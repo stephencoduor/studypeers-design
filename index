@@ -1,0 +1,30 @@
+[05-Jun-2020 09:17:03 Asia/Kolkata] PHP Fatal error:  require(): Failed opening required '/home/studypeers/public_html/application/vendor/composer/../facebook/graph-sdk/src/Facebook/polyfills.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/studypeers/public_html/application/vendor/composer/autoload_real.php on line 66
+[05-Jun-2020 09:17:04 Asia/Kolkata] PHP Fatal error:  require(): Failed opening required '/home/studypeers/public_html/application/vendor/composer/../facebook/graph-sdk/src/Facebook/polyfills.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/studypeers/public_html/application/vendor/composer/autoload_real.php on line 66
+[05-Jun-2020 09:17:13 Asia/Kolkata] PHP Fatal error:  require(): Failed opening required '/home/studypeers/public_html/application/vendor/composer/../facebook/graph-sdk/src/Facebook/polyfills.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/studypeers/public_html/application/vendor/composer/autoload_real.php on line 66
+[07-Jun-2020 15:31:18 Asia/Kolkata] PHP Fatal error:  require_once(): Failed opening required '/home/studypeers/public_html/application/third_party/PHPMailer/Exception.php' (include_path='.:/opt/cpanel/ea-php72/root/usr/share/pear') in /home/studypeers/public_html/application/libraries/Phpmailer_lib.php on line 24
+[09-Jun-2020 08:14:39 Asia/Kolkata] PHP Fatal error:  Can't use method return value in write context in /home/studypeers/public_html/application/models/User_model.php on line 173
+[12-Jun-2020 07:51:18 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[12-Jun-2020 07:51:18 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[12-Jun-2020 07:51:18 Asia/Kolkata] PHP Warning:  mkdir(): Invalid path in /home/studypeers/public_html/system/core/Log.php on line 131
+[12-Jun-2020 07:51:18 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 138
+[12-Jun-2020 07:51:18 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 142
+[12-Jun-2020 07:53:09 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[12-Jun-2020 07:53:09 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[12-Jun-2020 07:53:09 Asia/Kolkata] PHP Warning:  mkdir(): Invalid path in /home/studypeers/public_html/system/core/Log.php on line 131
+[12-Jun-2020 07:53:09 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 138
+[12-Jun-2020 07:53:09 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 142
+[16-Jun-2020 23:31:22 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[16-Jun-2020 23:31:22 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[16-Jun-2020 23:31:22 Asia/Kolkata] PHP Warning:  mkdir(): Invalid path in /home/studypeers/public_html/system/core/Log.php on line 131
+[16-Jun-2020 23:31:22 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 138
+[16-Jun-2020 23:31:22 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 142
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Warning:  mkdir(): Invalid path in /home/studypeers/public_html/system/core/Log.php on line 131
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 138
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 142
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Notice:  Undefined index: log_path in /home/studypeers/public_html/system/core/Log.php on line 127
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Warning:  mkdir(): Invalid path in /home/studypeers/public_html/system/core/Log.php on line 131
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 138
+[26-Jun-2020 05:56:19 Asia/Kolkata] PHP Notice:  Undefined index: log_threshold in /home/studypeers/public_html/system/core/Log.php on line 142

@@ -1,0 +1,278 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "83.454778",
+                    "27.697500"
+                ]
+            },
+            "properties": {
+                "id": "f6040e16a9f644518743565c6e33822e",
+                "index": 0,
+                "isActive": true,
+                "logo": "4f1a549c4f704d091416dc8ebb410146.jpg",
+                "image": "4f1a549c4f704d091416dc8ebb410146.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/arghakhanchi-metal-udyog/5",
+                "url": "",
+                "name": "Arghakhanchi Metal Udyog",
+                "category": "general",
+                "email": "argam.metal01@gmail.com",
+                "stars": "0.0",
+                "phone": "9847263225",
+                "address": "Butwal-9, Mainabagar",
+                "about": "&lt;p&gt;&lt;u&\r\n",
+                "tags": [
+                    "Bhada",
+                    " Metal",
+                    " udyog"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "85.3475722",
+                    "27.7461329"
+                ]
+            },
+            "properties": {
+                "id": "ea6cc89a5ff7c923c74de34dce1f0ebe",
+                "index": 1,
+                "isActive": true,
+                "logo": "d0e33141aa2c5a950e0ca63d1d3c9cb5.jpg",
+                "image": "d0e33141aa2c5a950e0ca63d1d3c9cb5.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/pramila-039-s-courtier-house/16",
+                "url": "",
+                "name": "Pramila&#039;s Courtier House",
+                "category": "general",
+                "email": "dhakalpramila1122@gmail.com",
+                "stars": "0.0",
+                "phone": "9849105643",
+                "address": "Children Park, Mandikatar, Kathmandu, Nepal",
+                "about": "\r\n",
+                "tags": [
+                    "Boutique",
+                    " fashion"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "83.466305",
+                    "27.699901"
+                ]
+            },
+            "properties": {
+                "id": "d4447e108ad0eb8920cc54c65ca06a20",
+                "index": 2,
+                "isActive": true,
+                "logo": "adb7e0526d786673c68fc4a7f6b6105a.jpg",
+                "image": "adb7e0526d786673c68fc4a7f6b6105a.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/global-automation-center/24",
+                "url": "",
+                "name": "Global Automation Center",
+                "category": "shop",
+                "email": "sulaxrana@gmail.com",
+                "stars": "0.0",
+                "phone": "071550410, 9847108323",
+                "address": "Butwal-6, Maitripath",
+                "about": "&lt;p&gt;Wholes\r\n",
+                "tags": [
+                    ""
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "83.465454",
+                    "27.703062"
+                ]
+            },
+            "properties": {
+                "id": "76cd90dbe55245e048673d863f73a09f",
+                "index": 3,
+                "isActive": true,
+                "logo": "82d3741f8bb1190f42cacf128d52f3ea.jpg",
+                "image": "82d3741f8bb1190f42cacf128d52f3ea.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/cozy-shoes/25",
+                "url": "",
+                "name": "Cozy Shoes",
+                "category": "shop",
+                "email": "kanchhadahal@gmail.com",
+                "stars": "5.0",
+                "phone": "9867230956, 9851191434",
+                "address": "Butwal-9, Ram Mandir Line",
+                "about": "&lt;p&gt;All ty\r\n",
+                "tags": [
+                    "Shoes "
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "83.465681",
+                    "27.701576"
+                ]
+            },
+            "properties": {
+                "id": "acbaec88c0d4c2d0a91b4a5ef04c590c",
+                "index": 4,
+                "isActive": true,
+                "logo": "0e30c4cd4f94392764008d5217c637f9.jpg",
+                "image": "0e30c4cd4f94392764008d5217c637f9.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/the-shoes-rack/26",
+                "url": "",
+                "name": "The Shoes Rack",
+                "category": "shop",
+                "email": "raviadhikari77@gmail.com",
+                "stars": "0.0",
+                "phone": "9867032338, 9812905251",
+                "address": "Durgamandir Line, Butwal-6",
+                "about": "&lt;p&gt;All Ty\r\n",
+                "tags": [
+                    ""
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "0",
+                    "0"
+                ]
+            },
+            "properties": {
+                "id": "c69673e80a6ee0ff85617aa005d95c21",
+                "index": 5,
+                "isActive": true,
+                "logo": "e294cdb77162aeb884ffced3ba7a6acd.jpg",
+                "image": "e294cdb77162aeb884ffced3ba7a6acd.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/aadi-shree-traders/27",
+                "url": "",
+                "name": "Aadi Shree Traders ",
+                "category": "shop",
+                "email": "aadishritrader@gmail.com",
+                "stars": "5.0",
+                "phone": "9845873593 , 9845873592",
+                "address": "Thapathali 11 Ram Shah Path",
+                "about": "&lt;p&gt;&lt;u&\r\n",
+                "tags": [
+                    "ro",
+                    " purifier"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "0",
+                    "o"
+                ]
+            },
+            "properties": {
+                "id": "a135268fc886f33baf62abf719680558",
+                "index": 6,
+                "isActive": true,
+                "logo": "305ed29468868aeb42ac8dc2d3e4b25f.jpg",
+                "image": "305ed29468868aeb42ac8dc2d3e4b25f.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/the-royal-furniture-amp-furnishing/28",
+                "url": "",
+                "name": " The Royal Furniture &amp; Furnishing",
+                "category": "general",
+                "email": "n.poudel45@gmail.com",
+                "stars": "5.0",
+                "phone": "9860385757, 9847502288",
+                "address": "Dingarnagar Tillottma ,rn",
+                "about": "&lt;p&gt;&lt;st\r\n",
+                "tags": [
+                    "furniture",
+                    "retailer"
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "83.456250",
+                    "27.685536"
+                ]
+            },
+            "properties": {
+                "id": "db5f4f5709b0a02e75353e1efb9e9b59",
+                "index": 7,
+                "isActive": true,
+                "logo": "bc26578d70a9fbe4d90f81d256085966.jpg",
+                "image": "bc26578d70a9fbe4d90f81d256085966.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/deurali-arghakhanchi-electrical/29",
+                "url": "",
+                "name": "Deurali Arghakhanchi Electrical ",
+                "category": "general",
+                "email": "bishnuprasadbhattrai@gmail.com",
+                "stars": "0.0",
+                "phone": "9857023609",
+                "address": "Butwal -11 Devinagarrn Near Lumbini zonal Ayurvedic Hospital ",
+                "about": "\r\n",
+                "tags": [
+                    "electric ",
+                    " shopping",
+                    " plumber "
+                ]
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    "83.456292",
+                    "27.685358"
+                ]
+            },
+            "properties": {
+                "id": "c7e8a715b68a332e60e204e50fb8316c",
+                "index": 8,
+                "isActive": true,
+                "logo": "2d37aa65c7ccd94ee013cdc83d6b515d.jpg",
+                "image": "2d37aa65c7ccd94ee013cdc83d6b515d.jpg",
+                "link": "http://localhost/khoja_nepal/home/listing/unique-arghakhanchi-mobile-repairing-center/30",
+                "url": "",
+                "name": "Unique Arghakhanchi Mobile Repairing center",
+                "category": "general",
+                "email": "prasangakh500@gmail.con",
+                "stars": "0.0",
+                "phone": "9847030500",
+                "address": "Bahadur Bhawan Butwal -11  Devinagar Chautari",
+                "about": "&lt;p&gt;we dea\r\n",
+                "tags": [
+                    "Mobile",
+                    " pendrive",
+                    "sim card",
+                    "mobile cover",
+                    "mobile reparing center",
+                    "mobile accessories"
+                ]
+            }
+        }
+    ]
+}
