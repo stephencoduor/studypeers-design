@@ -1,5 +1,8 @@
+
 <section class="hero-section" style="padding-top: 110px;background-color:#e7e5e5">
-        <div class="hero-area">
+    <?php if($this->session->flashdata('error_message')) { ?>
+        <div class="alert alert-danger">  <?= $this->session->flashdata('error_message'); ?></div>
+    <?php } ?>    <div class="hero-area">
             <div class="single-hero ">
                 <div class="container">
                     <div class="row justify-content-center">
@@ -8,6 +11,7 @@
                                 <span><?=$message?></span>
                             </div>
                         <?php } ?>
+
                         <div class="col-xl-5 col-lg-5 col-md-6 col-sm-10 centered">
                             <div class="hero-sub">
                                 <div class="table-cell">
@@ -79,22 +83,23 @@
                                     <div class="hero-left" style="color: #000000;text-align: center;text-align: justify;margin-bottom: 183px;">
                                         <div style="padding-bottom: 20px">
                                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
-                                                <a href="javascript:void(0)" style="font-size: 15px;text-decoration: none" title="google"><img src="<?=base_url('uploads/google.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH GOOGLE</a>
+                                                <a href="<?=base_url('socialLogin/google')?>" style="font-size: 15px;text-decoration: none" title="google"><img src="<?=base_url('uploads/google.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH GOOGLE</a>
                                             </div>
                                         </div>
                                         <div style="padding-bottom: 20px">
                                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
-                                                <a href="<?php echo $this->facebook->login_url();?>" style="font-size: 15px;text-decoration: none" title="facebook"><img src="<?=base_url('uploads/fb.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH FACEBOOK</a>
+                                                <a href="<?=base_url('socialLogin/facebook') ?>" style="font-size: 15px;text-decoration: none" title="facebook"><img src="<?=base_url('uploads/fb.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH FACEBOOK</a>
                                             </div>
                                         </div>
-                                        <div style="padding-bottom: 20px">
-                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
-                                                <a href="javascript:void(0)" style="font-size: 15px;text-decoration: none" title="twitter"><img src="<?=base_url('uploads/twit.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH TWITTER</a>
-                                            </div>
-                                        </div>
+
                                         <div style="padding-bottom: 20px">
                                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
                                                 <a href="javascript:void(0)" style="font-size: 15px;text-decoration: none" title="linkedIn"><img src="<?=base_url('uploads/link.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH LINKED IN</a>
+                                            </div>
+                                        </div>
+                                        <div style="padding-bottom: 20px">
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
+                                                <a href="javascript:void(0)" style="font-size: 15px;text-decoration: none" title="twitter"><img src="<?=base_url('uploads/twit.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH MICROSOFT</a>
                                             </div>
                                         </div>
                                     </div>

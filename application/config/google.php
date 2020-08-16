@@ -16,9 +16,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |  api_key           string   Developer key.
 |  scopes            string   Specify scopes
 */
-$config['google']['client_id']        = 'Google_API_Client_ID';
-$config['google']['client_secret']    = 'Google_API_Client_Secret';
-$config['google']['redirect_uri']     = 'http://localhost/newastro/newastro';
-$config['google']['application_name'] = 'Login to onlineastrotalk.com';
+$config['google']['client_id']        = '183108033073-b44b0k3qchofqgfb3r7e7qbdcnjj9k55.apps.googleusercontent.com';
+$config['google']['client_secret']    = '6gio3UhMqGSBBnAt_T1GLeat';
+$config['google']['redirect_uri']     = 'socialLogin/googleCallback';
+$config['google']['application_name'] = 'Study Peers';
 $config['google']['api_key']          = '';
 $config['google']['scopes']           = array();

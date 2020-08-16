@@ -533,3 +533,12 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+$config['facebook_app_id']              = '2627226627492976';
+$config['facebook_app_secret']          = '4372c08cf77b9adb7e1a87ede8374ab8';
+$config['facebook_login_type']          = 'web';
+$config['facebook_login_redirect_url']  = 'https://studypeers.dev/socialLogin/facebookCallback';
+$config['facebook_logout_redirect_url'] = 'https://studypeers.dev';
+$config['facebook_permissions']         = array('public_profile','email');
+$config['facebook_graph_version']       = 'v2.6';
+$config['facebook_auth_on_load']        = TRUE;
+
