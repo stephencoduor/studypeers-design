@@ -200,7 +200,7 @@ class FacebookClient
         if (get_class($request) === 'Facebook\FacebookRequest') {
             $request->validateAccessToken();
         }
-
+    
         list($url, $method, $headers, $body) = $this->prepareRequestMessage($request);
 
         // Since file uploads can take a while, we need to give more time for uploads
@@ -223,6 +223,8 @@ class FacebookClient
             $rawResponse->getHttpResponseCode(),
             $rawResponse->getHeaders()
         );
+        
+    
 
         if ($returnResponse->isError()) {
             throw $returnResponse->getThrownException();

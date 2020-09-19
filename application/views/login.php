@@ -53,6 +53,46 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-1 col-lg-1 col-md-1 centered d-sm-none d-md-block" >
+                            <div class="col-xl-5 col-lg-5 col-md-6  centered">
+                                <div class="hero-sub">
+                                    <div class="table-cell">
+
+                                        <div style="border-left: 1px solid gray;height: 410px;margin-bottom: 100px;">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 centered">
+                            <div class="hero-sub">
+                                <div class="table-cell">
+                                    <div class="hero-left" style="color: #000000;text-align: center;text-align: justify;margin-bottom: 183px;">
+                                        <div style="padding-bottom: 20px">
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
+                                                <a href="<?=base_url('socialLogin/googleLogin')?>" style="font-size: 15px;text-decoration: none" title="google"><img src="<?=base_url('uploads/google.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;LOGIN WITH GOOGLE</a>
+                                            </div>
+                                        </div>
+                                        <div style="padding-bottom: 20px">
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
+                                                <a href="<?=base_url('socialLogin/facebookLogin') ?>" style="font-size: 15px;text-decoration: none" title="facebook"><img src="<?=base_url('uploads/fb.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;LOGIN WITH FACEBOOK</a>
+                                            </div>
+                                        </div>
+
+                                        <div style="padding-bottom: 20px">
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
+                                                <a href="<?=base_url('socialLogin/linkedinCallback') ?>" style="font-size: 15px;text-decoration: none" title="linkedIn"><img src="<?=base_url('uploads/link.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;LOGIN WITH LINKED IN</a>
+                                            </div>
+                                        </div>
+                                        <div style="padding-bottom: 20px">
+                                            <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
+                                                <a href="<?=base_url('socialLogin/microsoftLogin') ?>" style="font-size: 15px;text-decoration: none" title="twitter"><img src="<?=base_url('uploads/twit.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;LOGIN WITH MICROSOFT</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             <!-- </div> -->

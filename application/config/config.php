@@ -28,7 +28,7 @@ ini_set('display_errors', 1);
 */
 
 if($_SERVER['SERVER_NAME'] == 'localhost'){
-	$config['base_url'] = 'http://localhost/studypeers/';
+	$config['base_url'] = 'https://localhost/studypeers/';
 } else {
 
 	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
@@ -111,7 +111,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = FALSE;
+$config['enable_hooks'] = TRUE;
 
 /*
 |--------------------------------------------------------------------------
@@ -533,3 +533,22 @@ $config['rewrite_short_tags'] = FALSE;
 | Array:		array('10.0.1.200', '192.168.5.0/24')
 */
 $config['proxy_ips'] = '';
+
+
+$config['facebook_app_id']              = '2627226627492976';
+$config['facebook_app_secret']          = '4372c08cf77b9adb7e1a87ede8374ab8';
+$config['facebook_login_type']          = 'web';
+$config['facebook_login_redirect_url']  = 'https://studypeers.dev/socialLogin/facebookCallback';
+$config['facebook_logout_redirect_url'] = 'https://studypeers.dev';
+$config['facebook_permissions']         = array('public_profile','email');
+$config['facebook_graph_version']       = 'v2.6';
+$config['facebook_auth_on_load']        = TRUE;
+
+$config['linkedin_app_id']				= '78beuic6jn92q4'; //live
+$config['linkedin_app_secret']			= 'HyXpuvnahIeT4xDo'; //live
+$config['linkedin_redirect_uri'] 		= 'https://studypeers.dev/socialLogin/linkedinCallback';
+$config['linkedin_scope'] 				= 'r_liteprofile r_emailaddress';
+
+$config['ms_client_id']					= '00000000445A8D80'; //live
+$config['ms_client_secret']				= 'efnWXM({otjfDGPM71088]#'; //live
+$config['ms_redirect_url'] 				= 'https://studypeers.dev/socialLogin/microsoftCallback';
