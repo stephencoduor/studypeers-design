@@ -158,8 +158,8 @@ $(document).ready(()=>{
       $('.edit_rating').removeClass('hide');
   });
 })
-$('.flipper').on('click',()=>{
-  $('.flipper').toggleClass('is-flipped');
+$('.flipper').on('click', function(){
+  $(this).toggleClass('is-flipped');
 })
 $('.showAnwer').on('click',()=>{
   $('.flipper').toggleClass('is-flipped');
@@ -173,7 +173,8 @@ $( ".match-item" ).draggable();
 
 $(document).ready(function(){
   $('.likecount a').click(function(){
-     $(this).find('i').toggleClass('fa-thumbs-o-up fa-thumbs-up')
+     $(this).find('i').toggleClass('fa-thumbs-o-up fa-thumbs-up');
+     $(this).toggleClass('active');
   })
 })
 //Add Course
@@ -209,3 +210,22 @@ $('.add_course').on('click', function(){
 
 
 
+
+
+
+
+// resize 
+$(window).resize(function() {
+  if($(window).width()<=1400) {
+    $('.mainContent').addClass('active');
+    $('aside').addClass('active');
+  } else {
+    $('.mainContent').removeClass('active');
+    $('aside').removeClass('active');
+  }
+  if($(window).width() <= 991) {
+    $('.rightsidemsgbar').css("transform","translateX(800px)");
+  } else {
+    $('.rightsidemsgbar').css("transform","translateX(0px)");
+  }
+})
