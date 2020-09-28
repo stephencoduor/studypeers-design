@@ -373,9 +373,10 @@ function validateJson($requestJson, $checkRequestKeys)
             $validate_keys[] = $key;
         }
 
-        $result = array_diff($checkRequestKeys, $validate_keys);
+        $result1 = array_diff($checkRequestKeys, $validate_keys); 
+        $result2 = array_diff($validate_keys, $checkRequestKeys); 
 
-        if ($result)
+        if(($result1) || ($result2))
         {
             return "0";
         }
@@ -574,6 +575,10 @@ function messages($resMsg = '', $dynamicValue = '')
         '219' => 'Revenue Data',
         '220' => 'Mother Already Admitted',
         '221' => 'Wrong Old Password',
+        '222' => 'Event Deleted Successfully',
+        '223' => 'Event Added To Calendar Successfully',
+        '224' => 'Comment Added Successfully',
+        '225' => 'Comment Reply Added Successfully',
         'E' => 'Data Not Found',
         'W' => 'Something Went Wrong',
         'S' => 'Success',
@@ -583,6 +588,9 @@ function messages($resMsg = '', $dynamicValue = '')
         'R' => 'Refund',
         'U' => 'Username already exists',
         'A' => 'Email already exists',
+        'M' => 'Mobile number already exists',
+        'I' => 'Institute email already exists',
+        'N' => 'User not authorized'
     );
 
     return (isset($codes[$resMsg])) ? $codes[$resMsg] : '';

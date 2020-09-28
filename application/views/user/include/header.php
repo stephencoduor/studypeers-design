@@ -7,20 +7,28 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/bootstrap.min.css">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<?php if($index_menu == 'dashboard') { ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/slick.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/slick-theme.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/dashboard-new.css">
+	<?php } ?>	
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/star-rating-svg.css">
 	<link href='<?php echo base_url(); ?>assets_d/css/fullcalendar.css' rel='stylesheet' />
-	<?php if($index_menu != 'questions') { ?>
+	<?php if($index_menu != 'questions' && $index_menu != 'dashboard') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/study-set.css">
 	<?php } ?>
-	<?php if($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets') { ?>
+	<?php if($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'dashboard') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/schedule.css">
 	<?php } ?>
 
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.css">
-	<?php if($index_menu != 'questions' && $index_menu != 'study-sets') { ?>
+	<?php if($index_menu == 'dashboard') { ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.tw.css">
+	<?php } ?>	
+	<?php if($index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'events' && $index_menu != 'dashboard') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/document.css">
 	<?php } ?>
 	

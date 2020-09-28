@@ -17,6 +17,8 @@
             $('#datetimepickermonth,#datetimepickerday,#datetimepickertask').datetimepicker({
                 inline: true,
                 // sideBySide: true
+
+
             });
             $('#datetimepicker1').datetimepicker({
                       allowInputToggle: true,
@@ -267,6 +269,31 @@
        $(".modal-body #delete_schedule_id").val(event_id);
        
   }
+
+  $('#datetimepickerday').on('dp.change', function(e){ 
+    var formatedValue = e.date.format(e.date._f);
+    var fields = formatedValue.split('T');
+    var url = '<?php echo base_url('account/getScheduleDayWise') ?>';
+    $('#dayTabList').html('<h6 class="loadingEvents">Loading Schedule</h6>');
+     $.ajax({
+          url: url,
+          type: 'POST',
+          data: {'date': fields[0]},
+          success: function(result) {
+              $('#dayTabList').html(result);
+          }
+      });
+  });
+
+ $('.prev').on('click',function() {
+
+ });
+  
+
+ $('.next').on('click',function() {
+
+ });
+  
 
 </script>
     <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>

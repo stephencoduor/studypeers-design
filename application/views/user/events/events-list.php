@@ -59,7 +59,7 @@
 							<form method="get" action="<?php echo base_url(); ?>account/events">
 								<div class="filterWrapper">
 								
-									<div class="filtercalendar" style="width: 24%;">
+									<div class="filtercalendar">
 									  	<div class='input-group date' id='datetimepicker1'>
 									  		<span class="input-group-addon" for="start-date">
 						                    	<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
@@ -94,7 +94,7 @@
 										  <option value="WY">Wyoming</option>
 										</select>
 									</div> -->
-									<div class="filterSelect" style="width: 24%;">
+									<div class="filterSelect">
 										<select class="form-control" name="course" id="course" placeholder="InsCoursetitution" onchange="getProfessor(this.value)">
 										  <option>Course</option>
 										  	<?php foreach ($course as $key => $value) { ?>
@@ -102,7 +102,7 @@
 											<?php } ?>
 										</select>
 									</div>
-									<div class="filterSelect" style="width: 24%;">
+									<div class="filterSelect">
 										<select class="form-control" placeholder="Professor" name="professor" id="professor">
 										  <option>Professor</option>
 										  <?php foreach ($professor as $key => $value) { ?>
@@ -110,7 +110,7 @@
 											<?php } ?>
 										</select>
 									</div>
-									<div class="filterSearch" style="width: 24%;">
+									<div class="filterSearch">
 										<input type="text" placeholder="Search Event..." name="keyword" value="<?= $keyword_search; ?>">
 										<button type="submit" class="searchBtn">
 											<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">

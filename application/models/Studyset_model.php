@@ -48,6 +48,8 @@ class Studyset_model extends CI_Model {
 
         if(isset($_GET['order_by']) && $_GET['order_by'] != '') {
             $this->db->order_by('s.'.$_GET['order_by'],'desc');
+        } else {
+            $this->db->order_by('s.study_set_id', 'desc');
         }
     
         $this->db->where('s.user_id',$user_id);        

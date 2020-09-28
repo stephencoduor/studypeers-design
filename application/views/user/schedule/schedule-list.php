@@ -79,7 +79,7 @@
 												</svg>
 						                        <!-- <span class="glyphicon glyphicon-calendar"></span> -->
 						                    </span>
-						                    <input type='text' class="form-control" name="start-date" id="start-date" value="<?php if($startdate_search != '') { echo date('m/d/Y h:i A', strtotime($startdate_search)); } ?>" />
+						                    <input type='text' class="form-control" name="start-date" id="start-date" value="<?php if($startdate_search != '') { echo date('m/d/Y h:i A', strtotime($startdate_search)); } ?>" style="width: 90%;" />
 						                    
 						                </div>
 									</div>
@@ -162,9 +162,9 @@
 														echo '<p class="text-center">'.$text_msg.'</p>';
 													} ?>
 													<?php if(!empty($schedule_list)) { ?>
-														<h6 class="loadingEvents">
+														<!-- <h6 class="loadingEvents">
 															Loading Events
-														</h6>
+														</h6> -->
 													<?php } ?>
 												</div>
 											</div>
@@ -183,38 +183,21 @@
 												<div id="datetimepickerday"></div>
 											</div>
 											<div class="events">
-												<div class="eventList">
-													<div class="constitition event">
-														<div class="time">All day</div>
-														<div class="name">Constitution Day</div>
-													</div>
-													<div class="mathlaton event">
-														<div class="time">All day</div>
-														<div class="name">Mathlaton 2020</div>
-													</div>
-													<div class="calculus event disabled">
-														<div class="time">7:30 <span>8:30</span></div>
-														<div class="name">Calculus 101</div>
-													</div>
-													<div class="dance event">
-														<div class="time">10:30 <span>12:30</span></div>
-														<div class="name">Feminist dancing therapy</div>
-													</div>
-													<div class="study event">
-														<div class="time">16:00 <span>18:00</span></div>
-														<div class="name">Study session</div>
-													</div>
-													<div class="mathlaton event">
-														<div class="time">17:00 <span>2:00</span></div>
-														<div class="name">Beer pong @ Mike's</div>
-													</div>
-													<div class="assignment event">
-														<div class="time">23:59</div>
-														<div class="name">Assignment due</div>
-													</div>
-													<h6 class="loadingEvents">
-														Loading Events
-													</h6>
+												<div class="eventList" id="dayTabList">
+													<?php if(!empty($schedule_list_day)) {
+													  $c = 0; foreach ($schedule_list_day as $key => $value) { ?>
+														<div class="<?= $colors[$c]; ?> event" id="<?= $value['id']; ?>">
+															<div class="time"><?php echo date('d M, Y h:i A', strtotime($value['start_date'])); ?> <span><?php echo date('d M, Y h:i A', strtotime($value['end_date'])); ?></span></div>
+															<div class="name"><?= $value['schedule_name'] ?></div>
+														</div>
+													<?php if($c == 5 ) { $c = 0; } else { $c++; } } } else {
+														echo '<p class="text-center">'.$text_msg.'</p>';
+													} ?>
+													<?php if(!empty($schedule_list)) { ?>
+														<!-- <h6 class="loadingEvents">
+															Loading Events
+														</h6> -->
+													<?php } ?>
 												</div>
 											</div>
 										</div>
@@ -228,7 +211,7 @@
 											</div>
 											<div class="events">
 												<div class="eventList">
-													<div class="constitition event">
+													<!-- <div class="constitition event">
 														<div class="time">All day</div>
 														<div class="name">Constitution Day</div>
 													</div>
@@ -258,7 +241,8 @@
 													</div>
 													<h6 class="loadingEvents">
 														Loading Events
-													</h6>
+													</h6> -->
+													<p class="text-center">No records to show.</p>
 												</div>
 											</div>
 										</div>

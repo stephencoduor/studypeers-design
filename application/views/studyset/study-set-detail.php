@@ -127,7 +127,7 @@
 										<i class="fa fa-thumbs-o-up <?php echo ($studyset['isLikedByUser']) ? 'fa-thumbs-up' : ''; ?>" aria-hidden="true"></i>
 										Like
 									</a>
-									<a href="#" class="like">								
+									<a class="like" data-toggle="tab" href="#comment" onclick="setTab()">								
 										<svg id="collapsea_1" 
 											enable-background="new 0 0 511.072 511.072" height="512" viewBox="0 0 511.072 511.072" width="512" xmlns="http://www.w3.org/2000/svg"><g id="Speech_Bubble_48_"><g><path d="m74.39 480.536h-36.213l25.607-25.607c13.807-13.807 22.429-31.765 24.747-51.246-36.029-23.644-62.375-54.751-76.478-90.425-14.093-35.647-15.864-74.888-5.121-113.482 12.89-46.309 43.123-88.518 85.128-118.853 45.646-32.963 102.47-50.387 164.33-50.387 77.927 0 143.611 22.389 189.948 64.745 41.744 38.159 64.734 89.63 64.734 144.933 0 26.868-5.471 53.011-16.26 77.703-11.165 25.551-27.514 48.302-48.593 67.619-46.399 42.523-112.042 65-189.83 65-28.877 0-59.01-3.855-85.913-10.929-25.465 26.123-59.972 40.929-96.086 40.929zm182-420c-124.039 0-200.15 73.973-220.557 147.285-19.284 69.28 9.143 134.743 76.043 175.115l7.475 4.511-.23 8.727c-.456 17.274-4.574 33.912-11.945 48.952 17.949-6.073 34.236-17.083 46.99-32.151l6.342-7.493 9.405 2.813c26.393 7.894 57.104 12.241 86.477 12.241 154.372 0 224.682-93.473 224.682-180.322 0-46.776-19.524-90.384-54.976-122.79-40.713-37.216-99.397-56.888-169.706-56.888z"/></g></g>
 										</svg>
@@ -235,7 +235,7 @@
 							    <li class="active"><a data-toggle="tab" href="#terms">Terms</a></li>
 							    <li><a data-toggle="tab" href="#testResult">Test Results</a></li>
 							    <li><a data-toggle="tab" href="#rating">Rating</a></li>
-							    <li><a data-toggle="tab" href="#comment">Comment</a></li>
+							    <li id="commentTab"><a data-toggle="tab" href="#comment">Comment</a></li>
 							</ul>
 							<div class="tab-content">
 							    <div id="terms" class="tab-pane fade in active">
@@ -243,29 +243,25 @@
 							      	<?php
 							      	foreach ($term_data as $key => $value) {
 							      	?>
-							      	<div class="card">
+							      	<div class="card" style="width: 100%;">
 							      		<div class="left">
 							      			<div class="innerLeft">
 							      				<?php echo $value['term_name'];?>
 							      			</div>
-							      			<div class="innerRight">
+							      			
+							      		</div>
+							      		<div class="right">
+								      		<p style="width: max-content;float: left;max-width: 70%;"><?php echo $value['term_description'];?></p>
+								      		<div class="innerRight" style="float: right;">
 							      				<figure>
 							      					<?php
 													if($value['term_image']) {
 													?>
-														<img src="<?php echo base_url();?>uploads/studyset/<?php echo $value['term_image'];?>" alt="User">
+														<img src="<?php echo base_url();?>uploads/studyset/<?php echo $value['term_image'];?>" alt="User" style="height: 90px; border-radius: 5px;">
 													<?php
-													} else {
-													?>
-														<img src="<?php echo base_url();?>assets_d/images/default.png" alt="user">
-													<?php
-													}
-													?>
+													} ?>
 							      				</figure>
 							      			</div>
-							      		</div>
-							      		<div class="right">
-								      		<?php echo $value['term_description'];?>
 								      	</div>
 							      	</div>
 							      	<?php
@@ -273,200 +269,567 @@
 							      	?>
 							      </div>
 							    </div>
-							    <div id="testResult" class="tab-pane fade">
+							    <div id="testResult" class="tab-pane fade" style="margin-top: -50px;">
 							    	<div class="testWrapper">
-							      		<h3 class="mb-2">Your Recent Attempts</h3>
-								      	<table class="table table-borderless sp-table">
-											<thead>
-													<tr>
-														<th>Rank</th>
-														<th>User</th>
-														<th>Score</th>
-														<th>Time Spent</th>
-														<th>Date</th>
-													</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td data-th="Rank"><span class="bt-content">1</span></td>
-													<td data-th="User"><span class="bt-content">				<div class="sp-avatar sp-avatar--small">
-														<a href="" class="sp-avatar__image">
-															<img alt="" src="images/default-avatar.svg" class="avatar avatar-30 photo avatar-default" height="30" width="30">					</a>
-														<div class="sp-avatar__content">
-															<span class="sp-avatar__name">Developer</span>
-														</div>
-													</div>
-													</span></td>
-													<td data-th="Score"><span class="bt-content">2 / 4</span></td>
-													<td data-th="Time Spent"><span class="bt-content">56 Seconds</span></td>
-													<td data-th="Date"><span class="bt-content">9 hours ago</span></td>
-												</tr>
-											</tbody>
-										</table>
-										<h3 class="mb-2">Top Ranking</h3>
-										<table class="table table-borderless sp-table">
-											<thead>
-											<tr>
-														<th>Rank</th>
-														<th>User</th>
-														<th>Score</th>
-														<th>Time Spent</th>
-														<th>Date</th>
-													</tr>
-											</thead>
-											<tbody>
-												<tr>
-														<td data-th="Rank"><span class="bt-content">1</span></td>
-														<td data-th="User"><span class="bt-content">		<div class="sp-avatar sp-avatar--small">
-													<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
-														<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			</a>
-													<div class="sp-avatar__content">
-														<span class="sp-avatar__name">Developer</span>
-													</div>
+							    		<div class="tabularLiist">
+											<ul class="nav nav-tabs">
+											    <li class="active"><a data-toggle="tab" href="#recentAttempts">Your Recent Attempts</a></li>
+											    <li><a data-toggle="tab" href="#topRanking">Top Ranking</a></li>
+											    <li><a data-toggle="tab" href="#peersAttempts">Peers Attempts</a></li>
+											    
+											</ul>
+											<div class="tab-content">
+												<div id="recentAttempts" class="tab-pane fade in active">
+													<h3 class="mb-2">Flashcard</h3>
+											      	<table class="table table-borderless sp-table">
+														<thead>
+																<tr>
+																	<th>Rank</th>
+																	<!-- <th>User</th> -->
+																	<th>Score</th>
+																	<th>Time Spent</th>
+																	<th>Date</th>
+																</tr>
+														</thead>
+														<tbody>
+															<?php $count = 1; foreach ($user_attempt_flashcard as $key => $value) { ?>
+																<tr>
+																	<td data-th="Rank"><span class="bt-content"><?= $count; ?></span></td>
+																	
+																	<td data-th="Score"><span class="bt-content"><?= $value['correct']; ?> / <?= $value['total']; ?></span></td>
+																	<td data-th="Time Spent"><span class="bt-content">
+																		<?php if(date("H", strtotime($value['time_span'])) != 0) { echo date("H", strtotime($value['time_span']))." Hours"; }   ?> <?php if(date("i", strtotime($value['time_span'])) != 0) { echo date("i", strtotime($value['time_span']))." Minutes"; }   ?> <?php if(date("s", strtotime($value['time_span'])) != 0) { echo date("s", strtotime($value['time_span']))." Seconds"; }   ?></span></td>
+																	<td data-th="Date"><span class="bt-content"><?php echo date('d M, Y h:i A', strtotime($value['created_at'])); ?></span></td>
+																</tr>
+															<?php $count++; } ?>
+																
+														</tbody>
+													</table>
+													<h3 class="mb-2">Learn</h3>
+													<?php if(!empty($user_attempt_learn)) { ?>
+												      	<table class="table table-borderless sp-table">
+															<thead>
+																	<tr>
+																		<th>S.No.</th>
+																		
+																		<th>Score</th>
+																		<th>Time Spent</th>
+																		<th>Date</th>
+																	</tr>
+															</thead>
+															<tbody>
+																<?php $count = 1; foreach ($user_attempt_learn as $key => $value) { ?>
+																	<tr>
+																		<td data-th="Rank"><span class="bt-content"><?= $count; ?></span></td>
+																		
+																		<td data-th="Score"><span class="bt-content"><?= $value['correct']; ?> / <?= $value['total']; ?></span></td>
+																		<td data-th="Time Spent"><span class="bt-content">
+																			<?php if(date("H", strtotime($value['time_span'])) != 0) { echo date("H", strtotime($value['time_span']))." Hours"; }   ?> <?php if(date("i", strtotime($value['time_span'])) != 0) { echo date("i", strtotime($value['time_span']))." Minutes"; }   ?> <?php if(date("s", strtotime($value['time_span'])) != 0) { echo date("s", strtotime($value['time_span']))." Seconds"; }   ?></span></td>
+																		<td data-th="Date"><span class="bt-content"><?php echo date('d M, Y h:i A', strtotime($value['created_at'])); ?></span></td>
+																	</tr>
+																<?php $count++; } ?>
+																
+															</tbody>
+														</table>
+													<?php } else {
+														echo '<div class="no_record_div">No Records Found.</div>';
+													} ?>
+													<h3 class="mb-2">Match</h3>
+													<?php if(!empty($user_attempt_match)) { ?>
+												      	<table class="table table-borderless sp-table">
+															<thead>
+																	<tr>
+																		<th>S.No.</th>
+																		<!-- <th>User</th> -->
+																		<th>Score</th>
+																		<th>Time Spent</th>
+																		<th>Date</th>
+																	</tr>
+															</thead>
+															<tbody>
+																<?php $count = 1; foreach ($user_attempt_match as $key => $value) { ?>
+																	<tr>
+																		<td data-th="Rank"><span class="bt-content"><?= $count; ?></span></td>
+																		<td data-th="Score"><span class="bt-content"><?php echo $value['correct']; ?> / <?php echo $value['total']; ?></span></td>
+																		<td data-th="Time Spent"><span class="bt-content"><?php if(date("H", strtotime($value['time_span'])) != 0) { echo date("H", strtotime($value['time_span']))." Hours"; }   ?> <?php if(date("i", strtotime($value['time_span'])) != 0) { echo date("i", strtotime($value['time_span']))." Minutes"; }   ?> <?php if(date("s", strtotime($value['time_span'])) != 0) { echo date("s", strtotime($value['time_span']))." Seconds"; }   ?></span></td>
+																		<td data-th="Date"><span class="bt-content"><?php echo date('d M, Y h:i A', strtotime($value['created_at'])); ?></span></td>
+																	</tr>
+																<?php $count++; } ?>
+																
+															</tbody>
+														</table>
+													<?php } else {
+														echo '<div class="no_record_div">No Records Found.</div>';
+													} ?>
+													<h3 class="mb-2">Write</h3>
+													<?php if(!empty($user_attempt_write)) { ?>
+												      	<table class="table table-borderless sp-table">
+															<thead>
+																	<tr>
+																		<th>S.No.</th>
+																		<!-- <th>User</th> -->
+																		<th>Score</th>
+																		<th>Time Spent</th>
+																		<th>Date</th>
+																	</tr>
+															</thead>
+															<tbody>
+																<?php $count = 1; foreach ($user_attempt_write as $key => $value) { ?>
+																	<tr>
+																		<td data-th="Rank"><span class="bt-content"><?= $count; ?></span></td>
+																		<td data-th="Score"><span class="bt-content"><?php echo $value['correct']; ?> / <?php echo $value['total']; ?></span></td>
+																		<td data-th="Time Spent"><span class="bt-content"><?php if(date("H", strtotime($value['time_span'])) != 0) { echo date("H", strtotime($value['time_span']))." Hours"; }   ?> <?php if(date("i", strtotime($value['time_span'])) != 0) { echo date("i", strtotime($value['time_span']))." Minutes"; }   ?> <?php if(date("s", strtotime($value['time_span'])) != 0) { echo date("s", strtotime($value['time_span']))." Seconds"; }   ?></span></td>
+																		<td data-th="Date"><span class="bt-content"><?php echo date('d M, Y h:i A', strtotime($value['created_at'])); ?></span></td>
+																	</tr>
+																<?php $count++; } ?>
+																
+															</tbody>
+														</table>
+													<?php } else {
+														echo '<div class="no_record_div">No Records Found.</div>';
+													} ?>
 												</div>
-												</span></td>
-														<td data-th="Score"><span class="bt-content">2 / 4</span></td>
-														<td data-th="Time Spent"><span class="bt-content">56 Seconds</span></td>
-														<td data-th="Date"><span class="bt-content">9 hours ago</span></td>
-													</tr>
-											</tbody>
-										</table>
-										<h3 class="mb-2">Recent Attempts</h3>
-										<table class="table table-borderless sp-table">
-											<thead>
-											<tr>
-														<th>Rank</th>
-														<th>User</th>
-														<th>Score</th>
-														<th>Time Spent</th>
-														<th>Date</th>
-													</tr>
-											</thead>
-											<tbody>
-												<tr>
-														<td data-th="Rank"><span class="bt-content">1</span></td>
-														<td data-th="User"><span class="bt-content">		<div class="sp-avatar sp-avatar--small">
-													<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
-														<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			</a>
-													<div class="sp-avatar__content">
-														<span class="sp-avatar__name">Developer</span>
-													</div>
+												<div id="topRanking" class="tab-pane fade">
+													<h3 class="mb-2">Flashcard</h3>
+													<?php if(!empty($top_rank_flashcard)) { ?>
+														<table class="table table-borderless sp-table">
+															<thead>
+															<tr>
+																		<th>Rank</th>
+																		<th>User</th>
+																		<th>Score</th>
+																		<th>Time Spent</th>
+																		<th>Date</th>
+																	</tr>
+															</thead>
+															<tbody>
+																<?php $count = 1; foreach ($top_rank_flashcard as $key => $value) { ?>
+																	<tr>
+																		<td data-th="Rank"><span class="bt-content"><?= $count; ?></span></td>
+																		<td data-th="User"><span class="bt-content">		
+																			<div class="sp-avatar sp-avatar--small">
+																				<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
+																					<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			
+																				</a>
+																				<div class="sp-avatar__content">
+																					<span class="sp-avatar__name"><?= $value['nickname']; ?></span>
+																				</div>
+																			</div>
+																		</span></td>
+																		<td data-th="Score"><span class="bt-content"><?= $value['correct']; ?> / <?= $value['total']; ?></span></td>
+																		<td data-th="Time Spent"><span class="bt-content"><?php if(date("H", strtotime($value['time_span'])) != 0) { echo date("H", strtotime($value['time_span']))." Hours"; }   ?> <?php if(date("i", strtotime($value['time_span'])) != 0) { echo date("i", strtotime($value['time_span']))." Minutes"; }   ?> <?php if(date("s", strtotime($value['time_span'])) != 0) { echo date("s", strtotime($value['time_span']))." Seconds"; }   ?></span></td>
+																		<td data-th="Date"><span class="bt-content"><?php echo date('d M, Y h:i A', strtotime($value['created_at'])); ?></span></td>
+																	</tr>
+																<?php $count++; } ?>
+																
+															</tbody>
+														</table>
+													<?php } else {
+														echo '<div class="no_record_div">No Records Found.</div>';
+													} ?>
+													<h3 class="mb-2">Learn</h3>
+													<?php if(!empty($top_rank_learn)) { ?>
+														<table class="table table-borderless sp-table">
+															<thead>
+															<tr>
+																		<th>Rank</th>
+																		<th>User</th>
+																		<th>Score</th>
+																		<th>Time Spent</th>
+																		<th>Date</th>
+																	</tr>
+															</thead>
+															<tbody>
+																<?php $count = 1; foreach ($top_rank_learn as $key => $value) { ?>
+																	<tr>
+																		<td data-th="Rank"><span class="bt-content"><?= $count; ?></span></td>
+																		<td data-th="User"><span class="bt-content">		
+																			<div class="sp-avatar sp-avatar--small">
+																				<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
+																					<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			
+																				</a>
+																				<div class="sp-avatar__content">
+																					<span class="sp-avatar__name"><?= $value['nickname']; ?></span>
+																				</div>
+																			</div>
+																		</span></td>
+																		<td data-th="Score"><span class="bt-content"><?= $value['correct']; ?> / <?= $value['total']; ?></span></td>
+																		<td data-th="Time Spent"><span class="bt-content"><?php if(date("H", strtotime($value['time_span'])) != 0) { echo date("H", strtotime($value['time_span']))." Hours"; }   ?> <?php if(date("i", strtotime($value['time_span'])) != 0) { echo date("i", strtotime($value['time_span']))." Minutes"; }   ?> <?php if(date("s", strtotime($value['time_span'])) != 0) { echo date("s", strtotime($value['time_span']))." Seconds"; }   ?></span></td>
+																		<td data-th="Date"><span class="bt-content"><?php echo date('d M, Y h:i A', strtotime($value['created_at'])); ?></span></td>
+																	</tr>
+																<?php $count++; } ?>
+																
+															</tbody>
+														</table>
+													<?php } else {
+														echo '<div class="no_record_div">No Records Found.</div>';
+													} ?>
+													<h3 class="mb-2">Match</h3>
+													<?php if(!empty($top_rank_match)) { ?>
+														<table class="table table-borderless sp-table">
+															<thead>
+															<tr>
+																		<th>Rank</th>
+																		<th>User</th>
+																		<th>Score</th>
+																		<th>Time Spent</th>
+																		<th>Date</th>
+																	</tr>
+															</thead>
+															<tbody>
+																<?php $count = 1; foreach ($top_rank_match as $key => $value) { ?>
+																	<tr>
+																		<td data-th="Rank"><span class="bt-content"><?= $count; ?></span></td>
+																		<td data-th="User"><span class="bt-content">		
+																			<div class="sp-avatar sp-avatar--small">
+																				<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
+																					<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			
+																				</a>
+																				<div class="sp-avatar__content">
+																					<span class="sp-avatar__name"><?= $value['nickname']; ?></span>
+																				</div>
+																			</div>
+																		</span></td>
+																		<td data-th="Score"><span class="bt-content"><?= $value['correct']; ?> / <?= $value['total']; ?></span></td>
+																		<td data-th="Time Spent"><span class="bt-content"><?php if(date("H", strtotime($value['time_span'])) != 0) { echo date("H", strtotime($value['time_span']))." Hours"; }   ?> <?php if(date("i", strtotime($value['time_span'])) != 0) { echo date("i", strtotime($value['time_span']))." Minutes"; }   ?> <?php if(date("s", strtotime($value['time_span'])) != 0) { echo date("s", strtotime($value['time_span']))." Seconds"; }   ?></span></td>
+																		<td data-th="Date"><span class="bt-content"><?php echo date('d M, Y h:i A', strtotime($value['created_at'])); ?></span></td>
+																	</tr>
+																<?php $count++; } ?>
+															</tbody>
+														</table>
+													<?php } else {
+														echo '<div class="no_record_div">No Records Found.</div>';
+													} ?>
+													<h3 class="mb-2">Write</h3>
+													<?php if(!empty($top_rank_write)) { ?>
+														<table class="table table-borderless sp-table">
+															<thead>
+															<tr>
+																		<th>Rank</th>
+																		<th>User</th>
+																		<th>Score</th>
+																		<th>Time Spent</th>
+																		<th>Date</th>
+																	</tr>
+															</thead>
+															<tbody>
+																<?php $count = 1; foreach ($top_rank_write as $key => $value) { ?>
+																	<tr>
+																		<td data-th="Rank"><span class="bt-content"><?= $count; ?></span></td>
+																		<td data-th="User"><span class="bt-content">		
+																			<div class="sp-avatar sp-avatar--small">
+																				<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
+																					<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			
+																				</a>
+																				<div class="sp-avatar__content">
+																					<span class="sp-avatar__name"><?= $value['nickname']; ?></span>
+																				</div>
+																			</div>
+																		</span></td>
+																		<td data-th="Score"><span class="bt-content"><?= $value['correct']; ?> / <?= $value['total']; ?></span></td>
+																		<td data-th="Time Spent"><span class="bt-content"><?php if(date("H", strtotime($value['time_span'])) != 0) { echo date("H", strtotime($value['time_span']))." Hours"; }   ?> <?php if(date("i", strtotime($value['time_span'])) != 0) { echo date("i", strtotime($value['time_span']))." Minutes"; }   ?> <?php if(date("s", strtotime($value['time_span'])) != 0) { echo date("s", strtotime($value['time_span']))." Seconds"; }   ?></span></td>
+																		<td data-th="Date"><span class="bt-content"><?php echo date('d M, Y h:i A', strtotime($value['created_at'])); ?></span></td>
+																	</tr>
+																<?php $count++; } ?>
+															</tbody>
+														</table>
+													<?php } else {
+														echo '<div class="no_record_div">No Records Found.</div>';
+													} ?>
 												</div>
-												</span></td>
-														<td data-th="Score"><span class="bt-content">2 / 4</span></td>
-														<td data-th="Time Spent"><span class="bt-content">56 Seconds</span></td>
-														<td data-th="Date"><span class="bt-content">9 hours ago</span></td>
-													</tr>
-											</tbody>
-										</table>
+												<div id="peersAttempts" class="tab-pane fade">
+													<h3 class="mb-2">Flashcard</h3>
+													<table class="table table-borderless sp-table">
+														<thead>
+														<tr>
+																	<th>Rank</th>
+																	<th>User</th>
+																	<th>Score</th>
+																	<th>Time Spent</th>
+																	<th>Date</th>
+																</tr>
+														</thead>
+														<tbody>
+															<tr>
+																	<td data-th="Rank"><span class="bt-content">1</span></td>
+																	<td data-th="User"><span class="bt-content">		<div class="sp-avatar sp-avatar--small">
+																<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
+																	<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			</a>
+																<div class="sp-avatar__content">
+																	<span class="sp-avatar__name">Developer</span>
+																</div>
+															</div>
+															</span></td>
+																	<td data-th="Score"><span class="bt-content">2 / 4</span></td>
+																	<td data-th="Time Spent"><span class="bt-content">56 Seconds</span></td>
+																	<td data-th="Date"><span class="bt-content">9 hours ago</span></td>
+																</tr>
+														</tbody>
+													</table>
+													<h3 class="mb-2">Learn</h3>
+													<table class="table table-borderless sp-table">
+														<thead>
+														<tr>
+																	<th>Rank</th>
+																	<th>User</th>
+																	<th>Score</th>
+																	<th>Time Spent</th>
+																	<th>Date</th>
+																</tr>
+														</thead>
+														<tbody>
+															<tr>
+																	<td data-th="Rank"><span class="bt-content">1</span></td>
+																	<td data-th="User"><span class="bt-content">		<div class="sp-avatar sp-avatar--small">
+																<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
+																	<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			</a>
+																<div class="sp-avatar__content">
+																	<span class="sp-avatar__name">Developer</span>
+																</div>
+															</div>
+															</span></td>
+																	<td data-th="Score"><span class="bt-content">2 / 4</span></td>
+																	<td data-th="Time Spent"><span class="bt-content">56 Seconds</span></td>
+																	<td data-th="Date"><span class="bt-content">9 hours ago</span></td>
+																</tr>
+														</tbody>
+													</table>
+													<h3 class="mb-2">Match</h3>
+													<table class="table table-borderless sp-table">
+														<thead>
+														<tr>
+																	<th>Rank</th>
+																	<th>User</th>
+																	<th>Score</th>
+																	<th>Time Spent</th>
+																	<th>Date</th>
+																</tr>
+														</thead>
+														<tbody>
+															<tr>
+																	<td data-th="Rank"><span class="bt-content">1</span></td>
+																	<td data-th="User"><span class="bt-content">		<div class="sp-avatar sp-avatar--small">
+																<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
+																	<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			</a>
+																<div class="sp-avatar__content">
+																	<span class="sp-avatar__name">Developer</span>
+																</div>
+															</div>
+															</span></td>
+																	<td data-th="Score"><span class="bt-content">2 / 4</span></td>
+																	<td data-th="Time Spent"><span class="bt-content">56 Seconds</span></td>
+																	<td data-th="Date"><span class="bt-content">9 hours ago</span></td>
+																</tr>
+														</tbody>
+													</table>
+													<h3 class="mb-2">Write</h3>
+													<table class="table table-borderless sp-table">
+														<thead>
+														<tr>
+																	<th>Rank</th>
+																	<th>User</th>
+																	<th>Score</th>
+																	<th>Time Spent</th>
+																	<th>Date</th>
+																</tr>
+														</thead>
+														<tbody>
+															<tr>
+																	<td data-th="Rank"><span class="bt-content">1</span></td>
+																	<td data-th="User"><span class="bt-content">		<div class="sp-avatar sp-avatar--small">
+																<a href="https://studypeers.com/profile/developer/" class="sp-avatar__image">
+																	<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">			</a>
+																<div class="sp-avatar__content">
+																	<span class="sp-avatar__name">Developer</span>
+																</div>
+															</div>
+															</span></td>
+																	<td data-th="Score"><span class="bt-content">2 / 4</span></td>
+																	<td data-th="Time Spent"><span class="bt-content">56 Seconds</span></td>
+																	<td data-th="Date"><span class="bt-content">9 hours ago</span></td>
+																</tr>
+														</tbody>
+													</table>
+												</div>
+											</div>
+										</div>      		
 								     </div>
 							    </div>
 							    <div id="rating" class="tab-pane fade">
-							    	<section class="activity piechart">
-										<h3>ANALYTICS</h3>
-										<section class="analyticData">
-											<p><span>Customers</span></p>
-											<p><span>Users</span></p>
-										</section>
-										<section class="myChartDiv">
-										  <canvas id="myChart" width="200" height="auto"></canvas>
-										</section>
-									</section>
+							    	
 							      <div class="ratingWrapper">
-							      	<div class="ratingCard current_user_rating edit_rating hide">
-							      		<div class="left">
-							      			<h5>Rate this Study Set</h5>
-							      			<div class="my-rating-6" data-rating="1.5"></div>
-							      			<a href="#" class="filterBtn">Submit rating</a>
+							      	<form method="post" action="<?php echo base_url(); ?>studyset/rateStudyset" onsubmit="return validateRating()">
+							      		<div class="ratingCard current_user_rating edit_rating hide">
+							      		
+								      		<div class="left">
+								      			<h5>Rate this Study Set</h5>
+								      			<div class="my-rating-6" data-rating="0"></div>
+								      			<span class="error" id="err_user_rating"></span>
+								      			<input type="hidden" name="user_rating" id="user_rating">
+								      			<input type="hidden" name="rate_description" id="rate_description">
+								      			<input type="hidden" name="if_anonymous" id="if_anonymous">
+								      			<input type="hidden" name="rate_studyset" value="<?php echo $studyset['study_set_id'];?>">
+								      			<div class="custom-control custom-checkbox mb-3">
+											      <input type="checkbox" class="custom-control-input" id="customCheck" onclick="anonymousCheck()">
+											      <label class="custom-control-label" for="customCheck">Anonymous</label>
+											    </div>
+								      			
+								      		</div>
+								      		<div class="right">
+
+								      			<div class="col-sm-offset-1 col-sm-10">
+								      				<h5>Select a Description</h5>
+									      			<div class="rating-div" onclick="selectRateDesc('comprehensive', 'Comprehensive')" id="comprehensive" onmouseover="hoverRateDesc('comprehensive', 'Comprehensive')" onmouseout="hoverOutRateDesc('comprehensive', 'Comprehensive')">
+									      				<img class="initial" src="<?php echo base_url(); ?>assets_d/images/comprehensive.svg">
+									      				<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/comprehensive-blue.svg">
+									      				<h6>Comprehensive</h6>
+									      			</div>
+											      	<div class="rating-div" onclick="selectRateDesc('engaging', 'Engaging Format')" id="engaging" onmouseover="hoverRateDesc('engaging', 'Engaging Format')" onmouseout="hoverOutRateDesc('engaging', 'Engaging Format')">
+									      				<img class="initial" src="<?php echo base_url(); ?>assets_d/images/engagin-format.svg" style="height: 30px;">
+									      				<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/engagin-format-blue.svg" style="height: 30px;">
+									      				<h6>Engaging Format</h6>
+									      			</div>
+									      		</div>
+									      		<div class="col-sm-offset-1 col-sm-10">
+											      	<div class="rating-div" onclick="selectRateDesc('refresher', 'Good Refresher')" id="refresher" onmouseover="hoverRateDesc('refresher', 'Good Refresher')" onmouseout="hoverOutRateDesc('refresher', 'Good Refresher')">
+									      				<img class="initial" src="<?php echo base_url(); ?>assets_d/images/good-refresher.svg">
+									      				<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/good-refresher-blue.svg">
+									      				<h6>Good Refresher</h6>
+									      			</div>
+											      	<div class="rating-div" onclick="selectRateDesc('great_test', 'Great Test Result')" id="great_test" onmouseover="hoverRateDesc('great_test', 'Great Test Result')" onmouseout="hoverOutRateDesc('great_test', 'Great Test Result')">
+									      				<img class="initial" src="<?php echo base_url(); ?>assets_d/images/great-test-result.svg">
+									      				<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/great-test-result-blue.svg">
+									      				<h6>Great Test Result</h6>
+									      			</div>
+									      		</div>
+									      		<div class="col-sm-offset-1 col-sm-10">
+									      			<span class="error" id="err_rate_description" style="color: red;"></span><br>
+									      			<button type="submit" class="filterBtn">Submit rating</button>
+									      		</div>
+								      		</div>
+							      	
 							      		</div>
-							      		<div class="right">
-							      			<textarea value="Loreum Ipsum"></textarea>
-							      			<div class="custom-control custom-checkbox mb-3">
-										      <input type="checkbox" class="custom-control-input" id="customCheck" name="example1">
-										      <label class="custom-control-label" for="customCheck">Anonymous</label>
-										    </div>
-							      		</div>
-							      	</div>
+							      	</form>
 							      	<div class="ratingCard current_user_rating rating_view">
-							      		<div class="left">
-							      			<h5>Your Rating</h5>
-							      			<div class="my-rating-5" data-rating="1.5"></div>
-							      			<a href="javascript:void(0)" class="filterBtn edit_rating">Edit rating</a>
-							      		</div>
-							      		<div class="right">
-							      			<span>06/14/2020</span>
-							      			<p>Loreum Ipsum</p>
-							      		</div>
+							      		<?php if(!empty($user_rating)) { ?>
+								      		<div class="left">
+								      			<h5>Your Rating</h5>
+								      			<div class="my-rating-5" data-rating="<?php echo $user_rating['rating']; ?>"></div>
+								      			<a href="javascript:void(0)" class="filterBtn edit_rating">Edit rating</a>
+								      		</div>
+								      		<div class="right">
+								      			<span><?php echo date('d M, Y h:i A', strtotime($user_rating['created_at'])); ?></span>
+								      			<p><?php echo $user_rating['description']; ?></p>
+								      		</div>
+								      	<?php } else { ?>
+								      		<div class="col-sm-12">
+											    <div class="text-center">
+											    	<p>You haven't rated this studyset yet. </p>
+											      <a href="javascript:void(0)" class="filterBtn edit_rating" style="display: inline-table;">Rate It</a>
+											    </div>
+											  </div>
+								      		
+								      	<?php } ?>
 							      	</div>
 							      	<div class="ratingCard">
-							      		<div class="my-rating-4" data-rating="1.5"></div>
-							      		<p>Loreum Ipsum</p>
-							      		<div class="sp-avatar sp-avatar--small">
-											<a href="#" class="user_avatar">
-												<div class="sp-avatar__image">
-													<img alt="" src="images/default-avatar.svg" class="avatar avatar-96 photo avatar-default" height="96" width="96">
-												</div>
-												<div class="sp-avatar__content"><span class="sp-avatar__name"> </span><time>06/14/2020</time></div>
-											</a>						
-										</div>
+							      		<?php if(!empty($rating_list)) { ?>
+								      		<div class="my-rating-4" data-rating="2"></div>
+								      		<p>Loreum Ipsum</p>
+								      		<div class="sp-avatar sp-avatar--small">
+												<a href="#" class="user_avatar">
+													<div class="sp-avatar__image">
+														<img alt="" src="<?php echo base_url();?>assets_d/images/default-avatar.svg" class="avatar avatar-96 photo avatar-default" height="96" width="96">
+													</div>
+													<div class="sp-avatar__content"><span class="sp-avatar__name"> </span><time>06/14/2020</time></div>
+												</a>						
+											</div>
+										<?php } else {
+											echo "No ratings yet.";
+										} ?>
 							      	</div>
 							      </div>
 							    </div>
 							    <div id="comment" class="tab-pane fade">
 							    	<div class="chatCommentWrapper">
 							    		<div class="listChatWrap">
-							    			<div class="chatMsg">
-							    				<figure>
-							    					<img src="images/ct_user.jpg" alt="User">
-							    				</figure>
-							    				<figcaption>
-							    					<span class="name"> Henric jenifer</span>
-								    				Happy Birthday								    				
-								    				<div class="actionmsgMenu">
-								    					<ul>
-								    						<li class="likeuser">Like</li>
-								    						<li class="replyuser">Reply</li>
-								    					</ul>
-								    				</div>
-								    				<div class="reactmessage">
-								    					<div class="react">
-								    						<img src="images/like.png" alt="Like">
-								    					</div>
-								    					<p>1</p>
-								    				</div>
-								    			</figcaption>
-								    			<div class="replyBox">
-								    				<figure>
-								    					<img src="images/ct_user.jpg" alt="User">
-								    				</figure>
-								    				<div class="replyuser">
-								    					<input type="text" placeholder="Write a Reply...">
-								    				</div>
-								    			</div>								    				
-							    			</div>
-							    			<div class="chatMsg">
-							    				<figure>
-							    					<img src="images/ct_user.jpg" alt="User">
-							    				</figure>
-							    				<figcaption>
-							    					<span class="name"> Henric jenifer</span>
-								    				पुलिस ने क़ैदी से पूछा तुम पागल कैसे हुए?
+							    			<div id="studyset_comment">
+								    			<?php foreach ($comment as $key => $value) { 
+								    				$user_info = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
+								    				$reply = $this->db->get_where('comment_master', array('comment_parent_id' => $value['id']))->result_array();
+								    				$count_like = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1))->num_rows();
+								    			?>
+								    				<div class="chatMsg">
+									    				<figure>
+									    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+									    				</figure>
+									    				<figcaption>
+									    					<span class="name"> <?php echo $user_info['nickname'] ?></span>
+									    					<?php if($value['type'] == 1) { ?>
+									    						<img src="<?php echo base_url(); ?>uploads/comments/<?= $value['comment']; ?>" alt="comment" style="height: 70px;"> 
+									    					<?php } else { echo $value['comment']; } ?>
+										    										    				
+										    				<div class="actionmsgMenu">
+										    					<ul>
+										    						<li class="likeuser" onclick="likeComment('<?php echo $value['id'] ?>')">Like</li>
+										    						<li class="replyuser" onclick="showReplyUser('<?php echo $value['id'] ?>')">Reply</li>
+										    					</ul>
+										    				</div>
+										    				<?php if($count_like == 0){
+											    				$css = 'display: none;';
+											    				} else {
+											    					$css = '';
+											    				} ?>
+										    				 <div class="reactmessage" id="reactmessage_<?php echo $value['id'] ?>" style="<?= $css; ?>">
+										    					<div class="react">
+										    						<img src="<?php echo base_url(); ?>assets_d/images/like.png" alt="Like">
+										    					</div>
+										    					<p id="like_count_<?php echo $value['id'] ?>"><?= $count_like; ?></p>
+										    				</div> 
+										    			</figcaption>
 
-													क़ैदी: ऐसे
-													.
-													.
-													.
-													...See more							    				
-								    				<div class="actionmsgMenu">
-								    					<ul>
-								    						<li class="likeuser">Like</li>
-								    						<li class="replyuser">Reply</li>
-								    					</ul>
-								    				</div>
-								    			</figcaption>							    				
-							    			</div>
+										    			<div class="reply" id="reply_<?php echo $value['id'] ?>">
+										    				<?php foreach ($reply as $key2 => $value2) { 
+										    					$user_info2 = $this->db->get_where('user_info', array('userID' => $value2['user_id']))->row_array();
+										    				 ?>
+										    				 <div class="userReplyBox">
+										    					<figure>
+											                        <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+											                    </figure>
+											                    <figcaption>
+											                        <span class="name"><?= $user_info2['nickname'] ?></span>
+											                        <p><?php echo $value2['comment'] ?></p>
+											                        
+											                    </figcaption>
+											                    
+											                </div>
+										    				<?php } ?>
+										    			</div>
+
+										    			<div class="replyBox" id="replyBox_<?php echo $value['id'] ?>">
+										    				<figure>
+										    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+										    				</figure>
+										    				<div class="replyuser">
+										    					<input type="text" id="input_reply_<?php echo $value['id'] ?>" placeholder="Write a Reply..." onkeypress="postReply(event,'<?php echo $value['id'] ?>', this.value)">
+										    				</div>
+										    			</div>								    				
+									    			</div>
+								    			<?php } ?>
+									    	</div>
 							    		<div class="chatreplyBox">
-							    			<input type="text" name="" placeholder="Comment..">
+							    		    <figure>
+						    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+						    				</figure>
+							    			<input type="hidden" id="comment_studyset_id" value="<?php echo $studyset['study_set_id'];?>
+							    			">
+							    			<input type="text" name="" placeholder="Comment.." id="input-emoji" data-emojiable="true"
+									data-emoji-input="unicode">
+							    			<div class="mediaAction">
+								    			<button type="button">
+								    				<img src="<?php echo base_url(); ?>assets_d/images/camera.svg" alt="Add Files">
+								    				<input type="file" id="imgComment">
+								    			</button>
+							    			</div>
 							    		</div>
 							    	</div>
 							    </div>
@@ -830,224 +1193,9 @@
         </div>
     </div>
 </div>
-<div class="modal fade" id="courseModal" role="dialog">
-	<div class="modal-dialog">
-	  <!-- Modal content-->
-	  <div class="modal-content">
-	      <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-	    <div class="modal-body">
-	      	<div class="courseHeader">
-	      		<h4>Course</h4>
-	      		<div class="add_course">
-					<svg height="512pt" 
-						viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#2196f3"/><path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" fill="#fafafa"/>
-					</svg>
-	      			Add a course
-	      		</div>
-	      	</div>
-	      	<div class="courseBox">
-	      		<div class="removeCourseBox">
-					<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
-								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
-						<g>
-							<g>
-								<path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
-									L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
-									c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
-									l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
-									L284.286,256.002z"/>
-							</g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-					</svg>
 
-	      		</div>
-	      		<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Course">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor First Name">
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor Last Name">
-						</div>
-					</div>
-				</div>
-	      	</div>
-	      	<div class="studybuttonGroup">
-				<button type="button" class="transparentBtn" onclick="">Cancel</button>
-				<button type="submit" class="filterBtn">
-					Add
-				</button>
-			</div>
-	    </div>
-	  </div>
-	</div>
-</div>
+
 <script type="text/javascript">
-$(document).ready(function(){
-	$(document).on('click','.deleteStudySet',function(){
-		var delete_id = $(this).data('id');
-		$("#ss_id").val(delete_id);
-
-	});
-
-	$(document).on('click','.reportBtn',function(){
-		var study_set_id = $("#report_id").val();
-		var report_reason = $("#report_reason").val();
-		var report_description = $("#report_description").val();
-		if(report_reason == ''){
-			$("#report_reason_err").html('Please select reason.');
-			return false;
-		}
-		if(study_set_id != '' && report_reason != ''){
-			$.ajax({
-				url : '<?php echo base_url();?>studyset/reportStudySet',
-				type : 'post',
-				data : {"study_set_id" : study_set_id,'report_description' : report_description, "report_reason" : report_reason},
-				success:function(result) {
-					$("#confirmationModal").modal('hide');
-					window.location='<?php echo base_url();?>studyset';
-				}	
-			})
-		}
-	});
-
-	$(document).on('click','.likecount',function(){
-		var study_set_id = $(this).data('id');
-		var that = $(this);
-		$.ajax({
-			url : '<?php echo base_url();?>studyset/manageLikes',
-			type : 'post',
-			data : {"study_set_id" : study_set_id},
-			success:function(result) {
-				if(result.trim() == 1) {
-					that.find('i').addClass('fa-thumbs-up');
-				} else {
-					that.find('i').removeClass('fa-thumbs-up');
-				}
-			}
-		})
-	});
-
-	const yLabels = {
-			    0 : 100,
-			      200 : 200,
-			      400 : 300,
-			      600 : 400,
-			      800 : 500,
-			      1000 : 600,
-			      1200 : 700,
-			      1400 : 800,
-			      1600 : 900,
-			      1800 : 1000
-			  };
-    Chart.defaults.global.elements.line.fill = false;
-      const barChartData = {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'],
-        datasets: [{
-        type: 'bar',
-        label: 'a',
-        id: "y-axis-0",
-        backgroundColor: "rgba(48,63,159,0.75)",
-        data: [550, 200, 200, 200,450,400,450,450,450,350,450,450]
-        }, {
-        type: 'bar',
-        label: 'b',
-        id: "y-axis-0",
-        backgroundColor: "rgba(63,81,181,0.75)",
-        data: [690, 210, 250, 300,650,500,780,620,700,500,620,650]
-        }]
-    };
-      const ctx = document.getElementById("myChart");
-      // allocate and initialize a chart
-      const ch = new Chart(ctx, {
-        type: 'bar',
-        scaleOverride : true,
-        data: barChartData,
-        options: {
-      legend: {
-        display: false
-      },
-          title: {
-            display: true,
-            text: ""
-          },
-          tooltips: {
-            mode: 'label'
-          },
-          responsive: true,
-          scales: {
-            xAxes: [{
-              stacked: true,
-              gridLines: {
-                    display:false
-                }
-            }],
-            yAxes: [{
-              stacked: true,
-              position: "left",
-         ticks: {
-                    beginAtZero: true,
-                    callback(value, index, values) {
-                        return yLabels[value];
-                    }
-                },
-              gridLines: {
-                    display:false
-              },
-              id: "y-axis-0",
-            }, {
-        display: false,
-              stacked: false,
-              position: "right",
-              gridLines: {
-                    display:false
-              },
-              id: "y-axis-1",
-            }]
-          }
-        }
-      });
-
-})
 
 function deleteStudySet() 
 {
@@ -1064,4 +1212,156 @@ function deleteStudySet()
 		})
 	}
 }
+
+
+function selectRateDesc(id, val){
+	$('#rate_description').val(val);
+	$('.onhover').hide(); $('.initial').show();
+	$('#'+id+' .initial').hide();
+	$('#'+id+' .onhover').show();
+	$("#err_rate_description").html('').hide();
+}
+
+
+function hoverRateDesc(id, val){
+	var rate_description = $('#rate_description').val();
+	if(rate_description != val) {
+		$('#'+id+' .initial').hide();
+		$('#'+id+' .onhover').show();
+	}
+}
+
+function hoverOutRateDesc(id, val){
+	var rate_description = $('#rate_description').val();
+	if(rate_description != val) {
+		$('#'+id+' .initial').show();
+		$('#'+id+' .onhover').hide();
+	}
+}
+
+
+function anonymousCheck(){
+	if ($('#customCheck').is(':checked')) {
+		$('#if_anonymous').val(1);
+	} else {
+		$('#if_anonymous').val(0);
+	}
+}
+
+
+function validateRating(){
+	var user_rating = $('#user_rating').val();
+	if(user_rating == ''){
+		$("#err_user_rating").html('Please select rating.').show();
+		return false;
+	} else {
+		$("#err_user_rating").html('').hide();
+	}
+
+	var rate_description = $('#rate_description').val();
+	if(rate_description == ''){
+		$("#err_rate_description").html('Please select a description.').show();
+		return false;
+	} else {
+		$("#err_rate_description").html('').hide();
+	}
+	
+}
+
+
+$("#input-emoji").keypress(function(event) {
+    if (event.which == 13) {
+        comment = $("#input-emoji").val();
+        studyset_id = $("#comment_studyset_id").val();
+        if(comment != ''){
+        	var url = '<?php echo base_url('studyset/addComment') ?>';
+        	$.ajax({
+	          url: url,
+	          type: 'POST',
+	          data: {'comment': comment, 'studyset_id': studyset_id},
+	          success: function(result) {
+	          	$('#studyset_comment').append(result);
+	            $("#input-emoji").val('');
+	          }
+	      });
+        }
+     }
+});
+
+
+function likeComment(comment_id){
+	var url = '<?php echo base_url('studyset/likeComment') ?>';
+	$.ajax({
+      url: url,
+      type: 'POST',
+      data: {'comment_id': comment_id},
+      success: function(result) {
+      	if(result != 0) {
+	      	$('#reactmessage_'+comment_id).show();
+	      	$('#like_count_'+comment_id).html(result);
+	    } else {
+	    	$('#reactmessage_'+comment_id).hide();
+	      	$('#like_count_'+comment_id).html(result);
+	    } 
+      }
+  	});
+}
+
+function showReplyUser(id){
+	$('#replyBox_'+id).css('display', 'flex');
+}
+
+function postReply(event, comment_id, comment){
+	if (event.which == 13) {
+        studyset_id = $("#comment_studyset_id").val();
+        if(comment != ''){
+    	var url = '<?php echo base_url('studyset/postReply') ?>';
+    	$.ajax({
+          url: url,
+          type: 'POST',
+          data: {'comment': comment, 'studyset_id': studyset_id, 'comment_id': comment_id},
+          success: function(result) {
+          	$('#reply_'+comment_id).append(result);
+            $("#input_reply_"+comment_id).val('');
+          }
+      	});
+     }
+	}
+}
+
+
+$("#imgComment").change(function () {
+    var file_data = $('#imgComment').prop('files')[0];   
+    var form_data = new FormData();     
+    studyset_id = $("#comment_studyset_id").val();             
+    form_data.append('file', file_data);
+    form_data.append('studyset_id', studyset_id);
+    // alert(form_data);  
+    var url = '<?php echo base_url('studyset/postImgReply') ?>';                           
+    $.ajax({
+        url: url, // point to server-side PHP script 
+        dataType: 'text',  // what to expect back from the PHP script, if anything
+        cache: false,
+        contentType: false,
+        processData: false,
+        data: form_data,                         
+        type: 'post',
+        success: function(result){
+            $('#studyset_comment').append(result);
+            $("#imgComment").val('');
+        }
+     });
+});
+
+
+function setTab(){ 
+	$('html, body').animate({
+        scrollTop: $(".tabularLiist").offset().top
+    }, 1000);
+	$('.nav-tabs li').removeClass('active');
+	$('#commentTab').addClass('active');
+	
+}
+
+
 </script>

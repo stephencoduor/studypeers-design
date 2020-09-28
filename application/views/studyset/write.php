@@ -21,14 +21,15 @@
 						</div>
 						<div class="main_subheaderCenter">
 							<div class="set-progress">
-								Round <span class="sp-set-progress__round-progress">02</span>
+								Round <span class="sp-set-progress__round-progress"><?php if($learn_round < 10) { echo 0; } echo $learn_round; ?></span>
 							</div>
 							<div class="set-progress">
-								Correct <span class="sp-set-progress__answered-progress">00</span>
+								Correct <span class="sp-set-progress__answered-progress" id="correct_count">00</span>
 							</div>
 							<div class="set-progress">
-								Missed <span class="sp-set-progress__missed-progress">01</span>
+								Missed <span class="sp-set-progress__missed-progress" id="missed_count">00</span>
 							</div>
+							<input type="hidden" id="total_term" value="<?php echo count($term_data); ?>">
 						</div>
 						<div class="main_subheaderRight">
 							<svg class="timer-tracker__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 501.333 501.333">
@@ -42,59 +43,32 @@
 							<div id="matchtime"></div>
 						</div>
 					</div>
+					<input type="hidden" id="studyset_id" value="<?php echo $studyset['study_set_id']; ?>">
+					<input type="hidden" id="missed_terms" value="">
 					<div class="mainCardWrapper">
-						<div class="commoncard" id="writeboxes">
-							<div class="writebox">
-								<div class="flashCard_txt">
-									A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.				
+						<?php $count = count($term_data)-1; foreach ($term_data as $key => $value) { ?>
+							<div class="commoncard <?php if($key == 0) { echo "current first"; } ?>  <?php if($key == $count) { echo "last"; } ?>" id="writeboxes" style="<?php if($key != 0) { echo "display: none"; } ?>">
+								<div class="writebox">
+									<div class="flashCard_txt">
+										
+										<p class="text-capitalise"><?php echo $value['term_description']; ?>	</p>
+                    <?php if(!empty($value['term_image'])) { ?>
+                      <img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 100px;border-radius:5px;">
+                    <?php } ?>			
+									</div>
+									<div class="writebox-answer">
+										<div class="form-group">
+											<input type="text" name="" class="form-control form-control--lg" placeholder="Type your answer..." id="text_<?php echo $value['study_set_term_id']; ?>">
+										</div>
+										<div class="learnBtnWrapper">
+											<button type="submit" class="createBtn checkAnswerWrite" data-id="<?php echo $value['study_set_term_id']; ?>">Answer</button>
+										</div>
+									</div>
 								</div>
-								<div class="writebox-answer">
-									<div class="form-group">
-										<input type="text" name="" class="form-control form-control--lg" placeholder="Type your answer...">
-									</div>
-									<div class="learnBtnWrapper">
-										<button type="submit" class="createBtn ">Answer</button>
-									</div>
+								<div class="answer-result" id="WriteAnsBox<?php echo $value['study_set_term_id']; ?>" style="display: none">
 								</div>
 							</div>
-							<div class="answer-result wrong">
-									<h3><svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-										  <path d="m497.6,244.7c-63.9-96.7-149.7-150-241.6-150-91.9,1.42109e-14-177.7,53.3-241.6,150-4.5,6.8-4.5,15.7 0,22.5 63.9,96.7 149.7,150 241.6,150 91.9,0 177.7-53.3 241.6-150 4.5-6.8 4.5-15.6 0-22.5zm-241.6,131.7c-74.2,0-144.8-42.6-199.9-120.4 55-77.8 125.6-120.4 199.9-120.4 74.2,0 144.8,42.6 199.9,120.4-55.1,77.8-125.6,120.4-199.9,120.4z"></path>
-										  <path d="m256,148.5c-59.3,0-107.5,48.2-107.5,107.5 0,59.3 48.2,107.5 107.5,107.5s107.5-48.2 107.5-107.5c0-59.3-48.2-107.5-107.5-107.5zm0,175.5c-36.8,0-66.8-30.5-66.8-68 0-37.5 30-68 66.8-68 36.8,0 66.8,30.5 66.8,68 0,37.5-30,68-66.8,68z"></path>
-										</svg> Study this one
-									</h3>
-								<h6>Definition</h6>
-								<div class="answer-result__card-desc">
-									A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.	
-								</div>	
-								<h6><svg class="sp-icon correct-dark mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-									<path d="M440.8,11H71.3C38,11,11,38,11,71.2v369.5C11,474,38,501,71.3,501h369.5c33.2,0,60.2-27,60.2-60.2V71.2
-										C501,38,474,11,440.8,11z M460.2,440.8c0,10.7-8.7,19.4-19.4,19.4H71.3c-10.7,0-19.4-8.7-19.4-19.4V71.2c0-10.7,8.7-19.4,19.4-19.4
-										h369.5c10.7,0,19.4,8.7,19.4,19.4L460.2,440.8L460.2,440.8z"></path>
-									<path d="M232.6,357.4c-5.4,0-10.7-2-14.8-6.2l-87.6-87.6c-8.2-8.2-8.2-21.5,0-29.7c8.2-8.2,21.5-8.2,29.7,0l72.7,72.7l151.7-151.7
-										c8.2-8.2,21.5-8.2,29.7,0c8.2,8.2,8.2,21.5,0,29.7L247.4,351.3C243.3,355.4,237.9,357.4,232.6,357.4z"></path>
-									</svg>
-									 Correct answer
-								</h6>	
-								<p class="correct-dark-color">
-										You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.		
-								</p>	
-								<h6>You said</h6>
-								<div class="you-said">
-									No answer given					
-								</div>
-								<div class="learnBtnWrapper justifycenter">
-									<button type="button" class="createBtn">Next
-										<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-											<path d="M244.1,53.7c-14.8,16.4-13.9,41.5,2,56.8l101.5,94.4l-308.4,0.7C17,206.2-0.5,224.6,0,246.7
-												c0.5,21.4,17.7,38.6,39.1,39.1l308.6-0.7l-101.5,94.4c-16.2,15.1-17.1,40.6-2,56.8c15.1,16.2,40.6,17.1,56.8,2l176.2-164
-												c8.1-7.6,12.7-18.2,12.8-29.3c0-11.1-4.6-21.7-12.8-29.3L301,51.8c-16.2-15.2-41.6-14.4-56.8,1.7c-0.1,0.1-0.2,0.2-0.2,0.2
-												L244.1,53.7z"></path>
-										</svg>
-									</button>
-								</div>	
-							</div>
-						</div>
+						<?php } ?>
 					</div>
 				</section>
 				<section class="rightsidemsgbar">
@@ -359,115 +333,109 @@
       </div>
     </div>
 </div>
-<div class="modal fade" id="courseModal" role="dialog">
-	<div class="modal-dialog">
-	  <!-- Modal content-->
-	  <div class="modal-content">
-	      <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-	    <div class="modal-body">
-	      	<div class="courseHeader">
-	      		<h4>Course</h4>
-	      		<div class="add_course">
-					<svg height="512pt" 
-						viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#2196f3"/><path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" fill="#fafafa"/>
-					</svg>
-	      			Add a course
-	      		</div>
-	      	</div>
-	      	<div class="courseBox">
-	      		<div class="removeCourseBox">
-					<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
-								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
-						<g>
-							<g>
-								<path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
-									L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
-									c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
-									l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
-									L284.286,256.002z"/>
-							</g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-					</svg>
 
-	      		</div>
-	      		<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Course">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor First Name">
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor Last Name">
-						</div>
-					</div>
-				</div>
-	      	</div>
-	      	<div class="studybuttonGroup">
-				<button type="button" class="transparentBtn" onclick="">Cancel</button>
-				<button type="submit" class="filterBtn">
-					Add
-				</button>
-			</div>
-	    </div>
-	  </div>
-	</div>
-</div>
 <script>
-	timer();
-	function timer(){
-	    var timepattern = new Date();
-	    var h = timepattern.getHours();
-	    var m = timepattern.getMinutes();
-	    var s = timepattern.getSeconds();
-	    h = checkTime(h);
-	    m = checkTime(m);
-	    s = checkTime(s);
-	    var time = h + ":" + m + ":" + s; 
-	    document.getElementById('matchtime').innerHTML = time;  
-	    var spectime = setTimeout(timer, 500);
-	}
-	function checkTime(i) {
-	  if (i < 10) {i = "0" + i};
-	  return i;
-	}
+var timer2 = "00:00:00";
+// var incrementUrl = '<?php echo base_url(); ?>studyset/incrementFlashcard';
+var interval = setInterval(function() {
+
+
+  var timer = timer2.split(':'); 
+  //by parsing integer, I avoid all extra string processing
+  var hours = parseInt(timer[0], 10);
+  var minutes = parseInt(timer[1], 10);
+  var seconds = parseInt(timer[2], 10);
+  ++seconds;
+  
+  hours = (hours < 10) ? '0' + hours : hours;
+  minutes = (seconds > 59) ? ++minutes : minutes;
+  minutes = (minutes < 10) ? '0' + minutes : minutes;
+  if(minutes > 59) {
+    minutes = 0;
+    hours = ++hours;
+  } else {
+    minutes = minutes;
+  }
+  // minutes = (minutes > 59) ? 0 : minutes;
+  if (minutes < 0) clearInterval(interval);
+  seconds = (seconds > 59) ? 0 : seconds;
+  seconds = (seconds < 10) ? '0' + seconds : seconds;
+  //minutes = (minutes < 10) ?  minutes : minutes;
+  $('#matchtime').html(hours + ':' + minutes + ':' + seconds);
+  // if ((seconds <= 0) && (minutes <= 0)) {
+  // 	clearInterval(interval);
+  // 	$('#timerOutModal').modal('show');
+  // }
+  timer2 = hours+ ':' + minutes + ':' + seconds;
+  
+}, 1000);
+
+$('.checkAnswerWrite').click(function() {
+	var id = $(this).data('id');
+	var correct_count = parseInt($('#correct_count').html()); 
+	var missed_count  = parseInt($('#missed_count').html());
+	var missed_terms  = $('#missed_terms').val();
+  
+	var select = $('#text_'+id).val();
+	var url = '<?php echo base_url(); ?>studyset/checkWriteAns';
+
+	$.ajax({
+	        url: url,
+	        type: 'POST',
+	        data: {'studyset_term_id': id, 'select': select},
+	        dataType: "json",
+	        success: function(result) {
+	        $('.writebox').hide(); 
+	          	if(result.type == 1){
+	            	$('#WriteAnsBox'+id).removeClass('wrong').addClass('correct').html(result.html).show();
+	            	var n = correct_count+1;
+	            	var formattedNumber = ("0" + n).slice(-2);
+	            	$('#correct_count').html(formattedNumber);
+	          	} else {
+	          		if(missed_terms != ""){
+	          			$('#missed_terms').val(missed_terms+','+id);
+	          		} else {
+	          			$('#missed_terms').val(id);
+	          		}
+	          		
+	          		$('#WriteAnsBox'+id).removeClass('correct').addClass('wrong').html(result.html).show();
+	          		var n = missed_count+1;
+	            	var formattedNumber = ("0" + n).slice(-2);
+	            	$('#missed_count').html(formattedNumber);
+	          	}
+	        }
+	});
+  
+  
+});
+
+function nextWriteAns() {
+  if ($('.current').hasClass('last')) {
+    var total_term = parseInt($('#total_term').val()); 
+    total_term = ("0" + total_term).slice(-2);
+    var correct_count = parseInt($('#correct_count').html()); 
+    correct_count = ("0" + correct_count).slice(-2);
+    var missed_count  = parseInt($('#missed_count').html());
+    missed_count = ("0" + missed_count).slice(-2);
+    var url = '<?php echo base_url(); ?>studyset/incrementWriteRound';
+    var studyset_id = $('#studyset_id').val();
+    var missed_terms = $('#missed_terms').val();
+    var time_span = $('#matchtime').html();
+    $.ajax({
+	        url: url,
+	        type: 'POST',
+	        data: {'studyset_id': studyset_id, 'total_term': total_term, 'correct_count': correct_count, 'missed_count': missed_count, 'missed_terms': missed_terms, 'time_span': time_span},
+	        success: function(result) {
+	        	clearInterval(interval);
+	          	$('.commoncard').html(result);
+          	}
+	});
+    
+  } else {
+    $('.writebox').show();
+    $('.current').removeClass('current').hide()
+        .next().show().addClass('current');
+  }
+}
+
 </script>
-</body>
-</html>

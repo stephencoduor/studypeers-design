@@ -33,393 +33,194 @@
 						</div>
 					</div>
 					<div class="mainCardWrapper">
-						<div class="commoncard study-set-test-form">
-							<h3>1 Written Questions</h3>
-							<div class="test-item">
-								<div class="test-item-index">1</div>
-								<div class="d-flex">
-									<div class="flex-fill">
-										<p class="text-item-desc mb-20">A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.</p>
-										<div class="test-input form-group ">
-											<input type="text" class="form-control form-control--lg" placeholder="Type your answer." required>
-										</div>
-									</div>									
-								</div>
-							</div>	
-						</div>
-						<div class="commoncard study-set-test-form">
-							<div class="test test-item">
-								<div class="row">
-									<div class="col-md-8 matching-item">
-										<h3>1 Matching Questions</h3>
-										<div class="text-item-desc  mb-5">
-											<input type="text" value="" name="matching[74]" class="form-control form-control--lg d-inline mr-2 match-input" style="max-width: 50px"required="">
-												You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.	
-										</div>
-									</div>
-									<div class="col-md-4">
-										<div class="match-card-desc mb-3 pull-right">
-											<div class="card-image--sm question-card-desc">
-												A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.
-											</div>
-											<strong class="match-bet">A</strong>											
-										</div>
-									</div>
-								</div>	
-							</div>
-						</div>
-						<div class="commoncard study-set-test-form">
-							<div class="test test-item">
-								<h3>1 Multiple Choice Questions</h3>
-								<div class="test-item">
-									<div class="test-item-index">1</div>
-									<div class="d-flex">
-										<div class="flex-fill">
-											<p class="text-item-desc mb-20">A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.</p>
-											
-											<div class="result"></div>
-											<div class="mcq-group-74">
-																			<div>
-														<div class="form-group">
-															<label class="custom-radio">
-																<input type="radio" name="mcq[74]" value="You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution." required="">
-																<span class="checkmark"></span> You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.									</label>
-														</div>
+						<form method="post" action="<?php echo base_url(); ?>studyset/submitTest" id="test-form" style="display: none;">
+							<input type="hidden" id="studyset_id" name="studyset_id" value="<?php echo $studyset['study_set_id']; ?>">
+							<input type="hidden" id="total_time" name="total_time">
 
-													</div>
-																	</div>
-										</div>
+							<input type="hidden" id="written_applicable" name="written_applicable" value="0">
+							<input type="hidden" id="match_applicable" name="match_applicable" value="0">
+							<input type="hidden" id="multiple_applicable" name="multiple_applicable" value="0">
+							<input type="hidden" id="truefalse_applicable" name="truefalse_applicable" value="0">
 
-															<div class="card-image question-card-desc">
-												A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.
-											</div>
-													</div>
-								</div>
-							</div>
-						</div>
-						<div class="commoncard study-set-test-form">
-							<div class="test test-item">
-								<h3>1 True/False questions</h3>
-								<div class="test-item">
-									<div class="test-item-index">1</div>
-									<div class="d-flex">
-										<div class="flex-fill">
-											<p><strong>You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.</strong><br>
-												A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.</p>
-
-											<div class="tf-group-74">
-												<div>
-
-													<label class="custom-radio">
-														<input type="radio" name="truefalse[74][You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.]" value="true" required="">
-														<span class="checkmark"></span>True							
-													</label>
-												</div>
-												<div>
-													<label class="custom-radio">
-														<input type="radio" name="truefalse[74][You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.]" value="false" required="">
-														<span class="checkmark"></span>False							
-													</label>
-												</div>
-											</div>
-										</div>		
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="btnWrap">
-							<button type="submit" class="filterBtn">submit Test</button>
-						</div>
-						<div class="study-set-results-box">
-							<h4>It took you <strong>40 Minutes 6 Seconds</strong> to complete the test</h4>
-							<h4>You got <strong>2 of 4</strong> correct</h4>
-							<h4>Your personal best is t <strong>2 out of 4 in 56</strong> - 2 days ago</h4>
-							<h4>Your recent attempts:</h4>
-							<table class="ch-ranking-table ch-ranking-no-rank mb-50">
-								<tbody>
-												<tr>
-										<td><div class="ch-ranking-value">2 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">40 Minutes6 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">1 second ago</div><small>Date</small></td>
-									</tr>
-												<tr>
-										<td><div class="ch-ranking-value">1 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">41 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">1 day ago</div><small>Date</small></td>
-									</tr>
-												<tr>
-										<td><div class="ch-ranking-value">2 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">56 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">2 days ago</div><small>Date</small></td>
-									</tr>
-											</tbody>
-							</table>
-							<h4 class="heading">Top Ranking</h4>
-							<table class="ch-ranking-table mb-50">
-								<tbody>
-											<tr>
-										<td><div class="ch-ranking-value">1</div></td>
-										<td><div class="ch-ranking-value">Developer</div><small>User</small></td>
-										<td><div class="ch-ranking-value">2 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">56 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">2 days ago</div><small>Date</small></td>
-									</tr>
-											<tr>
-										<td><div class="ch-ranking-value">2</div></td>
-										<td><div class="ch-ranking-value">Developer</div><small>User</small></td>
-										<td><div class="ch-ranking-value">2 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">40 Minutes6 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">1 second ago</div><small>Date</small></td>
-									</tr>
-											<tr>
-										<td><div class="ch-ranking-value">3</div></td>
-										<td><div class="ch-ranking-value">Developer</div><small>User</small></td>
-										<td><div class="ch-ranking-value">1 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">41 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">1 day ago</div><small>Date</small></td>
-									</tr>
-										</tbody>
-							</table>
-							<h4 class="heading">Recent Attempts</h4>
-							<table class="ch-ranking-table mb-50">
-								<tbody>
-											<tr>
-										<td><div class="ch-ranking-value">1</div></td>
-										<td><div class="ch-ranking-value">Developer</div><small>User</small></td>
-										<td><div class="ch-ranking-value">2 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">40 Minutes6 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">1 second ago</div><small>Date</small></td>
-									</tr>
-											<tr>
-										<td><div class="ch-ranking-value">2</div></td>
-										<td><div class="ch-ranking-value">Developer</div><small>User</small></td>
-										<td><div class="ch-ranking-value">1 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">41 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">1 day ago</div><small>Date</small></td>
-									</tr>
-											<tr>
-										<td><div class="ch-ranking-value">3</div></td>
-										<td><div class="ch-ranking-value">Developer</div><small>User</small></td>
-										<td><div class="ch-ranking-value">2 / 4</div><small>Score</small></td>
-										<td><div class="ch-ranking-value">56 Seconds</div><small>Time Spent</small></td>
-										<td><div class="ch-ranking-value">2 days ago</div><small>Date</small></td>
-									</tr>
-										</tbody>
-							</table>
-							<h4 class="heading">You can review the result of the test below.</h4>
-							
-						</div>
-						<form>
-							<div class="commoncard study-set-test-form">
-								<h3>1 Written Questions</h3>
-								<div class="test-item">
-									<div class="test-item-index">1</div>
-									<div class="d-flex">
-										<div class="flex-fill">
-											<p class="text-item-desc mb-20">A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.</p>
-											<div class="test-input form-group " style="display: none;">
-												<input type="text" class="form-control form-control--lg" placeholder="Type your answer." name="written[74]" autocomplete="off" required="">
-												<!-- <label></label> -->
-											</div>
-										</div>										
-									</div>
-									<div class="result"><label>INCORRECT</label><p class="error">sdsas</p><label>CORRECT</label><p class="">
-										You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.</p>
-									</div>
-								</div>
-							</div>
-							<div class="commoncard study-set-test-form">
-								<div class="test test-item">
-									<div class="row">
-										<div class="col-md-8 matching-item">
-											<h3 class="mb-5">1 Matching Questions</h3>
-											<div class="text-item-desc mb-5">
-												<input type="text" value="12" name="matching[74]" class="form-control form-control--lg d-inline mr-2 match-input" style="max-width: 50px" autocomplete="off" required="" disabled="">
-												You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.	
-											</div>						
-											<div class="result">
-													<label>INCORRECT</label>
-													<p class="error">A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.</p>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="match-card-desc mb-3 pull-right">
-												<div class="card-image--sm question-card-desc">
-													A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.
-												</div>
-												<strong class="match-bet">A</strong>											
-											</div>
-										</div>
-									</div>	
-								</div>
-							</div>
-							<div class="commoncard study-set-test-form">
-								<div class="test test-item">
-									<h3>1 Multiple Choice Questions</h3>
+							<div class="commoncard study-set-test-form" id="written_commoncard" style="display: none;">
+								<h3><?php echo count($term_data); ?> Written Questions</h3>
+								<?php $count = 1; foreach ($term_data as $key => $value) { ?>
 									<div class="test-item">
-										<div class="test-item-index">1</div>
+										<div class="test-item-index"><?php echo $count; ?></div>
 										<div class="d-flex">
 											<div class="flex-fill">
-												<p class="text-item-desc mb-20">A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.</p>
-												
-												<div class="result"><label>CORRECT</label><p class="correct">You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.</p></div>
-												
-											</div>
-
-																<div class="card-image question-card-desc">
-													A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.
+												<p class="text-item-desc mb-20 text-capitalise">  <?php echo $value['term_description']; ?></p>
+												<?php if(!empty($value['term_image'])) { ?>
+													<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 90px;margin-right: 5px; border-radius: 5px;">
+												<?php } ?>
+												<div class="test-input form-group mt-20">
+													<input type="text" class="form-control form-control--lg" name="written_answer[]" placeholder="Type your answer." required>
+													<input type="hidden" name="written_term_id[]" value="<?php echo $value['study_set_term_id']; ?>">
 												</div>
-														</div>
-									</div>
-								</div>
-							</div>
-							<div class="commoncard study-set-test-form">
-							<div class="test test-item">
-								<h3>1 True/False questions</h3>
-								<div class="test-item">
-									<div class="test-item-index">1</div>
-									<div class="d-flex">
-										<div class="flex-fill">
-
-											<p><strong>You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.</strong><br>
-												A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment until that may contain one or more models.</p>
-
-											
+											</div>									
 										</div>
-										
-
-									</div>
-									<div class="result"><label>CORRECT</label><p class="correct">Your answer is correct</p></div>
-
+									</div>	
+								<?php $count++; } ?>
+								
+							</div>
+							<div class="commoncard study-set-test-form" id="match_commoncard" style="display: none;">
+								<div class="test test-item">
+									<h3><?php echo count($term_data); ?> Matching Questions</h3>
+									<?php $random_arr = $term_data; 
+										shuffle($random_arr); 
+										foreach ($term_data as $key => $value) { 
+									?>
+										<div class="row" style="margin-bottom: 10px;">
+											<div class="col-md-8 matching-item">
+												<div class="text-item-desc  mb-5">
+													<input type="text" value="" name="matching_answer[]" class="form-control form-control--lg d-inline mr-2 match-input" style="max-width: 50px" required="">
+													<input type="hidden" name="matching_term_id[]" value="<?php echo $value['study_set_term_id']; ?>">
+													<p class="text-capitalise"><?php echo $value['term_description']; ?></p>
+														<?php if(!empty($value['term_image'])) { ?>
+															<div class="text-item-desc" style="margin-left: 15px;">
+															<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 90px;margin-right: 5px; border-radius: 5px;"></div>
+														<?php } ?>  	
+												</div>
+											</div>
+											<div class="col-md-4">
+												<div class="match-card-desc mb-3 pull-right">
+													<div class="card-image--sm question-card-desc">
+														<?php echo $random_arr[$key]['term_name']; ?>
+													</div>
+													<input type="hidden" name="letter_answer[]" value="<?php echo $letters[$key]; ?> <?php echo $random_arr[$key]['study_set_term_id']; ?>">
+													<strong class="match-bet"><?php echo $letters[$key]; ?></strong>											
+												</div>
+											</div>
+										</div>	
+									<?php } ?>
 								</div>
 							</div>
-						</div>
+							<div class="commoncard study-set-test-form" id="multiple_commoncard" style="display: none;">
+								<div class="test test-item">
+									<h3><?php echo count($term_data); ?> Multiple Choice Questions</h3>
+									<?php $count = 1; foreach ($term_data as $key => $value) {  ?>
+										<div class="test-item">
+											<div class="test-item-index"><?php echo $count; ?></div>
+											<div class="d-flex">
+												<div class="flex-fill">
+													<p class="text-item-desc mb-20 text-capitalise"> <?php echo $value['term_description']; ?></p>
+													<?php if(!empty($value['term_image'])) { ?>
+														<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 90px;margin-right: 5px; border-radius: 5px;">
+													<?php } ?>
+													<input type="hidden" name="multiple_term_id[]" value="<?php echo $value['study_set_term_id']; ?>">
+													<div class="result"></div>
+													<?php if(count($term_data) > 3) {
+														$exclude_arr = $term_data; 
+															unset($exclude_arr[$key]); 
+															$random_keys = array_rand($exclude_arr,3);
+															$random_keys[3] = $key; 
+															shuffle($random_keys); 
+													
+													?>
+													<div class="mcq-group-74 mt-20">
+														<?php foreach ($random_keys as $key2 => $value2) { ?>
+															<div>
+																<div class="form-group">
+																	<label class="custom-radio">
+																		<input type="radio" name="multiple_answer_<?php echo $value['study_set_term_id']; ?>" value="<?php echo $term_data[$value2]['study_set_term_id']; ?>" required="">
+																		<span class="checkmark"></span> <?php echo $term_data[$value2]['term_name'] ?>		</label>
+																</div>
+
+															</div>
+														<?php } ?>
+													</div>
+
+													<?php } else { ?>
+													<div class="mcq-group-74">
+															<?php foreach ($term_data as $key2 => $value2) { ?>
+																<div>
+																	<div class="form-group">
+																		<label class="custom-radio">
+																			<input type="radio" name="multiple_answer_<?php echo $value2['study_set_term_id']; ?>" value="<?php echo $value2['study_set_term_id']; ?>" required="">
+																			<span class="checkmark"></span> <?php echo $value2['term_name'] ?>		</label>
+																	</div>
+
+																</div>
+															<?php } ?>
+													</div>
+													<?php } ?>
+													
+
+
+												</div>
+
+																	
+											</div>
+										</div>
+									<?php $count++; } ?>
+								</div>
+							</div>
+							<div class="commoncard study-set-test-form" id="truefalse_commoncard" style="display: none;">
+								<div class="test test-item">
+									<h3><?php echo count($term_data); ?> True/False questions</h3>
+									<?php $random_arr = $term_data; 
+										shuffle($random_arr); $count = 1;
+										$per_val = round (count($term_data) * 40 / 100); 
+										
+										$true_arr = array_slice($random_arr, 0, $per_val); $false_arr = array_slice($random_arr, $per_val); $false_key = 0; 
+										foreach ($term_data as $key => $value) { 
+									?>
+										<div class="test-item">
+											<div class="test-item-index"><?php echo $count; ?></div>
+											<div class="d-flex">
+												<div class="flex-fill">
+													<p class="text-capitalise"><strong><?php echo $value['term_description']; ?></strong>
+													</p><?php if(!empty($value['term_image'])) { ?>
+														<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 90px;margin-right: 5px; border-radius: 5px;">
+													<?php } ?><br>
+													<p class="text-capitalise">
+													<?php if(array_search($value['study_set_term_id'], array_column($true_arr, 'study_set_term_id')) !== false) {
+														echo $value['term_name'];
+														$truefalse_term = $value['study_set_term_id'];
+													} else {
+														echo $false_arr[$false_key]['term_name'];
+														$truefalse_term = $false_arr[$false_key]['study_set_term_id'];
+														$false_key++;
+													} ?>
+
+													</p>
+													<input type="hidden" name="truefalse_term[]" value="<?php echo $truefalse_term; ?>">
+													<input type="hidden" name="truefalse_term_id[]" value="<?php echo $value['study_set_term_id']; ?>">
+													<div class="tf-group-74">
+														<div>
+
+															<label class="custom-radio">
+																<input type="radio" name="truefalse_answer_<?php echo $value['study_set_term_id']; ?>" value="true" required="">
+																<span class="checkmark"></span>True							
+															</label>
+														</div>
+														<div>
+															<label class="custom-radio">
+																<input type="radio" name="truefalse_answer_<?php echo $value['study_set_term_id']; ?>" value="false" required="">
+																<span class="checkmark"></span>False							
+															</label>
+														</div>
+													</div>
+												</div>		
+											</div>
+										</div>
+									<?php $count ++; } ?>
+								</div>
+							</div>
+
+							<div class="btnWrap">
+								<button type="submit" class="filterBtn">submit Test</button>
+							</div>
 						</form>
+
+						
 					</div>
 				</section>
-				<section class="rightsidemsgbar">
-					<section class="view message">
-                		Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
-                	</section>
-                	<section class="listBar">
-                		<section class="listHeader">
-	                		<h6>Peers</h6>
-	                		<a data-toggle="modal" data-target="#peersMessageModal">See More</a>
-                		</section>
-                		<section class="listChatBox">
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                				</figure>
-	                				<figcaption>Scholasticus Ipsum</figcaption>
-	                			</section>
-	                			<section class="action">
-	                				<i class="fa fa-ellipsis-v"></i>
-	                			</section>
-                			</section>
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                					<span class="messagecount">12</span>
-	                				</figure>
-	                				<figcaption>Scholasticus Ipsum</figcaption>
-	                			</section>
-	                			<section class="action">
-	                				<i class="fa fa-ellipsis-v"></i>
-	                			</section>
-                			</section>
-                		</section>
-                	</section>
-                	<section class="listBar">
-                		<section class="listHeader">
-	                		<h6>Groups</h6>
-	                		<a><i class="fa fa-plus"></i></a>
-                		</section>
-                		<section class="listChatBox">
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                				</figure>
-	                				<figcaption>The in group</figcaption>
-	                			</section>
-	                			<section class="action">
-	                				<i class="fa fa-ellipsis-v"></i>
-	                			</section>
-                			</section>
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                					<span class="messagecount">12</span>
-	                				</figure>
-	                				<figcaption>The in group</figcaption>
-	                			</section>
-	                			<section class="action">
-	                				<i class="fa fa-ellipsis-v"></i>
-	                			</section>
-                			</section>
-                		</section>
-                	</section>
-                	<section class="listBar">
-                		<section class="listHeader">
-	                		<h6>Contacts</h6>
-                		</section>
-                		<section class="listChatBox">
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                					<span class="circle online"></span>
-	                				</figure>
-	                				<figcaption>Angelina</figcaption>
-	                			</section>
-                			</section>
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                					<span class="circle offline"></span>
-	                				</figure>
-	                				<figcaption>Angelina</figcaption>
-	                			</section>
-                			</section>
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                					<span class="circle online"></span>
-	                				</figure>
-	                				<figcaption>Angelina</figcaption>
-	                			</section>
-                			</section>
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                					<span class="circle offline"></span>
-	                				</figure>
-	                				<figcaption>Angelina</figcaption>
-	                			</section>
-                			</section>
-                			<section class="list">
-	                			<section class="left">
-	                				<figure>
-	                					<img src="images/user2.jpg" alt="user">
-	                					<span class="circle online"></span>
-	                				</figure>
-	                				<figcaption>Charles</figcaption>
-	                			</section>
-                			</section>
-                		</section>
-                	</section>
-				</section>
+				
 			</section>
 		</section>
 	</section>
-<div class="modal fade" id="peersMessageModal" role="dialog">
+<div class="modal " id="peersMessageModal" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -559,113 +360,143 @@
       </div>
     </div>
 </div>
-<div class="modal fade" id="courseModal" role="dialog">
-	<div class="modal-dialog">
-	  <!-- Modal content-->
-	  <div class="modal-content">
-	      <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-	    <div class="modal-body">
-	      	<div class="courseHeader">
-	      		<h4>Course</h4>
-	      		<div class="add_course">
-					<svg height="512pt" 
-						viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#2196f3"/><path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" fill="#fafafa"/>
-					</svg>
-	      			Add a course
-	      		</div>
-	      	</div>
-	      	<div class="courseBox">
-	      		<div class="removeCourseBox">
-					<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
-								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
-						<g>
-							<g>
-								<path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
-									L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
-									c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
-									l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
-									L284.286,256.002z"/>
-							</g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-					</svg>
 
-	      		</div>
-	      		<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Course">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor First Name">
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor Last Name">
-						</div>
-					</div>
-				</div>
-	      	</div>
-	      	<div class="studybuttonGroup">
-				<button type="button" class="transparentBtn" onclick="">Cancel</button>
-				<button type="submit" class="filterBtn">
-					Add
-				</button>
-			</div>
-	    </div>
-	  </div>
-	</div>
+
+<div class="modal fade" id="TestModalAll" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            <div class="modal-body" >
+                <div class="courseHeader">
+                    <h4>Choose Test</h4>
+                    
+                </div>
+                <div id="TestModalAllBody">
+                	<div class="courseBox" style="padding-top: 10px;">
+                        
+                        <div class="row">
+                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <input type="checkbox" class="form-control form-control--lg option" style="margin: 0;" id="written">
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-12" style="padding: 0;">
+                                <h4 style="margin-top: 12px;">Written Questions</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <input type="checkbox" class="form-control form-control--lg option" style="margin: 0;" id="match">
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-12" style="padding: 0;">
+                                <h4 style="margin-top: 12px;">Matching Questions</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <input type="checkbox" class="form-control form-control--lg option" style="margin: 0;" id="multiple">
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-12" style="padding: 0;">
+                                <h4 style="margin-top: 12px;">Multiple Choice Questions</h4>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-1 col-sm-1 col-xs-12">
+                                <div class="form-group" style="margin-bottom: 0px;">
+                                    <input type="checkbox" class="form-control form-control--lg option" style="margin: 0;" id="truefalse">
+                                </div>
+                            </div>
+                            <div class="col-md-10 col-sm-10 col-xs-12" style="padding: 0;">
+                                <h4 style="margin-top: 12px;">True/False Questions</h4>
+                            </div>
+                            <div class="col-md-12" style="margin-bottom: 10px;">
+                            	<span class="custom_err" id="option_err"></span>
+                            </div>
+                        </div>
+
+                        
+                        
+                    </div>
+                </div>
+                
+                <div class="studybuttonGroup">
+                    <button type="button" class="transparentBtn" onclick="applyTest()">Apply</button>
+                </div>
+                
+            </div>
+          </div>
+        </div>
 </div>
+
 <script>
-	timer();
-	function timer(){
-	    var timepattern = new Date();
-	    var h = timepattern.getHours();
-	    var m = timepattern.getMinutes();
-	    var s = timepattern.getSeconds();
-	    h = checkTime(h);
-	    m = checkTime(m);
-	    s = checkTime(s);
-	    var time = h + ":" + m + ":" + s; 
-	    document.getElementById('matchtime').innerHTML = time;  
-	    var spectime = setTimeout(timer, 500);
+
+function startTimer(){
+
+	var timer2 = "00:00:00";
+
+	var interval = setInterval(function() {
+
+
+	  var timer = timer2.split(':'); 
+	  //by parsing integer, I avoid all extra string processing
+	  var hours = parseInt(timer[0], 10);
+	  var minutes = parseInt(timer[1], 10);
+	  var seconds = parseInt(timer[2], 10);
+	  ++seconds;
+	  
+	  hours = (hours < 10) ? '0' + hours : hours;
+	  minutes = (seconds > 59) ? ++minutes : minutes;
+	  minutes = (minutes < 10) ? '0' + minutes : minutes;
+	  if(minutes > 59) {
+	    minutes = 0;
+	    hours = ++hours;
+	  } else {
+	    minutes = minutes;
+	  }
+	  // minutes = (minutes > 59) ? 0 : minutes;
+	  if (minutes < 0) clearInterval(interval);
+	  seconds = (seconds > 59) ? 0 : seconds;
+	  seconds = (seconds < 10) ? '0' + seconds : seconds;
+	  //minutes = (minutes < 10) ?  minutes : minutes;
+	  $('#matchtime').html(hours + ':' + minutes + ':' + seconds);
+	  // if ((seconds <= 0) && (minutes <= 0)) {
+	  // 	clearInterval(interval);
+	  // 	$('#timerOutModal').modal('show');
+	  // }
+	  timer2 = hours+ ':' + minutes + ':' + seconds;
+	  val = timer2;
+	  $('#total_time').val(val);
+	  
+	}, 1000);
+
+}
+
+function applyTest(){
+	var len = $('.option:checked').length;
+	if(len == 0){
+		$('#option_err').html('Choose the test.').show();
+	} else {
+		$('#option_err').html('').hide();
+		$('.option').each(function() {
+		    var id = this.id;
+		    if($('#'+id+':checked').length > 0){
+			   $('#'+id+'_applicable').val(1);
+			   $('#'+id+'_commoncard').show();
+		    } else {
+		    	$('#'+id+'_commoncard').html('');
+		    }
+		});
+		$('#test-form').show();
+	    $('#TestModalAll').modal('hide');
+	    startTimer();
 	}
-	function checkTime(i) {
-	  if (i < 10) {i = "0" + i};
-	  return i;
-	}
+}
 </script>

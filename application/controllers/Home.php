@@ -28,8 +28,8 @@ class Home extends CI_Controller {
 	public function index()
 	{
         
-		$this->data['page_name'] = 'main';
-		$this->load->view('index',$this->data);
+		// $this->data['page_name'] = 'main';
+		$this->load->view('home-page');
 
 	}
     public function login()

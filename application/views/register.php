@@ -94,12 +94,12 @@
 
                                         <div style="padding-bottom: 20px">
                                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
-                                                <a href="javascript:void(0)" style="font-size: 15px;text-decoration: none" title="linkedIn"><img src="<?=base_url('uploads/link.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH LINKED IN</a>
+                                                <a href="<?=base_url('socialLogin/linkedinCallback') ?>" style="font-size: 15px;text-decoration: none" title="linkedIn"><img src="<?=base_url('uploads/link.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH LINKED IN</a>
                                             </div>
                                         </div>
                                         <div style="padding-bottom: 20px">
                                             <div class="col-xl-10 col-lg-10 col-md-10 col-sm-12" style=" padding: 10px;border-radius: 10px;width: 100%;border:1px solid gray;text-align: center" >
-                                                <a href="javascript:void(0)" style="font-size: 15px;text-decoration: none" title="twitter"><img src="<?=base_url('uploads/twit.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH MICROSOFT</a>
+                                                <a href="<?=base_url('socialLogin/microsoftLogin') ?>" style="font-size: 15px;text-decoration: none" title="twitter"><img src="<?=base_url('uploads/twit.png')?>" style="height: 22px">&nbsp;&nbsp;&nbsp;REGISTER WITH MICROSOFT</a>
                                             </div>
                                         </div>
                                     </div>

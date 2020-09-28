@@ -29,12 +29,22 @@ class Account extends CI_Controller {
 		is_valid_logged_in(); 
         $user_id = $this->session->get_userdata()['user_data']['user_id']; 
         $data['user_detail'] = $this->db->get_where('user', array('id' => $user_id))->row_array();
+        $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
+
+        
+        $this->db->select('user.*,university.SchoolName, user_info.nickname');
+        
+        $this->db->join('university','university.university_id=user_info.intitutionID');
+        $this->db->join('user','user.id=user_info.userID');
+        $this->db->order_by('user.id', 'desc');
+        $data['peer_suggestion'] = $this->db->get_where($this->db->dbprefix('user_info'), array('user_info.intitutionID'=>$user_info['intitutionID'], 'user.is_verified' => 1, 'user.id!=' => $user_id))->result_array(); 
+
         $data['index_menu']  = 'dashboard';
         $data['title']  = 'Dashboard | Studypeers';
         $this->load->view('user/include/header', $data);
         $this->load->view('user/dashboard');
         $this->load->view('user/include/right-sidebar');
-        $this->load->view('user/include/footer');
+        $this->load->view('user/include/footer-dashboard');
     }
 
     public function schedule(){ 
@@ -54,18 +64,24 @@ class Account extends CI_Controller {
             $keyword    = $this->input->get('keyword');
             if(!empty($startdate)) {
                 $timestamp1 = strtotime($startdate);
-                $start_date = date('Y-m-d H:i:s', $timestamp1); 
+                $start_date = date('Y-m-d 23:59:59', $timestamp1); 
+                $end_date = date('Y-m-d 00:00:00', $timestamp1); 
             } else {
-                $start_date = date('Y-m-d 00:00:00');
+                $start_date = date('Y-m-d 23:59:59');
+                $end_date = date('Y-m-d 00:00:00');
             }
             if(!empty($course) && !empty($keyword)){
-                $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and course = ".$course." and schedule_name like '%{$keyword}%' and created_by = ".$user_id." and start_date >= '".$start_date."'")->result_array();
+                $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and course = ".$course." and schedule_name like '%{$keyword}%' and created_by = ".$user_id." and start_date <= '".$start_date."' and end_date >= '".$end_date."'")->result_array();
+                $data['schedule_list_day'] = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and start_date <= '".$start_date."' and end_date >= '".$end_date."'")->result_array(); 
             } else if(!empty($course) && empty($keyword)){
-                $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and course = ".$course." and created_by = ".$user_id." and start_date >= '".$start_date."'")->result_array();
+                $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and course = ".$course." and created_by = ".$user_id." and start_date <= '".$start_date."' and end_date >= '".$end_date."'")->result_array();
+                $data['schedule_list_day'] = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and start_date <= '".$start_date."' and end_date >= '".$end_date."'")->result_array(); 
             } else if(empty($course) && !empty($keyword)){
-                $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and schedule_name like '%{$keyword}%' and created_by = ".$user_id." and start_date >= '".$start_date."'")->result_array();
+                $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and schedule_name like '%{$keyword}%' and created_by = ".$user_id." and start_date <= '".$start_date."' and end_date >= '".$end_date."'")->result_array();
+                $data['schedule_list_day'] = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and start_date <= '".$start_date."' and end_date >= '".$end_date."'")->result_array(); 
             } else {
-                $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and course = ".$course." and schedule_name like '%{$keyword}%' and created_by = ".$user_id." and start_date >= '".$start_date."'")->result_array();
+                $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and course = ".$course." and schedule_name like '%{$keyword}%' and created_by = ".$user_id." and start_date <= '".$start_date."' and end_date >= '".$end_date."'")->result_array();
+                $data['schedule_list_day'] = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and start_date <= '".$start_date."' and end_date >= '".$end_date."'")->result_array(); 
             }
 
             if(!empty($course)) {
@@ -74,8 +90,14 @@ class Account extends CI_Controller {
                 $data['professor']  = array();
             }
         } else {
-            $date = date('Y-m-d 00:00:00');
-            $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and start_date >= '".$date."'")->result_array();
+            $date1 = date('Y-m-d 23:59:59');
+            $date2 = date('Y-m-d 00:00:00');
+
+            $y = date('Y');
+            $m = date('m');
+
+            $data['schedule_list'] = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and YEAR(start_date) = ".$y." AND MONTH(start_date) = ".$m." AND YEAR(end_date) = ".$y." AND MONTH(end_date) = ".$m." order by id desc")->result_array(); 
+            $data['schedule_list_day'] = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and start_date <= '".$date1."' and end_date >= '".$date2."'")->result_array(); 
             $data['professor']  = array();
         }
         $data['course']     = $this->db->get_where('course_master', array('status' => 1, 'user_id' => $user_id))->result_array(); 
@@ -83,6 +105,31 @@ class Account extends CI_Controller {
         $this->load->view('user/schedule/schedule-list');
         $this->load->view('user/include/right-sidebar');
         $this->load->view('user/schedule/footer');
+    }
+
+
+    public function getScheduleDayWise(){
+        if($this->input->post()){
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
+            $date       = $this->input->post('date');
+            $date1 = $date.' 23:59:59';
+            $date2 = $date.' 00:00:00';
+            $colors = array('constitition', 'mathlaton', 'calculus', 'dance', 'study', 'assignment');
+            $schedule_list_day = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and start_date <= '".$date1."' and end_date >= '".$date2."'")->result_array(); 
+            if(!empty($schedule_list_day)){
+                $html = '';
+                $c = 0; foreach ($schedule_list_day as $key => $value) {
+                    $html.='<div class="'.$colors[$c].' event" id="'.$value['id'].'">
+                                                            <div class="time">'. date('d M, Y h:i A', strtotime($value['start_date'])).' <span>'. date('d M, Y h:i A', strtotime($value['end_date'])).'</span></div>
+                                                            <div class="name">'.$value['schedule_name'].'</div>
+                                                        </div>';
+                    if($c == 5 ) { $c = 0; } else { $c++; }
+                }
+            } else {
+                $html = '<p class="text-center">No records found..</p>';
+            }
+            echo $html;die;
+        }
     }
 
     public function addSchedule(){
