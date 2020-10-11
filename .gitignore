@@ -3,8 +3,8 @@
 /.vscode
 .htaccess
 /.htaccess
-/.studypeers.com/
-.studypeers.com/
+/.studypeers.com/*
+.studypeers.com/*
 .well-known/
 .cgi-bin
 ./cgi-bin
