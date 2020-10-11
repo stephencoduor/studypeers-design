@@ -215,4 +215,27 @@ class User_model extends CI_Model {
         return $result; 
     }
 
+    //get user's data with same email and registration_type column
+    public function check_email_with_registration_type($email, $registration_type)
+    {
+        $query = $this->db->select('*');
+        $query = $this->db->where(['email'=>$email,'registration_type'=>$registration_type]);
+        $query = $this->db->get('user');
+        return $query->result();
+    }
+
+    public function check_email_duplicacy($email)
+    {
+        $query = $this->db->select('*');
+        $query = $this->db->where(['email'=>$email]);
+        $query = $this->db->get('user');
+        return $query->result();
+    }
+
+    public function getGoogleSocialLoginToken($user_id){
+        $query = $this->db->select('google_id');
+        $query = $this->db->where(['id'=> $user_id]);
+        $query = $this->db->get('user');
+        return $query->result();
+    }
 }

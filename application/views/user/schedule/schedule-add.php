@@ -41,7 +41,7 @@
 
 												</div>
 												<div class="col-md-12">
-													<div class="form-group select select_label">
+													<div class="form-group select select_label courseMenuSelect">
 														<label>Course</label>
 														<select class="form-control" name="course" id="course" onchange="getProfessor(this.value)">
 															<option value="">Select Course</option>
@@ -50,6 +50,7 @@
 															<?php } ?>
 														</select>
 														<span class="custom_err" id="err_course"></span>
+														<a data-toggle="modal" data-target="#courseModal" style="cursor: pointer;">Add Course</a>
 													</div>
 												</div>
 												<div class="col-md-12">

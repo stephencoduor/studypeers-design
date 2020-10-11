@@ -373,9 +373,10 @@ function validateJson($requestJson, $checkRequestKeys)
             $validate_keys[] = $key;
         }
 
-        $result = array_diff($checkRequestKeys, $validate_keys);
+        $result1 = array_diff($checkRequestKeys, $validate_keys); 
+        $result2 = array_diff($validate_keys, $checkRequestKeys); 
 
-        if ($result)
+        if(($result1) || ($result2))
         {
             return "0";
         }
@@ -574,6 +575,10 @@ function messages($resMsg = '', $dynamicValue = '')
         '219' => 'Revenue Data',
         '220' => 'Mother Already Admitted',
         '221' => 'Wrong Old Password',
+        '222' => 'Event Deleted Successfully',
+        '223' => 'Event Added To Calendar Successfully',
+        '224' => 'Comment Added Successfully',
+        '225' => 'Comment Reply Added Successfully',
         'E' => 'Data Not Found',
         'W' => 'Something Went Wrong',
         'S' => 'Success',
@@ -583,6 +588,9 @@ function messages($resMsg = '', $dynamicValue = '')
         'R' => 'Refund',
         'U' => 'Username already exists',
         'A' => 'Email already exists',
+        'M' => 'Mobile number already exists',
+        'I' => 'Institute email already exists',
+        'N' => 'User not authorized'
     );
 
     return (isset($codes[$resMsg])) ? $codes[$resMsg] : '';
@@ -671,4 +679,72 @@ function createMd5OfString($arrayData)
     $md5Data = md5($stringData);
     return $md5Data;
 }
+
+function time_ago_in_php($timestamp){
+  
+    // date_default_timezone_set("Asia/Kolkata");         
+    $time_ago        = strtotime($timestamp);
+    $current_time    = time();
+    $time_difference = $current_time - $time_ago;
+    $seconds         = $time_difference;
+    
+    $minutes = round($seconds / 60); // value 60 is seconds  
+    $hours   = round($seconds / 3600); //value 3600 is 60 minutes * 60 sec  
+    $days    = round($seconds / 86400); //86400 = 24 * 60 * 60;  
+    $weeks   = round($seconds / 604800); // 7*24*60*60;  
+    $months  = round($seconds / 2629440); //((365+365+365+365+366)/5/12)*24*60*60  
+    $years   = round($seconds / 31553280); //(365+365+365+365+366)/5 * 24 * 60 * 60
+
+    $dateF   = date("M d ",strtotime($timestamp)).'at '.date("h:i A",strtotime($timestamp)); 
+                  
+    if ($seconds <= 60){
+
+      return "Just Now";
+
+    } else if ($minutes <= 60){
+
+      if ($minutes == 1){
+
+        return "one min ago";
+
+      } else {
+
+        return "$minutes mins ago";
+
+      }
+
+    } else if ($hours <= 24){
+
+      if ($hours == 1){
+
+        return "an hour ago";
+
+      } else {
+
+        return "$hours hrs ago";
+
+      }
+
+    } else if ($days <= 7){
+
+      if ($days == 1){
+
+        return "yesterday";
+
+      } else {
+
+        return "$days days ago";
+
+      }
+
+    } else if ($weeks == 1){
+
+      return "a week ago";
+        
+    } else {
+
+      return $dateF;
+      
+    }
+  }
 

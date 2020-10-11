@@ -242,7 +242,7 @@
 					<section class="sidebar-content">
 						<section class="sidebar-menu">
 		                	<ul>
-		                		<li><a href="index-dashboard.html">
+		                		<li><a href="index-dashboard-new.html">
 		                			<div class="activeBg">
 		                				<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488.875 488.875">
 											<path d="M481.65,206.175l-94.6-84.9v-100.2c0-11.4-9.4-20.8-20.8-20.8s-20.8,9.4-20.8,20.8v62.8l-87.3-78.4c-7.3-7.3-19.8-7.3-27,0
@@ -1210,11 +1210,11 @@
                 inline: true,
                 // sideBySide: true
             });
-            1
+            $('#datetimepickermonth').datetimepicker().on('changeYear', function(e){ console.log(e); })
 			$('#datetimepicker1').datetimepicker({
                 allowInputToggle: true,
                 format: 'L'
-			});
+			})
 			$('.event').not('.disabled').on('click',() => {
 				$('.eventDetail').addClass('active');
 			})
@@ -1222,6 +1222,17 @@
 				$(this).parents('.eventDetail').removeClass('active');
 			});
         });
+        // let eventname = $('#datetimepickermonth .table-condensed tr th');
+        // let eventname = document.querySelector('#datetimepickermonth .table-condensed tr th');
+        // console.log(eventname);
+        // eventname.addEventListener('click', function(){
+        // 	alert();
+        // })
+        // $('#datetimepickermonth .table-condensed tr th').on('click', function() {
+        // 	alert();
+        // 	let action = $(this).attr('data-action');
+        // 	console.log(action);
+        // })
     </script>
     <script src="js/custom.js"></script>
 </body>

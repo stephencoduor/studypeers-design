@@ -159,6 +159,43 @@ function is_admin_not_logged_in() {
     }
 }
 
+function sendFCM($message, $id, $message_info='', $type ='') {
+
+    $API_ACCESS_KEY = "AAAAKqIW2jE:APA91bHoQ8MnTa5K0gBAzHguOAjf69280kgDgpGfwlueRsyA4fGIjcyzgXRBePl2n-pOgpGhmtIlEvgOnJ6Z0-vI9Znz--v9m9C5Wvz6eBLD9W5iMOYtovrJt1PkSlRBtZTOaXbUgCCv";
+
+    $url = 'https://fcm.googleapis.com/fcm/send';
+
+    $fields = array (
+            'registration_ids' => array (
+                    $id
+            ),
+            'data' => array (
+                    "notification" => array(
+                        'title' => $message['title'],
+                        'body' => $message['body'],  
+                        'icon' => '/logo-mb.jpg',                            
+            ),
+                    'message_info' => $message_info,
+            ),                
+            'priority' => 'high',
+            
+    );
+    $fields = json_encode ( $fields );
+
+    $headers = array (
+            'Authorization: key=' . $API_ACCESS_KEY,
+            'Content-Type: application/json'
+    );
+    $ch = curl_init ();
+    curl_setopt ( $ch, CURLOPT_URL, $url );
+    curl_setopt ( $ch, CURLOPT_POST, true );
+    curl_setopt ( $ch, CURLOPT_HTTPHEADER, $headers );
+    curl_setopt ( $ch, CURLOPT_RETURNTRANSFER, true );
+    curl_setopt ( $ch, CURLOPT_POSTFIELDS, $fields );
+    $result = curl_exec ( $ch );
+    curl_close ( $ch );
+}
+
 
 // ------------------------------------------------------------------------
 /* End of file user_helper.php */

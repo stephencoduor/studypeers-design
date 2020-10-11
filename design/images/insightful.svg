@@ -1,0 +1,9 @@
+<svg width="24" height="24" xmlns="http://www.w3.org/2000/svg" id="interest-creation-medium" data-supported-dps="24x24">
+  <g fill="none" fill-rule="evenodd">
+    <path d="M0 0h24v24H0z"/>
+    <path d="M13.5 22.5h-3a1 1 0 01-1-1V19h5v2.5a1 1 0 01-1 1z" fill="#C07800"/>
+    <path d="M9.51 19v-.5a5.92 5.92 0 00-.29-1.82 5.78 5.78 0 00-1-1.5A6 6 0 016 10.53a6 6 0 0112 0 6.28 6.28 0 01-2.38 4.78l-.07.06a1.93 1.93 0 00-.35.37 3.67 3.67 0 00-.42.87 6 6 0 00-.28 1.92V19" fill="#F5BB5C"/>
+    <path d="M6 2.5l1.26 1.65M18.5 2.5l-1.26 1.65M12 .5V3M13.5 22.5h-3a1 1 0 01-1-1V19h5v2.5a1 1 0 01-1 1z" stroke="#5D3B01" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M9.5 19.5V19a5.92 5.92 0 00-.29-1.82 3.33 3.33 0 00-.48-.89A5.21 5.21 0 008 15.5a7 7 0 01-.7-.74 6.1 6.1 0 01-1-1.74A5.65 5.65 0 016 11h0a6 6 0 0112 0 6.08 6.08 0 01-1.35 3.74 7.8 7.8 0 01-1.07 1.08 1.71 1.71 0 00-.37.39 3.21 3.21 0 00-.43.87A6.24 6.24 0 0014.5 19v.5" stroke="#5D3B01" stroke-linecap="round" stroke-linejoin="round"/>
+  </g>
+</svg>

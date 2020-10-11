@@ -52,7 +52,7 @@ aside{top: 90px;height: 100%;z-index:99;position:fixed;width:276px;left:0;max-he
 .sidebar-menu ul li:visited,
 .sidebar-menu ul li:active{border-right: 5px solid #303f9f;}
 
-.activeBg{width:28px;height:28px;border-radius: 8px;display: inline-block;vertical-align: top;}
+.activeBg{width:28px;height:28px;border-radius: 8px;display: inline-block;vertical-align: middle;margin-top: -3px;}
 .activeBg svg {
     width: 28px;
     height: 28px;
@@ -77,7 +77,7 @@ aside{top: 90px;height: 100%;z-index:99;position:fixed;width:276px;left:0;max-he
 .coursepanel .coursepanel h6{color:#185aeb;font-size: 12px;font-weight: 600;margin: 0;}
 .coursepanel a{cursor: pointer}
 .coursepanel .coursepanel i{color:#7f7b94;}
-.coursepanel .courseheader{display: flex;align-items: center;justify-content: space-between;padding: 6px 15px 6px 15px;width: 100%;}
+.coursepanel .courseheader{display: flex;align-items: center;justify-content: space-between;padding: 6px 15px 6px 15px;width: 100%;position: relative;}
 .coursepanel .courseheader h6{color:#2a234f;font-size: 12px;font-weight: 600;margin: 0;}
 .coursepanel .courseheader a{text-decoration:none;background: #baf6eb;border-radius:8px;width:24px;height:16px;font-size: 12px;font-weight:600;color:#129e84;text-align: center}
 .coursepanel .courseheader p{font-size: 12px;font-weight: 500;color:#9592a7;width:100%;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;}

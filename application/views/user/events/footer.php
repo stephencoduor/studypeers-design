@@ -217,10 +217,11 @@
     <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
+    <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>
-	<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>
+	<!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>-->
+	<!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>-->
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>
@@ -445,6 +446,12 @@
 	     
 	});
 
+	$(document).on("click", ".removeEvent", function () {
+	     var event_id = $(this).data('id');
+	     $(".modal-body #remove_event_id").val(event_id);
+	     
+	});
+
 	function readURL(input) {
 	  if (input.files && input.files[0]) {
 	    var reader = new FileReader();
@@ -461,6 +468,22 @@
 	$("#featured_image-id").change(function() {
 	  readURL(this);
 	});
+
+	$('#datetimepickermonth').on('dp.change', function(e){ 
+    var formatedValue = e.date.format(e.date._f);
+    var fields = formatedValue.split('T');
+    var url = '<?php echo base_url('account/getEventsDayWise') ?>';
+    $('.events').html('<h6 class="loadingEvents">Loading Events</h6>');
+     $.ajax({
+          url: url,
+          type: 'POST',
+          data: {'date': fields[0]},
+          success: function(result) {
+              $('.events').html(result);
+          }
+      });
+  });
+
 
 </script>
     <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>

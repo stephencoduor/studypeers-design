@@ -96,7 +96,7 @@
 									</div> -->
 									<div class="filterSelect" style="width: 24%;">
 										<select class="form-control" name="course" id="course" placeholder="InsCoursetitution" onchange="getProfessor(this.value)">
-										  <option>Course</option>
+										  <option value="">Course</option>
 										  	<?php foreach ($course as $key => $value) { ?>
 												<option value="<?= $value['id'] ?>" <?php if($course_search == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
 											<?php } ?>
@@ -218,7 +218,7 @@
         																	<g>
         																		<g>
         																			
-        																				<rect x="89.73" y="169.097" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.8575 260.3719)" width="353.277" height="153.599"></rect>
+    																				<rect x="89.73" y="169.097" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.8575 260.3719)" width="353.277" height="153.599"></rect>
         																		</g>
         																	</g>
         																	<g>
@@ -267,8 +267,8 @@
         															</svg> Delete
         														</a>
         													</div>	
-        													<div class="edit">
-        														<a data-toggle="modal" data-target="#peersMessageModal">
+        													<div class="edit invitePeer" data-id="<?= $value['id']; ?>">
+        														<a data-toggle="modal" data-target="#peersModalShare">
         															<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
         																<path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
         																	c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
@@ -277,7 +277,7 @@
         																	c0,25-19.8,44.7-44.7,44.7S360,429.1,360,404.2c0-25,19.8-44.7,44.7-44.7S449.4,379.2,449.4,404.2z M104,305.3
         																	c-34.3,0-62.4-28.1-62.4-62.4s28.1-62.4,62.4-62.4s62.4,28.1,62.4,62.4C166.5,277.3,138.4,305.3,104,305.3z M449.4,85.8
         																	c0,25-19.8,44.7-44.7,44.7S360,110.7,360,85.8c0-25,19.8-44.7,44.7-44.7S449.4,60.9,449.4,85.8z"></path>
-        															</svg> Share
+        															</svg> Invite
         														</a>
         													</div>	
         												</div>
@@ -303,7 +303,11 @@
         														<a href="#" class="addEvents" data-id="<?= $value['id']; ?>" data-toggle="modal" data-target="#addEventModal">
         															<img src="<?php echo base_url(); ?>assets_d/images/calendar.svg" alt="Events Calendar"> 
         														</a>
-        														<?php } ?>
+        														<?php } else { ?>
+                                                                    <a href="#" class="removeEvent" data-id="<?= $value['id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">
+                                                                        <img src="<?php echo base_url(); ?>assets_d/images/calendar.png" alt="Events Calendar" style="width: 20px;height: 20px;"> 
+                                                                    </a>
+                                                                <?php } ?>
         														<a>
         															<div class="action_button">
         																<a href="<?php echo base_url(); ?>account/eventDetails/<?php echo base64_encode($value['id']); ?>">
@@ -480,7 +484,11 @@
     														<a href="#" class="addEvents" data-id="<?= $value['id']; ?>" data-toggle="modal" data-target="#addEventModal">
     															<img src="<?php echo base_url(); ?>assets_d/images/calendar.svg" alt="Events Calendar"> 
     														</a>
-    														<?php } ?>
+    														<?php } else { ?>
+                                                                    <a href="#" class="removeEvent" data-id="<?= $value['id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">
+                                                                        <img src="<?php echo base_url(); ?>assets_d/images/calendar.png" alt="Events Calendar" style="width: 20px;height: 20px;"> 
+                                                                    </a>
+                                                            <?php } ?>
     														<a>
     															<div class="action_button">
     																<a href="<?php echo base_url(); ?>account/eventDetails/<?php echo base64_encode($value['id']); ?>">
@@ -505,5 +513,103 @@
     						</div>
     					</div>
 				</section>
+
+
+                <div class="modal fade" id="removeFromScheduleModal" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="modal-body peers">
+                                   <h4>Confirmation</h4>
+                                   <div class="row">
+                                     <h6 class="modalText">Are you sure you want to remove this event <br> from your schedule?</h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form method="post" action="<?php echo base_url(); ?>account/removeEvent">
+                                                <div class="form-group button">
+                                                    <input type="hidden" id="remove_event_id" name="remove_event_id">
+                                                    <button type="button" data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                                    <button type="submit" class="filterBtn">Yes</button>
+                                                </div>
+                                            </form>
+                                            
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="peersModalShare" role="dialog">
+                    <div class="modal-dialog">
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <div class="modal-body peers">
+                          <h4>Peers List</h4>
+                          <div class="searchPeer">
+                            <div class="filterSearch">
+                                <input type="text" placeholder="Search Peers" name="">
+                                <button type="submit" class="searchBtn">
+                                    <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                                        <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+                                        s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+                                        c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                          </div>
+                          <div class="peersList">
+                            <div class="listHeader">
+                                <h6>Peers</h6>
+                                <!-- <a class="transAction">Share All</a> -->
+                            </div>
+                            <input type="hidden" id="invite_event">
+                            <div class="listUserWrap" id="shareList">
+                                
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
+
+    <script type="text/javascript">
+        
+        $(document).on('click','.invitePeer',function(){
+            var id = $(this).data('id');
+            $("#invite_event").val(id);
+            $.ajax({
+                url : '<?php echo base_url();?>account/getPeerToInvite',
+                type : 'post',
+                data : {"id" : id},
+                success:function(result) {
+                    
+                    $('#shareList').html(result);
+                }
+            })
+
+        });
+
+        function inviteToPeer(peer_id){
+            var invite_event = $('#invite_event').val();
+
+            $.ajax({
+                url : '<?php echo base_url();?>account/invitePeerEvent',
+                type : 'post',
+                data : {"id" : invite_event, 'peer_id': peer_id},
+                success:function(result) {
+                    // $('#share_count_'+share_document).html(result);
+                    $("#action_"+peer_id).html('<button type="button" class="like">invited</button>');
+                    // $("#share_studyset").val('');
+                }   
+            })
+        }
+
+    </script>
 				
 	

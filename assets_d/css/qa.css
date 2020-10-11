@@ -46,6 +46,9 @@
     align-items: center;
     justify-content: center;
 }
+.filterWrapper form {
+    width:100%;
+}
 .filterSearch {
     width:100%;
     border: 1px solid #eae9ee;
@@ -175,6 +178,9 @@
     border: 1px solid #eae9ee;
     padding: 16px;
     box-shadow: 0px 12px 45px 0px rgba(42, 35, 79, 0.08);
+}
+.content-area {
+    margin-top: 20px;
 }
 .filterForm label {
     display: block;
@@ -2092,6 +2098,12 @@ textarea{
       color: #7f7b94;
       margin-bottom:15px;
 }
+.studySetWrapper.qa-detail .detailDescription p img,
+.studySetWrapper.qa-detail .detailDescription img {
+        width: auto;
+        max-width: 100%;
+        margin-top: 20px;
+}
 .studySetWrapper.qa-detail .detailDescription p:last-child {
     margin-bottom:0;
 }
@@ -2258,16 +2270,22 @@ textarea{
 
 /*Media Css*/
 @media(max-width:1600px) {
-    .filterWrapper.active .filterSearch{width:52%;}
+    .filterWrapper.active .filterSearch{width:100%;}
+    .filterWrapper {
+        justify-content: flex-start;
+    }
+    .filterWrapper.active form {
+        width: 53%;
+    }
     .studySetWrapper .header h4,
     .studySetWrapper.qa-detail .rightHdrWrapper h4 {
         font-size: 26px;
     }
 }
 @media(max-width: 1500px) {
-    .filterWrapper.active .filterSearch{width:49%;}
+    .filterWrapper.active .filterSearch{width:100%;}
     .filterSearch {
-        width: 60%;
+        width: 100%;
     }
     .filterWrapper {
         justify-content: flex-start;
@@ -2278,7 +2296,7 @@ textarea{
     }
 }
 @media(max-width: 1400px) {
-    .filterWrapper.active .filterSearch{width:60%;}
+    .filterWrapper.active .filterSearch{width:100%;}
     .filterSearch {
         width: 100%;
     }
@@ -2296,7 +2314,7 @@ textarea{
     }
 }
 @media(max-width:1300px) {
-    .filterWrapper.active .filterSearch{width:53%;}
+    .filterWrapper.active .filterSearch{width:100%;}
     /*.feedWrapper.listView .feed-card {
         max-width: 48%;
     }*/
@@ -2314,11 +2332,14 @@ textarea{
     .feedWrapper.listView .delete, .feedWrapper.listView .edit {
         margin-right: 10px;
     }
+    .filterWrapper.active form {
+        width: 50%;
+    }
 }
 @media(max-width:1200px){
-    .filterWrapper.active .filterSearch{width:44%;}
+    .filterWrapper.active .filterSearch{width:100%;}
     .filterSearch {
-        width: 60%;
+        width: 100%;
     }
     .socialActionWrapper a {
         margin-bottom: 10px;
@@ -2328,11 +2349,30 @@ textarea{
     .studySetWrapper.qa-detail .commentfilterWrapper .filterSelect {
         width: 16%;
     }
+    .filterWrapper.active form {
+        width: 46%;
+    }
+}
+@media(max-width:1120px) {
+    .filterWrapper.active form {
+        width: 42%;
+    }
 }
 @media(max-width: 1100px){
-    .filterWrapper.active .filterSearch{width:37%;}
+    .filterWrapper {
+        flex-wrap: wrap;
+    }
     .filterSearch {
-        width: 55%;
+        width: 100%;
+    }
+    .buttonGroup{ 
+        width: 100%; 
+        justify-content: flex-start;
+        margin: 20px 0 0 0px;
+    }
+    .buttonGroup button {margin:0 15px 0 0;}
+    .filterWrapper.active form {
+        width: 100%;
     }
     .studySetWrapper .header h4,
     .studySetWrapper.qa-detail .rightHdrWrapper h4 {
@@ -2357,18 +2397,7 @@ textarea{
     }
 }
 @media(max-width:991px){
-    .filterWrapper {
-        flex-wrap: wrap;
-    }
-    .filterSearch {
-        width: 100%;
-    }
-    .buttonGroup{ 
-        width: 100%; 
-        justify-content: flex-start;
-        margin: 20px 0 0 0px;
-    }
-    .buttonGroup button {margin:0 15px 0 0;}
+    
     .studySetWrapper .header h4,
     .studySetWrapper.qa-detail .rightHdrWrapper h4{
         font-size: 18px;

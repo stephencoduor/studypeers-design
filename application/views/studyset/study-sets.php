@@ -1,5 +1,5 @@
 <style>.error { color: red; } .hide { display: none; }</style>
-<?php
+<?php $user_id = $this->session->get_userdata()['user_data']['user_id'];
 $getdata = (!empty($_GET)) ? $_GET : [];
 $getStr = '';
 foreach ($getdata as $key => $value) {
@@ -249,7 +249,7 @@ foreach ($getdata as $key => $value) {
 																	</g>
 																	<g>
 																	</g>
-															</svg> <?php echo $studyset['share_count'];?>
+															</svg> <span id="share_count_<?php echo $studyset['study_set_id'];?>"><?php echo $studyset['share_count'];?></span>
 														</a>
 													</li>
 												</ul>
@@ -275,79 +275,92 @@ foreach ($getdata as $key => $value) {
 												</figure>
 												<figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption>
 											</div>
-											<div class="edit">
-												<a href="<?php echo base_url();?>studyset/manage/<?php echo $studyset['study_set_id'];?>">
-													<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-															<g>
+											<?php if($studyset['user_id'] == $user_id) { ?>
+												<div class="edit">
+													<a href="<?php echo base_url();?>studyset/manage/<?php echo $studyset['study_set_id'];?>">
+														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
 																<g>
-																	<polygon points="51.2,353.28 0,512 158.72,460.8 		"></polygon>
+																	<g>
+																		<polygon points="51.2,353.28 0,512 158.72,460.8 		"></polygon>
+																	</g>
 																</g>
-															</g>
-															<g>
 																<g>
-																	
-																		<rect x="89.73" y="169.097" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.8575 260.3719)" width="353.277" height="153.599"></rect>
+																	<g>
+																		
+																			<rect x="89.73" y="169.097" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.8575 260.3719)" width="353.277" height="153.599"></rect>
+																	</g>
 																</g>
-															</g>
-															<g>
 																<g>
-																	<path d="M504.32,79.36L432.64,7.68c-10.24-10.24-25.6-10.24-35.84,0l-23.04,23.04l107.52,107.52l23.04-23.04
-																		C514.56,104.96,514.56,89.6,504.32,79.36z"></path>
+																	<g>
+																		<path d="M504.32,79.36L432.64,7.68c-10.24-10.24-25.6-10.24-35.84,0l-23.04,23.04l107.52,107.52l23.04-23.04
+																			C514.56,104.96,514.56,89.6,504.32,79.36z"></path>
+																	</g>
 																</g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-															<g>
-															</g>
-													</svg> Edit
-												</a>
-											</div>			
-											<div class="delete deleteStudySet" data-id="<?php echo $studyset['study_set_id'];?>">
-												<a data-toggle="modal" data-target="#confirmationModal">										
-													<svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
-														<path d="m156.371094 30.90625h85.570312v14.398438h30.902344v-16.414063c.003906-15.929687-12.949219-28.890625-28.871094-28.890625h-89.632812c-15.921875 0-28.875 12.960938-28.875 28.890625v16.414063h30.90625zm0 0"></path><path d="m344.210938 167.75h-290.109376c-7.949218 0-14.207031 6.78125-13.566406 14.707031l24.253906 299.90625c1.351563 16.742188 15.316407 29.636719 32.09375 29.636719h204.542969c16.777344 0 30.742188-12.894531 32.09375-29.640625l24.253907-299.902344c.644531-7.925781-5.613282-14.707031-13.5625-14.707031zm-219.863282 312.261719c-.324218.019531-.648437.03125-.96875.03125-8.101562 0-14.902344-6.308594-15.40625-14.503907l-15.199218-246.207031c-.523438-8.519531 5.957031-15.851562 14.472656-16.375 8.488281-.515625 15.851562 5.949219 16.375 14.472657l15.195312 246.207031c.527344 8.519531-5.953125 15.847656-14.46875 16.375zm90.433594-15.421875c0 8.53125-6.917969 15.449218-15.453125 15.449218s-15.453125-6.917968-15.453125-15.449218v-246.210938c0-8.535156 6.917969-15.453125 15.453125-15.453125 8.53125 0 15.453125 6.917969 15.453125 15.453125zm90.757812-245.300782-14.511718 246.207032c-.480469 8.210937-7.292969 14.542968-15.410156 14.542968-.304688 0-.613282-.007812-.921876-.023437-8.519531-.503906-15.019531-7.816406-14.515624-16.335937l14.507812-246.210938c.5-8.519531 7.789062-15.019531 16.332031-14.515625 8.519531.5 15.019531 7.816406 14.519531 16.335937zm0 0"></path><path d="m397.648438 120.0625-10.148438-30.421875c-2.675781-8.019531-10.183594-13.429687-18.640625-13.429687h-339.410156c-8.453125 0-15.964844 5.410156-18.636719 13.429687l-10.148438 30.421875c-1.957031 5.867188.589844 11.851562 5.34375 14.835938 1.9375 1.214843 4.230469 1.945312 6.75 1.945312h372.796876c2.519531 0 4.816406-.730469 6.75-1.949219 4.753906-2.984375 7.300781-8.96875 5.34375-14.832031zm0 0"></path>
-													</svg> Delete
-												</a>
-											</div>	
-											<div class="edit">
-												<a data-toggle="modal" data-target="#peersMessageModal">
-													<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-														<path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
-															c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
-															s-38.5-85.3-85.3-85.3c-26.8,0-50.9,12.6-66.5,32.2l-135.6-74.8c3.6-10.5,5.5-21.7,5.5-33.4c0-13-2.4-25.4-6.8-36.9l132.5-73
-															c15.4,22.9,41.5,38.1,70.9,38.1c46.8,0,85.3-38.5,85.3-85.3S451.5,0.5,404.7,0.5S319.4,39,319.4,85.8z M449.4,404.2
-															c0,25-19.8,44.7-44.7,44.7S360,429.1,360,404.2c0-25,19.8-44.7,44.7-44.7S449.4,379.2,449.4,404.2z M104,305.3
-															c-34.3,0-62.4-28.1-62.4-62.4s28.1-62.4,62.4-62.4s62.4,28.1,62.4,62.4C166.5,277.3,138.4,305.3,104,305.3z M449.4,85.8
-															c0,25-19.8,44.7-44.7,44.7S360,110.7,360,85.8c0-25,19.8-44.7,44.7-44.7S449.4,60.9,449.4,85.8z"></path>
-													</svg> Share
-												</a>
-											</div>	
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+																<g>
+																</g>
+														</svg> Edit
+													</a>
+												</div>			
+												<div class="delete deleteStudySet" data-id="<?php echo $studyset['study_set_id'];?>">
+													<a data-toggle="modal" data-target="#confirmationModal">										
+														<svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+															<path d="m156.371094 30.90625h85.570312v14.398438h30.902344v-16.414063c.003906-15.929687-12.949219-28.890625-28.871094-28.890625h-89.632812c-15.921875 0-28.875 12.960938-28.875 28.890625v16.414063h30.90625zm0 0"></path><path d="m344.210938 167.75h-290.109376c-7.949218 0-14.207031 6.78125-13.566406 14.707031l24.253906 299.90625c1.351563 16.742188 15.316407 29.636719 32.09375 29.636719h204.542969c16.777344 0 30.742188-12.894531 32.09375-29.640625l24.253907-299.902344c.644531-7.925781-5.613282-14.707031-13.5625-14.707031zm-219.863282 312.261719c-.324218.019531-.648437.03125-.96875.03125-8.101562 0-14.902344-6.308594-15.40625-14.503907l-15.199218-246.207031c-.523438-8.519531 5.957031-15.851562 14.472656-16.375 8.488281-.515625 15.851562 5.949219 16.375 14.472657l15.195312 246.207031c.527344 8.519531-5.953125 15.847656-14.46875 16.375zm90.433594-15.421875c0 8.53125-6.917969 15.449218-15.453125 15.449218s-15.453125-6.917968-15.453125-15.449218v-246.210938c0-8.535156 6.917969-15.453125 15.453125-15.453125 8.53125 0 15.453125 6.917969 15.453125 15.453125zm90.757812-245.300782-14.511718 246.207032c-.480469 8.210937-7.292969 14.542968-15.410156 14.542968-.304688 0-.613282-.007812-.921876-.023437-8.519531-.503906-15.019531-7.816406-14.515624-16.335937l14.507812-246.210938c.5-8.519531 7.789062-15.019531 16.332031-14.515625 8.519531.5 15.019531 7.816406 14.519531 16.335937zm0 0"></path><path d="m397.648438 120.0625-10.148438-30.421875c-2.675781-8.019531-10.183594-13.429687-18.640625-13.429687h-339.410156c-8.453125 0-15.964844 5.410156-18.636719 13.429687l-10.148438 30.421875c-1.957031 5.867188.589844 11.851562 5.34375 14.835938 1.9375 1.214843 4.230469 1.945312 6.75 1.945312h372.796876c2.519531 0 4.816406-.730469 6.75-1.949219 4.753906-2.984375 7.300781-8.96875 5.34375-14.832031zm0 0"></path>
+														</svg> Delete
+													</a>
+												</div>	
+												<?php if($studyset['privacy'] == '2') { ?>
+													<div class="edit shareStudyset" data-id="<?php echo $studyset['study_set_id'];?>">
+														<a data-toggle="modal" data-target="#peersModalShare" >
+															<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
+																<path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
+																	c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
+																	s-38.5-85.3-85.3-85.3c-26.8,0-50.9,12.6-66.5,32.2l-135.6-74.8c3.6-10.5,5.5-21.7,5.5-33.4c0-13-2.4-25.4-6.8-36.9l132.5-73
+																	c15.4,22.9,41.5,38.1,70.9,38.1c46.8,0,85.3-38.5,85.3-85.3S451.5,0.5,404.7,0.5S319.4,39,319.4,85.8z M449.4,404.2
+																	c0,25-19.8,44.7-44.7,44.7S360,429.1,360,404.2c0-25,19.8-44.7,44.7-44.7S449.4,379.2,449.4,404.2z M104,305.3
+																	c-34.3,0-62.4-28.1-62.4-62.4s28.1-62.4,62.4-62.4s62.4,28.1,62.4,62.4C166.5,277.3,138.4,305.3,104,305.3z M449.4,85.8
+																	c0,25-19.8,44.7-44.7,44.7S360,110.7,360,85.8c0-25,19.8-44.7,44.7-44.7S449.4,60.9,449.4,85.8z"></path>
+															</svg> Share
+														</a>
+													</div>	
+												<?php }  ?>
+												
+											<?php } else { ?>
+												<div class="delete removeStudySet" data-id="<?php echo $studyset['study_set_id'];?>">
+													<a data-toggle="modal" data-target="#confirmationModalRemove">										
+														<svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+															<path d="m156.371094 30.90625h85.570312v14.398438h30.902344v-16.414063c.003906-15.929687-12.949219-28.890625-28.871094-28.890625h-89.632812c-15.921875 0-28.875 12.960938-28.875 28.890625v16.414063h30.90625zm0 0"></path><path d="m344.210938 167.75h-290.109376c-7.949218 0-14.207031 6.78125-13.566406 14.707031l24.253906 299.90625c1.351563 16.742188 15.316407 29.636719 32.09375 29.636719h204.542969c16.777344 0 30.742188-12.894531 32.09375-29.640625l24.253907-299.902344c.644531-7.925781-5.613282-14.707031-13.5625-14.707031zm-219.863282 312.261719c-.324218.019531-.648437.03125-.96875.03125-8.101562 0-14.902344-6.308594-15.40625-14.503907l-15.199218-246.207031c-.523438-8.519531 5.957031-15.851562 14.472656-16.375 8.488281-.515625 15.851562 5.949219 16.375 14.472657l15.195312 246.207031c.527344 8.519531-5.953125 15.847656-14.46875 16.375zm90.433594-15.421875c0 8.53125-6.917969 15.449218-15.453125 15.449218s-15.453125-6.917968-15.453125-15.449218v-246.210938c0-8.535156 6.917969-15.453125 15.453125-15.453125 8.53125 0 15.453125 6.917969 15.453125 15.453125zm90.757812-245.300782-14.511718 246.207032c-.480469 8.210937-7.292969 14.542968-15.410156 14.542968-.304688 0-.613282-.007812-.921876-.023437-8.519531-.503906-15.019531-7.816406-14.515624-16.335937l14.507812-246.210938c.5-8.519531 7.789062-15.019531 16.332031-14.515625 8.519531.5 15.019531 7.816406 14.519531 16.335937zm0 0"></path><path d="m397.648438 120.0625-10.148438-30.421875c-2.675781-8.019531-10.183594-13.429687-18.640625-13.429687h-339.410156c-8.453125 0-15.964844 5.410156-18.636719 13.429687l-10.148438 30.421875c-1.957031 5.867188.589844 11.851562 5.34375 14.835938 1.9375 1.214843 4.230469 1.945312 6.75 1.945312h372.796876c2.519531 0 4.816406-.730469 6.75-1.949219 4.753906-2.984375 7.300781-8.96875 5.34375-14.832031zm0 0"></path>
+														</svg> Remove/ Hide
+													</a>
+												</div>	
+											<?php } ?>
 										</div>
 										<div class="action">
 											<a>
@@ -390,8 +403,9 @@ foreach ($getdata as $key => $value) {
 			</section>
 		</section>
 	</section>
+	
 	<!-- Modal -->
-<div class="modal fade" id="peersModal" role="dialog">
+<div class="modal fade" id="peersModalShare" role="dialog">
     <div class="modal-dialog">
       <!-- Modal content-->
       <div class="modal-content">
@@ -413,265 +427,18 @@ foreach ($getdata as $key => $value) {
           <div class="peersList">
           	<div class="listHeader">
           		<h6>Peers</h6>
-          		<a class="transAction">Share All</a>
+          		<!-- <a class="transAction">Share All</a> -->
           	</div>
-          	<div class="listUserWrap">
-          		<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
+          	<input type="hidden" id="share_studyset">
+          	<div class="listUserWrap" id="shareList">
+          		
           	</div>
           </div>
         </div>
       </div>
     </div>
 </div>
-<div class="modal fade" id="peersMessageModal" role="dialog">
-	<div class="modal-dialog">
-	  <!-- Modal content-->
-	  <div class="modal-content">
-	      <button type="button" class="close" data-dismiss="modal">&times;</button>
-	    <div class="modal-body peers">
-	      <h4>Peers List</h4>
-	      <div class="searchPeer">
-	      	<div class="filterSearch">
-				<input type="text" placeholder="Search Peers" name="">
-				<button type="submit" class="searchBtn">
-					<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-						<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
-						s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
-						c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-					</svg>
-				</button>
-			</div>
-	      </div>
-	      <div class="peersList">
-	      	<div class="listHeader">
-	      		<h6>Peers</h6>
-	      	</div>
-	      	<div class="listUserWrap">
-	      		<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-				<section class="list">
-	    			<section class="left">
-	    				<figure>
-	    					<img src="<?php echo base_url();?>assets_d/images/user2.jpg" alt="user">
-	    				</figure>
-	    				<figcaption>John Phelips</figcaption>
-	    			</section>
-	    			<section class="action">
-	    				<button type="button" class="like">message</button>
-	    			</section>
-				</section>
-	      	</div>
-	      </div>
-	    </div>
-	  </div>
-	</div>
-</div>
+
 <div class="modal fade" id="confirmationModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -695,97 +462,31 @@ foreach ($getdata as $key => $value) {
         </div>
     </div>
 </div>
-<div class="modal fade" id="courseModal" role="dialog">
-	<div class="modal-dialog">
-	  <!-- Modal content-->
-	  <div class="modal-content">
-	      <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-	    <div class="modal-body">
-	      	<div class="courseHeader">
-	      		<h4>Course</h4>
-	      		<div class="add_course">
-					<svg height="512pt" 
-						viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#2196f3"/><path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" fill="#fafafa"/>
-					</svg>
-	      			Add a course
-	      		</div>
-	      	</div>
-	      	<div class="courseBox">
-	      		<div class="removeCourseBox">
-					<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
-								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
-						<g>
-							<g>
-								<path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
-									L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
-									c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
-									l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
-									L284.286,256.002z"/>
-							</g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-					</svg>
 
-	      		</div>
-	      		<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Course">
+<div class="modal fade" id="confirmationModalRemove" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <div class="modal-body peers">
+	          	   <h4>Confirmation</h4>
+		           <div class="row">
+		           	 <h6 class="modalText">Are you sure to remove/hide this Syudy-Set !</h6>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group button">
+								<input type="hidden" name="remove_ss_id" id="remove_ss_id">
+								<button data-dismiss="modal" class="transparentBtn highlight">No</button>
+								<button type="button" class="filterBtn" onclick="removeStudySet()">Yes</button>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor First Name">
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor Last Name">
-						</div>
-					</div>
-				</div>
-	      	</div>
-	      	<div class="studybuttonGroup">
-				<button type="button" class="transparentBtn" onclick="">Cancel</button>
-				<button type="submit" class="filterBtn">
-					Add
-				</button>
-			</div>
-	    </div>
-	  </div>
-	</div>
+	        </div>
+        </div>
+    </div>
 </div>
+
 
 
 <script type="text/javascript">
@@ -797,7 +498,28 @@ $(document).ready(function(){
 
 	});
 
-	$(document).on('click','.likecount',function(){
+	$(document).on('click','.removeStudySet',function(){
+		var delete_id = $(this).data('id');
+		$("#remove_ss_id").val(delete_id);
+
+	});
+
+	$(document).on('click','.shareStudyset',function(){
+		var share_id = $(this).data('id');
+		$("#share_studyset").val(share_id);
+		$.ajax({
+			url : '<?php echo base_url();?>studyset/getPeerToShare',
+			type : 'post',
+			data : {"study_set_id" : share_id},
+			success:function(result) {
+				
+				$('#shareList').html(result);
+			}
+		})
+
+	});
+
+	$(document).on('click','.likecount',function(){ 
 		var study_set_id = $(this).data('id');
 		var that = $(this);
 		$.ajax({
@@ -807,11 +529,13 @@ $(document).ready(function(){
 			success:function(result) {
 				
 				var likecount = $('.likeclass_'+study_set_id).text();
-				if(result.trim() == 1) {
+				if(result.trim() == 1) { 
 					that.find('i').addClass('fa-thumbs-up');
+					that.find('i').removeClass('fa-thumbs-o-up');
 					likecount = parseInt(likecount) + 1;
-				} else {
+				} else { 
 					that.find('i').removeClass('fa-thumbs-up');
+					that.find('i').addClass('fa-thumbs-o-up');
 					likecount = parseInt(likecount) - 1;
 				}
 				$('.likeclass_'+study_set_id).html(likecount);
@@ -841,6 +565,21 @@ function loadStudySetData()
 				$(".reached").show();
 			}
 		}
+	})
+}
+
+function shareToPeer(peer_id){
+	var share_studyset = $('#share_studyset').val();
+
+	$.ajax({
+		url : '<?php echo base_url();?>studyset/shareToPeer',
+		type : 'post',
+		data : {"study_set_id" : share_studyset, 'peer_id': peer_id},
+		success:function(result) {
+			$('#share_count_'+share_studyset).html(result);
+			$("#action_"+peer_id).html('<button type="button" class="like">shared</button>');
+			// $("#share_studyset").val('');
+		}	
 	})
 }
 
@@ -895,6 +634,23 @@ function deleteStudySet()
 				$("#confirmationModal").modal('hide');
 				$("#study_set_id_div_"+ss_id).remove();
 				$("#ss_id").val('');
+			}	
+		})
+	}
+}
+
+function removeStudySet() 
+{
+	var ss_id = $("#remove_ss_id").val();
+	if(ss_id != ''){
+		$.ajax({
+			url : '<?php echo base_url();?>studyset/removeStudySet',
+			type : 'post',
+			data : {"study_set_id" : ss_id},
+			success:function(result) {
+				$("#confirmationModalRemove").modal('hide');
+				$("#study_set_id_div_"+ss_id).remove();
+				$("#remove_ss_id").val('');
 			}	
 		})
 	}

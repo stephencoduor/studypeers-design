@@ -1,3 +1,13 @@
+<?php  
+    $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+    $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")
+    ->result_array();
+      
+ 
+
+?>
+
 <section class="rightsidemsgbar">
 	<section class="view message">
 		Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
@@ -8,29 +18,36 @@
     		<a data-toggle="modal" data-target="#peersMessageModal">See More</a>
 		</section>
 		<section class="listChatBox">
-			<section class="list">
-    			<section class="left">
-    				<figure>
-    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-    				</figure>
-    				<figcaption>Scholasticus Ipsum</figcaption>
-    			</section>
-    			<section class="action">
-    				<i class="fa fa-ellipsis-v"></i>
-    			</section>
-			</section>
-			<section class="list">
-    			<section class="left">
-    				<figure>
-    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-    					<span class="messagecount">12</span>
-    				</figure>
-    				<figcaption>Scholasticus Ipsum</figcaption>
-    			</section>
-    			<section class="action">
-    				<i class="fa fa-ellipsis-v"></i>
-    			</section>
-			</section>
+            <?php foreach ($peer_list as $key => $value) {
+                if($key <= 2) {
+                    if($value['user_id'] == $user_id){
+                        $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array(); 
+                    } else {
+                        $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
+                    }
+             ?>
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                        </figure>
+                        <figcaption><?php echo $peer['nickname']; ?></figcaption>
+                    </section>
+                    <section class="action">
+                        
+                        <div class="dropdown">
+  
+                          <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                          <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                            <li class="removePeerSugg" data-id="<?php echo $peer['userID'];?>"><a href="javascript:void(0)"  data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
+                            
+                          </ul>
+                        </div>
+                    </section>
+                </section>
+            <?php } } ?>
+			
+			
 		</section>
 	</section>
 	<section class="listBar">
@@ -144,116 +161,30 @@
                     <h6>Peers</h6>
                 </div>
                 <div class="listUserWrap">
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
+
+                    <?php foreach ($peer_list as $key => $value) {
+                        if($value['user_id'] == $user_id){
+                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId'=>$value['peer_id']))->row_array(); 
+                        } else {
+                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId'=>$value['user_id']))->row_array(); 
+                        }
+                    ?>
+                        <section class="list">
+                            <section class="left">
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                </figure>
+                                <figcaption><?php echo $peer['nickname']; ?></figcaption>
+                            </section>
+                            <section class="action">
+                                <button type="button" class="like">message</button>
+                            </section>
                         </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            </figure>
-                            <figcaption>John Phelips</figcaption>
-                        </section>
-                        <section class="action">
-                            <button type="button" class="like">message</button>
-                        </section>
-                    </section>
+
+                    <?php } ?>
+                    
+                    
+                    
                 </div>
               </div>
             </div>
@@ -278,7 +209,7 @@
                 </div>
                 <form method="post" action="<?php echo base_url(); ?>account/postCourse" onsubmit="return validateCourse()" id="course_form">
                     <div class="courseBox">
-                        <div class="removeCourseBox">
+                        <div class="removeCourseBox" style="display: none;">
                             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
                                 <g>
@@ -382,3 +313,40 @@
           </div>
         </div>
     </div>
+
+
+    <div class="modal fade" id="removePeerSugg" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-body peers">
+                       <h4>Confirmation</h4>
+                       <div class="row">
+                         <h6 class="modalText">Are you sure to remove this peer !</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <form method="post" action="<?php echo base_url(); ?>account/removePeer">
+                                    <div class="form-group button">
+                                        <input type="hidden" name="remove_peer_id" id="remove_peer_id">
+                                        <button data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                        <button type="submit" class="filterBtn">Yes</button>
+                                    </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <script type="text/javascript">
+        $(document).on('click','.removePeerSugg',function(){
+            var peer_id = $(this).data('id');
+            $("#remove_peer_id").val(peer_id);
+
+        });
+    </script>

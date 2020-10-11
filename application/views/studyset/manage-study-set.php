@@ -21,6 +21,29 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 						<form method="post" action="<?php echo base_url();?>/studyset/manageStudySet" name="study-sets" enctype="multipart/form-data" onsubmit="return validateForm();">
 							<div class="content-box">
 								<div class="row">
+									<div class="col-sm-12" style="margin-bottom: 20px;">
+										<label>Cover Photo</label>
+												<labe class="imageBoxUpload">
+													<div id="studyset_preview">
+														
+															<?php if(!empty($studyset_data['image'])) { ?>
+																<img src="<?php echo (isset($studyset_data) && isset($studyset_data['image'])) ? base_url().'uploads/studyset/'.$studyset_data['image'] : '';?>">
+															<?php } else { ?>
+																<img src="<?php echo base_url().'assets/images/map.jpg';?>">
+															<?php } ?>
+													</div>
+															<div class="overlay-bg"> 
+												                <a href="#" class="icon"> 
+												                   <i class="fa fa-cloud-upload"></i> 
+												                </a> 
+												            </div> 
+														
+														
+													
+													<input type="file" name="featured_image" id="featured_image-id">
+													<span class="error" id="featured_image-id_err"></span>
+												</labe>
+											</div>
 									<div class="col-md-12">
 										<div class="form-group">
 											<input type="hidden" name="study_set_id" value="<?php echo (isset($study_set_id)) ? $study_set_id : 0;?>">
@@ -52,7 +75,9 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 												?>
 											</select>
 											<span class="error" id="course_err"></span>
+											<a data-toggle="modal" data-target="#courseModal" style="cursor: pointer;">Add Course</a>
 										</div>
+
 									</div>
 									<div class="col-md-12">
 										<div class="form-group">
@@ -64,68 +89,54 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 										</div>
 									</div>
 									<div class="col-md-12">
+										<div class="form-group">
+											<label>Privacy & Permission  <span style="font-size: 14px;font-weight: 400;color: gray;display: none;" id="privcy_span"></span></label>
+											<select class="form-control" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
+											  <option value="">Select Privacy</option>
+											  <option value="1" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 1) ? 'selected' : '';?>>Public</option>
+											  <option value="2" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 2) ? 'selected' : '';?>>Private</option>
+											  <!-- <option value="3" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 3) ? 'selected' : '';?>>Secret</option> -->
+											</select>
+											<span class="error" id="privacy_err"></span>
+
+										</div>
+									</div>
+									<div class="col-md-12">
 										<div class="form-row">
 											<div class="col-sm-6">
-												<!-- <div class="form-group">
-													<label>Subject</label>
-													<input type="text" class="form-control" id="subject" name="subject" placeholder="Subject" value="<?php echo (isset($studyset_data) && isset($studyset_data['subject'])) ? $studyset_data['subject'] : '';?>">
-													<span class="error" id="subject_err"></span>
-												</div> -->
+												
 												<div class="form-group">
 													<label>Chapter</label>
 													<input type="text" class="form-control" id="chapter" name="chapter" placeholder="Chapter" value="<?php echo (isset($studyset_data) && isset($studyset_data['chapter'])) ? $studyset_data['chapter'] : '';?>">
 													<span class="error" id="chapter_err"></span>
-												</div>											
+												</div>	
+											</div>	
+											<div class="col-sm-6">									
 												<div class="form-group">
 													<label>Unit</label>
 													<input type="text" class="form-control" id="unit" name="unit" placeholder="Unit" value="<?php echo (isset($studyset_data) && isset($studyset_data['unit'])) ? $studyset_data['unit'] : '';?>" >
 													<span class="error" id="unit_err"></span>
 												</div>
 											</div>
-											<div class="col-sm-6">
-												<labe class="imageBoxUpload">
-													<span class="next">
-														<img src="<?php echo (isset($studyset_data) && isset($studyset_data['image'])) ? base_url().'uploads/studyset/'.$studyset_data['image'] : '';?>" id="studyset_preview">
-													</span>
-													<span class="imageBoxUpload--icon previous">
-														<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-															<path d="M490.684082,0H21.315918C9.5085716,0,0,9.5085716,0,21.315918V490.684082C0,502.4914246,9.5085716,512,21.315918,512
-																H490.684082C502.4914246,512,512,502.4914246,512,490.684082V21.315918C512,9.5085716,502.4914246,0,490.684082,0z
-																 M50.6775513,469.3681641l108.9828644-165.3028564l92.0554962,165.3028564H50.6775513z M469.3681641,469.3681641H299.7812195
-																c-0.2089844-0.6269226-19.5396118-35.631012-42.6318359-77.217926L384,204.5910339l85.2636719,72.8293762v191.9477539H469.3681641z
-																 M469.3681641,221.204895l-75.6506042-64.6791992c-4.5975342-4.4930573-20.1665039-10.7624512-31.5559082,4.2840881
-																l-128.1045074,189.440033c-27.8987732-50.3641052-54.2301941-97.6979675-54.2301941-97.6979675
-																c-4.2840881-8.3591766-22.7787781-19.3306122-36.4669342-1.3583679L42.6318359,403.95755V42.6318359h426.6318054V221.204895
-																H469.3681641z"></path>
-															<path d="M238.1322327,205.6359253c35.1085815,0,63.6342773-28.5257263,63.6342773-63.6342926
-																s-28.5256958-63.6342926-63.6342773-63.6342926s-63.6342773,28.5257111-63.6342773,63.6342926
-																c0.1045074,35.1085663,28.6302032,63.6342773,63.6342773,63.6342773V205.6359253z M238.1322327,120.9991837
-																c11.5983734,0,20.8979797,9.4040909,20.8979797,20.8979568c0,11.5983734-9.4040985,20.8979645-20.8979797,20.8979645
-																c-11.5983734,0-20.8979492-9.4040833-20.8979492-20.8979645
-																C217.2342834,130.4032745,226.6383667,120.9991837,238.1322327,120.9991837z"></path>
-														</svg>
-														Add Image
-													</span>	
-													<input type="file" name="featured_image" id="featured_image-id">
-													<span class="error" id="featured_image-id_err"></span>
-												</labe>
-											</div>
+											
 										</div>
 									</div>
 								</div>
 							</div>
 							<div class="termsWrapper">
 								<h4>Term</h4>
-								<button type="button" class="transparentBtn" onclick="addTerm();">
-									<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-										<path d="M465.5,220.5h-196v-196C269.5,11,258.5,0,245,0s-24.5,11-24.5,24.5v196h-196C11,220.5,0,231.5,0,245s11,24.5,24.5,24.5h196
-											v196c0,13.5,11,24.5,24.5,24.5s24.5-11,24.5-24.5v-196h196c13.5,0,24.5-11,24.5-24.5S479,220.5,465.5,220.5z"></path>
-									</svg> Add a Term
-								</button>
+								
+
 							</div>
 							<?php
 								$term_data = (isset($studyset_data) && isset($studyset_data['term_data'])) ? $studyset_data['term_data'] : array();
+								if(isset($studyset_data['term_data'])){
+									$term_count = count($studyset_data['term_data']);
+								} else {
+									$term_count = 1;
+								}
 							?>
+							<input type="hidden" id="term_count" value="<?= $term_count; ?>">
 							<div class="content-box">
 								<div class="row">
 									<div class="col-md-12">
@@ -151,29 +162,32 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 											
 											<div class="col-sm-6">
 												<labe class="imageBoxUpload">
-													<span class="next">
-														<img src="<?php echo (!empty($term_data) && isset($term_data[0]) && isset($term_data[0]['term_image'])) ? base_url().'uploads/studyset/'.$term_data[0]['term_image'] : '';?>" >
-													</span>
-													<span class="imageBoxUpload--icon">
-														<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-															<path d="M490.684082,0H21.315918C9.5085716,0,0,9.5085716,0,21.315918V490.684082C0,502.4914246,9.5085716,512,21.315918,512
-																H490.684082C502.4914246,512,512,502.4914246,512,490.684082V21.315918C512,9.5085716,502.4914246,0,490.684082,0z
-																 M50.6775513,469.3681641l108.9828644-165.3028564l92.0554962,165.3028564H50.6775513z M469.3681641,469.3681641H299.7812195
-																c-0.2089844-0.6269226-19.5396118-35.631012-42.6318359-77.217926L384,204.5910339l85.2636719,72.8293762v191.9477539H469.3681641z
-																 M469.3681641,221.204895l-75.6506042-64.6791992c-4.5975342-4.4930573-20.1665039-10.7624512-31.5559082,4.2840881
-																l-128.1045074,189.440033c-27.8987732-50.3641052-54.2301941-97.6979675-54.2301941-97.6979675
-																c-4.2840881-8.3591766-22.7787781-19.3306122-36.4669342-1.3583679L42.6318359,403.95755V42.6318359h426.6318054V221.204895
-																H469.3681641z"></path>
-															<path d="M238.1322327,205.6359253c35.1085815,0,63.6342773-28.5257263,63.6342773-63.6342926
-																s-28.5256958-63.6342926-63.6342773-63.6342926s-63.6342773,28.5257111-63.6342773,63.6342926
-																c0.1045074,35.1085663,28.6302032,63.6342773,63.6342773,63.6342773V205.6359253z M238.1322327,120.9991837
-																c11.5983734,0,20.8979797,9.4040909,20.8979797,20.8979568c0,11.5983734-9.4040985,20.8979645-20.8979797,20.8979645
-																c-11.5983734,0-20.8979492-9.4040833-20.8979492-20.8979645
-																C217.2342834,130.4032745,226.6383667,120.9991837,238.1322327,120.9991837z"></path>
-														</svg>
-														Add Image
-													</span>	
-													<input type="file" class="term_image" name="term_image[]" id="featured_image-id">
+													<div id="imageBoxUpload_0">
+														<?php if(!empty($term_data[0]['term_image'])) { ?>
+															<img src="<?php echo (!empty($term_data) && isset($term_data[0]) && isset($term_data[0]['term_image'])) ? base_url().'uploads/studyset/'.$term_data[0]['term_image'] : '';?>" >
+														<?php } else { ?>
+															<span class="imageBoxUpload--icon">
+																<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+																	<path d="M490.684082,0H21.315918C9.5085716,0,0,9.5085716,0,21.315918V490.684082C0,502.4914246,9.5085716,512,21.315918,512
+																		H490.684082C502.4914246,512,512,502.4914246,512,490.684082V21.315918C512,9.5085716,502.4914246,0,490.684082,0z
+																		 M50.6775513,469.3681641l108.9828644-165.3028564l92.0554962,165.3028564H50.6775513z M469.3681641,469.3681641H299.7812195
+																		c-0.2089844-0.6269226-19.5396118-35.631012-42.6318359-77.217926L384,204.5910339l85.2636719,72.8293762v191.9477539H469.3681641z
+																		 M469.3681641,221.204895l-75.6506042-64.6791992c-4.5975342-4.4930573-20.1665039-10.7624512-31.5559082,4.2840881
+																		l-128.1045074,189.440033c-27.8987732-50.3641052-54.2301941-97.6979675-54.2301941-97.6979675
+																		c-4.2840881-8.3591766-22.7787781-19.3306122-36.4669342-1.3583679L42.6318359,403.95755V42.6318359h426.6318054V221.204895
+																		H469.3681641z"></path>
+																	<path d="M238.1322327,205.6359253c35.1085815,0,63.6342773-28.5257263,63.6342773-63.6342926
+																		s-28.5256958-63.6342926-63.6342773-63.6342926s-63.6342773,28.5257111-63.6342773,63.6342926
+																		c0.1045074,35.1085663,28.6302032,63.6342773,63.6342773,63.6342773V205.6359253z M238.1322327,120.9991837
+																		c11.5983734,0,20.8979797,9.4040909,20.8979797,20.8979568c0,11.5983734-9.4040985,20.8979645-20.8979797,20.8979645
+																		c-11.5983734,0-20.8979492-9.4040833-20.8979492-20.8979645
+																		C217.2342834,130.4032745,226.6383667,120.9991837,238.1322327,120.9991837z"></path>
+																</svg>
+																Add Image
+															</span>	
+														<?php } ?>
+													</div>
+													<input type="file" class="term_image" name="term_image[]" id="featured_image-id" data-id="0">
 													<span class="error"></span>
 												</labe>
 											</div>
@@ -210,27 +224,32 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 											
 											<div class="col-sm-6">
 												<labe class="imageBoxUpload">
-													<img src="<?php echo base_url().'uploads/studyset/'.$value['term_image'];?>" >
-													<span class="imageBoxUpload--icon">
-														<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-															<path d="M490.684082,0H21.315918C9.5085716,0,0,9.5085716,0,21.315918V490.684082C0,502.4914246,9.5085716,512,21.315918,512
-																H490.684082C502.4914246,512,512,502.4914246,512,490.684082V21.315918C512,9.5085716,502.4914246,0,490.684082,0z
-																 M50.6775513,469.3681641l108.9828644-165.3028564l92.0554962,165.3028564H50.6775513z M469.3681641,469.3681641H299.7812195
-																c-0.2089844-0.6269226-19.5396118-35.631012-42.6318359-77.217926L384,204.5910339l85.2636719,72.8293762v191.9477539H469.3681641z
-																 M469.3681641,221.204895l-75.6506042-64.6791992c-4.5975342-4.4930573-20.1665039-10.7624512-31.5559082,4.2840881
-																l-128.1045074,189.440033c-27.8987732-50.3641052-54.2301941-97.6979675-54.2301941-97.6979675
-																c-4.2840881-8.3591766-22.7787781-19.3306122-36.4669342-1.3583679L42.6318359,403.95755V42.6318359h426.6318054V221.204895
-																H469.3681641z"></path>
-															<path d="M238.1322327,205.6359253c35.1085815,0,63.6342773-28.5257263,63.6342773-63.6342926
-																s-28.5256958-63.6342926-63.6342773-63.6342926s-63.6342773,28.5257111-63.6342773,63.6342926
-																c0.1045074,35.1085663,28.6302032,63.6342773,63.6342773,63.6342773V205.6359253z M238.1322327,120.9991837
-																c11.5983734,0,20.8979797,9.4040909,20.8979797,20.8979568c0,11.5983734-9.4040985,20.8979645-20.8979797,20.8979645
-																c-11.5983734,0-20.8979492-9.4040833-20.8979492-20.8979645
-																C217.2342834,130.4032745,226.6383667,120.9991837,238.1322327,120.9991837z"></path>
-														</svg>
-														Add Image
-													</span>	
-													<input type="file" class="term_image" name="term_image[]" id="featured_image-id">
+													<div id="imageBoxUpload_<?php echo $key; ?>">
+														<?php if(!empty($value['term_image'])) { ?>
+															<img src="<?php echo base_url().'uploads/studyset/'.$value['term_image'];?>" >
+														<?php } else { ?>
+														<span class="imageBoxUpload--icon">
+															<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+																<path d="M490.684082,0H21.315918C9.5085716,0,0,9.5085716,0,21.315918V490.684082C0,502.4914246,9.5085716,512,21.315918,512
+																	H490.684082C502.4914246,512,512,502.4914246,512,490.684082V21.315918C512,9.5085716,502.4914246,0,490.684082,0z
+																	 M50.6775513,469.3681641l108.9828644-165.3028564l92.0554962,165.3028564H50.6775513z M469.3681641,469.3681641H299.7812195
+																	c-0.2089844-0.6269226-19.5396118-35.631012-42.6318359-77.217926L384,204.5910339l85.2636719,72.8293762v191.9477539H469.3681641z
+																	 M469.3681641,221.204895l-75.6506042-64.6791992c-4.5975342-4.4930573-20.1665039-10.7624512-31.5559082,4.2840881
+																	l-128.1045074,189.440033c-27.8987732-50.3641052-54.2301941-97.6979675-54.2301941-97.6979675
+																	c-4.2840881-8.3591766-22.7787781-19.3306122-36.4669342-1.3583679L42.6318359,403.95755V42.6318359h426.6318054V221.204895
+																	H469.3681641z"></path>
+																<path d="M238.1322327,205.6359253c35.1085815,0,63.6342773-28.5257263,63.6342773-63.6342926
+																	s-28.5256958-63.6342926-63.6342773-63.6342926s-63.6342773,28.5257111-63.6342773,63.6342926
+																	c0.1045074,35.1085663,28.6302032,63.6342773,63.6342773,63.6342773V205.6359253z M238.1322327,120.9991837
+																	c11.5983734,0,20.8979797,9.4040909,20.8979797,20.8979568c0,11.5983734-9.4040985,20.8979645-20.8979797,20.8979645
+																	c-11.5983734,0-20.8979492-9.4040833-20.8979492-20.8979645
+																	C217.2342834,130.4032745,226.6383667,120.9991837,238.1322327,120.9991837z"></path>
+															</svg>
+															Add Image
+														</span>	
+													<?php } ?>
+													</div>
+													<input type="file" class="term_image" name="term_image[]" id="term_image" data-id="<?php echo $key; ?>">
 													<span class="error"></span>
 												</labe>
 											</div>
@@ -243,7 +262,17 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 							?>
 
 							<span id="addTerm"></span>
-							<div class="studybuttonGroup">
+							<div class="termsWrapper" style="justify-content: flex-end;">
+								
+								<button type="button" class="transparentBtn" onclick="addTerm();">
+									<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
+										<path d="M465.5,220.5h-196v-196C269.5,11,258.5,0,245,0s-24.5,11-24.5,24.5v196h-196C11,220.5,0,231.5,0,245s11,24.5,24.5,24.5h196
+											v196c0,13.5,11,24.5,24.5,24.5s24.5-11,24.5-24.5v-196h196c13.5,0,24.5-11,24.5-24.5S479,220.5,465.5,220.5z"></path>
+									</svg> Add a Term
+								</button>
+
+							</div>
+							<div class="studybuttonGroup" style="justify-content: flex-start;">
 								<button type="button" class="transparentBtn" onclick="location.href='<?php echo base_url();?>studyset';">Cancel</button>
 								<button type="submit" name="submit" class="filterBtn">
 									<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 484 484">
@@ -408,97 +437,7 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
       </div>
     </div>
 </div>
-<div class="modal fade" id="courseModal" role="dialog">
-	<div class="modal-dialog">
-	  <!-- Modal content-->
-	  <div class="modal-content">
-	      <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-	    <div class="modal-body">
-	      	<div class="courseHeader">
-	      		<h4>Course</h4>
-	      		<div class="add_course">
-					<svg height="512pt" 
-						viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#2196f3"/><path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" fill="#fafafa"/>
-					</svg>
-	      			Add a course
-	      		</div>
-	      	</div>
-	      	<div class="courseBox">
-	      		<div class="removeCourseBox">
-					<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
-								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
-						<g>
-							<g>
-								<path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
-									L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
-									c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
-									l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
-									L284.286,256.002z"/>
-							</g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-						<g>
-						</g>
-					</svg>
 
-	      		</div>
-	      		<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Course">
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor First Name">
-						</div>
-					</div>
-					<div class="col-md-6 col-sm-6 col-xs-12">
-						<div class="form-group">
-							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor Last Name">
-						</div>
-					</div>
-				</div>
-	      	</div>
-	      	<div class="studybuttonGroup">
-				<button type="button" class="transparentBtn" onclick="">Cancel</button>
-				<button type="submit" class="filterBtn">
-					Add
-				</button>
-			</div>
-	    </div>
-	  </div>
-	</div>
-</div>
 <?php
 $professor = (isset($studyset_data) && isset($studyset_data['professor'])) ? $studyset_data['professor'] : '';
 ?>
@@ -507,6 +446,7 @@ var professor_id = '<?php echo $professor;?>';
 $(document).ready(function(){
 	$(document).on('click','.deleteTerm',function(){
 		$(this).parent().parent().parent().parent().remove();
+
 	});
 
     $("#featured_image-id").change(function(){
@@ -516,8 +456,9 @@ $(document).ready(function(){
     });
 
     $(document).on('change','.term_image',function(){
-        readImageURL(this);
-        $('.next').show();
+    	var data_id = $(this).attr("data-id");
+        readImageURL(this, data_id);
+        
     });
 
     var course_id = $("#course").val();
@@ -532,25 +473,21 @@ function readURL(input) {
 
         reader.onload = function (e) {
             $('#studyset_preview')
-                .attr('src', e.target.result)
-                .width(150)
-                .height(200);
+                .html('<img src="'+e.target.result+'">');
         };
 
         reader.readAsDataURL(input.files[0]);
     }
 }
 
-function readImageURL(input) {
+function readImageURL(input, data_id) {
     if (input.files && input.files[0]) {
         var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $(input).parent().find('img')
-                .attr('src', e.target.result)
-                .width(150)
-                .height(200);
-        };
+        reader.onload = function(e) {
+	    	$('#imageBoxUpload_'+data_id).html('<img src="'+e.target.result+'">');
+	      
+	    }
 
         reader.readAsDataURL(input.files[0]);
     }
@@ -565,7 +502,7 @@ function validateForm()
 	var institution = $("#institution").val().trim();
 	// var professor = $("#professor").val().trim();
 	var course = $("#course").val().trim();
-	// var subject = $("#subject").val().trim();
+	var privacy = $("#privacy").val().trim();
 	// var unit = $("#unit").val().trim();
 	// var chapter = $("#chapter").val().trim();
 
@@ -584,6 +521,10 @@ function validateForm()
 	// }
 	if(course == '') {
 		$('#course_err').html('This field is required');
+		flag = 1;
+	}
+	if(privacy == '') {
+		$('#privacy_err').html('This field is required');
 		flag = 1;
 	}
 	// if(subject == '') {
@@ -639,9 +580,24 @@ function getProfessor()
 }	
 
 function addTerm() 
-{
-	var term_html = '<div class="content-box"><div class="row"><div class="col-md-12"><div class="flex-form-row"><div class="form-group"><input type="hidden" name="study_set_term_id[]" value="0"/><input type="text" name="term_name[]" placeholder="Term" class="form-control form-control--lg term_name"><span class="error"></span></div><button type="button" class="transparentBtn deleteTerm">Delete</button></div></div><div class="col-md-12"><div class="form-row"><div class="col-sm-6"><div class="form-group"><label>Description</label><textarea class="term_description" name="term_description[]" id="definition0" cols="30" rows="10"></textarea><span class="error"></span></div></div><div class="col-sm-6"><labe class="imageBoxUpload"><span class="imageBoxUpload--icon"><svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M490.684082,0H21.315918C9.5085716,0,0,9.5085716,0,21.315918V490.684082C0,502.4914246,9.5085716,512,21.315918,512H490.684082C502.4914246,512,512,502.4914246,512,490.684082V21.315918C512,9.5085716,502.4914246,0,490.684082,0z M50.6775513,469.3681641l108.9828644-165.3028564l92.0554962,165.3028564H50.6775513z M469.3681641,469.3681641H299.7812195c-0.2089844-0.6269226-19.5396118-35.631012-42.6318359-77.217926L384,204.5910339l85.2636719,72.8293762v191.9477539H469.3681641z M469.3681641,221.204895l-75.6506042-64.6791992c-4.5975342-4.4930573-20.1665039-10.7624512-31.5559082,4.2840881l-128.1045074,189.440033c-27.8987732-50.3641052-54.2301941-97.6979675-54.2301941-97.6979675c-4.2840881-8.3591766-22.7787781-19.3306122-36.4669342-1.3583679L42.6318359,403.95755V42.6318359h426.6318054V221.204895H469.3681641z"></path><path d="M238.1322327,205.6359253c35.1085815,0,63.6342773-28.5257263,63.6342773-63.6342926s-28.5256958-63.6342926-63.6342773-63.6342926s-63.6342773,28.5257111-63.6342773,63.6342926c0.1045074,35.1085663,28.6302032,63.6342773,63.6342773,63.6342773V205.6359253z M238.1322327,120.9991837c11.5983734,0,20.8979797,9.4040909,20.8979797,20.8979568c0,11.5983734-9.4040985,20.8979645-20.8979797,20.8979645c-11.5983734,0-20.8979492-9.4040833-20.8979492-20.8979645C217.2342834,130.4032745,226.6383667,120.9991837,238.1322327,120.9991837z"></path></svg>Add Image</span><input type="file" class="term_image" name="term_image[]" id="featured_image-id"><span class="error"></span></labe></div></div></div></div></div>';
+{   
+	var term_count = $('#term_count').val();
+	
+	var term_html = '<div class="content-box"><div class="row"><div class="col-md-12"><div class="flex-form-row"><div class="form-group"><input type="hidden" name="study_set_term_id[]" value="0"/><input type="text" name="term_name[]" placeholder="Term" class="form-control form-control--lg term_name"><span class="error"></span></div><button type="button" class="transparentBtn deleteTerm">Delete</button></div></div><div class="col-md-12"><div class="form-row"><div class="col-sm-6"><div class="form-group"><label>Description</label><textarea class="term_description" name="term_description[]" id="definition0" cols="30" rows="10"></textarea><span class="error"></span></div></div><div class="col-sm-6"><labe class="imageBoxUpload"><div id="imageBoxUpload_'+term_count+'"><span class="imageBoxUpload--icon"><svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M490.684082,0H21.315918C9.5085716,0,0,9.5085716,0,21.315918V490.684082C0,502.4914246,9.5085716,512,21.315918,512H490.684082C502.4914246,512,512,502.4914246,512,490.684082V21.315918C512,9.5085716,502.4914246,0,490.684082,0z M50.6775513,469.3681641l108.9828644-165.3028564l92.0554962,165.3028564H50.6775513z M469.3681641,469.3681641H299.7812195c-0.2089844-0.6269226-19.5396118-35.631012-42.6318359-77.217926L384,204.5910339l85.2636719,72.8293762v191.9477539H469.3681641z M469.3681641,221.204895l-75.6506042-64.6791992c-4.5975342-4.4930573-20.1665039-10.7624512-31.5559082,4.2840881l-128.1045074,189.440033c-27.8987732-50.3641052-54.2301941-97.6979675-54.2301941-97.6979675c-4.2840881-8.3591766-22.7787781-19.3306122-36.4669342-1.3583679L42.6318359,403.95755V42.6318359h426.6318054V221.204895H469.3681641z"></path><path d="M238.1322327,205.6359253c35.1085815,0,63.6342773-28.5257263,63.6342773-63.6342926s-28.5256958-63.6342926-63.6342773-63.6342926s-63.6342773,28.5257111-63.6342773,63.6342926c0.1045074,35.1085663,28.6302032,63.6342773,63.6342773,63.6342773V205.6359253z M238.1322327,120.9991837c11.5983734,0,20.8979797,9.4040909,20.8979797,20.8979568c0,11.5983734-9.4040985,20.8979645-20.8979797,20.8979645c-11.5983734,0-20.8979492-9.4040833-20.8979492-20.8979645C217.2342834,130.4032745,226.6383667,120.9991837,238.1322327,120.9991837z"></path></svg>Add Image</span></div><input type="file" class="term_image" name="term_image[]" id="featured_image-id" data-id="'+term_count+'"><span class="error"></span></labe></div></div></div></div></div>';
 	$("#addTerm").append(term_html);
+	$('#term_count').val(term_count+1);
 
+}
+
+function showPermissionText(val){
+	if(val == 1) {
+		$('#privcy_span').html('(Keep this studyset public)').show();
+	} else if(val == 2) {
+		$('#privcy_span').html('(Keep this studyset private)').show();
+	} else if(val == 3) {
+		$('#privcy_span').html('(Keep this studyset secret)').show();
+	} else {
+		$('#privcy_span').html('').hide();
+	}  
 }
 </script>

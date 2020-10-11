@@ -5,6 +5,7 @@
 }
 .scheduleWrapper .header .buttonGroup {
     justify-content:flex-end;
+    width: auto;
 }
 .scheduleWrapper .header h4 {
     font-size: 32px;
@@ -76,12 +77,12 @@
     margin: 24px 0 32px 0;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 .filterSearch,
 .filtercalendar,
 .filterSelect {
-    width: 20%;
+    width: 24% !important;
     border: 1px solid #eae9ee;
     border-radius: 4px;
     display: flex;
@@ -125,7 +126,7 @@
     margin-right:0;
 }
 .cal-schedule {
-    padding-top:60px;
+    padding-top:0px;
 }
 .cal-schedule.eventHdrWrap {
     padding-top:0;
@@ -136,7 +137,7 @@
     justify-content: flex-start;
 }
 .monthView {
-    width: 32%;
+    width: 35%;
 }
 .events {
     width:68%;
@@ -199,7 +200,9 @@
     color: #fff;
 }
 .cal-schedule .bootstrap-datetimepicker-widget table th.picker-switch {
-    font-size: 24px;
+    font-size: 20px;
+    background: transparent !important;
+    font-weight: 400;
 }
 .eventList {
     padding-left: 50px;
@@ -432,6 +435,12 @@ button.fc-next-button.fc-button.fc-button-primary {
 .addScheduleBox .form-group.select_label::after {
     top: 70%!important;
 }
+.form-group.select_label.courseMenuSelect:after {
+    top: 55%!important;
+}
+.addScheduleBox .form-group.select.courseMenuSelect:after {
+    top: 55%!important;
+}
 .form-control {
     padding: 8px 16px;
     height: 48px;
@@ -548,8 +557,11 @@ select.form-control:focus {
     margin-right:20px;
 }
 .form-group.calendar .filtercalendar {
-    width:auto;
+    width:100% !important;
     margin-left: 10px;
+}
+.form-group.calendar .filtercalendar .input-group {
+    width:100%;
 }
 .form-group.calendar.event .filtercalendar {
     width: 220px;
@@ -558,9 +570,22 @@ select.form-control:focus {
 .form-group.calendar.event .filtercalendar .input-group.date input {
     width:100%;
 }
+/*.imageBoxUpload.event {*/
+/*    height: 160px;*/
+/*    margin-top: 12.5rem;*/
+/*}*/
 .imageBoxUpload.event {
-    height:230px;
-    margin-top: 2.5rem;
+    height: 250px;
+    margin-top: 27px;
+}
+.imageBoxUpload #imageBoxUpload {
+    width: 100%;
+    height: 100%;
+}
+.imageBoxUpload #imageBoxUpload img {
+    width: 100%;
+    /*height: 100%;*/
+    object-fit: contain;
 }
 /*switch toggle*/
 .switch {
@@ -1218,7 +1243,7 @@ div[data-edit] {
     margin: 0px 0 0 0;
 }
 .studySetWrapper .feed-card.list h5 {
-    margin-top:0;
+    margin:10px;
 }
 .feed_card_inner .header h5,
 .feed-card.list h5 {
@@ -1243,6 +1268,8 @@ div[data-edit] {
 }
 .feed-card.list .timeperiod {
     margin-top:10px;
+    flex-wrap: wrap;
+    color: #947ba2;
 }
 .timeperiod {
     font-size:16px;
@@ -1280,6 +1307,7 @@ div[data-edit] {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 .user-name {
     display: flex;
@@ -1969,7 +1997,7 @@ div[data-edit] {
     align-items: flex-start;
     position: relative;
     justify-content: flex-start;
-    margin: 0 0px 0px 0px;
+    margin: 0 0px 10px 0px;
     flex-wrap:wrap;
 }
 .chatMsg.reply {
@@ -1995,6 +2023,7 @@ div[data-edit] {
     align-items: flex-start;
     justify-content: flex-start;
     margin-top: 30px;
+    margin-bottom: 0px;
     flex-wrap: wrap;
     margin-left: 40px;
 }
@@ -2161,7 +2190,7 @@ div[data-edit] {
     height:20px;
 }
 .userIcoList {
-    margin-right: 15%;
+    margin-right: 20%;
 }
 .userIcoList ul {
     display: flex;
@@ -2267,8 +2296,15 @@ div[data-edit] {
     justify-content: flex-start;
 }
 
-
-
+.modal-dialog {
+    top: 35%;
+}
+#peersMessageModal .modal-dialog {
+    top: 10%;
+}
+.studybuttonGroup{
+    margin:20px 0;
+}
 
 
 
@@ -2334,7 +2370,7 @@ div[data-edit] {
         width:190px;
     }
     .mainContent .filtercalendar .input-group.date input {
-        width:120px;
+        width:180px;
     }
     .event .filtercalendar .input-group.date input {
         background-position: 85% 50%;
@@ -2350,9 +2386,6 @@ div[data-edit] {
     }
     .addScheduleBox .form-row.align-items-center .form-group.calendar label {
         width: 90px;
-    }
-    .addScheduleBox .form-group.calendar .filtercalendar {
-        width: auto;
     }
      .addScheduleBox .filtercalendar .input-group.date input {
         width: 170px;
@@ -2374,9 +2407,12 @@ div[data-edit] {
     .mainContent.msgActive .filterWrapper.event .filtercalendar .input-group.date input {
         width: 100%;
     }
-.filterWrapper.event .filtercalendar {
-    width: 20%;
-}
+    .filterWrapper.event .filtercalendar {
+        width: 20%;
+    }
+    .cal-schedule .bootstrap-datetimepicker-widget table th.picker-switch {
+        font-size: 17px;
+    }
 }
 @media(max-width:1400px) {
     .mainContent.active.msgActive button.fc-prev-button.fc-button.fc-button-primary {
@@ -2391,16 +2427,17 @@ div[data-edit] {
     .mainContent.active button.fc-next-button.fc-button.fc-button-primary {
         right: 4%;
     }
-    .filtercalendar .input-group.date input {
-        width: 120px;
+    .mainContent .filtercalendar .input-group.date input {
+        width: 90%;
     }
     .form-group.calendar.event .filtercalendar .input-group.date input {
         background-position: 92% 50%;
     }
-    .cal-schedule .bootstrap-datetimepicker-widget table th.picker-switch,
-    .fc .fc-toolbar-title {
-        font-size: 20px;
-    }.scheduleWrapper .header h4 {
+    /*.cal-schedule .bootstrap-datetimepicker-widget table th.picker-switch,*/
+    /*.fc .fc-toolbar-title {*/
+    /*    font-size: 20px;*/
+    /*}*/
+    .scheduleWrapper .header h4 {
         font-size: 22px;
     }
     .filterBtn, .scheduleWrapper .header a.filterBtn {
@@ -2415,6 +2452,9 @@ div[data-edit] {
     }
     .mainContent.msgActive .filtercalendar .input-group.date input {
         width: 100%;
+    }
+    .filterSearch, .filtercalendar, .filterSelect {
+        width: 24% !important;
     }
 }
 @media(max-width:1300px) {
@@ -2431,7 +2471,7 @@ div[data-edit] {
     }
     .mainContent.active .timeperiod .timeDetail {
         margin-right: 10px;
-        width: 46%;
+        width: 100%;
     }
     .mainContent.active .timeperiod {
         flex-wrap: wrap;
@@ -2450,6 +2490,12 @@ div[data-edit] {
     }
 }
 @media(max-width:1100px) {
+    .addScheduleBox .form-group.calendar .filtercalendar {
+        width: auto !important;
+    }
+    .addScheduleBox .filtercalendar .input-group.date input {
+        width: 120px;
+    }
     .mainContent.active.msgActive button.fc-prev-button.fc-button.fc-button-primary {
         left: 65%;
     }
@@ -2509,6 +2555,9 @@ div[data-edit] {
 }
 
 @media(max-width:991px) {
+    .addScheduleBox .filtercalendar .input-group.date input {
+        width: 100%;
+    }
     .filtercalendar .input-group {
         width: 100%;
     }
@@ -2520,7 +2569,7 @@ div[data-edit] {
         justify-content: flex-start;
     }
     .filterSearch, .filtercalendar, .filterSelect{
-        width:32%;
+        width:32% !important;
         margin-right: 10px;
         margin-bottom: 20px;
     }
@@ -2610,7 +2659,7 @@ div[data-edit] {
 }
 @media(max-width:900px){
     .filterSearch, .filtercalendar, .filterSelect {
-        width: 31%;
+        width: 31% !important;
     }
     .mainContent.active.msgActive button.fc-prev-button.fc-button.fc-button-primary {
         left: 60%;
@@ -2727,6 +2776,10 @@ div[data-edit] {
     .socialEventsDisplayWrapper .userIcoList {
         min-width: 60px;
     }
+    .imageBoxUpload.event {
+        height: 250px;
+        margin: 0 0 30px 0;
+    }
 }
 @media (max-width: 650px){
     .mainContent.active.msgActive button.fc-prev-button.fc-button.fc-button-primary {
@@ -2770,7 +2823,7 @@ div[data-edit] {
         margin: auto;
     }
     .filterSearch, .filtercalendar, .filterSelect {
-        width: 47%;
+        width: 47% !important;
     }
     .scheduleWrapper .header a {
         padding: 13px 15px;
@@ -2797,6 +2850,7 @@ div[data-edit] {
     }
     .events .feed-card.list {
         margin:0;
+        flex-flow: wrap column;
     }
     .events .feed_card_inner .header h5, .events .feed-card.list h5 {
         font-size: 16px;
@@ -2864,7 +2918,7 @@ div[data-edit] {
 }
 @media(max-width:479px) {
     .filterSearch, .filtercalendar, .filterSelect {
-        width: 100%;
+        width: 100% !important;
         margin: 0 0 15px 0;
     }
     .scheduleWrapper .header a {
@@ -2893,8 +2947,11 @@ div[data-edit] {
         right: 10px;
     }
     .filtercalendar {
-        width: 38%;
-        margin-right: 2%;
+        width: 100% !important;
+        /*margin-right: 2%;*/
+    }
+    .mainContent .filtercalendar .input-group.date input {
+        width: 100% !important;
     }
     .addScheduleBox .form-group.calendar {
         flex-wrap: wrap;
@@ -2904,6 +2961,9 @@ div[data-edit] {
         margin-right: 0%;
         margin-top: 3%;
         margin-left:0;
+    }
+    .addScheduleBox .form-group.calendar .filtercalendar {
+        width: 100% !important;
     }
     .addScheduleBox .input-group--overlap {
         width: 100%;
@@ -2925,6 +2985,14 @@ div[data-edit] {
     .form-group.calendar.event label {
         width: 100%;
         font-size: 14px;
+        margin-left: 0;
+    }
+    .mainContent.active .form-group.calendar.event .filtercalendar {
+         margin-left: 0;
+         width: 100%;
+    }
+    .eventAdd [class*="col-"] {
+        padding: 0;
     }
     .form-group.calendar.event .filtercalendar {
         width: 45%;
@@ -2934,14 +3002,14 @@ div[data-edit] {
     }
     .scheduleWrapper .header {
         flex-wrap: wrap;
-        flex-direction: column;
+        /*flex-direction: column;*/
         align-items: flex-start;
         margin-bottom: 20px;
     }
     .filterBtn, .scheduleWrapper .header a.filterBtn,
     .scheduleWrapper .header a.event {
         padding: 13px 20px;
-        height: auto;
+        height: 100%;
     }
     .filterWrapper.event .filtercalendar {
         width: 100%;
@@ -2982,6 +3050,18 @@ div[data-edit] {
         width: 100%;
         margin: 0 0px 10px 0px;
     }
+    .transparentBtn.cancelEvent {
+        color: #ea2e7e;
+        border-color: #ea2e7e;
+        margin-top: -10px;
+        padding: 15px 25px;
+    }
+    .form-group.calendar.event .filtercalendar .input-group.date input {
+        background-position: 97% 50%;
+    }
+    .transparentBtn.highlight {
+        margin-bottom:10px;
+    }
 }
 @media (max-width: 400px){
     .mainContent.active.msgActive button.fc-prev-button.fc-button.fc-button-primary {
@@ -2999,6 +3079,10 @@ div[data-edit] {
     }
     .socialEventsDisplayWrapper .userIcoList {
         min-width: 90px;
+    }
+    .filterBtn, .scheduleWrapper .header a.filterBtn, .scheduleWrapper .header a.event {
+        padding: 13px 10px;
+        height: 100%;
     }
 }
 

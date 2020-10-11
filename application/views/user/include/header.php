@@ -7,20 +7,30 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/bootstrap.min.css">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+	<?php if($index_menu == 'dashboard') { ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/slick.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/slick-theme.css" />
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/dashboard-new.css">
+	<?php } ?>	
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/star-rating-svg.css">
-	<link href='<?php echo base_url(); ?>assets_d/css/fullcalendar.css' rel='stylesheet' />
-	<?php if($index_menu != 'questions') { ?>
+	<link href='<?php echo base_url(); ?>assets_d/css/fullCalendar.css' rel='stylesheet' />
+	<?php if($index_menu != 'questions' && $index_menu != 'dashboard') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/study-set.css">
 	<?php } ?>
-	<?php if($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets') { ?>
+	<?php if($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'dashboard') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/schedule.css">
 	<?php } ?>
-
+    <link href='<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.min.css' rel='stylesheet' />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.css">
-	<?php if($index_menu != 'questions' && $index_menu != 'study-sets') { ?>
+	<?php if($index_menu == 'dashboard') { ?>
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.tw.css">
+		
+	<?php } ?>	
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/university.css">
+	<?php if($index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'events' && $index_menu != 'dashboard') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/document.css">
 	<?php } ?>
 	
@@ -39,6 +49,12 @@
 <?php 
 	$user_id = $this->session->get_userdata()['user_data']['user_id'];
 	$get_course = $this->db->get_where('course_master', array('user_id' => $user_id, 'status' => 1))->result_array();
+
+	$notification = $this->db->get_where('notification_master', array('user_id' => $user_id, 'status' => 1))->result_array();
+
+	$this->db->order_by('id', 'DESC');
+	$this->db->limit('10');
+	$last_notification = $this->db->get_where('notification_master', array('user_id' => $user_id, 'status!=' => 3))->result_array();
 ?>
 
 <body>
@@ -195,15 +211,110 @@
 					         <li class = "dropdown">
 					            <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">
 					               <i class="fa  fa-bell-o"></i>
-              					   <span class="label label-success">8</span>
+              					   <span class="label label-success" id="notification_count"><?php echo count($notification); ?></span>
 					            </a>					            
-					            <ul class = "dropdown-menu">
-					               <li><a href = "javascript:void(0);">Notification 1</a></li>
-					               <li><a href = "javascript:void(0);">Notification 2</a></li>
-					               <li><a href = "javascript:void(0);">Notification 3</a></li>					               
-					               <li class = "divider"></li>
-					               <li><a href = "javascript:void(0);">Notification 4</a></li>
-					            </ul>					            
+					            <div class = "dropdown-menu">
+					               <div class="notification-header">
+					               	<h6>Notifications</h6>
+					               	<a onclick="readAllNotofication()">Mark as all read</a>
+					               </div>
+					               <ul class="notification-ul">
+					               	<?php if(!empty($last_notification)) {
+					               		foreach ($last_notification as $key => $value) { 
+					               			$time_ago = time_ago_in_php($value['created_at']);
+					               			$cls = "";
+					               			if($value['status'] == '2'){
+					               				$cls = "read";
+					               			}
+					               			if($value['action_type'] == 1) {
+					               	?>
+
+					               			<li id="notification_<?= $value['id']; ?>" class="<?= $cls; ?>">
+							               		<a>
+							               			<figure>
+					                					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+					                				</figure>
+					                				<div class="right">
+					                					<h6><?php echo $value['notification']; ?></h6>
+					                					<div class="sortNotifyMessage">
+					                						<div class="info">
+					                							Follower  • <div class="time"><?php echo $time_ago; ?></div>
+					                						</div>
+					                						<div class="optPreview">
+					                							<?php if($value['status'] == 1){ ?>
+						                							<div class="viewacceptance" id="accept_<?= $value['id']; ?>" onclick="acceptRequest('<?= $value['id']; ?>', '<?= $value['action_id']; ?>')">Accept</div>
+						                							<div class="viewprofile" id="reject_<?= $value['id']; ?>" onclick="rejectRequest('<?= $value['id']; ?>', '<?= $value['action_id']; ?>')">Reject</div>
+						                							<!-- <div class="viewprofile">View Profile</div> -->
+						                						<?php } ?>
+					                						</div>
+					                					</div>
+					                				</div>
+							               		</a>
+							               	</li>
+					               	<?php } else if($value['action_type'] == 2) { ?>
+					               		<li id="notification_<?= $value['id']; ?>" class="<?= $cls; ?>">
+						               		<a>
+						               			<figure>
+				                					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+				                				</figure>
+				                				<div class="right">
+				                					<h6><?php echo $value['notification']; ?></h6>
+				                					<div class="sortNotifyMessage">
+				                						<div class="info">
+				                							Follower  • <div class="time"><?php echo $time_ago; ?></div>
+				                						</div>
+				                						<div class="optPreview">
+				                							
+				                							<div class="viewprofile">View Profile</div>
+				                						</div>
+				                					</div>
+				                				</div>
+						               		</a>
+						               	</li>
+
+					               	<?php } else if($value['action_type'] == 3) { ?>
+					               			<li id="notification_<?= $value['id']; ?>" class="<?= $cls; ?>">
+							               		<a>
+							               			<figure>
+					                					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+					                				</figure>
+					                				<div class="right">
+					                					<h6><?php echo $value['notification']; ?></h6>
+					                					<div class="sortNotifyMessage">
+					                						<div class="info">
+					                							Studyset  • <div class="time"><?php echo $time_ago; ?></div>
+					                						</div>
+					                						<div class="viewprofile" onclick="redirectAction('<?= $value['id']; ?>')">View Studyset</div>
+					                					</div>
+					                				</div>
+							               		</a>
+							               	</li>
+					               	<?php } else if($value['action_type'] == 4) { ?>
+					               		<li id="notification_<?= $value['id']; ?>" class="<?= $cls; ?>">
+						               		<a>
+						               			<figure>
+				                					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+				                				</figure>
+				                				<div class="right">
+				                					<h6><?php echo $value['notification']; ?></h6>
+				                					<div class="sortNotifyMessage">
+				                						<div class="info">
+				                							Event  • <div class="time"><?php echo $time_ago; ?></div>
+				                						</div>
+				                						<div class="viewprofile" onclick="redirectAction('<?= $value['id']; ?>')">View Event</div>
+				                					</div>
+				                				</div>
+						               		</a>
+						               	</li>
+					               	<?php } ?>
+					               		
+					               	<?php } } else { ?>
+					               	<li>
+					               		<p style="text-align: center;">No notification.</p>
+					               	</li>
+					               	<?php } ?>
+					               </ul>
+					            </div>				            
 					         </li>
 					         <li class="message dropdown">
 					            <a href = "javascript:void(0)" class = "dropdown-toggle" data-toggle = "dropdown">
@@ -417,3 +528,56 @@
 				  <span></span>
 				  <span></span>
 				</div>
+
+
+<script type="text/javascript">
+	function acceptRequest(id, action_id){
+		$.ajax({
+			url : '<?php echo base_url();?>account/acceptRequest',
+			type : 'post',
+			data : {"id" : id, "action_id": action_id},
+			success:function(result) {
+				$('#notification_'+id).addClass('read');
+				$('#accept_'+id).hide();
+				$('#reject_'+id).hide();
+			}	
+		})
+	}
+
+	function readAllNotofication(){
+		$.ajax({
+			url : '<?php echo base_url();?>account/readAllNotofication',
+			type : 'post',
+			data : {"id" : 1},
+			success:function(result) {
+				$('.notification-ul li').addClass('read');
+				$('#notification_count').html(0);
+			}	
+		})
+	}
+
+	function redirectAction(id){
+		$.ajax({
+			url : '<?php echo base_url();?>account/redirectAction',
+			type : 'post',
+			data : {"id" : id},
+			success:function(result) {
+				window.location.href = result;
+			}	
+		})
+	}
+
+	function rejectRequest(id, action_id){
+		$.ajax({
+			url : '<?php echo base_url();?>account/rejectRequest',
+			type : 'post',
+			data : {"id" : id, "action_id": action_id},
+			success:function(result) {
+				$('#notification_'+id).addClass('read');
+				$('#accept_'+id).hide();
+				$('#reject_'+id).hide();
+			}	
+		})
+	}
+
+</script>

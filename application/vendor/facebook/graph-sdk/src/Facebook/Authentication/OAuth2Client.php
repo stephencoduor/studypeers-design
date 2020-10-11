@@ -162,7 +162,7 @@ class OAuth2Client
             'code' => $code,
             'redirect_uri' => $redirectUri,
         ];
-
+        
         return $this->requestAnAccessToken($params);
     }
 
@@ -225,7 +225,6 @@ class OAuth2Client
     {
         $response = $this->sendRequestWithClientParams('/oauth/access_token', $params);
         $data = $response->getDecodedBody();
-
         if (!isset($data['access_token'])) {
             throw new FacebookSDKException('Access token was not returned from Graph.', 401);
         }
@@ -263,7 +262,7 @@ class OAuth2Client
         $params += $this->getClientParams();
 
         $accessToken = $accessToken ?: $this->app->getAccessToken();
-
+       
         $this->lastRequest = new FacebookRequest(
             $this->app,
             $accessToken,
@@ -273,7 +272,7 @@ class OAuth2Client
             null,
             $this->graphVersion
         );
-
+        
         return $this->client->sendRequest($this->lastRequest);
     }
 

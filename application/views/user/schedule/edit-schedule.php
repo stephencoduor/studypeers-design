@@ -51,6 +51,7 @@
 															<?php } ?>
 														</select>
 														<span class="custom_err" id="err_course"></span>
+														<a data-toggle="modal" data-target="#courseModal" style="cursor: pointer;">Add Course</a>
 													</div>
 												</div>
 												<div class="col-md-12">

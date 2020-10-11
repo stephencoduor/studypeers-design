@@ -1,4 +1,4 @@
-<?php  
+<?php  $user_id = $this->session->get_userdata()['user_data']['user_id'];
 	if($this->input->get()) { 
 		if($this->input->get('search')){
 			$course_filter     = $this->input->get('course_search');
@@ -34,117 +34,117 @@
 								Create New
 							</a>
 						</div>
-						<div class="filterWrapper">
 							<form method="get" action="<?php echo base_url(); ?>account/documents">
-								<div class="filterSearch">
-									<input type="hidden" name="course_search" value="<?= $course_filter; ?>">
-									<input type="hidden" name="professor_search" value="<?= $professor_filter; ?>">
-									<input type="hidden" name="university_search" value="<?= $university_filter; ?>">
-									<input type="text" placeholder="Search Documents..." name="keyword_search" value="<?= $keyword_filter; ?>">
-									<button type="submit" class="searchBtn" name="search" value="search">
-										<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-											<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
-											s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
-											c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-										</svg>
-									</button>
-								</div>
-							</form>
-							<div class="buttonGroup">
-								<button type="button" class="filterBtn"> 
-									<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.9 489.9">
-										<path d="M20.8,96.2h23.7c9,31.4,37.8,54.1,73,54.1s64.8-22.7,73.4-54.1h277.2c11.4,0,21.8-9.4,21.8-20.8s-9.4-20.8-20.8-20.8
-											H190.6c-9-31.4-37.8-54.1-73-54.1c-34.4,0-63.8,22.7-73,54.1H20.8C9.4,54.6,0,64,0,75.4C0,86.8,9.4,96.2,20.8,96.2z M117.6,41.1
-											c19.8,0,36.4,15.6,35.4,34.3c0,18.7-15.6,34.3-35.4,34.3S82.2,94.1,82.2,75.4S97.8,41.1,117.6,41.1z"></path>
-										<path d="M20.8,265.8h277.6c9,31.4,37.8,54.1,73,54.1c34.4,0,63.8-22.7,73-54.1h23.8c11.4,0,20.8-9.4,20.8-20.8
-											s-9.4-20.8-20.8-20.8h-23.7c-9-31.4-37.8-54.1-73-54.1c-34.4,0-63.8,22.7-73,54.1H20.8C9.4,224.2,0,233.6,0,245
-											S9.4,265.8,20.8,265.8z M371.4,210.7c19.8,0,35.4,15.6,35.4,34.3s-15.6,34.3-35.4,34.3S336,263.7,336,245S351.6,210.7,371.4,210.7
-											z"></path>
-										<path d="M469.2,392.7H190.3c-9.3-30.8-37.9-53.1-72.7-53.1c-34,0-63.1,22.2-72.7,53.1H20.8C9.4,392.7,0,402.1,0,413.5
-											s9.4,20.8,20.8,20.8h23.4c8.6,31.9,37.7,55.1,73.3,55.1s64.7-23.2,73.3-55.1h277.3c11.4,0,21.8-9.4,21.8-20.8
-											S480.6,392.7,469.2,392.7z M117.6,448.9c-19.8,0-35.4-15.6-35.4-34.3c0-18.7,15.6-34.3,35.4-34.3s35.4,15.6,35.4,34.3
-											C152.9,433.3,137.3,448.9,117.6,448.9z"></path>
-									</svg>
-									Filter
-								</button>
-								<div class="sortwrapper">
-									<button type="button" class="sortMenu dropdown-toggle" data-toggle = "dropdown">
-										<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.389 489.389">
-											<path d="M261.294,326.102c-8.3-7.3-21.8-6.2-29.1,2.1l-77,86.8v-346.9c0-11.4-9.4-20.8-20.8-20.8s-20.8,9.4-20.8,20.8v346.9
-												l-77-86.8c-8.3-8.3-20.8-9.4-29.1-2.1c-8.3,8.3-9.4,20.8-2.1,29.1l113.4,126.9c8.5,10.5,23.5,8.9,30.2,0l114.4-126.9
-												C270.694,347.002,269.694,333.402,261.294,326.102z"></path>
-											<path d="M483.994,134.702l-112.4-126.9c-10-10.1-22.5-10.7-31.2,0l-114.4,126.9c-7.3,8.3-6.2,21.8,2.1,29.1
-												c12.8,10.2,25.7,3.2,29.1-2.1l77-86.8v345.9c0,11.4,9.4,20.8,20.8,20.8s20.8-8.3,20.8-19.8v-346.8l77,86.8
-												c8.3,8.3,20.8,9.4,29.1,2.1C490.194,155.502,491.294,143.002,483.994,134.702z"></path>
-										</svg>
-										Sort
-									</button>
-									<ul class = "dropdown-menu sort">
-						               <li><a href = "<?php echo base_url(); ?>account/documents?sort-by=date">Date</a></li>
-						               <li><a href = "<?php echo base_url(); ?>account/documents?sort-by=name">Name</a></li>
-						            </ul>
-								</div>
-								<button type="button" class="sortMenu viewList">
-										<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489 489">
-											<path d="M209.1,259.1H20.8C9.4,259.1,0,268.5,0,279.9v188.3C0,479.6,9.4,489,20.8,489h188.3c11.4,0,19.8-9.4,20.8-20.8V279.9
-												C229.9,268.4,220.6,259.1,209.1,259.1z M188.3,448.4H40.6V300.7h147.7L188.3,448.4L188.3,448.4z"></path>
-											<path d="M209.1,0H20.8C9.4,0,0,9.4,0,20.8v187.3c0,11.4,9.4,20.8,20.8,20.8h188.3c11.4,0,19.8-8.3,20.8-19.8V20.8
-												C229.9,9.4,220.6,0,209.1,0z M188.3,188.3H40.6V40.6h147.7L188.3,188.3L188.3,188.3z"></path>
-											<path d="M468.2,0H279.9c-11.4,0-20.8,9.4-20.8,20.8v187.3c0,11.4,9.4,20.8,20.8,20.8h188.3c11.4,0,20.8-8.3,20.8-19.8V20.8
-												C489,9.4,479.6,0,468.2,0z M448.4,188.3H300.7V40.6h147.7L448.4,188.3L448.4,188.3z"></path>
-											<path d="M468.2,259.1H279.9c-11.4,0-20.8,9.4-20.8,20.8v188.3c0,11.4,9.4,20.8,20.8,20.8h188.3c11.4,0,20.8-9.4,20.8-20.8V279.9
-												C489,268.4,479.6,259.1,468.2,259.1z M448.4,448.4H300.7V300.7h147.7L448.4,448.4L448.4,448.4z"></path>
-										</svg>
-										Grid/List
-									</button>
-							</div>
-						</div>
-						<div class="filterForm">
-							<div class="row">
-								<form method="get" action="<?php echo base_url(); ?>account/documents">
-									<div class="col-md-12">
-										<div class="form-group select select_label">
-											<label>Institution</label>
-											<input type="hidden" name="keyword" value="<?= $keyword_filter; ?>">
-											<select class="form-control" name="university" id="university">
-											  <option value="<?= $university['university_id']; ?>"><?= $university['SchoolName']; ?></option>
-											</select>
-											<span class="custom_err" id="err_university"></span>
-										</div>
-									</div>
-									<div class="col-md-12 courseSelect">
-										<div class="form-group select select_label">
-											<label>Course</label>
-											<select class="form-control" name="course" id="course" onchange="getProfessor(this.value, '<?php echo base_url('account/getProfessor') ?>')">
-												<option value="">Select Course</option>
-												<?php foreach ($course as $key => $value) { ?>
-													<option value="<?= $value['id'] ?>" <?php if($course_filter == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
-												<?php } ?>
-											</select>
-
-											<span class="custom_err" id="err_course"></span>
-										</div>		
-									</div>
-									<div class="col-md-12 professorSelect">
-										<div class="form-group select select_label">
-											<label>Professor</label>
-											<select class="form-control" name="professor" id="professor">
-												<?php foreach ($professor as $key => $value) { ?>
-													<option value="<?= $value['id'] ?>" <?php if($professor_filter == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
-												<?php } ?>
-											</select>
-											<span class="custom_err" id="err_professor"></span>
-										</div>
-									</div>
-									<div class="col-md-12">
-										<div class="buttonWrapper">
-											<button type="submit" class="btn-all" name="filter_search" value="filter_search">Apply</button>
-											<button type="reset" class="btn-all" onclick="location.href='<?php echo base_url(); ?>account/documents'">Clear</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
+        						<div class="filterWrapper">
+        								<div class="filterSearch">
+        									<input type="hidden" name="course_search" value="<?= $course_filter; ?>">
+        									<input type="hidden" name="professor_search" value="<?= $professor_filter; ?>">
+        									<input type="hidden" name="university_search" value="<?= $university_filter; ?>">
+        									<input type="text" placeholder="Search Documents..." name="keyword_search" value="<?= $keyword_filter; ?>">
+        									<button type="submit" class="searchBtn" name="search" value="search">
+        										<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+        											<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+        											s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+        											c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+        										</svg>
+        									</button>
+        								</div>
+        							<div class="buttonGroup">
+        								<button type="button" class="filterBtn"> 
+        									<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.9 489.9">
+        										<path d="M20.8,96.2h23.7c9,31.4,37.8,54.1,73,54.1s64.8-22.7,73.4-54.1h277.2c11.4,0,21.8-9.4,21.8-20.8s-9.4-20.8-20.8-20.8
+        											H190.6c-9-31.4-37.8-54.1-73-54.1c-34.4,0-63.8,22.7-73,54.1H20.8C9.4,54.6,0,64,0,75.4C0,86.8,9.4,96.2,20.8,96.2z M117.6,41.1
+        											c19.8,0,36.4,15.6,35.4,34.3c0,18.7-15.6,34.3-35.4,34.3S82.2,94.1,82.2,75.4S97.8,41.1,117.6,41.1z"></path>
+        										<path d="M20.8,265.8h277.6c9,31.4,37.8,54.1,73,54.1c34.4,0,63.8-22.7,73-54.1h23.8c11.4,0,20.8-9.4,20.8-20.8
+        											s-9.4-20.8-20.8-20.8h-23.7c-9-31.4-37.8-54.1-73-54.1c-34.4,0-63.8,22.7-73,54.1H20.8C9.4,224.2,0,233.6,0,245
+        											S9.4,265.8,20.8,265.8z M371.4,210.7c19.8,0,35.4,15.6,35.4,34.3s-15.6,34.3-35.4,34.3S336,263.7,336,245S351.6,210.7,371.4,210.7
+        											z"></path>
+        										<path d="M469.2,392.7H190.3c-9.3-30.8-37.9-53.1-72.7-53.1c-34,0-63.1,22.2-72.7,53.1H20.8C9.4,392.7,0,402.1,0,413.5
+        											s9.4,20.8,20.8,20.8h23.4c8.6,31.9,37.7,55.1,73.3,55.1s64.7-23.2,73.3-55.1h277.3c11.4,0,21.8-9.4,21.8-20.8
+        											S480.6,392.7,469.2,392.7z M117.6,448.9c-19.8,0-35.4-15.6-35.4-34.3c0-18.7,15.6-34.3,35.4-34.3s35.4,15.6,35.4,34.3
+        											C152.9,433.3,137.3,448.9,117.6,448.9z"></path>
+        									</svg>
+        									Filter
+        								</button>
+        								<div class="sortwrapper">
+        									<button type="button" class="sortMenu dropdown-toggle" data-toggle = "dropdown">
+        										<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.389 489.389">
+        											<path d="M261.294,326.102c-8.3-7.3-21.8-6.2-29.1,2.1l-77,86.8v-346.9c0-11.4-9.4-20.8-20.8-20.8s-20.8,9.4-20.8,20.8v346.9
+        												l-77-86.8c-8.3-8.3-20.8-9.4-29.1-2.1c-8.3,8.3-9.4,20.8-2.1,29.1l113.4,126.9c8.5,10.5,23.5,8.9,30.2,0l114.4-126.9
+        												C270.694,347.002,269.694,333.402,261.294,326.102z"></path>
+        											<path d="M483.994,134.702l-112.4-126.9c-10-10.1-22.5-10.7-31.2,0l-114.4,126.9c-7.3,8.3-6.2,21.8,2.1,29.1
+        												c12.8,10.2,25.7,3.2,29.1-2.1l77-86.8v345.9c0,11.4,9.4,20.8,20.8,20.8s20.8-8.3,20.8-19.8v-346.8l77,86.8
+        												c8.3,8.3,20.8,9.4,29.1,2.1C490.194,155.502,491.294,143.002,483.994,134.702z"></path>
+        										</svg>
+        										Sort
+        									</button>
+        									<ul class = "dropdown-menu sort">
+        						               <li><a href = "<?php echo base_url(); ?>account/documents?sort-by=date">Date</a></li>
+        						               <li><a href = "<?php echo base_url(); ?>account/documents?sort-by=name">Name</a></li>
+        						            </ul>
+        								</div>
+        								<button type="button" class="sortMenu viewList">
+        										<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489 489">
+        											<path d="M209.1,259.1H20.8C9.4,259.1,0,268.5,0,279.9v188.3C0,479.6,9.4,489,20.8,489h188.3c11.4,0,19.8-9.4,20.8-20.8V279.9
+        												C229.9,268.4,220.6,259.1,209.1,259.1z M188.3,448.4H40.6V300.7h147.7L188.3,448.4L188.3,448.4z"></path>
+        											<path d="M209.1,0H20.8C9.4,0,0,9.4,0,20.8v187.3c0,11.4,9.4,20.8,20.8,20.8h188.3c11.4,0,19.8-8.3,20.8-19.8V20.8
+        												C229.9,9.4,220.6,0,209.1,0z M188.3,188.3H40.6V40.6h147.7L188.3,188.3L188.3,188.3z"></path>
+        											<path d="M468.2,0H279.9c-11.4,0-20.8,9.4-20.8,20.8v187.3c0,11.4,9.4,20.8,20.8,20.8h188.3c11.4,0,20.8-8.3,20.8-19.8V20.8
+        												C489,9.4,479.6,0,468.2,0z M448.4,188.3H300.7V40.6h147.7L448.4,188.3L448.4,188.3z"></path>
+        											<path d="M468.2,259.1H279.9c-11.4,0-20.8,9.4-20.8,20.8v188.3c0,11.4,9.4,20.8,20.8,20.8h188.3c11.4,0,20.8-9.4,20.8-20.8V279.9
+        												C489,268.4,479.6,259.1,468.2,259.1z M448.4,448.4H300.7V300.7h147.7L448.4,448.4L448.4,448.4z"></path>
+        										</svg>
+        										Grid/List
+        									</button>
+        							</div>
+        						</div>
+        						<div class="filterForm">
+        							<div class="row">
+        								<form method="get" action="<?php echo base_url(); ?>account/documents">
+        									<div class="col-md-12">
+        										<div class="form-group select select_label">
+        											<label>Institution</label>
+        											<input type="hidden" name="keyword" value="<?= $keyword_filter; ?>">
+        											<select class="form-control" name="university" id="university">
+        											  <option value="<?= $university['university_id']; ?>"><?= $university['SchoolName']; ?></option>
+        											</select>
+        											<span class="custom_err" id="err_university"></span>
+        										</div>
+        									</div>
+        									<div class="col-md-12 courseSelect">
+        										<div class="form-group select select_label">
+        											<label>Course</label>
+        											<select class="form-control" name="course" id="course" onchange="getProfessor(this.value, '<?php echo base_url('account/getProfessor') ?>')">
+        												<option value="">Select Course</option>
+        												<?php foreach ($course as $key => $value) { ?>
+        													<option value="<?= $value['id'] ?>" <?php if($course_filter == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
+        												<?php } ?>
+        											</select>
+        
+        											<span class="custom_err" id="err_course"></span>
+        										</div>		
+        									</div>
+        									<div class="col-md-12 professorSelect">
+        										<div class="form-group select select_label">
+        											<label>Professor</label>
+        											<select class="form-control" name="professor" id="professor">
+        												<?php foreach ($professor as $key => $value) { ?>
+        													<option value="<?= $value['id'] ?>" <?php if($professor_filter == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
+        												<?php } ?>
+        											</select>
+        											<span class="custom_err" id="err_professor"></span>
+        										</div>
+        									</div>
+        									<div class="col-md-12">
+        										<div class="buttonWrapper">
+        											<button type="submit" class="btn-all" name="filter_search" value="filter_search">Apply</button>
+        											<button type="reset" class="btn-all" onclick="location.href='<?php echo base_url(); ?>account/documents'">Clear</button>
+        										</div>
+        									</div>
+        								</form>
+        							</div>
+        						</div>
+        					</form>
 						<?php if($this->session->flashdata('flash_message')) { 
 					                  echo $this->session->flashdata('flash_message');
 					                }
@@ -175,7 +175,7 @@
 							?>
 								
 								<div class="feedVoteWrap">
-								<div class="feed-card list">
+								<div class="feed-card list" id="doc_id_div_<?= $value['id']; ?>">
 									<div class="left">
 										<figure>
 											<img src="<?php echo $urlI; ?>" alt="Study Set List">
@@ -285,7 +285,7 @@
 																		</g>
 																		<g>
 																		</g>
-																</svg> <?php echo $value['shareCount']; ?>
+																</svg> <span id="share_count_<?= $value['id']; ?>"><?php echo $value['shareCount']; ?></span>
 															</a>
 														</li>
 													</ul>
@@ -300,6 +300,7 @@
 													</figure>
 													<figcaption><?php echo $value['nickname']; ?></figcaption>
 												</div>
+											<?php if($value['created_by'] == $user_id) { ?>
 												<div class="edit">
 													<a href="<?php echo base_url(); ?>account/editDocument/<?php echo base64_encode($value['id']) ?>">
 														<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -360,8 +361,9 @@
 														</svg> Delete
 													</a>
 												</div>	
-												<div class="edit">
-													<a data-toggle="modal" data-target="#peersMessageModal">
+												<div class="edit shareDocument" data-id="<?= $value['id']; ?>">
+
+													<a data-toggle="modal" data-target="#peersModalShare">
 														<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
 															<path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
 																c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
@@ -373,6 +375,15 @@
 														</svg> Share
 													</a>
 												</div>
+											<?php } else { ?>
+												<div class="delete removeSharedDoc" data-id="<?php echo $value['id'];?>">
+													<a data-toggle="modal" data-target="#confirmationModalRemove">										
+														<svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+															<path d="m156.371094 30.90625h85.570312v14.398438h30.902344v-16.414063c.003906-15.929687-12.949219-28.890625-28.871094-28.890625h-89.632812c-15.921875 0-28.875 12.960938-28.875 28.890625v16.414063h30.90625zm0 0"></path><path d="m344.210938 167.75h-290.109376c-7.949218 0-14.207031 6.78125-13.566406 14.707031l24.253906 299.90625c1.351563 16.742188 15.316407 29.636719 32.09375 29.636719h204.542969c16.777344 0 30.742188-12.894531 32.09375-29.640625l24.253907-299.902344c.644531-7.925781-5.613282-14.707031-13.5625-14.707031zm-219.863282 312.261719c-.324218.019531-.648437.03125-.96875.03125-8.101562 0-14.902344-6.308594-15.40625-14.503907l-15.199218-246.207031c-.523438-8.519531 5.957031-15.851562 14.472656-16.375 8.488281-.515625 15.851562 5.949219 16.375 14.472657l15.195312 246.207031c.527344 8.519531-5.953125 15.847656-14.46875 16.375zm90.433594-15.421875c0 8.53125-6.917969 15.449218-15.453125 15.449218s-15.453125-6.917968-15.453125-15.449218v-246.210938c0-8.535156 6.917969-15.453125 15.453125-15.453125 8.53125 0 15.453125 6.917969 15.453125 15.453125zm90.757812-245.300782-14.511718 246.207032c-.480469 8.210937-7.292969 14.542968-15.410156 14.542968-.304688 0-.613282-.007812-.921876-.023437-8.519531-.503906-15.019531-7.816406-14.515624-16.335937l14.507812-246.210938c.5-8.519531 7.789062-15.019531 16.332031-14.515625 8.519531.5 15.019531 7.816406 14.519531 16.335937zm0 0"></path><path d="m397.648438 120.0625-10.148438-30.421875c-2.675781-8.019531-10.183594-13.429687-18.640625-13.429687h-339.410156c-8.453125 0-15.964844 5.410156-18.636719 13.429687l-10.148438 30.421875c-1.957031 5.867188.589844 11.851562 5.34375 14.835938 1.9375 1.214843 4.230469 1.945312 6.75 1.945312h372.796876c2.519531 0 4.816406-.730469 6.75-1.949219 4.753906-2.984375 7.300781-8.96875 5.34375-14.832031zm0 0"></path>
+														</svg> Remove/ Hide
+													</a>
+												</div>	
+											<?php } ?>
 											</div>
 											<div class="action">
 													<!-- <div class="action_button">
@@ -436,149 +447,63 @@
 				</div>
 
 
-				<div class="modal fade" id="peersModal" role="dialog">
+				<div class="modal fade" id="peersModalShare" role="dialog">
+				    <div class="modal-dialog">
+				      <!-- Modal content-->
+				      <div class="modal-content">
+				          <button type="button" class="close" data-dismiss="modal">&times;</button>
+				        <div class="modal-body peers">
+				          <h4>Peers List</h4>
+				          <div class="searchPeer">
+				          	<div class="filterSearch">
+								<input type="text" placeholder="Search Peers" name="">
+								<button type="submit" class="searchBtn">
+									<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+										<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+										s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+										c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+									</svg>
+								</button>
+							</div>
+				          </div>
+				          <div class="peersList">
+				          	<div class="listHeader">
+				          		<h6>Peers</h6>
+				          		<!-- <a class="transAction">Share All</a> -->
+				          	</div>
+				          	<input type="hidden" id="share_document">
+				          	<div class="listUserWrap" id="shareList">
+				          		
+				          	</div>
+				          </div>
+				        </div>
+				      </div>
+				    </div>
+				</div>
+
+<div class="modal fade" id="confirmationModalRemove" role="dialog">
     <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
+        <!-- Modal content-->
+        <div class="modal-content">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="modal-body peers">
-          <h4>Peers List</h4>
-          <div class="searchPeer">
-          	<div class="filterSearch">
-				<input type="text" placeholder="Search Peers" name="">
-				<button type="submit" class="searchBtn">
-					<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-						<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
-						s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
-						c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-					</svg>
-				</button>
-			</div>
-          </div>
-          <div class="peersList">
-          	<div class="listHeader">
-          		<h6>Peers</h6>
-          		<a class="transAction">Share All</a>
-          	</div>
-          	<div class="listUserWrap">
-          		<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-    			<section class="list">
-        			<section class="left">
-        				<figure>
-        					<img src="images/user2.jpg" alt="user">
-        				</figure>
-        				<figcaption>John Phelips</figcaption>
-        			</section>
-        			<section class="action">
-        				<button type="button" class="like">share</button>
-        			</section>
-    			</section>
-          	</div>
-          </div>
+	        <div class="modal-body peers">
+	          	   <h4>Confirmation</h4>
+		           <div class="row">
+		           	 <h6 class="modalText">Are you sure to remove/hide this Document !</h6>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group button">
+								<input type="hidden" name="remove_doc_id" id="remove_doc_id">
+								<button data-dismiss="modal" class="transparentBtn highlight">No</button>
+								<button type="button" class="filterBtn" onclick="removeDoc()">Yes</button>
+							</div>
+						</div>
+					</div>
+	        </div>
         </div>
-      </div>
     </div>
 </div>
-
-
 				
 
 
@@ -599,4 +524,58 @@
           $('#professor').html('');
         }
     }
+
+    function removeDoc() 
+	{
+		var ss_id = $("#remove_doc_id").val();
+		if(ss_id != ''){
+			$.ajax({
+				url : '<?php echo base_url();?>account/removeSharedDoc',
+				type : 'post',
+				data : {"id" : ss_id},
+				success:function(result) {
+					$("#confirmationModalRemove").modal('hide');
+					$("#doc_id_div_"+ss_id).remove();
+					$("#remove_doc_id").val('');
+				}	
+			})
+		}
+	}
+
+    function shareToPeer(peer_id){
+		var share_document = $('#share_document').val();
+
+		$.ajax({
+			url : '<?php echo base_url();?>account/shareToPeerDocument',
+			type : 'post',
+			data : {"id" : share_document, 'peer_id': peer_id},
+			success:function(result) {
+				$('#share_count_'+share_document).html(result);
+				$("#action_"+peer_id).html('<button type="button" class="like">shared</button>');
+				// $("#share_studyset").val('');
+			}	
+		})
+	}
+
+    $(document).on('click','.shareDocument',function(){
+		var share_id = $(this).data('id');
+		$("#share_document").val(share_id);
+		$.ajax({
+			url : '<?php echo base_url();?>studyset/getPeerToShare',
+			type : 'post',
+			data : {"id" : share_id},
+			success:function(result) {
+				
+				$('#shareList').html(result);
+			}
+		})
+
+	});
+
+	$(document).on('click','.removeSharedDoc',function(){
+		var delete_id = $(this).data('id');
+		$("#remove_doc_id").val(delete_id);
+
+	});
+
 </script>
