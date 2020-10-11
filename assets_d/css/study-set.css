@@ -199,7 +199,7 @@
     min-height: 48px !important;
     position: relative;
     border: 1px solid #cac8d3 !important;
-    
+
 }
 .institutions + .select2.select2-container .select2-selection--multiple .select2-selection__choice,
 .course + .select2.select2-container .select2-selection--multiple .select2-selection__choice,
@@ -336,12 +336,12 @@ select.form-control:focus {
     align-items: center;
     justify-content: space-between;
 }
-.timeperiod svg{    
+.timeperiod svg{
     width: 16px;
     height:16px;
     margin-right:5px;
-    fill: #cac8d3; 
-    vertical-align: middle; 
+    fill: #cac8d3;
+    vertical-align: middle;
 }
 .socialAction ul {
     display: flex;
@@ -461,12 +461,12 @@ select.form-control:focus {
 .studySetWrapper.list .feedWrapper.listView .feed_card_inner .header {
     justify-content: space-between;
 }
-.studySetWrapper.list .feedWrapper.listView .feed-card.list .badgeList ul { 
+.studySetWrapper.list .feedWrapper.listView .feed-card.list .badgeList ul {
     flex-wrap: wrap
 }
 .studySetWrapper.list .feedWrapper.listView .feed-card.list .badgeList ul li {
     margin-bottom:10px;
-} 
+}
 
 .feedWrapper.listView .feed_card_inner .header{
     flex-wrap: wrap;
@@ -552,7 +552,7 @@ label{
     vertical-align: middle;
     margin-right: 10px;
 }
-.transparentBtn{    
+.transparentBtn{
     background-color: transparent;
     border-color: #185aeb;
     color: #185aeb;
@@ -1002,8 +1002,8 @@ l,.share:focus
     align-items: center;
     border-left: 2px solid #eae9ee;
 }
-.main_subheaderCenter .sp-set-progress__round-progress, 
-.main_subheaderCenter .sp-set-progress__answered-progress, 
+.main_subheaderCenter .sp-set-progress__round-progress,
+.main_subheaderCenter .sp-set-progress__answered-progress,
 .main_subheaderCenter .sp-set-progress__missed-progress {
     font-size: 28px;
     font-weight: 300;
@@ -1084,14 +1084,14 @@ l,.share:focus
 .flashcards .front{
     transform: rotateX(0deg);
 }
- .flashcards .back{
+.flashcards .back{
     transform: rotateX(-180deg);
 }
 .flipper.is-flipped .front{
-  transform: rotateX(180deg);
+    transform: rotateX(180deg);
 }
 .flipper.is-flipped .back{
-  transform: rotateX(0deg);
+    transform: rotateX(0deg);
 }
 .flashCard_txt{
     vertical-align: middle;
@@ -1235,11 +1235,11 @@ l,.share:focus
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-  /* Create a custom checkbox */;
+    /* Create a custom checkbox */;
 }
 
 .custom-check input,
-  .custom-radio input {
+.custom-radio input {
     position: absolute;
     opacity: 0;
     cursor: pointer;
@@ -1248,7 +1248,7 @@ l,.share:focus
 }
 
 .custom-check .checkmark,
-  .custom-radio .checkmark {
+.custom-radio .checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -1260,23 +1260,23 @@ l,.share:focus
 }
 
 .custom-check input:checked ~ .checkmark,
-  .custom-radio input:checked ~ .checkmark {
+.custom-radio input:checked ~ .checkmark {
     background-color: #fff;
 }
 
 .custom-check input[disabled] ~ .checkmark,
-  .custom-radio input[disabled] ~ .checkmark {
+.custom-radio input[disabled] ~ .checkmark {
     border: solid 1px #eae9ee;
     background-color: #fbfbfc;
 }
 
 .custom-check input:checked ~ .checkmark:after,
-  .custom-radio input:checked ~ .checkmark:after {
+.custom-radio input:checked ~ .checkmark:after {
     display: block;
 }
 
 .custom-check .checkmark:after,
-  .custom-radio .checkmark:after {
+.custom-radio .checkmark:after {
     content: "";
     position: absolute;
     display: none;
@@ -1290,7 +1290,7 @@ l,.share:focus
 }
 
 .custom-check:focus,
-  .custom-radio:focus {
+.custom-radio:focus {
     outline: none;
 }
 
@@ -1469,11 +1469,11 @@ l,.share:focus
 .test-item .match-card-desc {
     position: relative;
 }
- .card-image-base, 
- .learnbox .card-image, 
- .writebox .card-image, 
- .test .card-image, 
- .test .card-image--sm {
+.card-image-base,
+.learnbox .card-image,
+.writebox .card-image,
+.test .card-image,
+.test .card-image--sm {
     position: relative;
     background-color: #f7f7f7;
     margin-left: 60px;
@@ -1487,8 +1487,8 @@ l,.share:focus
     display: flex;
     align-items: center;
     color:#7f7b94;
- }
- .test .card-image--sm.question-card-desc {
+}
+.test .card-image--sm.question-card-desc {
     min-height: 150px;
 }
 .test-item .match-card-desc .match-bet {
@@ -1798,7 +1798,7 @@ l,.share:focus
 .emojiPickerIconWrap {
     width:100%;
 }
-.emojiPicker .shortcode { 
+.emojiPicker .shortcode {
     display:none;
 }
 .emojiPicker section {
@@ -1820,7 +1820,7 @@ l,.share:focus
     position: relative;
 }
 .chatreplyBox input {
-    width: 100% !important; 
+    width: 100% !important;
     border-radius: 20px;
     border: 1px solid #f1f0f0;
     background: #f1f0f0;
@@ -1845,22 +1845,22 @@ l,.share:focus
     left: 50px;
     display: none;
 }
-.replyBox figure{ 
+.replyBox figure{
     width: 24px;
     height: 24px;
     border-radius: 50%;
     overflow: hidden;
     margin-right: 5px;
- }
- .chatMsg.reply figcaption {
+}
+.chatMsg.reply figcaption {
     margin-bottom: 0px;
- }
- .replyuser {
+}
+.replyuser {
     /*padding: 10px;
     border-top: 1px solid #e3e3e3;
     margin: auto;
     text-align: center;*/
- }
+}
 .replyuser input {
     width: 100%;
     border-radius: 20px;
@@ -2006,7 +2006,7 @@ l,.share:focus
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px 0 0 0; 
+    margin: 20px 0 0 0;
 }
 .transparentBtn.highlight {
     color: #ea2e7e;
@@ -2071,7 +2071,7 @@ l,.share:focus
     }
     .mainContent.active .main_subheader {
         left: 0;
-        top: 80px;   
+        top: 80px;
         width: calc(100% - 240px);
     }
     .studySetWrapper .header.listHeader a, .studySetWrapper .feed-card.list h5 a {
@@ -2131,8 +2131,8 @@ l,.share:focus
     .filterSearch {
         width: 100%;
     }
-    .buttonGroup{ 
-        width: 100%; 
+    .buttonGroup{
+        width: 100%;
         justify-content: flex-start;
         margin: 20px 0 0 0px;
     }
@@ -2191,7 +2191,7 @@ l,.share:focus
     }
 }
 @media(max-width:767px){
-    
+
     .filterForm {
         display: none;
     }
@@ -2208,8 +2208,8 @@ l,.share:focus
     .feedWrapper.listView .feed_card_inner .header h5 {
         order: 1;
     }
-    .feedWrapper.listView .feed_card_inner .header .my-rating-4{ 
-        order: 2; 
+    .feedWrapper.listView .feed_card_inner .header .my-rating-4{
+        order: 2;
     }
     #peersModal .modal-dialog {
         position: relative;
@@ -2273,7 +2273,7 @@ l,.share:focus
         padding: 11px 25px;
     }
     #confirmationModal .filterBtn {
-        padding: 11px 25px;   
+        padding: 11px 25px;
     }
     .flashcard_result {
         overflow: auto;
@@ -2530,32 +2530,32 @@ l,.share:focus
 
 
 
-.overlay-bg { 
-    position: absolute; 
+.overlay-bg {
+    position: absolute;
     top: 0;
     left: 0;
     transition: .3s ease;
     background: rgba(0,0,0,0.67);
     width: 100%;
     height: 100%;
-    opacity: 0; 
-} 
-          
-/* Overlay hover */ 
-.imageBoxUpload:hover .overlay-bg { 
-    opacity: 1; 
-} 
-  
-/* Icon styling */ 
-.overlay-bg .icon { 
-    color: white; 
-    font-size: 92px; 
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    text-align: center; 
-} 
+    opacity: 0;
+}
+
+/* Overlay hover */
+.imageBoxUpload:hover .overlay-bg {
+    opacity: 1;
+}
+
+/* Icon styling */
+.overlay-bg .icon {
+    color: white;
+    font-size: 92px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
 
 .text-capitalise{
     text-transform: capitalize;
@@ -2578,7 +2578,7 @@ l,.share:focus
     font-weight: bold;
     line-height: 1.38;
     text-align: left;
-    
+
 }
 
 .text-dark{
@@ -2645,7 +2645,7 @@ l,.share:focus
 }
 
 .onhover {
-  display: none;
+    display: none;
 }
 
 /*.rating-div:hover img[class="initial"] {
@@ -2910,9 +2910,9 @@ l,.share:focus
 .descp_card .left {
 }
 .descp_card .right {
-    padding-left:25px;    
+    padding-left:25px;
     border-left:1px solid #f3f3f3;
-} 
+}
 .descp_card .left,
 .descp_card .right {
     text-align: left;

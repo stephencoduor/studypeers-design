@@ -7,14 +7,14 @@
     border-bottom: 0px;
 }
 .tabularLiist > .nav-tabs li a {
-	padding: 10px 15px !important;
-	font-size: 13px;
+    padding: 10px 15px !important;
+    font-size: 13px;
 }
 .tabularLiist > .nav-tabs li a:after {
-	border-radius: 10px;
+    border-radius: 10px;
 }
 .tabularLiist > .nav-tabs li.active a:after {
-	background-color: #546de5;
+    background-color: #546de5;
 }
 .tabularLiist > .nav-tabs li a {
     color: #2a234f;
@@ -27,14 +27,14 @@
     width: 100%;
 }
 .box-card {
-	width: 100%;
+    width: 100%;
     margin-bottom: 20px;
     position: relative;
 }
 .createBox {
     background: #fff;
     border-radius: 8px;
-    padding: 20px 17px 0px 17px; 
+    padding: 20px 17px 0px 17px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 .box-card.message .createBox {
@@ -70,10 +70,10 @@
     border-radius: 12px;
 }
 .storyRoom .userStoryList.createStory {
-	border: 1px solid rgb(239 239 239 / 40%);
+    border: 1px solid rgb(239 239 239 / 40%);
 }
 .user-wrapper {
-	background-image:linear-gradient(to bottom, rgb(159 159 159 / 18%), rgb(0 0 0 / 31%));
+    background-image:linear-gradient(to bottom, rgb(159 159 159 / 18%), rgb(0 0 0 / 31%));
     display: flex;
     align-items: center;
     justify-content: center;
@@ -81,27 +81,27 @@
     border-radius: 12px;
 }
 .storyRoom .userStoryList.createStory figure {
-	margin:0;
-	width: 30px;
-	height: 30px;
+    margin:0;
+    width: 30px;
+    height: 30px;
 }
 .storyRoom .userStoryList.createStory figure img {
-	width:100%;
-	height: 100%;
+    width:100%;
+    height: 100%;
 }
 .userstory-img {
-	width: 36px;
-	height:36px;
+    width: 36px;
+    height:36px;
     border-radius: 50%;
-	overflow: hidden;
-	position: absolute;
+    overflow: hidden;
+    position: absolute;
     bottom: -15px;
-	left: 30%;
-	border: 2px solid #fff;	
+    left: 30%;
+    border: 2px solid #fff;
 }
 .userstory-img img {
-	width:100%;
-	height:100%;
+    width:100%;
+    height:100%;
 }
 .userStoryList h3 {
     font-size: 14px;
@@ -111,12 +111,12 @@
 }
 .userStoryList.storySnaps figure,
 .userStoryList.storySnaps figure  img {
-	width: 100%;
-	height:100%;
-	border-radius: 12px;
+    width: 100%;
+    height:100%;
+    border-radius: 12px;
 }
 .storyRoom .userStoryList.storySnaps .userstory-img {
-	border: 2px solid #546de5;	
+    border: 2px solid #546de5;
 }
 .slick-track {
     padding-bottom: 50px;
@@ -129,7 +129,7 @@
     display: flex !important;
     align-items: center;
     justify-content: center;
-    z-index: 9;    
+    z-index: 9;
     top: -30px;
     border: 0;
 }
@@ -138,32 +138,32 @@
     right: 30px;
 }
 .slick-next {
-	right:0;
+    right:0;
 }
 .slick-prev:before, .slick-next:before {
-	content:'';
-	width: 100% !important;
+    content:'';
+    width: 100% !important;
     height: 100% !important;
     opacity: 1;
 }
 .slick-prev:before{
-	background: url(../images/next.svg) no-repeat center center #fff;
-	transform: rotate(-180deg);
+    background: url(../images/next.svg) no-repeat center center #fff;
+    transform: rotate(-180deg);
 }
 .slick-next:before{
     background: url(../images/next.svg) no-repeat center center #fff;
 }
 .slick-next.slick-disabled:before {
-	background: url(../images/prev.svg) no-repeat center center #fff;
-	transform: rotate(180deg);
-	cursor: not-allowed;
-	opacity: .50;
+    background: url(../images/prev.svg) no-repeat center center #fff;
+    transform: rotate(180deg);
+    cursor: not-allowed;
+    opacity: .50;
 }
 .slick-prev.slick-disabled:before{
-	background: url(../images/prev.svg) no-repeat center center #fff;
-	transform: rotate(0deg);
-	cursor: not-allowed;
-	opacity: .50;
+    background: url(../images/prev.svg) no-repeat center center #fff;
+    transform: rotate(0deg);
+    cursor: not-allowed;
+    opacity: .50;
 }
 .postWrapper {
     display: flex;
@@ -186,15 +186,15 @@
     margin-top:15px;
 }
 .writePostWrapper figure {
-	margin:0;
-	width:60px;
-	height:60px;
-	border-radius: 50%;
-	overflow: hidden;
+    margin:0;
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 .writePostWrapper figure img {
-	width:100%;
-	height:100%;
+    width:100%;
+    height:100%;
 }
 .postMessageWrapper {
     height: 56px;
@@ -228,11 +228,11 @@
     justify-content: flex-start;
 }
 .imageSection {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	margin-right: 40px;
-	cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 40px;
+    cursor: pointer;
     position: relative;
 }
 .imageSection input {
@@ -244,28 +244,28 @@
     outline:none;
 }
 .imageSection img {
-	width: 25px;
+    width: 25px;
     height: 21px;
     margin-right:15px;
 }
 .imageSection span {
-	font-size: 17px;
+    font-size: 17px;
     font-weight: 400;
 }
 .pollSection {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	margin-right: 40px;
-	cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 40px;
+    cursor: pointer;
 }
 .pollSection img {
-	width: 25px;
+    width: 25px;
     height: 21px;
     margin-right:15px;
 }
 .pollSection span {
-	font-size: 17px;
+    font-size: 17px;
     font-weight: 400;
 }
 .suggestionWrapper {
@@ -290,9 +290,9 @@
     text-align: center;
 }
 .post-notification img {
-	width: 80%;
-	max-width: 100%;
-	cursor: pointer;
+    width: 80%;
+    max-width: 100%;
+    cursor: pointer;
 }
 .peerSuggestionList {
     width: 100%;
@@ -337,7 +337,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-align: center;
-} 
+}
 .add_peer {
     width: 100%;
     margin: 0;
@@ -366,7 +366,7 @@
 }
 .feeduserwrap {}
 .user-details {
-	display: flex;
+    display: flex;
     align-items: flex-start;
     justify-content: space-between;
 }
@@ -436,16 +436,16 @@
     color:#fe9774;
 }
 .badgeList ul li.badge.badge1 a {
-    color:#185aeb;   
+    color:#185aeb;
 }
 .badgeList ul li.badge.badge2 a {
-    color:#ea2e7e;   
+    color:#ea2e7e;
 }
 .badgeList ul li.badge.badge3 a {
-    color:#1ae1bd;   
+    color:#1ae1bd;
 }
 .badgeList ul li.badge.badge4 a {
-    color:#fe9774;   
+    color:#fe9774;
 }
 .timeline {
     color: #bebebe;
@@ -484,7 +484,7 @@
     margin-right:10px;
 }
 .socialStatus .leftStatus a span {
-     color: #bebebe;
+    color: #bebebe;
     font-size: 16px;
     margin-left:10px;
     font-weight: 400;
@@ -630,7 +630,7 @@
     border-bottom: 8px solid #fff;
 }
 .box-card  .imgWrapper.type3 figure:nth-child(2) {
-    border-right: 8px solid #fff;   
+    border-right: 8px solid #fff;
 }
 .box-card .imgWrapper.type4 figure {
     width: 50%;
@@ -642,7 +642,7 @@
     border-bottom: 8px solid #fff;
 }
 .box-card  .imgWrapper.type4 figure:nth-child(2) {
-    border-right: 8px solid #fff;   
+    border-right: 8px solid #fff;
 }
 .count {
     position: absolute;
@@ -706,7 +706,7 @@
     align-items: flex-start;
     justify-content: space-between;
 }
-.event-description .left {    
+.event-description .left {
     font-size: 16px;
     font-weight: 400;
 }
@@ -714,7 +714,7 @@
     margin-right: 10px;
     width:16px;
 }
-.event-description .right { 
+.event-description .right {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -1098,21 +1098,21 @@
 }
 /* Custom Radio Button */
 .dashRadioWrap {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .dashRadioWrap input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
 }
 .checkmark {
     position: absolute;
@@ -1143,7 +1143,7 @@
     -o-transition: all 0.3s ease-in;
 }
 .dashRadioWrap input:checked ~ .checkmark:after {
-  display: block;
+    display: block;
 }
 .dashRadioWrap .checkmark:after {
     transform: rotate(45deg);
@@ -1326,7 +1326,7 @@
     height: 25px;
     cursor: pointer;
     outline:none;
-} 
+}
 .postMessage textarea {
     width: 100%;
     border: 0;
@@ -1523,63 +1523,63 @@ shareOptionList celebrate*/
 /*Check Slider*/
 
 .allowComment .switch {
-  position: relative;
-  display: inline-block;
-  width: 32px;
-  height: 17px;
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 17px;
 }
 
-.allowComment .switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
+.allowComment .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .allowComment .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 .allowComment .slider:before {
-  position: absolute;
-  content: "";
-  height: 12px;
-  width: 12px;
-  right: 17px;
-  bottom: 3px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    right: 17px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 .allowComment input:checked + .slider {
-  background-color: #546de5;
+    background-color: #546de5;
 }
 
 .allowComment input:focus + .slider {
-  box-shadow: 0 0 1px #546de5;
+    box-shadow: 0 0 1px #546de5;
 }
 
 .allowComment input:checked + .slider:before {
-  -webkit-transform: translateX(14px);
-  -ms-transform: translateX(14px);
-  transform: translateX(14px);
+    -webkit-transform: translateX(14px);
+    -ms-transform: translateX(14px);
+    transform: translateX(14px);
 }
 
 /* Rounded sliders */
 .allowComment .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .allowComment .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 .settingWrapper {
     display: flex;
@@ -1714,7 +1714,7 @@ shareOptionList celebrate*/
     width:170px;
     margin-right:15px;
 }
-.polltimeform .filtercalendar .input-group.date input, 
+.polltimeform .filtercalendar .input-group.date input,
 .polltimeform .filtercalendar .input-group--overlap input {
     min-height: 55px;
     border-radius: 30px;

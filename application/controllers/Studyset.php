@@ -1,39 +1,39 @@
-<?php 
+<?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Studyset extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see https://codeigniter.com/user_guide/general/urls.html
-	 */
+    /**
+     * Index Page for this controller.
+     *
+     * Maps to the following URL
+     * 		http://example.com/index.php/welcome
+     *	- or -
+     * 		http://example.com/index.php/welcome/index
+     *	- or -
+     * Since this controller is set as the default controller in
+     * config/routes.php, it's displayed at http://example.com/
+     *
+     * So any other public methods not prefixed with an underscore will
+     * map to /index.php/welcome/<method_name>
+     * @see https://codeigniter.com/user_guide/general/urls.html
+     */
 
 
-	public function __construct() {
-        
+    public function __construct() {
+
         parent::__construct();
         $this->load->model('studyset_model');
         $this->load->library('upload');
-        is_valid_logged_in(); 
+        is_valid_logged_in();
         $this->data = array("index_menu" => 'study-sets', "title" => 'Study-sets | Studypeers');
-        
+
     }
-	public function index()
-	{ 
+    public function index()
+    {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $data['userdata'] = $this->studyset_model->getUserData($user_id);
-        
+
         $data['courses'] = $this->studyset_model->getCourseData($user_id);
         $data['studysets'] = $this->studyset_model->getStudySets($user_id);
         $data['total_study_sets'] = $this->studyset_model->getTotalStudySets($user_id);
@@ -42,7 +42,7 @@ class Studyset extends CI_Controller {
         $this->load->view('studyset/study-sets',$data);
         $this->load->view('user/include/right-sidebar');
         $this->load->view('user/include/footer');
-	}
+    }
 
     public function manage($study_set_id = 0)
     {
@@ -73,58 +73,58 @@ class Studyset extends CI_Controller {
         $data['studyset'] = $this->studyset_model->getStudySetDetails($study_set_id,$user_id);
         $data['term_data'] = $this->studyset_model->getStudySetTermData($study_set_id);
 
-                                    $this->db->order_by('learn_round_master.id', 'desc');
-                                    $this->db->limit(5);
+        $this->db->order_by('learn_round_master.id', 'desc');
+        $this->db->limit(5);
         $data['user_attempt_learn'] = $this->db->get_where('learn_round_master', array('userId' => $user_id, ' study_set_id' => $study_set_id))->result_array();
 
-                                    $this->db->order_by('match_round_master.id', 'desc');
-                                    $this->db->limit(5);
+        $this->db->order_by('match_round_master.id', 'desc');
+        $this->db->limit(5);
         $data['user_attempt_match'] = $this->db->get_where('match_round_master', array('userId' => $user_id, ' study_set_id' => $study_set_id))->result_array();
 
-                                    $this->db->order_by('write_round_master.id', 'desc');
-                                    $this->db->limit(5);
+        $this->db->order_by('write_round_master.id', 'desc');
+        $this->db->limit(5);
         $data['user_attempt_write'] = $this->db->get_where('write_round_master', array('userId' => $user_id, ' study_set_id' => $study_set_id))->result_array();
 
-                                    $this->db->order_by('flashcard_round_master.id', 'desc');
-                                    $this->db->limit(5);
+        $this->db->order_by('flashcard_round_master.id', 'desc');
+        $this->db->limit(5);
         $data['user_attempt_flashcard'] = $this->db->get_where('flashcard_round_master', array('userId' => $user_id, ' study_set_id' => $study_set_id))->result_array();
 
 
-                                    $this->db->select('learn_round_master.*, user_info.nickname');
-                                    $this->db->join('user_info','user_info.userID=learn_round_master.userId');
-                                    $this->db->order_by('learn_round_master.correct', 'desc');
-                                    $this->db->limit(5);
+        $this->db->select('learn_round_master.*, user_info.nickname');
+        $this->db->join('user_info','user_info.userID=learn_round_master.userId');
+        $this->db->order_by('learn_round_master.correct', 'desc');
+        $this->db->limit(5);
         $data['top_rank_learn'] = $this->db->get_where('learn_round_master', array('learn_round_master.study_set_id' => $study_set_id))->result_array();
 
-                                    $this->db->select('match_round_master.*, user_info.nickname');
-                                    $this->db->join('user_info','user_info.userID=match_round_master.userId');
-                                    $this->db->order_by('match_round_master.correct', 'desc');
-                                    $this->db->limit(5);
+        $this->db->select('match_round_master.*, user_info.nickname');
+        $this->db->join('user_info','user_info.userID=match_round_master.userId');
+        $this->db->order_by('match_round_master.correct', 'desc');
+        $this->db->limit(5);
         $data['top_rank_match'] = $this->db->get_where('match_round_master', array('match_round_master.study_set_id' => $study_set_id))->result_array();
 
-                                    $this->db->select('write_round_master.*, user_info.nickname');
-                                    $this->db->join('user_info','user_info.userID=write_round_master.userId');
-                                    $this->db->order_by('write_round_master.correct', 'desc');
-                                    $this->db->limit(5);
+        $this->db->select('write_round_master.*, user_info.nickname');
+        $this->db->join('user_info','user_info.userID=write_round_master.userId');
+        $this->db->order_by('write_round_master.correct', 'desc');
+        $this->db->limit(5);
         $data['top_rank_write'] = $this->db->get_where('write_round_master', array('write_round_master.study_set_id' => $study_set_id))->result_array();
 
-                                    $this->db->select('flashcard_round_master.*, user_info.nickname');
-                                    $this->db->join('user_info','user_info.userID=flashcard_round_master.userId');
-                                    $this->db->order_by('flashcard_round_master.correct', 'desc');
-                                    $this->db->limit(5);
+        $this->db->select('flashcard_round_master.*, user_info.nickname');
+        $this->db->join('user_info','user_info.userID=flashcard_round_master.userId');
+        $this->db->order_by('flashcard_round_master.correct', 'desc');
+        $this->db->limit(5);
         $data['top_rank_flashcard'] = $this->db->get_where('flashcard_round_master', array('flashcard_round_master.study_set_id' => $study_set_id))->result_array();
 
-                                    $this->db->select('studyset_rating_master.*, user_info.nickname');
-                                    $this->db->join('user_info','user_info.userID=studyset_rating_master.user_id');
-                                    $this->db->order_by('studyset_rating_master.created_at', 'desc');
-                                    $this->db->limit(5);
+        $this->db->select('studyset_rating_master.*, user_info.nickname');
+        $this->db->join('user_info','user_info.userID=studyset_rating_master.user_id');
+        $this->db->order_by('studyset_rating_master.created_at', 'desc');
+        $this->db->limit(5);
         $data['rating_list'] = $this->db->get_where('studyset_rating_master', array('studyset_rating_master.study_set_id' => $study_set_id, 'studyset_rating_master.user_id !=' => $user_id))->result_array();
 
 
         $data['user_rating'] = $this->db->get_where('studyset_rating_master', array('studyset_rating_master.study_set_id' => $study_set_id, 'user_id' => $user_id))->row_array();
 
         $data['comment'] = $this->db->get_where('comment_master', array('reference' => 'studyset', 'reference_id' => $study_set_id, 'comment_parent_id' => 0))->result_array();
-        
+
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/study-set-detail',$data);
         $this->load->view('user/include/right-sidebar');
@@ -146,13 +146,13 @@ class Studyset extends CI_Controller {
             } else {
 
                 $insertArr = array( 'comment_id' => $comment_id,
-                                
-                                'user_id' => $user_id,
-                                
-                                'status' => '1',
-                                'created_at' => date('Y-m-d H:i:s')
 
-                            );
+                    'user_id' => $user_id,
+
+                    'status' => '1',
+                    'created_at' => date('Y-m-d H:i:s')
+
+                );
 
                 $this->db->insert('comment_like_master', $insertArr);
             }
@@ -168,13 +168,13 @@ class Studyset extends CI_Controller {
             $user_id = $this->session->get_userdata()['user_data']['user_id'];
 
             $insertArr = array( 'reference' => 'studyset',
-                                'reference_id' => $studyset_id,
-                                'user_id' => $user_id,
-                                'comment' => $comment,
-                                'status' => '1',
-                                'created_at' => date('Y-m-d H:i:s')
+                'reference_id' => $studyset_id,
+                'user_id' => $user_id,
+                'comment' => $comment,
+                'status' => '1',
+                'created_at' => date('Y-m-d H:i:s')
 
-                            );
+            );
 
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
@@ -187,7 +187,7 @@ class Studyset extends CI_Controller {
                         </figure>
                         <figcaption>
                             <span class="name"> '.$user_info['nickname'].'</span>
-                            '.$comment.'                                                 
+                            '.$comment.'
                             <div class="actionmsgMenu">
                                 <ul>
                                     <li class="likeuser" onclick="likeComment('.$comment_id.')">Like</li>
@@ -202,7 +202,7 @@ class Studyset extends CI_Controller {
                             </div>
                         </figcaption>
                         <div class="reply" id="reply_'.$comment_id.'">
-                                                
+
                         </div>
                         <div class="replyBox" id="replyBox_'.$comment_id.'">
                             <figure>
@@ -211,7 +211,7 @@ class Studyset extends CI_Controller {
                             <div class="replyuser">
                                 <input type="text" id="input_reply_'.$comment_id.'" placeholder="Write a Reply..." onkeypress="postReply(event,'.$comment_id.', this.value)">
                             </div>
-                        </div>                                                  
+                        </div>
                     </div>';
             echo $html;die;
         }
@@ -225,14 +225,14 @@ class Studyset extends CI_Controller {
             $user_id = $this->session->get_userdata()['user_data']['user_id'];
 
             $insertArr = array( 'reference' => 'studyset',
-                                'reference_id' => $studyset_id,
-                                'comment_parent_id' => $comment_id,
-                                'user_id' => $user_id,
-                                'comment' => $comment,
-                                'status' => '1',
-                                'created_at' => date('Y-m-d H:i:s')
+                'reference_id' => $studyset_id,
+                'comment_parent_id' => $comment_id,
+                'user_id' => $user_id,
+                'comment' => $comment,
+                'status' => '1',
+                'created_at' => date('Y-m-d H:i:s')
 
-                            );
+            );
 
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
@@ -244,8 +244,8 @@ class Studyset extends CI_Controller {
                     </figure>
                     <figcaption>
                         <span class="name">'.$user_info['nickname'].'</span>
-                        '.$comment.'                                            
-                        
+                        '.$comment.'
+
                     </figcaption></div>';
             echo $html;die;
 
@@ -253,22 +253,22 @@ class Studyset extends CI_Controller {
     }
 
     public function postImgReply(){
-        
+
         if($this->input->post()){
-            
+
             $studyset_id = $this->input->post('studyset_id');
             $user_id = $this->session->get_userdata()['user_data']['user_id'];
             $c_image = $this->uploadCommentImg('file', $_FILES['file']['name']);
 
             $insertArr = array( 'reference' => 'studyset',
-                                'reference_id' => $studyset_id,
-                                'user_id' => $user_id,
-                                'comment' => $c_image,
-                                'type'   => 1,
-                                'status' => '1',
-                                'created_at' => date('Y-m-d H:i:s')
+                'reference_id' => $studyset_id,
+                'user_id' => $user_id,
+                'comment' => $c_image,
+                'type'   => 1,
+                'status' => '1',
+                'created_at' => date('Y-m-d H:i:s')
 
-                            );
+            );
 
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
@@ -281,7 +281,7 @@ class Studyset extends CI_Controller {
                         </figure>
                         <figcaption>
                             <span class="name"> '.$user_info['nickname'].'</span>
-                            <img src="'.base_url().'uploads/comments/'.$c_image.'" alt="comment" style="height: 70px;">                                                 
+                            <img src="'.base_url().'uploads/comments/'.$c_image.'" alt="comment" style="height: 70px;">
                             <div class="actionmsgMenu">
                                 <ul>
                                     <li class="likeuser" onclick="likeComment('.$comment_id.')">Like</li>
@@ -296,7 +296,7 @@ class Studyset extends CI_Controller {
                             </div>
                         </figcaption>
                         <div class="reply" id="reply_'.$comment_id.'">
-                                                
+
                         </div>
                         <div class="replyBox" id="replyBox_'.$comment_id.'">
                             <figure>
@@ -305,37 +305,37 @@ class Studyset extends CI_Controller {
                             <div class="replyuser">
                                 <input type="text" id="input_reply_'.$comment_id.'" placeholder="Write a Reply..." onkeypress="postReply(event,'.$comment_id.', this.value)">
                             </div>
-                        </div>                                                  
+                        </div>
                     </div>';
             echo $html;die;
         }
-    
+
     }
 
     public function uploadCommentImg($f_n, $name) {
-            $fileTypes = array('jpg', 'jpeg', 'gif', 'png', 'zip', 'xlsx', 'cad', 'pdf', 'doc', 'docx', 'ppt', 'pptx', 'pps', 'ppsx', 'odt', 'xls', 'xlsx', '.mp3', 'm4a', 'ogg', 'wav', 'mp4', 'm4v', 'mov', 'wmv' ); // Allowed file extensions
+        $fileTypes = array('jpg', 'jpeg', 'gif', 'png', 'zip', 'xlsx', 'cad', 'pdf', 'doc', 'docx', 'ppt', 'pptx', 'pps', 'ppsx', 'odt', 'xls', 'xlsx', '.mp3', 'm4a', 'ogg', 'wav', 'mp4', 'm4v', 'mov', 'wmv' ); // Allowed file extensions
 
-            $imagename  = time();
-            $config['upload_path']      = 'uploads/comments/';
-            $config['allowed_types']    = $fileTypes;
-            $config['max_size']         = '0';
-            $logo_file_name             = '';
-            $config['file_name']        =   $imagename;
-            $this->upload->initialize($config);
+        $imagename  = time();
+        $config['upload_path']      = 'uploads/comments/';
+        $config['allowed_types']    = $fileTypes;
+        $config['max_size']         = '0';
+        $logo_file_name             = '';
+        $config['file_name']        =   $imagename;
+        $this->upload->initialize($config);
 
-            // $this->load->library('upload', $config);
+        // $this->load->library('upload', $config);
 
-            if ($this->upload->do_upload($f_n)) {
-                $logo_data = $this->upload->data();             
-                $logo_file_name = $logo_data['file_name'];
-            }
+        if ($this->upload->do_upload($f_n)) {
+            $logo_data = $this->upload->data();
+            $logo_file_name = $logo_data['file_name'];
+        }
 
-            if (!empty($logo_file_name)) {
-                $img = $logo_file_name;
-            } else {
-                $img = 'default.png';
-            }
-            return $img;
+        if (!empty($logo_file_name)) {
+            $img = $logo_file_name;
+        } else {
+            $img = 'default.png';
+        }
+        return $img;
     }
 
     public function deleteStudySet()
@@ -345,7 +345,7 @@ class Studyset extends CI_Controller {
     }
 
     public function removeStudySet()
-    {   
+    {
         $study_set_id = $this->input->post('study_set_id');
         return $this->studyset_model->removeStudySet($study_set_id);
     }
@@ -356,13 +356,13 @@ class Studyset extends CI_Controller {
         $peer_id = $this->input->post('peer_id');
 
         $insertArr = array('reference' => 'studyset',
-                        'reference_id' => $study_set_id,
-                        'user_id' => $user_id,
-                        'peer_id' => $peer_id,
-                        'status' => '1',
-                        'created_at' => date("Y-m-d H:i:s")
-                        
-                    );
+            'reference_id' => $study_set_id,
+            'user_id' => $user_id,
+            'peer_id' => $peer_id,
+            'status' => '1',
+            'created_at' => date("Y-m-d H:i:s")
+
+        );
         $this->db->insert('share_master', $insertArr);
 
         $action_id = $this->db->insert_id();
@@ -371,22 +371,22 @@ class Studyset extends CI_Controller {
         $notification = "<b>".$userdata['username']."</b> has shared a studyset with you.";
 
         $insertArr = array(
-                                'user_id'       => $peer_id,
-                                'notification'  => $notification,
-                                'action_type'   => 3, // for share
-                                'action_id'     => $action_id,
-                                'status'        => 1,
-                                'created_at'    => date('Y-m-d H:i:s')
+            'user_id'       => $peer_id,
+            'notification'  => $notification,
+            'action_type'   => 3, // for share
+            'action_id'     => $action_id,
+            'status'        => 1,
+            'created_at'    => date('Y-m-d H:i:s')
 
-                            );
+        );
 
         $this->db->insert('notification_master', $insertArr);
 
         $this->studyset_model->updateShareCount($study_set_id);
 
-        $det = $this->db->get_where($this->db->dbprefix('study_sets'), array('study_set_id'=>$study_set_id))->row_array(); 
+        $det = $this->db->get_where($this->db->dbprefix('study_sets'), array('study_set_id'=>$study_set_id))->row_array();
 
-        $get_active_token = $this->db->get_where($this->db->dbprefix('user_token'), array('user_id'=>$peer_id, 'status' => 1))->result_array(); 
+        $get_active_token = $this->db->get_where($this->db->dbprefix('user_token'), array('user_id'=>$peer_id, 'status' => 1))->result_array();
 
         foreach ($get_active_token  as $key => $value) {
             $this->sendTestNotification($value['token'], 'Studyset Shared', 'A studyset has been shared with you', $action_id);
@@ -405,11 +405,11 @@ class Studyset extends CI_Controller {
 
         foreach ($peer_list as $key => $value) {
             if($value['user_id'] == $user_id){
-                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array(); 
+                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array();
             } else {
-                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
+                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array();
             }
-            $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'studyset', 'reference_id' => $study_set_id, 'status' => 1))->row_array(); 
+            $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'studyset', 'reference_id' => $study_set_id, 'status' => 1))->row_array();
             if(empty($chk_if_shared)){
                 $html.= '<section class="list"><section class="left">
                             <figure>
@@ -429,7 +429,7 @@ class Studyset extends CI_Controller {
     public function sendTestNotification($token, $title, $body, $info){
         $message['title'] = $title;
         $message['body'] = $body;
-        sendFCM($message, $token, $info ); 
+        sendFCM($message, $token, $info );
     }
 
     public function reportStudySet()
@@ -437,15 +437,15 @@ class Studyset extends CI_Controller {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $study_set_id = $this->input->post('study_set_id');
         $report_data = array(
-                                "study_set_id" => $study_set_id,
-                                "user_id" => $user_id,
-                                "report_reason" => $this->input->post('report_reason'),
-                                "report_description" => $this->input->post('report_description'),
-                                "created_at" => date("Y-m-d H:i:s"),
-                                "updated_at" => date("Y-m-d H:i:s"),
-                                "status" => 1
-                            );
-        
+            "study_set_id" => $study_set_id,
+            "user_id" => $user_id,
+            "report_reason" => $this->input->post('report_reason'),
+            "report_description" => $this->input->post('report_description'),
+            "created_at" => date("Y-m-d H:i:s"),
+            "updated_at" => date("Y-m-d H:i:s"),
+            "status" => 1
+        );
+
         echo $this->studyset_model->reportStudySet($study_set_id,$user_id,$report_data);
     }
 
@@ -466,53 +466,53 @@ class Studyset extends CI_Controller {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
 
         $study_set_arr = array  (
-                                    "study_set_id" => $study_set_id,
-                                    "user_id" => $user_id,
-                                    "name" => $name,
-                                    "course" => $course,
-                                    "institution" => $institution,
-                                    "professor" => $professor,
-                                    "subject" => $subject,
-                                    "unit" => $unit,
-                                    "chapter" => $chapter,
-                                    "privacy" => $privacy
-                                );
-        
+            "study_set_id" => $study_set_id,
+            "user_id" => $user_id,
+            "name" => $name,
+            "course" => $course,
+            "institution" => $institution,
+            "professor" => $professor,
+            "subject" => $subject,
+            "unit" => $unit,
+            "chapter" => $chapter,
+            "privacy" => $privacy
+        );
+
         if (isset($_FILES['featured_image']) && !empty($_FILES['featured_image']['name'])) {
             $study_set_arr['image'] = $this->uploadImg('featured_image','studyset');
         }
-        
+
         //print_r($study_set_arr);
         $study_set_id = $this->studyset_model->manageStudySet($study_set_arr);
 
         $files = array();
-        
+
 
         $term_array = array();
         $study_set_term_id = $this->input->post('study_set_term_id');
         $term_name = $this->input->post('term_name');
         $term_description = $this->input->post('term_description');
         $config = array(
-                            'upload_path'   => 'uploads/studyset/',
-                            'allowed_types' => 'jpg|png|jpeg|gif',
-                            'overwrite'     => 1,                       
-                        );
+            'upload_path'   => 'uploads/studyset/',
+            'allowed_types' => 'jpg|png|jpeg|gif',
+            'overwrite'     => 1,
+        );
 
-                        $this->load->library('upload', $config);
-                        $images = array();
-                        
+        $this->load->library('upload', $config);
+        $images = array();
+
         foreach ($term_name as $key => $value) {
             $term = array(
-                            "study_set_term_id" =>  $study_set_term_id[$key],
-                            "study_set_id" => $study_set_id,
-                            "term_name" => $value,
-                            "term_description" => $term_description[$key]
-                        );
+                "study_set_term_id" =>  $study_set_term_id[$key],
+                "study_set_id" => $study_set_id,
+                "term_name" => $value,
+                "term_description" => $term_description[$key]
+            );
             if(!empty($_FILES['term_image']['name'][$key]))
-            {   
-                
+            {
 
-                $image = $_FILES['term_image']['name'][$key]; 
+
+                $image = $_FILES['term_image']['name'][$key];
                 $_FILES['images[]']['name']     = $_FILES['term_image']['name'][$key];
                 $_FILES['images[]']['type']     = $_FILES['term_image']['type'][$key];
                 $_FILES['images[]']['tmp_name'] = $_FILES['term_image']['tmp_name'][$key];
@@ -528,17 +528,17 @@ class Studyset extends CI_Controller {
                 $this->upload->initialize($config);
 
                 if ($this->upload->do_upload('images[]')) {
-                    $image_data = $this->upload->data();             
+                    $image_data = $this->upload->data();
                     $term['term_image'] = $image_data['file_name'];
-                }        
-                
+                }
+
             }
-            
+
 
             array_push($term_array,$term);
         }
 
-        
+
         $result = $this->studyset_model->manageStudySetTerms($term_array);
 
         redirect("/studyset");
@@ -550,7 +550,7 @@ class Studyset extends CI_Controller {
         echo $this->studyset_model->getProfessors($course_id);
     }
 
-    public function uploadImg($filename,$foldername) 
+    public function uploadImg($filename,$foldername)
     {
         $imagename  = time();
         $config['upload_path']      = 'uploads/'.$foldername.'/';
@@ -566,7 +566,7 @@ class Studyset extends CI_Controller {
         // $this->load->library('upload', $config);
 
         if ($this->upload->do_upload($filename)) {
-            $image_data = $this->upload->data();             
+            $image_data = $this->upload->data();
             $image_name = $image_data['file_name'];
         }
 
@@ -592,7 +592,7 @@ class Studyset extends CI_Controller {
 
 
         $images = array();
-        
+
         foreach ($files['name'] as $key => $image) {
             $_FILES['images[]']['name']= $files['name'][$key];
             $_FILES['images[]']['type']= $files['type'][$key];
@@ -607,7 +607,7 @@ class Studyset extends CI_Controller {
             $this->upload->initialize($config);
 
             if ($this->upload->do_upload('images[]')) {
-                $image_data = $this->upload->data();             
+                $image_data = $this->upload->data();
                 $images[] = $image_data['file_name'];
             } else {
                 $images[] = '';
@@ -626,8 +626,8 @@ class Studyset extends CI_Controller {
     public function flashcards($study_set_id)
     {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $data['studyset'] = $this->studyset_model->getStudySetDetails($study_set_id,$user_id); 
-        $data['term_data'] = $this->studyset_model->getStudySetTermData($study_set_id); 
+        $data['studyset'] = $this->studyset_model->getStudySetDetails($study_set_id,$user_id);
+        $data['term_data'] = $this->studyset_model->getStudySetTermData($study_set_id);
         $data['flashcard_round'] = $this->db->get_where('flashcard_round_master', array('study_set_id' => $study_set_id, 'userId' => $user_id))->num_rows();
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/flashcards-new',$data);
@@ -648,7 +648,7 @@ class Studyset extends CI_Controller {
     }
 
     public function match($study_set_id)
-    {   
+    {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $data['studyset'] = $this->studyset_model->getStudySetDetails($study_set_id,$user_id);
         $data['term_data'] = $this->studyset_model->getStudySetTermData($study_set_id);
@@ -695,7 +695,7 @@ class Studyset extends CI_Controller {
             $total = $this->db->get_where('study_set_terms', array('study_set_id' => $studyset_id, 'status' => 1))->num_rows();
 
             if(!empty($correctTerms)) {
-                $str_arr = explode (",", $correctTerms); 
+                $str_arr = explode (",", $correctTerms);
                 $count = count($str_arr);
             } else {
                 $count = 0;
@@ -705,13 +705,13 @@ class Studyset extends CI_Controller {
             $missed_count = $total - $count;
 
             $insertArr = array( 'userId'        => $user_id,
-                                'study_set_id'  => $studyset_id,
-                                'time_span'     => $matchtime,
-                                'total'         => $total,
-                                'correct'       => $count,
-                                'missed'        => $missed_count,
-                                'created_at'    => date('Y-m-d H:i:s')
-                            );
+                'study_set_id'  => $studyset_id,
+                'time_span'     => $matchtime,
+                'total'         => $total,
+                'correct'       => $count,
+                'missed'        => $missed_count,
+                'created_at'    => date('Y-m-d H:i:s')
+            );
             $this->db->insert('flashcard_round_master', $insertArr);
 
             $round_id = $this->db->insert_id();
@@ -726,7 +726,7 @@ class Studyset extends CI_Controller {
                                 You had <a>'.$count.'</a> cards correct. <br>
                                 Study again and be perfectly prepared for your exam.
                             </div>
-                            <a href="'.base_url().'studyset/flashcards/'.$studyset_id.'"><button type="button" class="study_action"> Study Again</button>  </a>  
+                            <a href="'.base_url().'studyset/flashcards/'.$studyset_id.'"><button type="button" class="study_action"> Study Again</button>  </a>
                         </div>';
                 $html.= '<div class="report_card">
                             <h5>Here is your report</h5>
@@ -746,7 +746,7 @@ class Studyset extends CI_Controller {
                                 <div class="card not-sure">
                                     <h6>'.$notSureCount.'</h6>
                                     <p>Not Sure</p>
-                                </div>  
+                                </div>
                             </div>
                             <h5>You need to study these terms</h5>
                         </div>';
@@ -755,10 +755,10 @@ class Studyset extends CI_Controller {
 
                     } else {
                         $insertArr = array( 'round_id'      => $round_id,
-                                            'term_id'       => $value['study_set_term_id'],
-                                    
-                                            'created_at'    => date('Y-m-d H:i:s')
-                                    );
+                            'term_id'       => $value['study_set_term_id'],
+
+                            'created_at'    => date('Y-m-d H:i:s')
+                        );
                         $this->db->insert('flashcard_round_details', $insertArr);
 
                         $html.= '<div class="descp_card">
@@ -768,13 +768,13 @@ class Studyset extends CI_Controller {
                                     </div>
                                     <div class="right">
                                         <h6>Description</h6>';
-                                    if(!empty($value['term_image'])){
-                                     $html.= '<div class="flashImg">
+                        if(!empty($value['term_image'])){
+                            $html.= '<div class="flashImg">
                                                 <img src="'.base_url().'uploads/studyset/'.$value['term_image'].'">
                                             </div>';
-                                    }
-                                        
-                                $html.= '<p>'.$value['term_description'].'</p>
+                        }
+
+                        $html.= '<p>'.$value['term_description'].'</p>
                                     </div>
                                 </div>';
                     }
@@ -789,7 +789,7 @@ class Studyset extends CI_Controller {
                             <a href="'.base_url().'studyset/flashcards/'.$studyset_id.'"><button type="button" class="study_action"> Study Again</button>  </a>  
                         </div>';
             }
-            
+
 
             echo $html;die;
         }
@@ -808,23 +808,23 @@ class Studyset extends CI_Controller {
             $time_span      = $this->input->post('time_span');
 
             $insertArr = array( 'userId'        => $user_id,
-                                'study_set_id'  => $studyset_id,
-                                'time_span'     => $time_span,
-                                'total'         => $total_term,
-                                'correct'       => $correct_count,
-                                'missed'        => $missed_count,
-                                'created_at'    => date('Y-m-d H:i:s')
-                            );
+                'study_set_id'  => $studyset_id,
+                'time_span'     => $time_span,
+                'total'         => $total_term,
+                'correct'       => $correct_count,
+                'missed'        => $missed_count,
+                'created_at'    => date('Y-m-d H:i:s')
+            );
             $this->db->insert('learn_round_master', $insertArr);
 
             $round_id = $this->db->insert_id();
 
-            
+
 
             $html = '<div class="result col-sm-12"><h3 class="text-center">Here is your report</h3><div class="col-sm-4 CheckpointView total"><div class="CheckpointView-content"><span class="bucketCount total">'.$total_term.'</span><span class="bucketName"><span>Total</span></span></div></div><div class="col-sm-4 CheckpointView correct"><div class="CheckpointView-content"><span class="bucketCount correct">'.$correct_count.'</span><span class="bucketName"><span>Correct</span></span></div></div><div class="col-sm-4 CheckpointView missed"><div class="CheckpointView-content"><span class="bucketCount missed">'.$missed_count.'</span><span class="bucketName"><span>Missed</span></span></div></div></div>';
 
             if(!empty($missed_terms)) {
-                $str_arr = explode (",", $missed_terms); 
+                $str_arr = explode (",", $missed_terms);
                 $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
                                                 <thead>
                                                         <tr>
@@ -836,9 +836,9 @@ class Studyset extends CI_Controller {
 
                 foreach ($str_arr as $key => $value) {
                     $insertArr = array( 'round_id'        => $round_id,
-                                        'term_id'  => $value,
-                                        'created_at'    => date('Y-m-d H:i:s')
-                                    );
+                        'term_id'  => $value,
+                        'created_at'    => date('Y-m-d H:i:s')
+                    );
                     $this->db->insert('learn_round_details', $insertArr);
 
                     $term_detail = $this->db->get_where('study_set_terms', array(' study_set_term_id' => $value))->row_array();
@@ -875,23 +875,23 @@ class Studyset extends CI_Controller {
             $time_span      = $this->input->post('time_span');
 
             $insertArr = array( 'userId'        => $user_id,
-                                'study_set_id'  => $studyset_id,
-                                'time_span'     => $time_span,
-                                'total'         => $total_term,
-                                'correct'       => $correct_count,
-                                'missed'        => $missed_count,
-                                'created_at'    => date('Y-m-d H:i:s')
-                            );
+                'study_set_id'  => $studyset_id,
+                'time_span'     => $time_span,
+                'total'         => $total_term,
+                'correct'       => $correct_count,
+                'missed'        => $missed_count,
+                'created_at'    => date('Y-m-d H:i:s')
+            );
             $this->db->insert('match_round_master', $insertArr);
 
             $round_id = $this->db->insert_id();
 
-            
+
 
             $html = '<div class="result col-sm-12"><h3 class="text-center">Here is your report</h3><div class="col-sm-4 CheckpointView total"><div class="CheckpointView-content"><span class="bucketCount total">'.$total_term.'</span><span class="bucketName"><span>Total</span></span></div></div><div class="col-sm-4 CheckpointView correct"><div class="CheckpointView-content"><span class="bucketCount correct">'.$correct_count.'</span><span class="bucketName"><span>Correct</span></span></div></div><div class="col-sm-4 CheckpointView missed"><div class="CheckpointView-content"><span class="bucketCount missed">'.$missed_count.'</span><span class="bucketName"><span>Missed</span></span></div></div></div>';
 
             if(!empty($missed_terms)){
-                $str_arr = explode (",", $missed_terms); 
+                $str_arr = explode (",", $missed_terms);
                 $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
                                                 <thead>
                                                         <tr>
@@ -903,9 +903,9 @@ class Studyset extends CI_Controller {
 
                 foreach ($str_arr as $key => $value) {
                     $insertArr = array( 'round_id'        => $round_id,
-                                        'term_id'  => $value,
-                                        'created_at'    => date('Y-m-d H:i:s')
-                                    );
+                        'term_id'  => $value,
+                        'created_at'    => date('Y-m-d H:i:s')
+                    );
                     $this->db->insert('match_round_details', $insertArr);
 
                     $term_detail = $this->db->get_where('study_set_terms', array(' study_set_term_id' => $value))->row_array();
@@ -944,23 +944,23 @@ class Studyset extends CI_Controller {
             $time_span      = $this->input->post('time_span');
 
             $insertArr = array( 'userId'        => $user_id,
-                                'study_set_id'  => $studyset_id,
-                                'time_span'     => $time_span,
-                                'total'         => $total_term,
-                                'correct'       => $correct_count,
-                                'missed'        => $missed_count,
-                                'created_at'    => date('Y-m-d H:i:s')
-                            );
+                'study_set_id'  => $studyset_id,
+                'time_span'     => $time_span,
+                'total'         => $total_term,
+                'correct'       => $correct_count,
+                'missed'        => $missed_count,
+                'created_at'    => date('Y-m-d H:i:s')
+            );
             $this->db->insert('write_round_master', $insertArr);
 
             $round_id = $this->db->insert_id();
 
-            
+
 
             $html = '<div class="result col-sm-12"><h3 class="text-center">Here is your report</h3><div class="col-sm-4 CheckpointView total"><div class="CheckpointView-content"><span class="bucketCount total">'.$total_term.'</span><span class="bucketName"><span>Total</span></span></div></div><div class="col-sm-4 CheckpointView correct"><div class="CheckpointView-content"><span class="bucketCount correct">'.$correct_count.'</span><span class="bucketName"><span>Correct</span></span></div></div><div class="col-sm-4 CheckpointView missed"><div class="CheckpointView-content"><span class="bucketCount missed">'.$missed_count.'</span><span class="bucketName"><span>Missed</span></span></div></div></div>';
 
             if(!empty($missed_terms)) {
-                $str_arr = explode (",", $missed_terms); 
+                $str_arr = explode (",", $missed_terms);
                 $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
                                                 <thead>
                                                         <tr>
@@ -972,9 +972,9 @@ class Studyset extends CI_Controller {
 
                 foreach ($str_arr as $key => $value) {
                     $insertArr = array( 'round_id'        => $round_id,
-                                        'term_id'  => $value,
-                                        'created_at'    => date('Y-m-d H:i:s')
-                                    );
+                        'term_id'  => $value,
+                        'created_at'    => date('Y-m-d H:i:s')
+                    );
                     $this->db->insert('write_round_details', $insertArr);
 
                     $term_detail = $this->db->get_where('study_set_terms', array(' study_set_term_id' => $value))->row_array();
@@ -1031,8 +1031,8 @@ class Studyset extends CI_Controller {
                                          Correct answer
                                     </h6>   
                                     <p class="correct-dark-color">'.
-                                          $data['term_name']
-                                    .'</p>    
+                    $data['term_name']
+                    .'</p>
                                     <div class="learnBtnWrapper justifycenter">
                                         <button type="button" class="createBtn nextLearnAns" onclick="nextLearnAns()">Next
                                             <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
@@ -1055,8 +1055,8 @@ class Studyset extends CI_Controller {
                                     <div class="answer-result__card-desc"><p class="text-capitalise">'.$data['term_description'].'</p>'.$image.'</div>    
                                     <h6>Your Answer</h6>
                                     <div class="wrong-dark-color answer-result__card-desc">'.
-                                          $select_data['term_name']
-                                    .'</div>  
+                    $select_data['term_name']
+                    .'</div>
                                     <h6><svg class="sp-icon correct-dark mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                         <path d="M440.8,11H71.3C38,11,11,38,11,71.2v369.5C11,474,38,501,71.3,501h369.5c33.2,0,60.2-27,60.2-60.2V71.2
                                             C501,38,474,11,440.8,11z M460.2,440.8c0,10.7-8.7,19.4-19.4,19.4H71.3c-10.7,0-19.4-8.7-19.4-19.4V71.2c0-10.7,8.7-19.4,19.4-19.4
@@ -1067,8 +1067,8 @@ class Studyset extends CI_Controller {
                                          Correct answer
                                     </h6>   
                                     <p class="correct-dark-color">'.
-                                          $data['term_name']
-                                    .'</p>    
+                    $data['term_name']
+                    .'</p>
                                     <div class="learnBtnWrapper justifycenter">
                                         <button type="button" class="createBtn nextLearnAns" onclick="nextLearnAns()">Next
                                             <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
@@ -1079,7 +1079,7 @@ class Studyset extends CI_Controller {
                                             </svg>
                                         </button>
                                     </div>';
-                    $result['type'] = 2;
+                $result['type'] = 2;
             }
             $result['html'] = $html;
             print_r(json_encode($result));die;
@@ -1125,8 +1125,8 @@ class Studyset extends CI_Controller {
                                          Correct answer
                                     </h6>   
                                     <p class="correct-dark-color">'.
-                                          $data['term_name']
-                                    .'</p>    
+                    $data['term_name']
+                    .'</p>
                                     <div class="learnBtnWrapper justifycenter">
                                         <button type="button" class="createBtn nextLearnAns" onclick="nextLearnAns()">Next
                                             <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
@@ -1149,8 +1149,8 @@ class Studyset extends CI_Controller {
                                     <div class="answer-result__card-desc"><p class="text-capitalise">'.$data['term_description'].'</p>'.$image.'</div>   
                                     <h6>Your Answer</h6>
                                     <div class="wrong-dark-color answer-result__card-desc">'.
-                                          $answer
-                                    .'</div>  
+                    $answer
+                    .'</div>
                                     <h6><svg class="sp-icon correct-dark mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                         <path d="M440.8,11H71.3C38,11,11,38,11,71.2v369.5C11,474,38,501,71.3,501h369.5c33.2,0,60.2-27,60.2-60.2V71.2
                                             C501,38,474,11,440.8,11z M460.2,440.8c0,10.7-8.7,19.4-19.4,19.4H71.3c-10.7,0-19.4-8.7-19.4-19.4V71.2c0-10.7,8.7-19.4,19.4-19.4
@@ -1161,8 +1161,8 @@ class Studyset extends CI_Controller {
                                          Correct answer
                                     </h6>   
                                     <p class="correct-dark-color">'.
-                                          $data['term_name']
-                                    .'</p>    
+                    $data['term_name']
+                    .'</p>
                                     <div class="learnBtnWrapper justifycenter">
                                         <button type="button" class="createBtn nextLearnAns" onclick="nextLearnAns()">Next
                                             <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
@@ -1173,7 +1173,7 @@ class Studyset extends CI_Controller {
                                             </svg>
                                         </button>
                                     </div>';
-                    $result['type'] = 2;
+                $result['type'] = 2;
             }
             $result['html'] = $html;
             print_r(json_encode($result));die;
@@ -1219,8 +1219,8 @@ class Studyset extends CI_Controller {
                                          Correct answer
                                     </h6>   
                                     <p class="correct-dark-color">'.
-                                          $data['term_name']
-                                    .'</p>    
+                    $data['term_name']
+                    .'</p>
                                     <div class="learnBtnWrapper justifycenter">
                                         <button type="button" class="createBtn nextWriteAns" onclick="nextWriteAns()">Next
                                             <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
@@ -1243,8 +1243,8 @@ class Studyset extends CI_Controller {
                                     <div class="answer-result__card-desc"><p class="text-capitalise">'.$data['term_description'].'</p>'.$image.'</div>  
                                     <h6>Your Answer</h6>
                                     <div class="wrong-dark-color answer-result__card-desc">'.
-                                          $answer
-                                    .'</div>  
+                    $answer
+                    .'</div>
                                     <h6><svg class="sp-icon correct-dark mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                         <path d="M440.8,11H71.3C38,11,11,38,11,71.2v369.5C11,474,38,501,71.3,501h369.5c33.2,0,60.2-27,60.2-60.2V71.2
                                             C501,38,474,11,440.8,11z M460.2,440.8c0,10.7-8.7,19.4-19.4,19.4H71.3c-10.7,0-19.4-8.7-19.4-19.4V71.2c0-10.7,8.7-19.4,19.4-19.4
@@ -1255,8 +1255,8 @@ class Studyset extends CI_Controller {
                                          Correct answer
                                     </h6>   
                                     <p class="correct-dark-color">'.
-                                          $data['term_name']
-                                    .'</p>    
+                    $data['term_name']
+                    .'</p>
                                     <div class="learnBtnWrapper justifycenter">
                                         <button type="button" class="createBtn nextWriteAns" onclick="nextWriteAns()">Next
                                             <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
@@ -1267,7 +1267,7 @@ class Studyset extends CI_Controller {
                                             </svg>
                                         </button>
                                     </div>';
-                    $result['type'] = 2;
+                $result['type'] = 2;
             }
             $result['html'] = $html;
             print_r(json_encode($result));die;
@@ -1288,14 +1288,14 @@ class Studyset extends CI_Controller {
         $user_id        = $this->session->get_userdata()['user_data']['user_id'];
 
         $insertArr = array(     'userId'        => $user_id,
-                                'study_set_id'  => $studyset_id,
-                                'time_span'     => $total_time,
-                                'written_applicable'        => $written_applicable,
-                                'match_applicable'          => $match_applicable,
-                                'multiple_applicable'       => $multiple_applicable,
-                                'truefalse_applicable'      => $truefalse_applicable,
-                                'created_at'    => date('Y-m-d H:i:s')
-                            );
+            'study_set_id'  => $studyset_id,
+            'time_span'     => $total_time,
+            'written_applicable'        => $written_applicable,
+            'match_applicable'          => $match_applicable,
+            'multiple_applicable'       => $multiple_applicable,
+            'truefalse_applicable'      => $truefalse_applicable,
+            'created_at'    => date('Y-m-d H:i:s')
+        );
         $this->db->insert('test_round_master', $insertArr);
 
         $round_id = $this->db->insert_id();
@@ -1309,13 +1309,13 @@ class Studyset extends CI_Controller {
                 $get_term_details = $this->db->get_where('study_set_terms', array('study_set_term_id' => $value))->row_array();
                 if($get_term_details['term_name'] != trim($written_answer[$key])){
                     $insertArr = array( 'round_id'      => $round_id,
-                                        'term_id'       => $value,
-                                        'type'          => 'written',
-                                        'user_answer'   => $written_answer[$key],
-                                        'created_at'    => date('Y-m-d H:i:s')
-                                    );
+                        'term_id'       => $value,
+                        'type'          => 'written',
+                        'user_answer'   => $written_answer[$key],
+                        'created_at'    => date('Y-m-d H:i:s')
+                    );
                     $this->db->insert('test_round_details', $insertArr);
-                } 
+                }
                 $total++;
             }
         }
@@ -1334,18 +1334,18 @@ class Studyset extends CI_Controller {
                             $searchword = $matching_answer[$key];
                             foreach($letter_answer as $index => $string) {
                                 if (strpos($string, $searchword) !== FALSE){
-                                    $user_answer = explode(" ",$string); 
+                                    $user_answer = explode(" ",$string);
                                     $get_term_details = $this->db->get_where('study_set_terms', array('study_set_term_id' => $user_answer[1]))->row_array();
                                     $insertArr = array( 'round_id'      => $round_id,
-                                                'term_id'       => $value,
-                                                'type'          => 'matching',
-                                                'user_answer'   => $get_term_details['term_name'],
-                                                'created_at'    => date('Y-m-d H:i:s')
-                                            );
+                                        'term_id'       => $value,
+                                        'type'          => 'matching',
+                                        'user_answer'   => $get_term_details['term_name'],
+                                        'created_at'    => date('Y-m-d H:i:s')
+                                    );
                                     $this->db->insert('test_round_details', $insertArr);
-                                } 
+                                }
                             }
-                            
+
                         }
                     }
                 }
@@ -1353,7 +1353,7 @@ class Studyset extends CI_Controller {
             }
         }
 
-        
+
         if($multiple_applicable == 1) {
             $multiple_term_id   = $this->input->post('multiple_term_id');
             foreach ($multiple_term_id as $key => $value) {
@@ -1361,17 +1361,17 @@ class Studyset extends CI_Controller {
                 if($value != $multiple_answer){
                     $get_term_details = $this->db->get_where('study_set_terms', array('study_set_term_id' => $multiple_answer))->row_array();
                     $insertArr = array( 'round_id'      => $round_id,
-                                        'term_id'       => $value,
-                                        'type'          => 'multiple',
-                                        'user_answer'   => $get_term_details['term_name'],
-                                        'created_at'    => date('Y-m-d H:i:s')
-                                    );
+                        'term_id'       => $value,
+                        'type'          => 'multiple',
+                        'user_answer'   => $get_term_details['term_name'],
+                        'created_at'    => date('Y-m-d H:i:s')
+                    );
                     $this->db->insert('test_round_details', $insertArr);
-                } 
+                }
                 $total++;
             }
         }
-        
+
 
         if($truefalse_applicable == 1) {
             $truefalse_term_id  = $this->input->post('truefalse_term_id');
@@ -1381,32 +1381,32 @@ class Studyset extends CI_Controller {
                 $truefalse_answer = $this->input->post('truefalse_answer_'.$value);
                 if($value == $truefalse_term[$key]){
                     if($truefalse_answer != 'true'){
-                        
+
                         $insertArr = array( 'round_id'      => $round_id,
-                                            'term_id'       => $value,
-                                            'type'          => 'truefalse',
-                                            'user_answer'   => $truefalse_answer,
-                                            'created_at'    => date('Y-m-d H:i:s')
-                                        );
+                            'term_id'       => $value,
+                            'type'          => 'truefalse',
+                            'user_answer'   => $truefalse_answer,
+                            'created_at'    => date('Y-m-d H:i:s')
+                        );
                         $this->db->insert('test_round_details', $insertArr);
-                    } 
+                    }
                 } else {
                     if($truefalse_answer != 'false'){
-                        
+
                         $insertArr = array( 'round_id'      => $round_id,
-                                            'term_id'       => $value,
-                                            'type'          => 'truefalse',
-                                            'user_answer'   => $truefalse_answer,
-                                            'created_at'    => date('Y-m-d H:i:s')
-                                        );
+                            'term_id'       => $value,
+                            'type'          => 'truefalse',
+                            'user_answer'   => $truefalse_answer,
+                            'created_at'    => date('Y-m-d H:i:s')
+                        );
                         $this->db->insert('test_round_details', $insertArr);
-                    } 
+                    }
                 }
                 $total++;
             }
         }
-        
-        
+
+
         $wrong = $this->db->get_where('test_round_details', array('round_id' => $round_id))->num_rows();
         $score = $total - $wrong;
         $this->db->where(array('id' => $round_id));
@@ -1416,18 +1416,18 @@ class Studyset extends CI_Controller {
 
 
     function testResult(){
-        $studyset_id = $this->uri->segment('3'); 
-        $round_id = $this->uri->segment('4'); 
+        $studyset_id = $this->uri->segment('3');
+        $round_id = $this->uri->segment('4');
 
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $data['studyset'] = $this->studyset_model->getStudySetDetails($studyset_id,$user_id);
         $data['term_data'] = $this->studyset_model->getStudySetTermData($studyset_id);
 
         $data['round_id'] = $round_id;
-        
+
         $data['round_data'] = $this->db->get_where('test_round_master', array('id' => $round_id))->row_array();
 
-        
+
 
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/test-result',$data);
@@ -1454,12 +1454,12 @@ class Studyset extends CI_Controller {
             } else {
 
                 $insertArr = array( 'study_set_id'      => $rate_studyset,
-                                    'user_id'           => $user_id,
-                                    'rating'            => $user_rating,
-                                    'description'       => $rate_description,
-                                    'if_anonymous'      => $if_anonymous,
-                                    'created_at'        => date('Y-m-d H:i:s')
-                                );
+                    'user_id'           => $user_id,
+                    'rating'            => $user_rating,
+                    'description'       => $rate_description,
+                    'if_anonymous'      => $if_anonymous,
+                    'created_at'        => date('Y-m-d H:i:s')
+                );
                 $this->db->insert('studyset_rating_master', $insertArr);
             }
 

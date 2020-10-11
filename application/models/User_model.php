@@ -6,9 +6,9 @@ class User_model extends CI_Model {
     function __construct()
     {
         parent::__construct();
-        
+
     }
-        function get_all_row_where($table,$array,$select='*')
+    function get_all_row_where($table,$array,$select='*')
     {
         $this->db->select($select);
         return $this->db->get_where($table,$array)->result();
@@ -24,7 +24,7 @@ class User_model extends CI_Model {
         $this->db->select($select);
         return $this->db->get_where($table,$array)->row_array();
     }
-    
+
     public function get_single_table_query($query)
     {
         $query = $this->db->query($query);
@@ -41,8 +41,8 @@ class User_model extends CI_Model {
         $this->db->select($select);
         return $this->db->get($table)->row();
     }
-   
-     function get_all_row_where_join ($table,$array,$join,$select='*')
+
+    function get_all_row_where_join ($table,$array,$join,$select='*')
     {
         $this->db->select($select);
         foreach($join as $j){
@@ -80,7 +80,7 @@ class User_model extends CI_Model {
         $query = $this->db->query($query);
         return $query->row();
     }
-    
+
     public function generate_random_password($length = 6) {
         $numbers = range('0','9');
         $final_array = array_merge($numbers);
@@ -94,9 +94,9 @@ class User_model extends CI_Model {
 
         return $password;
     }
-    
-    function add_user() { 
-        $guest_user = $this->session->userdata('guest_user');  
+
+    function add_user() {
+        $guest_user = $this->session->userdata('guest_user');
         $data['email'] = sanitizer($guest_user['email']);
         $data['username'] = sanitizer($guest_user['username']);
         $data['password'] = sanitizer($guest_user['password']);
@@ -108,7 +108,7 @@ class User_model extends CI_Model {
         $data['job_wishlist'] = '[]';
         $data['rental_wishlist'] = '[]';
         // $verification_code =  $this->generate_random_password();
-        $data['verification_code'] = 1; 
+        $data['verification_code'] = 1;
         $validity = $this->check_duplication('on_create', $data['email']);
         if($validity){
             if (strtolower($this->session->userdata('role')) == 'admin') {
@@ -119,7 +119,7 @@ class User_model extends CI_Model {
                 $this->session->set_flashdata('flash_message', get_phrase('user_registration_successfully_done'));
             }else {
                 $this->session->unset_userdata('guest_user');
-                
+
                 $data['is_verified'] = 0;
                 $this->db->insert('user', $data);
                 $user_id = $this->db->insert_id();
@@ -206,13 +206,13 @@ class User_model extends CI_Model {
     }
 
 
-    public function get_user_data($user_id){ 
+    public function get_user_data($user_id){
         $this->db->select('user.username,user.first_name,user.last_name,user.phone,user.form_step, user_info.*');
         $this->db->join('user_info','user_info.userID=user.id');
-      
-        $result = $this->db->get_where($this->db->dbprefix('user'), array('user.id'=>$user_id))->row_array(); 
-      
-        return $result; 
+
+        $result = $this->db->get_where($this->db->dbprefix('user'), array('user.id'=>$user_id))->row_array();
+
+        return $result;
     }
 
     //get user's data with same email and registration_type column

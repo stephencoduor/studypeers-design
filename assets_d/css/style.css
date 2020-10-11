@@ -974,7 +974,12 @@ textarea {
 
 .learnAnsBox.wrong h3 {
     color: #ea2e7e;
+<<<<<<< HEAD
     
+=======
+    border-bottom: solid 1px #eee;
+    padding-bottom: 20px;
+>>>>>>> f60079cc6d2c75ee24996b1789ff14375d42c015
 }
 
 .learnAnsBox .wrong-dark {
@@ -987,11 +992,19 @@ textarea {
 
 .wrong-dark-color {
     color: #ea2e7e;
+<<<<<<< HEAD
+=======
+    
+>>>>>>> f60079cc6d2c75ee24996b1789ff14375d42c015
 }
 
 .CheckpointView{
   margin: 0.75rem;
+<<<<<<< HEAD
 width: calc((33.3% - 2.00rem));
+=======
+  width: calc((33.3% - 2.00rem));
+>>>>>>> f60079cc6d2c75ee24996b1789ff14375d42c015
   box-shadow: 0 0.25rem 1rem 0 rgba(0,0,0,.16);
   background: var(--ui_color_white_background);
     border-bottom: .3125rem solid #fff;
