@@ -9,4 +9,4 @@ studypeers.com/*
 .cgi-bin
 ./cgi-bin
 ./application/config/database.php
-/application/config/database.php
+application/config/database.php
