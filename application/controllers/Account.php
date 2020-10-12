@@ -288,14 +288,14 @@ class Account extends CI_Controller {
             $date       = $this->input->post('date');
 
             $event_list = $this->db->query("select * from event_master where status = 1 and created_by = ".$user_id." and (start_date <= '".$date."' AND end_date >= '".$date."') OR event_master.id in (SELECT reference_id from share_master where peer_id = ".$user_id." and reference = 'event' and status != 4)  order by start_date desc")->result_array();
-            print_r($event_list);die;
+            $html="";
 
             if(!empty($event_list)) {
                 foreach ($event_list as $key => $value) { 
                     $university = $this->db->get_where('university', array('university_id' => $value['university']))->row_array();
                                         
 
-                    $html = '<div class="feed-card list" id="event_id_div_'.$value['id'].'">';
+                    $html.= '<div class="feed-card list" id="event_id_div_'.$value['id'].'">';
 
                         if($value['featured_image'] != '') { 
                          $html.= '<div class="left">
