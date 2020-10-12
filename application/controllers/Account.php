@@ -287,7 +287,7 @@ class Account extends CI_Controller {
             $user_id = $this->session->get_userdata()['user_data']['user_id']; 
             $date       = $this->input->post('date');
 
-            $event_list = $this->db->query("select * from event_master where status = 1 OR event_master.id in (SELECT reference_id from share_master where peer_id = ".$user_id." and reference = 'event' and status != 4) and created_by = ".$user_id." and (start_date <= '".$date."' AND end_date >= '".$date."') order by start_date desc")->result_array();
+            $event_list = $this->db->query("select * from event_master where status = 1 and created_by = ".$user_id." and (start_date <= '".$date."' AND end_date >= '".$date."') OR event_master.id in (SELECT reference_id from share_master where peer_id = ".$user_id." and reference = 'event' and status != 4)  order by start_date desc")->result_array();
 
 
             if(!empty($event_list)) {
