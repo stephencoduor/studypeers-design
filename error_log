@@ -3511,3 +3511,7 @@
 [10-Oct-2020 20:30:39 Asia/Kolkata] PHP Notice:  Undefined index: HTTP_HOST in /home/studypeers/public_html/application/config/config.php on line 34
 [10-Oct-2020 20:30:39 Asia/Kolkata] PHP Notice:  Undefined index: HTTP_HOST in /home/studypeers/public_html/application/config/config.php on line 34
 [10-Oct-2020 20:30:40 Asia/Kolkata] PHP Notice:  Undefined index: HTTP_HOST in /home/studypeers/public_html/application/config/config.php on line 34
+[11-Oct-2020 23:39:49 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[11-Oct-2020 23:39:49 Asia/Kolkata] OAuth client: A valid access token is not available
+[11-Oct-2020 23:39:49 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[11-Oct-2020 23:39:49 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602439789-13b36a&scope=r_liteprofile+r_emailaddress

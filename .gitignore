@@ -8,5 +8,6 @@ studypeers.com/*
 .well-known/
 .cgi-bin
 ./cgi-bin
-./application/config/database.php
 application/config/database.php
+./application/config/database.php
+error_log
