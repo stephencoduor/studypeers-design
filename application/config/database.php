@@ -75,7 +75,6 @@ $query_builder = TRUE;
 if($_SERVER['SERVER_NAME'] == 'localhost'){
 	$username = 'root';
 	$pwd = 'root';
-
 }  else {
 	$username = 'studypee_studypeers';
 	$pwd = ')Fm]m${zpiO_';
