@@ -72,12 +72,19 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
+if($_SERVER['SERVER_NAME'] == 'localhost'){
+	$username = 'root';
+	$pwd = '';
+}  else {
+	$username = 'studypee_studypeers';
+	$pwd = ')Fm]m${zpiO_';
+}
 
 $db['default'] = array(
 	'dsn'	=> '',
 	'hostname' => 'localhost',
-	'username' => 'studypee_studypeers',
-	'password' => ')Fm]m${zpiO_',
+	'username' => $username,
+	'password' => $pwd,
 	'database' => 'studypee_studypee',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
