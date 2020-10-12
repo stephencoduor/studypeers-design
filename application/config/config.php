@@ -28,7 +28,7 @@ ini_set('display_errors', 1);
 */
 
 if($_SERVER['SERVER_NAME'] == 'localhost'){
-	$config['base_url'] = 'https://localhost/studypeers/';
+	$config['base_url'] = 'http://localhost/studypeers/';
 } else {
 //	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
 	$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
