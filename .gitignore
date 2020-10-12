@@ -6,6 +6,5 @@
 studypeers.com/*
 .well-known/
 .cgi-bin
-.application/config/database.php
-./application/config/database.php
+!application/config/database.php
 error_log
