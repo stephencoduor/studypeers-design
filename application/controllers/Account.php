@@ -449,7 +449,7 @@ class Account extends CI_Controller {
 
                                                     } else { 
                                                         $this->db->order_by('share_master.id', 'desc');
-                                                        $shared = $this->db->get_where('share_master', array('reference_id' => $value['id'], 'reference' => 'event'))->row_array();
+                                                        $shared = $this->db->get_where('share_master', array('reference_id' => $value['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array();
                                                         $html.= '<div class="delete removeSharedEvent" data-id="'.$value['id'].'">
                                                                 <a data-toggle="modal" data-target="#confirmationModalRemove" class="delete_event">                                        
                                                                     <svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
@@ -664,7 +664,7 @@ class Account extends CI_Controller {
 
                                                     } else { 
                                                         $this->db->order_by('share_master.id', 'desc');
-                                                        $shared = $this->db->get_where('share_master', array('reference_id' => $value['id'], 'reference' => 'event'))->row_array();
+                                                        $shared = $this->db->get_where('share_master', array('reference_id' => $value['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array();
                                                         $html.= '<div class="delete removeSharedEvent" data-id="'.$value['id'].'">
                                                                 <a data-toggle="modal" data-target="#confirmationModalRemove" class="delete_event">                                        
                                                                     <svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">

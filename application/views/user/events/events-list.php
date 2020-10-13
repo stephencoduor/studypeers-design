@@ -692,9 +692,9 @@
             var txt = $('#attend_text_'+event_id).html(); 
             $("#attend_event_id").val(event_id);
             if(txt == 'Attend'){
-                $('#confirmationModalAttendHead').html('Are you sure to attend this Event !');
+                $('#confirmationModalAttendHead').html('Do you want to attend this Event !');
             } else {
-                $('#confirmationModalAttendHead').html('Are you sure to not attend this Event !');
+                $('#confirmationModalAttendHead').html("Are you sure you don't want to attend this Event !");
             }
 
         });

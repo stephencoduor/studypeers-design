@@ -76,12 +76,20 @@
 			</div>
 			<div class="socialEventsDisplayWrapper">
 				<div class="socialActionWrapper">
-					<?php if($event['created_by'] != $user_id) { ?>
-						<a href="#" class="transAction event">
+					<?php if($event['created_by'] != $user_id) { 
+						$this->db->order_by('share_master.id', 'desc');
+                        $shared = $this->db->get_where('share_master', array('reference_id' => $event['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array(); 
+                    ?>
+						<a href="#" class="transAction attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?= $event['id']; ?>">
 							<svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
 								<path d="m452 512h-392c-33.085938 0-60-26.914062-60-60v-392c0-33.085938 26.914062-60 60-60h392c33.085938 0 60 26.914062 60 60v392c0 33.085938-26.914062 60-60 60zm-392-472c-11.027344 0-20 8.972656-20 20v392c0 11.027344 8.972656 20 20 20h392c11.027344 0 20-8.972656 20-20v-392c0-11.027344-8.972656-20-20-20zm370.898438 111.34375-29.800782-26.6875-184.964844 206.566406-107.351562-102.046875-27.558594 28.988281 137.21875 130.445313zm0 0"/>
-							</svg>
-							Attend
+							</svg><span id="attend_text_<?= $event['id']; ?>">
+							<?php if($shared['status'] == 2){
+                                       echo 'Unattend';
+                                    } else {
+                                        echo 'Attend';
+                                    }
+                            ?></span>
 						</a>
 					<?php } ?>
 					<?php if($event['created_by'] == $user_id) { ?>
@@ -351,3 +359,60 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+
+<div class="modal fade" id="confirmationModalAttend" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                   <h4>Confirmation</h4>
+                   <div class="row">
+                     <h6 class="modalText" id="confirmationModalAttendHead">Are you sure to attend this Event !</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group button">
+                                <input type="hidden" name="attend_event_id" id="attend_event_id">
+                                <button data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                <button type="button" class="filterBtn" onclick="attendEvent()">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+	$(document).on('click','.attendEvent',function(){
+        var event_id = $(this).data('id');
+        var txt = $('#attend_text_'+event_id).html(); 
+        $("#attend_event_id").val(event_id);
+        if(txt == 'Attend'){
+            $('#confirmationModalAttendHead').html('Do you want to attend this Event !');
+        } else {
+            $('#confirmationModalAttendHead').html("Are you sure you don't want to attend this Event !");
+        }
+
+    });
+
+    function attendEvent(){
+        var id = $("#attend_event_id").val();
+        var txt = $('#attend_text_'+id).html();
+        if(id != ''){
+            $.ajax({
+                url : '<?php echo base_url();?>account/attendSharedEvent',
+                type : 'post',
+                data : {"id" : id, "type" : txt},
+                success:function(result) {
+                    $("#confirmationModalAttend").modal('hide');
+                    $("#attend_text_"+id).html(result);
+                    $("#attend_event_id").val('');
+                }   
+            })
+        }
+    }
+</script>
