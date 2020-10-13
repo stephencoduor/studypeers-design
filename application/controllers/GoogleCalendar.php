@@ -95,6 +95,8 @@ class GoogleCalendar extends CI_Controller
         if(count($calendarList->getItems()) > 0) {
             $this->db->where(array('created_by' => $user_id, 'google_events' => 1));
             $this->db->delete('schedule_master');
+            $this->db->where(array('created_by' => $user_id, 'google_events' => 1));
+            $this->db->delete('event_master');
             foreach ($calendarList->getItems() as $calendarListEntry) {
                 $events = $service->events->listEvents($calendarListEntry->id);
                 foreach($events->getItems() as $eventItems){
@@ -110,7 +112,7 @@ class GoogleCalendar extends CI_Controller
                         $end_date = $eventItems['end']['date'];
                         $end_datetime = $eventItems['end']['dateTime'];
                         $event_data = [
-                            'schedule' => 'event',
+                            'schedule' => 'others',
                             'schedule_name' => $event_name,
                             'schedule_id' => $event_id,
                             'description' => $description,
