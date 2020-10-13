@@ -295,6 +295,7 @@ class Account extends CI_Controller {
                 foreach ($event_list as $key => $value) { 
                     $university = $this->db->get_where('university', array('university_id' => $value['university']))->row_array();
                                         
+                    $peer_attending = $this->db->get_where('share_master', array('reference_id' => $value['id'], 'reference' => 'event', 'status' => 2))->result_array();
 
                     $html.= '<div class="feed-card list" id="event_id_div_'.$value['id'].'">';
 
@@ -477,26 +478,44 @@ class Account extends CI_Controller {
                                                                 </a>
                                                             </div>';
                                                     }
-                                                    $html.= '</div>
+                                                    $html.= '</div>';
 
-                                                        <div class="userIcoList" data-toggle="modal" data-target="#peersModal">
-                                                            <ul>
-                                                                <li>
+                                                    if(!empty($peer_attending)) {
+
+
+                                                         $html.= '<div class="userIcoList peersModalAttending" data-toggle="modal" data-target="#peersModalAttending" data-id="'.$value['id'].'">
+                                                            <ul>';
+                                                            if(!empty($peer_attending[0])) {
+                                                                $html.= '<li>
                                                                     <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
-                                                                </li>
-                                                                <li>
+                                                                </li>';
+                                                            }
+
+                                                            if(!empty($peer_attending[1])) {
+                                                                $html.= '<li>
                                                                     <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
-                                                                </li>
-                                                                <li>
+                                                                </li>';
+                                                            }
+
+                                                            if(!empty($peer_attending[2])) {
+                                                                $html.= '<li>
                                                                     <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
-                                                                </li>
-                                                                <li class="more">
-                                                                    +5
-                                                                </li>
-                                                            </ul>
-                                                        </div>
+                                                                </li>';
+                                                            }
+                                                                
+                                                                $count = count($peer_attending) - 3;
+                                                                
+                                                                if($count > 3) {
+                                                                    $html.= '<li class="more">
+                                                                    +'.$count.'
+                                                                </li>';
+                                                                }
+                                                                
+                                                            $html.= '</ul>
+                                                        </div>';
+                                                    }
                                                         
-                                                            <div class="action">';
+                                                            $html.= '<div class="action">';
                                                                 if($value['addedToCalender'] == 0) { 
                                                             $html.= '<a href="#" class="addEvents" data-id="'.$value['id'].'" data-toggle="modal" data-target="#addEventModal">
                                                                     <img src="'.base_url().'assets_d/images/calendar.svg" alt="Events Calendar"> 
@@ -687,26 +706,43 @@ class Account extends CI_Controller {
                                                                 </a>
                                                             </div>';
                                                     } 
-                                                    $html.='</div>
+                                                    $html.='</div>';
 
-                                                    <div class="userIcoList" data-toggle="modal" data-target="#peersModal">
-                                                        <ul>
-                                                            <li>
-                                                                <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
-                                                            </li>
-                                                            <li>
-                                                                <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
-                                                            </li>
-                                                            <li>
-                                                                <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
-                                                            </li>
-                                                            <li class="more">
-                                                                +5
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                    if(!empty($peer_attending)) {
+
+
+                                                         $html.= '<div class="userIcoList peersModalAttending" data-toggle="modal" data-id="'.$value['id'].'" data-target="#peersModalAttending">
+                                                            <ul>';
+                                                            if(!empty($peer_attending[0])) {
+                                                                $html.= '<li>
+                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                </li>';
+                                                            }
+
+                                                            if(!empty($peer_attending[1])) {
+                                                                $html.= '<li>
+                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                </li>';
+                                                            }
+
+                                                            if(!empty($peer_attending[2])) {
+                                                                $html.= '<li>
+                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                </li>';
+                                                            }
+                                                                
+                                                                $count = count($peer_attending) - 3;
+                                                                if($count > 3) {
+                                                                    $html.= '<li class="more">
+                                                                    +'.$count.'
+                                                                </li>';
+                                                                }
+                                                                
+                                                            $html.= '</ul>
+                                                        </div>';
+                                                    }
                                                     
-                                                        <div class="action">';
+                                                        $html.='<div class="action">';
                                                             if($value['addedToCalender'] == 0) { 
                                                             $html.='<a href="#" class="addEvents" data-id="'.$value['id'].'" data-toggle="modal" data-target="#addEventModal">
                                                                 <img src="'.base_url().'assets_d/images/calendar.svg" alt="Events Calendar"> 
@@ -2759,6 +2795,34 @@ class Account extends CI_Controller {
         echo $html;die;
     }
 
+
+    public function getPeersEVentAttending(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        
+
+        $peer_attending = $this->db->get_where('share_master', array('reference_id' => $id, 'reference' => 'event', 'status' => 2))->result_array();
+
+        $html = '';
+
+        foreach ($peer_attending as $key => $value) {
+            
+            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array(); 
+            
+            
+                $html.= '<section class="list"><section class="left">
+                            <figure>
+                                <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>'.$peer['nickname'].'</figcaption>
+                        </section>
+                        
+                    </section>';
+            
+        }
+        echo $html;die;
+    }
+
     public function invitePeerEvent(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $id = $this->input->post('id');
@@ -2816,12 +2880,14 @@ class Account extends CI_Controller {
         $id = $this->input->post('id');
         $type = $this->input->post('type');
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $this->db->order_by('share_master.id', 'desc');
+        $get_last_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('reference_id' => $id, 'reference' => 'event', 'peer_id' => $user_id))->row_array(); 
         if($type == 'Attend'){
-            $this->db->where(array('reference_id' => $id, 'reference' => 'event', 'peer_id' => $user_id));
+            $this->db->where(array('id' => $get_last_shared['id']));
             $result = $this->db->update('share_master',array('status' => 2));
             echo 'Unattend';die;
         } else {
-            $this->db->where(array('reference_id' => $id, 'reference' => 'event', 'peer_id' => $user_id));
+            $this->db->where(array('id' => $get_last_shared['id']));
             $result = $this->db->update('share_master',array('status' => 3));
             echo 'Attend';die;
         }
