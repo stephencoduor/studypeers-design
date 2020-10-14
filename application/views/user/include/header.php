@@ -213,7 +213,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 									<i class="fa  fa-bell-o"></i>
 									<span class="label label-success" id="notification_count"><?php echo count($notification); ?></span>
 								</a>
-								<div class = "dropdown-menu">
+								<div class = "dropdown-menu notification">
 									<div class="notification-header">
 										<h6>Notifications</h6>
 										<a onclick="readAllNotofication()">Mark as all read</a>
