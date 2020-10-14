@@ -122,15 +122,17 @@ class SocialLogin extends CI_Controller {
 			$helper->getPersistentDataHandler()->set('state', $_GET['state']);
 		}
 		$accessToken = $helper->getAccessToken();
-		$exchange_url = 'https://graph.facebook.com/2.0/oauth/access_token?grant_type=fb_exchange_token&client_id='.$app_id.'&
+		echo $accessToken;
+		$exchange_url = 'https://graph.facebook.com/v2.0/oauth/access_token?grant_type=fb_exchange_token&client_id='.$app_id.'&
     					client_secret='.$app_secret.'&
     					fb_exchange_token='.$accessToken;
 
 		$long_live_token_details = $this->curl_file_get_contents($exchange_url);
 		echo '<pre/>';
 		print_r($long_live_token_details);
-		die;
 		$long_live_token_details = json_decode($long_live_token_details, true);
+		print_r($long_live_token_details);
+
 		$response = $fb->get('/me?fields=id,name,email', $long_live_token_details['access_token']);
 
 
