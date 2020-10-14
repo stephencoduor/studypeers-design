@@ -218,7 +218,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 										<h6>Notifications</h6>
 										<a onclick="readAllNotofication()">Mark as all read</a>
 									</div>
-									<ul class="notification-ul">
+									<ul class="notification-ul" id="notification-ul">
 										<?php if(!empty($last_notification)) {
 											foreach ($last_notification as $key => $value) {
 												$time_ago = time_ago_in_php($value['created_at']);

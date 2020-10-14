@@ -2892,4 +2892,15 @@ class Account extends CI_Controller {
             echo 'Attend';die;
         }
     }
+
+
+    public function getLatestNotification(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $html = "test noti";
+
+        $result['notification'] = $html;
+        $result['count'] = $user_id;
+
+        print_r(json_encode($result));die;
+    }
 }
