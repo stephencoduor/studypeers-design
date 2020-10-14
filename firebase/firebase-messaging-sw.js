@@ -33,7 +33,7 @@ messaging.setBackgroundMessageHandler(function(payload) {
     };
 
     $.ajax({
-            url : '<?php echo base_url();?>account/getLatestNotification',
+            url : 'https://studypeers.dev/account/getLatestNotification',
             type : 'post',
             data : {"token" : 1},
             dataType: "json",
