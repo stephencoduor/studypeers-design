@@ -127,9 +127,10 @@ class SocialLogin extends CI_Controller {
     					fb_exchange_token='.$accessToken;
 
 		$long_live_token_details = $this->curl_file_get_contents($exchange_url);
-		$long_live_token_details = json_decode($long_live_token_details, true);
 		echo '<pre/>';
 		print_r($long_live_token_details);
+		die;
+		$long_live_token_details = json_decode($long_live_token_details, true);
 		$response = $fb->get('/me?fields=id,name,email', $long_live_token_details['access_token']);
 
 
