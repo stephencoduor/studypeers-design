@@ -83,6 +83,6 @@
                         $('#notification_count').html(result.count);
                     }   
                 })
-            }, 30000);
+            }, 5000);
 
     </script>
