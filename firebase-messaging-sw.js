@@ -39,6 +39,17 @@ messaging.setBackgroundMessageHandler(function(payload) {
     
    
     console.log(noti);
+    $.ajax({
+            url : 'https://studypeers.dev/account/getLatestNotification',
+            type : 'post',
+            data : {"token" : 1},
+            dataType: "json",
+            success:function(result) {
+                console.log(result);
+                $('#notification-ul').html(result.notification);
+                $('#notification_count').html(result.count);
+            }   
+        })
     // Customize notification here
     const notificationTitle = noti.title;
     const notificationOptions = {
