@@ -7,9 +7,7 @@ importScripts(
     "https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js",
 );
 
-importScripts(
-    "https://code.jquery.com/jquery-3.5.1.min.js",
-);
+
 
 if( 'function' === typeof importScripts) {
 //   importScripts('script2.js');
@@ -43,17 +41,7 @@ messaging.setBackgroundMessageHandler(function(payload) {
     
    
     console.log(noti);
-    $.ajax({
-            url : 'https://studypeers.dev/account/getLatestNotification',
-            type : 'post',
-            data : {"token" : 1},
-            dataType: "json",
-            success:function(result) {
-                console.log(result);
-                $('#notification-ul').html(result.notification);
-                $('#notification_count').html(result.count);
-            }   
-        })
+    
     // Customize notification here
     const notificationTitle = noti.title;
     const notificationOptions = {
