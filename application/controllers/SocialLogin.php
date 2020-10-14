@@ -117,23 +117,27 @@ class SocialLogin extends CI_Controller {
 			//'default_access_token' => $app_id.'|'.$app_secret
 		]);
 
+
+		$query = http_build_query([
+			'client_id'     => $app_id,
+			'client_secret' => $app_secret,
+			'grant_type'    => 'fb_exchange_token',
+		]);
+
 		$helper = $fb->getRedirectLoginHelper();
 		if (isset($_GET['state'])) {
 			$helper->getPersistentDataHandler()->set('state', $_GET['state']);
 		}
 		$accessToken = $helper->getAccessToken();
 		echo $accessToken;
-		$exchange_url = 'https://graph.facebook.com/v2.0/oauth/access_token?grant_type=fb_exchange_token&client_id='.$app_id.'&
-    					client_secret='.$app_secret.'&
-    					fb_exchange_token='.$accessToken;
 
-		$long_live_token_details = $this->curl_file_get_contents($exchange_url);
+		$res = $fb->get('/v2.0/oauth/access_token?'.$query, $accessToken);
+
 		echo '<pre/>';
-		print_r($long_live_token_details);
-		$long_live_token_details = json_decode($long_live_token_details, true);
-		print_r($long_live_token_details);
+		print_r($res);
+		die;
 
-		$response = $fb->get('/me?fields=id,name,email', $long_live_token_details['access_token']);
+		$response = $fb->get('/me?fields=id,name,email', $accessToken);
 
 
 		// User Information Retrival begins................................................
