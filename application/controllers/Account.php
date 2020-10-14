@@ -2896,10 +2896,107 @@ class Account extends CI_Controller {
 
     public function getLatestNotification(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $html = "test notification";
+
+        $notification = $this->db->get_where('notification_master', array('user_id' => $user_id, 'status' => 1))->num_rows();
+
+        $this->db->order_by('id', 'DESC');
+        $this->db->limit('10');
+        $last_notification = $this->db->get_where('notification_master', array('user_id' => $user_id, 'status!=' => 3))->result_array();
+
+        $html = "";
+
+        foreach ($last_notification as $key => $value) {
+            $time_ago = time_ago_in_php($value['created_at']);
+            $cls = "";
+            if($value['status'] == '2'){
+                $cls = "read";
+            }
+            if($value['action_type'] == 1) {
+                
+
+                $html .= '<li id="notification_'.$value['id'].'" class="'.$cls.'">
+                    <a>
+                        <figure>
+                            <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                        </figure>
+                        <div class="right">
+                            <h6>'.$value['notification'].'</h6>
+                            <div class="sortNotifyMessage">
+                                <div class="info">
+                                    Follower  • <div class="time">'.$time_ago.'</div>
+                                </div>
+                                <div class="optPreview">';
+                                    if($value['status'] == 1){ 
+                                        $html .= '<div class="viewacceptance" id="accept_'.$value['id'].'" onclick="acceptRequest('.$value['id'].', '.$value['action_id'].')">Accept</div>
+                                        <div class="viewprofile" id="reject_'.$value['id'].'" onclick="rejectRequest('.$value['id'].', '.$value['action_id'].')">Reject</div>';
+                                        
+                                     } 
+                                $html .= '</div>
+                            </div>
+                        </div>
+                    </a>
+                </li>';
+            } else if($value['action_type'] == 2) { 
+                $html .= '<li id="notification_'.$value['id'].'" class="'.$cls.'">
+                    <a>
+                        <figure>
+                            <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                        </figure>
+                        <div class="right">
+                            <h6>'.$value['notification'].'</h6>
+                            <div class="sortNotifyMessage">
+                                <div class="info">
+                                    Follower  • <div class="time">'.$time_ago.'</div>
+                                </div>
+                                <div class="optPreview">
+
+                                    <div class="viewprofile">View Profile</div>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </li>';
+
+            } else if($value['action_type'] == 3) { 
+                $html .= '<li id="notification_'.$value['id'].'" class="'.$cls.'">
+                    <a>
+                        <figure>
+                            <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                        </figure>
+                        <div class="right">
+                            <h6>'.$value['notification'].'</h6>
+                            <div class="sortNotifyMessage">
+                                <div class="info">
+                                    Studyset  • <div class="time">'.$time_ago.'</div>
+                                </div>
+                                <div class="viewprofile" onclick="redirectAction('.$value['id'].')">View Studyset</div>
+                            </div>
+                        </div>
+                    </a>
+                </li>';
+            } else if($value['action_type'] == 4) { 
+                $html .= '<li id="notification_'.$value['id'].'" class="'.$cls.'">
+                    <a>
+                        <figure>
+                            <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                        </figure>
+                        <div class="right">
+                            <h6>'.$value['notification'].'</h6>
+                            <div class="sortNotifyMessage">
+                                <div class="info">
+                                    Event  • <div class="time">'.$time_ago.'</div>
+                                </div>
+                                <div class="viewprofile" onclick="redirectAction('.$value['id'].')">View Event</div>
+                            </div>
+                        </div>
+                    </a>
+                </li>';
+            } 
+        }
+                                            
 
         $result['notification'] = $html;
-        $result['count'] = $user_id;
+        $result['count'] = $notification;
 
         print_r(json_encode($result));die;
     }
