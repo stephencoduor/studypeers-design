@@ -3089,8 +3089,9 @@ div[data-edit] {
     .socialEventsDisplayWrapper .userIcoList {
         min-width: 90px;
     }
-    .filterBtn, .scheduleWrapper .header a.filterBtn, .scheduleWrapper .header a.event {
-        padding: 13px 10px;
+    .filterBtn, .scheduleWrapper .header a.filterBtn, .scheduleWrapper .header a.event,
+    .transparentBtn.highlight {
+        padding: 13px 20px;
         height: 100%;
     }
 }

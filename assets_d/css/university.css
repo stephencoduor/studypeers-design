@@ -226,7 +226,7 @@ header .navbar-default ul li .notification-header a:hover {
 .nav .dropdown-menu li.read a {
     border-left: 5px solid #fff;
 }
-.nav .dropdown-menu:before { 
+.nav .dropdown-menu.notification:before { 
     content: '';
     width: 10px;
     height: 10px;

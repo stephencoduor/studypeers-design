@@ -1602,7 +1602,7 @@ l,.share:focus
     outline: none;
 }
 .searchPeer .filterSearch {
-    width:100%;
+    width:100% !important;
 }
 .filterSearch button:hover,
 .filterSearch button:focus {
@@ -2522,6 +2522,9 @@ l,.share:focus
     .userWrap.study-sets {
         margin: 0;
         flex-wrap: wrap;
+    }
+    #confirmationModal .filterBtn {
+        padding: 13px 20px;
     }
 }
 
