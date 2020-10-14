@@ -2778,7 +2778,7 @@ class Account extends CI_Controller {
             } else {
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
             }
-            $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'event', 'reference_id' => $id, 'status' => 1))->row_array(); 
+            $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'event', 'reference_id' => $id, 'status!=' => 4))->row_array(); 
             if(empty($chk_if_shared)){
                 $html.= '<section class="list"><section class="left">
                             <figure>
@@ -2896,7 +2896,7 @@ class Account extends CI_Controller {
 
     public function getLatestNotification(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $html = "test noti";
+        $html = "test notification";
 
         $result['notification'] = $html;
         $result['count'] = $user_id;
