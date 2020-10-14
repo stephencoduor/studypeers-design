@@ -38,6 +38,7 @@ messaging.setBackgroundMessageHandler(function(payload) {
             data : {"token" : 1},
             dataType: "json",
             success:function(result) {
+                console.log(result);
                 $('#notification-ul').html(result.notification);
                 $('#notification_count').html(result.count);
             }   
