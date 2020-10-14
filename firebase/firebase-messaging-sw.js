@@ -32,6 +32,17 @@ messaging.setBackgroundMessageHandler(function(payload) {
         icon: "/logo-mb.jpg",
     };
 
+    $.ajax({
+            url : '<?php echo base_url();?>account/getLatestNotification',
+            type : 'post',
+            data : {"token" : 1},
+            dataType: "json",
+            success:function(result) {
+                $('#notification-ul').html(result.notification);
+                $('#notification_count').html(result.count);
+            }   
+        })
+
     return self.registration.showNotification( 
         notificationTitle,
         notificationOptions,
