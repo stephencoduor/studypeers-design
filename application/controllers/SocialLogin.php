@@ -128,7 +128,7 @@ class SocialLogin extends CI_Controller {
 			'client_secret' => $app_secret,
 			'fb_exchange_token'    => $accessToken,
 		]);
-		$res = $fb->get('/v2.8/oauth/access_token?'.$query);
+		$res = $this->curl_file_get_contents('https://graph.facebook.com/v2.0/oauth/access_token?'.$query);
 
 		echo '<pre/>';
 		print_r($res);
