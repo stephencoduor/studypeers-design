@@ -41,6 +41,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/study-sets',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -57,6 +58,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/manage-study-set',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -128,6 +130,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/study-set-detail',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -632,6 +635,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/flashcards-new',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -644,6 +648,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/learn',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -655,6 +660,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/match',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('studyset/match-footer');
     }
 
@@ -667,6 +673,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/write',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -679,6 +686,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/test',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('studyset/test-footer');
     }
 
@@ -1432,6 +1440,7 @@ class Studyset extends CI_Controller {
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/test-result',$data);
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
