@@ -117,21 +117,18 @@ class SocialLogin extends CI_Controller {
 			//'default_access_token' => $app_id.'|'.$app_secret
 		]);
 
-
-		$query = http_build_query([
-			'client_id'     => $app_id,
-			'client_secret' => $app_secret,
-			'grant_type'    => 'fb_exchange_token',
-		]);
-
 		$helper = $fb->getRedirectLoginHelper();
 		if (isset($_GET['state'])) {
 			$helper->getPersistentDataHandler()->set('state', $_GET['state']);
 		}
 		$accessToken = $helper->getAccessToken();
 		echo $accessToken;
-
-		$res = $fb->get('/v2.0/oauth/access_token?'.$query, $accessToken);
+		$query = http_build_query([
+			'client_id'     => $app_id,
+			'client_secret' => $app_secret,
+			'fb_exchange_token'    => $accessToken,
+		]);
+		$res = $fb->get('/v2.8/oauth/access_token?'.$query);
 
 		echo '<pre/>';
 		print_r($res);
