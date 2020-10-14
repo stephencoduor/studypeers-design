@@ -57,11 +57,32 @@
                     data : {"token" : 1},
                     dataType: "json",
                     success:function(result) {
-                        console.log(result);
+                        
                         $('#notification-ul').html(result.notification);
                         $('#notification_count').html(result.count);
                     }   
                 })
             }
         });
+
+
+
+    </script>
+
+    <script type="text/javascript">
+            
+            window.setInterval(function(){
+              $.ajax({
+                    url : '<?php echo base_url();?>account/getLatestNotification',
+                    type : 'post',
+                    data : {"token" : 1},
+                    dataType: "json",
+                    success:function(result) {
+                        console.log('called');
+                        $('#notification-ul').html(result.notification);
+                        $('#notification_count').html(result.count);
+                    }   
+                })
+            }, 30000);
+
     </script>
