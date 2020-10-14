@@ -3,7 +3,7 @@ ul,li{list-style:none;padding: 0;margin: 0;}
 a:link{text-decoration:none;}
 ::selection{background:#3f51b5;color:#fff;}
 
-header{width:100%;float:left;background: #fff;position:relative;position: fixed;z-index: 999;border-bottom: 1px solid #eae9ee;}
+header{width:100%;float:left;background: #fff;position:relative;position: fixed;z-index: 999;border-bottom: 1px solid #eae9ee;top:0;}
 .logo{padding:16px 39px;}
 .no-padding{padding:0;}
 header .navbar-default{background:transparent;border:0px;margin: 10px auto;min-height: auto;}

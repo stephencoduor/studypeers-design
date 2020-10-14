@@ -73,20 +73,42 @@ $(document).ready(() => {
 });
 
 
-$(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").niceScroll(
-  {
-    cursorwidth:"8",
-    cursorcolor:"#000",
-    scrollspeed:"100",
-    touchbehavior:false,
-    boxzoom: true,
-    cursor:false,
-    smoothscroll:true,
-    autohidemode:false,
-    zindex:9999999,
-    background:"#e3e3e3"
+// $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").niceScroll(
+//   {
+//     cursorwidth:"8",
+//     cursorcolor:"#000",
+//     scrollspeed:"100",
+//     touchbehavior:false,
+//     boxzoom: true,
+//     cursor:false,
+//     smoothscroll:true,
+//     autohidemode:false,
+//     zindex:9999999,
+//     background:"#e3e3e3"
+//   });
+  $(document).ready(function(){
+    $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").mCustomScrollbar({
+      theme:"dark-thin",
+      autoExpandScrollbar:true,
+      advanced:{autoExpandHorizontalScroll:true}
+    });
   });
-
+  $(document).ready(function(){
+    $("body").mCustomScrollbar({
+      theme:"dark-thin",
+      autoExpandScrollbar:true,
+      advanced:{autoExpandHorizontalScroll:true}
+    });
+  });
+// (function($){
+//   $(window).on("load",function(){
+    
+//     $("body").mCustomScrollbar({
+//       theme:"minimal"
+//     });
+    
+//   });
+// })(jQuery);
 
 
 //study-set JS
