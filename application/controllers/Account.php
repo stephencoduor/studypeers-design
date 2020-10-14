@@ -123,6 +123,7 @@ class Account extends CI_Controller {
         $this->load->view('user/schedule/schedule-list');
         $this->load->view('user/include/right-sidebar');
         $this->load->view('user/schedule/fullcalendar-script');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/schedule/footer');
     }
 
@@ -203,6 +204,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/schedule/schedule-add');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/schedule/footer');
     }
 
@@ -278,6 +280,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/events/events-list');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/events/footer');
     }
 
@@ -868,6 +871,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/events/add-event');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/events/footer');
     }
 
@@ -891,6 +895,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/events/event-details');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/events/footer-map');
     }
 
@@ -1011,6 +1016,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/events/edit-event');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/events/footer');
     }
 
@@ -1153,6 +1159,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/documents/documents-list');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -1215,6 +1222,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/documents/add-document');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -1240,6 +1248,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/documents/document-details');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -1301,6 +1310,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/documents/document-edit');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -1416,6 +1426,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/questions/questions-list');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -1462,6 +1473,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/questions/add-question');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -1508,6 +1520,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/questions/question-details');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -1564,6 +1577,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/questions/question-edit');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
     }
 
@@ -2092,6 +2106,7 @@ class Account extends CI_Controller {
         $this->load->view('user/include/header', $data);
         $this->load->view('user/schedule/edit-schedule');
         $this->load->view('user/include/right-sidebar');
+        $this->load->view('user/include/firebase-include');
         $this->load->view('user/schedule/footer');
     }
 
