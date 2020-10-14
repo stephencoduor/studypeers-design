@@ -2582,9 +2582,9 @@ div[data-edit] {
         margin-right: 10px;
         margin-bottom: 20px;
     }
-    .cal-schedule {
+    /* .cal-schedule {
         padding-top: 20px;
-    }
+    } */
     .monthEvents {
         flex-wrap: wrap;
     }
