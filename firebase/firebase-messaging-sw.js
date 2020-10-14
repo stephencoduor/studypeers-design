@@ -22,7 +22,7 @@ const messaging = firebase.messaging();
 
 messaging.setBackgroundMessageHandler(function(payload) {
     console.log(
-        "[firebase-messaging-sw.js] Received background message ",
+        "[firebase-messaging-sw.js] Received background notification ",
         payload,
     );
     // Customize notification here
