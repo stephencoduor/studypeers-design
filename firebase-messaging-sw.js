@@ -7,6 +7,10 @@ importScripts(
     "https://www.gstatic.com/firebasejs/7.16.1/firebase-analytics.js",
 );
 
+importScripts(
+    "https://code.jquery.com/jquery-3.5.1.min.js",
+);
+
 if( 'function' === typeof importScripts) {
 //   importScripts('script2.js');
    addEventListener('message', onMessage);
