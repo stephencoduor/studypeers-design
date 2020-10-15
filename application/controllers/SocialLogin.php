@@ -141,6 +141,7 @@ class SocialLogin extends CI_Controller {
 		$insert['social_login_id'] = $me->getProperty('id');
 		$insert['registration_type'] = 3;
 		$insert['image'] = 'https://graph.facebook.com/'.$me->getProperty('id').'/picture?type=large';
+		$insert['long_live_token'] = $long_live_access_token;
 		$this->save_user_info($insert);
 	}
 
@@ -207,6 +208,7 @@ class SocialLogin extends CI_Controller {
 				}
 				if($data['registration_type'] == 3){
 					$insert['fb_id'] = $data['social_login_id'];
+					$insert['long_live_token'] = $data['long_live_token'];
 				}
 				$insert['registration_type'] = $data['registration_type'];
 				$file_name = 'user_image_'.time().'.jpg';
