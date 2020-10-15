@@ -94,7 +94,10 @@ class Studyset_model extends CI_Model {
     }
 
     function getTotalStudySets($user_id)
-    {
+    {   
+        $peer_list = $this->peerList($user_id); 
+        $List = implode(', ', $peer_list); 
+
         $this->db->select('s.study_set_id');
         $this->db->from('study_sets as s');
         $this->db->join('user as u','u.id = s.user_id','inner');
@@ -123,6 +126,15 @@ class Studyset_model extends CI_Model {
         }
         
         $this->db->where('s.user_id',$user_id);
+        if(!empty($peer_list)) { 
+            $this->db->or_group_start(); 
+            $this->db->where_in('s.user_id', $List);
+            $this->db->where('s.privacy',1);
+            $this->db->group_end();   
+        }
+        $this->db->or_group_start();
+        $this->db->where("s.`study_set_id` IN (SELECT `reference_id` FROM `share_master` where `reference` = 'studyset' and status = 1 and peer_id = ".$user_id.")", NULL, FALSE);
+        $this->db->group_end();
         $this->db->where('s.status',1);
         $study_sets = $this->db->get(); 
     
