@@ -22,8 +22,8 @@ class Studyset_model extends CI_Model {
 
     function getStudySets($user_id)
     {   
-        $peer_list = $this->peerList($user_id); 
-        $List = implode(', ', $peer_list); 
+        $List = $this->peerListString($user_id); 
+        // $List = implode(', ', $peer_list); 
         
         $page = (isset($_POST['page']) && $_POST['page'] > 0) ? $_POST['page'] : 0;
         $this->db->select('s.*,u.first_name,u.last_name,u.image as user_image,cm.name as course_name,pm.name as professor_name,uv.SchoolName as institution_name,');
@@ -56,7 +56,7 @@ class Studyset_model extends CI_Model {
         }
     
         $this->db->where('s.user_id',$user_id);
-        if(!empty($peer_list)) { 
+        if(!empty($List)) { 
             $this->db->or_group_start(); 
             $this->db->where_in('s.user_id', $List);
             $this->db->where('s.privacy',1);
@@ -68,7 +68,7 @@ class Studyset_model extends CI_Model {
         $this->db->where('s.status',1);
         $this->db->limit(PER_PAGE, $page * PER_PAGE);
         $study_sets = $this->db->get()->result_array(); 
-        // echo $this->db->last_query();die;
+        echo $this->db->last_query();die;
         // echo $this->db->last_query();die;   
         $final_study_set = array();
         foreach ($study_sets as $key => $value) {
@@ -81,14 +81,31 @@ class Studyset_model extends CI_Model {
     }
 
 
+    function peerListString($user_id){
+        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
+        $peer = array();
+        foreach ($peer_list as $key => $value) {
+            if($value['user_id'] == $user_id){
+                // $peer[$key] = $value['peer_id']; 
+                array_push($peer, $value['peer_id']);
+            } else {
+                // $peer[$key] = $value['user_id']; 
+                array_push($peer, $value['user_id']);
+            }
+        }
+        return $peer;
+    }
+
     function peerList($user_id){
         $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
         $peer = array();
         foreach ($peer_list as $key => $value) {
             if($value['user_id'] == $user_id){
                 $peer[$key] = $value['peer_id']; 
+                // array_push($peer, $value['peer_id']);
             } else {
                 $peer[$key] = $value['user_id']; 
+                // array_push($peer, $value['user_id']);
             }
         }
         return $peer;
