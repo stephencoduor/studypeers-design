@@ -68,6 +68,7 @@ class Studyset_model extends CI_Model {
         $this->db->where('s.status',1);
         $this->db->limit(PER_PAGE, $page * PER_PAGE);
         $study_sets = $this->db->get()->result_array(); 
+        echo $this->db->last_query();die;
         // echo $this->db->last_query();die;   
         $final_study_set = array();
         foreach ($study_sets as $key => $value) {
@@ -75,7 +76,7 @@ class Studyset_model extends CI_Model {
             $value['isLikedByUser'] = $this->isLikedByUser($user_id,$value['study_set_id']); 
             array_push($final_study_set, $value);
         }
-        echo $this->db->last_query();die;
+        
         return $final_study_set;
     }
 
