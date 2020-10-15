@@ -75,7 +75,7 @@ class Studyset_model extends CI_Model {
             $value['isLikedByUser'] = $this->isLikedByUser($user_id,$value['study_set_id']); 
             array_push($final_study_set, $value);
         }
-    
+        echo $this->db->last_query();die;
         return $final_study_set;
     }
 
