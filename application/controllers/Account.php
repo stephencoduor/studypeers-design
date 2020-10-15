@@ -27,6 +27,7 @@ class Account extends CI_Controller {
 
     public function dashboard(){
         is_valid_logged_in(); 
+
         $user_id = $this->session->get_userdata()['user_data']['user_id']; 
         $data['user_detail'] = $this->db->get_where('user', array('id' => $user_id))->row_array();
         $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
@@ -2570,7 +2571,11 @@ class Account extends CI_Controller {
             $action_id = $this->db->insert_id();
 
             $userdata = $this->session->userdata('user_data');
-            $notification = "<b>".$userdata['username']."</b> sent you peer request";
+
+            $user_detail    = $this->db->get_where('user', array('id' => $user_id))->row_array();
+            $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
+
+            $notification = "<b>".$full_name."</b> sent you peer request";
 
             $insertArr = array(
                                     'user_id'       => $peer_id,
@@ -2617,7 +2622,10 @@ class Account extends CI_Controller {
                 $this->db->update('peer_master',array('status' => 2));
 
                 $userdata = $this->session->userdata('user_data');
-                $notification = "<b>".$userdata['username']."</b> accepted your peer request";
+                $user_detail    = $this->db->get_where('user', array('id' => $user_id))->row_array();
+                $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
+
+                $notification = "<b>".$full_name."</b> accepted your peer request";
 
                 $insertArr = array(
                                         'user_id'       => $detail['user_id'],
@@ -2745,7 +2753,9 @@ class Account extends CI_Controller {
         $action_id = $this->db->insert_id();
 
         $userdata = $this->session->userdata('user_data');
-        $notification = "<b>".$userdata['username']."</b> has shared a document with you.";
+        $user_detail    = $this->db->get_where('user', array('id' => $user_id))->row_array();
+        $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
+        $notification = "<b>".$full_name."</b> has shared a document with you.";
 
         $insertArr = array(
                                 'user_id'       => $peer_id,
@@ -2856,7 +2866,9 @@ class Account extends CI_Controller {
         $action_id = $this->db->insert_id();
 
         $userdata = $this->session->userdata('user_data');
-        $notification = "<b>".$userdata['username']."</b> has invited you to an event.";
+        $user_detail    = $this->db->get_where('user', array('id' => $user_id))->row_array();
+        $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
+        $notification = "<b>".$full_name."</b> has invited you to an event.";
 
         $insertArr = array(
                                 'user_id'       => $peer_id,
