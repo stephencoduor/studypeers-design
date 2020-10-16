@@ -102,7 +102,7 @@ class Account extends CI_Controller {
             $data['schedule_list_day'] = $this->db->query("select * from schedule_master where status = 1 and created_by = ".$user_id." and start_date <= '".$date1."' and end_date >= '".$date2."'")->result_array(); 
             $data['professor']  = array();
         }
-        $user_info = $this->db->get_where('schedule_master', array('created_by' => $user_id))->result_array();
+        $user_info = $this->db->get_where('schedule_master', array('created_by' => $user_id, 'status' => 1))->result_array();
         $events = array();
         $color_codes = array('#5D8CF1','#776BA7','#FFCD9B','#76EDD7','#F06DA5','#CAC8D3');
 

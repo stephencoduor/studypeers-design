@@ -141,7 +141,7 @@
 												?>
 													
 												</figure>
-												<figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name']; echo $studyset['user_id'];?></figcaption>
+												<figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption>
 											</div>
 											<?php if($studyset['user_id'] == $user_id) { ?>
 												<div class="edit">
