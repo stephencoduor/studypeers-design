@@ -610,7 +610,7 @@ class Account extends CI_Controller {
                                                             <figcaption>'.$user['nickname'].'</figcaption>
 
                                                         </div>'; 
-                                                        if($value['created_by'] == $user_id) {
+                                                    if($value['created_by'] == $user_id) {
                                                         $html.= '<div class="edit">
                                                                 <a href="'.base_url().'account/editEvent/'.base64_encode($value['id']).'">
                                                                     <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -747,15 +747,27 @@ class Account extends CI_Controller {
                                                     }
                                                     
                                                         $html.='<div class="action">';
+                                                        if($value['created_by'] == $user_id) {
                                                             if($value['addedToCalender'] == 0) { 
-                                                            $html.='<a href="#" class="addEvents" data-id="'.$value['id'].'" data-toggle="modal" data-target="#addEventModal">
-                                                                <img src="'.base_url().'assets_d/images/calendar.svg" alt="Events Calendar"> 
-                                                            </a>';
+                                                                $html.='<a href="#" class="addEvents" data-id="'.$value['id'].'" data-toggle="modal" data-target="#addEventModal">
+                                                                    <img src="'.base_url().'assets_d/images/calendar.svg" alt="Events Calendar"> 
+                                                                </a>';
                                                              } else {
                                                                 $html.='<a href="#" class="removeEvent" data-id="'.$value['id'].'" data-toggle="modal" data-target="#removeFromScheduleModal">
                                                                         <img src="'.base_url().'assets_d/images/calendar.png" alt="Events Calendar" style="width: 20px;height: 20px;"> 
                                                                     </a>';
                                                             }
+                                                        } else {
+                                                            if($shared['schedule_master_id'] == 0) { 
+                                                                $html.='<a href="#" class="addEvents" data-id="'.$value['id'].'" data-toggle="modal" data-target="#addEventModal">
+                                                                    <img src="'.base_url().'assets_d/images/calendar.svg" alt="Events Calendar"> 
+                                                                </a>';
+                                                            } else {
+                                                                $html.='<a href="#" class="removeEvent" data-id="'.$value['id'].'" data-toggle="modal" data-target="#removeFromScheduleModal">
+                                                                        <img src="'.base_url().'assets_d/images/calendar.png" alt="Events Calendar" style="width: 20px;height: 20px;"> 
+                                                                </a>';
+                                                            }
+                                                        }
                                                             $html.='<a>
                                                                 <div class="action_button">
                                                                     <a href="'.base_url().'account/eventDetails/'.base64_encode($value['id']).'">
@@ -1873,34 +1885,68 @@ class Account extends CI_Controller {
     }
 
     public function addEventToCalender(){
-        if($this->input->post()){
+        if($this->input->post()){ 
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
             $event_id   = $this->input->post('calender_event_id');
             $event      = $this->db->query("select * from event_master where id = ".$event_id."")->row_array();
-            $startdate  = $event['start_date'].' '.$event['start_time'];
-            $enddate    = $event['end_date'].' '.$event['end_time'];
-            $schedule   = array('schedule'      => 'event',
-                                'schedule_name' => $event['event_name'],
-                                'description'   => $event['description'],
-                                'university'    => $event['university'],
-                                'course'        => $event['course'],
-                                'professor'     => $event['professor'],
-                                'start_date'    => $startdate,
-                                'end_date'      => $enddate,
-                                'location'      => $event['location_txt'],
-                                'latitude'      => $event['latitude'],
-                                'longitude'     => $event['longitude'],
-                                'featured_image'    => $event['featured_image'],
-                                'event_master_id'=> $event['id'],
-                                'status'        => 1,
-                                'created_at'    => date('Y-m-d H:i:s'),
-                                'created_by'    => $event['created_by'],
-                             );
 
-            $this->db->insert('schedule_master', $schedule);
-            $schedule_id = $this->db->insert_id();
+            
+            if($event['created_by'] == $user_id) {
 
-            $this->db->where(array('id' => $event_id));
-            $this->db->update('event_master',array('addedToCalender' => 1, 'schedule_master_id' => $schedule_id));
+                $startdate  = $event['start_date'].' '.$event['start_time'];
+                $enddate    = $event['end_date'].' '.$event['end_time'];
+                $schedule   = array('schedule'      => 'event',
+                                        'schedule_name' => $event['event_name'],
+                                        'description'   => $event['description'],
+                                        'university'    => $event['university'],
+                                        'course'        => $event['course'],
+                                        'professor'     => $event['professor'],
+                                        'start_date'    => $startdate,
+                                        'end_date'      => $enddate,
+                                        'location'      => $event['location_txt'],
+                                        'latitude'      => $event['latitude'],
+                                        'longitude'     => $event['longitude'],
+                                        'featured_image'    => $event['featured_image'],
+                                        'event_master_id'=> $event['id'],
+                                        'status'        => 1,
+                                        'created_at'    => date('Y-m-d H:i:s'),
+                                        'created_by'    => $event['created_by'],
+                                     );
+
+                $this->db->insert('schedule_master', $schedule);
+                $schedule_id = $this->db->insert_id();
+
+
+                $this->db->where(array('id' => $event_id));
+                $this->db->update('event_master',array('addedToCalender' => 1, 'schedule_master_id' => $schedule_id));
+            } else {
+                $startdate  = $event['start_date'].' '.$event['start_time'];
+                $enddate    = $event['end_date'].' '.$event['end_time'];
+
+                $schedule   = array(    'schedule'      => 'event',
+                                        'schedule_name' => $event['event_name'],
+                                        'description'   => $event['description'],
+                                        'university'    => $event['university'],
+                                        'course'        => $event['course'],
+                                        'professor'     => $event['professor'],
+                                        'start_date'    => $startdate,
+                                        'end_date'      => $enddate,
+                                        'location'      => $event['location_txt'],
+                                        'latitude'      => $event['latitude'],
+                                        'longitude'     => $event['longitude'],
+                                        'featured_image'    => $event['featured_image'],
+                                        'event_master_id'=> $event['id'],
+                                        'status'        => 1,
+                                        'created_at'    => date('Y-m-d H:i:s'),
+                                        'created_by'    => $user_id,
+                                     );
+
+                $this->db->insert('schedule_master', $schedule);
+                $schedule_id = $this->db->insert_id();
+
+                $this->db->where(array('reference_id' => $event_id, 'reference' => 'event', 'peer_id' => $user_id, 'status' => 2));
+                $this->db->update('share_master',array('schedule_master_id' => $schedule_id));
+            }
 
             $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Event Added To Calender Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -1914,6 +1960,7 @@ class Account extends CI_Controller {
     public function getScheduleDetail(){
         if($this->input->post()){
             $id     = $this->input->post('id');
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
             $res    = $this->db->get_where('schedule_master', array('id' => $id))->row_array();
             $uni    = $this->db->get_where('university', array('university_id' => $res['university']))->row_array();
             $course    = $this->db->get_where('course_master', array('id' => $res['course']))->row_array();
@@ -1923,70 +1970,141 @@ class Account extends CI_Controller {
             } else {
                 $edit_url = base_url().'account/editSchedule/'.base64_encode($res['id']);
             }
+            
             $user = $this->db->get_where('user_info', array('userID' => $res['created_by']))->row_array();
-            $html = '<div class="userWrap action">                                      
-            <div class="edit">
-                <a href="'.$edit_url.'">
-                    <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
-                            <g>
+            $html = "";
+            if($res['schedule'] == 'event') {
+                $event    = $this->db->get_where('event_master', array('id' => $res['event_master_id']))->row_array();
+                if($event['created_by'] == $user_id) {
+                    $html.='<div class="userWrap action">                                      
+                        <div class="edit">
+                            <a href="'.$edit_url.'">
+                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+                                        <g>
+                                            <g>
+                                                <polygon points="51.2,353.28 0,512 158.72,460.8         "></polygon>
+                                            </g>
+                                        </g>
+                                        <g>
+                                            <g>
+                                                
+                                                    <rect x="89.73" y="169.097" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.8575 260.3719)" width="353.277" height="153.599"></rect>
+                                            </g>
+                                        </g>
+                                        <g>
+                                            <g>
+                                                <path d="M504.32,79.36L432.64,7.68c-10.24-10.24-25.6-10.24-35.84,0l-23.04,23.04l107.52,107.52l23.04-23.04
+                                                    C514.56,104.96,514.56,89.6,504.32,79.36z"></path>
+                                            </g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                </svg> Edit
+                            </a>
+                        </div>          
+                        <div class="delete">
+                            <a data-toggle="modal" onclick="deleteSchedule('.$res['id'].')" data-target="#confirmationModal">                                        
+                                <svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="m156.371094 30.90625h85.570312v14.398438h30.902344v-16.414063c.003906-15.929687-12.949219-28.890625-28.871094-28.890625h-89.632812c-15.921875 0-28.875 12.960938-28.875 28.890625v16.414063h30.90625zm0 0"></path><path d="m344.210938 167.75h-290.109376c-7.949218 0-14.207031 6.78125-13.566406 14.707031l24.253906 299.90625c1.351563 16.742188 15.316407 29.636719 32.09375 29.636719h204.542969c16.777344 0 30.742188-12.894531 32.09375-29.640625l24.253907-299.902344c.644531-7.925781-5.613282-14.707031-13.5625-14.707031zm-219.863282 312.261719c-.324218.019531-.648437.03125-.96875.03125-8.101562 0-14.902344-6.308594-15.40625-14.503907l-15.199218-246.207031c-.523438-8.519531 5.957031-15.851562 14.472656-16.375 8.488281-.515625 15.851562 5.949219 16.375 14.472657l15.195312 246.207031c.527344 8.519531-5.953125 15.847656-14.46875 16.375zm90.433594-15.421875c0 8.53125-6.917969 15.449218-15.453125 15.449218s-15.453125-6.917968-15.453125-15.449218v-246.210938c0-8.535156 6.917969-15.453125 15.453125-15.453125 8.53125 0 15.453125 6.917969 15.453125 15.453125zm90.757812-245.300782-14.511718 246.207032c-.480469 8.210937-7.292969 14.542968-15.410156 14.542968-.304688 0-.613282-.007812-.921876-.023437-8.519531-.503906-15.019531-7.816406-14.515624-16.335937l14.507812-246.210938c.5-8.519531 7.789062-15.019531 16.332031-14.515625 8.519531.5 15.019531 7.816406 14.519531 16.335937zm0 0"></path><path d="m397.648438 120.0625-10.148438-30.421875c-2.675781-8.019531-10.183594-13.429687-18.640625-13.429687h-339.410156c-8.453125 0-15.964844 5.410156-18.636719 13.429687l-10.148438 30.421875c-1.957031 5.867188.589844 11.851562 5.34375 14.835938 1.9375 1.214843 4.230469 1.945312 6.75 1.945312h372.796876c2.519531 0 4.816406-.730469 6.75-1.949219 4.753906-2.984375 7.300781-8.96875 5.34375-14.832031zm0 0"></path>
+                                </svg> Delete
+                            </a>
+                        </div>  
+                    </div>';
+                }
+            } else {
+                $html.='<div class="userWrap action">                                      
+                <div class="edit">
+                    <a href="'.$edit_url.'">
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
                                 <g>
-                                    <polygon points="51.2,353.28 0,512 158.72,460.8         "></polygon>
+                                    <g>
+                                        <polygon points="51.2,353.28 0,512 158.72,460.8         "></polygon>
+                                    </g>
                                 </g>
-                            </g>
-                            <g>
                                 <g>
-                                    
-                                        <rect x="89.73" y="169.097" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.8575 260.3719)" width="353.277" height="153.599"></rect>
+                                    <g>
+                                        
+                                            <rect x="89.73" y="169.097" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -95.8575 260.3719)" width="353.277" height="153.599"></rect>
+                                    </g>
                                 </g>
-                            </g>
-                            <g>
                                 <g>
-                                    <path d="M504.32,79.36L432.64,7.68c-10.24-10.24-25.6-10.24-35.84,0l-23.04,23.04l107.52,107.52l23.04-23.04
-                                        C514.56,104.96,514.56,89.6,504.32,79.36z"></path>
+                                    <g>
+                                        <path d="M504.32,79.36L432.64,7.68c-10.24-10.24-25.6-10.24-35.84,0l-23.04,23.04l107.52,107.52l23.04-23.04
+                                            C514.56,104.96,514.56,89.6,504.32,79.36z"></path>
+                                    </g>
                                 </g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                            <g>
-                            </g>
-                    </svg> Edit
-                </a>
-            </div>          
-            <div class="delete">
-                <a data-toggle="modal" onclick="deleteSchedule('.$res['id'].')" data-target="#confirmationModal">                                        
-                    <svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
-                        <path d="m156.371094 30.90625h85.570312v14.398438h30.902344v-16.414063c.003906-15.929687-12.949219-28.890625-28.871094-28.890625h-89.632812c-15.921875 0-28.875 12.960938-28.875 28.890625v16.414063h30.90625zm0 0"></path><path d="m344.210938 167.75h-290.109376c-7.949218 0-14.207031 6.78125-13.566406 14.707031l24.253906 299.90625c1.351563 16.742188 15.316407 29.636719 32.09375 29.636719h204.542969c16.777344 0 30.742188-12.894531 32.09375-29.640625l24.253907-299.902344c.644531-7.925781-5.613282-14.707031-13.5625-14.707031zm-219.863282 312.261719c-.324218.019531-.648437.03125-.96875.03125-8.101562 0-14.902344-6.308594-15.40625-14.503907l-15.199218-246.207031c-.523438-8.519531 5.957031-15.851562 14.472656-16.375 8.488281-.515625 15.851562 5.949219 16.375 14.472657l15.195312 246.207031c.527344 8.519531-5.953125 15.847656-14.46875 16.375zm90.433594-15.421875c0 8.53125-6.917969 15.449218-15.453125 15.449218s-15.453125-6.917968-15.453125-15.449218v-246.210938c0-8.535156 6.917969-15.453125 15.453125-15.453125 8.53125 0 15.453125 6.917969 15.453125 15.453125zm90.757812-245.300782-14.511718 246.207032c-.480469 8.210937-7.292969 14.542968-15.410156 14.542968-.304688 0-.613282-.007812-.921876-.023437-8.519531-.503906-15.019531-7.816406-14.515624-16.335937l14.507812-246.210938c.5-8.519531 7.789062-15.019531 16.332031-14.515625 8.519531.5 15.019531 7.816406 14.519531 16.335937zm0 0"></path><path d="m397.648438 120.0625-10.148438-30.421875c-2.675781-8.019531-10.183594-13.429687-18.640625-13.429687h-339.410156c-8.453125 0-15.964844 5.410156-18.636719 13.429687l-10.148438 30.421875c-1.957031 5.867188.589844 11.851562 5.34375 14.835938 1.9375 1.214843 4.230469 1.945312 6.75 1.945312h372.796876c2.519531 0 4.816406-.730469 6.75-1.949219 4.753906-2.984375 7.300781-8.96875 5.34375-14.832031zm0 0"></path>
-                    </svg> Delete
-                </a>
-            </div>  
-        </div>
-        <h4>'.$res['schedule_name'].'</h4>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                        </svg> Edit
+                    </a>
+                </div>          
+                <div class="delete">
+                    <a data-toggle="modal" onclick="deleteSchedule('.$res['id'].')" data-target="#confirmationModal">                                        
+                        <svg height="512pt" viewBox="-57 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+                            <path d="m156.371094 30.90625h85.570312v14.398438h30.902344v-16.414063c.003906-15.929687-12.949219-28.890625-28.871094-28.890625h-89.632812c-15.921875 0-28.875 12.960938-28.875 28.890625v16.414063h30.90625zm0 0"></path><path d="m344.210938 167.75h-290.109376c-7.949218 0-14.207031 6.78125-13.566406 14.707031l24.253906 299.90625c1.351563 16.742188 15.316407 29.636719 32.09375 29.636719h204.542969c16.777344 0 30.742188-12.894531 32.09375-29.640625l24.253907-299.902344c.644531-7.925781-5.613282-14.707031-13.5625-14.707031zm-219.863282 312.261719c-.324218.019531-.648437.03125-.96875.03125-8.101562 0-14.902344-6.308594-15.40625-14.503907l-15.199218-246.207031c-.523438-8.519531 5.957031-15.851562 14.472656-16.375 8.488281-.515625 15.851562 5.949219 16.375 14.472657l15.195312 246.207031c.527344 8.519531-5.953125 15.847656-14.46875 16.375zm90.433594-15.421875c0 8.53125-6.917969 15.449218-15.453125 15.449218s-15.453125-6.917968-15.453125-15.449218v-246.210938c0-8.535156 6.917969-15.453125 15.453125-15.453125 8.53125 0 15.453125 6.917969 15.453125 15.453125zm90.757812-245.300782-14.511718 246.207032c-.480469 8.210937-7.292969 14.542968-15.410156 14.542968-.304688 0-.613282-.007812-.921876-.023437-8.519531-.503906-15.019531-7.816406-14.515624-16.335937l14.507812-246.210938c.5-8.519531 7.789062-15.019531 16.332031-14.515625 8.519531.5 15.019531 7.816406 14.519531 16.335937zm0 0"></path><path d="m397.648438 120.0625-10.148438-30.421875c-2.675781-8.019531-10.183594-13.429687-18.640625-13.429687h-339.410156c-8.453125 0-15.964844 5.410156-18.636719 13.429687l-10.148438 30.421875c-1.957031 5.867188.589844 11.851562 5.34375 14.835938 1.9375 1.214843 4.230469 1.945312 6.75 1.945312h372.796876c2.519531 0 4.816406-.730469 6.75-1.949219 4.753906-2.984375 7.300781-8.96875 5.34375-14.832031zm0 0"></path>
+                        </svg> Delete
+                    </a>
+                </div>  
+            </div>';
+            }
+            
+        $html.='<h4>'.$res['schedule_name'].'</h4>
         <div class="badgeList">
             <ul>
                 <li class="badge badge1">'.$uni['SchoolName'].'</li>
@@ -2114,6 +2232,8 @@ class Account extends CI_Controller {
     public function deleteSchedule(){
         if($this->input->post()){ //print_r($this->input->post());die;
             $schedule_id = $this->input->post('delete_schedule_id');
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
+
             $this->db->where(array('id' => $schedule_id));
             $this->db->update('schedule_master',array('status' => 3));
 
@@ -2131,11 +2251,18 @@ class Account extends CI_Controller {
     public function removeEvent(){
         if($this->input->post()){ //print_r($this->input->post());die;
             $remove_event_id = $this->input->post('remove_event_id');
-            $this->db->where(array('event_master_id' => $remove_event_id));
+            $event      = $this->db->query("select * from event_master where id = ".$remove_event_id."")->row_array();
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
+            $this->db->where(array('event_master_id' => $remove_event_id, 'created_by' => $user_id));
             $this->db->update('schedule_master',array('status' => 3));
 
-            $this->db->where(array('id' => $remove_event_id));
-            $this->db->update('event_master',array('addedToCalender' => 0));
+            if($event['created_by'] == $user_id) {
+                $this->db->where(array('id' => $remove_event_id));
+                $this->db->update('event_master',array('addedToCalender' => 0));
+            } else {
+                $this->db->where(array('reference_id' => $remove_event_id, 'reference' => 'event', 'peer_id' => $user_id, 'status' => 2));
+                $this->db->update('share_master',array('schedule_master_id' => 0));
+            }
 
             $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Event Removed From Schedule Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -2622,7 +2749,7 @@ class Account extends CI_Controller {
                 $this->db->update('peer_master',array('status' => 2));
 
                 $userdata = $this->session->userdata('user_data');
-                $user_detail    = $this->db->get_where('user', array('id' => $user_id))->row_array();
+                $user_detail    = $this->db->get_where('user', array('id' => $detail['peer_id']))->row_array();
                 $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 
                 $notification = "<b>".$full_name."</b> accepted your peer request";
@@ -2642,7 +2769,7 @@ class Account extends CI_Controller {
                 $get_active_token = $this->db->get_where($this->db->dbprefix('user_token'), array('user_id'=>$detail['user_id'], 'status' => 1))->result_array(); 
 
                 foreach ($get_active_token  as $key => $value) {
-                    $this->sendTestNotification($value['token'], 'Peer Request Accepted', 'Your Peer Request has been accepted.', '0');
+                    $this->sendTestNotification($value['token'], 'Peer Request Accepted', 'Your Peer Request has been accepted by '.$full_name.'.', '0');
                 }
 
             }

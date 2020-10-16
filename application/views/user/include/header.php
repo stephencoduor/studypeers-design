@@ -334,7 +334,9 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 							<li class="user">
 								<?php
 								$userdata = $this->session->userdata('user_data');
-								echo $userdata['username'];
+								$user_detail    = $this->db->get_where('user', array('id' => $userdata['user_id']))->row_array();
+        						$full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
+								echo $full_name;
 								?>
 							</li>
 							<li class = "dropdown">
