@@ -22,8 +22,8 @@ class Studyset_model extends CI_Model {
 
     function getStudySets($user_id)
     {   
-        $peer_list = $this->peerList($user_id); 
-        $List = implode(', ', $peer_list); 
+        $List = $this->peerListString($user_id); 
+        // $List = implode(', ', $peer_list); 
         
         $page = (isset($_POST['page']) && $_POST['page'] > 0) ? $_POST['page'] : 0;
         $this->db->select('s.*,u.first_name,u.last_name,u.image as user_image,cm.name as course_name,pm.name as professor_name,uv.SchoolName as institution_name,');
@@ -56,7 +56,7 @@ class Studyset_model extends CI_Model {
         }
     
         $this->db->where('s.user_id',$user_id);
-        if(!empty($peer_list)) { 
+        if(!empty($List)) { 
             $this->db->or_group_start(); 
             $this->db->where_in('s.user_id', $List);
             $this->db->where('s.privacy',1);
@@ -113,8 +113,8 @@ class Studyset_model extends CI_Model {
 
     function getTotalStudySets($user_id)
     {   
-        $peer_list = $this->peerList($user_id); 
-        $List = implode(', ', $peer_list); 
+        $List = $this->peerListString($user_id); 
+        // $List = implode(', ', $peer_list); 
 
         $this->db->select('s.study_set_id');
         $this->db->from('study_sets as s');
@@ -144,7 +144,7 @@ class Studyset_model extends CI_Model {
         }
         
         $this->db->where('s.user_id',$user_id);
-        if(!empty($peer_list)) { 
+        if(!empty($List)) { 
             $this->db->or_group_start(); 
             $this->db->where_in('s.user_id', $List);
             $this->db->where('s.privacy',1);
