@@ -32,6 +32,7 @@ class Studyset_model extends CI_Model {
         $this->db->join('course_master as cm','cm.id = s.course','inner');
         $this->db->join('professor_master as pm','pm.id = s.professor','inner');
         $this->db->join('university as uv','uv.university_id = s.institution','inner');
+        $this->db->or_group_start();
         if(isset($_GET['study_search']) && $_GET['study_search'] != ''){
             $txt = $_GET['study_search'];
             $this->db->where("(s.name like '%$txt%' OR uv.SchoolName like '%$txt%' OR cm.name like '%$txt%' OR pm.name like '%$txt%')");
@@ -64,6 +65,7 @@ class Studyset_model extends CI_Model {
         }
         $this->db->or_group_start();
         $this->db->where("s.`study_set_id` IN (SELECT `reference_id` FROM `share_master` where `reference` = 'studyset' and status = 1 and peer_id = ".$user_id.")", NULL, FALSE);
+        $this->db->group_end();
         $this->db->group_end();
         $this->db->where('s.status',1);
         $this->db->limit(PER_PAGE, $page * PER_PAGE);
