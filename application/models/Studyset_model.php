@@ -74,9 +74,12 @@ class Studyset_model extends CI_Model {
         // echo $this->db->last_query();die;   
         $final_study_set = array();
         foreach ($study_sets as $key => $value) {
-            $value['time_ago'] = $this->to_time_ago(strtotime($value['created_on']));
-            $value['isLikedByUser'] = $this->isLikedByUser($user_id,$value['study_set_id']); 
-            array_push($final_study_set, $value);
+            $chk = $this->db->get_where($this->db->dbprefix('remove_master'), array('user_id'=>$user_id, 'reference_id' => $value['study_set_id'], 'reference' => 'studyset', 'status' => 1))->row_array();
+            if(empty($chk)) {
+                $value['time_ago'] = $this->to_time_ago(strtotime($value['created_on']));
+                $value['isLikedByUser'] = $this->isLikedByUser($user_id,$value['study_set_id']); 
+                array_push($final_study_set, $value);
+            }
         }
         
         return $final_study_set;
@@ -294,8 +297,20 @@ class Studyset_model extends CI_Model {
     function removeStudySet($study_set_id)
     {   
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $this->db->where(array('reference_id' => $study_set_id, 'reference' => 'studyset', 'peer_id' => $user_id));
-        $result = $this->db->update('share_master',array('status' => 3));
+
+        $chk = $this->db->get_where($this->db->dbprefix('share_master'), array('reference_id' => $study_set_id, 'reference' => 'studyset', 'peer_id' => $user_id))->row_array();
+        if(!empty($chk)){
+            $this->db->where(array('reference_id' => $study_set_id, 'reference' => 'studyset', 'peer_id' => $user_id));
+            $result = $this->db->update('share_master',array('status' => 3));
+        } else {
+            $insertArr = array( 'reference'     => 'studyset', 
+                                'reference_id'  => $study_set_id,
+                                'user_id'       => $user_id,
+                                'status'        => 1,
+                                'addDate'       => date("Y-m-d H:i:s")
+                            );
+            $result = $this->db->insert('remove_master',$insertArr);
+        }
 
         return $result;
     }
