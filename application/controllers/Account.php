@@ -15,6 +15,7 @@ class Account extends CI_Controller {
         // Set the timezone
         date_default_timezone_set(get_settings('timezone'));
         $this->load->library('upload');
+        $this->load->model('studyset_model');
     }
 
     public function index() {
@@ -23,6 +24,21 @@ class Account extends CI_Controller {
         }else {
             redirect(site_url('login'), 'refresh');
         }
+    }
+
+    function peerListString($user_id){
+        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
+        $peer = array();
+        foreach ($peer_list as $key => $value) {
+            if($value['user_id'] == $user_id){
+                // $peer[$key] = $value['peer_id']; 
+                array_push($peer, $value['peer_id']);
+            } else {
+                // $peer[$key] = $value['user_id']; 
+                array_push($peer, $value['user_id']);
+            }
+        }
+        return $peer;
     }
 
     public function dashboard(){
@@ -38,7 +54,15 @@ class Account extends CI_Controller {
 
 
         $data['peer_requests'] = $this->db->get_where('peer_master', array('peer_id' => $user_id, 'status' => 1))->result_array();
+
+        $peerList = $this->peerListString($user_id); 
+
+        $comma_separated = implode(",", $peerList);
+
+        $data['events'] = $this->db->query("select * from event_master where status = 1 and created_by = ".$user_id." OR event_master.id in (SELECT reference_id from share_master where peer_id = ".$user_id." and reference = 'event' and status != 4) OR (event_master.created_by in (".$comma_separated.") AND status = 1) order by start_date desc limit 5")->result_array();
         
+        $data['studysets'] = $this->studyset_model->getStudySets($user_id);
+       
         $data['index_menu']  = 'dashboard';
         $data['title']  = 'Dashboard | Studypeers';
         $this->load->view('user/include/header', $data);
