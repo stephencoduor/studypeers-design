@@ -4698,7 +4698,7 @@
 									<?php foreach ($events as $key => $value) { ?>
 										<div class="box-card message">
 										<div class="eventMessage">
-											<img src="<?php echo base_url(); ?>assets_d/images/event.svg" alt="Ring"> Event
+											<img src="<?php echo base_url(); ?>assets_d/images/Event.svg" alt="Ring"> Event
 										</div>
 										<div class="dropdown dropdownToggleMenu">
 											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
