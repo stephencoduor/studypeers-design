@@ -114,6 +114,24 @@ $(document).ready(() => {
 //study-set JS
 $(document).ready(function() {
     $('.institutions,.course,.professor').select2();
+    $(".select-box").select2({
+      placeholder: "--Select--",
+    });
+    $(".study-field").select2({
+      placeholder: "--Select your field of study--",
+    });
+    $(".major-field").select2({
+      placeholder: "--Select your major--",
+    });
+    $(".session-field").select2({
+      placeholder: "--Session--",
+    });
+    $(".degree-field").select2({
+        placeholder: "--Select degree--",
+    });
+    $(".field-of-interest").select2({
+      placeholder: "--Field of interest--",
+    });
     $('.filterForm').addClass('collapse');
     $('.filterBtn').on('click',()=>{
       $('.filterForm').toggleClass('collapse');
