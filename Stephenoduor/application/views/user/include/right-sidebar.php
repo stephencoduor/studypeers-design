@@ -1,0 +1,384 @@
+<section class="rightsidemsgbar">
+	<section class="view message">
+		Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
+	</section>
+	<section class="listBar">
+		<section class="listHeader">
+    		<h6>Peers</h6>
+    		<a data-toggle="modal" data-target="#peersMessageModal">See More</a>
+		</section>
+		<section class="listChatBox">
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    				</figure>
+    				<figcaption>Scholasticus Ipsum</figcaption>
+    			</section>
+    			<section class="action">
+    				<i class="fa fa-ellipsis-v"></i>
+    			</section>
+			</section>
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    					<span class="messagecount">12</span>
+    				</figure>
+    				<figcaption>Scholasticus Ipsum</figcaption>
+    			</section>
+    			<section class="action">
+    				<i class="fa fa-ellipsis-v"></i>
+    			</section>
+			</section>
+		</section>
+	</section>
+	<section class="listBar">
+		<section class="listHeader">
+    		<h6>Groups</h6>
+    		<a><i class="fa fa-plus"></i></a>
+		</section>
+		<section class="listChatBox">
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    				</figure>
+    				<figcaption>The in group</figcaption>
+    			</section>
+    			<section class="action">
+    				<i class="fa fa-ellipsis-v"></i>
+    			</section>
+			</section>
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    					<span class="messagecount">12</span>
+    				</figure>
+    				<figcaption>The in group</figcaption>
+    			</section>
+    			<section class="action">
+    				<i class="fa fa-ellipsis-v"></i>
+    			</section>
+			</section>
+		</section>
+	</section>
+	<section class="listBar">
+		<section class="listHeader">
+    		<h6>Contacts</h6>
+		</section>
+		<section class="listChatBox">
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    					<span class="circle online"></span>
+    				</figure>
+    				<figcaption>Angelina</figcaption>
+    			</section>
+			</section>
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    					<span class="circle offline"></span>
+    				</figure>
+    				<figcaption>Angelina</figcaption>
+    			</section>
+			</section>
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    					<span class="circle online"></span>
+    				</figure>
+    				<figcaption>Angelina</figcaption>
+    			</section>
+			</section>
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    					<span class="circle offline"></span>
+    				</figure>
+    				<figcaption>Angelina</figcaption>
+    			</section>
+			</section>
+			<section class="list">
+    			<section class="left">
+    				<figure>
+    					<img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+    					<span class="circle online"></span>
+    				</figure>
+    				<figcaption>Charles</figcaption>
+    			</section>
+			</section>
+		</section>
+	</section>
+</section>
+</section>
+        </section>
+    </section>
+    <div class="modal fade" id="peersMessageModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+              <h4>Peers List</h4>
+              <div class="searchPeer">
+                <div class="filterSearch">
+                    <input type="text" placeholder="Search Peers" name="">
+                    <button type="submit" class="searchBtn">
+                        <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                            <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+                            s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+                            c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+                        </svg>
+                    </button>
+                </div>
+              </div>
+              <div class="peersList">
+                <div class="listHeader">
+                    <h6>Peers</h6>
+                </div>
+                <div class="listUserWrap">
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            </figure>
+                            <figcaption>John Phelips</figcaption>
+                        </section>
+                        <section class="action">
+                            <button type="button" class="like">message</button>
+                        </section>
+                    </section>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="courseModal" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            <div class="modal-body">
+                <div class="courseHeader">
+                    <h4>Course</h4>
+                    <div class="add_course">
+                        <svg height="512pt" 
+                            viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#2196f3"/><path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" fill="#fafafa"/>
+                        </svg>
+                        Add a course
+                    </div>
+                </div>
+                <form method="post" action="<?php echo base_url(); ?>account/postCourse" onsubmit="return validateCourse()" id="course_form">
+                    <div class="courseBox">
+                        <div class="removeCourseBox">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
+                                        xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+                                <g>
+                                    <g>
+                                        <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+                                            L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+                                            c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+                                            l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+                                            L284.286,256.002z"/>
+                                    </g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                            </svg>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" name="course_id[]" class="form-control form-control--lg" placeholder="Course ID">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" name="course_name[]" class="form-control form-control--lg course_name" placeholder="Course Name">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" name="professor_first_name[]" class="form-control form-control--lg professor_first_name" placeholder="Professor First Name">
+                                </div>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <div class="form-group">
+                                    <input type="text" name="professor_last_name[]" class="form-control form-control--lg professor_last_name" placeholder="Professor Last Name">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="studybuttonGroup">
+                        <button type="button" class="transparentBtn" data-dismiss="modal">Cancel</button>
+                        <button type="submit" class="filterBtn">
+                            Add
+                        </button>
+                    </div>
+                </form>
+            </div>
+          </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="courseModalAll" role="dialog">
+        <div class="modal-dialog">
+          <!-- Modal content-->
+          <div class="modal-content">
+              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            <div class="modal-body" >
+                <div class="courseHeader">
+                    <h4>All Courses</h4>
+                    
+                </div>
+                <div id="courseModalAllBody"></div>
+                
+                <div class="studybuttonGroup">
+                    <button type="button" class="transparentBtn" data-dismiss="modal">Close</button>
+                </div>
+                
+            </div>
+          </div>
+        </div>
+    </div>
