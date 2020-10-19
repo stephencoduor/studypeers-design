@@ -1,4 +1,4 @@
-
+<?php $user_id = $this->session->get_userdata()['user_data']['user_id'];  ?>
 				<section class="mainContent">
 					<div class="main-home-wrapper">
 						<div class="tabularLiist">
@@ -181,7 +181,7 @@
 										</div>
 									<?php } ?>
 									<!-- Alert Notification -->
-									<div class="box-card message">
+									<!-- <div class="box-card message">
 										<div class="alertMessage">
 											<img src="<?php echo base_url(); ?>assets_d/images/alert.svg" alt="Ring">
 										</div>
@@ -628,9 +628,9 @@
 								    			</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<!-- End -->
-									<div class="box-card">
+									<!-- <div class="box-card">
 										<div class="dropdown dropdownToggleMenu">
 											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
 											<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
@@ -4693,11 +4693,12 @@
 								    			</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<!-- Event -->
-									<div class="box-card message">
+									<?php foreach ($events as $key => $value) { ?>
+										<div class="box-card message">
 										<div class="eventMessage">
-											<img src="<?php echo base_url(); ?>assets_d/images/event.svg" alt="Ring"> Event
+											<img src="<?php echo base_url(); ?>assets_d/images/Event.svg" alt="Ring"> Event
 										</div>
 										<div class="dropdown dropdownToggleMenu">
 											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
@@ -4799,12 +4800,22 @@
 															<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
 														</figure>
 														<div class="right">
-															<figcaption>Loreum Ipsum <span>posted in university</span> <img src="<?php echo base_url(); ?>assets_d/images/university.svg"> University name</figcaption>
+															<?php $user = $this->db->get_where('user', array('id' => $value['created_by']))->row_array();
+															$user_info = $this->db->get_where('user_info', array('userID' => $value['created_by']))->row_array();
+															$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array();
+															 if($value['created_by'] == $user_id) { ?>
+																<figcaption>You 
+															<?php } else { 
+																
+															?>
+																<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> 
+															<?php } ?>
+															<span>posted in university</span> <img src="<?php echo base_url(); ?>assets_d/images/university.svg"> <?php echo $university['SchoolName']; ?></figcaption>
 															<div class="badgeList">
 																<ul>
 																	<li class="badge badge1">
 																		<a href="">
-																			<img src="<?php echo base_url(); ?>assets_d/images/institution.svg" alt="InStitute"> University name
+																			<img src="<?php echo base_url(); ?>assets_d/images/institution.svg" alt="InStitute"> <?php echo $university['SchoolName']; ?>
 																		</a>
 																	</li>
 																	<li class="badge badge3">
@@ -4818,27 +4829,29 @@
 													</div>
 													<div class="timeline">10 mins ago</div>
 												</div>
-												<h4>Lorem Ipsum is simply dummy text of the printing and</h4>
+												<h4><?php echo $value['event_name'] ?></h4>
 												<div class="event-description">
 													<div class="left">
-														<img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> Location name
+														<img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> <?php echo $value['location_txt'] ?>
 													</div>
 													<div class="right">
 														<figure>
 															<img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
 														</figure>
-														<figcaption>July 17, 03:00 PM</figcaption>
+														<figcaption><?php echo date('d M, Y', strtotime($value['start_date'])); ?></figcaption>
 														<a>Add to Calendar</a>
 													</div>
 												</div>
 												<p class="feedPostMessages">
-													Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+													<?php echo $value['description']; ?> 
 												</p>
-												<div class="imgWrapper type1">
-													<figure>
-														<img src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="Post Image">
-													</figure>
-												</div>
+												<?php if($value['featured_image'] != '') { ?>
+													<div class="imgWrapper type1">
+														<figure>
+															<img src="<?php echo base_url(); ?>uploads/users/<?php echo $value['featured_image']; ?>" alt="Post Image">
+														</figure>
+													</div>
+												<?php } ?>
 												<div class="eventActionWrap">
 													<ul>
 														<li>
@@ -5183,7 +5196,10 @@
 											</div>
 										</div>
 									</div>
+									<?php } ?>
+									
 									<!-- Study Set -->
+									<?php foreach ($studysets as $key => $value) { ?>
 									<div class="box-card message">
 										<div class="eventMessage">
 											<img src="<?php echo base_url(); ?>assets_d/images/Study Sets.svg" alt="Ring"> Study Set
@@ -5287,13 +5303,16 @@
 														<figure>
 															<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
 														</figure>
+														<?php $user = $this->db->get_where('user', array('id' => $value['user_id']))->row_array();
+															$user_info = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
+															$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 														<div class="right">
-															<figcaption>Loreum Ipsum </figcaption>
+															<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> </figcaption>
 															<div class="badgeList">
 																<ul>
 																	<li class="badge badge1">
 																		<a href="">
-																			<img src="<?php echo base_url(); ?>assets_d/images/institution.svg" alt="InStitute"> University name
+																			<img src="<?php echo base_url(); ?>assets_d/images/institution.svg" alt="InStitute"> <?php echo $university['SchoolName']; ?>
 																		</a>
 																	</li>
 																	<li class="badge badge3">
@@ -5307,12 +5326,18 @@
 													</div>
 													<div class="timeline">10 mins ago</div>
 												</div>
-												<h4>Lorem Ipsum is simply dummy text of the printing and</h4>
+												<h4><?php echo $value['name']; ?></h4>
+												
 												<div class="imgWrapper type1">
 													<figure>
-														<img src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="Post Image">
+														<?php if($value['image']) { ?>
+															<img src="<?php echo base_url();?>uploads/studyset/<?php echo $value['image'];?>" alt="Post Image">
+														<?php } else { ?>
+															<img src="<?php echo base_url();?>assets_d/images/detail1.jpg" alt="Post Image">
+														<?php } ?>
 													</figure>
 												</div>
+												
 												<div class="socialStatus">
 													<div class="leftStatus">
 														<a>
@@ -5641,7 +5666,8 @@
 											</div>
 										</div>
 									</div>
-									<div class="box-card message">
+									<?php } ?>
+									<!-- <div class="box-card message">
 										<div class="eventMessage">
 											<img src="<?php echo base_url(); ?>assets_d/images/document.svg" alt="document"> Document
 										</div>
@@ -6550,9 +6576,9 @@
 								    			</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<!-- Textbook -->
-									<div class="box-card message">
+									<!-- <div class="box-card message">
 										<div class="eventMessage">
 											<img src="<?php echo base_url(); ?>assets_d/images/document.svg" alt="document"> Document
 										</div>
@@ -7916,9 +7942,9 @@
 								    			</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 									<!-- Article -->
-									<div class="box-card message">
+									<!-- <div class="box-card message">
 										<div class="eventMessage">
 											<img src="<?php echo base_url(); ?>assets_d/images/Article.svg" alt="Article"> Article
 										</div>
@@ -10038,7 +10064,7 @@
 								    			</div>
 											</div>
 										</div>
-									</div>
+									</div> -->
 								</div>
 								<div id="schoolfeed" class="tab-pane fade">Tab2</div>
 							</div>

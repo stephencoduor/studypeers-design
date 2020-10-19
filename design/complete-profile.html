@@ -152,7 +152,7 @@
 						<div class="col-sm-8">
 							<ul class="header-menu">
 								<li><a href="">Aboutus</a></li>
-								<li><a href="">Privacy Policy</a></li>
+								<li><a href="privacy.html">Privacy Policy</a></li>
 								<li><a href="">Terms & Conditions</a></li>
 								
 							</ul>
@@ -256,7 +256,7 @@
 							</div>
 						</div>
 						<div class="form-group text-right">
-							<button type="submit" class="filterBtn" data-toggle="modal" data-target="#verify-email">Continue</button>
+							<a href="where-are-studying.html" class="filterBtn">Continue</a>
 						</div>
 					</div>
 				</div>
@@ -335,20 +335,6 @@
         $('.sp-round-btn').click(function(e){
         	$(this).parent('.showInputs').parent('.flex-form-row').removeClass('isEditable');
         });
-        // $('.changeselectbox select').on('change',function(){
-        // 	let data = $(this).val();
-        // 	let course = $('#course').attr('data-show');
-        // 	let location = $('#location').attr('data-show');
-        // 	let splitCourse = course.split(' ');
-        // 	let splitLocation = location.split(' ');
-        // 	var results = Array.FindAll(arr, s => s.Equals(target));
-        // 	console.log(splitCourse);
-        // 	if(data === splitCourse || data === splitLocation){
-        // 		alert();
-        // 		$('#course').show();
-        // 		$('#location').show();
-        // 	}
-        // })
         $('#eventtype').on('change', function(){
         	let data = $(this).val();
         	if(data === 'rotating') {
