@@ -51,7 +51,6 @@
     });
     $(document).ready(function() {
         var base_url = $('#base').val();
-        console.log(base_url);
         CKEDITOR.replace('messagepostarea', {
             on: {
                 instanceReady: function (evt) {
@@ -61,8 +60,55 @@
                 }
             }
         });
+        var counter = 1;
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var html_image = '<div class="col-md-4"><div class="uloadedImage"><figure><img src="'+e.target.result+'" alt="image" id="image'+counter+'"></figure>'+
+                        '<div class="close"><img src="'+base_url+'assets_d/images/close-pink.svg" class="remove_image" id="remove_image_'+counter+'" alt="close"></div></div></div>';
+                    $('#imgInp'+counter).hide();
+                    $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp'+counter+'" name="file[]" multiple="multiple">');
+                    $('#image_row').append(html_image);
+                    counter++;
+                };
+                reader.readAsDataURL(input.files[0]); // convert to base64 string
+            }
+        }
+
+        $(document).on('change','.image_upload_button', function(){
+            readURL(this);
+        });
+
+
+
         $(document).on( 'click', '#save_post_from_ajax', function () {
+            $('#addPostForm').submit();
+        });
+        $('#addPostForm').on("submit", function(e){
+            e.preventDefault();
+            var formData = new FormData(this);
+            var url = $(this).attr('action');
             var html_content = CKEDITOR.instances['messagepostarea'].getData();
+            var privacy = $("input:radio.privacy_val:checked").val();
+            var allow_comment = $('#allow_comment').val();
+            formData.append('html_content', html_content);
+            formData.append('privacy', privacy);
+            formData.append('allow_comment', allow_comment);
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+            //return false;
+            /*var html_content = CKEDITOR.instances['messagepostarea'].getData();
             console.log(html_content);
             var privacy = $("input:radio.privacy_val:checked").val();
             console.log(privacy);
@@ -72,7 +118,7 @@
                 $.ajax({
                     url : base_url+'Profile/savePost',
                     type : 'post',
-                    data : {"html_content" : html_content,"privacy" : privacy,"allow_comment" : allow_comment},
+                    data : {"html_content" : html_content,"privacy" : privacy,"allow_comment" : allow_comment, "image_data" : formdata},
                     success:function(result) {
                         if(result == true){
                             window.location.href = base_url+'Profile/redirect_page?status='+result;
@@ -80,7 +126,7 @@
                     }
                 });
 
-            }
+            }*/
         });
 
         $('.box-card').each(function () {

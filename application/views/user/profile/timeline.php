@@ -276,14 +276,24 @@
                                                                         <p class="feedPostMessages">
                                                                             <?php echo $posts['post_content_html']; ?>
                                                                         </p>
-                                                                      <!--  <div class="imgWrapper type2">
-                                                                            <figure>
-                                                                                <img src="<?php /*echo base_url(); */?>assets_d/images/detail1.jpg" alt="Post Image">
-                                                                            </figure>
-                                                                            <figure>
-                                                                                <img src="<?php /*echo base_url(); */?>assets_d/images/detail1.jpg" alt="Post Image">
-                                                                            </figure>
-                                                                        </div>-->
+                                                                        <?php if(count($posts['images']) > 0){
+                                                                            ?>
+                                                                            <div class="imgWrapper type2">
+                                                                                <?php
+                                                                                foreach($posts['images'] as $image){
+                                                                                    if(!empty($image)){
+                                                                                    ?>
+                                                                                    <figure>
+                                                                                        <img src="<?php echo base_url().$image ?>" alt="Post Image">
+                                                                                    </figure>
+                                                                                    <?php
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </div>
+                                                                        <?php
+                                                                        }?>
+
                                                                         <div class="socialStatus">
                                                                             <div class="leftStatus">
                                                                                 <a>
