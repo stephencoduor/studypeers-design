@@ -171,7 +171,7 @@
     display: none;
 }
 .cal-schedule .bootstrap-datetimepicker-widget table td.today.active, 
-.cal-schedule .bootstrap-datetimepicker-widget table td.today.active:hover, {
+.cal-schedule .bootstrap-datetimepicker-widget table td.today.active:hover {
     min-width: 24px !important;
     min-height: 24px !important;
     background-color: #185aeb;
@@ -575,22 +575,8 @@ select.form-control:focus {
 /*    margin-top: 12.5rem;*/
 /*}*/
 .imageBoxUpload.event {
-<<<<<<< HEAD
-    height: 250px;
-    margin-top: 27px;
-}
-.imageBoxUpload #imageBoxUpload {
-    width: 100%;
-    height: 100%;
-}
-.imageBoxUpload #imageBoxUpload img {
-    width: 100%;
-    /*height: 100%;*/
-    object-fit: contain;
-=======
     height:210px;
     margin-top: 2.5rem;
->>>>>>> f60079cc6d2c75ee24996b1789ff14375d42c015
 }
 /*switch toggle*/
 .switch {
@@ -2028,11 +2014,7 @@ div[data-edit] {
     align-items: flex-start;
     justify-content: flex-start;
     margin-top: 30px;
-<<<<<<< HEAD
-    margin-bottom: 0px;
-=======
     margin-bottom: 30px;
->>>>>>> f60079cc6d2c75ee24996b1789ff14375d42c015
     flex-wrap: wrap;
     margin-left: 40px;
 }
@@ -2305,9 +2287,9 @@ div[data-edit] {
     justify-content: flex-start;
 }
 
-.modal-dialog {
+/* .modal-dialog {
     top: 35%;
-}
+} */
 #peersMessageModal .modal-dialog {
     top: 10%;
 }

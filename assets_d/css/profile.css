@@ -228,14 +228,14 @@
 	background: #ea2e7e;
     border-radius: 20px;
 }
-.innerFeedTabs .nav-tabs li.active a:after {
+.mainProfileWrapper .innerFeedTabs .nav-tabs li.active a:after {
 	display: none;
 }
-.innerFeedTabs .nav-tabs li.active a {
-    color: #ffffff;
-    background: transparent;
-    border: 1px solid #ea2e7e;
-    border-radius: 20px;
+.mainProfileWrapper .innerFeedTabs .nav-tabs li.active a {
+    color: #ffffff !important;
+    background: transparent !important;
+    border: 1px solid #ea2e7e !important;
+    border-radius: 20px !important;
 }
 .tabPaneWrapper {
 	display: flex;
@@ -293,8 +293,8 @@
 	color:#333;
 }
 .profileUser {
-    width: 125px;
-    height: 125px;
+    width: 80px;
+    height: 80px;
     border-radius: 50%;
     position: absolute;
     top: 5px;
@@ -308,8 +308,8 @@
 /*Porgress css start*/
 
 .progress {
-  width: 135px;
-  height: 135px;
+  width: 90px;
+  height: 90px;
   background: none;
   position: relative;
   box-shadow: none;
@@ -2716,6 +2716,9 @@ shareOptionList celebrate*/
 .cke_editable {
     font-size: 15px !important;
     line-height: 0.6 !important;
+}
+.dashbody {
+    margin-top: 45px !important;
 }
 /*Ends*/
 
