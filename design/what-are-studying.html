@@ -194,7 +194,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group text-right">
-									<span class="not-listed">My Institutions Not Listed</span>
+									<span class="not-listed" data-toggle="modal" data-target="#add-study">My Field of Study Not Listed</span>
 								</div>
 							</div>
 						</div>
@@ -211,7 +211,7 @@
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group text-right">
-									<span class="not-listed">My Major Not Listed</span>
+									<span class="not-listed" data-toggle="modal" data-target="#add-major">My Major Not Listed</span>
 								</div>
 							</div>
 						</div>
@@ -246,14 +246,14 @@
 							</div>
 						</div>
 						<div class="form-group text-right">
-							<a href="privacy.html" class="filterBtn" data-toggle="modal" data-target="#field-of-study">Continue</a>
+							<a href="privacy.html" class="filterBtn">Continue</a>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</section>
-	<div class="modal fade" id="field-of-study" role="dialog">
+	<div class="modal fade" id="add-study" role="dialog">
 		<div class="modal-dialog modal-sm">
 			<!-- Modal content-->
 			<div class="modal-content">
@@ -263,7 +263,7 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group">
-								<p>Tell us your Field Of Study we can manually
+								<p>Tell us your Field Of Study so we can manually
 									verify it.</p>
 								<input type="text" name="" class="form-control form-control--lg" placeholder="Enter your field of study">
 							</div>
@@ -273,7 +273,35 @@
 					<div class="row">
 						<div class="col-md-12">
 							<div class="form-group text-right">
-								<button type="submit" class="filterBtn"  data-toggle="modal" data-target="#field-of-study">Continue</button>
+								<button type="submit" class="filterBtn">Continue</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="add-major" role="dialog">
+		<div class="modal-dialog modal-sm">
+			<!-- Modal content-->
+			<div class="modal-content">
+			  <button type="button" class="close" data-dismiss="modal">&times;</button>
+				<div class="modal-body peers">
+					<h4>Add Major</h4>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<p>Tell us your Field Of Study we can manually
+									verify it.</p>
+								<input type="text" name="" class="form-control form-control--lg" placeholder="Enter your major">
+							</div>
+							
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group text-right">
+								<button type="submit" class="filterBtn">Continue</button>
 							</div>
 						</div>
 					</div>
