@@ -50,6 +50,7 @@
         $('.feedPostMessages a').show();
     });
     $(document).ready(function() {
+        $('.loading').hide();
         var base_url = $('#base').val();
         CKEDITOR.replace('messagepostarea', {
             on: {
@@ -61,32 +62,93 @@
             }
         });
         var counter = 1;
+        var image_types = ['jpg','png','jpeg'];
+        var video_types = ['mp4','3gp','mpeg4','mkv','mov'];
         function readURL(input) {
             if (input.files && input.files[0]) {
+                var file = input.files[0];
+                var extension = file.name.split('.').pop().toLowerCase(); //file extension from input file
+                var isImage = image_types.indexOf(extension) > -1;
+                var isVideo = video_types.indexOf(extension) > -1;
                 var reader = new FileReader();
-                reader.onload = function(e) {
-                    var html_image = '<div class="col-md-4"><div class="uloadedImage"><figure><img src="'+e.target.result+'" alt="image" id="image'+counter+'"></figure>'+
-                        '<div class="close"><img src="'+base_url+'assets_d/images/close-pink.svg" class="remove_image" id="remove_image_'+counter+'" alt="close"></div></div></div>';
-                    $('#imgInp'+counter).hide();
-                    $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp'+counter+'" name="file[]" multiple="multiple">');
-                    $('#image_row').append(html_image);
-                    counter++;
-                };
-                reader.readAsDataURL(input.files[0]); // convert to base64 string
+                if(isImage){
+                    reader.onload = function(e) {
+                        var html_image = '<div class="col-md-4" id="delete_'+counter+'"><div class="uloadedImage"><figure><img src="'+e.target.result+'" alt="image" id="image'+counter+'"></figure>'+
+                            '<div class="close"><img src="'+base_url+'assets_d/images/close-pink.svg" class="remove_image" id="remove_image_'+counter+'" alt="close"></div></div></div>';
+                        $('#imgInp'+counter).hide();
+                        $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp'+counter+'" name="file[]" multiple="multiple">');
+                        $('#image_row').append(html_image);
+                        counter++;
+                    };
+                    reader.readAsDataURL(file); // convert to base64 string
+                }
+                else{
+                    reader.onload = function() {
+                        var blob = new Blob([reader.result], {type: file.type});
+                        var url = URL.createObjectURL(blob);
+                        var video = document.createElement('video');
+                        var timeupdate = function() {
+                            if (snapImage()) {
+                                video.removeEventListener('timeupdate', timeupdate);
+                                video.pause();
+                            }
+                        };
+                        video.addEventListener('loadeddata', function() {
+                            if (snapImage()) {
+                                video.removeEventListener('timeupdate', timeupdate);
+                            }
+                        });
+                        var snapImage = function() {
+                            var canvas = document.createElement('canvas');
+                            canvas.width = video.videoWidth;
+                            canvas.height = video.videoHeight;
+                            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                            var image = canvas.toDataURL();
+                            var success = image.length > 100000;
+                            if (success) {
+                                var html_image = '<div class="col-md-4"><div class="uloadedImage"><figure><img src="'+image+'" alt="image" id="image'+counter+'"></figure>'+
+                                    '<div class="close"><img src="'+base_url+'assets_d/images/close-pink.svg" class="remove_image" id="remove_image_'+counter+'" alt="close"></div></div></div>';
+                                console.log(html_image);
+                                $('#image_row').append(html_image);
+                                // URL.revokeObjectURL(url);
+                                $('#imgInp'+counter).hide();
+                                $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp'+counter+'" name="file[]" multiple="multiple">');
+                                counter++;
+                            }
+                            return success;
+                        };
+                        video.addEventListener('timeupdate', timeupdate);
+                        video.preload = 'metadata';
+                        video.src = url;
+                        // Load video in Safari / IE11
+                        video.muted = true;
+                        video.playsInline = true;
+                        video.play();
+                    };
+                    reader.readAsArrayBuffer(file);
+                }
+
             }
         }
+
+        $(document).on('click','.remove_image', function(){
+            var img_id = $(this).attr('id').split('_');
+            $('#delete_'+img_id[2]).remove();
+            $('#imgInp'+img_id[2]).val('');
+            counter--;
+        });
 
         $(document).on('change','.image_upload_button', function(){
             readURL(this);
         });
-
-
 
         $(document).on( 'click', '#save_post_from_ajax', function () {
             $('#addPostForm').submit();
         });
         $('#addPostForm').on("submit", function(e){
             e.preventDefault();
+            $('.loading').show();
+
             var formData = new FormData(this);
             var url = $(this).attr('action');
             var html_content = CKEDITOR.instances['messagepostarea'].getData();
@@ -103,30 +165,14 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function (data) {
-                    console.log(data);
+                success: function (result) {
+                    if(result == true){
+                        window.location.href = base_url+'Profile/redirect_page?status='+result;
+                    }
+                    $('.loading').hide();
                 }
             });
-            //return false;
-            /*var html_content = CKEDITOR.instances['messagepostarea'].getData();
-            console.log(html_content);
-            var privacy = $("input:radio.privacy_val:checked").val();
-            console.log(privacy);
-            var allow_comment = $('#allow_comment').val();
-            console.log(allow_comment);
-            if((html_content !== undefined) && (privacy !== undefined) && (allow_comment !== undefined)){
-                $.ajax({
-                    url : base_url+'Profile/savePost',
-                    type : 'post',
-                    data : {"html_content" : html_content,"privacy" : privacy,"allow_comment" : allow_comment, "image_data" : formdata},
-                    success:function(result) {
-                        if(result == true){
-                            window.location.href = base_url+'Profile/redirect_page?status='+result;
-                        }
-                    }
-                });
 
-            }*/
         });
 
         $('.box-card').each(function () {
@@ -144,7 +190,7 @@
             } else {
                 return
             }
-        })
+        });
         let vid = document.getElementById("myVideo");
         $('.video-click').click(function () {
             $(this).parent().hide();
@@ -244,7 +290,7 @@
             index++;
             $('.pollsform').append(
                 `<div class="form-group">
-                        <input type="text" class="form-control" placeholder="Option ${index}">
+                        <input type="text" class="form-control" name="option[${index}]" placeholder="Option ${index}">
                     </div>
                     `
             );

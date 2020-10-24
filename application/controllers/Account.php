@@ -44,7 +44,7 @@ class Account extends CI_Controller {
     public function dashboard(){
         is_valid_logged_in(); 
 
-        $user_id = $this->session->get_userdata()['user_data']['user_id']; 
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $data['user_detail'] = $this->db->get_where('user', array('id' => $user_id))->row_array();
         $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
@@ -55,16 +55,21 @@ class Account extends CI_Controller {
 
         $data['peer_requests'] = $this->db->get_where('peer_master', array('peer_id' => $user_id, 'status' => 1))->result_array();
 
-        $peerList = $this->peerListString($user_id); 
+        $peerList = $this->peerListString($user_id);
+        if(count($peerList) > 0){
+            $comma_separated = implode(",", $peerList);
 
-        $comma_separated = implode(",", $peerList);
+            $data['events'] = $this->db->query("select * from event_master where status = 1 and created_by = ".$user_id." OR event_master.id in (SELECT reference_id from share_master where peer_id = ".$user_id." and reference = 'event' and status != 4) OR (event_master.created_by in (".$comma_separated.") AND status = 1) order by start_date desc limit 5")->result_array();
 
-        $data['events'] = $this->db->query("select * from event_master where status = 1 and created_by = ".$user_id." OR event_master.id in (SELECT reference_id from share_master where peer_id = ".$user_id." and reference = 'event' and status != 4) OR (event_master.created_by in (".$comma_separated.") AND status = 1) order by start_date desc limit 5")->result_array();
-        
+        }else{
+            $data['events'] = [];
+        }
+
         $data['studysets'] = $this->studyset_model->getStudySets($user_id);
        
         $data['index_menu']  = 'dashboard';
         $data['title']  = 'Dashboard | Studypeers';
+
         $this->load->view('user/include/header', $data);
         $this->load->view('user/dashboard');
         $this->load->view('user/include/right-sidebar');
