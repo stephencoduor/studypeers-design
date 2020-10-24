@@ -103,16 +103,19 @@ class Profile extends CI_Controller {
 		$poll_data = $_POST['option'];
 		if(count($poll_data) > 0){
 			foreach($poll_data as $value) {
-				$qtyOut = $value;
-				//insert in polls table
-				$insert_polls = array(
-					'post_id' => $inserted_post_id,
-					'options' => $value,
-					'status' => 1,
-					'created_at' => date('Y-m-d H:i:s'),
-					'updated_at' => date('Y-m-d H:i:s')
-				);
-				$insert_reference = $this->db->insert('post_poll_options', $insert_polls);
+				if(!empty($value)){
+					$qtyOut = $value;
+					//insert in polls table
+					$insert_polls = array(
+						'post_id' => $inserted_post_id,
+						'options' => $value,
+						'status' => 1,
+						'created_at' => date('Y-m-d H:i:s'),
+						'updated_at' => date('Y-m-d H:i:s')
+					);
+					$insert_reference = $this->db->insert('post_poll_options', $insert_polls);
+				}
+
 			}
 		}
 

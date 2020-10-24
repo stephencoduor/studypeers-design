@@ -310,35 +310,35 @@
                                                                             </div>
                                                                             <?php
                                                                         }?>
-                                                                  <!--      <?php /*if(count($posts['post_poll_options']) > 0){
+                                                                        <?php if(count($posts['post_poll_options']) > 0){
                                                                             foreach($posts['post_poll_options'] as $options){
-                                                                            */?>
+                                                                            ?>
                                                                             <div class="selectedPollOptions">
                                                                                 <label class="dashRadioWrap">
                                                                                     <div class="progressBar">
                                                                                         <div class="progress">
                                                                                             <div class="progressValues">
                                                                                                 <div class="leftValue">
-                                                                                                    <?php /*echo $options['options'] ; */?>
+                                                                                                    <?php echo $options['options'] ; ?>
                                                                                                 </div>
                                                                                                 <div class="rightValues">
                                                                                                     <p>75%</p>
                                                                                                     <div class="eventActionWrap">
                                                                                                         <ul>
                                                                                                             <li>
-                                                                                                                <img src="<?php /*echo base_url();*/?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
                                                                                                             </li>
                                                                                                             <li>
-                                                                                                                <img src="<?php /*echo base_url();*/?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
                                                                                                             </li>
                                                                                                             <li>
-                                                                                                                <img src="<?php /*echo base_url();*/?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
                                                                                                             </li>
                                                                                                             <li>
-                                                                                                                <img src="<?php /*echo base_url();*/?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
                                                                                                             </li>
                                                                                                             <li>
-                                                                                                                <img src="<?php /*echo base_url();*/?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
                                                                                                             </li>
                                                                                                             <li class="more">
                                                                                                                 +5
@@ -354,10 +354,10 @@
                                                                                     <span class="checkmark"></span>
                                                                                 </label>
                                                                             </div>
-                                                                            --><?php
-/*                                                                            }
+                                                                            <?php
+                                                                            }
                                                                         }
-                                                                        */?>
+                                                                        ?>
 
 
 
