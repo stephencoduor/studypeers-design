@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+  <g id="Peers_grey" data-name="Peers grey" transform="translate(0)">
+    <g id="Group_3540" data-name="Group 3540" transform="translate(0)">
+      <g id="Group_3539" data-name="Group 3539">
+        <path id="Path_6770" data-name="Path 6770" d="M12.923,9.032a9.148,9.148,0,0,0-1.058-.425,4.781,4.781,0,1,0-5.725,0A9.145,9.145,0,0,0,.046,15.424,2.136,2.136,0,0,0,2.134,18h8.659a.7.7,0,0,0,0-1.406H2.134a.714.714,0,0,1-.562-.267.735.735,0,0,1-.149-.616A7.769,7.769,0,0,1,8.814,9.559q.093,0,.186,0t.188,0a7.659,7.659,0,0,1,3.13.743.7.7,0,0,0,.6-1.27Zm-3.751-.88L9,8.15l-.17,0a3.375,3.375,0,1,1,.342,0Z" transform="translate(0)" fill="#aaa"/>
+      </g>
+    </g>
+    <g id="Group_3542" data-name="Group 3542" transform="translate(11.321 11.32)">
+      <g id="Group_3541" data-name="Group 3541">
+        <path id="Path_6771" data-name="Path 6771" d="M327.977,324.637h-1.934V322.7a.7.7,0,0,0-1.406,0v1.934H322.7a.7.7,0,0,0,0,1.406h1.934v1.934a.7.7,0,0,0,1.406,0v-1.934h1.934a.7.7,0,0,0,0-1.406Z" transform="translate(-322 -322)" fill="#aaa"/>
+      </g>
+    </g>
+  </g>
+</svg>
