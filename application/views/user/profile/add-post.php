@@ -42,13 +42,13 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         <div class="pollsWrapper">
                             <div class="pollsform">
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Option 1">
+                                    <input type="text" class="form-control" name="option[1]" placeholder="Option 1">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Option 2">
+                                    <input type="text" class="form-control" name="option[2]" placeholder="Option 2">
                                 </div>
                                 <div class="form-group">
-                                    <input type="text" class="form-control" placeholder="Option 3">
+                                    <input type="text" class="form-control" name="option[3]" placeholder="Option 3">
                                 </div>
                             </div>
                             <div class="addmore">
@@ -60,10 +60,10 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                     <div class="filtercalendar">
                                         <div class="input-group date" id="datetimepickerstart">
                                             <span class="input-group-addon" for="start-date"></span>
-                                            <input type="text" class="form-control" name="start-date" placeholder="dd/mm/yy" id="start-date">
+                                            <input type="text" class="form-control" name="poll-end-date" placeholder="dd/mm/yy" id="start-date">
                                         </div>
                                         <div class="input-group--overlap" id="selectTime1">
-                                            <input type="text" class="form-control  form-control--lg" placeholder="hh:mm" name="">
+                                            <input type="text" class="form-control form-control--lg" placeholder="hh:mm" name="poll-end-time">
                                         </div>
                                     </div>
                                 </div>

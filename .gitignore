@@ -4,6 +4,9 @@
 .htaccess
 /.htaccess
 studypeers.com/*
+home/*
+Stephenoduor/*
+josebautista/*
 .well-known/
 .cgi-bin
 /application/config/database.php
