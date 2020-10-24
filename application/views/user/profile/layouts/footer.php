@@ -50,6 +50,7 @@
         $('.feedPostMessages a').show();
     });
     $(document).ready(function() {
+        $('.loading').hide();
         var base_url = $('#base').val();
         CKEDITOR.replace('messagepostarea', {
             on: {
@@ -146,6 +147,8 @@
         });
         $('#addPostForm').on("submit", function(e){
             e.preventDefault();
+            $('.loading').show();
+
             var formData = new FormData(this);
             var url = $(this).attr('action');
             var html_content = CKEDITOR.instances['messagepostarea'].getData();
@@ -166,6 +169,7 @@
                     if(result == true){
                         window.location.href = base_url+'Profile/redirect_page?status='+result;
                     }
+                    $('.loading').hide();
                 }
             });
 

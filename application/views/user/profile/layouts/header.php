@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/star-rating-svg.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.tw.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/loader.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 </head>
@@ -26,6 +27,8 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 ?>
 
 <body>
+<div class="loading">Loading&#8230;</div>
+
 <header>
     <section class="container-fluid">
         <section class="row">
