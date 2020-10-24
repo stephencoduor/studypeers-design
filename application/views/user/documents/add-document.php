@@ -31,6 +31,19 @@
 										</div>
 									</div>
 									<div class="col-md-12">
+										<div class="form-group">
+											<label>Privacy & Permission  <span style="font-size: 14px;font-weight: 400;color: gray;display: none;" id="privcy_span"></span></label>
+											<select class="form-control" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
+												<option value="">Select Privacy</option>
+												<option value="1">Public</option>
+												<option value="2">Private</option>
+												<!-- <option value="3" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 3) ? 'selected' : '';?>>Secret</option> -->
+											</select>
+											<span class="error" id="err_privacy"></span>
+
+										</div>
+									</div>
+									<div class="col-md-12">
 										<div class="form-row">
 											<div class="col-sm-6">		
 												<div class="form-group select select_label">
@@ -119,6 +132,16 @@
       } else {
         $('#err_description').html("").hide();
       }
+
+
+      var privacy = $('#privacy').val();
+      if(privacy == ''){
+        $('#err_privacy').html("This field is required").show();
+        return false;
+      } else {
+        $('#err_privacy').html("").hide();
+      }
+
 
       var university = $('#university').val();
       if(university == ''){
@@ -221,7 +244,17 @@
   
 
 
-
+	function showPermissionText(val){
+		if(val == 1) {
+			$('#privcy_span').html('(Keep this studyset public)').show();
+		} else if(val == 2) {
+			$('#privcy_span').html('(Keep this studyset private)').show();
+		} else if(val == 3) {
+			$('#privcy_span').html('(Keep this studyset secret)').show();
+		} else {
+			$('#privcy_span').html('').hide();
+		}
+	}
 
 
 

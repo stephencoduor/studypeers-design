@@ -624,7 +624,10 @@ textarea {
     overflow: auto;
 }
 
-
+a.filterBtn,a.sortMenu{
+    display:inline-block;
+    line-height:21px;
+}
 
 
 

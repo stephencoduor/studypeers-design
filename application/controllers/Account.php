@@ -847,6 +847,8 @@ class Account extends CI_Controller {
             $starttime      = $this->input->post('start-time');
             $endtime        = $this->input->post('end-time');
 
+            $privacy        = $this->input->post('privacy');
+
             $url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($location_txt)."&key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU";
                         
             $ch = curl_init();
@@ -893,6 +895,7 @@ class Account extends CI_Controller {
                                 'end_date'      => $end_date,
                                 'start_time'    => $start_time,
                                 'end_time'      => $end_time,
+                                'privacy'       => $privacy,
                                 'latitude'      => $latitude,
                                 'longitude'     => $longitude,
                                 'featured_image' => $featured_image,
@@ -901,6 +904,19 @@ class Account extends CI_Controller {
                                 'created_at'    => date('Y-m-d H:i:s')
                             );
             $this->db->insert('event_master', $insertArr);
+
+            $insert_id = $this->db->insert_id();
+
+            $insertRef = array( 'reference'     => 'event',
+                                'reference_id'  => $insert_id,
+                                'user_id'       => $user_id,
+                                
+                                'status'        => 1,
+                                
+                                'addDate'       => date('Y-m-d H:i:s'),
+                                'modifyDate'    => date('Y-m-d H:i:s')
+                            );
+            $this->db->insert('reference_master', $insertRef);
 
             $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Event Added Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -971,6 +987,8 @@ class Account extends CI_Controller {
             $starttime      = $this->input->post('start-time');
             $endtime        = $this->input->post('end-time');
 
+            $privacy        = $this->input->post('privacy');
+
             $timestamp1 = strtotime($startdate);
             $start_date = date('Y-m-d', $timestamp1); 
 
@@ -1015,6 +1033,7 @@ class Account extends CI_Controller {
                                 'professor'     => $professor,
                                 'start_date'    => $start_date,
                                 'end_date'      => $end_date,
+                                'privacy'       => $privacy,
                                 'start_time'    => $start_time,
                                 'featured_image'    => $featured_image,
                                 'end_time'      => $end_time,
@@ -1074,6 +1093,9 @@ class Account extends CI_Controller {
                 $this->db->update('schedule_master',array('status' => 3));
             }
 
+            $this->db->where(array('reference_id' => $event_id, 'reference' => 'event'));
+            $this->db->update('reference_master',array('status' => 3));
+
             $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Event Deleted Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button></div>';
@@ -1087,6 +1109,9 @@ class Account extends CI_Controller {
             $document_id = $this->input->post('document_id'); 
             $this->db->where(array('id' => $document_id));
             $this->db->update('document_master',array('status' => 3));
+
+            $this->db->where(array('reference_id' => $document_id, 'reference' => 'document'));
+            $this->db->update('reference_master',array('status' => 3));
 
             $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Document Deleted Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -1232,7 +1257,7 @@ class Account extends CI_Controller {
             $university     = $this->input->post('university');
             $course         = $this->input->post('course');
             $professor      = $this->input->post('professor');
-            
+            $privacy        = $this->input->post('privacy');
              
             if (!empty($_FILES['featured_image']['name'])) { 
                 $featured_image = $this->uploadImg('featured_image', $_FILES['featured_image']['name']);
@@ -1245,13 +1270,26 @@ class Account extends CI_Controller {
                                 'university'    => $university,
                                 'course'        => $course,
                                 'professor'     => $professor,
-                                
+                                'privacy'       => $privacy,
                                 'featured_image' => $featured_image,
                                 'status'        => 1,
                                 'created_by'    => $user_id,
                                 'created_at'    => date('Y-m-d H:i:s')
                             );
             $this->db->insert('document_master', $insertArr);
+
+            $insert_id = $this->db->insert_id();
+
+            $insertRef = array( 'reference'     => 'document',
+                                'reference_id'  => $insert_id,
+                                'user_id'       => $user_id,
+                                
+                                'status'        => 1,
+                                
+                                'addDate'       => date('Y-m-d H:i:s'),
+                                'modifyDate'    => date('Y-m-d H:i:s')
+                            );
+            $this->db->insert('reference_master', $insertRef);
 
             $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Document Added Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
@@ -1321,6 +1359,7 @@ class Account extends CI_Controller {
             $university     = $this->input->post('university');
             $course         = $this->input->post('course');
             $professor      = $this->input->post('professor');
+            $privacy        = $this->input->post('privacy');
             
              
             if (!empty($_FILES['featured_image']['name'])) { 
@@ -1334,7 +1373,7 @@ class Account extends CI_Controller {
                                 'university'    => $university,
                                 'course'        => $course,
                                 'professor'     => $professor,
-                                
+                                'privacy'       => $privacy,
                                 'featured_image' => $featured_image
                             );
             
