@@ -408,6 +408,14 @@
 	      $('#err_description').html("").hide();
 	    }
 
+	    var privacy = $('#privacy').val();
+      	if(privacy == ''){
+	        $('#err_privacy').html("This field is required").show();
+	        return false;
+        } else {
+        	$('#err_privacy').html("").hide();
+        }
+
 	    var university = $('#university').val();
 	    if(university == ''){
 	      $('#err_university').html("This field is required").show();
@@ -432,6 +440,18 @@
 	      $('#err_professor').html("").hide();
 	    }
   	}
+
+  	function showPermissionText(val){
+		if(val == 1) {
+			$('#privcy_span').html('(Keep this studyset public)').show();
+		} else if(val == 2) {
+			$('#privcy_span').html('(Keep this studyset private)').show();
+		} else if(val == 3) {
+			$('#privcy_span').html('(Keep this studyset secret)').show();
+		} else {
+			$('#privcy_span').html('').hide();
+		}
+	}
 
 
   	$(document).on("click", ".delete_event", function () {

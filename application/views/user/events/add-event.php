@@ -143,6 +143,19 @@
 										</div>
 									</div>
 									<div class="col-md-12">
+										<div class="form-group">
+											<label>Privacy & Permission  <span style="font-size: 14px;font-weight: 400;color: gray;display: none;" id="privcy_span"></span></label>
+											<select class="form-control" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
+												<option value="">Select Privacy</option>
+												<option value="1">Public</option>
+												<option value="2">Private</option>
+												<!-- <option value="3" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 3) ? 'selected' : '';?>>Secret</option> -->
+											</select>
+											<span class="error" id="err_privacy"></span>
+
+										</div>
+									</div>
+									<div class="col-md-12">
 										<div class="form-row">
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group select select_label">
@@ -221,3 +234,6 @@
 						</form>
 					</div>
 				</section>
+
+
+	
