@@ -262,6 +262,19 @@ class Studyset_model extends CI_Model {
             unset($data['study_set_id']);
             $result = $this->db->insert('study_sets',$data);
             $study_set_id = $this->db->insert_id();
+
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
+
+            $insertRef = array( 'reference'     => 'studyset',
+                                'reference_id'  => $study_set_id,
+                                'user_id'       => $user_id,
+                                
+                                'status'        => 1,
+                                
+                                'addDate'       => date('Y-m-d H:i:s'),
+                                'modifyDate'    => date('Y-m-d H:i:s')
+                            );
+            $this->db->insert('reference_master', $insertRef);
         }
 
         return $study_set_id;
@@ -291,6 +304,10 @@ class Studyset_model extends CI_Model {
     {
         $this->db->where('study_set_id', $study_set_id);
         $result = $this->db->update('study_sets',array('status' => 2));
+
+        $this->db->where(array('reference_id' => $study_set_id, 'reference' => 'studyset'));
+        $this->db->update('reference_master',array('status' => 3));
+
         return $result;
     }
 

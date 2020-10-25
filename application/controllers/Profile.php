@@ -41,7 +41,7 @@ class Profile extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		is_valid_logged_in();
 		$config['upload_path'] = './uploads/posts/';
-		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4';
+		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi';
 		$config['encrypt_name'] = TRUE;
 		$config['remove_spaces']=TRUE;  //it will remove all spaces
 		$user_id = $this->session->get_userdata()['user_data']['user_id'];
