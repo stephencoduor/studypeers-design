@@ -1,4 +1,3 @@
-<link rel="stylesheet" type="text/css" href="<?php echo base_url();?>assets_d/css/profile.css">
 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
 <section class="dashbody">
     <section class="container-fluid">
@@ -138,8 +137,8 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="addOnPostMessage">
-                                                                    <div class="imageSection">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="image/video">
+                                                                    <div class="imageSection image_upload_button">
+                                                                        <img src="<?php echo base_url(); ?>assets_d/images/image.svg"  alt="image/video">
                                                                         <span>Image/Video</span>
                                                                     </div>
                                                                     <div class="pollSection">
@@ -152,6 +151,7 @@
                                                     </div>
                                                     <?php
                                                     foreach($all_posts as $posts){
+
                                                     ?>
                                                             <div class="box-card">
                                                                 <div class="dropdown dropdownToggleMenu">
@@ -271,20 +271,20 @@
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="timeline"><?php echo time_elapsed_string($posts['created_at']); ?></div>
+                                                                            <div class="timeline"><?php echo time_elapsed_string($posts['post_details']->created_at); ?></div>
                                                                         </div>
                                                                         <p class="feedPostMessages">
-                                                                            <?php echo $posts['post_content_html']; ?>
+                                                                            <?php echo $posts['post_details']->post_content_html; ?>
                                                                         </p>
-                                                                        <?php if(count($posts['images']) > 0){
+                                                                        <?php if(count($posts['post_images']) > 0){
                                                                             ?>
                                                                             <div class="imgWrapper type2">
                                                                                 <?php
-                                                                                foreach($posts['images'] as $image){
+                                                                                foreach($posts['post_images'] as $image){
                                                                                     if(!empty($image)){
                                                                                     ?>
                                                                                     <figure>
-                                                                                        <img src="<?php echo base_url().$image ?>" alt="Post Image">
+                                                                                        <img src="<?php echo base_url().$image['image_path'] ?>" alt="Post Image">
                                                                                     </figure>
                                                                                     <?php
                                                                                     }
@@ -293,13 +293,80 @@
                                                                             </div>
                                                                         <?php
                                                                         }?>
+                                                                        <?php if(count($posts['post_videos']) > 0){
+                                                                            ?>
+                                                                            <div class="imgWrapper type2">
+                                                                                <?php
+                                                                                foreach($posts['post_videos'] as $videos){
+                                                                                    if(!empty($videos)){
+                                                                                        ?>
+                                                                                        <video id="myVideo" width="320" height="240" controls>
+                                                                                            <source src="<?php echo base_url().$videos['video_path']?>" alt="Video">
+                                                                                        </video>
+                                                                                        <?php
+                                                                                    }
+                                                                                }
+                                                                                ?>
+                                                                            </div>
+                                                                            <?php
+                                                                        }?>
+                                                                        <?php if(count($posts['post_poll_options']) > 0){
+                                                                            foreach($posts['post_poll_options'] as $options){
+                                                                            ?>
+                                                                            <div class="selectedPollOptions">
+                                                                                <label class="dashRadioWrap">
+                                                                                    <div class="progressBar">
+                                                                                        <div class="progress">
+                                                                                            <div class="progressValues">
+                                                                                                <div class="leftValue">
+                                                                                                    <?php echo $options['options'] ; ?>
+                                                                                                </div>
+                                                                                                <div class="rightValues">
+                                                                                                    <p>75%</p>
+                                                                                                    <div class="eventActionWrap">
+                                                                                                        <ul>
+                                                                                                            <li>
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                            </li>
+                                                                                                            <li>
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                            </li>
+                                                                                                            <li>
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                            </li>
+                                                                                                            <li>
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                            </li>
+                                                                                                            <li>
+                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                            </li>
+                                                                                                            <li class="more">
+                                                                                                                +5
+                                                                                                            </li>
+                                                                                                        </ul>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:70%"></div>
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <input type="radio" checked="checked" name="radio">
+                                                                                    <span class="checkmark"></span>
+                                                                                </label>
+                                                                            </div>
+                                                                            <?php
+                                                                            }
+                                                                        }
+                                                                        ?>
+
+
 
                                                                         <div class="socialStatus">
                                                                             <div class="leftStatus">
                                                                                 <a>
                                                                                     <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
                                                                                     <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Like">
-                                                                                    <span><?php echo $posts['likes_count']; ?></span>
+                                                                                    <span><?php echo $posts['post_details']->likes_count; ?></span>
                                                                                 </a>
                                                                             </div>
                                                                             <div class="rightStatus">
@@ -307,13 +374,13 @@
                                                                                     <li>
                                                                                         <a>
                                                                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                                                                            <span><?php echo $posts['comments_count']; ?></span>
+                                                                                            <span><?php echo $posts['post_details']->comments_count; ?></span>
                                                                                         </a>
                                                                                     </li>
                                                                                     <li>
                                                                                         <a>
                                                                                             <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
-                                                                                            <span><?php echo $posts['share_count']; ?></span>
+                                                                                            <span><?php echo $posts['post_details']->share_count; ?></span>
                                                                                         </a>
                                                                                     </li>
                                                                                 </ul>

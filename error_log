@@ -3515,3 +3515,386 @@
 [11-Oct-2020 23:39:49 Asia/Kolkata] OAuth client: A valid access token is not available
 [11-Oct-2020 23:39:49 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
 [11-Oct-2020 23:39:49 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602439789-13b36a&scope=r_liteprofile+r_emailaddress
+[14-Oct-2020 21:10:23 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[14-Oct-2020 21:10:23 Asia/Kolkata] OAuth client: A valid access token is not available
+[14-Oct-2020 21:10:23 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[14-Oct-2020 21:10:23 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602690023-2439d1&scope=r_liteprofile+r_emailaddress
+[14-Oct-2020 22:28:39 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[14-Oct-2020 22:28:39 Asia/Kolkata] OAuth client: A valid access token is not available
+[14-Oct-2020 22:28:39 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[14-Oct-2020 22:28:39 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602694719-d62675&scope=r_liteprofile+r_emailaddress
+[14-Oct-2020 22:28:47 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[14-Oct-2020 22:28:47 Asia/Kolkata] OAuth client: A valid access token is not available
+[14-Oct-2020 22:28:47 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback?code=AQSMePeHRxeRE9gB-RaFCN2ERp9jyt27qAtwQJOy_BYnkyGr-1QYZQ3vvfLU41LAnio6hGrJGN9qFobzkN9aXWT4w8d-0ByeWwWS2LEu-trgpi_OfYmDPyE-Fwd6obNmYfbdJbYLXj0giCnKOyRX2wSy0lp_WiJ4zHfHS2TlB5YgZbVFtGqsm1zOsgCY3A&state=1602694719-d62675
+[14-Oct-2020 22:28:47 Asia/Kolkata] OAuth client: Checking the authentication code
+[14-Oct-2020 22:28:47 Asia/Kolkata] OAuth client: Accessing the OAuth access token at https://www.linkedin.com/oauth/v2/accessToken
+[14-Oct-2020 22:28:47 Asia/Kolkata] Connecting to www.linkedin.com
+[14-Oct-2020 22:28:47 Asia/Kolkata] Resolving HTTP server domain "www.linkedin.com"...
+[14-Oct-2020 22:28:47 Asia/Kolkata] Connecting to HTTP server IP 13.107.42.14 port 443...
+[14-Oct-2020 22:28:47 Asia/Kolkata] Connected to www.linkedin.com
+[14-Oct-2020 22:28:47 Asia/Kolkata] C POST /oauth/v2/accessToken HTTP/1.1
+[14-Oct-2020 22:28:47 Asia/Kolkata] C Host: www.linkedin.com
+[14-Oct-2020 22:28:47 Asia/Kolkata] C User-Agent: PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.165 $)
+[14-Oct-2020 22:28:47 Asia/Kolkata] C Accept: */*
+[14-Oct-2020 22:28:47 Asia/Kolkata] C Connection: Keep-Alive
+[14-Oct-2020 22:28:47 Asia/Kolkata] C Content-Type: application/x-www-form-urlencoded
+[14-Oct-2020 22:28:47 Asia/Kolkata] C Content-Length: 356
+[14-Oct-2020 22:28:47 Asia/Kolkata] C 
+[14-Oct-2020 22:28:47 Asia/Kolkata] C code=AQSMePeHRxeRE9gB-RaFCN2ERp9jyt27qAtwQJOy_BYnkyGr-1QYZQ3vvfLU41LAnio6hGrJGN9qFobzkN9aXWT4w8d-0ByeWwWS2LEu-trgpi_OfYmDPyE-Fwd6obNmYfbdJbYLXj0giCnKOyRX2wSy0lp_WiJ4zHfHS2TlB5YgZbVFtGqsm1zOsgCY3A&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&grant_type=authorization_code&client_id=78beuic6jn92q4&client_secret=HyXpuvnahIeT4xDo
+[14-Oct-2020 22:28:47 Asia/Kolkata] S HTTP/1.1 200 OK
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Cache-Control: no-cache, no-store
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Pragma: no-cache
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Content-Length: 390
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Content-Type: application/json
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Expires: Thu, 01 Jan 1970 00:00:00 GMT
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Set-Cookie: lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Set-Cookie: bcookie="v=2&1fec6065-d2f6-447d-8f61-dc509451fcf6"; domain=.linkedin.com; Path=/; Secure; Expires=Sat, 15-Oct-2022 04:36:19 GMT; SameSite=None
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Set-Cookie: bscookie="v=1&2020101416584716b32a57-e7f6-4497-87fa-beb28413b4fbAQH5loeeRaaeUO7Ze-RzM6ceiu_UcDiW"; domain=.www.linkedin.com; Path=/; Secure; Expires=Sat, 15-Oct-2022 04:36:19 GMT; HttpOnly; SameSite=None
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Set-Cookie: lissc=1; domain=.linkedin.com; Path=/; Secure; Expires=Thu, 14-Oct-2021 16:58:47 GMT; SameSite=None
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Set-Cookie: lidc="b=OB20:g=3307:u=107:i=1602694727:t=1602781119:s=AQFSyM6jc8t9bkMMjSVul_CGKRiY2bQO"; Expires=Thu, 15 Oct 2020 16:58:39 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-FS-TXN-ID: 2b42080ee4a0
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-FS-UUID: bee91ded5cea3d16d03defca842b0000
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Expect-CT: max-age=86400, report-uri="https://www.linkedin.com/platform-telemetry/ct"
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-XSS-Protection: 1; mode=block
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Content-Security-Policy: default-src *; connect-src 'self' https://media-src.linkedin.com/media/ www.linkedin.com s.c.lnkd.licdn.com m.c.lnkd.licdn.com s.c.exp1.licdn.com s.c.exp2.licdn.com m.c.exp1.licdn.com m.c.exp2.licdn.com wss://*.linkedin.com dms.licdn.com https://dpm.demdex.net/id https://lnkd.demdex.net/event blob: https://accounts.google.com/gsi/status https://linkedin.sc.omtrdc.net/b/ss/ www.google-analytics.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com media.licdn.com media-exp1.licdn.com media-exp2.licdn.com media-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'report-sample' 'unsafe-inline' 'unsafe-eval' 'self' spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com www.google-analytics.com ssl.google-analytics.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com slideshare.www.linkedin.com https://snap.licdn.com/li.lms-analytics/ platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com; object-src 'none'; media-src blob: *; child-src blob: lnkd-communities: voyager: *; frame-ancestors 'self'
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-Frame-Options: sameorigin
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-Content-Type-Options: nosniff
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Strict-Transport-Security: max-age=2592000
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-Li-Fabric: prod-lor1
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-Li-Pop: afd-prod-edc2
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-Li-Proto: http/1.1
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Report-To: {"group":"network-errors","max_age":2592000,"endpoints":[{"url":"https://www.linkedin.com/li/rep"}],"include_subdomains":true}
+[14-Oct-2020 22:28:47 Asia/Kolkata] S NEL: {"report_to":"network-errors","max_age":1296000,"success_fraction":0.00066,"failure_fraction":1,"include_subdomains":true}
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-LI-UUID: 0ML87FzqPRYAIYaEhCsAAA==
+[14-Oct-2020 22:28:47 Asia/Kolkata] S X-MSEdge-Ref: Ref A: 08509D475EFB45CD8AC85FF3A7474268 Ref B: NYCEDGE1612 Ref C: 2020-10-14T16:58:47Z
+[14-Oct-2020 22:28:47 Asia/Kolkata] S Date: Wed, 14 Oct 2020 16:58:47 GMT
+[14-Oct-2020 22:28:47 Asia/Kolkata] S 
+[14-Oct-2020 22:28:47 Asia/Kolkata] S {"access_token":"AQWpFyERv2VfjyCx3w5b7jgfJ3O5VxEW48RXX8K90L-6v4t9f9FAHl4gsMEWQLKQ0IpQcynyCRwuRwgukcStCdS21CQ9lyaqR5Y_Y_asSN7xGinuNScVlpJ5lb4nOpN4R2YRwWwNw-mNyPVLv7fJcbnq_GGtBJJE8vFcXSaxsmCwS4Hts5ZYPvT2RHPjuhk_xCFkLv4bv6BHhqYX5mD7eqJMAz880Q--9lPNaiylbheWTO-ZvRt0xFKSaH5ZeiWopIt6PRCgPCAiFkla3CwdQjhVt1YQbM_erFADSqFdBM0fSuPwdMF9IDd2aT9klM_hox526bX-OiGRfcKVs05LQU7TOnfO2w","expires_in":5184000}
+[14-Oct-2020 22:28:47 Asia/Kolkata] Keeping the connection alive to www.linkedin.com
+[14-Oct-2020 22:28:47 Asia/Kolkata] OAuth client: Access token: AQWpFyERv2VfjyCx3w5b7jgfJ3O5VxEW48RXX8K90L-6v4t9f9FAHl4gsMEWQLKQ0IpQcynyCRwuRwgukcStCdS21CQ9lyaqR5Y_Y_asSN7xGinuNScVlpJ5lb4nOpN4R2YRwWwNw-mNyPVLv7fJcbnq_GGtBJJE8vFcXSaxsmCwS4Hts5ZYPvT2RHPjuhk_xCFkLv4bv6BHhqYX5mD7eqJMAz880Q--9lPNaiylbheWTO-ZvRt0xFKSaH5ZeiWopIt6PRCgPCAiFkla3CwdQjhVt1YQbM_erFADSqFdBM0fSuPwdMF9IDd2aT9klM_hox526bX-OiGRfcKVs05LQU7TOnfO2w
+[14-Oct-2020 22:28:47 Asia/Kolkata] OAuth client: Access token expiry: 2020-12-13 16:58:47 UTC
+[15-Oct-2020 06:35:08 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 06:35:08 Asia/Kolkata] OAuth client: A valid access token is not available
+[15-Oct-2020 06:35:08 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[15-Oct-2020 06:35:08 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602723908-70eeca&scope=r_liteprofile+r_emailaddress
+[15-Oct-2020 06:35:16 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 06:35:16 Asia/Kolkata] OAuth client: A valid access token is not available
+[15-Oct-2020 06:35:16 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback?code=AQQOuhe7Hv70FILd-nHllmbSPI-5ah4ZmR9TYoWrxNlpAH2GCX5fWvzFpgabGf5nzQ74W6AkdzkiCjSlMZ2p21MtTDP3Ve3M0rmdXieVeIFazMlas7xg7lNqzoW8kiW2TWdvhbs-kjEXhQPr-alUI2RhXv9VMcAYxNmz9A8SafZwqa7w_Fgs_P9s7uZMvw&state=1602723908-70eeca
+[15-Oct-2020 06:35:16 Asia/Kolkata] OAuth client: Checking the authentication code
+[15-Oct-2020 06:35:16 Asia/Kolkata] OAuth client: Accessing the OAuth access token at https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 06:35:16 Asia/Kolkata] Connecting to www.linkedin.com
+[15-Oct-2020 06:35:16 Asia/Kolkata] Resolving HTTP server domain "www.linkedin.com"...
+[15-Oct-2020 06:35:16 Asia/Kolkata] Connecting to HTTP server IP 13.107.42.14 port 443...
+[15-Oct-2020 06:35:16 Asia/Kolkata] Connected to www.linkedin.com
+[15-Oct-2020 06:35:16 Asia/Kolkata] C POST /oauth/v2/accessToken HTTP/1.1
+[15-Oct-2020 06:35:16 Asia/Kolkata] C Host: www.linkedin.com
+[15-Oct-2020 06:35:16 Asia/Kolkata] C User-Agent: PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.165 $)
+[15-Oct-2020 06:35:16 Asia/Kolkata] C Accept: */*
+[15-Oct-2020 06:35:16 Asia/Kolkata] C Connection: Keep-Alive
+[15-Oct-2020 06:35:16 Asia/Kolkata] C Content-Type: application/x-www-form-urlencoded
+[15-Oct-2020 06:35:16 Asia/Kolkata] C Content-Length: 356
+[15-Oct-2020 06:35:16 Asia/Kolkata] C 
+[15-Oct-2020 06:35:16 Asia/Kolkata] C code=AQQOuhe7Hv70FILd-nHllmbSPI-5ah4ZmR9TYoWrxNlpAH2GCX5fWvzFpgabGf5nzQ74W6AkdzkiCjSlMZ2p21MtTDP3Ve3M0rmdXieVeIFazMlas7xg7lNqzoW8kiW2TWdvhbs-kjEXhQPr-alUI2RhXv9VMcAYxNmz9A8SafZwqa7w_Fgs_P9s7uZMvw&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&grant_type=authorization_code&client_id=78beuic6jn92q4&client_secret=HyXpuvnahIeT4xDo
+[15-Oct-2020 06:35:16 Asia/Kolkata] S HTTP/1.1 200 OK
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Cache-Control: no-cache, no-store
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Pragma: no-cache
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Content-Length: 390
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Content-Type: application/json
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Expires: Thu, 01 Jan 1970 00:00:00 GMT
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Set-Cookie: lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Set-Cookie: bcookie="v=2&07a57a36-e21c-40f9-8450-f4a3ac812f7a"; domain=.linkedin.com; Path=/; Secure; Expires=Sat, 15-Oct-2022 12:42:48 GMT; SameSite=None
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Set-Cookie: bscookie="v=1&2020101501051623a8ff84-12b7-4ba2-8261-34fe2f0f2560AQFaYmM2QKRy38Fem97G3z1gK5yigXKE"; domain=.www.linkedin.com; Path=/; Secure; Expires=Sat, 15-Oct-2022 12:42:48 GMT; HttpOnly; SameSite=None
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Set-Cookie: lissc=1; domain=.linkedin.com; Path=/; Secure; Expires=Fri, 15-Oct-2021 01:05:16 GMT; SameSite=None
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Set-Cookie: lidc="b=OB20:g=3307:u=107:i=1602723916:t=1602781119:s=AQEGlXGTgwXawiE0rO-DUg7GazkGhlSW"; Expires=Thu, 15 Oct 2020 16:58:39 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-FS-TXN-ID: 2b46b64f5780
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-FS-UUID: 2a594b1ae9043e16a06914d25b2b0000
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Expect-CT: max-age=86400, report-uri="https://www.linkedin.com/platform-telemetry/ct"
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-XSS-Protection: 1; mode=block
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Content-Security-Policy: default-src *; connect-src 'self' https://media-src.linkedin.com/media/ www.linkedin.com s.c.lnkd.licdn.com m.c.lnkd.licdn.com s.c.exp1.licdn.com s.c.exp2.licdn.com m.c.exp1.licdn.com m.c.exp2.licdn.com wss://*.linkedin.com dms.licdn.com https://dpm.demdex.net/id https://lnkd.demdex.net/event blob: https://accounts.google.com/gsi/status https://linkedin.sc.omtrdc.net/b/ss/ www.google-analytics.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com media.licdn.com media-exp1.licdn.com media-exp2.licdn.com media-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'report-sample' 'unsafe-inline' 'unsafe-eval' 'self' spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com www.google-analytics.com ssl.google-analytics.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com slideshare.www.linkedin.com https://snap.licdn.com/li.lms-analytics/ platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com; object-src 'none'; media-src blob: *; child-src blob: lnkd-communities: voyager: *; frame-ancestors 'self'
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-Frame-Options: sameorigin
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-Content-Type-Options: nosniff
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Strict-Transport-Security: max-age=2592000
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-Li-Fabric: prod-lor1
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-Li-Pop: afd-prod-ltx1
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-Li-Proto: http/1.1
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-LI-UUID: uygsGukEPhagWA5rWysAAA==
+[15-Oct-2020 06:35:16 Asia/Kolkata] S X-MSEdge-Ref: Ref A: 7830DF11E4F445CCB524A328CF81698E Ref B: NYCEDGE1610 Ref C: 2020-10-15T01:05:16Z
+[15-Oct-2020 06:35:16 Asia/Kolkata] S Date: Thu, 15 Oct 2020 01:05:16 GMT
+[15-Oct-2020 06:35:16 Asia/Kolkata] S 
+[15-Oct-2020 06:35:16 Asia/Kolkata] S {"access_token":"AQUzfNzEN-UKgR1MzX1tT_srCa1QLJC-Rp3BQ4ajRZtk2Mu2x9ZOfWxINXgDARY1L66FpShuUnDB7DDDmp9v3WBmp7dG2GTrnjtq1ul4sGDTbRfnk1hNWgMwmLb0qDr-GOy1cuGuOKfBQl3uaFgsRXGT4gkqXpZpDXwFgMT9NvBGW0eQ01hnmSRx-DoxZNK2X04wZ78Z6S83UXuv3Ef8XsLxjLiCgzV4NjR3b7WfmxBO9sgAF271ZjcDV4U7cQbihtP5q5W5Hb6QK8XoGSEL0_J_lqdfXxO7xBIhhRnKf_hXXGoQW0V41q78mjYNolaZ1z-VIUnMvz_od0AVDK_dk4w3MVnmKQ","expires_in":5183999}
+[15-Oct-2020 06:35:16 Asia/Kolkata] Keeping the connection alive to www.linkedin.com
+[15-Oct-2020 06:35:16 Asia/Kolkata] OAuth client: Access token: AQUzfNzEN-UKgR1MzX1tT_srCa1QLJC-Rp3BQ4ajRZtk2Mu2x9ZOfWxINXgDARY1L66FpShuUnDB7DDDmp9v3WBmp7dG2GTrnjtq1ul4sGDTbRfnk1hNWgMwmLb0qDr-GOy1cuGuOKfBQl3uaFgsRXGT4gkqXpZpDXwFgMT9NvBGW0eQ01hnmSRx-DoxZNK2X04wZ78Z6S83UXuv3Ef8XsLxjLiCgzV4NjR3b7WfmxBO9sgAF271ZjcDV4U7cQbihtP5q5W5Hb6QK8XoGSEL0_J_lqdfXxO7xBIhhRnKf_hXXGoQW0V41q78mjYNolaZ1z-VIUnMvz_od0AVDK_dk4w3MVnmKQ
+[15-Oct-2020 06:35:16 Asia/Kolkata] OAuth client: Access token expiry: 2020-12-14 01:05:15 UTC
+[15-Oct-2020 07:49:07 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 07:49:07 Asia/Kolkata] OAuth client: A valid access token is not available
+[15-Oct-2020 07:49:07 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[15-Oct-2020 07:49:07 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602728347-fbc955&scope=r_liteprofile+r_emailaddress
+[15-Oct-2020 08:33:20 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 08:33:20 Asia/Kolkata] OAuth client: The OAuth access token AQUzfNzEN-UKgR1MzX1tT_srCa1QLJC-Rp3BQ4ajRZtk2Mu2x9ZOfWxINXgDARY1L66FpShuUnDB7DDDmp9v3WBmp7dG2GTrnjtq1ul4sGDTbRfnk1hNWgMwmLb0qDr-GOy1cuGuOKfBQl3uaFgsRXGT4gkqXpZpDXwFgMT9NvBGW0eQ01hnmSRx-DoxZNK2X04wZ78Z6S83UXuv3Ef8XsLxjLiCgzV4NjR3b7WfmxBO9sgAF271ZjcDV4U7cQbihtP5q5W5Hb6QK8XoGSEL0_J_lqdfXxO7xBIhhRnKf_hXXGoQW0V41q78mjYNolaZ1z-VIUnMvz_od0AVDK_dk4w3MVnmKQ is valid
+[15-Oct-2020 08:33:20 Asia/Kolkata] OAuth client: The OAuth access token expires on 2020-12-14 01:05:15
+[15-Oct-2020 11:35:30 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 11:35:30 Asia/Kolkata] OAuth client: A valid access token is not available
+[15-Oct-2020 11:35:30 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[15-Oct-2020 11:35:30 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602741930-8ccb15&scope=r_liteprofile+r_emailaddress
+[15-Oct-2020 11:35:37 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 11:35:37 Asia/Kolkata] OAuth client: A valid access token is not available
+[15-Oct-2020 11:35:37 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback?code=AQTe1jT7r9Taoc_StFIy7GOU8mQvj8tteqyoJGBlWa5qRixw4piXUR4mnS7z7BB9UDIf06rx_05y8imq5q5DbqoNV2AYBg9x2c4_TbCm7Lm7fudi7JMM_WW7tXR9jsl3PLAK432c7R7RD0si0UnaxNhBNJG4vxzETCSdKiyUYy_QjoAW2JW0x0hE7DWYbg&state=1602741930-8ccb15
+[15-Oct-2020 11:35:37 Asia/Kolkata] OAuth client: Checking the authentication code
+[15-Oct-2020 11:35:37 Asia/Kolkata] OAuth client: Accessing the OAuth access token at https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 11:35:37 Asia/Kolkata] Connecting to www.linkedin.com
+[15-Oct-2020 11:35:37 Asia/Kolkata] Resolving HTTP server domain "www.linkedin.com"...
+[15-Oct-2020 11:35:37 Asia/Kolkata] Connecting to HTTP server IP 13.107.42.14 port 443...
+[15-Oct-2020 11:35:37 Asia/Kolkata] Connected to www.linkedin.com
+[15-Oct-2020 11:35:37 Asia/Kolkata] C POST /oauth/v2/accessToken HTTP/1.1
+[15-Oct-2020 11:35:37 Asia/Kolkata] C Host: www.linkedin.com
+[15-Oct-2020 11:35:37 Asia/Kolkata] C User-Agent: PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.165 $)
+[15-Oct-2020 11:35:37 Asia/Kolkata] C Accept: */*
+[15-Oct-2020 11:35:37 Asia/Kolkata] C Connection: Keep-Alive
+[15-Oct-2020 11:35:37 Asia/Kolkata] C Content-Type: application/x-www-form-urlencoded
+[15-Oct-2020 11:35:37 Asia/Kolkata] C Content-Length: 356
+[15-Oct-2020 11:35:37 Asia/Kolkata] C 
+[15-Oct-2020 11:35:37 Asia/Kolkata] C code=AQTe1jT7r9Taoc_StFIy7GOU8mQvj8tteqyoJGBlWa5qRixw4piXUR4mnS7z7BB9UDIf06rx_05y8imq5q5DbqoNV2AYBg9x2c4_TbCm7Lm7fudi7JMM_WW7tXR9jsl3PLAK432c7R7RD0si0UnaxNhBNJG4vxzETCSdKiyUYy_QjoAW2JW0x0hE7DWYbg&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&grant_type=authorization_code&client_id=78beuic6jn92q4&client_secret=HyXpuvnahIeT4xDo
+[15-Oct-2020 11:35:38 Asia/Kolkata] S HTTP/1.1 200 OK
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Cache-Control: no-cache, no-store
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Pragma: no-cache
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Content-Length: 390
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Content-Type: application/json
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Expires: Thu, 01 Jan 1970 00:00:00 GMT
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Set-Cookie: lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Set-Cookie: bcookie="v=2&a7226b86-fc54-4d7f-86bf-c3f4d3f50a50"; domain=.linkedin.com; Path=/; Secure; Expires=Sat, 15-Oct-2022 17:43:10 GMT; SameSite=None
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Set-Cookie: bscookie="v=1&20201015060538d709aec8-e6fe-442e-878f-67944ff850a0AQGQVoBt8wf77mWfPs-BcC5QJ11Bv1YC"; domain=.www.linkedin.com; Path=/; Secure; Expires=Sat, 15-Oct-2022 17:43:10 GMT; HttpOnly; SameSite=None
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Set-Cookie: lissc=1; domain=.linkedin.com; Path=/; Secure; Expires=Fri, 15-Oct-2021 06:05:38 GMT; SameSite=None
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Set-Cookie: lidc="b=OB20:g=3307:u=107:i=1602741938:t=1602781119:s=AQHjg8TiCZAHiTN7sJZSW74TFx2wmRpH"; Expires=Thu, 15 Oct 2020 16:58:39 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-FS-TXN-ID: 2b2957d52630
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-FS-UUID: 6cca67084d153e1690b1c945052b0000
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Expect-CT: max-age=86400, report-uri="https://www.linkedin.com/platform-telemetry/ct"
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-XSS-Protection: 1; mode=block
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Content-Security-Policy: default-src *; connect-src 'self' https://media-src.linkedin.com/media/ www.linkedin.com s.c.lnkd.licdn.com m.c.lnkd.licdn.com s.c.exp1.licdn.com s.c.exp2.licdn.com m.c.exp1.licdn.com m.c.exp2.licdn.com wss://*.linkedin.com dms.licdn.com https://dpm.demdex.net/id https://lnkd.demdex.net/event blob: https://accounts.google.com/gsi/status https://linkedin.sc.omtrdc.net/b/ss/ www.google-analytics.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com media.licdn.com media-exp1.licdn.com media-exp2.licdn.com media-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'report-sample' 'unsafe-inline' 'unsafe-eval' 'self' spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com www.google-analytics.com ssl.google-analytics.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com slideshare.www.linkedin.com https://snap.licdn.com/li.lms-analytics/ platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com; object-src 'none'; media-src blob: *; child-src blob: lnkd-communities: voyager: *; frame-ancestors 'self'
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-Frame-Options: sameorigin
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-Content-Type-Options: nosniff
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Strict-Transport-Security: max-age=2592000
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-Li-Fabric: prod-lor1
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-Li-Pop: afd-prod-eda6
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-Li-Proto: http/1.1
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-LI-UUID: oY5JCE0VPhaQLhJPBSsAAA==
+[15-Oct-2020 11:35:38 Asia/Kolkata] S X-MSEdge-Ref: Ref A: 88F4D03FA87C4B54A5E3E028302691E5 Ref B: NYCEDGE1308 Ref C: 2020-10-15T06:05:37Z
+[15-Oct-2020 11:35:38 Asia/Kolkata] S Date: Thu, 15 Oct 2020 06:05:38 GMT
+[15-Oct-2020 11:35:38 Asia/Kolkata] S 
+[15-Oct-2020 11:35:38 Asia/Kolkata] S {"access_token":"AQXgeOMDFceHw5MwVfiMPyStJH2joolsAcmLZTjRpJOLmtrVN1lSyze67N0Mwfbf8dPpNdq0IvPr4Q1pxDMCe4JavEQsxfVcqzD_Qo2yaWf_K_rDOo2zg27U0CDqcfu2R8FzkUIoc1x6FDl1A4z8DE7fAo0ChLxXawO9p6mV9mAg5qIONaSpOnJGbJ9y1bLYiiLOFV6so9YQjujyyMhEmFhSIE-YLqQ5fwwceMo_QpdE5PIfSt8Mf0gMCxgzjbCtktdB2b-nMYcmyqWbEXGVvFh1NIeB82s3Lts9Ad5E7aBV4CBKp4JHAJypVlSFN61wdq422yPWZFS-IuMFMvkB3figGDiSkA","expires_in":5183999}
+[15-Oct-2020 11:35:38 Asia/Kolkata] Keeping the connection alive to www.linkedin.com
+[15-Oct-2020 11:35:38 Asia/Kolkata] OAuth client: Access token: AQXgeOMDFceHw5MwVfiMPyStJH2joolsAcmLZTjRpJOLmtrVN1lSyze67N0Mwfbf8dPpNdq0IvPr4Q1pxDMCe4JavEQsxfVcqzD_Qo2yaWf_K_rDOo2zg27U0CDqcfu2R8FzkUIoc1x6FDl1A4z8DE7fAo0ChLxXawO9p6mV9mAg5qIONaSpOnJGbJ9y1bLYiiLOFV6so9YQjujyyMhEmFhSIE-YLqQ5fwwceMo_QpdE5PIfSt8Mf0gMCxgzjbCtktdB2b-nMYcmyqWbEXGVvFh1NIeB82s3Lts9Ad5E7aBV4CBKp4JHAJypVlSFN61wdq422yPWZFS-IuMFMvkB3figGDiSkA
+[15-Oct-2020 11:35:38 Asia/Kolkata] OAuth client: Access token expiry: 2020-12-14 06:05:37 UTC
+[15-Oct-2020 12:24:22 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[15-Oct-2020 12:24:22 Asia/Kolkata] OAuth client: The OAuth access token AQXgeOMDFceHw5MwVfiMPyStJH2joolsAcmLZTjRpJOLmtrVN1lSyze67N0Mwfbf8dPpNdq0IvPr4Q1pxDMCe4JavEQsxfVcqzD_Qo2yaWf_K_rDOo2zg27U0CDqcfu2R8FzkUIoc1x6FDl1A4z8DE7fAo0ChLxXawO9p6mV9mAg5qIONaSpOnJGbJ9y1bLYiiLOFV6so9YQjujyyMhEmFhSIE-YLqQ5fwwceMo_QpdE5PIfSt8Mf0gMCxgzjbCtktdB2b-nMYcmyqWbEXGVvFh1NIeB82s3Lts9Ad5E7aBV4CBKp4JHAJypVlSFN61wdq422yPWZFS-IuMFMvkB3figGDiSkA is valid
+[15-Oct-2020 12:24:22 Asia/Kolkata] OAuth client: The OAuth access token expires on 2020-12-14 06:05:37
+[16-Oct-2020 15:14:59 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[16-Oct-2020 15:14:59 Asia/Kolkata] OAuth client: A valid access token is not available
+[16-Oct-2020 15:14:59 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[16-Oct-2020 15:14:59 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602841499-ee2fca&scope=r_liteprofile+r_emailaddress
+[16-Oct-2020 15:15:11 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[16-Oct-2020 15:15:11 Asia/Kolkata] OAuth client: A valid access token is not available
+[16-Oct-2020 15:15:11 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback?code=AQQQtpVU-Z_TIoQ4CyXTN6QCVcSnf2WOCzqNw_gtFnymiM5q1dUMk_bWbJ1xzc3FjygxceaQ1GsFseKovRLpy63tGgDsWHIMkceDr5Okb8NglvimA_YNKpROLGC_2XeNOq5vG817-GeGMteVytIYJberj9RTXrPVQGMEZkZ6joH_QiHlSHZ3nrhySvOBTg&state=1602841499-ee2fca
+[16-Oct-2020 15:15:11 Asia/Kolkata] OAuth client: Checking the authentication code
+[16-Oct-2020 15:15:11 Asia/Kolkata] OAuth client: Accessing the OAuth access token at https://www.linkedin.com/oauth/v2/accessToken
+[16-Oct-2020 15:15:11 Asia/Kolkata] Connecting to www.linkedin.com
+[16-Oct-2020 15:15:11 Asia/Kolkata] Resolving HTTP server domain "www.linkedin.com"...
+[16-Oct-2020 15:15:11 Asia/Kolkata] Connecting to HTTP server IP 13.107.42.14 port 443...
+[16-Oct-2020 15:15:11 Asia/Kolkata] Connected to www.linkedin.com
+[16-Oct-2020 15:15:11 Asia/Kolkata] C POST /oauth/v2/accessToken HTTP/1.1
+[16-Oct-2020 15:15:11 Asia/Kolkata] C Host: www.linkedin.com
+[16-Oct-2020 15:15:11 Asia/Kolkata] C User-Agent: PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.165 $)
+[16-Oct-2020 15:15:11 Asia/Kolkata] C Accept: */*
+[16-Oct-2020 15:15:11 Asia/Kolkata] C Connection: Keep-Alive
+[16-Oct-2020 15:15:11 Asia/Kolkata] C Content-Type: application/x-www-form-urlencoded
+[16-Oct-2020 15:15:11 Asia/Kolkata] C Content-Length: 356
+[16-Oct-2020 15:15:11 Asia/Kolkata] C 
+[16-Oct-2020 15:15:11 Asia/Kolkata] C code=AQQQtpVU-Z_TIoQ4CyXTN6QCVcSnf2WOCzqNw_gtFnymiM5q1dUMk_bWbJ1xzc3FjygxceaQ1GsFseKovRLpy63tGgDsWHIMkceDr5Okb8NglvimA_YNKpROLGC_2XeNOq5vG817-GeGMteVytIYJberj9RTXrPVQGMEZkZ6joH_QiHlSHZ3nrhySvOBTg&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&grant_type=authorization_code&client_id=78beuic6jn92q4&client_secret=HyXpuvnahIeT4xDo
+[16-Oct-2020 15:15:11 Asia/Kolkata] S HTTP/1.1 200 OK
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Cache-Control: no-cache, no-store
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Pragma: no-cache
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Content-Length: 390
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Content-Type: application/json
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Expires: Thu, 01 Jan 1970 00:00:00 GMT
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Set-Cookie: lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Set-Cookie: bcookie="v=2&b9393ca2-46c3-4d8b-8d56-53d5dee4e71e"; domain=.linkedin.com; Path=/; Secure; Expires=Sun, 16-Oct-2022 21:22:43 GMT; SameSite=None
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Set-Cookie: bscookie="v=1&202010160945111035ca7a-dcc4-4fdd-8a84-955d6225f1a2AQF4gm5co2m-gVTm53BCFsopGhxbXYWi"; domain=.www.linkedin.com; Path=/; Secure; Expires=Sun, 16-Oct-2022 21:22:43 GMT; HttpOnly; SameSite=None
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Set-Cookie: lissc=1; domain=.linkedin.com; Path=/; Secure; Expires=Sat, 16-Oct-2021 09:45:11 GMT; SameSite=None
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Set-Cookie: lidc="b=OB20:g=3308:u=107:i=1602841511:t=1602927900:s=AQHXSOQlvzYlekEyTTNdeuV4lbVVHGcO"; Expires=Sat, 17 Oct 2020 09:45:00 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-FS-TXN-ID: 2b4206cde740
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-FS-UUID: c798fddbdc6f3e167054177c502b0000
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Expect-CT: max-age=86400, report-uri="https://www.linkedin.com/platform-telemetry/ct"
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-XSS-Protection: 1; mode=block
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Content-Security-Policy: default-src *; connect-src 'self' https://media-src.linkedin.com/media/ www.linkedin.com s.c.lnkd.licdn.com m.c.lnkd.licdn.com s.c.exp1.licdn.com s.c.exp2.licdn.com m.c.exp1.licdn.com m.c.exp2.licdn.com wss://*.linkedin.com dms.licdn.com https://dpm.demdex.net/id https://lnkd.demdex.net/event blob: https://accounts.google.com/gsi/status https://linkedin.sc.omtrdc.net/b/ss/ www.google-analytics.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com media.licdn.com media-exp1.licdn.com media-exp2.licdn.com media-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'report-sample' 'unsafe-inline' 'unsafe-eval' 'self' spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com www.google-analytics.com ssl.google-analytics.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com slideshare.www.linkedin.com https://snap.licdn.com/li.lms-analytics/ platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com; object-src 'none'; media-src blob: *; child-src blob: lnkd-communities: voyager: *; frame-ancestors 'self'; report-uri https://www.linkedin.com/platform-telemetry/csp?f=l
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-Frame-Options: sameorigin
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-Content-Type-Options: nosniff
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Strict-Transport-Security: max-age=2592000
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-Li-Fabric: prod-lor1
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-Li-Pop: afd-prod-eda6
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-Li-Proto: http/1.1
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-LI-UUID: Bkrh29xvPhbQNoF/UCsAAA==
+[16-Oct-2020 15:15:11 Asia/Kolkata] S X-MSEdge-Ref: Ref A: 921C2E8B352243ECB5626E4A44BB2406 Ref B: NYCEDGE1317 Ref C: 2020-10-16T09:45:11Z
+[16-Oct-2020 15:15:11 Asia/Kolkata] S Date: Fri, 16 Oct 2020 09:45:11 GMT
+[16-Oct-2020 15:15:11 Asia/Kolkata] S 
+[16-Oct-2020 15:15:11 Asia/Kolkata] S {"access_token":"AQWFOmXXKT2N4C_SetzkWYKrxKuCSLN7oFEYbXI6i_FF3tdh_oqEa_9Gp4VLeOei09LvithA7yuT-rIqQxljZ1lIuGhOIy7sZ6Qhu-KddZBvaUV4S2ZrNrRbsmcn8Z46MHMQQSdE_NrROsDAHToFhcC54vlgMgEeDtVByR3hvBeZBgB6Xdc7NPmIDB-UL-aU3z_-1fzEHzDNwJ0YQdjCinhTg-ZPSK7DOU6ESHwszXpcjho_f8I9ZUFYVvK5wkhzp--8zBH1RmcQ9k5W5bPQ4s1ZrrejrugAmJ8eVXm_4hUmF-XjBDXx-hYjx_xv1fCWzlauVb7JF-xJe4O5XISA-cYGqKjp3A","expires_in":5184000}
+[16-Oct-2020 15:15:11 Asia/Kolkata] Keeping the connection alive to www.linkedin.com
+[16-Oct-2020 15:15:11 Asia/Kolkata] OAuth client: Access token: AQWFOmXXKT2N4C_SetzkWYKrxKuCSLN7oFEYbXI6i_FF3tdh_oqEa_9Gp4VLeOei09LvithA7yuT-rIqQxljZ1lIuGhOIy7sZ6Qhu-KddZBvaUV4S2ZrNrRbsmcn8Z46MHMQQSdE_NrROsDAHToFhcC54vlgMgEeDtVByR3hvBeZBgB6Xdc7NPmIDB-UL-aU3z_-1fzEHzDNwJ0YQdjCinhTg-ZPSK7DOU6ESHwszXpcjho_f8I9ZUFYVvK5wkhzp--8zBH1RmcQ9k5W5bPQ4s1ZrrejrugAmJ8eVXm_4hUmF-XjBDXx-hYjx_xv1fCWzlauVb7JF-xJe4O5XISA-cYGqKjp3A
+[16-Oct-2020 15:15:11 Asia/Kolkata] OAuth client: Access token expiry: 2020-12-15 09:45:11 UTC
+[17-Oct-2020 19:54:30 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[17-Oct-2020 19:54:30 Asia/Kolkata] OAuth client: A valid access token is not available
+[17-Oct-2020 19:54:30 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[17-Oct-2020 19:54:30 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1602944670-9456ea&scope=r_liteprofile+r_emailaddress
+[17-Oct-2020 20:03:19 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[17-Oct-2020 20:03:19 Asia/Kolkata] OAuth client: A valid access token is not available
+[17-Oct-2020 20:03:19 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback?code=AQTXAXJ1zYm8nX5qOrEtoPponubLK3SgEyHa1VL9AVUviZGwhJJcoesV27cx583tMMCSfOrevnMibRJff_ZnXgnXUgOwVS2P6WMo57Ut4mxeG1hXP0B7TvONCAym4XbMfRrXrcKnIYSWXB8WguJ3LCC4ADg9kNEat21z80sXa6H7wGhP4iTXZ4vbBllAfA&state=1602944670-9456ea
+[17-Oct-2020 20:03:19 Asia/Kolkata] OAuth client: Checking the authentication code
+[17-Oct-2020 20:03:19 Asia/Kolkata] OAuth client: Accessing the OAuth access token at https://www.linkedin.com/oauth/v2/accessToken
+[17-Oct-2020 20:03:19 Asia/Kolkata] Connecting to www.linkedin.com
+[17-Oct-2020 20:03:19 Asia/Kolkata] Resolving HTTP server domain "www.linkedin.com"...
+[17-Oct-2020 20:03:19 Asia/Kolkata] Connecting to HTTP server IP 13.107.42.14 port 443...
+[17-Oct-2020 20:03:19 Asia/Kolkata] Connected to www.linkedin.com
+[17-Oct-2020 20:03:19 Asia/Kolkata] C POST /oauth/v2/accessToken HTTP/1.1
+[17-Oct-2020 20:03:19 Asia/Kolkata] C Host: www.linkedin.com
+[17-Oct-2020 20:03:19 Asia/Kolkata] C User-Agent: PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.165 $)
+[17-Oct-2020 20:03:19 Asia/Kolkata] C Accept: */*
+[17-Oct-2020 20:03:19 Asia/Kolkata] C Connection: Keep-Alive
+[17-Oct-2020 20:03:19 Asia/Kolkata] C Content-Type: application/x-www-form-urlencoded
+[17-Oct-2020 20:03:19 Asia/Kolkata] C Content-Length: 356
+[17-Oct-2020 20:03:19 Asia/Kolkata] C 
+[17-Oct-2020 20:03:19 Asia/Kolkata] C code=AQTXAXJ1zYm8nX5qOrEtoPponubLK3SgEyHa1VL9AVUviZGwhJJcoesV27cx583tMMCSfOrevnMibRJff_ZnXgnXUgOwVS2P6WMo57Ut4mxeG1hXP0B7TvONCAym4XbMfRrXrcKnIYSWXB8WguJ3LCC4ADg9kNEat21z80sXa6H7wGhP4iTXZ4vbBllAfA&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&grant_type=authorization_code&client_id=78beuic6jn92q4&client_secret=HyXpuvnahIeT4xDo
+[17-Oct-2020 20:03:19 Asia/Kolkata] S HTTP/1.1 200 OK
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Cache-Control: no-cache, no-store
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Pragma: no-cache
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Content-Length: 390
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Content-Type: application/json
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Expires: Thu, 01 Jan 1970 00:00:00 GMT
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Set-Cookie: lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Set-Cookie: bcookie="v=2&5d6bbc38-b191-4a7a-8b21-43e0c8102055"; domain=.linkedin.com; Path=/; Secure; Expires=Tue, 18-Oct-2022 02:10:51 GMT; SameSite=None
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Set-Cookie: bscookie="v=1&2020101714331902205075-d2ca-4753-84a8-8539f1a1b083AQGr3ivWBXjiNAP-Jng5qPheZImgKEr7"; domain=.www.linkedin.com; Path=/; Secure; Expires=Tue, 18-Oct-2022 02:10:51 GMT; HttpOnly; SameSite=None
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Set-Cookie: lissc=1; domain=.linkedin.com; Path=/; Secure; Expires=Sun, 17-Oct-2021 14:33:19 GMT; SameSite=None
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Set-Cookie: lidc="b=OB20:g=3309:u=107:i=1602945199:t=1602997373:s=AQGTNjOdF5rUOvE-ibZVOXxDHwPZfVGY"; Expires=Sun, 18 Oct 2020 05:02:53 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-FS-TXN-ID: 2b557e4c3af0
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-FS-UUID: af6b7b8c2ace3e16a0e345fff52a0000
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Expect-CT: max-age=86400, report-uri="https://www.linkedin.com/platform-telemetry/ct"
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-XSS-Protection: 1; mode=block
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Content-Security-Policy: default-src *; connect-src 'self' https://media-src.linkedin.com/media/ www.linkedin.com s.c.lnkd.licdn.com m.c.lnkd.licdn.com s.c.exp1.licdn.com s.c.exp2.licdn.com m.c.exp1.licdn.com m.c.exp2.licdn.com wss://*.linkedin.com dms.licdn.com https://dpm.demdex.net/id https://lnkd.demdex.net/event blob: https://accounts.google.com/gsi/status https://linkedin.sc.omtrdc.net/b/ss/ www.google-analytics.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com media.licdn.com media-exp1.licdn.com media-exp2.licdn.com media-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'report-sample' 'unsafe-inline' 'unsafe-eval' 'self' spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com www.google-analytics.com ssl.google-analytics.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com slideshare.www.linkedin.com https://snap.licdn.com/li.lms-analytics/ platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com; object-src 'none'; media-src blob: *; child-src blob: lnkd-communities: voyager: *; frame-ancestors 'self'
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-Frame-Options: sameorigin
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-Content-Type-Options: nosniff
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Strict-Transport-Security: max-age=2592000
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-Li-Fabric: prod-lor1
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-Li-Pop: afd-prod-esv5
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-Li-Proto: http/1.1
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-LI-UUID: AWVUjCrOPhZAsY0q9ioAAA==
+[17-Oct-2020 20:03:19 Asia/Kolkata] S X-MSEdge-Ref: Ref A: 0DE786BE353A486594726464442C3C83 Ref B: NYCEDGE1719 Ref C: 2020-10-17T14:33:19Z
+[17-Oct-2020 20:03:19 Asia/Kolkata] S Date: Sat, 17 Oct 2020 14:33:18 GMT
+[17-Oct-2020 20:03:19 Asia/Kolkata] S 
+[17-Oct-2020 20:03:19 Asia/Kolkata] S {"access_token":"AQXBl1vgo_FfCU5VNUPL8h3LKswCB8hTpEvprM5Nh5EMq2EXP8S_QqyUivlvby2tRxFWjiHxvB-3Y9sgtNsCw-0LZLDoftrFWCEkMoY9chpMgFKmRSlOfipsNo5SqfIEefAFwEWf27rVf-IXa9TPJPraOXqQmp30CxfsZ0G-nTeta5KDL2sDVf0YCtYGBiKzKDLkMxWfYdTa4D5KRZeC_Z5F-iHoB0PAeyZaXZ4grgTnjmmm2q8V8-j9hP2e0xu6D7mQcVziM_afrXfw8DaO_3GgNbwiuBRNV7T1UvQmxPgU0Ad5Kkj_b-Xl3lZA_rTikZn5ZD4oJdwBpcFUXwv9CoonG4GVgg","expires_in":5183999}
+[17-Oct-2020 20:03:19 Asia/Kolkata] Keeping the connection alive to www.linkedin.com
+[17-Oct-2020 20:03:19 Asia/Kolkata] OAuth client: Access token: AQXBl1vgo_FfCU5VNUPL8h3LKswCB8hTpEvprM5Nh5EMq2EXP8S_QqyUivlvby2tRxFWjiHxvB-3Y9sgtNsCw-0LZLDoftrFWCEkMoY9chpMgFKmRSlOfipsNo5SqfIEefAFwEWf27rVf-IXa9TPJPraOXqQmp30CxfsZ0G-nTeta5KDL2sDVf0YCtYGBiKzKDLkMxWfYdTa4D5KRZeC_Z5F-iHoB0PAeyZaXZ4grgTnjmmm2q8V8-j9hP2e0xu6D7mQcVziM_afrXfw8DaO_3GgNbwiuBRNV7T1UvQmxPgU0Ad5Kkj_b-Xl3lZA_rTikZn5ZD4oJdwBpcFUXwv9CoonG4GVgg
+[17-Oct-2020 20:03:19 Asia/Kolkata] OAuth client: Access token expiry: 2020-12-16 14:33:17 UTC
+[18-Oct-2020 12:56:24 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[18-Oct-2020 12:56:24 Asia/Kolkata] OAuth client: A valid access token is not available
+[18-Oct-2020 12:56:24 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[18-Oct-2020 12:56:24 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1603005984-fb310c&scope=r_liteprofile+r_emailaddress
+[18-Oct-2020 12:56:35 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[18-Oct-2020 12:56:35 Asia/Kolkata] OAuth client: A valid access token is not available
+[18-Oct-2020 12:56:35 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback?code=AQSqtnE_rCikrn3ZrFU0Qi1AhGPoV3AUboOdCGpR4YA_Rdz3L4dMUZ7FEo5XsVyIhvLyOYkf7hTIdRe1bCCEjmLuaROGluqZmX8YMGqWzfDSQtx5swdbox1voUrFlH3abWolFSFNo9JAgGrbQ59UsenjWAqH8HKTgkIEPrKUFJswGvQ9FoKUDsojE5dFHQ&state=1603005984-fb310c
+[18-Oct-2020 12:56:35 Asia/Kolkata] OAuth client: Checking the authentication code
+[18-Oct-2020 12:56:35 Asia/Kolkata] OAuth client: Accessing the OAuth access token at https://www.linkedin.com/oauth/v2/accessToken
+[18-Oct-2020 12:56:35 Asia/Kolkata] Connecting to www.linkedin.com
+[18-Oct-2020 12:56:35 Asia/Kolkata] Resolving HTTP server domain "www.linkedin.com"...
+[18-Oct-2020 12:56:35 Asia/Kolkata] Connecting to HTTP server IP 13.107.42.14 port 443...
+[18-Oct-2020 12:56:35 Asia/Kolkata] Connected to www.linkedin.com
+[18-Oct-2020 12:56:35 Asia/Kolkata] C POST /oauth/v2/accessToken HTTP/1.1
+[18-Oct-2020 12:56:35 Asia/Kolkata] C Host: www.linkedin.com
+[18-Oct-2020 12:56:35 Asia/Kolkata] C User-Agent: PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.165 $)
+[18-Oct-2020 12:56:35 Asia/Kolkata] C Accept: */*
+[18-Oct-2020 12:56:35 Asia/Kolkata] C Connection: Keep-Alive
+[18-Oct-2020 12:56:35 Asia/Kolkata] C Content-Type: application/x-www-form-urlencoded
+[18-Oct-2020 12:56:35 Asia/Kolkata] C Content-Length: 356
+[18-Oct-2020 12:56:35 Asia/Kolkata] C 
+[18-Oct-2020 12:56:35 Asia/Kolkata] C code=AQSqtnE_rCikrn3ZrFU0Qi1AhGPoV3AUboOdCGpR4YA_Rdz3L4dMUZ7FEo5XsVyIhvLyOYkf7hTIdRe1bCCEjmLuaROGluqZmX8YMGqWzfDSQtx5swdbox1voUrFlH3abWolFSFNo9JAgGrbQ59UsenjWAqH8HKTgkIEPrKUFJswGvQ9FoKUDsojE5dFHQ&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&grant_type=authorization_code&client_id=78beuic6jn92q4&client_secret=HyXpuvnahIeT4xDo
+[18-Oct-2020 12:56:35 Asia/Kolkata] S HTTP/1.1 200 OK
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Cache-Control: no-cache, no-store
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Pragma: no-cache
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Content-Length: 390
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Content-Type: application/json
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Expires: Thu, 01 Jan 1970 00:00:00 GMT
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Set-Cookie: lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Set-Cookie: bcookie="v=2&0851d5ae-55b6-446f-890d-81624068a5cf"; domain=.linkedin.com; Path=/; Secure; Expires=Tue, 18-Oct-2022 19:04:07 GMT; SameSite=None
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Set-Cookie: bscookie="v=1&20201018072635bbbf71e2-d04f-4a04-8bc6-d0b645af5433AQHQQDgOSbQRMsYjNxVLH_m9QNx8SIDR"; domain=.www.linkedin.com; Path=/; Secure; Expires=Tue, 18-Oct-2022 19:04:07 GMT; HttpOnly; SameSite=None
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Set-Cookie: lissc=1; domain=.linkedin.com; Path=/; Secure; Expires=Mon, 18-Oct-2021 07:26:35 GMT; SameSite=None
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Set-Cookie: lidc="b=OB20:g=3309:u=107:i=1603005995:t=1603092387:s=AQHCHD_wvg09B0ph9u_5-8tWfWNkLfDF"; Expires=Mon, 19 Oct 2020 07:26:27 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-FS-TXN-ID: 2b46b3cff8d0
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-FS-UUID: 06ae25b175053f16505ea424352b0000
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Expect-CT: max-age=86400, report-uri="https://www.linkedin.com/platform-telemetry/ct"
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-XSS-Protection: 1; mode=block
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Content-Security-Policy: default-src *; connect-src 'self' https://media-src.linkedin.com/media/ www.linkedin.com s.c.lnkd.licdn.com m.c.lnkd.licdn.com s.c.exp1.licdn.com s.c.exp2.licdn.com m.c.exp1.licdn.com m.c.exp2.licdn.com wss://*.linkedin.com dms.licdn.com https://dpm.demdex.net/id https://lnkd.demdex.net/event blob: https://accounts.google.com/gsi/status https://linkedin.sc.omtrdc.net/b/ss/ www.google-analytics.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com media.licdn.com media-exp1.licdn.com media-exp2.licdn.com media-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'report-sample' 'unsafe-inline' 'unsafe-eval' 'self' spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com www.google-analytics.com ssl.google-analytics.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com slideshare.www.linkedin.com https://snap.licdn.com/li.lms-analytics/ platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com; object-src 'none'; media-src blob: *; child-src blob: lnkd-communities: voyager: *; frame-ancestors 'self'; report-uri https://www.linkedin.com/platform-telemetry/csp?f=l
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-Frame-Options: sameorigin
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-Content-Type-Options: nosniff
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Strict-Transport-Security: max-age=2592000
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-Li-Fabric: prod-lor1
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-Li-Pop: afd-prod-esv5
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-Li-Proto: http/1.1
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-LI-UUID: ng/8sHUFPxbQ4kj+NCsAAA==
+[18-Oct-2020 12:56:35 Asia/Kolkata] S X-MSEdge-Ref: Ref A: 5CF5B8AB8B9846378B54CDF73B3411BD Ref B: NYCEDGE1312 Ref C: 2020-10-18T07:26:35Z
+[18-Oct-2020 12:56:35 Asia/Kolkata] S Date: Sun, 18 Oct 2020 07:26:34 GMT
+[18-Oct-2020 12:56:35 Asia/Kolkata] S 
+[18-Oct-2020 12:56:35 Asia/Kolkata] S {"access_token":"AQVPvHDS4EuSrQ8Zke0o5SdbpRW4K76ttfDVVk_PyCp6XqILBacgRWEFcfKfX4XalyoVD875T9iyvycMbXpR1e9tGH05f0Zci-VTGJdUWCHcVEWhaI3DB6l5rwnv-X-Jdyd830o1tpWS3RwNWu89EiGTa-gKApdlv036ODYvNSCvbkc7ieFVa5t79LpqVlzKcTSsZG7ZgFJROCpX9Q3O0w-8XoL5_UNqpPlheSBG3Gy5oce-X2rImGk0COO1gB4XVP-_ppM5kjCoqIPUaudbluWuVsRfevz4C5eFSv8fBS3U2k_RVhjAqADf5QfIRtQYD7rMHzQm7fVbsKhLqjRtzQ7leC9q4A","expires_in":5184000}
+[18-Oct-2020 12:56:35 Asia/Kolkata] Keeping the connection alive to www.linkedin.com
+[18-Oct-2020 12:56:35 Asia/Kolkata] OAuth client: Access token: AQVPvHDS4EuSrQ8Zke0o5SdbpRW4K76ttfDVVk_PyCp6XqILBacgRWEFcfKfX4XalyoVD875T9iyvycMbXpR1e9tGH05f0Zci-VTGJdUWCHcVEWhaI3DB6l5rwnv-X-Jdyd830o1tpWS3RwNWu89EiGTa-gKApdlv036ODYvNSCvbkc7ieFVa5t79LpqVlzKcTSsZG7ZgFJROCpX9Q3O0w-8XoL5_UNqpPlheSBG3Gy5oce-X2rImGk0COO1gB4XVP-_ppM5kjCoqIPUaudbluWuVsRfevz4C5eFSv8fBS3U2k_RVhjAqADf5QfIRtQYD7rMHzQm7fVbsKhLqjRtzQ7leC9q4A
+[18-Oct-2020 12:56:35 Asia/Kolkata] OAuth client: Access token expiry: 2020-12-17 07:26:34 UTC
+[19-Oct-2020 10:05:28 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[19-Oct-2020 10:05:28 Asia/Kolkata] OAuth client: A valid access token is not available
+[19-Oct-2020 10:05:28 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback
+[19-Oct-2020 10:05:28 Asia/Kolkata] OAuth client: Redirecting to OAuth Dialog https://www.linkedin.com/oauth/v2/authorization?response_type=code&client_id=78beuic6jn92q4&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&state=1603082128-e0db6f&scope=r_liteprofile+r_emailaddress
+[19-Oct-2020 10:05:44 Asia/Kolkata] OAuth client: Checking if OAuth access token was already retrieved from https://www.linkedin.com/oauth/v2/accessToken
+[19-Oct-2020 10:05:44 Asia/Kolkata] OAuth client: A valid access token is not available
+[19-Oct-2020 10:05:44 Asia/Kolkata] OAuth client: Checking the authentication state in URI /socialLogin/linkedinCallback?code=AQRlfv0VqhvqJ3d6kv6qJ_uY_VZCkdJXdA9fRpDxcQxtRVQ_e-YfekTNioEKipocshfTd0O01ol7jJVuezb0xPSHwg2m8acXAsg4LqXDsdwS0fwRXAFPE5u2G9aTV4Rl9aA4HJWFt87WzbNlaqviXCWWqir8ndoqjvEYALTC20IRcCP72DxrRahYKLX9ig&state=1603082128-e0db6f
+[19-Oct-2020 10:05:44 Asia/Kolkata] OAuth client: Checking the authentication code
+[19-Oct-2020 10:05:44 Asia/Kolkata] OAuth client: Accessing the OAuth access token at https://www.linkedin.com/oauth/v2/accessToken
+[19-Oct-2020 10:05:44 Asia/Kolkata] Connecting to www.linkedin.com
+[19-Oct-2020 10:05:44 Asia/Kolkata] Resolving HTTP server domain "www.linkedin.com"...
+[19-Oct-2020 10:05:44 Asia/Kolkata] Connecting to HTTP server IP 13.107.42.14 port 443...
+[19-Oct-2020 10:05:44 Asia/Kolkata] Connected to www.linkedin.com
+[19-Oct-2020 10:05:44 Asia/Kolkata] C POST /oauth/v2/accessToken HTTP/1.1
+[19-Oct-2020 10:05:44 Asia/Kolkata] C Host: www.linkedin.com
+[19-Oct-2020 10:05:44 Asia/Kolkata] C User-Agent: PHP-OAuth-API (http://www.phpclasses.org/oauth-api $Revision: 1.165 $)
+[19-Oct-2020 10:05:44 Asia/Kolkata] C Accept: */*
+[19-Oct-2020 10:05:44 Asia/Kolkata] C Connection: Keep-Alive
+[19-Oct-2020 10:05:44 Asia/Kolkata] C Content-Type: application/x-www-form-urlencoded
+[19-Oct-2020 10:05:44 Asia/Kolkata] C Content-Length: 356
+[19-Oct-2020 10:05:44 Asia/Kolkata] C 
+[19-Oct-2020 10:05:44 Asia/Kolkata] C code=AQRlfv0VqhvqJ3d6kv6qJ_uY_VZCkdJXdA9fRpDxcQxtRVQ_e-YfekTNioEKipocshfTd0O01ol7jJVuezb0xPSHwg2m8acXAsg4LqXDsdwS0fwRXAFPE5u2G9aTV4Rl9aA4HJWFt87WzbNlaqviXCWWqir8ndoqjvEYALTC20IRcCP72DxrRahYKLX9ig&redirect_uri=https%3A%2F%2Fstudypeers.dev%2FsocialLogin%2FlinkedinCallback&grant_type=authorization_code&client_id=78beuic6jn92q4&client_secret=HyXpuvnahIeT4xDo
+[19-Oct-2020 10:05:44 Asia/Kolkata] S HTTP/1.1 200 OK
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Cache-Control: no-cache, no-store
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Pragma: no-cache
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Content-Length: 390
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Content-Type: application/json
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Expires: Thu, 01 Jan 1970 00:00:00 GMT
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Set-Cookie: lang=v=2&lang=en-us; SameSite=None; Path=/; Domain=linkedin.com; Secure
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Set-Cookie: bcookie="v=2&2acfb817-5764-4a8c-8285-7a6053394f7f"; domain=.linkedin.com; Path=/; Secure; Expires=Wed, 19-Oct-2022 16:13:16 GMT; SameSite=None
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Set-Cookie: bscookie="v=1&2020101904354405739e28-750a-4e5d-8c6f-9615eb6fb993AQF81jUOalEACsoV-D14FKv4w-fhpEJk"; domain=.www.linkedin.com; Path=/; Secure; Expires=Wed, 19-Oct-2022 16:13:16 GMT; HttpOnly; SameSite=None
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Set-Cookie: lissc=1; domain=.linkedin.com; Path=/; Secure; Expires=Tue, 19-Oct-2021 04:35:44 GMT; SameSite=None
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Set-Cookie: lidc="b=OB20:g=3309:u=107:i=1603082144:t=1603092387:s=AQHCFhNBRD2FQUNikTL3TR3MmXh-66xW"; Expires=Mon, 19 Oct 2020 07:26:27 GMT; domain=.linkedin.com; Path=/; SameSite=None; Secure
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-FS-TXN-ID: 2b98b6cbdd90
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-FS-UUID: 7e7f8c76b74a3f16e02d9af8042b0000
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Expect-CT: max-age=86400, report-uri="https://www.linkedin.com/platform-telemetry/ct"
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-XSS-Protection: 1; mode=block
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Content-Security-Policy: default-src *; connect-src 'self' https://media-src.linkedin.com/media/ www.linkedin.com s.c.lnkd.licdn.com m.c.lnkd.licdn.com s.c.exp1.licdn.com s.c.exp2.licdn.com m.c.exp1.licdn.com m.c.exp2.licdn.com wss://*.linkedin.com dms.licdn.com https://dpm.demdex.net/id https://lnkd.demdex.net/event blob: https://accounts.google.com/gsi/status https://linkedin.sc.omtrdc.net/b/ss/ www.google-analytics.com static.licdn.com static-exp1.licdn.com static-exp2.licdn.com static-exp3.licdn.com media.licdn.com media-exp1.licdn.com media-exp2.licdn.com media-exp3.licdn.com; img-src data: blob: *; font-src data: *; style-src 'unsafe-inline' 'self' static-src.linkedin.com *.licdn.com; script-src 'report-sample' 'unsafe-inline' 'unsafe-eval' 'self' spdy.linkedin.com static-src.linkedin.com *.ads.linkedin.com *.licdn.com static.chartbeat.com www.google-analytics.com ssl.google-analytics.com bcvipva02.rightnowtech.com www.bizographics.com sjs.bizographics.com js.bizographics.com d.la4-c1-was.salesforceliveagent.com slideshare.www.linkedin.com https://snap.licdn.com/li.lms-analytics/ platform.linkedin.com platform-akam.linkedin.com platform-ecst.linkedin.com platform-azur.linkedin.com; object-src 'none'; media-src blob: *; child-src blob: lnkd-communities: voyager: *; frame-ancestors 'self'; report-uri https://www.linkedin.com/platform-telemetry/csp?f=l
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-Frame-Options: sameorigin
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-Content-Type-Options: nosniff
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Strict-Transport-Security: max-age=2592000
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-Li-Fabric: prod-lor1
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-Li-Pop: afd-prod-eda6
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-Li-Proto: http/1.1
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-LI-UUID: oz9qdrdKPxYAsIiCBCsAAA==
+[19-Oct-2020 10:05:44 Asia/Kolkata] S X-MSEdge-Ref: Ref A: 0BBF2D447211471BB34BCDB276460089 Ref B: NYCEDGE1308 Ref C: 2020-10-19T04:35:44Z
+[19-Oct-2020 10:05:44 Asia/Kolkata] S Date: Mon, 19 Oct 2020 04:35:44 GMT
+[19-Oct-2020 10:05:44 Asia/Kolkata] S 
+[19-Oct-2020 10:05:44 Asia/Kolkata] S {"access_token":"AQX7iW34T6Sx1tJcsp1822kb_Lj1BAKDj1ZpLyLmIATKLggmAKo_TDugYEEFbt5lxkUQwAI3lwSeubTRyMcmRwPmaZyvIbXeFDwzVYw2UTSxjhVHU3PZ_34CiBMO_1-F7-s2tg_DTMvcxILOAPzYn9sZ767c0RhYno6zz56Rgu9xtUc8lGZRmYYiDGyru_O-FvMxKXFjGz5M21ykL6p61om2fpuID6bp0BDwVCWGP50uDL3Q30ASSIUz4ZRRlJUUE428LOC-PgVme7EipW0-JXKblPN88SOCytTl0-Gs9M_TZhDo6rruVQDWn38NC9Q4s1dOgNFG05K-vva_NdHnkLBszo4ytA","expires_in":5183999}
+[19-Oct-2020 10:05:44 Asia/Kolkata] Keeping the connection alive to www.linkedin.com
+[19-Oct-2020 10:05:44 Asia/Kolkata] OAuth client: Access token: AQX7iW34T6Sx1tJcsp1822kb_Lj1BAKDj1ZpLyLmIATKLggmAKo_TDugYEEFbt5lxkUQwAI3lwSeubTRyMcmRwPmaZyvIbXeFDwzVYw2UTSxjhVHU3PZ_34CiBMO_1-F7-s2tg_DTMvcxILOAPzYn9sZ767c0RhYno6zz56Rgu9xtUc8lGZRmYYiDGyru_O-FvMxKXFjGz5M21ykL6p61om2fpuID6bp0BDwVCWGP50uDL3Q30ASSIUz4ZRRlJUUE428LOC-PgVme7EipW0-JXKblPN88SOCytTl0-Gs9M_TZhDo6rruVQDWn38NC9Q4s1dOgNFG05K-vva_NdHnkLBszo4ytA
+[19-Oct-2020 10:05:44 Asia/Kolkata] OAuth client: Access token expiry: 2020-12-18 04:35:43 UTC
+[20-Oct-2020 10:18:05 Asia/Kolkata] PHP Notice:  Undefined index: HTTP_HOST in /home/studypeers/public_html/application/config/config.php on line 34
+[20-Oct-2020 10:20:55 Asia/Kolkata] PHP Notice:  Undefined index: HTTP_HOST in /home/studypeers/public_html/application/config/config.php on line 34
+[22-Oct-2020 01:46:11 Asia/Kolkata] PHP Notice:  Undefined index: HTTP_HOST in /home/studypeers/public_html/application/config/config.php on line 34
