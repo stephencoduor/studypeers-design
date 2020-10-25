@@ -89,27 +89,27 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                             </button>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!--<li>
                                         <a href="javascript:void(0)">
                                             <button type="button" class="choose_btn dropbox">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/dropbox.svg" alt="Choose File"> Dropbox
+                                                <img src="<?php /*echo base_url(); */?>assets_d/images/dropbox.svg" alt="Choose File"> Dropbox
                                             </button>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)">
                                             <button type="button" class="choose_btn gdrive">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/google-drive.svg" alt="Choose File"> Google Drive
+                                                <img src="<?php /*echo base_url(); */?>assets_d/images/google-drive.svg" alt="Choose File"> Google Drive
                                             </button>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="javascript:void(0)">
                                             <button type="button" class="choose_btn oneDrive">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/onedrive.svg" alt="Choose File"> oneDrive
+                                                <img src="<?php /*echo base_url(); */?>assets_d/images/onedrive.svg" alt="Choose File"> oneDrive
                                             </button>
                                         </a>
-                                    </li>
+                                    </li>-->
                                 </ul>
                             </div>
                         </div>
