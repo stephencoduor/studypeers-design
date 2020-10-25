@@ -1123,6 +1123,9 @@ class Account extends CI_Controller {
             $this->db->where(array('id' => $question_id));
             $this->db->update('question_master',array('status' => 3));
 
+            $this->db->where(array('reference_id' => $question_id, 'reference' => 'question'));
+            $this->db->update('reference_master',array('status' => 3));
+
             $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Question Deleted Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
                     </button></div>';
@@ -1537,6 +1540,19 @@ class Account extends CI_Controller {
                                 'created_at'    => date('Y-m-d H:i:s')
                             );
             $this->db->insert('question_master', $insertArr);
+
+            $insert_id = $this->db->insert_id();
+
+            $insertRef = array( 'reference'     => 'question',
+                                'reference_id'  => $insert_id,
+                                'user_id'       => $user_id,
+                                
+                                'status'        => 1,
+                                
+                                'addDate'       => date('Y-m-d H:i:s'),
+                                'modifyDate'    => date('Y-m-d H:i:s')
+                            );
+            $this->db->insert('reference_master', $insertRef);
 
             $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Question Added Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                       <span aria-hidden="true">&times;</span>
