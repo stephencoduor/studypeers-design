@@ -19,6 +19,8 @@
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
+
 <script>
 
     $(function() {
@@ -142,6 +144,43 @@
             readURL(this);
         });
 
+        var document_counter = 1, close_id;
+        $(document).on('change', '#document', function(){
+            getoutput(this);
+        });
+
+        function getFile(filePath) {
+            return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
+        }
+
+        function getoutput(inputfile) {
+            var file_ext = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "pdf"];
+            var extension = inputfile.value.split('.')[1];
+            var filename = getFile(inputfile.value);
+            // Check if a value exists in the file_ext array
+            if(file_ext.indexOf(extension) == -1){
+                alert("Invalid file type ! Please choose another file");
+                console.log($("#fileToUpload")[0].files[document_counter]);
+            }
+            var img_icon = '';
+            if(extension == 'docx'){
+                img_icon = '<img src="'+base_url+'/assets_d/images/document.svg'+'" />';
+            }else if(extension == 'pdf'){
+                img_icon = '<img src="'+base_url+'/assets_d/images/pdf.svg'+'" />';
+            }else{
+                img_icon = '<img src="'+base_url+'/assets_d/images/pdf.svg'+'" />';
+            }
+            $('#all_documents').append('<div class="filename" id="document_file_'+document_counter+'">'+img_icon+'</div><div class="closeBtn" id="remove_document_'+document_counter+'"><img src="'+base_url+'/assets_d/images/close-pink.svg'+'" alt="close"/> '+filename+'.'+extension+'</div>');
+            document_counter++;
+        }
+
+        $(document).on("click", ".closeBtn", function(){
+            close_id = $(this).attr('id');
+            close_id = close_id.split('_');
+            $('#document_file_'+close_id[2]).remove();
+            $('#remove_document_'+close_id[2]).remove();
+        });
+
         $(document).on( 'click', '#save_post_from_ajax', function () {
             $('#addPostForm').submit();
         });
@@ -166,6 +205,7 @@
                 contentType: false,
                 processData: false,
                 success: function (result) {
+                    console.log(result);
                     if(result == true){
                         window.location.href = base_url+'Profile/redirect_page?status='+result;
                     }
@@ -174,6 +214,118 @@
             });
 
         });
+
+        /** Upload Profile Picture **/
+        $image_crop = $('#image_demo').croppie({
+            enableExif: true,
+            viewport: {
+                width: 200,
+                height: 200,
+                type: 'square' //circle
+            },
+            boundary: {
+                width: 300,
+                height: 300
+            }
+        });
+        $('#upload_image').on("change", function(){
+            var reader = new FileReader();
+            reader.onload = function (event) {
+                $image_crop.croppie('bind', {
+                    url: event.target.result
+                }).then(function(){
+                    console.log('jQuery bind complete');
+                });
+            }
+            reader.readAsDataURL(this.files[0]);
+            $('#uploadimageModal').modal('show');
+        });
+        $('.crop_image').click(function(event){
+            $image_crop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function(response){
+                console.log(response);
+                $.ajax({
+                    url: base_url+'Profile/uploadProfilePicture',
+                    type: "POST",
+                    data:{"image": response},
+                    success:function(data)
+                    {
+                        if(data == true){
+                            $('#uploadimageModal').modal('hide');
+                            $("#currentProfilePicture").attr("src", response);
+                        }
+                        window.location.reload();
+                    }
+                });
+            })
+        });
+        /** End of upload profile picture **/
+
+        /** Upload Cover Picture **/
+        $cover_crop = $('#cover_image_demo').croppie({
+            enableExif: true,
+            viewport: {
+                width: 200,
+                height: 200,
+                type: 'square' //circle
+            },
+            boundary: {
+                width: 300,
+                height: 300
+            }
+        });
+        $('#upload_cover_image').on("change", function(){
+            console.log('in');
+            var cover_reader = new FileReader();
+            cover_reader.onload = function (event) {
+                console.log(event.target.result);
+                $cover_crop.croppie('bind', {
+                    url: event.target.result
+                }).then(function(){
+                    console.log('jQuery bind complete');
+                });
+            };
+            cover_reader.readAsDataURL(this.files[0]);
+            $('#uploadCoverImageModal').modal('show');
+        });
+        $('.crop_cover_image').click(function(event){
+            $cover_crop.croppie('result', {
+                type: 'canvas',
+                size: 'viewport'
+            }).then(function(response){
+                $.ajax({
+                    url: base_url+'Profile/uploadCoverPicture',
+                    type: "POST",
+                    data:{"image": response},
+                    success:function(data)
+                    {
+                        if(data == true){
+                            $('#uploadCoverImageModal').modal('hide');
+                            $("#currentCoverPicture").attr("src", response);
+                        }
+                        window.location.reload();
+                    }
+                });
+            })
+        });
+        /** End of upload cover picture **/
+
+        /** Copy to clipboard **/
+        $('#copyShareLink').on("click", function(){
+            /* Get the text field */
+            var copyText = document.getElementById("sharelink");
+            console.log(copyText.value);
+            /* Select the text field */
+            copyText.select();
+            /* Copy the text inside the text field */
+            document.execCommand("copy");
+            /* Alert the copied text */
+            alert("Link Copied: " + copyText.value);
+        });
+
+
 
         $('.box-card').each(function () {
             let feedImage = $(this).children('.createBox ').children('.feeduserwrap').children('.imgWrapper ').find('figure');
@@ -426,6 +578,58 @@
         $('.reportSection li').on('click', function () {
             $(this).toggleClass('active');
         });
+
+
+        /**Cover image crop and upload**/
+        var $uploadCrop, tempFilename, rawImg, imageId;
+        function readFile(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function (e) {
+                    $('.upload-demo').addClass('ready');
+                    $('#cropImagePop').modal('show');
+                    rawImg = e.target.result;
+                }
+                reader.readAsDataURL(input.files[0]);
+            }
+            else {
+                swal("Sorry - you're browser doesn't support the FileReader API");
+            }
+        }
+
+        $uploadCrop = $('#upload-demo').croppie({
+            viewport: {
+                width: 150,
+                height: 200,
+            },
+            enforceBoundary: false,
+            enableExif: true
+        });
+        $('#cropImagePop').on('shown.bs.modal', function(){
+            // alert('Shown pop');
+            $uploadCrop.croppie('bind', {
+                url: rawImg
+            }).then(function(){
+                console.log('jQuery bind complete');
+            });
+        });
+
+        $('.item-img').on('change', function () { imageId = $(this).data('id'); tempFilename = $(this).val();
+            $('#cancelCropBtn').data('id', imageId); readFile(this); });
+        $('#cropImageBtn').on('click', function (ev) {
+            $uploadCrop.croppie('result', {
+                type: 'base64',
+                format: 'jpeg',
+                size: {width: 150, height: 200}
+            }).then(function (resp) {
+                $('#item-img-output').attr('src', resp);
+                $('#cropImagePop').modal('hide');
+            });
+        });
+        // End upload preview image
+
+
+
     });
 </script>
 </body>
