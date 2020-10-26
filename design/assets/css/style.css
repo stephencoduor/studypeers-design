@@ -1759,6 +1759,12 @@ footer .right-footer p {
     outline: none;
     color: #fff;
 }
+.banner-text form button.pink-btn:hover{
+    background: #3733b5;
+}
+.banner-text form button.pink-btn:focus{
+    background: #3733b5;
+}
 .tough-wrap{
     margin-bottom:25px;
 }
@@ -1963,6 +1969,8 @@ footer .right-footer p {
     display: flex;
     align-items:center;
     justify-content:center;
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
 }
 .add-icon{
     background:#e6e6fe;
@@ -1975,4 +1983,97 @@ footer .right-footer p {
 }
 .share-icon{
     background:#ffd5e9;
+}
+.add-section:hover .add-icon{
+    background-color:transparent;
+}
+.follow-section:hover .follow-icon{
+    background-color:transparent;
+}
+.chat-section:hover .chat-icon{
+    background-color:transparent;
+}
+.share-section:hover .share-icon{
+    background-color:transparent;
+
+}
+@media (max-width: 1280px) {
+    .stay-connected{
+        width:800px;
+    }
+}
+@media (max-width: 1000px) {
+    .stay-connected{
+        width:500px;
+    }
+    .stay-connected-inner {
+        width: 180px;
+    }
+    .top-border figure {
+        width:165px;
+        height:165px;
+    }
+    .top-border figure img{
+        width:160px;
+        height:160px;
+    }
+    .top-border figure{
+        top:-80px;
+    }
+}
+
+@media (max-width: 767px) {
+    .stay-connected {
+        width: 100%;
+    }
+    .stay-connected-inner {
+        width: 0;
+    }
+}
+
+@media (max-width: 576px) {
+    .stay-connected {
+        width: 100%;
+        height:500px;
+    }
+    .stay-connected-inner {
+        width: 100%;
+        height:240px;
+    }
+    .share-section{
+        right:0;
+    }
+    .add-section{
+        left:0;
+    }
+    .follow-section{
+        left:0;
+    }
+    .chat-section{
+        right:0;
+    }
+    .stay-connected:before{
+        display:none;
+    }
+    .top-border:before{
+        display:none;
+    }
+    .top-border:after{
+        display:none;
+    }
+    .stay-connected-inner:before{
+        display:none;
+    }
+    .stay-connected-inner:after{
+        display:none;
+    }
+    .stay-connected:after{
+        display:none;
+    }
+    .bottom-border:before{
+        display:none;
+    }
+    .bottom-border:after{
+        display:none;
+    }
 }
