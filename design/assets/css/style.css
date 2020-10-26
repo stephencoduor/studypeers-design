@@ -2030,3 +2030,50 @@ footer .right-footer p {
         width: 0;
     }
 }
+
+@media (max-width: 576px) {
+    .stay-connected {
+        width: 100%;
+        height:500px;
+    }
+    .stay-connected-inner {
+        width: 100%;
+        height:240px;
+    }
+    .share-section{
+        right:0;
+    }
+    .add-section{
+        left:0;
+    }
+    .follow-section{
+        left:0;
+    }
+    .chat-section{
+        right:0;
+    }
+    .stay-connected:before{
+        display:none;
+    }
+    .top-border:before{
+        display:none;
+    }
+    .top-border:after{
+        display:none;
+    }
+    .stay-connected-inner:before{
+        display:none;
+    }
+    .stay-connected-inner:after{
+        display:none;
+    }
+    .stay-connected:after{
+        display:none;
+    }
+    .bottom-border:before{
+        display:none;
+    }
+    .bottom-border:after{
+        display:none;
+    }
+}
