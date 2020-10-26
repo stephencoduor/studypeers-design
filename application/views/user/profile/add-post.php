@@ -72,12 +72,15 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         <div class="shareDocs">
                             <h4>Share a Document</h4>
                             <div class="uploadedDocs">
-                                <div class="filename">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf">  document name.ext
+                                <div id="all_documents">
+
+                                </div>
+                                <!--<div class="filename">
+                                    <img src="<?php /*echo base_url(); */?>assets_d/images/pdf.svg" alt="pdf">  document name.ext
                                 </div>
                                 <div class="closeBtn">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/close-pink.svg" alt="close">
-                                </div>
+                                    <img src="<?php /*echo base_url(); */?>assets_d/images/close-pink.svg" alt="close">
+                                </div>-->
                             </div>
                             <div class="shareOptionBox">
                                 <ul>
@@ -85,7 +88,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                         <a href="javascript:void(0)">
                                             <button type="button" class="choose_btn shareBtn">
                                                 <img src="<?php echo base_url(); ?>assets_d/images/choose-file.svg" alt="Choose File"> Choose File
-                                                <input type="file" />
+                                                <input type="file" name="file[]" id="document" multiple="multiple"/>
                                             </button>
                                         </a>
                                     </li>
