@@ -19,7 +19,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     <div class="profileHeaderWrapper">
                         <div class="profileBanner">
                             <figure>
-                                <?php if(empty($user_detail['image'])) {
+                                <?php if(empty($user_detail['cover_image'])) {
                                     ?>
                                     <img id="currentCoverPicture" src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="Profile Banner">
                                 <?php } else {
