@@ -167,8 +167,15 @@
                 img_icon = '<img src="'+base_url+'/assets_d/images/document.svg'+'" />';
             }else if(extension == 'pdf'){
                 img_icon = '<img src="'+base_url+'/assets_d/images/pdf.svg'+'" />';
+            }else if(extension == 'ppt' || extension == 'pptx'){
+                img_icon = '<img src="'+base_url+'/assets_d/images/pptx.svg'+'" />';
+            }else if(extension == 'xls' || extension == 'xlsx'){
+                img_icon = '<img src="'+base_url+'/assets_d/images/xlsx.svg'+'" />';
+            }else if(extension == 'txt'){
+                img_icon = '<img src="'+base_url+'/assets_d/images/txt.svg'+'" />';
             }else{
-                img_icon = '<img src="'+base_url+'/assets_d/images/pdf.svg'+'" />';
+                alert('Invalid file format ! Please choose any other file . Supported file formats are docx/pdf/ppt/xls/txt');
+                return false;
             }
             $('#all_documents').append('<div class="filename" id="document_file_'+document_counter+'">'+img_icon+'</div><div class="closeBtn" id="remove_document_'+document_counter+'"><img src="'+base_url+'/assets_d/images/close-pink.svg'+'" alt="close"/> '+filename+'.'+extension+'</div>');
             document_counter++;
