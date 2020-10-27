@@ -64,8 +64,8 @@ class Account extends CI_Controller {
         }else{
             $data['events'] = [];
         }
-
-        $data['studysets'] = $this->studyset_model->getStudySets($user_id);
+        $data['events'] = [];
+        $data['studysets'] = [];
        
         $data['index_menu']  = 'dashboard';
         $data['title']  = 'Dashboard | Studypeers';
@@ -75,6 +75,27 @@ class Account extends CI_Controller {
         $this->load->view('user/include/right-sidebar');
         $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer-dashboard');
+    }
+
+    public function getDashboardFeeds(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $count     = $this->input->get('count');
+        $peerList = $this->peerListString($user_id);
+        $this->db->select('reference_master.*,');
+        $this->db->from('reference_master');
+        $this->db->where("reference_master.status",1);
+        $this->db->where("reference_master.user_id",$user_id);
+        if(!empty($peerList)) { 
+            $this->db->or_group_start(); 
+            $this->db->where_in('reference_master.user_id', $peerList);
+            $this->db->where('reference_master.status',1);
+            $this->db->group_end();   
+        }
+        $this->db->limit(10, $count);
+        $this->db->order_by('reference_master.id', 'desc');
+        $data['feeds'] = $this->db->get()->result_array(); 
+        $html = $this->load->view('user/dashboard-feeds', $data, true);
+        echo $html;
     }
 
     public function schedule(){ 
