@@ -198,6 +198,7 @@ header .nav li a:focus:after {
     justify-content: center;
 }
 .banner-text {
+    width:100%;
     position: absolute;
     z-index: 9;
     /*top: 40%;*/
@@ -230,6 +231,7 @@ header .nav li a:focus:after {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin:0 auto;
 }
 .banner-text form input {
     width: 70%;
@@ -1984,6 +1986,40 @@ footer .right-footer p {
 .share-icon{
     background:#ffd5e9;
 }
+.image-card figure{
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    border-radius:50%;
+}
+.image-card:hover figure{
+    background-color:transparent;
+}
+.flashcards-icon figure{
+    background:#e6e6fe;
+}
+.tests-icon figure {
+    background: #d8f5f6;
+}
+.matching-cards-icon figure{
+    background: #fff1e2;
+}
+.matching-cards-icon figure{
+    background: #fff1e2;
+}
+.study-notes-icon figure{
+    background:#e9e9e9;
+}
+.document-icon figure{
+    background: #ffd5e9;
+}
+.collaboration-icon figure{
+    background: #e6e6fe;
+}
+.image-card img{
+    width:110px;
+    height:110px;
+    border-radius:50%;
+}
 .add-section:hover .add-icon{
     background-color:transparent;
 }
@@ -2023,15 +2059,6 @@ footer .right-footer p {
 }
 
 @media (max-width: 767px) {
-    .stay-connected {
-        width: 100%;
-    }
-    .stay-connected-inner {
-        width: 0;
-    }
-}
-
-@media (max-width: 576px) {
     .stay-connected {
         width: 100%;
         height:500px;
