@@ -10090,6 +10090,7 @@
 			success:function(result) {
 
 				$('#dashboard-feeds').html(result);
+				$('.commentBoxWrap').hide();
 			}
 		});
 	});
