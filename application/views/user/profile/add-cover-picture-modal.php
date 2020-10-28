@@ -7,11 +7,13 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-8 text-center">
-                        <div id="cover_image_demo" style="width:350px; margin-top:30px"></div>
+                    <div class="col-md-12 text-center">
+                        <div id="cover_image_demo" style="width:100%; margin-top:30px"></div>
                     </div>
+
+                </div>
+                <div class="row">
                     <div class="col-md-4" style="padding-top:30px;">
-                        <br/>
                         <button class="btn btn-success crop_cover_image">Crop & Upload Image</button>
                     </div>
                 </div>
