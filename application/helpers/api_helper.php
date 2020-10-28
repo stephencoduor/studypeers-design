@@ -746,5 +746,26 @@ function time_ago_in_php($timestamp){
       return $dateF;
       
     }
-  }
+}
+
+
+function userImage($user_id){
+    $tableRecord = & get_instance();
+    $tableRecord
+        ->load
+        ->database();
+        
+    $user_detail = $tableRecord->db->get_where('user', array('id' => $user_id))->row_array();
+    $user_info = $tableRecord->db->get_where('user_info', array('userID' => $user_id))->row_array();
+
+    if(!empty($user_detail['image']) && ($user_detail['image'] != 'user.png')) {
+        return base_url().'uploads/users/'.$user_detail['image'];
+    } else {
+        if($user_info['gender'] == 'male'){
+            return base_url().'uploads/user-male.png';
+        } else {
+            return base_url().'uploads/user-female.png';
+        }
+    }
+}
 

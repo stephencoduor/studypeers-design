@@ -19,10 +19,12 @@ class Profile extends CI_Controller {
 			$post_images_query = $this->db->query('SELECT * from post_images where post_id = '.$res['reference_id'])->result_array();
 			$post_videos_query = $this->db->query('SELECT * from post_videos where post_id = '.$res['reference_id'])->result_array();
 			$post_options_query = $this->db->query('SELECT * from post_poll_options where post_id = '.$res['reference_id'])->result_array();
+			$post_documents_query = $this->db->query('SELECT * from post_documents where post_id = '.$res['reference_id'])->result_array();
 			$all_posts_array[$res['id']]['post_details'] = $post_query;
 			$all_posts_array[$res['id']]['post_images'] = $post_images_query;
 			$all_posts_array[$res['id']]['post_videos'] = $post_videos_query;
 			$all_posts_array[$res['id']]['post_poll_options'] = $post_options_query;
+			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
 		}
 
 		$data['all_posts'] = $all_posts_array;
@@ -32,6 +34,8 @@ class Profile extends CI_Controller {
 		$this->load->view('user/profile/timeline');
 		$this->load->view('user/profile/add-post');
 		$this->load->view('user/profile/post-privacy');
+		$this->load->view('user/profile/add-profile-picture-modal');
+		$this->load->view('user/profile/add-cover-picture-modal');
 		$this->load->view('user/profile/layouts/footer');
 	}
 
@@ -41,7 +45,7 @@ class Profile extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		is_valid_logged_in();
 		$config['upload_path'] = './uploads/posts/';
-		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi';
+		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|pdf|xlsx|xls|doc|docx|txt|ppt|pptx';
 		$config['encrypt_name'] = TRUE;
 		$config['remove_spaces']=TRUE;  //it will remove all spaces
 		$user_id = $this->session->get_userdata()['user_data']['user_id'];
@@ -71,6 +75,7 @@ class Profile extends CI_Controller {
 		$files = $_FILES;
 		$image_extensions_arr = array('jpg', 'image/jpg', 'image/jpeg', 'image/png' , 'jpeg' , 'png' );
 		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg");
+		$document_extension_arr = array('pdf', 'xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt');
 		$maxsize = 5242880; // 5MB
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
 		{
@@ -93,10 +98,12 @@ class Profile extends CI_Controller {
 					$F[] = $data["file_name"];
 					if(in_array($file_type, $image_extensions_arr)){
 						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
-					}else{
+					}elseif(in_array($file_type, $video_extensions_arr)){
 						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
+					}else{
+						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
 					}
-			}
+				}
 		}
 
 		//save poll data
@@ -147,6 +154,35 @@ class Profile extends CI_Controller {
 			redirect(site_url('Profile/timeline'), 'refresh');
 		}
 	}
+
+
+	public function uploadProfilePicture()
+	{
+		$userdata = $this->session->userdata('user_data');
+		$base_64_image = $_POST['image'];
+		$image_array_1 = explode(";", $base_64_image);
+		$image_array_2 = explode(",", $image_array_1[1]);
+		$data = base64_decode($image_array_2[1]);
+		$imageName = time() . '.png';
+		file_put_contents('uploads/users/'.$imageName, $data);
+		$upload_result = $this->upload_model->save_profile_picture($userdata['user_id'], $imageName);
+		echo $upload_result;
+	}
+
+	public function uploadCoverPicture()
+	{
+		$userdata = $this->session->userdata('user_data');
+		$base_64_image = $_POST['image'];
+		$image_array_1 = explode(";", $base_64_image);
+		$image_array_2 = explode(",", $image_array_1[1]);
+		$data = base64_decode($image_array_2[1]);
+		$imageName = time() . '.png';
+		file_put_contents('uploads/users/cover/'.$imageName, $data);
+		$upload_result = $this->upload_model->save_cover_picture($userdata['user_id'], $imageName);
+		echo $upload_result;
+	}
+
+
 
 
 }

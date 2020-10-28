@@ -1076,3 +1076,17 @@ width: calc((33.3% - 2.00rem));
 .CheckpointView.missed {
     border-bottom-color: #ea2e7e;
 }
+
+.header-user-img figure {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+  float: left;
+}
+
+.header-user-img figure img {
+  width: 100%;
+  height: 100%;
+}

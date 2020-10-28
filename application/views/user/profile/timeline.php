@@ -1,3 +1,8 @@
+<?php
+$userdata = $this->session->userdata('user_data');
+$user_detail    = $this->db->get_where('user', array('id' => $userdata['user_id']))->row_array();
+$full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
+?>
 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
 <section class="dashbody">
     <section class="container-fluid">
@@ -14,28 +19,51 @@
                     <div class="profileHeaderWrapper">
                         <div class="profileBanner">
                             <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="Profile Banner">
+                                <?php if(empty($user_detail['cover_image'])) {
+                                    ?>
+                                    <img id="currentCoverPicture" src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="Profile Banner">
+                                <?php } else {
+                                   ?>
+                                    <img id="currentCoverPicture" src="<?php echo base_url()."uploads/users/cover/".$user_detail['cover_image']; ?>" alt="Profile Banner">
+                                    <?php
+                                }?>
                             </figure>
                             <div class="changeProfileBanner">
-                                <img src="<?php echo base_url(); ?>assets_d/images/camera_profile.svg" alt="change Profile Banner">
-                                <input type="file">
+                                <img id="currentCoverPicture" src="<?php echo base_url(); ?>assets_d/images/camera_profile.svg" alt="change Profile Banner">
+                                <input type="file" name="upload_cover_image" id="upload_cover_image">
                             </div>
                         </div>
                         <div class="profileInfoWrapper">
                             <div class="infoWrapper">
                                 <div class="profileLogo">
                                     <figure>
-                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg" alt="User">
+                                        <?php if(empty($user_detail['image'])) {
+                                            ?>
+                                            <img id="currentProfilePicture"
+                                            src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg"
+                                                alt="User">
+                                            <?php
+                                        }
+                                            else{
+                                              ?>
+                                                <img id="currentProfilePicture" src="<?php echo base_url(); ?>uploads/users/<?php echo $user_detail['image']; ?>" alt="change profile banner" />
+                                                <?php
+                                            }
+                                        ?>
+                                        <!---->
                                     </figure>
-                                    <div class="changeProfile">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/camera-circle.svg" alt="change Profile Banner">
-                                        <input type="file">
-                                    </div>
+                                    <form id="profile_picture_form">
+                                        <div class="changeProfile">
+                                            <img src="<?php echo base_url(); ?>assets_d/images/camera-circle.svg" alt="change Profile Banner">
+                                            <input type="file" name="upload_image" id="upload_image" />
+                                        </div>
+                                    </form>
+
                                 </div>
                                 <div class="profileDtl">
                                     <div class="profileInformation">
-                                        <h4 class="name">Full name</h4>
-                                        <h6 class="username">@username •  <span>Joined on April 20, 2020</span></h6>
+                                        <h4 class="name"><?php echo $full_name; ?></h4>
+                                        <h6 class="username"><?php echo $user_detail['username'];?>  <span>Joined on <?php echo date("F jS, Y", strtotime($user_detail['added_on'])); ?></span></h6>
                                         <ul class="socialstatus">
                                             <li> <span>25</span> Followers</li>
                                             <li> <span>25</span> Following</li>
@@ -61,33 +89,34 @@
                                             <img src="<?php echo base_url(); ?>assets_d/images/pin.svg" alt="location"> location name
                                         </div>
                                     </div>
-                                    <div class="shareProfile">
+                                    <div class="shareProfile" id="copyShareLink" >
+                                        <input type="hidden" id="sharelink" value="<?php echo base_url().'Profile/shareLink/'.$userdata['username']; ?>" />
                                         <img src="<?php echo base_url(); ?>assets_d/images/share-profile1.svg" alt="share profile"> Share Profile
                                     </div>
-                                    <div class="shareMenu shareOption">
+                                <!--    <div class="shareMenu shareOption">
                                         <ul>
                                             <li><a>Add Peer</a></li>
                                             <li><a>Follow</a></li>
                                             <li>
-                                                <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
+                                                <img src="<?php /*echo base_url(); */?>assets_d/images/messagebox.svg" alt="Message">
                                             </li>
                                             <li class="dropdown">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="More Option">
+                                                <img src="<?php /*echo base_url(); */?>assets_d/images/more.svg" alt="More Option">
                                                 <ul>
                                                     <li>
                                                         <a role="menuitem" href="javascript:void(0);">
-                                                            <img src="<?php echo base_url(); ?>assets_d/images/report1.svg" > Report
+                                                            <img src="<?php /*echo base_url(); */?>assets_d/images/report1.svg" > Report
                                                         </a>
                                                     </li>
                                                     <li>
                                                         <a role="menuitem" href="javascript:void(0);">
-                                                            <img src="<?php echo base_url(); ?>assets_d/images/block.svg" > Block
+                                                            <img src="<?php /*echo base_url(); */?>assets_d/images/block.svg" > Block
                                                         </a>
                                                     </li>
                                                 </ul>
                                             </li>
                                         </ul>
-                                    </div>
+                                    </div>-->
                                 </div>
                             </div>
                             <div class="tabularLiist">
@@ -130,7 +159,13 @@
                                                                 </div>
                                                                 <div class="writePostWrapper">
                                                                     <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="Post User Image">
+                                                                        <?php if(empty($user_detail['image'])){
+                                                                            echo '<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">';
+                                                                        }else{
+                                                                            ?>
+                                                                            <img src="<?php echo base_url()."uploads/users/".$user_detail['image']; ?>" alt="user">
+                                                                            <?php
+                                                                        }?>
                                                                     </figure>
                                                                     <div class="postMessageWrapper"  data-toggle="modal" data-target="#createPost">
                                                                         <div class="defaultMessage">What's on your mind ?</div>
@@ -251,10 +286,17 @@
                                                                         <div class="user-details">
                                                                             <div class="user-name">
                                                                                 <figure>
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                    <?php if(empty($user_detail['image'])){
+                                                                                        echo '<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">';
+                                                                                    }else{
+                                                                                       ?>
+                                                                                        <img src="<?php echo base_url()."uploads/users/".$user_detail['image']; ?>" alt="user">
+                                                                                    <?php
+                                                                                    }?>
+
                                                                                 </figure>
                                                                                 <div class="right">
-                                                                                    <figcaption>Loreum Ipsum</figcaption>
+                                                                                    <figcaption><?php echo $full_name; ?></figcaption>
                                                                                     <div class="badgeList">
                                                                                         <ul>
                                                                                             <li class="badge badge1">
@@ -309,7 +351,17 @@
                                                                                 ?>
                                                                             </div>
                                                                             <?php
-                                                                        }?>
+                                                                        }
+                                                                        if(count($posts['post_documents']) > 0){
+                                                                            foreach($posts['post_documents'] as $document){
+                                                                            ?>
+                                                                            <p class="feedPostMessages">
+                                                                                <a href="<?php echo base_url().$document['document_path']; ?>">Click here to download the attachment</a>
+                                                                            </p>
+                                                                        <?php
+                                                                            }
+                                                                        }
+                                                                        ?>
                                                                         <?php if(count($posts['post_poll_options']) > 0){
                                                                             foreach($posts['post_poll_options'] as $options){
                                                                             ?>
@@ -358,8 +410,6 @@
                                                                             }
                                                                         }
                                                                         ?>
-
-
 
                                                                         <div class="socialStatus">
                                                                             <div class="leftStatus">
@@ -712,6 +762,13 @@
 															              <span class="progress-bar border-primary"></span>
 															          </span>
                                                                 <div class="profileUser">
+                                                                    <?php if(empty($user_detail['image'])){
+                                                                        echo '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">';
+                                                                    }else{
+                                                                        ?>
+                                                                        <img src="<?php echo base_url()."uploads/users/".$user_detail['image']; ?>" alt="user">
+                                                                        <?php
+                                                                    }?>
                                                                     <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
                                                                 </div>
                                                             </div>
