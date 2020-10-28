@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
   <g id="matching-cards" transform="translate(0.241)">
-    <rect id="Rectangle_726" data-name="Rectangle 726" width="100" height="100" rx="50" transform="translate(-0.241)" fill="#fff1e2"/>
+    <rect id="Rectangle_726" data-name="Rectangle 726" width="100" height="100" rx="50" transform="translate(-0.241)" fill="transparent"/>
     <g id="credit-card_3_" data-name="credit-card (3)" transform="translate(23.453 30)">
       <path id="Path_2775" data-name="Path 2775" d="M7.818,43.909H44.182A6.818,6.818,0,0,0,51,37.091V9.818A6.818,6.818,0,0,0,44.182,3H7.818A6.818,6.818,0,0,0,1,9.818V37.091A6.818,6.818,0,0,0,7.818,43.909ZM5.545,9.818A2.273,2.273,0,0,1,7.818,7.545H44.182a2.273,2.273,0,0,1,2.273,2.273V37.091a2.273,2.273,0,0,1-2.273,2.273H7.818a2.273,2.273,0,0,1-2.273-2.273Z" transform="translate(-1 -3)" fill="#ffb770"/>
       <path id="Path_2776" data-name="Path 2776" d="M7.273,19.545h6.818a2.273,2.273,0,0,0,0-4.545H7.273a2.273,2.273,0,0,0,0,4.545Z" transform="translate(4.091 12.273)" fill="#ffb770"/>
