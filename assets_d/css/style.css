@@ -1090,3 +1090,10 @@ width: calc((33.3% - 2.00rem));
   width: 100%;
   height: 100%;
 }
+
+.left figure {
+  border-radius: 50%;
+  overflow: hidden;
+  margin-right: 5px;
+  float: left;
+}
