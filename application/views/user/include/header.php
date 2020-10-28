@@ -340,9 +340,11 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 								?>
 							</li>
 							<li class = "dropdown">
-								<a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">
-									<img src="<?php echo base_url(); ?>assets_d/images/user1.jpg" alt="User" >
-									<div class="dropIcon">
+								<a href = "#" class = "dropdown-toggle header-user-img" data-toggle = "dropdown">
+									<figure>
+										<img src="<?php echo userImage($userdata['user_id']); ?>" alt="User" >
+									</figure>
+									<div class="dropIcon" style="float: right;margin-top: 10px;">
 										<i class="fa fa-angle-down" aria-hidden="true"></i>
 									</div>
 								</a>
