@@ -107,7 +107,7 @@
 							<div class="user-details">
 								<div class="user-name">
 									<figure>
-										<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+										<img src="<?php echo userImage($event_detail['created_by']); ?>" alt="user">
 									</figure>
 									<div class="right">
 										<?php $user = $this->db->get_where('user', array('id' => $event_detail['created_by']))->row_array();
@@ -611,7 +611,7 @@
 					<div class="user-details">
 						<div class="user-name">
 							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+								<img src="<?php echo userImage($studyset_detail['user_id']); ?>" alt="user">
 							</figure>
 							<?php $user = $this->db->get_where('user', array('id' => $studyset_detail['user_id']))->row_array();
 								$user_info = $this->db->get_where('user_info', array('userID' => $studyset_detail['user_id']))->row_array();
@@ -1081,7 +1081,7 @@
 						<div class="user-details">
 							<div class="user-name">
 								<figure>
-									<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+									<img src="<?php echo userImage($document_detail['created_by']); ?>" alt="user">
 								</figure>
 								<?php $user = $this->db->get_where('user', array('id' => $document_detail['created_by']))->row_array();
 					$user_info = $this->db->get_where('user_info', array('userID' => $document_detail['created_by']))->row_array();
@@ -1544,7 +1544,7 @@
 												<div class="user-details">
 													<div class="user-name">
 														<figure>
-															<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+															<img src="<?php echo userImage($question_detail['created_by']); ?>" alt="user">
 														</figure>
 														<?php $user = $this->db->get_where('user', array('id' => $question_detail['created_by']))->row_array();
 					$user_info = $this->db->get_where('user_info', array('userID' => $question_detail['created_by']))->row_array();
@@ -2028,7 +2028,7 @@
                             <div class="user-name">
                                 <figure>
                                     
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                    <img src="<?php echo userImage($post_query->created_by); ?>" alt="user">
                                 </figure>
                                 <div class="right">
                                     <figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?></figcaption>

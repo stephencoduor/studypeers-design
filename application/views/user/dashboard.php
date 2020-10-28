@@ -156,7 +156,7 @@
 														?>
 															<div class="peerList" id="peerList<?= $value['id']; ?>">
 																<figure>
-																	<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Peers">
+																	<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
 																	<div class="removePeer">
 																		<img src="<?php echo base_url(); ?>assets_d/images/close-peer.svg" alt="Close Peer Suggestions">
 																	</div>
