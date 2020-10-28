@@ -274,9 +274,9 @@
         $cover_crop = $('#cover_image_demo').croppie({
             enableExif: true,
             viewport: {
-                width: 200,
-                height: 200,
-                type: 'square' //circle
+                width: 500,
+                height: 400,
+                type: 'rectangle' //circle
             },
             boundary: {
                 width: 300,
@@ -329,8 +329,12 @@
             /* Copy the text inside the text field */
             document.execCommand("copy");
             /* Alert the copied text */
-            alert("Link Copied: " + copyText.value);
+            alert("Copied to clipboard ");
         });
+
+
+
+
 
 
 
@@ -636,8 +640,37 @@
         // End upload preview image
 
 
-
     });
+
+    /**Send friend request to peer**/
+    function sendRequest(peer_id){
+        $.ajax({
+            url : '<?php echo base_url();?>account/sendPeerRequest',
+            type : 'post',
+            data : {"peer_id" : peer_id},
+            success:function(result) {
+                $('#add_peer').text('Cancel Request');
+                $("#add_peer").attr("onclick","cancelRequest("+peer_id+")");
+
+            }
+        })
+    }
+    /********************/
+    function cancelRequest(peer_id){
+        $.ajax({
+            url : '<?php echo base_url();?>account/cancelRequest',
+            type : 'post',
+            data : {"peer_id" : peer_id},
+            success:function(result) {
+                $('#add_peer').text('Add Peer');
+                $("#add_peer").attr("onclick","sendRequest("+peer_id+")");
+
+            }
+        })
+    }
+
+
+
 </script>
 </body>
 </html>

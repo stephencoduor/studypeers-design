@@ -1,11 +1,11 @@
 
 .mainContent.profile {
-	padding: 0px 40px !important;
-	margin: -6px auto 0 auto;
+    padding: 0px 40px !important;
+    margin: -6px auto 0 auto;
 }
 .mainProfileWrapper {
-	max-width: 823px;
-	width: 100%;
+    max-width: 823px;
+    width: 100%;
     margin: auto;
     /*margin: 0 auto 0 80px;*/
     transition: width 0.10s ease-in;
@@ -18,172 +18,172 @@
     max-width: 1023px;
 }
 .profileHeaderWrapper {
-	width: 100%;
-	background: #fff;
+    width: 100%;
+    background: #fff;
     border-radius: 8px;
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
 }
 .profileBanner {
-	width:100%;
-	max-height: 290px;
-   	height: 100%;
-   	position: relative;
+    width:100%;
+    max-height: 290px;
+    height: 100%;
+    position: relative;
 }
 .profileBanner figure {
     width: 100%;
     height: 290px;
 }
 .profileBanner figure img {
-	width:100%;
-	height:100%;
+    width:100%;
+    height:100%;
 }
 .changeProfileBanner {
-	width:57px;
-	height:57px;
-	background: #fff;
-	border-radius: 50%;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	bottom:20px;
-	right:20px;
+    width:57px;
+    height:57px;
+    background: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom:20px;
+    right:20px;
 }
 .changeProfileBanner input {
-	width: 100%;
-	height:100%;
-	opacity: 0;
-	position: absolute;
-	top:0;
-	left:0;
-	cursor: pointer;
+    width: 100%;
+    height:100%;
+    opacity: 0;
+    position: absolute;
+    top:0;
+    left:0;
+    cursor: pointer;
 }
 .profileInfoWrapper {
-	width: 100%;
-	background: #fff;
-	padding: 0 20px;
-	border-bottom-left-radius: 8px;
-   	border-bottom-right-radius: 8px;
+    width: 100%;
+    background: #fff;
+    padding: 0 20px;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 
 }
 .infoWrapper {
-	width:100%;
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	padding-bottom: 58px;
-	border-bottom: 1px solid #ebebeb;
+    width:100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding-bottom: 58px;
+    border-bottom: 1px solid #ebebeb;
 }
 .profileLogo {
-	width:200px;
-	height:200px;    
-	margin: -66px 0 0 0;
+    width:200px;
+    height:200px;
+    margin: -66px 0 0 0;
     z-index: 1;
     position: relative;
 }
 .profileLogo figure {
-	width:100%;
-	height:100%;
-	border-radius: 50%;
-	border:5px solid #fff;
-	overflow: hidden
+    width:100%;
+    height:100%;
+    border-radius: 50%;
+    border:5px solid #fff;
+    overflow: hidden
 }
 .profileLogo figure img {
-	width:100%;
-	height:100%;
+    width:100%;
+    height:100%;
 }
 .profileLogo .changeProfile {
-	width:60px;
-	height:60px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: absolute;
-	bottom: 10px;
+    width:60px;
+    height:60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 10px;
     right: -5px;
 }
 .profileLogo .changeProfile img{
-	width: 100%;
+    width: 100%;
     height: 100%;
 }
 .profileLogo .changeProfile input {
-	width: 100%;
-	height:100%;
-	opacity: 0;
-	position: absolute;
-	top:0;
-	left:0;
-	cursor: pointer;
+    width: 100%;
+    height:100%;
+    opacity: 0;
+    position: absolute;
+    top:0;
+    left:0;
+    cursor: pointer;
 }
 .profileDtl {
-	width: calc(100% - 240px);
-	margin-left: 43px;
-	margin-top: 25px;
-	display: flex;
-	align-items: flex-start;
-	justify-content: space-between;
+    width: calc(100% - 240px);
+    margin-left: 43px;
+    margin-top: 25px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
     position: relative;
 }
 .profileInformation {
-	width:auto;
+    width:auto;
 }
 .profileInformation .name {
-	color: #333333;
-	font-size: 20px;
-	font-weight: 700;
-	text-transform: capitalize;
-	margin: 0;
+    color: #333333;
+    font-size: 20px;
+    font-weight: 700;
+    text-transform: capitalize;
+    margin: 0;
 }
 .profileInformation .username {
-	font-weight:400;
-	font-size: 14px;
-	color: #333333;
+    font-weight:400;
+    font-size: 14px;
+    color: #333333;
 }
 .socialstatus {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 .socialstatus li {
-	margin-right:30px;
-	font-weight:500;
-	font-size: 14px;
-	color: #333333;
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
+    margin-right:30px;
+    font-weight:500;
+    font-size: 14px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 }
 .socialstatus li:last-child {
-	margin-right:0;
+    margin-right:0;
 }
 .socialstatus li span {
-	color:#ea2e7e;
-	margin-right: 5px;
+    color:#ea2e7e;
+    margin-right: 5px;
 }
 .socialstatus li a {
-	width: 22px;
-	height: 22px;
-	display: block;
-	margin-right:10px;
+    width: 22px;
+    height: 22px;
+    display: block;
+    margin-right:10px;
 }
 .socialstatus li a:last-child {
-	margin-right:0;
+    margin-right:0;
 }
 .socialstatus li a img {
-	width:100%;
-	height:100%;
+    width:100%;
+    height:100%;
 }
 .profileInformation .location {
-	font-weight:400;
-	font-size: 16px;
-	color: #333333;
-	margin-top: 10px;
+    font-weight:400;
+    font-size: 16px;
+    color: #333333;
+    margin-top: 10px;
 }
 .profileInformation .location img {
-	width:20px;
-	height:20px;
-	margin-right:5px;
-	vertical-align: middle;
+    width:20px;
+    height:20px;
+    margin-right:5px;
+    vertical-align: middle;
 }
 .shareProfile {
     color: #ea2e7e;
@@ -192,19 +192,19 @@
     cursor: pointer;
 }
 .shareProfile img {
-	margin-right:10px;
+    margin-right:10px;
 }
 .profileInfoWrapper .tabularLiist > .nav-tabs li a {
-	padding: 21px 10px !important;
-	display: flex;
+    padding: 21px 10px !important;
+    display: flex;
     font-size: 16px;
 }
 .profileInfoWrapper .tabularLiist > .nav-tabs li a:after {
-	border-radius: 30px;
-	height: 4px;
+    border-radius: 30px;
+    height: 4px;
 }
 .profileInfoWrapper .tabularLiist > .nav-tabs {
-	border:0;
+    border:0;
 }
 .profileInfoWrapper .tabularLiist > .nav-tabs li.active a {
     color: #185aeb;
@@ -213,8 +213,8 @@
     color: #2a234f;
 }
 .innerFeedTabs .nav {
-	border:0;
-	margin: 30px 0;
+    border:0;
+    margin: 30px 0;
 }
 .innerFeedTabs .nav li {
     background: #e9e9e9;
@@ -222,32 +222,32 @@
     margin-right: 8px;
 }
 .innerFeedTabs .nav li a {
-	padding: 12px 22px !important;
+    padding: 12px 22px !important;
 }
 .innerFeedTabs .nav-tabs li.active  {
-	background: #ea2e7e;
+    background: #ea2e7e;
     border-radius: 20px;
 }
-.mainProfileWrapper .innerFeedTabs .nav-tabs li.active a:after {
-	display: none;
+.innerFeedTabs .nav-tabs li.active a:after {
+    display: none;
 }
-.mainProfileWrapper .innerFeedTabs .nav-tabs li.active a {
-    color: #ffffff !important;
-    background: transparent !important;
-    border: 1px solid #ea2e7e !important;
-    border-radius: 20px !important;
+.innerFeedTabs .nav-tabs li.active a {
+    color: #ffffff;
+    background: transparent;
+    border: 1px solid #ea2e7e;
+    border-radius: 20px;
 }
 .tabPaneWrapper {
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 .tabPaneWrapper .left {
-	width:70%;
-	padding-right: 25px;
+    width:70%;
+    padding-right: 25px;
 }
 .tabPaneWrapper .right {
-	width:30%;
+    width:30%;
 }
 .boxwrap {
     width: 100%;
@@ -265,36 +265,36 @@
     margin: 0 0 10px 0;
 }
 .boxwrap p {
-	color: #333333;
+    color: #333333;
     font-size:16px;
     font-weight: 400;
     margin:  0 0 10px 0;
 }
 .profileProgressBar {
-	display: flex;
-	align-items: flex-start;
+    display: flex;
+    align-items: flex-start;
     justify-content: space-between;
 }
 .profileProgressBar .progress-value {
-	margin-top: 20px;
+    margin-top: 20px;
 }
 .profileProgressBar .progress-value,
 .profileProgressBar .progress-value sup {
-	color:#feb872;
-	text-align: center;
+    color:#feb872;
+    text-align: center;
     vertical-align: middle;
 }
 .profileProgressBar .progress-value sup {
-	top: 0;
+    top: 0;
 }
 .complete{
-	font-size: 17px;
-	font-weight: 500;
-	color:#333;
+    font-size: 17px;
+    font-weight: 500;
+    color:#333;
 }
 .profileUser {
-    width: 80px;
-    height: 80px;
+    width: 125px;
+    height: 125px;
     border-radius: 50%;
     position: absolute;
     top: 5px;
@@ -302,79 +302,79 @@
     left: 5px;
 }
 .profileUser img {
-	width:100%;
-	height:100%;
+    width:100%;
+    height:100%;
 }
 /*Porgress css start*/
 
 .progress {
-  width: 90px;
-  height: 90px;
-  background: none;
-  position: relative;
-  box-shadow: none;
+    width: 135px;
+    height: 135px;
+    background: none;
+    position: relative;
+    box-shadow: none;
 }
 
 .progress::after {
-  content: "";
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  border: 3px solid #c9c8cd;
-  position: absolute;
-  top: 0;
-  left: 0;
+    content: "";
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #c9c8cd;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 
 .progress>span {
-  width: 50%;
-  height: 100%;
-  overflow: hidden;
-  position: absolute;
-  top: 0;
-  z-index: 1;
+    width: 50%;
+    height: 100%;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+    z-index: 1;
 }
 
 .progress .progress-left {
-  left: 0;
+    left: 0;
 }
 
 .progress .progress-bar {
-  width: 100%;
-  height: 100%;
-  background: none;
-  border-width: 3px;
-  border-style: solid;
-  position: absolute;
-  top: 0;
+    width: 100%;
+    height: 100%;
+    background: none;
+    border-width: 3px;
+    border-style: solid;
+    position: absolute;
+    top: 0;
 }
 
 .progress .progress-left .progress-bar {
-  left: 100%;
-  border-top-right-radius: 80px;
-  border-bottom-right-radius: 80px;
-  border-left: 0;
-  -webkit-transform-origin: center left;
-  transform-origin: center left;
+    left: 100%;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    border-left: 0;
+    -webkit-transform-origin: center left;
+    transform-origin: center left;
 }
 
 .progress .progress-right {
-  right: 0;
+    right: 0;
 }
 
 .progress .progress-right .progress-bar {
-  left: -100%;
-  border-top-left-radius: 80px;
-  border-bottom-left-radius: 80px;
-  border-right: 0;
-  -webkit-transform-origin: center right;
-  transform-origin: center right;
+    left: -100%;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    border-right: 0;
+    -webkit-transform-origin: center right;
+    transform-origin: center right;
 }
 
 .progress .progress-value {
-  position: absolute;
-  top: 0;
-  left: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 .border-primary {
     border-color: #feb872!important;
@@ -407,7 +407,7 @@
     margin-bottom: 15px;
 }
 .listWrap .left {
-	padding-right: 0;
+    padding-right: 0;
 }
 .listWrap .left,
 .listWrap .right {
@@ -439,12 +439,12 @@
     margin: 0;
 }
 .listBox {
-	border-bottom: 1px solid #ebebeb;
-	margin-bottom:15px;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom:15px;
 }
 .listBox.last {
-	border-bottom:0;
-	margin-bottom:0;
+    border-bottom:0;
+    margin-bottom:0;
 }
 .box-card {
     width: 100%;
@@ -455,7 +455,7 @@
     margin-top: 60px;
 }
 .user-details {
-	display: flex;
+    display: flex;
     align-items: flex-start;
     justify-content: space-between;
 }
@@ -492,7 +492,7 @@
     margin: 0 3px;
 }
 .box-card .user-name .right {
-	width:auto;
+    width:auto;
 }
 .badgeList ul {
     display: flex;
@@ -528,16 +528,16 @@
     color:#fe9774;
 }
 .badgeList ul li.badge.badge1 a {
-    color:#185aeb;   
+    color:#185aeb;
 }
 .badgeList ul li.badge.badge2 a {
-    color:#ea2e7e;   
+    color:#ea2e7e;
 }
 .badgeList ul li.badge.badge3 a {
-    color:#1ae1bd;   
+    color:#1ae1bd;
 }
 .badgeList ul li.badge.badge4 a {
-    color:#fe9774;   
+    color:#fe9774;
 }
 .timeline {
     color: #bebebe;
@@ -576,7 +576,7 @@
     margin-right:10px;
 }
 .socialStatus .leftStatus a span {
-     color: #bebebe;
+    color: #bebebe;
     font-size: 16px;
     margin-left:10px;
     font-weight: 400;
@@ -1037,7 +1037,7 @@
     border-bottom: 8px solid #fff;
 }
 .box-card  .imgWrapper.type3 figure:nth-child(2) {
-    border-right: 8px solid #fff;   
+    border-right: 8px solid #fff;
 }
 .box-card .imgWrapper.type4 figure {
     width: 50%;
@@ -1049,7 +1049,7 @@
     border-bottom: 8px solid #fff;
 }
 .box-card  .imgWrapper.type4 figure:nth-child(2) {
-    border-right: 8px solid #fff;   
+    border-right: 8px solid #fff;
 }
 .count {
     position: absolute;
@@ -1113,7 +1113,7 @@
     align-items: flex-start;
     justify-content: space-between;
 }
-.event-description .left {    
+.event-description .left {
     font-size: 16px;
     font-weight: 400;
     width: auto;
@@ -1122,7 +1122,7 @@
     margin-right: 10px;
     width:16px;
 }
-.event-description .right { 
+.event-description .right {
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
@@ -1259,15 +1259,15 @@
     margin-top:15px;
 }
 .writePostWrapper figure {
-	margin:0;
-	width:60px;
-	height:60px;
-	border-radius: 50%;
-	overflow: hidden;
+    margin:0;
+    width:60px;
+    height:60px;
+    border-radius: 50%;
+    overflow: hidden;
 }
 .writePostWrapper figure img {
-	width:100%;
-	height:100%;
+    width:100%;
+    height:100%;
 }
 .postMessageWrapper {
     height: 56px;
@@ -1301,11 +1301,11 @@
     justify-content: flex-start;
 }
 .imageSection {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	margin-right: 40px;
-	cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 40px;
+    cursor: pointer;
     position: relative;
 }
 .imageSection input {
@@ -1317,28 +1317,28 @@
     outline:none;
 }
 .imageSection img {
-	width: 25px;
+    width: 25px;
     height: 21px;
     margin-right:15px;
 }
 .imageSection span {
-	font-size: 17px;
+    font-size: 17px;
     font-weight: 400;
 }
 .pollSection {
-	display: flex;
-	align-items: center;
-	justify-content: flex-start;
-	margin-right: 40px;
-	cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-right: 40px;
+    cursor: pointer;
 }
 .pollSection img {
-	width: 25px;
+    width: 25px;
     height: 21px;
     margin-right:15px;
 }
 .pollSection span {
-	font-size: 17px;
+    font-size: 17px;
     font-weight: 400;
 }
 .suggestionWrapper {
@@ -1363,9 +1363,9 @@
     text-align: center;
 }
 .post-notification img {
-	width: 80%;
-	max-width: 100%;
-	cursor: pointer;
+    width: 80%;
+    max-width: 100%;
+    cursor: pointer;
 }
 .peerSuggestionList {
     width: 100%;
@@ -1410,7 +1410,7 @@
     white-space: nowrap;
     overflow: hidden;
     text-align: center;
-} 
+}
 .add_peer {
     width: 100%;
     margin: 0;
@@ -1439,7 +1439,7 @@
 }
 .feeduserwrap {}
 .user-details {
-	display: flex;
+    display: flex;
     align-items: flex-start;
     justify-content: space-between;
 }
@@ -1536,7 +1536,7 @@
     height: 25px;
     cursor: pointer;
     outline:none;
-} 
+}
 .postMessage textarea {
     width: 100%;
     border: 0;
@@ -1733,63 +1733,63 @@ shareOptionList celebrate*/
 /*Check Slider*/
 
 .allowComment .switch {
-  position: relative;
-  display: inline-block;
-  width: 32px;
-  height: 17px;
+    position: relative;
+    display: inline-block;
+    width: 32px;
+    height: 17px;
 }
 
-.allowComment .switch input { 
-  opacity: 0;
-  width: 0;
-  height: 0;
+.allowComment .switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .allowComment .slider {
-  position: absolute;
-  cursor: pointer;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: #ccc;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 .allowComment .slider:before {
-  position: absolute;
-  content: "";
-  height: 12px;
-  width: 12px;
-  right: 17px;
-  bottom: 3px;
-  background-color: white;
-  -webkit-transition: .4s;
-  transition: .4s;
+    position: absolute;
+    content: "";
+    height: 12px;
+    width: 12px;
+    right: 17px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
 }
 
 .allowComment input:checked + .slider {
-  background-color: #546de5;
+    background-color: #546de5;
 }
 
 .allowComment input:focus + .slider {
-  box-shadow: 0 0 1px #546de5;
+    box-shadow: 0 0 1px #546de5;
 }
 
 .allowComment input:checked + .slider:before {
-  -webkit-transform: translateX(14px);
-  -ms-transform: translateX(14px);
-  transform: translateX(14px);
+    -webkit-transform: translateX(14px);
+    -ms-transform: translateX(14px);
+    transform: translateX(14px);
 }
 
 /* Rounded sliders */
 .allowComment .slider.round {
-  border-radius: 34px;
+    border-radius: 34px;
 }
 
 .allowComment .slider.round:before {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 .settingWrapper {
     display: flex;
@@ -1924,7 +1924,7 @@ shareOptionList celebrate*/
     width:170px;
     margin-right:15px;
 }
-.polltimeform .filtercalendar .input-group.date input, 
+.polltimeform .filtercalendar .input-group.date input,
 .polltimeform .filtercalendar .input-group--overlap input {
     min-height: 55px;
     border-radius: 30px;
@@ -1994,21 +1994,21 @@ shareOptionList celebrate*/
 
 /* Custom Radio Button */
 .dashRadioWrap {
-  display: block;
-  position: relative;
-  padding-left: 35px;
-  margin-bottom: 12px;
-  cursor: pointer;
-  font-size: 22px;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .dashRadioWrap input {
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
 }
 .checkmark {
     position: absolute;
@@ -2039,7 +2039,7 @@ shareOptionList celebrate*/
     -o-transition: all 0.3s ease-in;
 }
 .dashRadioWrap input:checked ~ .checkmark:after {
-  display: block;
+    display: block;
 }
 .dashRadioWrap .checkmark:after {
     transform: rotate(45deg);
@@ -2056,58 +2056,58 @@ shareOptionList celebrate*/
 /*End*/
 /*Profile Start*/
 #profile .box-card .createBox {
-	padding: 20px 17px;
+    padding: 20px 17px;
 }
 .tabularLiist .tab-content {
-	padding:0;
+    padding:0;
 }
 #profile .tabPaneWrapper {
-	margin:30px 0;
+    margin:30px 0;
 }
 #profile .postWrapper {
-	justify-content: space-between;
+    justify-content: space-between;
 }
 #profile .postWrapper h5 {
     font-size: 19px;
     font-weight: 400;
 }
 .editWrapper {
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	color:#546de5;
-	cursor: pointer;
-	outline: none;
-	font-weight: 500;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    color:#546de5;
+    cursor: pointer;
+    outline: none;
+    font-weight: 500;
 }
 .editWrapper img {
-	margin-right:10px;
+    margin-right:10px;
 }
 #profile .infoWrapper  {
-	flex-flow: wrap column;
-	padding-bottom: 20px;
+    flex-flow: wrap column;
+    padding-bottom: 20px;
 }
 .infoWrapper .list {
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
-	width: 100%;
-	margin: 20px 0 0 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: 100%;
+    margin: 20px 0 0 0;
 }
 .infoWrapper .list  .heading {
-	font-size: 16px;
-	font-weight:400;
-	width:30%;
-	color:#b5acbb;
+    font-size: 16px;
+    font-weight:400;
+    width:30%;
+    color:#b5acbb;
 }
 .infoWrapper .list  .value {
-	font-size: 16px;
-	font-weight:400;
-	color:#333333;
+    font-size: 16px;
+    font-weight:400;
+    color:#333333;
 }
 #profile .useraboutWrapper {
     padding-bottom: 20px;
-	border-bottom: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
 }
 #profile .useraboutWrapper h5 {
     font-size: 19px;
@@ -2122,9 +2122,9 @@ shareOptionList celebrate*/
     margin: 0;
 }
 .useraboutWrapper ul {
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-start;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 .useraboutWrapper ul  li {
     width: 35px;
@@ -2136,7 +2136,7 @@ shareOptionList celebrate*/
     height: 100%;
 }
 #profile .useraboutWrapper.social {
-	border-bottom: 0; 
+    border-bottom: 0;
 }
 .TabsAndSortWrapper {
     display: flex;
@@ -2150,38 +2150,38 @@ shareOptionList celebrate*/
     background: #fff;
 }
 .sortWrapper ul {
-	display: flex;
+    display: flex;
     align-items: center;
     justify-content: flex-start;
 }
 .sortWrapper ul li {
-	margin-right:10px;
-	cursor: pointer;
+    margin-right:10px;
+    cursor: pointer;
     margin-bottom: 0;
 }
 .sortWrapper ul li:last-child {
-	margin-right:0;
+    margin-right:0;
 }
 .sortWrapper ul li img {
-	width:50px;
-	height:50px;
+    width:50px;
+    height:50px;
 }
 .sortWrapper ul li .selectOrder select {
-	border:0;
-	cursor: pointer;
-	outline: none;
+    border:0;
+    cursor: pointer;
+    outline: none;
 }
 .userBoxWrapper {
-	display: flex;
+    display: flex;
     align-items: flex-start;
     justify-content: flex-start;
     flex-wrap:wrap;
 }
 .userBoxWrapper .card {
-	padding: 15px;
-	background: #fff;
-   	box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-   	border-radius: 8px;
+    padding: 15px;
+    background: #fff;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    border-radius: 8px;
     margin-bottom:20px;
     position: relative;
 }
@@ -2220,22 +2220,22 @@ shareOptionList celebrate*/
     overflow: hidden;
 }
 .profileSection figure img {
-	width: 100%;
-	height:100%;
+    width: 100%;
+    height:100%;
 }
 .userBoxWrapper.gridview .profileSection figure {
     margin: auto;
 }
 .profileSection h5 {
-	font-size: 20px;
+    font-size: 20px;
 }
 .profileSection p {
-	color: #333333;
+    color: #333333;
     font-size: 16px;
     text-align: center;
 }
 .profileSection .followers {
-	font-weight: 400;
+    font-weight: 400;
     font-size: 15px;
     color: #333333;
     text-align: center;
@@ -2260,7 +2260,7 @@ shareOptionList celebrate*/
 .followOptionsWrapper ul {
     display: flex;
     align-items: flex-start;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     width: 100%;
     white-space: normal;
     word-break: break-all;
@@ -2350,7 +2350,7 @@ shareOptionList celebrate*/
 .courseStructure {
     display: flex;
     align-items: center;
-    justify-content: space-between; 
+    justify-content: space-between;
     padding: 10px 0;
 }
 .courseStructure  p {
@@ -2376,7 +2376,7 @@ shareOptionList celebrate*/
 .professorInfo {
     display: flex;
     align-items: center;
-    justify-content: flex-start; 
+    justify-content: flex-start;
     font-size: 16px;
     color:#333;
     padding: 10px 0;
@@ -2390,7 +2390,7 @@ shareOptionList celebrate*/
 .courseStatusBox {
     display: flex;
     align-items: center;
-    justify-content: flex-end; 
+    justify-content: flex-end;
     width: 100%;
 }
 .courseStatusBox .statusCheck {
@@ -2662,7 +2662,7 @@ shareOptionList celebrate*/
     display: flex;
     align-items: center;
     justify-content: center;
-    flex-flow: wrap column;   
+    flex-flow: wrap column;
 }
 .noFeedWrapper figure {
     width: 160px;
@@ -2712,13 +2712,6 @@ shareOptionList celebrate*/
     min-height: 40px;
     top: 0;
     padding: 0 20px 0 40px;
-}
-.cke_editable {
-    font-size: 15px !important;
-    line-height: 0.6 !important;
-}
-.dashbody {
-    margin-top: 45px !important;
 }
 /*Ends*/
 
