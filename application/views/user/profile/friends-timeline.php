@@ -27,34 +27,23 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                     <div class="profileLogo">
                                         <figure>
                                             <?php if(empty($user['image'])) {
-                                                if($user['gender'] == 'male'){
-
+                                                if(strcasecmp($user['gender'] , 'male') == 0){
                                                 ?>
-                                                <img id="currentProfilePicture"
-                                                     src="<?php echo base_url().'uploads/user-male.png' ?>"
-                                                     alt="User">
-                                                <?php}else{
+                                                    <img id="currentProfilePicture" src="<?php echo base_url(); ?>uploads/user-male.png" alt="User">
+                                                <?php } else {
                                                     ?>
-                                                    <img id="currentProfilePicture"
-                                                         src="<?php echo base_url().'uploads/user-female.png' ?>"
-                                                         alt="User">
+                                                    <img id="currentProfilePicture" src="<?php echo base_url(); ?>uploads/user-female.png" alt="User">
                                                 <?php
                                                 }
                                             }
                                             else{
-                                                ?>
+                                            ?>
                                                 <img id="currentProfilePicture" src="<?php echo base_url(); ?>uploads/users/<?php echo $user['image']; ?>" alt="change profile banner" />
-                                                <?php
+                                            <?php
                                             }
                                             ?>
 
                                         </figure>
-                                       <!-- <form id="profile_picture_form">
-                                            <div class="changeProfile">
-                                                <img src="<?php /*echo base_url(); */?>assets_d/images/camera-circle.svg" alt="change Profile Banner">
-                                                <input type="file" name="upload_image" id="upload_image" />
-                                            </div>
-                                        </form>-->
 
                                     </div>
                                     <div class="profileDtl">
