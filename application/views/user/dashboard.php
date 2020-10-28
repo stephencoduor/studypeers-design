@@ -10090,7 +10090,7 @@
 		$.ajax({
 			url : '<?php echo base_url();?>account/getDashboardFeeds',
 			type : 'post',
-			data : {"count" : 1},
+			data : {"count" : 0},
 			success:function(result) {
 
 				$('#dashboard-feeds').html(result);
@@ -10098,5 +10098,19 @@
 			}
 		});
 	});
+
+
+	function loadDashboardFeeds(count){ 
+		$.ajax({
+			url : '<?php echo base_url();?>account/getDashboardFeeds',
+			type : 'post',
+			data : {"count" : count},
+			success:function(result) {
+				$('#loadmore_'+count).hide(1000);
+				$('#dashboard-feeds').append(result);
+				$('.commentBoxWrap').hide();
+			}
+		});
+	}
 
 </script>

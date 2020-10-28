@@ -29,7 +29,7 @@
                 <section class="list">
                     <section class="left">
                         <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
                         </figure>
                         <figcaption><?php echo $peer['nickname']; ?></figcaption>
                     </section>
@@ -172,7 +172,7 @@
                         <section class="list">
                             <section class="left">
                                 <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                    <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
                                 </figure>
                                 <figcaption><?php echo $peer['nickname']; ?></figcaption>
                             </section>
