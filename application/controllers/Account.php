@@ -79,8 +79,23 @@ class Account extends CI_Controller {
 
     public function getDashboardFeeds(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $count     = $this->input->get('count');
+        $offset     = $this->input->post('count'); 
+        $count      = $offset*10; 
         $peerList = $this->peerListString($user_id);
+
+
+        $this->db->select('reference_master.*,');
+        $this->db->from('reference_master');
+        $this->db->where("reference_master.status",1);
+        $this->db->where("reference_master.user_id",$user_id);
+        if(!empty($peerList)) { 
+            $this->db->or_group_start(); 
+            $this->db->where_in('reference_master.user_id', $peerList);
+            $this->db->where('reference_master.status',1);
+            $this->db->group_end();   
+        }
+        $total_feeds = $this->db->get()->num_rows();
+
         $this->db->select('reference_master.*,');
         $this->db->from('reference_master');
         $this->db->where("reference_master.status",1);
@@ -94,6 +109,13 @@ class Account extends CI_Controller {
         $this->db->limit(10, $count);
         $this->db->order_by('reference_master.id', 'desc');
         $data['feeds'] = $this->db->get()->result_array(); 
+        // echo $this->db->last_query();die;
+        if($count+10 < $total_feeds){
+            $data['loadMore'] = 1;
+        } else {
+            $data['loadMore'] = 0;
+        }
+        $data['nextOffset'] = $offset+1;
         $html = $this->load->view('user/dashboard-feeds', $data, true);
         echo $html;
     }

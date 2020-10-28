@@ -188,7 +188,7 @@ header .nav li a:focus:after {
 	background: #3733b5;
 }
 .banner {
-	background: url('../images/Study-Tools-bg.jpg') no-repeat 0 0;
+    width:100%;
 	min-height: 600px;
 	background-size: cover;
 	position: relative;
@@ -197,11 +197,24 @@ header .nav li a:focus:after {
     align-items: center;
     justify-content: center;
 }
+.study-tools-landing{
+    background: url('../images/Study-Tools-bg.jpg') no-repeat 0 0;
+}
+.become-professor{
+    background: url('../images/Become-Professor.jpg') no-repeat 0 0;
+}
+.connect-with-peers{
+    background: url('../images/Connect-Peers.jpg') no-repeat center top;
+}
 .banner-text {
     width:100%;
     position: absolute;
     z-index: 9;
     /*top: 40%;*/
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
 }
 .banner:after {
     content: '';

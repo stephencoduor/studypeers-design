@@ -2071,3 +2071,22 @@ shareOptionList celebrate*/
     width: max-content;
     margin:0 8px 0 0 ;
 }
+
+
+.loadMoreWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.loadMoreWrapper button {
+    background-color: #eae9ee !important;
+    border-color: #eae9ee !important;
+    color: #cac8d3 !important;
+    font-size:12px;
+    line-height: 16px;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin: 20px 0;
+    border: none;
+    padding: 14px 30px;
+}
