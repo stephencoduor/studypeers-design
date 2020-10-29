@@ -210,11 +210,25 @@ header .nav li a:focus:after {
     width:100%;
     position: absolute;
     z-index: 9;
-    /*top: 40%;*/
+    text-align: center;
+    top:50%;
+    left:50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+-webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+        transform: translate(-50%,-50%);
 }
 .banner:after {
     content: '';
@@ -982,9 +996,6 @@ footer .right-footer p {
     }
 }
 @media (max-width:1400px) {
-    .banner-text {
-        top: 30%;
-    }
     .banner-text h4 {
         font-size: 40px;
         text-align: center;
@@ -2116,4 +2127,8 @@ footer .right-footer p {
     .bottom-border:after{
         display:none;
     }
+}
+.banner .container{
+    position: relative;
+    min-height:600px;
 }
