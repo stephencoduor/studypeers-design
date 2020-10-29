@@ -45,7 +45,7 @@ class Profile extends CI_Controller {
 		$this->load->helper(array('form', 'url'));
 		is_valid_logged_in();
 		$config['upload_path'] = './uploads/posts/';
-		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|pdf|xlsx|xls|doc|docx|txt|ppt|pptx';
+		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|mov|pdf|xlsx|xls|doc|docx|txt|ppt|pptx';
 		$config['encrypt_name'] = TRUE;
 		$config['remove_spaces']=TRUE;  //it will remove all spaces
 		$user_id = $this->session->get_userdata()['user_data']['user_id'];
@@ -183,6 +183,41 @@ class Profile extends CI_Controller {
 	}
 
 
-
+	public function friends()
+	{
+		is_valid_logged_in();
+		$user_id = $_REQUEST['profile_id'];
+		$query = $this->db->query('SELECT * from reference_master WHERE user_id = '.$user_id.' ORDER BY id DESC');
+		$user_details = $this->db->query('SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID WHERE a.id = '.$user_id.'');
+		$result = $query->result_array();
+		$all_posts_array = [];
+		foreach($result as $res){
+			$post_query = $this->db->query('SELECT * from posts where id = '.$res['reference_id'])->row();
+			$post_images_query = $this->db->query('SELECT * from post_images where post_id = '.$res['reference_id'])->result_array();
+			$post_videos_query = $this->db->query('SELECT * from post_videos where post_id = '.$res['reference_id'])->result_array();
+			$post_options_query = $this->db->query('SELECT * from post_poll_options where post_id = '.$res['reference_id'])->result_array();
+			$post_documents_query = $this->db->query('SELECT * from post_documents where post_id = '.$res['reference_id'])->result_array();
+			$all_posts_array[$res['id']]['post_details'] = $post_query;
+			$all_posts_array[$res['id']]['post_images'] = $post_images_query;
+			$all_posts_array[$res['id']]['post_videos'] = $post_videos_query;
+			$all_posts_array[$res['id']]['post_poll_options'] = $post_options_query;
+			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
+		}
+		$login_user_id = $this->session->get_userdata()['user_data']['user_id'];
+		$request_query = $this->db->query('SELECT * from peer_master WHERE user_id = '.$login_user_id.' AND peer_id = '.$user_id.' AND status = 1')->row_array();
+		$is_request_sent = true;
+		if(empty($request_query)){
+			$is_request_sent = false;
+		}
+		$data['all_posts'] = $all_posts_array;
+		$data['index_menu']  = 'timeline';
+		$data['title']  = 'Timeline | Studypeers';
+		$data['user'] = $user_details->row_array();
+		$data['user_id'] = $user_id;
+		$data['is_request_sent'] = $is_request_sent;
+		$this->load->view('user/profile/layouts/header', $data);
+		$this->load->view('user/profile/friends-timeline');
+		$this->load->view('user/profile/layouts/footer');
+	}
 
 }

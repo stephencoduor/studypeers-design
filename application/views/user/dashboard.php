@@ -155,6 +155,8 @@
 															$chk_if_sent = $this->db->get_where('peer_master', array('peer_id' => $value['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
 														?>
 															<div class="peerList" id="peerList<?= $value['id']; ?>">
+																<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['id'] ?>">
+
 																<figure>
 																	<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
 																	<div class="removePeer">
@@ -162,6 +164,8 @@
 																	</div>
 																</figure>
 																<h4><?php echo $value['nickname']; ?></h4>
+																</a>
+
 																<p>0 mutual peers</p>
 																<button type="button" class="follow_peer">Follow</button>
 																<?php if(!empty($chk_if_sent)) { ?>
@@ -169,9 +173,9 @@
 																<?php } else { ?>
 																	<button type="button" class="add_peer" onclick="sendRequest('<?= $value['id']; ?>')" id="add_peer_<?= $value['id']; ?>">Add Peer</button>
 																<?php } ?>
-																
 
-															</div>
+																</div>
+
 														<?php } ?>
 														
 														
@@ -10086,7 +10090,7 @@
 		$.ajax({
 			url : '<?php echo base_url();?>account/getDashboardFeeds',
 			type : 'post',
-			data : {"count" : 1},
+			data : {"count" : 0},
 			success:function(result) {
 
 				$('#dashboard-feeds').html(result);
@@ -10094,5 +10098,19 @@
 			}
 		});
 	});
+
+
+	function loadDashboardFeeds(count){ 
+		$.ajax({
+			url : '<?php echo base_url();?>account/getDashboardFeeds',
+			type : 'post',
+			data : {"count" : count},
+			success:function(result) {
+				$('#loadmore_'+count).hide(1000);
+				$('#dashboard-feeds').append(result);
+				$('.commentBoxWrap').hide();
+			}
+		});
+	}
 
 </script>

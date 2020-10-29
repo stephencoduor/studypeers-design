@@ -4,16 +4,7 @@ $user_detail    = $this->db->get_where('user', array('id' => $userdata['user_id'
 $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 ?>
 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
-<section class="dashbody">
-    <section class="container-fluid">
-        <section class="row">
-            <div class="overlay"></div>
-            <div id="sidenav">
-                <span></span>
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+
             <section class="mainContent profile">
                 <div class="mainProfileWrapper">
                     <div class="profileHeaderWrapper">
