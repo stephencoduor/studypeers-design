@@ -201,10 +201,10 @@
 							<li>
 								<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
 							</li>
-						<?php } $count = count($peer_attending) - 3; ?>
+						<?php } $count = count($peer_attending); ?>
 						<?php if($count > 3) { ?>
 							<li class="more">
-								+<?= $count; ?>
+								+<?= $count - 3; ?>
 							</li>
 						<?php } ?>
 					</ul>
