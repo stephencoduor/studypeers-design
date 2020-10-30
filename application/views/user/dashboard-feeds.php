@@ -661,7 +661,7 @@
 							</div>
 							<div class="timeline"><?php echo time_ago_in_php($studyset_detail['created_on']); ?></div>
 						</div>
-						<h4><a href="<?php echo base_url(); ?>studyset/details/<?php $studyset_detail['study_set_id']; ?>"><?php echo $studyset_detail['name']; ?></a></h4>
+						<h4><a href="<?php echo base_url(); ?>studyset/details/<?php echo $studyset_detail['study_set_id']; ?>"><?php echo $studyset_detail['name']; ?></a></h4>
 						
 						<div class="imgWrapper type1">
 							<figure>
@@ -1144,7 +1144,7 @@
 						<h4><?php echo $document_detail['document_name']; ?></h4>
 						<p><?php echo $document_detail['description']; ?> </p>
 						<div class="documentName">
-							<img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <?php echo $document_detail['featured_image']; ?>
+							<img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a href="<?php echo base_url(); ?>account/documentDetail/<?php echo base64_encode($document_detail['id']); ?>"><?php echo $document_detail['featured_image']; ?></a>
 						</div>
 						<div class="socialStatus">
 							<div class="leftStatus">
