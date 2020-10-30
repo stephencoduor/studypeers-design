@@ -77,9 +77,11 @@ class Profile extends CI_Controller {
 		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg");
 		$document_extension_arr = array('pdf', 'xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt');
 		$maxsize = 5242880; // 5MB
+		echo $files['file']['type'][0];
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
 		{
 			$file_type = $files['file']['type'][$i];
+			echo $file_type;die;
 			if($files['file']['size'][$i] > $maxsize){
 				echo 'file size is too large';
 				die;

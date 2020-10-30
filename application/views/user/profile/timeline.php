@@ -1,6 +1,6 @@
 <?php
 $userdata = $this->session->userdata('user_data');
-$user_detail    = $this->db->get_where('user', array('id' => $userdata['user_id']))->row_array();
+$user_detail    = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID WHERE a.id = ".$userdata['user_id'])->row_array();
 $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 ?>
 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
@@ -29,11 +29,16 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 <div class="profileLogo">
                                     <figure>
                                         <?php if(empty($user_detail['image'])) {
+
+                                            if(strcasecmp($user_detail['gender'] , 'male') == 0){
                                             ?>
-                                            <img id="currentProfilePicture"
-                                            src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg"
-                                                alt="User">
+                                            <img id="currentProfilePicture" src="<?php echo base_url(); ?>uploads/user-male.png" alt="User">
+                                        <?php } else {
+                                            ?>
+                                            <img id="currentProfilePicture" src="<?php echo base_url(); ?>uploads/user-female.png" alt="User">
                                             <?php
+                                        }
+
                                         }
                                             else{
                                               ?>
@@ -151,7 +156,12 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                 <div class="writePostWrapper">
                                                                     <figure>
                                                                         <?php if(empty($user_detail['image'])){
-                                                                            echo '<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">';
+                                                                            if($user_detail['gender'] == 'male'){
+                                                                                echo '<img src="'. base_url().'uploads/user-male.png" alt="user">';
+                                                                            }else{
+                                                                                echo '<img src="'. base_url().'uploads/user-female.png" alt="user">';
+                                                                            }
+
                                                                         }else{
                                                                             ?>
                                                                             <img src="<?php echo base_url()."uploads/users/".$user_detail['image']; ?>" alt="user">
@@ -754,7 +764,16 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 															          </span>
                                                                 <div class="profileUser">
                                                                     <?php if(empty($user_detail['image'])){
-                                                                        echo '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">';
+
+                                                                        if(strcasecmp($user_detail['gender'] , 'male') == 0){
+                                                                            ?>
+                                                                            <img src="<?php echo base_url(); ?>uploads/user-male.png" alt="User Post">
+                                                                        <?php } else {
+                                                                            ?>
+                                                                            <img src="<?php echo base_url(); ?>uploads/user-female.png" alt="User Post">
+                                                                            <?php
+                                                                        }
+
                                                                     }else{
                                                                         ?>
                                                                         <img src="<?php echo base_url()."uploads/users/".$user_detail['image']; ?>" alt="user">
