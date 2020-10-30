@@ -91,12 +91,6 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 <div id="all_documents">
 
                                 </div>
-                                <!--<div class="filename">
-                                    <img src="<?php /*echo base_url(); */?>assets_d/images/pdf.svg" alt="pdf">  document name.ext
-                                </div>
-                                <div class="closeBtn">
-                                    <img src="<?php /*echo base_url(); */?>assets_d/images/close-pink.svg" alt="close">
-                                </div>-->
                             </div>
                             <div class="shareOptionBox">
                                 <ul>

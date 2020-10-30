@@ -119,7 +119,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" href="#feed">Feeds</a></li>
                                     <li><a data-toggle="tab" href="#profile">Profile</a></li>
-                                    <li><a data-toggle="tab" href="#peers">Peers <div>(10)</div></a></li>
+                                    <li><a data-toggle="tab" href="#peers">Peers <div>(<?php echo count($peers) ?>)</div></a></li>
                                     <li><a data-toggle="tab" href="#institution">Institutions</a></li>
                                     <li><a data-toggle="tab" href="#courses">Courses</a></li>
                                     <li><a data-toggle="tab" href="#professor">Professor</a></li>
@@ -186,185 +186,231 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                         </div>
                                                     </div>
                                                     <?php
-                                                    foreach($all_posts as $posts){
+                                                    if(isset($all_posts)){
+                                                    foreach($all_posts as $posts) {
 
-                                                    ?>
-                                                            <div class="box-card">
-                                                                <div class="dropdown dropdownToggleMenu">
-                                                                    <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" >
-                                                                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                <div class="left">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/save.svg" alt="Save">
-                                                                                </div>
-                                                                                <div class="right">
-                                                                                    <span>Save</span>
-                                                                                    <p>Save for later</p>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                <div class="left">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/copy-link.svg" alt="Link">
-                                                                                </div>
-                                                                                <div class="right">
-                                                                                    <span>Copy link to post</span>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                <div class="left">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/embed.svg" alt="Embed">
-                                                                                </div>
-                                                                                <div class="right">
-                                                                                    <span>Embed this post</span>
-                                                                                    <p>copy and paste this post to your site</p>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                <div class="left">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/hide.svg" alt="Hide Post">
-                                                                                </div>
-                                                                                <div class="right">
-                                                                                    <span>Hide this post</span>
-                                                                                    <p>I don't want to see this post in my feed</p>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                <div class="left">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/unfollow.svg" alt="Unfollow">
-                                                                                </div>
-                                                                                <div class="right">
-                                                                                    <span>Unfollow Loreum Ipsum</span>
-                                                                                    <p>Stop seeing post from Loreum Ipsum</p>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                <div class="left">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/report.svg" alt="Report">
-                                                                                </div>
-                                                                                <div class="right">
-                                                                                    <span>Report this post</span>
-                                                                                    <p>This post is offensive or account is hacked</p>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                <div class="left">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/improve-feed.svg" alt="Improve Feed">
-                                                                                </div>
-                                                                                <div class="right">
-                                                                                    <span>Improve my feed</span>
-                                                                                    <p>Get recommended sources to follow</p>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                <div class="left">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/who-can-see.svg" alt="Visible">
-                                                                                </div>
-                                                                                <div class="right">
-                                                                                    <span>Who can see this post?</span>
-                                                                                    <p>Visible to public</p>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                                <div class="createBox">
-                                                                    <div class="feeduserwrap">
-                                                                        <div class="user-details">
-                                                                            <div class="user-name">
-                                                                                <figure>
-                                                                                    <?php if(empty($user_detail['image'])){
-                                                                                        echo '<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">';
-                                                                                    }else{
-                                                                                       ?>
-                                                                                        <img src="<?php echo base_url()."uploads/users/".$user_detail['image']; ?>" alt="user">
+                                                        ?>
+                                                        <div class="box-card">
+                                                            <div class="dropdown dropdownToggleMenu">
+                                                                <img
+                                                                    src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                    alt="toggle" data-toggle="dropdown">
+                                                                <ul class="dropdown-menu" role="menu"
+                                                                    aria-labelledby="menu1">
+                                                                    <li role="presentation">
+                                                                        <a role="menuitem" tabindex="-1"
+                                                                           href="javascript:void(0);">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/save.svg"
+                                                                                    alt="Save">
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <span>Save</span>
+                                                                                <p>Save for later</p>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="presentation">
+                                                                        <a role="menuitem" tabindex="-1"
+                                                                           href="javascript:void(0);">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/copy-link.svg"
+                                                                                    alt="Link">
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <span>Copy link to post</span>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="presentation">
+                                                                        <a role="menuitem" tabindex="-1"
+                                                                           href="javascript:void(0);">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/embed.svg"
+                                                                                    alt="Embed">
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <span>Embed this post</span>
+                                                                                <p>copy and paste this post to your
+                                                                                    site</p>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="presentation">
+                                                                        <a role="menuitem" tabindex="-1"
+                                                                           href="javascript:void(0);">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/hide.svg"
+                                                                                    alt="Hide Post">
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <span>Hide this post</span>
+                                                                                <p>I don't want to see this post in my
+                                                                                    feed</p>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="presentation">
+                                                                        <a role="menuitem" tabindex="-1"
+                                                                           href="javascript:void(0);">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/unfollow.svg"
+                                                                                    alt="Unfollow">
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <span>Unfollow Loreum Ipsum</span>
+                                                                                <p>Stop seeing post from Loreum
+                                                                                    Ipsum</p>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="presentation">
+                                                                        <a role="menuitem" tabindex="-1"
+                                                                           href="javascript:void(0);">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/report.svg"
+                                                                                    alt="Report">
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <span>Report this post</span>
+                                                                                <p>This post is offensive or account is
+                                                                                    hacked</p>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="presentation">
+                                                                        <a role="menuitem" tabindex="-1"
+                                                                           href="javascript:void(0);">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/improve-feed.svg"
+                                                                                    alt="Improve Feed">
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <span>Improve my feed</span>
+                                                                                <p>Get recommended sources to follow</p>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li role="presentation">
+                                                                        <a role="menuitem" tabindex="-1"
+                                                                           href="javascript:void(0);">
+                                                                            <div class="left">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/who-can-see.svg"
+                                                                                    alt="Visible">
+                                                                            </div>
+                                                                            <div class="right">
+                                                                                <span>Who can see this post?</span>
+                                                                                <p>Visible to public</p>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                            <div class="createBox">
+                                                                <div class="feeduserwrap">
+                                                                    <div class="user-details">
+                                                                        <div class="user-name">
+                                                                            <figure>
+                                                                                <?php if (empty($user_detail['image'])) {
+                                                                                    echo '<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">';
+                                                                                } else {
+                                                                                    ?>
+                                                                                    <img
+                                                                                        src="<?php echo base_url() . "uploads/users/" . $user_detail['image']; ?>"
+                                                                                        alt="user">
                                                                                     <?php
-                                                                                    }?>
+                                                                                } ?>
 
-                                                                                </figure>
-                                                                                <div class="right">
-                                                                                    <figcaption><?php echo $full_name; ?></figcaption>
-                                                                                    <div class="badgeList">
-                                                                                        <ul>
-                                                                                            <li class="badge badge1">
-                                                                                                <a href="">
-                                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/institution.svg" alt="InStitute"> University name
-                                                                                                </a>
-                                                                                            </li>
-                                                                                            <li class="badge badge3">
-                                                                                                <a href="">
-                                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
-                                                                                                </a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
+                                                                            </figure>
+                                                                            <div class="right">
+                                                                                <figcaption><?php echo $full_name; ?></figcaption>
+                                                                                <div class="badgeList">
+                                                                                    <ul>
+                                                                                        <li class="badge badge1">
+                                                                                            <a href="">
+                                                                                                <img
+                                                                                                    src="<?php echo base_url(); ?>assets_d/images/institution.svg"
+                                                                                                    alt="InStitute">
+                                                                                                University name
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li class="badge badge3">
+                                                                                            <a href="">
+                                                                                                <img
+                                                                                                    src="<?php echo base_url(); ?>assets_d/images/professor.svg"
+                                                                                                    alt="Professor">
+                                                                                                Faculty
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="timeline"><?php echo time_elapsed_string($posts['post_details']->created_at); ?></div>
                                                                         </div>
-                                                                        <p class="feedPostMessages">
-                                                                            <?php echo $posts['post_details']->post_content_html; ?>
-                                                                        </p>
-                                                                        <?php if(count($posts['post_images']) > 0){
-                                                                            ?>
-                                                                            <div class="imgWrapper type2">
-                                                                                <?php
-                                                                                foreach($posts['post_images'] as $image){
-                                                                                    if(!empty($image)){
+                                                                        <div
+                                                                            class="timeline"><?php echo time_elapsed_string($posts['post_details']->created_at); ?></div>
+                                                                    </div>
+                                                                    <p class="feedPostMessages">
+                                                                        <?php echo $posts['post_details']->post_content_html; ?>
+                                                                    </p>
+                                                                    <?php if (count($posts['post_images']) > 0) {
+                                                                        ?>
+                                                                        <div class="imgWrapper type2">
+                                                                            <?php
+                                                                            foreach ($posts['post_images'] as $image) {
+                                                                                if (!empty($image)) {
                                                                                     ?>
                                                                                     <figure>
-                                                                                        <img src="<?php echo base_url().$image['image_path'] ?>" alt="Post Image">
+                                                                                        <img
+                                                                                            src="<?php echo base_url() . $image['image_path'] ?>"
+                                                                                            alt="Post Image">
                                                                                     </figure>
                                                                                     <?php
-                                                                                    }
                                                                                 }
-                                                                                ?>
-                                                                            </div>
-                                                                        <?php
-                                                                        }?>
-                                                                        <?php if(count($posts['post_videos']) > 0){
+                                                                            }
                                                                             ?>
-                                                                            <div class="imgWrapper type2">
-                                                                                <?php
-                                                                                foreach($posts['post_videos'] as $videos){
-                                                                                    if(!empty($videos)){
-                                                                                        ?>
-                                                                                        <video id="myVideo" width="320" height="240" controls>
-                                                                                            <source src="<?php echo base_url().$videos['video_path']?>" alt="Video">
-                                                                                        </video>
-                                                                                        <?php
-                                                                                    }
-                                                                                }
-                                                                                ?>
-                                                                            </div>
+                                                                        </div>
+                                                                        <?php
+                                                                    } ?>
+                                                                    <?php if (count($posts['post_videos']) > 0) {
+                                                                        ?>
+                                                                        <div class="imgWrapper type2">
                                                                             <?php
-                                                                        }
-                                                                        if(count($posts['post_documents']) > 0){
-                                                                            foreach($posts['post_documents'] as $document){
+                                                                            foreach ($posts['post_videos'] as $videos) {
+                                                                                if (!empty($videos)) {
+                                                                                    ?>
+                                                                                    <video id="myVideo" width="320"
+                                                                                           height="240" controls>
+                                                                                        <source
+                                                                                            src="<?php echo base_url() . $videos['video_path'] ?>"
+                                                                                            alt="Video">
+                                                                                    </video>
+                                                                                    <?php
+                                                                                }
+                                                                            }
+                                                                            ?>
+                                                                        </div>
+                                                                        <?php
+                                                                    }
+                                                                    if (count($posts['post_documents']) > 0) {
+                                                                        foreach ($posts['post_documents'] as $document) {
                                                                             ?>
                                                                             <p class="feedPostMessages">
-                                                                                <a href="<?php echo base_url().$document['document_path']; ?>">Click here to download the attachment</a>
+                                                                                <a href="<?php echo base_url() . $document['document_path']; ?>"><?php echo $document['original_name'] ?></a>
                                                                             </p>
-                                                                        <?php
-                                                                            }
+                                                                            <?php
                                                                         }
-                                                                        ?>
-                                                                        <?php if(count($posts['post_poll_options']) > 0){
-                                                                            foreach($posts['post_poll_options'] as $options){
+                                                                    }
+                                                                    ?>
+                                                                    <?php if (count($posts['post_poll_options']) > 0) {
+                                                                        foreach ($posts['post_poll_options'] as $options) {
                                                                             ?>
                                                                             <div class="selectedPollOptions">
                                                                                 <label class="dashRadioWrap">
@@ -372,26 +418,38 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                                         <div class="progress">
                                                                                             <div class="progressValues">
                                                                                                 <div class="leftValue">
-                                                                                                    <?php echo $options['options'] ; ?>
+                                                                                                    <?php echo $options['options']; ?>
                                                                                                 </div>
-                                                                                                <div class="rightValues">
+                                                                                                <div
+                                                                                                    class="rightValues">
                                                                                                     <p>75%</p>
-                                                                                                    <div class="eventActionWrap">
+                                                                                                    <div
+                                                                                                        class="eventActionWrap">
                                                                                                         <ul>
                                                                                                             <li>
-                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img
+                                                                                                                    src="<?php echo base_url(); ?>assets_d/images/user.jpg"
+                                                                                                                    alt="user">
                                                                                                             </li>
                                                                                                             <li>
-                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img
+                                                                                                                    src="<?php echo base_url(); ?>assets_d/images/user.jpg"
+                                                                                                                    alt="user">
                                                                                                             </li>
                                                                                                             <li>
-                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img
+                                                                                                                    src="<?php echo base_url(); ?>assets_d/images/user.jpg"
+                                                                                                                    alt="user">
                                                                                                             </li>
                                                                                                             <li>
-                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img
+                                                                                                                    src="<?php echo base_url(); ?>assets_d/images/user.jpg"
+                                                                                                                    alt="user">
                                                                                                             </li>
                                                                                                             <li>
-                                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+                                                                                                                <img
+                                                                                                                    src="<?php echo base_url(); ?>assets_d/images/user.jpg"
+                                                                                                                    alt="user">
                                                                                                             </li>
                                                                                                             <li class="more">
                                                                                                                 +5
@@ -400,341 +458,492 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                                                     </div>
                                                                                                 </div>
                                                                                             </div>
-                                                                                            <div class="progress-bar" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width:70%"></div>
+                                                                                            <div class="progress-bar"
+                                                                                                 role="progressbar"
+                                                                                                 aria-valuenow="75"
+                                                                                                 aria-valuemin="0"
+                                                                                                 aria-valuemax="100"
+                                                                                                 style="width:70%"></div>
                                                                                         </div>
                                                                                     </div>
-                                                                                    <input type="radio" checked="checked" name="radio">
+                                                                                    <input type="radio"
+                                                                                           checked="checked"
+                                                                                           name="radio">
                                                                                     <span class="checkmark"></span>
                                                                                 </label>
                                                                             </div>
                                                                             <?php
-                                                                            }
                                                                         }
-                                                                        ?>
+                                                                    }
+                                                                    ?>
 
-                                                                        <div class="socialStatus">
-                                                                            <div class="leftStatus">
-                                                                                <a>
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Like">
-                                                                                    <span><?php echo $posts['post_details']->likes_count; ?></span>
-                                                                                </a>
-                                                                            </div>
-                                                                            <div class="rightStatus">
-                                                                                <ul>
-                                                                                    <li>
-                                                                                        <a>
-                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                                                                            <span><?php echo $posts['post_details']->comments_count; ?></span>
-                                                                                        </a>
-                                                                                    </li>
-                                                                                    <li>
-                                                                                        <a>
-                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
-                                                                                            <span><?php echo $posts['post_details']->share_count; ?></span>
-                                                                                        </a>
-                                                                                    </li>
-                                                                                </ul>
-                                                                            </div>
+                                                                    <div class="socialStatus">
+                                                                        <div class="leftStatus">
+                                                                            <a>
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
+                                                                                    alt="Like">
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
+                                                                                    alt="Like">
+                                                                                <span><?php echo $posts['post_details']->likes_count; ?></span>
+                                                                            </a>
                                                                         </div>
-                                                                        <div class="socialAction">
+                                                                        <div class="rightStatus">
                                                                             <ul>
-                                                                                <li class="likeMenu">
-                                                                                    <a>
-                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/like-grey.svg" class="likepost" alt="Like">
-                                                                                        <span>Like</span>
-                                                                                    </a>
-                                                                                    <div class="hoverMenu">
-                                                                                        <ul>
-                                                                                            <li class="likeOption">
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="like">
-                                                                                            </li>
-                                                                                            <li class="supportMenu">
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="like">
-                                                                                            </li>
-                                                                                            <li class="celebrateMenu">
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="like">
-                                                                                            </li>
-                                                                                            <li class="curiousMenu">
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="like">
-                                                                                            </li>
-                                                                                            <li class="insightMenu">
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="like">
-                                                                                            </li>
-                                                                                            <li class="loveMenu">
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="like">
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </li>
                                                                                 <li>
                                                                                     <a>
-                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                                                                        <span>Comment</span>
+                                                                                        <img
+                                                                                            src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
+                                                                                            alt="comment">
+                                                                                        <span><?php echo $posts['post_details']->comments_count; ?></span>
                                                                                     </a>
                                                                                 </li>
                                                                                 <li>
                                                                                     <a>
-                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
-                                                                                        <span>Share</span>
+                                                                                        <img
+                                                                                            src="<?php echo base_url(); ?>assets_d/images/share-grey.svg"
+                                                                                            alt="Share">
+                                                                                        <span><?php echo $posts['post_details']->share_count; ?></span>
                                                                                     </a>
                                                                                 </li>
                                                                             </ul>
                                                                         </div>
-                                                                        <div class="commentBoxWrap">
-                                                                            <div class="comment-popularity">
-                                                                                <div class="relevant">
-                                                                                    <div class="value">Most Relevant</div>
-                                                                                    <div class="caretIcon">
-                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg" alt="down arrow">
-                                                                                    </div>
+                                                                    </div>
+                                                                    <div class="socialAction">
+                                                                        <ul>
+                                                                            <li class="likeMenu">
+                                                                                <a>
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
+                                                                                        class="likepost" alt="Like">
+                                                                                    <span>Like</span>
+                                                                                </a>
+                                                                                <div class="hoverMenu">
+                                                                                    <ul>
+                                                                                        <li class="likeOption">
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
+                                                                                                alt="like">
+                                                                                        </li>
+                                                                                        <li class="supportMenu">
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
+                                                                                                alt="like">
+                                                                                        </li>
+                                                                                        <li class="celebrateMenu">
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg"
+                                                                                                alt="like">
+                                                                                        </li>
+                                                                                        <li class="curiousMenu">
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg"
+                                                                                                alt="like">
+                                                                                        </li>
+                                                                                        <li class="insightMenu">
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg"
+                                                                                                alt="like">
+                                                                                        </li>
+                                                                                        <li class="loveMenu">
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg"
+                                                                                                alt="like">
+                                                                                        </li>
+                                                                                    </ul>
                                                                                 </div>
-                                                                                <div class="commentmsg">
-                                                                                    <a>Hide Comments</a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a>
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
+                                                                                        alt="comment">
+                                                                                    <span>Comment</span>
+                                                                                </a>
+                                                                            </li>
+                                                                            <li>
+                                                                                <a>
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/share-grey.svg"
+                                                                                        alt="comment">
+                                                                                    <span>Share</span>
+                                                                                </a>
+                                                                            </li>
+                                                                        </ul>
+                                                                    </div>
+                                                                    <div class="commentBoxWrap">
+                                                                        <div class="comment-popularity">
+                                                                            <div class="relevant">
+                                                                                <div class="value">Most Relevant</div>
+                                                                                <div class="caretIcon">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg"
+                                                                                        alt="down arrow">
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="chatMsgBox">
-                                                                                <figure>
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                                                </figure>
-                                                                                <div class="right">
-                                                                                    <div class="userWrapText">
-                                                                                        <h4>User Name</h4>
-                                                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                                                        <div class="leftStatus">
-                                                                                            <a>
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                                                                <span>24</span>
-                                                                                            </a>
-                                                                                            <a>Like</a>
-                                                                                            <a>Reply</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="dotsBullet dropdown">
-                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                                            <li role="presentation">
-                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                    <div class="left">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                                                    </div>
-                                                                                                    <div class="right">
-                                                                                                        <span>Hide/block</span>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                            <li role="presentation">
-                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                    <div class="left">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                                                    </div>
-                                                                                                    <div class="right">
-                                                                                                        <span>Delete</span>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                        </ul>
+                                                                            <div class="commentmsg">
+                                                                                <a>Hide Comments</a>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="chatMsgBox">
+                                                                            <figure>
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
+                                                                                    alt="User">
+                                                                            </figure>
+                                                                            <div class="right">
+                                                                                <div class="userWrapText">
+                                                                                    <h4>User Name</h4>
+                                                                                    <p>Lorem Ipsum is simply dummy text
+                                                                                        of the printing and</p>
+                                                                                    <div class="leftStatus">
+                                                                                        <a>
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
+                                                                                                alt="Like">
+                                                                                            <span>24</span>
+                                                                                        </a>
+                                                                                        <a>Like</a>
+                                                                                        <a>Reply</a>
                                                                                     </div>
                                                                                 </div>
-                                                                            </div>
-                                                                            <div class="chatMsgBox">
-                                                                                <figure>
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                                                </figure>
-                                                                                <div class="right">
-                                                                                    <div class="userWrapText">
-                                                                                        <h4>User Name</h4>
-                                                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                                                        <div class="leftStatus">
-                                                                                            <a>
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                                                                <span>24</span>
-                                                                                            </a>
-                                                                                            <a>Like</a>
-                                                                                            <a class="reply">Reply(2)</a>
-                                                                                            <div class="innerReplyBox">
-                                                                                                <figure>
-                                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                                                                </figure>
+                                                                                <div class="dotsBullet dropdown">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                                        alt="more"
+                                                                                        data-toggle="dropdown">
+                                                                                    <ul class="dropdown-menu"
+                                                                                        role="menu"
+                                                                                        aria-labelledby="menu1">
+                                                                                        <li role="presentation">
+                                                                                            <a role="menuitem"
+                                                                                               tabindex="-1"
+                                                                                               href="javascript:void(0);">
+                                                                                                <div class="left">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                                        alt="Save">
+                                                                                                </div>
                                                                                                 <div class="right">
-                                                                                                    <div class="userWrapText">
-                                                                                                        <h4>User Name</h4>
-                                                                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                                                                        <div class="leftStatus">
-                                                                                                            <a>Like</a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div class="dotsBullet dropdown">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                                                            <li role="presentation">
-                                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                                    <div class="left">
-                                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                                                                    </div>
-                                                                                                                    <div class="right">
-                                                                                                                        <span>Hide/block</span>
-                                                                                                                    </div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                            <li role="presentation">
-                                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                                    <div class="left">
-                                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                                                                    </div>
-                                                                                                                    <div class="right">
-                                                                                                                        <span>Delete</span>
-                                                                                                                    </div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                        </ul>
-                                                                                                    </div>
+                                                                                                    <span>Hide/block</span>
                                                                                                 </div>
-                                                                                            </div>
-                                                                                            <div class="innerReplyBox">
-                                                                                                <figure>
-                                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                                                                </figure>
-                                                                                                <div class="right">
-                                                                                                    <div class="userWrapText">
-                                                                                                        <h4>User Name</h4>
-                                                                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                                                                        <div class="leftStatus">
-                                                                                                            <a>Like</a>
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                    <div class="dotsBullet dropdown">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                                                            <li role="presentation">
-                                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                                    <div class="left">
-                                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                                                                    </div>
-                                                                                                                    <div class="right">
-                                                                                                                        <span>Hide/block</span>
-                                                                                                                    </div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                            <li role="presentation">
-                                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                                    <div class="left">
-                                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                                                                    </div>
-                                                                                                                    <div class="right">
-                                                                                                                        <span>Delete</span>
-                                                                                                                    </div>
-                                                                                                                </a>
-                                                                                                            </li>
-                                                                                                        </ul>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                            <div class="commentWrapBox">
-                                                                                                <figure>
-                                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                                                                </figure>
-                                                                                                <input type="text" name="" placeholder="Comment" id="em_0">
-                                                                                                <div class="mediaAction">
-                                                                                                    <button type="button">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-                                                                                                        <input type="file">
-                                                                                                    </button>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="dotsBullet dropdown">
-                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                                            <li role="presentation">
-                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                    <div class="left">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                                                    </div>
-                                                                                                    <div class="right">
-                                                                                                        <span>Hide/block</span>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                            <li role="presentation">
-                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                    <div class="left">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                                                    </div>
-                                                                                                    <div class="right">
-                                                                                                        <span>Delete</span>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="chatMsgBox">
-                                                                                <figure>
-                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                                                </figure>
-                                                                                <div class="right">
-                                                                                    <div class="userWrapText">
-                                                                                        <h4>User Name</h4>
-                                                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                                                        <div class="leftStatus">
-                                                                                            <a>
-                                                                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                                                                <span>24</span>
                                                                                             </a>
-                                                                                            <a>Like</a>
-                                                                                            <a>Reply</a>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="dotsBullet dropdown">
-                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                                            <li role="presentation">
-                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                    <div class="left">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                                                    </div>
-                                                                                                    <div class="right">
-                                                                                                        <span>Hide/block</span>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                            <li role="presentation">
-                                                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                                                    <div class="left">
-                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                                                    </div>
-                                                                                                    <div class="right">
-                                                                                                        <span>Delete</span>
-                                                                                                    </div>
-                                                                                                </a>
-                                                                                            </li>
-                                                                                        </ul>
-                                                                                    </div>
+                                                                                        </li>
+                                                                                        <li role="presentation">
+                                                                                            <a role="menuitem"
+                                                                                               tabindex="-1"
+                                                                                               href="javascript:void(0);">
+                                                                                                <div class="left">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                                        alt="Link">
+                                                                                                </div>
+                                                                                                <div class="right">
+                                                                                                    <span>Delete</span>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="chatMsgBox">
-                                                                                <div class="commentWrapBox">
-                                                                                    <figure>
-                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                                                    </figure>
-                                                                                    <input type="text" name="" placeholder="Comment" id="em_1">
-                                                                                    <div class="mediaAction">
-                                                                                        <button type="button">
-                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-                                                                                            <input type="file">
-                                                                                        </button>
+                                                                        </div>
+                                                                        <div class="chatMsgBox">
+                                                                            <figure>
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
+                                                                                    alt="User">
+                                                                            </figure>
+                                                                            <div class="right">
+                                                                                <div class="userWrapText">
+                                                                                    <h4>User Name</h4>
+                                                                                    <p>Lorem Ipsum is simply dummy text
+                                                                                        of the printing and</p>
+                                                                                    <div class="leftStatus">
+                                                                                        <a>
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
+                                                                                                alt="Like">
+                                                                                            <span>24</span>
+                                                                                        </a>
+                                                                                        <a>Like</a>
+                                                                                        <a class="reply">Reply(2)</a>
+                                                                                        <div class="innerReplyBox">
+                                                                                            <figure>
+                                                                                                <img
+                                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
+                                                                                                    alt="User">
+                                                                                            </figure>
+                                                                                            <div class="right">
+                                                                                                <div
+                                                                                                    class="userWrapText">
+                                                                                                    <h4>User Name</h4>
+                                                                                                    <p>Lorem Ipsum is
+                                                                                                        simply dummy
+                                                                                                        text of the
+                                                                                                        printing and</p>
+                                                                                                    <div
+                                                                                                        class="leftStatus">
+                                                                                                        <a>Like</a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="dotsBullet dropdown">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                                                        alt="more"
+                                                                                                        data-toggle="dropdown">
+                                                                                                    <ul class="dropdown-menu"
+                                                                                                        role="menu"
+                                                                                                        aria-labelledby="menu1">
+                                                                                                        <li role="presentation">
+                                                                                                            <a role="menuitem"
+                                                                                                               tabindex="-1"
+                                                                                                               href="javascript:void(0);">
+                                                                                                                <div
+                                                                                                                    class="left">
+                                                                                                                    <img
+                                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                                                        alt="Save">
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="right">
+                                                                                                                    <span>Hide/block</span>
+                                                                                                                </div>
+                                                                                                            </a>
+                                                                                                        </li>
+                                                                                                        <li role="presentation">
+                                                                                                            <a role="menuitem"
+                                                                                                               tabindex="-1"
+                                                                                                               href="javascript:void(0);">
+                                                                                                                <div
+                                                                                                                    class="left">
+                                                                                                                    <img
+                                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                                                        alt="Link">
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="right">
+                                                                                                                    <span>Delete</span>
+                                                                                                                </div>
+                                                                                                            </a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="innerReplyBox">
+                                                                                            <figure>
+                                                                                                <img
+                                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
+                                                                                                    alt="User">
+                                                                                            </figure>
+                                                                                            <div class="right">
+                                                                                                <div
+                                                                                                    class="userWrapText">
+                                                                                                    <h4>User Name</h4>
+                                                                                                    <p>Lorem Ipsum is
+                                                                                                        simply dummy
+                                                                                                        text of the
+                                                                                                        printing and</p>
+                                                                                                    <div
+                                                                                                        class="leftStatus">
+                                                                                                        <a>Like</a>
+                                                                                                    </div>
+                                                                                                </div>
+                                                                                                <div
+                                                                                                    class="dotsBullet dropdown">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                                                        alt="more"
+                                                                                                        data-toggle="dropdown">
+                                                                                                    <ul class="dropdown-menu"
+                                                                                                        role="menu"
+                                                                                                        aria-labelledby="menu1">
+                                                                                                        <li role="presentation">
+                                                                                                            <a role="menuitem"
+                                                                                                               tabindex="-1"
+                                                                                                               href="javascript:void(0);">
+                                                                                                                <div
+                                                                                                                    class="left">
+                                                                                                                    <img
+                                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                                                        alt="Save">
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="right">
+                                                                                                                    <span>Hide/block</span>
+                                                                                                                </div>
+                                                                                                            </a>
+                                                                                                        </li>
+                                                                                                        <li role="presentation">
+                                                                                                            <a role="menuitem"
+                                                                                                               tabindex="-1"
+                                                                                                               href="javascript:void(0);">
+                                                                                                                <div
+                                                                                                                    class="left">
+                                                                                                                    <img
+                                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                                                        alt="Link">
+                                                                                                                </div>
+                                                                                                                <div
+                                                                                                                    class="right">
+                                                                                                                    <span>Delete</span>
+                                                                                                                </div>
+                                                                                                            </a>
+                                                                                                        </li>
+                                                                                                    </ul>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div class="commentWrapBox">
+                                                                                            <figure>
+                                                                                                <img
+                                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
+                                                                                                    alt="User">
+                                                                                            </figure>
+                                                                                            <input type="text" name=""
+                                                                                                   placeholder="Comment"
+                                                                                                   id="em_0">
+                                                                                            <div class="mediaAction">
+                                                                                                <button type="button">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/image.svg"
+                                                                                                        alt="Add Files">
+                                                                                                    <input type="file">
+                                                                                                </button>
+                                                                                            </div>
+                                                                                        </div>
                                                                                     </div>
+                                                                                </div>
+                                                                                <div class="dotsBullet dropdown">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                                        alt="more"
+                                                                                        data-toggle="dropdown">
+                                                                                    <ul class="dropdown-menu"
+                                                                                        role="menu"
+                                                                                        aria-labelledby="menu1">
+                                                                                        <li role="presentation">
+                                                                                            <a role="menuitem"
+                                                                                               tabindex="-1"
+                                                                                               href="javascript:void(0);">
+                                                                                                <div class="left">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                                        alt="Save">
+                                                                                                </div>
+                                                                                                <div class="right">
+                                                                                                    <span>Hide/block</span>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li role="presentation">
+                                                                                            <a role="menuitem"
+                                                                                               tabindex="-1"
+                                                                                               href="javascript:void(0);">
+                                                                                                <div class="left">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                                        alt="Link">
+                                                                                                </div>
+                                                                                                <div class="right">
+                                                                                                    <span>Delete</span>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="chatMsgBox">
+                                                                            <figure>
+                                                                                <img
+                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
+                                                                                    alt="User">
+                                                                            </figure>
+                                                                            <div class="right">
+                                                                                <div class="userWrapText">
+                                                                                    <h4>User Name</h4>
+                                                                                    <p>Lorem Ipsum is simply dummy text
+                                                                                        of the printing and</p>
+                                                                                    <div class="leftStatus">
+                                                                                        <a>
+                                                                                            <img
+                                                                                                src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
+                                                                                                alt="Like">
+                                                                                            <span>24</span>
+                                                                                        </a>
+                                                                                        <a>Like</a>
+                                                                                        <a>Reply</a>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="dotsBullet dropdown">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                                        alt="more"
+                                                                                        data-toggle="dropdown">
+                                                                                    <ul class="dropdown-menu"
+                                                                                        role="menu"
+                                                                                        aria-labelledby="menu1">
+                                                                                        <li role="presentation">
+                                                                                            <a role="menuitem"
+                                                                                               tabindex="-1"
+                                                                                               href="javascript:void(0);">
+                                                                                                <div class="left">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                                        alt="Save">
+                                                                                                </div>
+                                                                                                <div class="right">
+                                                                                                    <span>Hide/block</span>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                        <li role="presentation">
+                                                                                            <a role="menuitem"
+                                                                                               tabindex="-1"
+                                                                                               href="javascript:void(0);">
+                                                                                                <div class="left">
+                                                                                                    <img
+                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                                        alt="Link">
+                                                                                                </div>
+                                                                                                <div class="right">
+                                                                                                    <span>Delete</span>
+                                                                                                </div>
+                                                                                            </a>
+                                                                                        </li>
+                                                                                    </ul>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="chatMsgBox">
+                                                                            <div class="commentWrapBox">
+                                                                                <figure>
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
+                                                                                        alt="User">
+                                                                                </figure>
+                                                                                <input type="text" name=""
+                                                                                       placeholder="Comment" id="em_1">
+                                                                                <div class="mediaAction">
+                                                                                    <button type="button">
+                                                                                        <img
+                                                                                            src="<?php echo base_url(); ?>assets_d/images/image.svg"
+                                                                                            alt="Add Files">
+                                                                                        <input type="file">
+                                                                                    </button>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
+                                                        </div>
 
-                                                    <?php
+                                                        <?php
+                                                    }
                                                         }
                                                     ?>
 
@@ -880,2014 +1089,14 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 </div>
                             </div>
                         </div>
-                        <div id="profile" class="tab-pane fade in">
-                            <div class="tabPaneWrapper">
-                                <div class="left">
-                                    <div class="box-card">
-                                        <div class="createBox">
-                                            <div class="postWrapper">
-                                                <h5>General Information</h5>
-                                                <div class="editWrapper" data-dismiss="modal" data-toggle="modal" href="#deleteUser">
-                                                    <img src="images/edit.svg" alt="edit"> Edit Profile
-                                                </div>
-                                            </div>
-                                            <div class="infoWrapper">
-                                                <div class="list">
-                                                    <div class="heading">First Name</div>
-                                                    <div class="value">Loreum</div>
-                                                </div>
-                                                <div class="list">
-                                                    <div class="heading">Last Name</div>
-                                                    <div class="value">Ipsum</div>
-                                                </div>
-                                                <div class="list">
-                                                    <div class="heading">Gender</div>
-                                                    <div class="value">Female</div>
-                                                </div>
-                                                <div class="list">
-                                                    <div class="heading">Date of Birth</div>
-                                                    <div class="value">October 20, 1999</div>
-                                                </div>
-                                                <div class="list">
-                                                    <div class="heading">Country</div>
-                                                    <div class="value">India</div>
-                                                </div>
-                                                <div class="list">
-                                                    <div class="heading">Field of interest</div>
-                                                    <div class="value">lorem ipsum, lorem ipsum</div>
-                                                </div>
-                                            </div>
-                                            <div class="useraboutWrapper">
-                                                <h5>About Me</h5>
-                                                <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                                    eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                                                    voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-                                                    kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                                                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy</p>
-                                            </div>
-                                            <div class="infoWrapper">
-                                                <div class="list">
-                                                    <div class="heading">High School </div>
-                                                    <div class="value">
-                                                        <span>School name</span>
-                                                        <br>
-                                                        Course (yyyy-yyyy)
-                                                    </div>
-                                                </div>
-                                                <div class="list">
-                                                    <div class="heading">Graduation</div>
-                                                    <div class="value">
-                                                        <span>College name</span>
-                                                        <br>
-                                                        Course (yyyy-yyyy)
-                                                    </div>
-                                                </div>
-                                                <div class="list">
-                                                    <div class="heading">Other</div>
-                                                    <div class="value">
-                                                        <span>Institute name</span>
-                                                        <br>
-                                                        Course (yyyy-yyyy)
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="useraboutWrapper social">
-                                                <h5>Follow</h5>
-                                                <ul>
-                                                    <li>
-                                                        <a href="javascript:void(0)">
-                                                            <img src="images/facebook.svg" alt="facebook">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0)">
-                                                            <img src="images/twitter.svg" alt="twitter">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0)">
-                                                            <img src="images/linkedin.svg" alt="linkedin">
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a href="javascript:void(0)">
-                                                            <img src="images/youtube.svg" alt="youtube">
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <div class="boxwrap completeProfile">
-                                        <h6>Complete your profile</h6>
-                                        <p>Current status of your profile</p>
-                                        <div class="profileProgressBar">
-                                            <div class="progress mx-auto" data-value="40">
-											          <span class="progress-left">
-											             <span class="progress-bar border-primary"></span>
-											          </span>
-											          <span class="progress-right">
-											              <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-											          </span>
-                                                <div class="profileUser">
-                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                </div>
-                                            </div>
-                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                <div class="complete">Complete</div>
-                                            </div>
-                                        </div>
-                                        <div class="completeNow">
-                                            <button type="button" class="event_action">Complete Now</button>
-                                        </div>
-                                    </div>
-                                    <div class="boxwrap">
-                                        <h6>Latest Updates</h6>
-                                        <p>Peers</p>
-                                        <div class="listBox">
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="images/user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="images/user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="images/user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>Institutions</p>
-                                        <div class="listBox last">
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="images/user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="images/user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="images/user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="peers" class="tab-pane fade in">
-                            <div class="innerFeedTabs">
-                                <div class="tabularLiist">
-                                    <div class="TabsAndSortWrapper">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active"><a data-toggle="tab" href="#myconnections">My Connections</a></li>
-                                            <li><a data-toggle="tab" href="#requests">Requests</a></li>
-                                        </ul>
-                                        <div class="search">
-                                            <div class="searchIcon">
-                                                <img src="images/search.png" alt="search">
-                                            </div>
-                                            <input type="text" name="">
-                                        </div>
-                                        <div class="sortWrapper">
-                                            <ul>
-                                                <li>
-                                                    <div class="selectOrder">
-                                                        <select name="sort" id="sort">
-                                                            <option value="volvo">Alphabetical</option>
-                                                        </select>
-                                                    </div>
-                                                </li>
-                                                <li class="grid active">
-                                                    <img src="images/grid-box-blue.svg" alt="Grid">
-                                                </li>
-                                                <li class="list">
-                                                    <img src="images/list-box-grey.svg" alt="List">
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tab-content">
-                                        <div id="myconnections" class="tab-pane fade in active">
-                                            <div class="tabPaneWrapper">
-                                                <div class="left">
-                                                    <div class="userBoxWrapper gridview">
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="right">
-                                                    <div class="boxwrap completeProfile">
-                                                        <h6>Complete your profile</h6>
-                                                        <p>Current status of your profile</p>
-                                                        <div class="profileProgressBar">
-                                                            <div class="progress mx-auto" data-value="40">
-															          <span class="progress-left">
-															             <span class="progress-bar border-primary"></span>
-															          </span>
-															          <span class="progress-right">
-															              <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-															          </span>
-                                                                <div class="profileUser">
-                                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                </div>
-                                                            </div>
-                                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                                <div class="complete">Complete</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="completeNow">
-                                                            <button type="button" class="event_action">Complete Now</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="boxwrap">
-                                                        <h6>Latest Updates</h6>
-                                                        <p>Peers</p>
-                                                        <div class="listBox">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p>Institutions</p>
-                                                        <div class="listBox last">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="requests" class="tab-pane fade in">
-                                            <div class="tabPaneWrapper">
-                                                <div class="left">
-                                                    <div class="userBoxWrapper gridview">
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d/<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li class="follower">
-                                                                            <a href="javascript:void(0)">Follow</a>
-                                                                        </li>
-                                                                        <li class="follower">
-                                                                            <a href="javascript:void(0)">Accept</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                            </div>
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Full Name</h5>
-                                                                        <p>location name</p>
-                                                                        <div class="followers">
-                                                                            <span>25 </span> Followers
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="followOptionsWrapper">
-                                                                    <ul>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Following</a>
-                                                                        </li>
-                                                                        <li>
-                                                                            <a href="javascript:void(0)">Peer</a>
-                                                                        </li>
-                                                                    </ul>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="right">
-                                                    <div class="boxwrap completeProfile">
-                                                        <h6>Complete your profile</h6>
-                                                        <p>Current status of your profile</p>
-                                                        <div class="profileProgressBar">
-                                                            <div class="progress mx-auto" data-value="40">
-															          <span class="progress-left">
-															             <span class="progress-bar border-primary"></span>
-															          </span>
-															          <span class="progress-right">
-															              <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-															          </span>
-                                                                <div class="profileUser">
-                                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                </div>
-                                                            </div>
-                                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                                <div class="complete">Complete</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="completeNow">
-                                                            <button type="button" class="event_action">Complete Now</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="boxwrap">
-                                                        <h6>Latest Updates</h6>
-                                                        <p>Peers</p>
-                                                        <div class="listBox">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p>Institutions</p>
-                                                        <div class="listBox last">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="institution" class="tab-pane fade in">
-                            <div class="TabsAndSortWrapper institute">
-                                <div class="sortWrapper">
-                                    <ul>
-                                        <li>
-                                            <div class="selectOrder">
-                                                <select name="sort" id="sort">
-                                                    <option value="volvo">Alphabetical</option>
-                                                </select>
-                                            </div>
-                                        </li>
-                                        <li class="grid active">
-                                            <img src="<?php echo base_url(); ?>assets_d//grid-box-blue.svg" alt="Grid">
-                                        </li>
-                                        <li class="list">
-                                            <img src="<?php echo base_url(); ?>assets_d//list-box-grey.svg" alt="List">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="tabPaneWrapper">
-                                <div class="left">
-                                    <div class="userBoxWrapper gridview">
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li class="follower">
-                                                            <a href="javascript:void(0)">Follow</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Attendening</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Attendening</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Attendening</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Attendening</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Attendening</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Attendening</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <div class="boxwrap completeProfile">
-                                        <h6>Complete your profile</h6>
-                                        <p>Current status of your profile</p>
-                                        <div class="profileProgressBar">
-                                            <div class="progress mx-auto" data-value="40">
-											          <span class="progress-left">
-											             <span class="progress-bar border-primary"></span>
-											          </span>
-											          <span class="progress-right">
-											              <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-											          </span>
-                                                <div class="profileUser">
-                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                </div>
-                                            </div>
-                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                <div class="complete">Complete</div>
-                                            </div>
-                                        </div>
-                                        <div class="completeNow">
-                                            <button type="button" class="event_action">Complete Now</button>
-                                        </div>
-                                    </div>
-                                    <div class="boxwrap">
-                                        <h6>Latest Updates</h6>
-                                        <p>Peers</p>
-                                        <div class="listBox">
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>Institutions</p>
-                                        <div class="listBox last">
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="courses" class="tab-pane fade in">
-                            <div class="TabsAndSortWrapper courses">
-                                <div class="sortWrapper">
-                                    <ul>
-                                        <li>
-                                            <div class="selectOrder">
-                                                <select name="sort" id="sort">
-                                                    <option value="volvo">Alphabetical</option>
-                                                </select>
-                                            </div>
-                                        </li>
-                                        <li class="grid active">
-                                            <img src="<?php echo base_url(); ?>assets_d//grid-box-blue.svg" alt="Grid">
-                                        </li>
-                                        <li class="list">
-                                            <img src="<?php echo base_url(); ?>assets_d//list-box-grey.svg" alt="List">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="tabPaneWrapper courseView">
-                                <div class="left">
-                                    <div class="userBoxWrapper gridview">
-                                        <div class="card">
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Course Name</h5>
-                                                        <div class="courseStructure">
-                                                            <p>10 lessons</p>
-                                                            <div class="statusourse progress">
-                                                                66% complete
-                                                            </div>
-                                                        </div>
-                                                        <div class="professorInfo">
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg" >
-                                                            Professor name
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="courseStatusBox">
-                                                    <div class="statusCheck progress">In Progress</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Course Name</h5>
-                                                        <div class="courseStructure">
-                                                            <p>10 lessons</p>
-                                                            <div class="statusourse complete">
-                                                                100% complete
-                                                            </div>
-                                                        </div>
-                                                        <div class="professorInfo">
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg" >
-                                                            Professor name
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="courseStatusBox">
-                                                    <div class="statusCheck complete">In Progress</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Course Name</h5>
-                                                        <div class="courseStructure">
-                                                            <p>10 lessons</p>
-                                                            <div class="statusourse enrolled">
-                                                                0% complete
-                                                            </div>
-                                                        </div>
-                                                        <div class="professorInfo">
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg" >
-                                                            Professor name
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="courseStatusBox">
-                                                    <div class="statusCheck enrolled">Enrolled</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Course Name</h5>
-                                                        <div class="courseStructure">
-                                                            <p>10 lessons</p>
-                                                            <div class="statusourse complete">
-                                                                100% complete
-                                                            </div>
-                                                        </div>
-                                                        <div class="professorInfo">
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg" >
-                                                            Professor name
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="courseStatusBox">
-                                                    <div class="statusCheck complete">In Progress</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Course Name</h5>
-                                                        <div class="courseStructure">
-                                                            <p>10 lessons</p>
-                                                            <div class="statusourse complete">
-                                                                100% complete
-                                                            </div>
-                                                        </div>
-                                                        <div class="professorInfo">
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg" >
-                                                            Professor name
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="courseStatusBox">
-                                                    <div class="statusCheck complete">In Progress</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Course Name</h5>
-                                                        <div class="courseStructure">
-                                                            <p>10 lessons</p>
-                                                            <div class="statusourse complete">
-                                                                100% complete
-                                                            </div>
-                                                        </div>
-                                                        <div class="professorInfo">
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg" >
-                                                            Professor name
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="courseStatusBox">
-                                                    <div class="statusCheck complete">In Progress</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <div class="boxwrap completeProfile">
-                                        <h6>Complete your profile</h6>
-                                        <p>Current status of your profile</p>
-                                        <div class="profileProgressBar">
-                                            <div class="progress mx-auto" data-value="40">
-											          <span class="progress-left">
-											             <span class="progress-bar border-primary"></span>
-											          </span>
-											          <span class="progress-right">
-											              <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-											          </span>
-                                                <div class="profileUser">
-                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                </div>
-                                            </div>
-                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                <div class="complete">Complete</div>
-                                            </div>
-                                        </div>
-                                        <div class="completeNow">
-                                            <button type="button" class="event_action">Complete Now</button>
-                                        </div>
-                                    </div>
-                                    <div class="boxwrap">
-                                        <h6>Latest Updates</h6>
-                                        <p>Peers</p>
-                                        <div class="listBox">
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>Institutions</p>
-                                        <div class="listBox last">
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="professor" class="tab-pane fade in">
-                            <div class="TabsAndSortWrapper institute">
-                                <div class="sortWrapper">
-                                    <ul>
-                                        <li>
-                                            <div class="selectOrder">
-                                                <select name="sort" id="sort">
-                                                    <option value="volvo">Alphabetical</option>
-                                                </select>
-                                            </div>
-                                        </li>
-                                        <li class="grid active">
-                                            <img src="<?php echo base_url(); ?>assets_d//grid-box-blue.svg" alt="Grid">
-                                        </li>
-                                        <li class="list">
-                                            <img src="<?php echo base_url(); ?>assets_d//list-box-grey.svg" alt="List">
-                                        </li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="tabPaneWrapper">
-                                <div class="left">
-                                    <div class="userBoxWrapper gridview">
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li class="follower">
-                                                            <a href="javascript:void(0)">Follow</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Follow</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="card">
-                                            <div class="messagePeerBox">
-                                                <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                            </div>
-                                            <div class="profileSection">
-                                                <div class="profileViewToggleWrapper">
-                                                    <figure>
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </figure>
-                                                    <div class="changeView">
-                                                        <h5>Institution Name</h5>
-                                                        <p>location name</p>
-                                                        <div class="followers">
-                                                            <span>25 </span> Followers
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="followOptionsWrapper">
-                                                    <ul>
-                                                        <li>
-                                                            <a href="javascript:void(0)">Following</a>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="right">
-                                    <div class="boxwrap completeProfile">
-                                        <h6>Complete your profile</h6>
-                                        <p>Current status of your profile</p>
-                                        <div class="profileProgressBar">
-                                            <div class="progress mx-auto" data-value="40">
-											          <span class="progress-left">
-											             <span class="progress-bar border-primary"></span>
-											          </span>
-											          <span class="progress-right">
-											              <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-											          </span>
-                                                <div class="profileUser">
-                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                </div>
-                                            </div>
-                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                <div class="complete">Complete</div>
-                                            </div>
-                                        </div>
-                                        <div class="completeNow">
-                                            <button type="button" class="event_action">Complete Now</button>
-                                        </div>
-                                    </div>
-                                    <div class="boxwrap">
-                                        <h6>Latest Updates</h6>
-                                        <p>Peers</p>
-                                        <div class="listBox">
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <p>Institutions</p>
-                                        <div class="listBox last">
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                            <div class="listWrap">
-                                                <div class="left">
-                                                    <figure>
-                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                    </figure>
-                                                </div>
-                                                <div class="right">
-                                                    <h6>Jane Doe</h6>
-                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="market" class="tab-pane fade in">
-                            <div class="innerFeedTabs">
-                                <div class="tabularLiist">
-                                    <div class="TabsAndSortWrapper">
-                                        <ul class="nav nav-tabs">
-                                            <li class="active"><a data-toggle="tab" href="#buying">Buying</a></li>
-                                            <li><a data-toggle="tab" href="#selling">Selling</a></li>
-                                        </ul>
-                                        <div class="search">
-                                            <div class="searchIcon">
-                                                <img src="<?php echo base_url(); ?>assets_d//search.png" alt="search">
-                                            </div>
-                                            <input type="text" name="">
-                                        </div>
-                                        <div class="sortWrapper">
-                                            <ul>
-                                                <li>
-                                                    <div class="selectOrder">
-                                                        <select name="sort" id="sort">
-                                                            <option value="volvo">Alphabetical</option>
-                                                        </select>
-                                                    </div>
-                                                </li>
-                                                <li class="grid active">
-                                                    <img src="<?php echo base_url(); ?>assets_d//grid-box-blue.svg" alt="Grid">
-                                                </li>
-                                                <li class="list">
-                                                    <img src="<?php echo base_url(); ?>assets_d//list-box-grey.svg" alt="List">
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                    <div class="tab-content">
-                                        <div id="buying" class="tab-pane fade in active">
-                                            <div class="tabPaneWrapper market">
-                                                <div class="left">
-                                                    <div class="userBoxWrapper gridview">
-                                                        <div class="card">
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Book Name</h5>
-                                                                        <div class="courseStructure">
-                                                                            <p>Author name</p>
-                                                                            <div class="statusourse price">
-                                                                                ₹ 600.00
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="my-rating-4" data-rating="3.5">
-                                                                            <span>1200</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Book Name</h5>
-                                                                        <div class="courseStructure">
-                                                                            <p>Author name</p>
-                                                                            <div class="statusourse price">
-                                                                                ₹ 600.00
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="my-rating-4" data-rating="3.5">
-                                                                            <span>1200</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="right">
-                                                    <div class="boxwrap completeProfile">
-                                                        <h6>Complete your profile</h6>
-                                                        <p>Current status of your profile</p>
-                                                        <div class="profileProgressBar">
-                                                            <div class="progress mx-auto" data-value="40">
-															          <span class="progress-left">
-															             <span class="progress-bar border-primary"></span>
-															          </span>
-															          <span class="progress-right">
-															              <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-															          </span>
-                                                                <div class="profileUser">
-                                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                </div>
-                                                            </div>
-                                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                                <div class="complete">Complete</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="completeNow">
-                                                            <button type="button" class="event_action">Complete Now</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="boxwrap">
-                                                        <h6>Latest Updates</h6>
-                                                        <p>Peers</p>
-                                                        <div class="listBox">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p>Institutions</p>
-                                                        <div class="listBox last">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div id="selling" class="tab-pane fade in">
-                                            <div class="tabPaneWrapper market">
-                                                <div class="left">
-                                                    <div class="userBoxWrapper gridview">
-                                                        <div class="card">
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//detail1.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Book Name</h5>
-                                                                        <div class="courseStructure">
-                                                                            <p>Author name</p>
-                                                                            <div class="statusourse price">
-                                                                                ₹ 600.00
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="my-rating-4" data-rating="3.5">
-                                                                            <span>1200</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="card">
-                                                            <div class="profileSection">
-                                                                <div class="profileViewToggleWrapper">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/detail1.jpg">
-                                                                    </figure>
-                                                                    <div class="changeView">
-                                                                        <h5>Book Name</h5>
-                                                                        <div class="courseStructure">
-                                                                            <p>Author name</p>
-                                                                            <div class="statusourse price">
-                                                                                ₹ 600.00
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="my-rating-4" data-rating="3.5">
-                                                                            <span>1200</span>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="right">
-                                                    <div class="boxwrap completeProfile">
-                                                        <h6>Complete your profile</h6>
-                                                        <p>Current status of your profile</p>
-                                                        <div class="profileProgressBar">
-                                                            <div class="progress mx-auto" data-value="40">
-															          <span class="progress-left">
-															             <span class="progress-bar border-primary"></span>
-															          </span>
-															          <span class="progress-right">
-															              <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-															          </span>
-                                                                <div class="profileUser">
-                                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                                </div>
-                                                            </div>
-                                                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                                <div class="complete">Complete</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="completeNow">
-                                                            <button type="button" class="event_action">Complete Now</button>
-                                                        </div>
-                                                    </div>
-                                                    <div class="boxwrap">
-                                                        <h6>Latest Updates</h6>
-                                                        <p>Peers</p>
-                                                        <div class="listBox">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <p>Institutions</p>
-                                                        <div class="listBox last">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <?php include_once 'profile-section.php'?>
+                        <?php include_once 'peer-section.php'?>
+                        <?php include_once 'institution-section.php'?>
+                        <?php include_once 'course-section.php'?>
+                        <?php include_once 'professor-section.php'?>
+                        <?php include_once 'master-section.php'?>
+
+
                     </div>
                 </div>
             </section>
