@@ -371,13 +371,16 @@ class Studyset extends CI_Controller {
         $action_id = $this->db->insert_id();
 
         $userdata = $this->session->userdata('user_data');
-        $notification = "<b>".$userdata['username']."</b> has shared a studyset with you.";
+        $user_detail    = $this->db->get_where('user', array('id' => $user_id))->row_array();
+        $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
+        $notification = "<b>".$full_name."</b> has shared a studyset with you.";
 
         $insertArr = array(
             'user_id'       => $peer_id,
             'notification'  => $notification,
             'action_type'   => 3, // for share
             'action_id'     => $action_id,
+            'img_user_id'   => $user_id,
             'status'        => 1,
             'created_at'    => date('Y-m-d H:i:s')
 

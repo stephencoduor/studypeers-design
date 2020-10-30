@@ -2836,6 +2836,7 @@ class Account extends CI_Controller {
                                     'notification'       => $notification,
                                     'action_type'   => 1,
                                     'action_id'     => $action_id,
+                                    'img_user_id'   => $user_id,
                                     'status'        => 1,
                                     'created_at'    => date('Y-m-d H:i:s')
 
@@ -2886,6 +2887,7 @@ class Account extends CI_Controller {
                                         'notification'  => $notification,
                                         'action_type'   => 2,
                                         'action_id'     => 0,
+                                        'img_user_id'   => $detail['peer_id'],
                                         'status'        => 1,
                                         'created_at'    => date('Y-m-d H:i:s')
 
@@ -3016,6 +3018,7 @@ class Account extends CI_Controller {
                                 'notification'  => $notification,
                                 'action_type'   => 3, // for share
                                 'action_id'     => $action_id,
+                                'img_user_id'   => $user_id,
                                 'status'        => 1,
                                 'created_at'    => date('Y-m-d H:i:s')
 
@@ -3129,6 +3132,7 @@ class Account extends CI_Controller {
                                 'notification'  => $notification,
                                 'action_type'   => 4, // for invite
                                 'action_id'     => $action_id,
+                                'img_user_id'   => $user_id,
                                 'status'        => 1,
                                 'created_at'    => date('Y-m-d H:i:s')
 
