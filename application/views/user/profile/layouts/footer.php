@@ -63,7 +63,7 @@
                 }
             }
         });
-        var counter = 1;
+        var counter = 1, video_counter = 1;
         var image_types = ['jpg','png','jpeg'];
         var video_types = ['mp4','3gp','mpeg4','mkv','mov'];
         function readURL(input) {
@@ -108,14 +108,14 @@
                             var image = canvas.toDataURL();
                             var success = image.length > 100000;
                             if (success) {
-                                var html_image = '<div class="col-md-4"><div class="uloadedImage"><figure><img src="'+image+'" alt="image" id="image'+counter+'"></figure>'+
-                                    '<div class="close"><img src="'+base_url+'assets_d/images/close-pink.svg" class="remove_image" id="remove_image_'+counter+'" alt="close"></div></div></div>';
+                                var html_image = '<div class="col-md-4" id="delete_video_'+video_counter+'"><div class="uloadedImage"><figure><img src="'+image+'" alt="image" id="image'+video_counter+'"></figure>'+
+                                    '<div class="close"><img src="'+base_url+'assets_d/images/close-pink.svg" class="remove_video" id="remove_video_'+video_counter+'" alt="close"></div></div></div>';
                                 console.log(html_image);
                                 $('#image_row').append(html_image);
                                 // URL.revokeObjectURL(url);
-                                $('#imgInp'+counter).hide();
-                                $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp'+counter+'" name="file[]" multiple="multiple">');
-                                counter++;
+                                $('#imgInp'+video_counter).hide();
+                                $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp'+video_counter+'" name="file[]" multiple="multiple">');
+                                video_counter++;
                             }
                             return success;
                         };
@@ -140,6 +140,13 @@
             counter--;
         });
 
+        $(document).on('click','.remove_video', function(){
+            var video_id = $(this).attr('id').split('_');
+            $('#delete_video_'+video_id[2]).remove();
+            $('#imgInp'+video_id[2]).val('');
+            video_counter--;
+        });
+
         $(document).on('change','.image_upload_button', function(){
             readURL(this);
         });
@@ -156,6 +163,7 @@
         function getoutput(inputfile) {
             var file_ext = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "pdf"];
             var extension = inputfile.value.split('.')[1];
+            console.log(extension);
             var filename = getFile(inputfile.value);
             // Check if a value exists in the file_ext array
             if(file_ext.indexOf(extension) == -1){
@@ -163,7 +171,7 @@
                 console.log($("#fileToUpload")[0].files[document_counter]);
             }
             var img_icon = '';
-            if(extension == 'docx'){
+            if(extension == 'docx' || extension == 'doc'){
                 img_icon = '<img src="'+base_url+'/assets_d/images/document.svg'+'" />';
             }else if(extension == 'pdf'){
                 img_icon = '<img src="'+base_url+'/assets_d/images/pdf.svg'+'" />';
@@ -174,7 +182,7 @@
             }else if(extension == 'txt'){
                 img_icon = '<img src="'+base_url+'/assets_d/images/txt.svg'+'" />';
             }else{
-                alert('Invalid file format ! Please choose any other file . Supported file formats are docx/pdf/ppt/xls/txt');
+                alert('Invalid file format ! Please choose any other file . Supported file formats are doc/docx/pdf/ppt/xls/txt');
                 return false;
             }
             $('#all_documents').append('<div class="filename" id="document_file_'+document_counter+'">'+img_icon+'</div><div class="closeBtn" id="remove_document_'+document_counter+'"><img src="'+base_url+'/assets_d/images/close-pink.svg'+'" alt="close"/> '+filename+'.'+extension+'</div>');
@@ -186,6 +194,7 @@
             close_id = close_id.split('_');
             $('#document_file_'+close_id[2]).remove();
             $('#remove_document_'+close_id[2]).remove();
+            document_counter--;
         });
 
         $(document).on( 'click', '#save_post_from_ajax', function () {
@@ -213,9 +222,9 @@
                 processData: false,
                 success: function (result) {
                     console.log(result);
-                    if(result == true){
+                   /* if(result == true){
                         window.location.href = base_url+'Profile/redirect_page?status='+result;
-                    }
+                    }*/
                     $('.loading').hide();
                 }
             });

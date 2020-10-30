@@ -1,6 +1,6 @@
 <?php
 $userdata = $this->session->userdata('user_data');
-$user_detail    = $this->db->get_where('user', array('id' => $userdata['user_id']))->row_array();
+$user_detail    = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID WHERE a.id = ".$userdata['user_id'])->row_array();
 $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 ?>
 <div class="modal fade" id="createPost" role="dialog">
@@ -20,7 +20,23 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         <div class="postHeaderWrapper">
                             <div class="username">
                                 <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="user Post">
+                                    <?php if(empty($user_detail['image'])) {
+
+                                        if(strcasecmp($user_detail['gender'] , 'male') == 0){
+                                            ?>
+                                            <img src="<?php echo base_url(); ?>uploads/user-male.png" alt="User Post">
+                                        <?php } else {
+                                            ?>
+                                            <img src="<?php echo base_url(); ?>uploads/user-female.png" alt="User Post">
+                                            <?php
+                                        }
+                                    }
+                                    else{
+                                        ?>
+                                        <img id="currentProfilePicture" src="<?php echo base_url(); ?>uploads/users/<?php echo $user_detail['image']; ?>" alt="User Post" />
+                                        <?php
+                                    }
+                                    ?>
                                 </figure>
                                 <div class="right">
                                     <span><?php echo ucwords($full_name); ?></span>
@@ -75,12 +91,6 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 <div id="all_documents">
 
                                 </div>
-                                <!--<div class="filename">
-                                    <img src="<?php /*echo base_url(); */?>assets_d/images/pdf.svg" alt="pdf">  document name.ext
-                                </div>
-                                <div class="closeBtn">
-                                    <img src="<?php /*echo base_url(); */?>assets_d/images/close-pink.svg" alt="close">
-                                </div>-->
                             </div>
                             <div class="shareOptionBox">
                                 <ul>

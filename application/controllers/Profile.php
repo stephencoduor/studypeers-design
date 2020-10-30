@@ -27,6 +27,8 @@ class Profile extends CI_Controller {
 			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
 		}
 
+		$peers = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 1 OR a.status = 2)')->result_array();
+		$data['peers'] = $peers;
 		$data['all_posts'] = $all_posts_array;
 		$data['index_menu']  = 'timeline';
 		$data['title']  = 'Timeline | Studypeers';
@@ -74,7 +76,7 @@ class Profile extends CI_Controller {
 		$count_uploaded_files = count( $_FILES['file']['name'] );
 		$files = $_FILES;
 		$image_extensions_arr = array('jpg', 'image/jpg', 'image/jpeg', 'image/png' , 'jpeg' , 'png' );
-		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg");
+		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg","video/mp4", "video/mov", "video/avi", "video/3gp", "video/mpeg");
 		$document_extension_arr = array('pdf', 'xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt');
 		$maxsize = 5242880; // 5MB
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
@@ -92,16 +94,17 @@ class Profile extends CI_Controller {
 						'error'    => $files['file']['error'][$i],
 						'size'     => $files['file']['size'][$i]
 				];
+				$original_name = $files['file']['name'][$i];
 				if($this->upload->do_upload('userfile'))
 				{
 					$data = $this->upload->data();
 					$F[] = $data["file_name"];
 					if(in_array($file_type, $image_extensions_arr)){
-						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
+						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
 					}elseif(in_array($file_type, $video_extensions_arr)){
-						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
+						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
 					}else{
-						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
+						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
 					}
 				}
 		}
