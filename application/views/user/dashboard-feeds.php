@@ -198,7 +198,17 @@
 											+5
 										</li>
 									</ul>
-									<button type="button" class="event_action"> Attend Event</button>
+									<?php if($event_detail['created_by'] != $user_id) { 
+										$this->db->order_by('share_master.id', 'desc');
+				                        $shared = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array(); 
+				                    ?>
+										<button type="button" class="event_action attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?= $event_detail['id']; ?>"> <span id="attend_text_<?= $event_detail['id']; ?>"><?php if($shared['status'] == 2){
+		                                       echo 'Unattend';
+		                                    } else {
+		                                        echo 'Attend';
+		                                    } ?></span> Event
+		                                </button>
+									<?php } ?>
 								</div>
 								<div class="socialStatus">
 									<div class="leftStatus">
