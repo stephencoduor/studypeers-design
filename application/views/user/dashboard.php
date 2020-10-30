@@ -10082,6 +10082,30 @@
 						</div>
 					</div>
 				</section>
+
+<div class="modal fade" id="confirmationModalAttend" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                   <h4>Confirmation</h4>
+                   <div class="row">
+                     <h6 class="modalText" id="confirmationModalAttendHead">Are you sure to attend this Event !</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group button">
+                                <input type="hidden" name="attend_event_id" id="attend_event_id">
+                                <button data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                <button type="button" class="filterBtn" onclick="attendEvent()">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
 				
 
 <script type="text/javascript">
@@ -10098,6 +10122,35 @@
 			}
 		});
 	});
+
+	$(document).on('click','.attendEvent',function(){
+        var event_id = $(this).data('id');
+        var txt = $('#attend_text_'+event_id).html(); 
+        $("#attend_event_id").val(event_id);
+        if(txt == 'Attend'){
+            $('#confirmationModalAttendHead').html('Do you want to attend this Event !');
+        } else {
+            $('#confirmationModalAttendHead').html("Are you sure you don't want to attend this Event !");
+        }
+
+    });
+
+    function attendEvent(){
+        var id = $("#attend_event_id").val();
+        var txt = $('#attend_text_'+id).html();
+        if(id != ''){
+            $.ajax({
+                url : '<?php echo base_url();?>account/attendSharedEvent',
+                type : 'post',
+                data : {"id" : id, "type" : txt},
+                success:function(result) {
+                    $("#confirmationModalAttend").modal('hide');
+                    $("#attend_text_"+id).html(result);
+                    $("#attend_event_id").val('');
+                }   
+            })
+        }
+    }
 
 
 	function loadDashboardFeeds(count){ 
