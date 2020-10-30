@@ -2836,6 +2836,7 @@ class Account extends CI_Controller {
                                     'notification'       => $notification,
                                     'action_type'   => 1,
                                     'action_id'     => $action_id,
+                                    'img_user_id'   => $user_id,
                                     'status'        => 1,
                                     'created_at'    => date('Y-m-d H:i:s')
 
@@ -2886,6 +2887,7 @@ class Account extends CI_Controller {
                                         'notification'  => $notification,
                                         'action_type'   => 2,
                                         'action_id'     => 0,
+                                        'img_user_id'   => $detail['peer_id'],
                                         'status'        => 1,
                                         'created_at'    => date('Y-m-d H:i:s')
 
@@ -3016,6 +3018,7 @@ class Account extends CI_Controller {
                                 'notification'  => $notification,
                                 'action_type'   => 3, // for share
                                 'action_id'     => $action_id,
+                                'img_user_id'   => $user_id,
                                 'status'        => 1,
                                 'created_at'    => date('Y-m-d H:i:s')
 
@@ -3129,6 +3132,7 @@ class Account extends CI_Controller {
                                 'notification'  => $notification,
                                 'action_type'   => 4, // for invite
                                 'action_id'     => $action_id,
+                                'img_user_id'   => $user_id,
                                 'status'        => 1,
                                 'created_at'    => date('Y-m-d H:i:s')
 
@@ -3163,14 +3167,28 @@ class Account extends CI_Controller {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $this->db->order_by('share_master.id', 'desc');
         $get_last_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('reference_id' => $id, 'reference' => 'event', 'peer_id' => $user_id))->row_array(); 
-        if($type == 'Attend'){
-            $this->db->where(array('id' => $get_last_shared['id']));
-            $result = $this->db->update('share_master',array('status' => 2));
-            echo 'Unattend';die;
+        if(!empty($get_last_shared)){
+            if($type == 'Attend'){
+                $this->db->where(array('id' => $get_last_shared['id']));
+                $result = $this->db->update('share_master',array('status' => 2));
+                echo 'Unattend';die;
+            } else {
+                $this->db->where(array('id' => $get_last_shared['id']));
+                $result = $this->db->update('share_master',array('status' => 3));
+                echo 'Attend';die;
+            }
         } else {
-            $this->db->where(array('id' => $get_last_shared['id']));
-            $result = $this->db->update('share_master',array('status' => 3));
-            echo 'Attend';die;
+            $event = $this->db->get_where($this->db->dbprefix('event_master'), array('id' => $id))->row_array(); 
+            $insertArr = array( 'reference' => 'event',
+                            'reference_id' => $id,
+                            'user_id' => $event['created_by'],
+                            'peer_id' => $user_id,
+                            'status' => '2',
+                            'created_at' => date("Y-m-d H:i:s")
+                            
+                        );
+            $this->db->insert('share_master', $insertArr);
+            echo 'Unattend';die;
         }
     }
 
