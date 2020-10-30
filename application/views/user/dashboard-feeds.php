@@ -5,10 +5,17 @@
 				$event_detail = $this->db->get_where('event_master', array('id' => $value['reference_id']))->row_array();
 				if($user_id == $event_detail['created_by']) {
 					$chk_view = 1;
+					$txt = "added a new event";
 				} else {
 					$chk_if_shared = $this->db->get_where('share_master', array('reference_id' => $value['reference_id'], 'reference' => 'event', 'peer_id' => $user_id, 'status!=' => 4))->row_array();
 					if(($event_detail['privacy'] == 1) || !empty($chk_if_shared)){
 						$chk_view = 1;
+					}
+
+					if(($event_detail['privacy'] == 1)) {
+						$txt = "added a new event";
+					} else {
+						$txt = "has invited you to an event";
 					}
 				}
 				if($chk_view == 1) {
@@ -128,7 +135,7 @@
 											?>
 												<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> 
 											<?php } ?>
-											<span>posted in university</span> <img src="<?php echo base_url(); ?>assets_d/images/university.svg"> <?php echo $university['SchoolName']; ?></figcaption>
+											<span><?php echo $txt; ?></span> </figcaption>
 											<div class="badgeList">
 												<ul>
 													<li class="badge badge1">
@@ -635,7 +642,7 @@
 									$user_info = $this->db->get_where('user_info', array('userID' => $studyset_detail['user_id']))->row_array();
 									$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> </figcaption>
+									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>added a new studyset</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">
@@ -654,7 +661,7 @@
 							</div>
 							<div class="timeline"><?php echo time_ago_in_php($studyset_detail['created_on']); ?></div>
 						</div>
-						<h4><?php echo $studyset_detail['name']; ?></h4>
+						<h4><a href="<?php echo base_url(); ?>studyset/details/<?php $studyset_detail['study_set_id']; ?>"><?php echo $studyset_detail['name']; ?></a></h4>
 						
 						<div class="imgWrapper type1">
 							<figure>
@@ -1115,7 +1122,7 @@
 					$user_info = $this->db->get_where('user_info', array('userID' => $document_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> </figcaption>
+									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>added a new document</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">
@@ -1578,7 +1585,7 @@
 					$user_info = $this->db->get_where('user_info', array('userID' => $question_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 														<div class="right">
-															<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> </figcaption>
+															<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>has posted a question</span></figcaption>
 															<div class="badgeList">
 																<ul>
 																	<li class="badge badge1">
@@ -1647,7 +1654,7 @@
 									</a>
 								</li>
 								<li>
-									<a>
+									<a href="<?php echo base_url(); ?>account/questionDetail/<?php echo base64_encode($question_detail['id']); ?>">
 										<img src="<?php echo base_url(); ?>assets_d/images/answers-grey.svg" alt="Down Arrow">
 										<span>Answer</span>
 									</a>
