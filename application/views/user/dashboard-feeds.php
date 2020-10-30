@@ -177,27 +177,44 @@
 										</figure>
 									</div>
 								<?php } ?>
+								
 								<div class="eventActionWrap">
-									<ul>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li class="more">
-											+5
-										</li>
-									</ul>
+									<?php $peer_attending = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'status' => 2))->result_array(); ?>
+									<?php  if(!empty($peer_attending)) {  ?>
+										<ul>
+											<?php if(!empty($peer_attending[0])) { ?>
+												<li>
+													<img src="<?php echo userImage($peer_attending[0]['peer_id']); ?>" alt="user">
+												</li>
+											<?php } ?>
+											<?php if(!empty($peer_attending[1])) { ?>
+												<li>
+													<img src="<?php echo userImage($peer_attending[1]['peer_id']); ?>" alt="user">
+												</li>
+											<?php } ?>
+											<?php if(!empty($peer_attending[2])) { ?>
+												<li>
+													<img src="<?php echo userImage($peer_attending[2]['peer_id']); ?>" alt="user">
+												</li>
+											<?php } ?>
+											<?php if(!empty($peer_attending[3])) { ?>
+												<li>
+													<img src="<?php echo userImage($peer_attending[3]['peer_id']); ?>" alt="user">
+												</li>
+											<?php } ?>
+											<?php if(!empty($peer_attending[4])) { ?>
+												<li>
+													<img src="<?php echo userImage($peer_attending[4]['peer_id']); ?>" alt="user">
+												</li>
+											<?php } $count = count($peer_attending);  ?>
+											<?php if($count > 5) { ?>
+												<li class="more">
+													+<?= $count - 5; ?>
+												</li>
+											<?php } ?>
+										</ul>
+
+									<?php } ?>
 									<?php if($event_detail['created_by'] != $user_id) { 
 										$this->db->order_by('share_master.id', 'desc');
 				                        $shared = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array(); 
