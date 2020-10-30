@@ -3188,7 +3188,7 @@ class Account extends CI_Controller {
                             
                         );
             $this->db->insert('share_master', $insertArr);
-            'Unattend';die;
+            echo 'Unattend';die;
         }
     }
 
