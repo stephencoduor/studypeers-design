@@ -44,7 +44,7 @@
 								<div class="userWrap">
 									<div class="user-name">
 										<figure>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+											<img src="<?php echo userImage($result['created_by']); ?>" alt="user">
 										</figure>
 										<figcaption><?php echo $result['nickname']; ?></figcaption>
 									</div>
