@@ -2079,7 +2079,12 @@ class Account extends CI_Controller {
                       <span aria-hidden="true">&times;</span>
                     </button></div>';
             $this->session->set_flashdata('flash_message', $message);
-            redirect(site_url('account/events'), 'refresh');
+            if($this->input->post('dashboard')){
+                redirect(site_url('account/dashboard'), 'refresh');
+            } else {
+                redirect(site_url('account/events'), 'refresh');
+            }
+            
         }
     }
 
@@ -2395,7 +2400,11 @@ class Account extends CI_Controller {
                       <span aria-hidden="true">&times;</span>
                     </button></div>';
             $this->session->set_flashdata('flash_message', $message);
-            redirect(site_url('account/events'), 'refresh');
+            if($this->input->post('dashboard')){
+                redirect(site_url('account/dashboard'), 'refresh');
+            } else {
+                redirect(site_url('account/events'), 'refresh');
+            }
         }
     }
 
