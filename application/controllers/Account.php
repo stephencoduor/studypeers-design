@@ -442,7 +442,7 @@ class Account extends CI_Controller {
                                                     $html.='<div class="userWrap eventBox">
                                                             <div class="user-name">
                                                                 <figure>
-                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                    <img src="'.userImage($value['created_by']).'" alt="user">
                                                                 </figure>
                                                                 <figcaption>'.$user['nickname'].'</figcaption>
 
@@ -563,19 +563,19 @@ class Account extends CI_Controller {
                                                             <ul>';
                                                             if(!empty($peer_attending[0])) {
                                                                 $html.= '<li>
-                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                    <img src="'.userImage($peer_attending[0]['peer_id']).'" alt="user">
                                                                 </li>';
                                                             }
 
                                                             if(!empty($peer_attending[1])) {
                                                                 $html.= '<li>
-                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                    <img src="'.userImage($peer_attending[1]['peer_id']).'" alt="user">
                                                                 </li>';
                                                             }
 
                                                             if(!empty($peer_attending[2])) {
                                                                 $html.= '<li>
-                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                    <img src="'.userImage($peer_attending[2]['peer_id']).'" alt="user">
                                                                 </li>';
                                                             }
                                                                 
@@ -677,7 +677,7 @@ class Account extends CI_Controller {
                                                 $html.='<div class="userWrap eventBox">
                                                         <div class="user-name">
                                                             <figure>
-                                                                <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                <img src="'.userImage($value['created_by']).'" alt="user">
                                                             </figure>
                                                             <figcaption>'.$user['nickname'].'</figcaption>
 
@@ -791,19 +791,19 @@ class Account extends CI_Controller {
                                                             <ul>';
                                                             if(!empty($peer_attending[0])) {
                                                                 $html.= '<li>
-                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                    <img src="'.userImage($peer_attending[0]['peer_id']).'" alt="user">
                                                                 </li>';
                                                             }
 
                                                             if(!empty($peer_attending[1])) {
                                                                 $html.= '<li>
-                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                    <img src="'.userImage($peer_attending[1]['peer_id']).'" alt="user">
                                                                 </li>';
                                                             }
 
                                                             if(!empty($peer_attending[2])) {
                                                                 $html.= '<li>
-                                                                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                                                                    <img src="'.userImage($peer_attending[2]['peer_id']).'" alt="user">
                                                                 </li>';
                                                             }
                                                                 
@@ -2268,7 +2268,7 @@ class Account extends CI_Controller {
         <div class="userWrap">
             <div class="user-name">
                 <figure>
-                    <img src="'.base_url().'assets_d/images/user.jpg" alt="user">
+                    <img src="'.userImage($res['created_by']).'" alt="user">
                 </figure>
                 <figcaption>'.$user['nickname'].'</figcaption>
             </div>  
@@ -2430,7 +2430,7 @@ class Account extends CI_Controller {
 
             $html = '<div class="chatMsg" id="chatMsg_'.$comment_id.'">
                         <figure>
-                            <img src="'.base_url().'assets_d/images/ct_user.jpg" alt="User">
+                            <img src="'.userImage($user_id).'" alt="User">
                         </figure>
                         <figcaption>
                             <span class="name"> '.$user_info['nickname'].'</span>
@@ -2453,7 +2453,7 @@ class Account extends CI_Controller {
                         </div>
                         <div class="replyBox" id="replyBox_'.$comment_id.'">
                             <figure>
-                                <img src="'.base_url().'assets_d/images/ct_user.jpg" alt="User">
+                                <img src="'.userImage($user_id).'" alt="User">
                             </figure>
                             <div class="replyuser">
                                 <input type="text" id="input_reply_'.$comment_id.'" placeholder="Write a Reply..." onkeypress="postReply(event,'.$comment_id.', this.value)">
@@ -2487,7 +2487,7 @@ class Account extends CI_Controller {
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $html = '<div class="userReplyBox"><figure>
-                        <img src="'.base_url().'assets_d/images/ct_user.jpg" alt="User">
+                        <img src="'.userImage($user_id).'" alt="User">
                     </figure>
                     <figcaption>
                         <span class="name">'.$user_info['nickname'].'</span>
@@ -2573,7 +2573,7 @@ class Account extends CI_Controller {
 
             $html = '<div class="chatMsg" id="chatMsg_'.$comment_id.'">
                         <figure>
-                            <img src="'.base_url().'assets_d/images/ct_user.jpg" alt="User">
+                            <img src="'.userImage($user_id).'" alt="User">
                         </figure>
                         <figcaption>
                             <span class="name"> '.$user_info['nickname'].'</span>
@@ -2596,7 +2596,7 @@ class Account extends CI_Controller {
                         </div>
                         <div class="replyBox" id="replyBox_'.$comment_id.'">
                             <figure>
-                                <img src="'.base_url().'assets_d/images/ct_user.jpg" alt="User">
+                                <img src="'.userImage($user_id).'" alt="User">
                             </figure>
                             <div class="replyuser">
                                 <input type="text" id="input_reply_'.$comment_id.'" placeholder="Write a Reply..." onkeypress="postReply(event,'.$comment_id.', this.value)">
