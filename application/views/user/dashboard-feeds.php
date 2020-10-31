@@ -164,7 +164,23 @@
 											<img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
 										</figure>
 										<figcaption><?php echo date('d M, Y', strtotime($event_detail['start_date'])); ?></figcaption>
-										<a>Add to Calendar</a>
+										<?php if($event_detail['created_by'] == $user_id) {
+												if($event_detail['addedToCalender'] == 0) { 
+										?>
+												<a href="#" class="addEvents" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#addEventModal">Add to Calendar</a>
+										<?php } else { ?>
+												<a href="#" class="removeEvent" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">Remove From Calendar</a>
+										<?php } } else { 
+													$this->db->order_by('share_master.id', 'desc');
+                                                    $shared = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array();
+                                                if($shared['schedule_master_id'] == 0) { ?>
+                                                	<a href="#" class="addEvents" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#addEventModal">Add to Calendar</a>
+
+                                                <?php } else { ?>
+                                                	<a href="#" class="removeEvent" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">Remove From Calendar</a>
+                                                <?php }
+
+										}?>
 									</div>
 								</div>
 								<p class="feedPostMessages">
@@ -181,38 +197,40 @@
 								<div class="eventActionWrap">
 									<?php $peer_attending = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'status' => 2))->result_array(); ?>
 									<?php  if(!empty($peer_attending)) {  ?>
-										<ul>
-											<?php if(!empty($peer_attending[0])) { ?>
-												<li>
-													<img src="<?php echo userImage($peer_attending[0]['peer_id']); ?>" alt="user">
-												</li>
-											<?php } ?>
-											<?php if(!empty($peer_attending[1])) { ?>
-												<li>
-													<img src="<?php echo userImage($peer_attending[1]['peer_id']); ?>" alt="user">
-												</li>
-											<?php } ?>
-											<?php if(!empty($peer_attending[2])) { ?>
-												<li>
-													<img src="<?php echo userImage($peer_attending[2]['peer_id']); ?>" alt="user">
-												</li>
-											<?php } ?>
-											<?php if(!empty($peer_attending[3])) { ?>
-												<li>
-													<img src="<?php echo userImage($peer_attending[3]['peer_id']); ?>" alt="user">
-												</li>
-											<?php } ?>
-											<?php if(!empty($peer_attending[4])) { ?>
-												<li>
-													<img src="<?php echo userImage($peer_attending[4]['peer_id']); ?>" alt="user">
-												</li>
-											<?php } $count = count($peer_attending);  ?>
-											<?php if($count > 5) { ?>
-												<li class="more">
-													+<?= $count - 5; ?>
-												</li>
-											<?php } ?>
-										</ul>
+										<div class="userIcoList peersModalAttending" data-id="<?= $event_detail['id'] ?>" data-toggle="modal" data-target="#peersModalAttending" style="margin-right: 15%;">
+											<ul>
+												<?php if(!empty($peer_attending[0])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[0]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } ?>
+												<?php if(!empty($peer_attending[1])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[1]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } ?>
+												<?php if(!empty($peer_attending[2])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[2]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } ?>
+												<?php if(!empty($peer_attending[3])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[3]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } ?>
+												<?php if(!empty($peer_attending[4])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[4]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } $count = count($peer_attending);  ?>
+												<?php if($count > 5) { ?>
+													<li class="more">
+														+<?= $count - 5; ?>
+													</li>
+												<?php } ?>
+											</ul>
+										</div>
 
 									<?php } ?>
 									<?php if($event_detail['created_by'] != $user_id) { 
