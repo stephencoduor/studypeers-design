@@ -27,7 +27,9 @@ class Profile extends CI_Controller {
 			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
 		}
 
-		$peers = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 1 OR a.status = 2)')->result_array();
+		$peer_to = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 1 OR a.status = 2) ORDER BY a.id DESC')->result_array();
+		$peer_from = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 1 OR a.status = 2) ORDER BY a.id DESC')->result_array();
+		$peers = array_merge($peer_to, $peer_from);
 		$data['peers'] = $peers;
 		$data['all_posts'] = $all_posts_array;
 		$data['index_menu']  = 'timeline';
