@@ -227,4 +227,13 @@ class Profile extends CI_Controller {
 		$this->load->view('user/profile/layouts/footer');
 	}
 
+	public function updateGeneralInfo(){
+		try {
+
+		} catch (\Exception $e) {
+
+		}
+	}
+
+
 }
