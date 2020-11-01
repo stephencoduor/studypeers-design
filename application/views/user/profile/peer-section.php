@@ -3,8 +3,8 @@
         <div class="tabularLiist">
             <div class="TabsAndSortWrapper">
                 <ul class="nav nav-tabs">
-                    <li class="active"><a data-toggle="tab" href="#myconnections">My Connections</a></li>
-                    <li><a data-toggle="tab" href="#requests">Requests</a></li>
+                    <li class="active"><a data-toggle="tab" href="#myconnections">My Connections (<?php echo $connections; ?>)</a></li>
+                    <li><a data-toggle="tab" href="#requests">Requests (<?php echo $requests; ?>)</a></li>
                 </ul>
                 <div class="search">
                     <div class="searchIcon">
@@ -59,7 +59,7 @@
                                                     <a href="javascript:void(0)">Following</a>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0)">Peer</a>
+                                                    <a href="javascript:void(0)">Unfriend</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -178,7 +178,7 @@
                                 <?php if(isset($peers)){ foreach($peers as $peer){ if($peer['status'] == 1){?>
                                     <div class="card">
                                         <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                            <img src="<?php echo base_url(); ?>assets_d/<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
+                                            <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
                                         </div>
                                         <div class="profileSection">
                                             <div class="profileViewToggleWrapper">
@@ -196,10 +196,10 @@
                                             <div class="followOptionsWrapper">
                                                 <ul>
                                                     <li class="follower">
-                                                        <a href="javascript:void(0)">Follow</a>
+                                                        <a href="javascript:void(0)">Accept</a>
                                                     </li>
                                                     <li class="follower">
-                                                        <a href="javascript:void(0)">Accept</a>
+                                                        <a href="javascript:void(0)">Reject</a>
                                                     </li>
                                                 </ul>
                                             </div>

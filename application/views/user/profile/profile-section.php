@@ -5,36 +5,82 @@
                 <div class="createBox">
                     <div class="postWrapper">
                         <h5>General Information</h5>
-                        <div class="editWrapper" data-dismiss="modal" data-toggle="modal" href="#deleteUser">
+                        <div class="editWrapper">
                             <img src="<?php echo base_url(); ?>assets_d/images/edit.svg" alt="edit"> Edit Profile
                         </div>
                     </div>
                     <div class="infoWrapper">
-                        <div class="list">
-                            <div class="heading">First Name</div>
-                            <div class="value"><?php echo $user_detail['first_name'];?></div>
+                        <div class="profile_general_info">
+                            <div class="list">
+                                <div class="heading">First Name</div>
+                                <div class="value"><?php echo $user_detail['first_name'];?></div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Last Name</div>
+                                <div class="value"><?php echo $user_detail['last_name'];?></div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Gender</div>
+                                <div class="value"><?php echo $user_detail['gender'];?></div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Date of Birth</div>
+                                <div class="value"><?php echo $user_detail['dob'];?></div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Country</div>
+                                <div class="value"><?php echo $user_detail['country'];?></div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Field of interest</div>
+                                <div class="value"><?php echo $user_detail['field_interest'];?></div>
+                            </div>
                         </div>
-                        <div class="list">
-                            <div class="heading">Last Name</div>
-                            <div class="value"><?php echo $user_detail['last_name'];?></div>
-                        </div>
-                        <div class="list">
-                            <div class="heading">Gender</div>
-                            <div class="value"><?php echo $user_detail['gender'];?></div>
-                        </div>
-                        <div class="list">
-                            <div class="heading">Date of Birth</div>
-                            <div class="value"><?php echo $user_detail['dob'];?></div>
-                        </div>
-                        <div class="list">
-                            <div class="heading">Country</div>
-                            <div class="value"><?php echo $user_detail['country'];?></div>
-                        </div>
-                        <div class="list">
-                            <div class="heading">Field of interest</div>
-                            <div class="value"><?php echo $user_detail['field_interest'];?></div>
+                        <div class="edit_general_info">
+                            <div class="list">
+                                <div class="heading">First Name</div>
+                                <div class="value">
+                                    <input type="text" class="form-control" name="first_name" />
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Last Name</div>
+                                <div class="value">
+                                    <input type="text" class="form-control" name="last_name" />
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Gender</div>
+                                <div class="value">
+                                    <select class="form-control" name="gender" >
+                                         <option value="male">Male</option>
+                                         <option value="female">Female</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Date Of Birth</div>
+                                <div class="value">
+
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Country</div>
+                                <div class="value">
+
+                                </div>
+                            </div>
+                            <div class="list">
+                                <div class="heading">Field of interest</div>
+                                <div class="value">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
+
+
+
                     <div class="useraboutWrapper">
                         <h5>About Me</h5>
                         <p><?php echo $user_detail['about'];?></p>

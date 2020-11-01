@@ -32,6 +32,8 @@ class Profile extends CI_Controller {
 		$peers = array_merge($peer_to, $peer_from);
 		$data['peers'] = $peers;
 		$data['all_posts'] = $all_posts_array;
+		$data['connections'] = count($peer_to);
+		$data['requests'] = count($peer_from);
 		$data['index_menu']  = 'timeline';
 		$data['title']  = 'Timeline | Studypeers';
 		$this->load->view('user/profile/layouts/header', $data);
