@@ -681,5 +681,48 @@
 
 
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#edit_profile').on("click", function(){
+            $('.profile_general_info').hide();
+            $('.edit_general_info').show();
+            $(this).hide();
+        });
+
+        $('#show_general_info').on("click", function(){
+            $('.profile_general_info').show();
+            $('.edit_general_info').hide();
+            $('#edit_profile').show();
+
+        });
+
+        $('#edit_about').on("click", function(){
+           $('#about_info').hide();
+           $('#edit_about_info').show();
+            $(this).hide();
+        });
+
+        $('#show_about_info').on("click", function(){
+            $('#about_info').show();
+            $('#edit_about_info').hide();
+            $('#edit_about').show();
+        });
+
+        $('#edit_social').on("click", function(){
+            $('#social_info').hide();
+            $('#edit_social_info').show();
+            $(this).hide();
+        });
+
+        $('#show_social_div').on("click", function(){
+            $('#edit_social_info').hide();
+            $('#social_info').show();
+            $('#edit_social').show();
+        });
+
+    });
+</script>
+
+
 </body>
 </html>

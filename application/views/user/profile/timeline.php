@@ -119,7 +119,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 <ul class="nav nav-tabs">
                                     <li class="active"><a data-toggle="tab" href="#feed">Feeds</a></li>
                                     <li><a data-toggle="tab" href="#profile">Profile</a></li>
-                                    <li><a data-toggle="tab" href="#peers">Peers <div>(<?php echo count($peers) ?>)</div></a></li>
+                                    <li><a data-toggle="tab" href="#peers">Peers</a></li>
                                     <li><a data-toggle="tab" href="#institution">Institutions</a></li>
                                     <li><a data-toggle="tab" href="#courses">Courses</a></li>
                                     <li><a data-toggle="tab" href="#professor">Professor</a></li>
