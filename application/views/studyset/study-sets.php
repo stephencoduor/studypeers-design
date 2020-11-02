@@ -570,7 +570,7 @@ foreach ($getdata as $key => $value) {
 			data : {"study_set_id" : share_studyset, 'peer_id': peer_id},
 			success:function(result) {
 				$('#share_count_'+share_studyset).html(result);
-				$("#action_"+peer_id).html('<button type="button" class="like">shared</button>');
+				$("#action_"+peer_id).html('<button type="button" class="like" onclick="unshareToPeer('+peer_id+')>shared</button>');
 				// $("#share_studyset").val('');
 			}
 		})
@@ -585,7 +585,7 @@ foreach ($getdata as $key => $value) {
 			data : {"study_set_id" : share_studyset, 'peer_id': peer_id},
 			success:function(result) {
 				$('#share_count_'+share_studyset).html(result);
-				$("#action_"+peer_id).html('<button type="button" class="like">share</button>');
+				$("#action_"+peer_id).html('<button type="button" class="like" onclick="shareToPeer('+peer_id+')">share</button>');
 				// $("#share_studyset").val('');
 			}
 		})
