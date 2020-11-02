@@ -260,17 +260,10 @@ foreach ($getdata as $key => $value) {
 							<div class="userWrap study-sets">
 								<div class="user-name">
 									<figure>
-										<?php
-										if($studyset['image']) {
-											?>
-											<img src="<?php echo base_url();?>uploads/user_identification/<?php echo $studyset['user_image'];?>" alt="User">
-											<?php
-										} else {
-											?>
-											<img src="<?php echo base_url();?>assets_d/images/user.jpg" alt="user">
-											<?php
-										}
-										?>
+										
+											<img src="<?php echo userImage($studyset['user_id']); ?>" alt="user">
+											
+										
 
 									</figure>
 									<figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption>
