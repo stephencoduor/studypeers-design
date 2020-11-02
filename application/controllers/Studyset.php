@@ -416,18 +416,22 @@ class Studyset extends CI_Controller {
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array();
             }
             $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'studyset', 'reference_id' => $study_set_id, 'status' => 1))->row_array();
-            if(empty($chk_if_shared)){
-                $html.= '<section class="list"><section class="left">
-                            <figure>
-                                <img src="'.userImage($peer['userID']).'" alt="user">
-                            </figure>
-                            <figcaption>'.$peer['nickname'].'</figcaption>
-                        </section>
-                        <section class="action" id="action_'.$peer['userID'].'">
-                            <button type="button" class="like" onclick="shareToPeer('.$peer['userID'].')">share</button>
-                        </section>
-                    </section>';
-            }
+            
+            $html.= '<section class="list"><section class="left">
+                        <figure>
+                            <img src="'.userImage($peer['userID']).'" alt="user">
+                        </figure>
+                        <figcaption>'.$peer['nickname'].'</figcaption>
+                    </section>
+                    <section class="action" id="action_'.$peer['userID'].'">';
+                    if(empty($chk_if_shared)){
+                        $html.= '<button type="button" class="like" onclick="shareToPeer('.$peer['userID'].')">share</button>';
+                    } else {
+                        $html.= '<button type="button" class="like" onclick="unshareToPeer('.$peer['userID'].')">shared</button>';
+                    }
+                    $html.= '</section>
+                </section>';
+            
         }
         echo $html;die;
     }
