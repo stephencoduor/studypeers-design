@@ -419,7 +419,7 @@ class Studyset extends CI_Controller {
             if(empty($chk_if_shared)){
                 $html.= '<section class="list"><section class="left">
                             <figure>
-                                <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                                <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
                             <figcaption>'.$peer['nickname'].'</figcaption>
                         </section>
