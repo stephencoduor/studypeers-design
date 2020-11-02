@@ -400,6 +400,29 @@ class Studyset extends CI_Controller {
         echo $det['share_count'];die;
     }
 
+
+    public function unshareToPeer(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $study_set_id = $this->input->post('study_set_id');
+        $peer_id = $this->input->post('peer_id');
+
+        $this->db->order_by('share_master.id', 'desc');
+        $action_detail    = $this->db->get_where('share_master', array('reference' => 'studyset', 'reference_id' => $study_set_id, 'user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
+
+        $this->db->where(array('id' => $action_detail['id']));
+        $this->db->delete('share_master');
+
+
+        $this->db->where(array('action_id' => $action_detail['id']));
+        $this->db->delete('notification_master');
+
+        $this->studyset_model->updateShareCountDec($study_set_id);
+
+        $det = $this->db->get_where($this->db->dbprefix('study_sets'), array('study_set_id'=>$study_set_id))->row_array();
+
+        echo $det['share_count'];die;
+    }
+
     public function getPeerToShare(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $study_set_id = $this->input->post('study_set_id');

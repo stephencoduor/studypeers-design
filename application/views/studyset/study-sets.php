@@ -576,6 +576,21 @@ foreach ($getdata as $key => $value) {
 		})
 	}
 
+	function unshareToPeer(peer_id){
+		var share_studyset = $('#share_studyset').val();
+
+		$.ajax({
+			url : '<?php echo base_url();?>studyset/unshareToPeer',
+			type : 'post',
+			data : {"study_set_id" : share_studyset, 'peer_id': peer_id},
+			success:function(result) {
+				$('#share_count_'+share_studyset).html(result);
+				$("#action_"+peer_id).html('<button type="button" class="like">share</button>');
+				// $("#share_studyset").val('');
+			}
+		})
+	}
+
 	function checkSearch()
 	{
 		$('.error').html('');
