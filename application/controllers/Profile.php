@@ -276,5 +276,22 @@ class Profile extends CI_Controller {
 
 	}
 
+	public function searchFriends()
+	{
+		$userdata = $this->session->userdata('user_data');
+		$search_term = $this->input->get('keyword');
+		$is_friend = $this->input->get('is_friend');
+		if($is_friend){
+			$status = 2;
+		}else{
+			$status = 1;
+		}
+		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' ORDER BY a.id DESC');
+		$result = $query->result_array();
+		echo json_encode($result);
+	}
+
+
+
 
 }
