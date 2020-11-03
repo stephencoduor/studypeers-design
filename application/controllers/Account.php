@@ -3073,7 +3073,7 @@ class Account extends CI_Controller {
             if(empty($chk_if_shared)){
                 $html.= '<section class="list"><section class="left">
                             <figure>
-                                <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                                <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
                             <figcaption>'.$peer['nickname'].'</figcaption>
                         </section>
@@ -3103,7 +3103,7 @@ class Account extends CI_Controller {
             
                 $html.= '<section class="list"><section class="left">
                             <figure>
-                                <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                                <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
                             <figcaption>'.$peer['nickname'].'</figcaption>
                         </section>
@@ -3225,7 +3225,7 @@ class Account extends CI_Controller {
                 $html .= '<li id="notification_'.$value['id'].'" class="'.$cls.'">
                     <a>
                         <figure>
-                            <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                            <img src="'.userImage($value['img_user_id']).'" alt="user">
                         </figure>
                         <div class="right">
                             <h6>'.$value['notification'].'</h6>
@@ -3248,7 +3248,7 @@ class Account extends CI_Controller {
                 $html .= '<li id="notification_'.$value['id'].'" class="'.$cls.'">
                     <a>
                         <figure>
-                            <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                            <img src="'.userImage($value['img_user_id']).'" alt="user">
                         </figure>
                         <div class="right">
                             <h6>'.$value['notification'].'</h6>
@@ -3269,7 +3269,7 @@ class Account extends CI_Controller {
                 $html .= '<li id="notification_'.$value['id'].'" class="'.$cls.'">
                     <a>
                         <figure>
-                            <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                            <img src="'.userImage($value['img_user_id']).'" alt="user">
                         </figure>
                         <div class="right">
                             <h6>'.$value['notification'].'</h6>
@@ -3286,7 +3286,7 @@ class Account extends CI_Controller {
                 $html .= '<li id="notification_'.$value['id'].'" class="'.$cls.'">
                     <a>
                         <figure>
-                            <img src="'.base_url().'assets_d/images/user2.jpg" alt="user">
+                            <img src="'.userImage($value['img_user_id']).'" alt="user">
                         </figure>
                         <div class="right">
                             <h6>'.$value['notification'].'</h6>

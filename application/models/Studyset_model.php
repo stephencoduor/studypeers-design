@@ -379,6 +379,13 @@ class Studyset_model extends CI_Model {
         return 1;
     }
 
+    function updateShareCountDec($study_set_id){
+        $this->db->where('study_set_id',$study_set_id);
+        $this->db->set('share_count', 'share_count-1', FALSE);
+        $update_like = $this->db->update('study_sets');
+        return 1;
+    }
+
      function isLikedByUser($user_id,$study_set_id) {
 
         $this->db->select('like_id');
