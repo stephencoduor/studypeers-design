@@ -64,19 +64,19 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                             <li> <span>25</span> Followers</li>
                                             <li> <span>25</span> Following</li>
                                             <li>
-                                                <a href="javascript:void(0)">
+                                                <a href="<?php echo $user_detail['fb_link']; ?>">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg" alt="facebook">
                                                 </a>
 
-                                                <a href="javascript:void(0)">
+                                                <a href="<?php echo $user_detail['twitter_link']; ?>">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/twitter.svg" alt="twitter">
                                                 </a>
 
-                                                <a href="javascript:void(0)">
+                                                <a href="<?php echo $user_detail['linkedIn_link']; ?>">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/linkedin.svg" alt="linkedin">
                                                 </a>
 
-                                                <a href="javascript:void(0)">
+                                                <a href="<?php echo $user_detail['youtube_link']; ?>">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/youtube.svg" alt="youtube">
                                                 </a>
                                             </li>
@@ -963,8 +963,24 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                     <div class="boxwrap completeProfile">
                                                         <h6>Complete your profile</h6>
                                                         <p>Current status of your profile</p>
+
+                                                        <?php
+                                                            $complete_per = 40;
+                                                            if(isset($user_detail['about']) && isset($user_detail['high_School'])){
+                                                                $complete_per += 30;
+                                                            }
+                                                            if(isset($user_detail['fb_link'])){
+                                                                $complete_per += 30;
+                                                            }
+
+
+
+                                                        ?>
+
+
+
                                                         <div class="profileProgressBar">
-                                                            <div class="progress mx-auto" data-value='40'>
+                                                            <div class="progress mx-auto" data-value='<?php echo $complete_per ; ?>'>
 															          <span class="progress-left">
 															             <span class="progress-bar border-primary"></span>
 															          </span>
@@ -988,17 +1004,21 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                         <img src="<?php echo base_url()."uploads/users/".$user_detail['image']; ?>" alt="user">
                                                                         <?php
                                                                     }?>
-                                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
                                                                 </div>
                                                             </div>
                                                             <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                                <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
+                                                                <div class="h2 font-weight-bold"><?php echo $complete_per ; ?><sup class="small">%</sup></div>
                                                                 <div class="complete">Complete</div>
                                                             </div>
                                                         </div>
-                                                        <div class="completeNow">
-                                                            <button type="button" class="event_action">Complete Now</button>
-                                                        </div>
+                                                        <?php if($complete_per != 100){
+                                                            ?>
+                                                            <div class="completeNow">
+                                                                <button type="button" class="event_action">Complete Now</button>
+                                                            </div>
+    <?php
+                                                        }?>
+
                                                     </div>
                                                     <div class="boxwrap">
                                                         <h6>Latest Updates</h6>
@@ -1040,39 +1060,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                         </div>
                                                         <p>Institutions</p>
                                                         <div class="listBox last">
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
-                                                            <div class="listWrap">
-                                                                <div class="left">
-                                                                    <figure>
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                                                    </figure>
-                                                                </div>
-                                                                <div class="right">
-                                                                    <h6>Jane Doe</h6>
-                                                                    <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                                </div>
-                                                            </div>
+                                                            <div class="listWrap">Nothing to show</div>
                                                         </div>
                                                     </div>
                                                 </div>
