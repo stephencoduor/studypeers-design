@@ -35,7 +35,7 @@
                     <div class="tabPaneWrapper">
                         <div class="left">
                             <div class="userBoxWrapper gridview friend_container">
-                                <?php if(isset($peers)){ foreach($peers as $peer){ if($peer['status'] == 2){?>
+                                <?php if(isset($all_connections)){ foreach($all_connections as $peer){ ?>
                                 <div class="card">
                                     <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
                                         <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
@@ -65,7 +65,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <?php } } }?>
+                                <?php  } }?>
                             </div>
                         </div>
                         <?php include 'right-side-content.php' ?>
@@ -75,7 +75,7 @@
                     <div class="tabPaneWrapper">
                         <div class="left">
                             <div class="userBoxWrapper gridview request_container">
-                                <?php if(isset($peers)){ foreach($peers as $peer){ if($peer['status'] == 1){?>
+                                <?php if(isset($all_requests)){ foreach($all_requests as $peer){ ?>
                                     <div class="card">
                                         <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
                                             <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
@@ -105,7 +105,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                <?php } } }?>
+                                <?php } } ?>
                             </div>
                         </div>
                         <?php include 'right-side-content.php' ?>
