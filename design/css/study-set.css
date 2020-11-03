@@ -2608,7 +2608,8 @@ textarea{
     }
 }
 .vertical-menu {
-  width: 200px; /* Set a width if you like */
+  width: 200px;
+  text: bold; /* Set a width if you like */
 }
 
 .vertical-menu a {
@@ -2624,12 +2625,21 @@ textarea{
   color: black;
 }
 
-.vertical-menu a.active {
-  color: green;
-}
+
 .sp {
   word-spacing: 10px;
   margin-bottom:20px;
 }
 .centered { margin: 0 auto; width: 88%; }
 .centered p {text-align:justify;}
+
+
+.faq_menu a:hover {
+background-color: #FFFFFF;
+  
+  color: #FF0066;
+}
+.faq_menu a:active {
+  
+  color: #FF0066;
+}
