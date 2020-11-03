@@ -260,17 +260,10 @@ foreach ($getdata as $key => $value) {
 							<div class="userWrap study-sets">
 								<div class="user-name">
 									<figure>
-										<?php
-										if($studyset['image']) {
-											?>
-											<img src="<?php echo base_url();?>uploads/user_identification/<?php echo $studyset['user_image'];?>" alt="User">
-											<?php
-										} else {
-											?>
-											<img src="<?php echo base_url();?>assets_d/images/user.jpg" alt="user">
-											<?php
-										}
-										?>
+										
+											<img src="<?php echo userImage($studyset['user_id']); ?>" alt="user">
+											
+										
 
 									</figure>
 									<figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption>
@@ -577,7 +570,22 @@ foreach ($getdata as $key => $value) {
 			data : {"study_set_id" : share_studyset, 'peer_id': peer_id},
 			success:function(result) {
 				$('#share_count_'+share_studyset).html(result);
-				$("#action_"+peer_id).html('<button type="button" class="like">shared</button>');
+				$("#action_"+peer_id).html('<button type="button" class="like" onclick="unshareToPeer('+peer_id+')">shared</button>');
+				// $("#share_studyset").val('');
+			}
+		})
+	}
+
+	function unshareToPeer(peer_id){
+		var share_studyset = $('#share_studyset').val();
+
+		$.ajax({
+			url : '<?php echo base_url();?>studyset/unshareToPeer',
+			type : 'post',
+			data : {"study_set_id" : share_studyset, 'peer_id': peer_id},
+			success:function(result) {
+				$('#share_count_'+share_studyset).html(result);
+				$("#action_"+peer_id).html('<button type="button" class="like" onclick="shareToPeer('+peer_id+')">share</button>');
 				// $("#share_studyset").val('');
 			}
 		})

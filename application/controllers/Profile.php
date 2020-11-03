@@ -32,6 +32,8 @@ class Profile extends CI_Controller {
 		$peers = array_merge($peer_to, $peer_from);
 		$data['peers'] = $peers;
 		$data['all_posts'] = $all_posts_array;
+		$data['connections'] = count($peer_to);
+		$data['requests'] = count($peer_from);
 		$data['index_menu']  = 'timeline';
 		$data['title']  = 'Timeline | Studypeers';
 		$this->load->view('user/profile/layouts/header', $data);
@@ -224,5 +226,54 @@ class Profile extends CI_Controller {
 		$this->load->view('user/profile/friends-timeline');
 		$this->load->view('user/profile/layouts/footer');
 	}
+
+	public function updateGeneralInfo(){
+		try {
+			$userdata = $this->session->userdata('user_data');
+			$users_array = [
+				'first_name' => $this->input->post('first_name'),
+				'last_name' => $this->input->post('last_name')
+				];
+			$user_info_array = [
+				'gender' => $this->input->post('gender'),
+				'dob' => $this->input->post('dob'),
+				'field_interest' => $this->input->post('field_of_interest')
+			];
+
+			$this->db->where(array('id' => $userdata['user_id']));
+			$this->db->update('user',$users_array);
+			$this->db->where(array('userID' => $userdata['user_id']));
+			$this->db->update('user_info',$user_info_array);
+			redirect(site_url('Profile/timeline'));
+
+		} catch (\Exception $e) {
+			var_dump($e->getMessage());
+		}
+	}
+
+
+	public function updateAboutInfo(){
+		$userdata = $this->session->userdata['user_data'];
+		$this->db->where(array('id' => $userdata['user_id']));
+		$this->db->update('user',array('about' => $this->input->post('about_me')));
+		$this->db->where(array('userID' => $userdata['user_id']));
+		$this->db->update('user_info',array('high_school' => $this->input->post('high_school') , 'high_school_course_name' => $this->input->post('course_name'), 'high_school_course_year' => $this->input->post('course_year')));
+		redirect(site_url('Profile/timeline'));
+	}
+
+
+	public function updateSocialInfo(){
+		$userdata = $this->session->userdata['user_data'];
+		$this->db->where(array('userID' => $userdata['user_id']));
+		$this->db->update('user_info',array(
+			'fb_link' => $this->input->post('facebook_link') ,
+			'twitter_link' => $this->input->post('twitter_link'),
+			'linkedIn_link' => $this->input->post('linkedin_link'),
+			'youtube_link' => $this->input->post('youtube_link')
+		));
+		redirect(site_url('Profile/timeline'));
+
+	}
+
 
 }

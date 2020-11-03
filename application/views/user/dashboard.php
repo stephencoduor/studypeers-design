@@ -155,15 +155,18 @@
 															$chk_if_sent = $this->db->get_where('peer_master', array('peer_id' => $value['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
 														?>
 															<div class="peerList" id="peerList<?= $value['id']; ?>">
-																<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['id'] ?>">
+
 
 																<figure>
-																	<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
+																	<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['id'] ?>">
+																		<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
+																	</a>
 																	<div class="removePeer">
 																		<img src="<?php echo base_url(); ?>assets_d/images/close-peer.svg" alt="Close Peer Suggestions">
 																	</div>
 																</figure>
-																<h4><?php echo $value['nickname']; ?></h4>
+																<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['id'] ?>">
+																	<h4><?php echo $value['nickname']; ?></h4>
 																</a>
 
 																<p>0 mutual peers</p>

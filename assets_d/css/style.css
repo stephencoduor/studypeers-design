@@ -1039,3 +1039,8 @@ a.filterBtn,a.sortMenu{
   margin-right: 5px;
   float: left;
 }
+
+
+figure img {
+    height: 100%;
+}
