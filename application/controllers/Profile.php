@@ -237,6 +237,7 @@ class Profile extends CI_Controller {
 			$user_info_array = [
 				'gender' => $this->input->post('gender'),
 				'dob' => $this->input->post('dob'),
+				'country' => $this->input->post('country'),
 				'field_interest' => $this->input->post('field_of_interest')
 			];
 
