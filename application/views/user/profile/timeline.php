@@ -15,7 +15,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                     <img id="currentCoverPicture" src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="Profile Banner">
                                 <?php } else {
                                    ?>
-                                    <img id="currentCoverPicture" src="<?php echo base_url()."uploads/users/cover/".$user_detail['cover_image']; ?>" alt="Profile Banner">
+                                    <img id="currentCoverPicture" src="<?php echo base_url()."uploads/users/cover/".@$user_detail['cover_image']; ?>" alt="Profile Banner">
                                     <?php
                                 }?>
                             </figure>
@@ -58,21 +58,21 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 </div>
                                 <div class="profileDtl">
                                     <div class="profileInformation">
-                                        <h4 class="name"><?php echo $full_name; ?></h4>
-                                        <h6 class="username"><?php echo $user_detail['username'];?>  <span>Joined on <?php echo date("F jS, Y", strtotime($user_detail['added_on'])); ?></span></h6>
+                                        <h4 class="name"><?php echo @$full_name; ?></h4>
+                                        <h6 class="username"><?php echo @$user_detail['username'];?>  <span>Joined on <?php echo date("F jS, Y", strtotime($user_detail['added_on'])); ?></span></h6>
                                         <ul class="socialstatus">
                                             <li> <span>25</span> Followers</li>
                                             <li> <span>25</span> Following</li>
                                             <li>
-                                                <a href="<?php echo $user_detail['fb_link']; ?>">
+                                                <a href="<?php echo @$user_detail['fb_link']; ?>">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg" alt="facebook">
                                                 </a>
 
-                                                <a href="<?php echo $user_detail['twitter_link']; ?>">
+                                                <a href="<?php echo @$user_detail['twitter_link']; ?>">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/twitter.svg" alt="twitter">
                                                 </a>
 
-                                                <a href="<?php echo $user_detail['linkedIn_link']; ?>">
+                                                <a href="<?php echo @$user_detail['linkedIn_link']; ?>">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/linkedin.svg" alt="linkedin">
                                                 </a>
 
@@ -86,7 +86,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                         </div>
                                     </div>
                                     <div class="shareProfile" id="copyShareLink" >
-                                        <input type="hidden" id="sharelink" value="<?php echo base_url().'Profile/shareLink/'.$userdata['username']; ?>" />
+                                        <input type="hidden" id="sharelink" value="<?php echo base_url().'Profile/shareLink/'.@$userdata['username']; ?>" />
                                         <img src="<?php echo base_url(); ?>assets_d/images/share-profile1.svg" alt="share profile"> Share Profile
                                     </div>
                                 <!--    <div class="shareMenu shareOption">
@@ -331,7 +331,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 
                                                                             </figure>
                                                                             <div class="right">
-                                                                                <figcaption><?php echo $full_name; ?></figcaption>
+                                                                                <figcaption><?php echo @$full_name; ?></figcaption>
                                                                                 <div class="badgeList">
                                                                                     <ul>
                                                                                         <li class="badge badge1">
@@ -355,16 +355,16 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                             </div>
                                                                         </div>
                                                                         <div
-                                                                            class="timeline"><?php echo time_elapsed_string($posts['post_details']->created_at); ?></div>
+                                                                            class="timeline"><?php echo time_elapsed_string(@$posts['post_details']->created_at); ?></div>
                                                                     </div>
                                                                     <p class="feedPostMessages">
-                                                                        <?php echo $posts['post_details']->post_content_html; ?>
+                                                                        <?php echo @$posts['post_details']->post_content_html; ?>
                                                                     </p>
-                                                                    <?php if (count($posts['post_images']) > 0) {
+                                                                    <?php if (count(@$posts['post_images']) > 0) {
                                                                         ?>
                                                                         <div class="imgWrapper type2">
                                                                             <?php
-                                                                            foreach ($posts['post_images'] as $image) {
+                                                                            foreach (@$posts['post_images'] as $image) {
                                                                                 if (!empty($image)) {
                                                                                     ?>
                                                                                     <figure>
@@ -383,13 +383,13 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                         ?>
                                                                         <div class="imgWrapper type2">
                                                                             <?php
-                                                                            foreach ($posts['post_videos'] as $videos) {
-                                                                                if (!empty($videos)) {
+                                                                            foreach (@$posts['post_videos'] as $videos) {
+                                                                                if (!empty(@$videos)) {
                                                                                     ?>
                                                                                     <video id="myVideo" width="320"
                                                                                            height="240" controls>
                                                                                         <source
-                                                                                            src="<?php echo base_url() . $videos['video_path'] ?>"
+                                                                                            src="<?php echo base_url() . @$videos['video_path'] ?>"
                                                                                             alt="Video">
                                                                                     </video>
                                                                                     <?php
@@ -403,7 +403,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                         foreach ($posts['post_documents'] as $document) {
                                                                             ?>
                                                                             <p class="feedPostMessages">
-                                                                                <a href="<?php echo base_url() . $document['document_path']; ?>"><?php echo $document['original_name'] ?></a>
+                                                                                <a href="<?php echo base_url() . @$document['document_path']; ?>"><?php echo $document['original_name'] ?></a>
                                                                             </p>
                                                                             <?php
                                                                         }
@@ -418,7 +418,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                                         <div class="progress">
                                                                                             <div class="progressValues">
                                                                                                 <div class="leftValue">
-                                                                                                    <?php echo $options['options']; ?>
+                                                                                                    <?php echo @$options['options']; ?>
                                                                                                 </div>
                                                                                                 <div
                                                                                                     class="rightValues">
@@ -486,7 +486,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                                 <img
                                                                                     src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
                                                                                     alt="Like">
-                                                                                <span><?php echo $posts['post_details']->likes_count; ?></span>
+                                                                                <span><?php echo @$posts['post_details']->likes_count; ?></span>
                                                                             </a>
                                                                         </div>
                                                                         <div class="rightStatus">
@@ -496,7 +496,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                                         <img
                                                                                             src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
                                                                                             alt="comment">
-                                                                                        <span><?php echo $posts['post_details']->comments_count; ?></span>
+                                                                                        <span><?php echo @$posts['post_details']->comments_count; ?></span>
                                                                                     </a>
                                                                                 </li>
                                                                                 <li>
@@ -504,7 +504,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                                         <img
                                                                                             src="<?php echo base_url(); ?>assets_d/images/share-grey.svg"
                                                                                             alt="Share">
-                                                                                        <span><?php echo $posts['post_details']->share_count; ?></span>
+                                                                                        <span><?php echo @$posts['post_details']->share_count; ?></span>
                                                                                     </a>
                                                                                 </li>
                                                                             </ul>
