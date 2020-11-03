@@ -1,7 +1,12 @@
 <?php
 $userdata = $this->session->userdata('user_data');
-$user_detail    = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID WHERE a.id = ".$userdata['user_id'])->row_array();
+$user_detail    = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = ".$userdata['user_id'])->row_array();
 $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
+
+/*echo '<pre/>';
+print_r($user_detail);
+die;*/
+
 ?>
 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
 
@@ -320,7 +325,15 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                                                         <div class="user-name">
                                                                             <figure>
                                                                                 <?php if (empty($user_detail['image'])) {
-                                                                                    echo '<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">';
+                                                                                    if(strcasecmp($user_detail['gender'] , 'male') == 0){
+                                                                                        ?>
+                                                                                        <img src="<?php echo base_url(); ?>uploads/user-male.png" alt="User">
+                                                                                    <?php } else {
+                                                                                        ?>
+                                                                                        <img src="<?php echo base_url(); ?>uploads/user-female.png" alt="User">
+                                                                                        <?php
+                                                                                    }
+
                                                                                 } else {
                                                                                     ?>
                                                                                     <img

@@ -25,7 +25,7 @@
                             </div>
                             <div class="list">
                                 <div class="heading">Date of Birth</div>
-                                <div class="value"><?php echo $user_detail['dob'];?></div>
+                                <div class="value"><?php echo date('d-m-Y', strtotime($user_detail['dob']));?></div>
                             </div>
                             <div class="list">
                                 <div class="heading">Country</div>
@@ -66,12 +66,12 @@
                                         <input class="form-control date" style="height: 48px;margin-bottom: 20px;" type="text" placeholder="Date Of Birth" onfocus="(this.type='date')" onblur="(this.type='text')" title="Date of Birth" name="dob"  id="dob" value="<?= $user_detail['dob']; ?>" required>
                                     </div>
                                 </div>
-                               <!-- <div class="list">
+                                <div class="list">
                                     <div class="heading">Country</div>
                                     <div class="value">
-
+                                        <input class="form-control" style="height: 48px;margin-bottom: 20px;" type="text" placeholder="Country" name="country" value="<?= $user_detail['country']; ?>" >
                                     </div>
-                                </div>-->
+                                </div>
                                 <div class="list">
                                     <div class="heading">Field of interest</div>
                                     <div class="value">
@@ -112,9 +112,9 @@
                             <div class="list">
                                 <div class="heading">Graduation</div>
                                 <div class="value">
-                                    <span>College name</span>
+                                    <span><?php echo @$user_detail['SchoolName'] ?></span>
                                     <br>
-                                    Course (yyyy-yyyy)
+                                    <?php echo @$user_detail['name'] ?>  <?php echo @$user_detail['session'] ?>
                                 </div>
                             </div>
                         </div>
@@ -172,7 +172,9 @@
                                 <div class="list">
                                     <div class="heading">Graduation</div>
                                     <div class="value">
-
+                                        <span><?php echo @$user_detail['SchoolName'] ?></span>
+                                        <br>
+                                        <?php echo @$user_detail['name'] ?>  <?php echo @$user_detail['session'] ?>
                                     </div>
                                 </div>
                                 <div class="list">
@@ -191,22 +193,22 @@
                         <div class="row" id="social_info">
                             <ul>
                                 <li>
-                                    <a href="<?php echo @$user_detail['fb_link']; ?>">
+                                    <a href="<?php echo @$user_detail['fb_link']; ?>" target="_blank">
                                         <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg" alt="facebook">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo @$user_detail['twitter_link']; ?>">
+                                    <a href="<?php echo @$user_detail['twitter_link']; ?>" target="_blank">
                                         <img src="<?php echo base_url(); ?>assets_d/images/twitter.svg" alt="twitter">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo @$user_detail['linkedIn_link']; ?>">
+                                    <a href="<?php echo @$user_detail['linkedIn_link']; ?>" target="_blank">
                                         <img src="<?php echo base_url(); ?>assets_d/images/linkedin.svg" alt="linkedin">
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="<?php echo @$user_detail['youtube_link']; ?>">
+                                    <a href="<?php echo @$user_detail['youtube_link']; ?>" target="_blank">
                                         <img src="<?php echo base_url(); ?>assets_d/images/youtube.svg" alt="youtube">
                                     </a>
                                 </li>
@@ -217,25 +219,25 @@
                             <div class="list">
                                 <div class="heading">Facebook Link</div>
                                 <div class="value">
-                                    <input type="text" class="form-control" name="facebook_link" />
+                                    <input type="text" class="form-control" name="facebook_link" value="<?php echo @$user_detail['fb_link']; ?>"/>
                                 </div>
                             </div>
                             <div class="list">
                                 <div class="heading">Twitter Link</div>
                                 <div class="value">
-                                    <input type="text" class="form-control" name="twitter_link" />
+                                    <input type="text" class="form-control" name="twitter_link" value="<?php echo @$user_detail['twitter_link']; ?>"/>
                                 </div>
                             </div>
                             <div class="list">
                                 <div class="heading">LinkedIn Link</div>
                                 <div class="value">
-                                    <input type="text" class="form-control" name="linkedin_link" />
+                                    <input type="text" class="form-control" name="linkedin_link" value="<?php echo @$user_detail['linkedIn_link']; ?>"/>
                                 </div>
                             </div>
                             <div class="list">
                                 <div class="heading">Youtube Link</div>
                                 <div class="value">
-                                    <input type="text" class="form-control" name="youtube_link" />
+                                    <input type="text" class="form-control" name="youtube_link" value="<?php echo @$user_detail['youtube_link']; ?>"/>
                                 </div>
                             </div>
                             <div class="row">

@@ -222,9 +222,9 @@
                 processData: false,
                 success: function (result) {
                     console.log(result);
-                   /* if(result == true){
+                    if(result == true){
                         window.location.href = base_url+'Profile/redirect_page?status='+result;
-                    }*/
+                    }
                     $('.loading').hide();
                 }
             });
