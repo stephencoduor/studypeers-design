@@ -722,49 +722,93 @@
         $('#search_friend').on("keyup", function(e){
             var search_value = $(this).val();var html = '';
             var friend = selection_type;   // 0 => requests , 1 => friend
-            var response = search_friend(search_value, friend);
             if(friend == 0){
                 $('.friend_container').empty();
             }else{
                 $('.request_container').empty();
             }
-            for(var i = 0; i < response.length; i++){
-                if(friend == 0){
-                    html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
-                            '<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div><div class="profileSection">'+
-                            '<div class="profileViewToggleWrapper"><figure>'+
-                            '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
-                            '</figure><div class="changeView"><h5>'+response[i].first_name+' '+response[i].last_name+'</h5><p>location name</p>'+
-                            '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">'+
-                            '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>'+
-                            '</div></div></div>';
-                    $('.friend_container').append(html);
-                }else{
-                    html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
-                        +'<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div>'+
-                        +'<div class="profileSection"><div class="profileViewToggleWrapper"><figure>'+
-                        +'<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
-                        +'</figure><div class="changeView"><h5>'+response[i].first_name+' '+response[i].last_name+'</h5><p>location name</p>'+
-                        +'<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>'+
-                        +'<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>'+
-                        +'</li><li><a href="javascript:void(0)">Unfriend</a></li></ul></div></div></div>';
-                    $('.request_container').append(html);
+
+            $.ajax({
+                url : '<?php echo base_url();?>Profile/searchFriends?keyword='+search_value+"&is_friend="+friend,
+                type : 'get',
+                success:function(result) {
+                    /* for(var i = 0; i < result.length; i++){
+                         if(friend == 0){
+                             html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
+                             '<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div><div class="profileSection">'+
+                             '<div class="profileViewToggleWrapper"><figure>'+
+                             '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
+                             '</figure><div class="changeView"><h5>'+result[i].first_name+' '+result[i].last_name+'</h5><p>location name</p>'+
+                             '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">'+
+                             '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>'+
+                             '</div></div></div>';
+                             $('.friend_container').append(html);
+                         }else{
+                             html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
+                             +'<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div>'+
+                             +'<div class="profileSection"><div class="profileViewToggleWrapper"><figure>'+
+                             +'<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
+                             +'</figure><div class="changeView"><h5>'+result[i].first_name+' '+result[i].last_name+'</h5><p>location name</p>'+
+                             +'<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>'+
+                             +'<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>'+
+                             +'</li><li><a href="javascript:void(0)">Unfriend</a></li></ul></div></div></div>';
+                             $('.request_container').append(html);
+                         }
+                     }*/
                 }
-            }
+            });
+
         });
 
 
-        function search_friend(keyword, friend)
-        {
+        function acceptRequest(action_id, id){
+            console.log(action_id);
+            console.log(id);
             $.ajax({
-                url : '<?php echo base_url();?>Profile/searchFriends?keyword='+keyword+"&is_friend="+friend,
-                type : 'get',
+                url : '<?php echo base_url();?>account/acceptRequest',
+                type : 'post',
+                data : {"id" : id, "action_id": action_id},
                 success:function(result) {
-                   return result;
+                    $('#action_'+action_id).remove();
                 }
-            });
+            })
         }
 
+        function rejectRequest(id, action_id){
+            $.ajax({
+                url : '<?php echo base_url();?>account/rejectRequest',
+                type : 'post',
+                data : {"id" : id, "action_id": action_id},
+                success:function(result) {
+                    $('#notification_'+id).addClass('read');
+                    $('#accept_'+id).hide();
+                    $('#reject_'+id).hide();
+                }
+            })
+        }
+
+        $('.follow_now').on("click", function(){
+            var peer_id = $(this).attr('data-id');
+            var status = $(this).attr('id');
+            var url = '<?php echo base_url();?>Profile/follow';
+            if(status == 0){
+                url = '<?php echo base_url();?>Profile/unfollow';
+            }
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_id" : peer_id},
+                success:function(result) {
+                    if(status == 1){
+                        $('.follow_'+peer_id).html('Unfollow');
+                        $('.follow_'+peer_id).attr('id',0);
+                    }else{
+                        $('.follow_'+peer_id).html('Follow');
+                        $('.follow_'+peer_id).attr('id',1);
+                    }
+                }
+            })
+        });
 
 
 

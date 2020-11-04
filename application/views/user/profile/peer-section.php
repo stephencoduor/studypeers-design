@@ -43,7 +43,7 @@
                                     <div class="profileSection">
                                         <div class="profileViewToggleWrapper">
                                             <figure>
-                                                <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
+                                                <img src="<?php echo userImage($peer['id']); ?>">
                                             </figure>
                                             <div class="changeView">
                                                 <h5><?php echo $peer['first_name'].' '.$peer['last_name']; ?></h5>
@@ -55,8 +55,22 @@
                                         </div>
                                         <div class="followOptionsWrapper">
                                             <ul>
-                                                <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                    <a href="javascript:void(0)">Follow</a>
+                                                <li>
+                                                    <?php $follow_status = checkFollowStatus($this->session->get_userdata()['user_data']['user_id'] , $peer['id']);
+                                                        if($follow_status){
+                                                            ?>
+                                                            <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="0">UnFollow</a>
+
+
+                                                            <?php
+                                                        }else{
+                                                            ?>
+                                                            <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="1">Follow</a>
+
+                                                            <?php
+                                                        }
+
+                                                    ?>
                                                 </li>
                                                 <li>
                                                     <a href="javascript:void(0)">Unfriend</a>
@@ -76,14 +90,14 @@
                         <div class="left">
                             <div class="userBoxWrapper gridview request_container">
                                 <?php if(isset($all_requests)){ foreach($all_requests as $peer){ ?>
-                                    <div class="card">
+                                    <div class="card" id="action_<?php echo $peer['action_id']; ?>">
                                         <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
                                             <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
                                         </div>
                                         <div class="profileSection">
                                             <div class="profileViewToggleWrapper">
                                                 <figure>
-                                                    <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
+                                                    <img src="<?php echo userImage($peer['id']); ?>">
                                                 </figure>
                                                 <div class="changeView">
                                                     <h5><?php echo $peer['first_name'].' '.$peer['last_name']; ?></h5>
@@ -96,7 +110,9 @@
                                             <div class="followOptionsWrapper">
                                                 <ul>
                                                     <li class="follower">
-                                                        <a href="javascript:void(0)">Accept</a>
+                                                        <a href="javascript:void(0)">
+                                                            Accept
+                                                        </a>
                                                     </li>
                                                     <li class="follower">
                                                         <a href="javascript:void(0)">Reject</a>
