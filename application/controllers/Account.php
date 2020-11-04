@@ -3095,6 +3095,7 @@ class Account extends CI_Controller {
         
 
         $peer_attending = $this->db->get_where('share_master', array('reference_id' => $id, 'reference' => 'event', 'status' => 2))->result_array();
+        $event_details = $this->db->get_where('event_master', array('id' => $id))->row_array();
 
         $html = '';
 
@@ -3108,9 +3109,13 @@ class Account extends CI_Controller {
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
                             <figcaption>'.$peer['nickname'].'</figcaption>
-                        </section>
+                        </section>';
+                        if($event_details['created_by'] == $user_id) {
+                            $html.= '<section class="action" id="action_'.$peer['userID'].'">
+                    
+                            <button type="button" class="like" onclick="removePeer('.$peer['userID'].')">Attending</button></section>';
+                        }
                         
-                    </section>';
             
         }
         echo $html;die;
