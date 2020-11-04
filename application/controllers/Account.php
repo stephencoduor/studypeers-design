@@ -536,14 +536,8 @@ class Account extends CI_Controller {
                                                             </div>
                                                             <div class="edit invitePeer" data-id="'.$value['id'].'">
                                                                 <a data-toggle="modal" data-target="#confirmationModalAttend">
-                                                                    <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-                                                                        <path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
-                                                                            c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
-                                                                            s-38.5-85.3-85.3-85.3c-26.8,0-50.9,12.6-66.5,32.2l-135.6-74.8c3.6-10.5,5.5-21.7,5.5-33.4c0-13-2.4-25.4-6.8-36.9l132.5-73
-                                                                            c15.4,22.9,41.5,38.1,70.9,38.1c46.8,0,85.3-38.5,85.3-85.3S451.5,0.5,404.7,0.5S319.4,39,319.4,85.8z M449.4,404.2
-                                                                            c0,25-19.8,44.7-44.7,44.7S360,429.1,360,404.2c0-25,19.8-44.7,44.7-44.7S449.4,379.2,449.4,404.2z M104,305.3
-                                                                            c-34.3,0-62.4-28.1-62.4-62.4s28.1-62.4,62.4-62.4s62.4,28.1,62.4,62.4C166.5,277.3,138.4,305.3,104,305.3z M449.4,85.8
-                                                                            c0,25-19.8,44.7-44.7,44.7S360,110.7,360,85.8c0-25,19.8-44.7,44.7-44.7S449.4,60.9,449.4,85.8z"></path>
+                                                                    <svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="m452 512h-392c-33.085938 0-60-26.914062-60-60v-392c0-33.085938 26.914062-60 60-60h392c33.085938 0 60 26.914062 60 60v392c0 33.085938-26.914062 60-60 60zm-392-472c-11.027344 0-20 8.972656-20 20v392c0 11.027344 8.972656 20 20 20h392c11.027344 0 20-8.972656 20-20v-392c0-11.027344-8.972656-20-20-20zm370.898438 111.34375-29.800782-26.6875-184.964844 206.566406-107.351562-102.046875-27.558594 28.988281 137.21875 130.445313zm0 0"/>
                                                                     </svg> <span id="attend_text_'.$value['id'].'">';
                                                                     if($shared['status'] == 2){
                                                                         $html.='Unattend';
@@ -3081,7 +3075,7 @@ class Account extends CI_Controller {
                     if(empty($chk_if_shared)){
                         $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>';
                     } else {
-                        $html.= '<button type="button" class="like" onclick="uninviteToPeer('.$peer['userID'].')">invited</button>';
+                        $html.= '<button type="button" class="like" onclick="uninvitePeerEvent('.$peer['userID'].')">invited</button>';
                     }
                     $html.= '</section>
                 </section>';
