@@ -3122,7 +3122,7 @@ class Account extends CI_Controller {
             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array(); 
             
             
-                $html.= '<section class="list"><section class="left" id="action_'.$peer['userID'].'">
+                $html.= '<div id="remove_peer_'.$peer['userID'].'"><section class="list"><section class="left" >
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
@@ -3135,7 +3135,7 @@ class Account extends CI_Controller {
                         } else {
                             $html.= '<section class="action" >
                     
-                            <button type="button" class="like">Attending</button></section>';
+                            <button type="button" class="like">Attending</button></section></div>';
                         }
                         
             

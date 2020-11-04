@@ -819,7 +819,7 @@
                 data : {"id" : peer_attend_event, 'peer_id': peer_id},
                 success:function(result) {
                     // $('#share_count_'+share_document).html(result);
-                    $("#action_"+peer_id).hide();
+                    $("#remove_peer_"+peer_id).hide();
                     // $("#share_studyset").val('');
                 }   
             })
