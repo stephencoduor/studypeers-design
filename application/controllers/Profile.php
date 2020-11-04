@@ -287,7 +287,7 @@ class Profile extends CI_Controller {
 		}else{
 			$status = 1;
 		}
-		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' ORDER BY a.id DESC');
+		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
 		$result = $query->result_array();
 		echo json_encode($result);
 	}
