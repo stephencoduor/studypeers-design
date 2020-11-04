@@ -676,6 +676,7 @@
                 <h6>Peers</h6>
                 
             </div>
+            <input type="hidden" id="peer_attend_event">
             <div class="listUserWrap" id="peersModalAttendingList">
                 
                 
@@ -699,7 +700,7 @@
 
         $(document).on('click','.peersModalAttending',function(){
             var event_id = $(this).data('id'); 
-            
+            $("#peer_attend_event").val(event_id);
             $.ajax({
                 url : '<?php echo base_url();?>account/getPeersEVentAttending',
                 type : 'post',
@@ -803,6 +804,22 @@
                 success:function(result) {
                     // $('#share_count_'+share_document).html(result);
                     $("#action_"+peer_id).html('<button type="button" onclick="inviteToPeer('+peer_id+')" class="like">invite</button>');
+                    // $("#share_studyset").val('');
+                }   
+            })
+        }
+
+
+        function removePeer(peer_id){
+            var peer_attend_event = $('#peer_attend_event').val();
+
+            $.ajax({
+                url : '<?php echo base_url();?>account/removePeerAttending',
+                type : 'post',
+                data : {"id" : peer_attend_event, 'peer_id': peer_id},
+                success:function(result) {
+                    // $('#share_count_'+share_document).html(result);
+                    $("#action_"+peer_id).hide();
                     // $("#share_studyset").val('');
                 }   
             })
