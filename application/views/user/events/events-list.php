@@ -787,7 +787,22 @@
                 data : {"id" : invite_event, 'peer_id': peer_id},
                 success:function(result) {
                     // $('#share_count_'+share_document).html(result);
-                    $("#action_"+peer_id).html('<button type="button" class="like">invited</button>');
+                    $("#action_"+peer_id).html('<button type="button" class="like" onclick="uninviteToPeer('+peer_id+')">invited</button>');
+                    // $("#share_studyset").val('');
+                }   
+            })
+        }
+
+        function uninviteToPeer(peer_id){
+            var invite_event = $('#invite_event').val();
+
+            $.ajax({
+                url : '<?php echo base_url();?>account/uninvitePeerEvent',
+                type : 'post',
+                data : {"id" : invite_event, 'peer_id': peer_id},
+                success:function(result) {
+                    // $('#share_count_'+share_document).html(result);
+                    $("#action_"+peer_id).html('<button type="button" onclick="inviteToPeer('+peer_id+')" class="like">invite</button>');
                     // $("#share_studyset").val('');
                 }   
             })

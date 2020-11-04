@@ -3070,18 +3070,22 @@ class Account extends CI_Controller {
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
             }
             $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'event', 'reference_id' => $id, 'status!=' => 4))->row_array(); 
-            if(empty($chk_if_shared)){
-                $html.= '<section class="list"><section class="left">
-                            <figure>
-                                <img src="'.userImage($peer['userID']).'" alt="user">
-                            </figure>
-                            <figcaption>'.$peer['nickname'].'</figcaption>
-                        </section>
-                        <section class="action" id="action_'.$peer['userID'].'">
-                            <button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>
-                        </section>
-                    </section>';
-            }
+            
+            $html.= '<section class="list"><section class="left">
+                        <figure>
+                            <img src="'.userImage($peer['userID']).'" alt="user">
+                        </figure>
+                        <figcaption>'.$peer['nickname'].'</figcaption>
+                    </section>
+                    <section class="action" id="action_'.$peer['userID'].'">';
+                    if(empty($chk_if_shared)){
+                        $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>';
+                    } else {
+                        $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invited</button>';
+                    }
+                    $html.= '</section>
+                </section>';
+            
         }
         echo $html;die;
     }
@@ -3156,6 +3160,23 @@ class Account extends CI_Controller {
         foreach ($get_active_token  as $key => $value) {
             $this->sendTestNotification($value['token'], 'Event Invitation', 'You have received an event invitation', $action_id);
         }
+        echo 1;die;
+    }
+
+    public function uninvitePeerEvent(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        $peer_id = $this->input->post('peer_id');
+
+        $this->db->order_by('share_master.id', 'desc');
+        $action_detail = $this->db->get_where('share_master', array('reference' =>  'event', 'reference_id' => $id, 'user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
+
+        $this->db->where(array('id' => $action_detail['id']));
+        $this->db->delete('share_master');
+
+        $this->db->where(array('action_id' => $action_detail['id']));
+        $this->db->delete('notification_master');
+
         echo 1;die;
     }
 
