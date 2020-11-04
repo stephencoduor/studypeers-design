@@ -3081,7 +3081,7 @@ class Account extends CI_Controller {
                     if(empty($chk_if_shared)){
                         $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>';
                     } else {
-                        $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invited</button>';
+                        $html.= '<button type="button" class="like" onclick="uninviteToPeer('.$peer['userID'].')">invited</button>';
                     }
                     $html.= '</section>
                 </section>';
