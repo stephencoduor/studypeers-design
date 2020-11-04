@@ -579,7 +579,7 @@ class Account extends CI_Controller {
                                                                     $html.= '<li class="more">
                                                                     +';
                                                                     if($count > 3) {
-                                                                        $html.= .$count.;
+                                                                        $html.= $count;
                                                                     }
                                                                 $html.= '</li>';
                                                                 }
@@ -808,7 +808,7 @@ class Account extends CI_Controller {
                                                                 $html.= '<li class="more">
                                                                     +';
                                                                     if($count > 3) {
-                                                                        $html.= .$count.;
+                                                                        $html.= $count;
                                                                     }
                                                                 $html.= '</li>';
                                                                 }
