@@ -3068,21 +3068,39 @@ class Account extends CI_Controller {
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
             }
             $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'event', 'reference_id' => $id, 'status!=' => 4))->row_array(); 
-            
-            $html.= '<section class="list"><section class="left">
-                        <figure>
-                            <img src="'.userImage($peer['userID']).'" alt="user">
-                        </figure>
-                        <figcaption>'.$peer['nickname'].'</figcaption>
-                    </section>
-                    <section class="action" id="action_'.$peer['userID'].'">';
-                    if(empty($chk_if_shared)){
-                        $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>';
-                    } else {
-                        $html.= '<button type="button" class="like" onclick="uninvitePeerEvent('.$peer['userID'].')">invited</button>';
-                    }
-                    $html.= '</section>
-                </section>';
+            if(!empty($chk_if_shared)){
+                if($chk_if_shared['status'] != 2){
+                    $html.= '<section class="list"><section class="left">
+                            <figure>
+                                <img src="'.userImage($peer['userID']).'" alt="user">
+                            </figure>
+                            <figcaption>'.$peer['nickname'].'</figcaption>
+                        </section>
+                        <section class="action" id="action_'.$peer['userID'].'">';
+                        if(empty($chk_if_shared)){
+                            $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>';
+                        } else {
+                            $html.= '<button type="button" class="like" onclick="uninvitePeerEvent('.$peer['userID'].')">invited</button>';
+                        }
+                        $html.= '</section>
+                    </section>';
+                }
+            } else {
+                $html.= '<section class="list"><section class="left">
+                            <figure>
+                                <img src="'.userImage($peer['userID']).'" alt="user">
+                            </figure>
+                            <figcaption>'.$peer['nickname'].'</figcaption>
+                        </section>
+                        <section class="action" id="action_'.$peer['userID'].'">';
+                        if(empty($chk_if_shared)){
+                            $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>';
+                        } else {
+                            $html.= '<button type="button" class="like" onclick="uninvitePeerEvent('.$peer['userID'].')">invited</button>';
+                        }
+                        $html.= '</section>
+                    </section>';
+            }
             
         }
         echo $html;die;
@@ -3104,16 +3122,20 @@ class Account extends CI_Controller {
             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array(); 
             
             
-                $html.= '<section class="list"><section class="left">
+                $html.= '<section class="list"><section class="left" id="action_'.$peer['userID'].'">
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
                             <figcaption>'.$peer['nickname'].'</figcaption>
                         </section>';
                         if($event_details['created_by'] == $user_id) {
-                            $html.= '<section class="action" id="action_'.$peer['userID'].'">
+                            $html.= '<section class="action" >
                     
-                            <button type="button" class="like" onclick="removePeer('.$peer['userID'].')">Attending</button></section>';
+                            <button type="button" class="like" onclick="removePeer('.$peer['userID'].')">Remove</button></section>';
+                        } else {
+                            $html.= '<section class="action" >
+                    
+                            <button type="button" class="like">Attending</button></section>';
                         }
                         
             
@@ -3180,6 +3202,21 @@ class Account extends CI_Controller {
         $this->db->where(array('action_id' => $action_detail['id']));
         $this->db->delete('notification_master');
 
+        echo 1;die;
+    }
+
+    public function removePeerAttending(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        $peer_id = $this->input->post('peer_id');
+
+        $this->db->order_by('share_master.id', 'desc');
+        $action_detail = $this->db->get_where('share_master', array('reference' =>  'event', 'reference_id' => $id, 'user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
+
+        $this->db->where(array('id' => $action_detail['id']));
+        $this->db->delete('share_master');
+
+        
         echo 1;die;
     }
 
