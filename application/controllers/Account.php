@@ -575,11 +575,14 @@ class Account extends CI_Controller {
                                                                 
                                                                 $count = count($peer_attending) - 3;
                                                                 
-                                                                if($count > 3) {
-                                                                    $html.= '<li class="more">
-                                                                    +'.$count.'
-                                                                </li>';
-                                                                }
+                                                                
+                                                                $html.= '<li class="more">
+                                                                    +';
+                                                                    if($count > 3) {
+                                                                        $html.= $count;
+                                                                    }
+                                                                $html.= '</li>';
+                                                                
                                                                 
                                                             $html.= '</ul>
                                                         </div>';
@@ -802,11 +805,12 @@ class Account extends CI_Controller {
                                                             }
                                                                 
                                                                 $count = count($peer_attending) - 3;
-                                                                if($count > 3) {
-                                                                    $html.= '<li class="more">
-                                                                    +'.$count.'
-                                                                </li>';
-                                                                }
+                                                                $html.= '<li class="more">
+                                                                    +';
+                                                                    if($count > 3) {
+                                                                        $html.= $count;
+                                                                    }
+                                                                $html.= '</li>';
                                                                 
                                                             $html.= '</ul>
                                                         </div>';
