@@ -2998,6 +2998,42 @@ class Account extends CI_Controller {
         }
     }
 
+    public function getPeerToShare(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $document_id = $this->input->post('id');
+        $peer_id = $this->input->post('peer_id');
+
+        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
+
+        $html = '';
+
+        foreach ($peer_list as $key => $value) {
+            if($value['user_id'] == $user_id){
+                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array();
+            } else {
+                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array();
+            }
+            $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'document', 'reference_id' => $study_set_id, 'status' => 1))->row_array();
+            
+            $html.= '<section class="list"><section class="left">
+                        <figure>
+                            <img src="'.userImage($peer['userID']).'" alt="user">
+                        </figure>
+                        <figcaption>'.$peer['nickname'].'</figcaption>
+                    </section>
+                    <section class="action" id="action_'.$peer['userID'].'">';
+                    if(empty($chk_if_shared)){
+                        $html.= '<button type="button" class="like" onclick="shareToPeer('.$peer['userID'].')">share</button>';
+                    } else {
+                        $html.= '<button type="button" class="like" onclick="unshareToPeer('.$peer['userID'].')">shared</button>';
+                    }
+                    $html.= '</section>
+                </section>';
+            
+        }
+        echo $html;die;
+    }
+
     public function shareToPeerDocument(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $id = $this->input->post('id');
@@ -3048,6 +3084,36 @@ class Account extends CI_Controller {
     function updateShareCountDocument($id){
         $this->db->where('id',$id);
         $this->db->set('shareCount', 'shareCount+1', FALSE);
+        $update_like = $this->db->update('document_master');
+        return 1;
+    }
+
+
+    public function unshareToPeerDocument(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        $peer_id = $this->input->post('peer_id');
+
+        $this->db->order_by('share_master.id', 'desc');
+        $action_detail    = $this->db->get_where('share_master', array('reference' => 'document', 'reference_id' => $id, 'user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
+
+        $this->db->where(array('id' => $action_detail['id']));
+        $this->db->delete('share_master');
+
+        $this->db->where(array('action_id' => $action_detail['id']));
+        $this->db->delete('notification_master');
+
+        $this->updateShareCountDocumentDec($id);
+
+        $det = $this->db->get_where($this->db->dbprefix('document_master'), array('id'=>$id))->row_array(); 
+
+        
+        echo $det['shareCount'];die;
+    }
+
+    function updateShareCountDocumentDec($id){
+        $this->db->where('id',$id);
+        $this->db->set('shareCount', 'shareCount-1', FALSE);
         $update_like = $this->db->update('document_master');
         return 1;
     }
