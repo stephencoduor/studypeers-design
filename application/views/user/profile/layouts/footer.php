@@ -63,7 +63,7 @@
                 }
             }
         });
-        var counter = 1;
+        var counter = 1, video_counter = 1;
         var image_types = ['jpg','png','jpeg'];
         var video_types = ['mp4','3gp','mpeg4','mkv','mov'];
         function readURL(input) {
@@ -108,14 +108,13 @@
                             var image = canvas.toDataURL();
                             var success = image.length > 100000;
                             if (success) {
-                                var html_image = '<div class="col-md-4"><div class="uloadedImage"><figure><img src="'+image+'" alt="image" id="image'+counter+'"></figure>'+
-                                    '<div class="close"><img src="'+base_url+'assets_d/images/close-pink.svg" class="remove_image" id="remove_image_'+counter+'" alt="close"></div></div></div>';
-                                console.log(html_image);
+                                var html_image = '<div class="col-md-4" id="delete_video_'+video_counter+'"><div class="uloadedImage"><figure><img src="'+image+'" alt="image" id="image'+video_counter+'"></figure>'+
+                                    '<div class="close"><img src="'+base_url+'assets_d/images/close-pink.svg" class="remove_video" id="remove_video_'+video_counter+'" alt="close"></div></div></div>';
                                 $('#image_row').append(html_image);
                                 // URL.revokeObjectURL(url);
-                                $('#imgInp'+counter).hide();
-                                $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp'+counter+'" name="file[]" multiple="multiple">');
-                                counter++;
+                                $('#imgInp'+video_counter).hide();
+                                $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp'+video_counter+'" name="file[]" multiple="multiple">');
+                                video_counter++;
                             }
                             return success;
                         };
@@ -140,6 +139,13 @@
             counter--;
         });
 
+        $(document).on('click','.remove_video', function(){
+            var video_id = $(this).attr('id').split('_');
+            $('#delete_video_'+video_id[2]).remove();
+            $('#imgInp'+video_id[2]).val('');
+            video_counter--;
+        });
+
         $(document).on('change','.image_upload_button', function(){
             readURL(this);
         });
@@ -160,10 +166,9 @@
             // Check if a value exists in the file_ext array
             if(file_ext.indexOf(extension) == -1){
                 alert("Invalid file type ! Please choose another file");
-                console.log($("#fileToUpload")[0].files[document_counter]);
             }
             var img_icon = '';
-            if(extension == 'docx'){
+            if(extension == 'docx' || extension == 'doc'){
                 img_icon = '<img src="'+base_url+'/assets_d/images/document.svg'+'" />';
             }else if(extension == 'pdf'){
                 img_icon = '<img src="'+base_url+'/assets_d/images/pdf.svg'+'" />';
@@ -174,7 +179,7 @@
             }else if(extension == 'txt'){
                 img_icon = '<img src="'+base_url+'/assets_d/images/txt.svg'+'" />';
             }else{
-                alert('Invalid file format ! Please choose any other file . Supported file formats are docx/pdf/ppt/xls/txt');
+                alert('Invalid file format ! Please choose any other file . Supported file formats are doc/docx/pdf/ppt/xls/txt');
                 return false;
             }
             $('#all_documents').append('<div class="filename" id="document_file_'+document_counter+'">'+img_icon+'</div><div class="closeBtn" id="remove_document_'+document_counter+'"><img src="'+base_url+'/assets_d/images/close-pink.svg'+'" alt="close"/> '+filename+'.'+extension+'</div>');
@@ -186,6 +191,7 @@
             close_id = close_id.split('_');
             $('#document_file_'+close_id[2]).remove();
             $('#remove_document_'+close_id[2]).remove();
+            document_counter--;
         });
 
         $(document).on( 'click', '#save_post_from_ajax', function () {
@@ -212,7 +218,6 @@
                 contentType: false,
                 processData: false,
                 success: function (result) {
-                    console.log(result);
                     if(result == true){
                         window.location.href = base_url+'Profile/redirect_page?status='+result;
                     }
@@ -284,10 +289,8 @@
             }
         });
         $('#upload_cover_image').on("change", function(){
-            console.log('in');
             var cover_reader = new FileReader();
             cover_reader.onload = function (event) {
-                console.log(event.target.result);
                 $cover_crop.croppie('bind', {
                     url: event.target.result
                 }).then(function(){
@@ -323,7 +326,6 @@
         $('#copyShareLink').on("click", function(){
             /* Get the text field */
             var copyText = document.getElementById("sharelink");
-            console.log(copyText.value);
             /* Select the text field */
             copyText.select();
             /* Copy the text inside the text field */
@@ -534,16 +536,16 @@
             let toggleViewWrapper = $('.userBoxWrapper');
             $('.sortWrapper li').removeClass('active');
             if ($(this).hasClass('grid')) {
-                $(this).addClass('active')
-                toggleImgItem.attr('src', 'images/grid-box-blue.svg');
-                $('.sortWrapper li.list').children('img').attr('src', 'images/list-box-grey.svg');
+                $(this).addClass('active');
+                toggleImgItem.attr('src', base_url+'assets_d/images/grid-box-blue.svg');
+                $('.sortWrapper li.list').children('img').attr('src', base_url+'assets_d/images/list-box-grey.svg');
                 if (toggleViewWrapper.hasClass('listview')) {
                     toggleViewWrapper.removeClass('listview').addClass('gridview');
                 }
             } else if ($(this).hasClass('list')) {
-                $(this).addClass('active')
-                toggleImgItem.attr('src', 'images/list-box-blue.svg');
-                $('.sortWrapper li.grid').children('img').attr('src', 'images/grid-box-grey.svg');
+                $(this).addClass('active');
+                toggleImgItem.attr('src', base_url+'assets_d/images/list-box-blue.svg');
+                $('.sortWrapper li.grid').children('img').attr('src', base_url+'assets_d/images/grid-box-grey.svg');
                 if (toggleViewWrapper.hasClass('gridview')) {
                     toggleViewWrapper.removeClass('gridview').addClass('listview');
                 }
@@ -666,11 +668,153 @@
                 $("#add_peer").attr("onclick","sendRequest("+peer_id+")");
 
             }
-        })
+        });
     }
 
 
 
 </script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#edit_profile').on("click", function(){
+            $('.profile_general_info').hide();
+            $('.edit_general_info').show();
+            $(this).hide();
+        });
+
+        $('#show_general_info').on("click", function(){
+            $('.profile_general_info').show();
+            $('.edit_general_info').hide();
+            $('#edit_profile').show();
+
+        });
+
+        $('#edit_about').on("click", function(){
+           $('#about_info').hide();
+           $('#edit_about_info').show();
+            $(this).hide();
+        });
+
+        $('#show_about_info').on("click", function(){
+            $('#about_info').show();
+            $('#edit_about_info').hide();
+            $('#edit_about').show();
+        });
+
+        $('#edit_social').on("click", function(){
+            $('#social_info').hide();
+            $('#edit_social_info').show();
+            $(this).hide();
+        });
+
+        $('#show_social_div').on("click", function(){
+            $('#edit_social_info').hide();
+            $('#social_info').show();
+            $('#edit_social').show();
+        });
+
+        var selection_type = 1;var base_url = '<?php echo base_url(); ?>';
+        $('.selection_type').on("click", function(){
+            selection_type = $(this).attr('data-id');
+            console.log(selection_type);
+        });
+
+        $('#search_friend').on("keyup", function(e){
+            var search_value = $(this).val();var html = '';
+            var friend = selection_type;   // 0 => requests , 1 => friend
+            if(friend == 0){
+                $('.friend_container').empty();
+            }else{
+                $('.request_container').empty();
+            }
+
+            $.ajax({
+                url : '<?php echo base_url();?>Profile/searchFriends?keyword='+search_value+"&is_friend="+friend,
+                type : 'get',
+                success:function(result) {
+                    /* for(var i = 0; i < result.length; i++){
+                         if(friend == 0){
+                             html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
+                             '<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div><div class="profileSection">'+
+                             '<div class="profileViewToggleWrapper"><figure>'+
+                             '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
+                             '</figure><div class="changeView"><h5>'+result[i].first_name+' '+result[i].last_name+'</h5><p>location name</p>'+
+                             '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">'+
+                             '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>'+
+                             '</div></div></div>';
+                             $('.friend_container').append(html);
+                         }else{
+                             html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
+                             +'<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div>'+
+                             +'<div class="profileSection"><div class="profileViewToggleWrapper"><figure>'+
+                             +'<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
+                             +'</figure><div class="changeView"><h5>'+result[i].first_name+' '+result[i].last_name+'</h5><p>location name</p>'+
+                             +'<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>'+
+                             +'<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>'+
+                             +'</li><li><a href="javascript:void(0)">Unfriend</a></li></ul></div></div></div>';
+                             $('.request_container').append(html);
+                         }
+                     }*/
+                }
+            });
+
+        });
+
+
+        function acceptRequest(action_id, id){
+            console.log(action_id);
+            console.log(id);
+            $.ajax({
+                url : '<?php echo base_url();?>account/acceptRequest',
+                type : 'post',
+                data : {"id" : id, "action_id": action_id},
+                success:function(result) {
+                    $('#action_'+action_id).remove();
+                }
+            })
+        }
+
+        function rejectRequest(id, action_id){
+            $.ajax({
+                url : '<?php echo base_url();?>account/rejectRequest',
+                type : 'post',
+                data : {"id" : id, "action_id": action_id},
+                success:function(result) {
+                    $('#notification_'+id).addClass('read');
+                    $('#accept_'+id).hide();
+                    $('#reject_'+id).hide();
+                }
+            })
+        }
+
+        $('.follow_now').on("click", function(){
+            var peer_id = $(this).attr('data-id');
+            var status = $(this).attr('id');
+            var url = '<?php echo base_url();?>Profile/follow';
+            if(status == 0){
+                url = '<?php echo base_url();?>Profile/unfollow';
+            }
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_id" : peer_id},
+                success:function(result) {
+                    if(status == 1){
+                        $('.follow_'+peer_id).html('Unfollow');
+                        $('.follow_'+peer_id).attr('id',0);
+                    }else{
+                        $('.follow_'+peer_id).html('Follow');
+                        $('.follow_'+peer_id).attr('id',1);
+                    }
+                }
+            })
+        });
+
+
+
+    });
+</script>
+
+
 </body>
 </html>

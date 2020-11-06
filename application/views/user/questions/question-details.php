@@ -237,7 +237,7 @@
 								</div>
 								<div class="user-name">
 									<figure>
-										<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+										<img src="<?php echo userImage($result['created_by']); ?>" alt="user">
 									</figure>
 									<figcaption><?php echo $result['nickname']; ?></figcaption>
 								</div>
@@ -362,7 +362,7 @@
 												<div class="userWrap study-sets">
 													<div class="user-name">
 														<figure>
-															<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+															<img src="<?php echo userImage($value['created_by']); ?>" alt="user">
 														</figure>
 														<figcaption><?php echo $value['nickname']; ?></figcaption>
 													</div>
@@ -429,7 +429,7 @@
 														<div class="userWrap study-sets">
 															<div class="user-name">
 																<figure>
-																	<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+																	<img src="<?php echo userImage($value2['created_by']); ?>" alt="user">
 																</figure>
 																<figcaption><?php echo $value2['nickname']; ?></figcaption>
 															</div>

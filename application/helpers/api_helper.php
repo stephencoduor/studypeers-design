@@ -769,3 +769,16 @@ function userImage($user_id){
     }
 }
 
+function checkFollowStatus($user_id , $peer_id){
+        $tableRecord = & get_instance();
+        $tableRecord
+            ->load
+            ->database();
+        $check_follow_status = $tableRecord->db->get_where('follow_master', array('user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
+        if(isset($check_follow_status) && !empty($check_follow_status)){
+            return true;
+        }else{
+            return false;
+        }
+}
+

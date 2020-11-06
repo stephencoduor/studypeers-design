@@ -1,10 +1,11 @@
 <?php
 class Upload_model extends CI_Model{
 
-    function save_image($post_id,$image){
+    function save_image($post_id,$image,$type){
         $data = array(
             'post_id'     => $post_id,
             'image_path' => $image,
+            'type' => $type,
             'created_at' => date('d-m-Y H:i:s'),
             'updated_at' => date('d-m-Y H:i:s')
         );
@@ -12,10 +13,11 @@ class Upload_model extends CI_Model{
         return $result;
     }
 
-    function save_video($post_id, $video){
+    function save_video($post_id, $video,$type){
         $data = array(
             'post_id'     => $post_id,
             'video_path' => $video,
+            'type' => $type,
             'created_at' => date('d-m-Y H:i:s'),
             'updated_at' => date('d-m-Y H:i:s')
         );
@@ -23,10 +25,12 @@ class Upload_model extends CI_Model{
         return $result;
     }
 
-    function save_document($post_id, $video){
+    function save_document($post_id, $video, $type, $filename){
         $data = array(
             'post_id'     => $post_id,
             'document_path' => $video,
+            'type' => $type,
+            'original_name' => $filename,
             'created_at' => date('d-m-Y H:i:s'),
             'updated_at' => date('d-m-Y H:i:s')
         );

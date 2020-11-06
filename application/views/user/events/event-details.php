@@ -46,7 +46,7 @@
 					<?php $user = $this->db->get_where('user_info', array('userID' => $event['created_by']))->row_array();  ?>
 					<a href="#">
 						<figure>
-							<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+							<img src="<?php echo userImage($event['created_by']); ?>" alt="user">
 						</figure>
 						<figcaption><?= $user['nickname']; ?></figcaption>
 					</a>
@@ -189,22 +189,22 @@
 					<ul>
 						<?php if(!empty($peer_attending[0])) { ?>
 							<li>
-								<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+								<img src="<?php echo userImage($peer_attending[0]['peer_id']); ?>" alt="user">
 							</li>
 						<?php } ?>
 						<?php if(!empty($peer_attending[1])) { ?>
 							<li>
-								<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+								<img src="<?php echo userImage($peer_attending[1]['peer_id']); ?>" alt="user">
 							</li>
 						<?php } ?>
 						<?php if(!empty($peer_attending[2])) { ?>
 							<li>
-								<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
+								<img src="<?php echo userImage($peer_attending[2]['peer_id']); ?>" alt="user">
 							</li>
-						<?php } $count = count($peer_attending) - 3; ?>
+						<?php } $count = count($peer_attending); ?>
 						<?php if($count > 3) { ?>
 							<li class="more">
-								+<?= $count; ?>
+								+<?= $count - 3; ?>
 							</li>
 						<?php } ?>
 					</ul>
@@ -270,7 +270,7 @@
 							?>
 							<div class="chatMsg">
 								<figure>
-									<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+									<img src="<?php echo userImage($value['user_id']); ?>" alt="User">
 								</figure>
 								<figcaption>
 									<span class="name"> <?php echo $user_info['nickname'] ?></span>
@@ -303,7 +303,7 @@
 										?>
 										<div class="userReplyBox">
 											<figure>
-												<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+												<img src="<?php echo userImage($value2['user_id']); ?>" alt="User">
 											</figure>
 											<figcaption>
 												<span class="name"><?= $user_info2['nickname'] ?></span>
@@ -316,7 +316,7 @@
 
 								<div class="replyBox">
 									<figure>
-										<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+										<img src="<?php echo userImage($user_id); ?>" alt="User">
 									</figure>
 									<div class="replyuser">
 										<input type="text" id="input_reply_<?php echo $value['id'] ?>" placeholder="Write a Reply..." onkeypress="postReply(event,'<?php echo $value['id'] ?>', this.value)">

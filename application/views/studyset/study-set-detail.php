@@ -46,17 +46,9 @@
 			<div class="userWrap">
 				<div class="user-name">
 					<figure>
-						<?php
-						if($studyset['image']) {
-							?>
-							<img src="<?php echo base_url();?>uploads/user_identification/<?php echo $studyset['user_image'];?>" alt="User">
-							<?php
-						} else {
-							?>
-							<img src="<?php echo base_url();?>assets_d/images/user.jpg" alt="user">
-							<?php
-						}
-						?>
+						
+							<img src="<?php echo userImage($studyset['user_id']); ?>" alt="user">
+							
 					</figure>
 					<figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption>
 				</div>
@@ -766,7 +758,7 @@
 								?>
 								<div class="chatMsg">
 									<figure>
-										<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+										<img src="<?php echo userImage($value['user_id']); ?>" alt="User">
 									</figure>
 									<figcaption>
 										<span class="name"> <?php echo $user_info['nickname'] ?></span>
@@ -799,7 +791,7 @@
 											?>
 											<div class="userReplyBox">
 												<figure>
-													<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+													<img src="<?php echo userImage($value2['user_id']); ?>" alt="User">
 												</figure>
 												<figcaption>
 													<span class="name"><?= $user_info2['nickname'] ?></span>
@@ -813,7 +805,7 @@
 
 									<div class="replyBox" id="replyBox_<?php echo $value['id'] ?>">
 										<figure>
-											<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+											<img src="<?php echo userImage($value['user_id']); ?>" alt="User">
 										</figure>
 										<div class="replyuser">
 											<input type="text" id="input_reply_<?php echo $value['id'] ?>" placeholder="Write a Reply..." onkeypress="postReply(event,'<?php echo $value['id'] ?>', this.value)">
@@ -824,7 +816,7 @@
 						</div>
 						<div class="chatreplyBox">
 							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+								<img src="<?php echo userImage($studyset['user_id']); ?>" alt="User">
 							</figure>
 							<input type="hidden" id="comment_studyset_id" value="<?php echo $studyset['study_set_id'];?>
 							    			">

@@ -5,10 +5,17 @@
 				$event_detail = $this->db->get_where('event_master', array('id' => $value['reference_id']))->row_array();
 				if($user_id == $event_detail['created_by']) {
 					$chk_view = 1;
+					$txt = "added a new event";
 				} else {
 					$chk_if_shared = $this->db->get_where('share_master', array('reference_id' => $value['reference_id'], 'reference' => 'event', 'peer_id' => $user_id, 'status!=' => 4))->row_array();
 					if(($event_detail['privacy'] == 1) || !empty($chk_if_shared)){
 						$chk_view = 1;
+					}
+
+					if(($event_detail['privacy'] == 1)) {
+						$txt = "added a new event";
+					} else {
+						$txt = "has invited you to an event";
 					}
 				}
 				if($chk_view == 1) {
@@ -128,7 +135,7 @@
 											?>
 												<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> 
 											<?php } ?>
-											<span>posted in university</span> <img src="<?php echo base_url(); ?>assets_d/images/university.svg"> <?php echo $university['SchoolName']; ?></figcaption>
+											<span><?php echo $txt; ?></span> </figcaption>
 											<div class="badgeList">
 												<ul>
 													<li class="badge badge1">
@@ -157,7 +164,23 @@
 											<img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
 										</figure>
 										<figcaption><?php echo date('d M, Y', strtotime($event_detail['start_date'])); ?></figcaption>
-										<a>Add to Calendar</a>
+										<?php if($event_detail['created_by'] == $user_id) {
+												if($event_detail['addedToCalender'] == 0) { 
+										?>
+												<a href="#" class="addEvents" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#addEventModal">Add to Calendar</a>
+										<?php } else { ?>
+												<a href="#" class="removeEvent" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">Remove From Calendar</a>
+										<?php } } else { 
+													$this->db->order_by('share_master.id', 'desc');
+                                                    $shared = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array();
+                                                if($shared['schedule_master_id'] == 0) { ?>
+                                                	<a href="#" class="addEvents" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#addEventModal">Add to Calendar</a>
+
+                                                <?php } else { ?>
+                                                	<a href="#" class="removeEvent" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">Remove From Calendar</a>
+                                                <?php }
+
+										}?>
 									</div>
 								</div>
 								<p class="feedPostMessages">
@@ -170,28 +193,57 @@
 										</figure>
 									</div>
 								<?php } ?>
+								
 								<div class="eventActionWrap">
-									<ul>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li>
-											<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-										</li>
-										<li class="more">
-											+5
-										</li>
-									</ul>
-									<button type="button" class="event_action"> Attend Event</button>
+									<?php $peer_attending = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'status' => 2))->result_array(); ?>
+									<?php  if(!empty($peer_attending)) {  ?>
+										<div class="userIcoList peersModalAttending" data-id="<?= $event_detail['id'] ?>" data-toggle="modal" data-target="#peersModalAttending" style="margin-right: 15%;">
+											<ul>
+												<?php if(!empty($peer_attending[0])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[0]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } ?>
+												<?php if(!empty($peer_attending[1])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[1]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } ?>
+												<?php if(!empty($peer_attending[2])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[2]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } ?>
+												<?php if(!empty($peer_attending[3])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[3]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } ?>
+												<?php if(!empty($peer_attending[4])) { ?>
+													<li>
+														<img src="<?php echo userImage($peer_attending[4]['peer_id']); ?>" alt="user">
+													</li>
+												<?php } $count = count($peer_attending);  ?>
+												<?php if($count > 5) { ?>
+													<li class="more">
+														+<?= $count - 5; ?>
+													</li>
+												<?php } ?>
+											</ul>
+										</div>
+
+									<?php } ?>
+									<?php if($event_detail['created_by'] != $user_id) { 
+										$this->db->order_by('share_master.id', 'desc');
+				                        $shared = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array(); 
+				                    ?>
+										<button type="button" class="event_action attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?= $event_detail['id']; ?>"> <span id="attend_text_<?= $event_detail['id']; ?>"><?php if($shared['status'] == 2){
+		                                       echo 'Unattend';
+		                                    } else {
+		                                        echo 'Attend';
+		                                    } ?></span> Event
+		                                </button>
+									<?php } ?>
 								</div>
 								<div class="socialStatus">
 									<div class="leftStatus">
@@ -635,7 +687,7 @@
 									$user_info = $this->db->get_where('user_info', array('userID' => $studyset_detail['user_id']))->row_array();
 									$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> </figcaption>
+									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>added a new studyset</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">
@@ -654,7 +706,7 @@
 							</div>
 							<div class="timeline"><?php echo time_ago_in_php($studyset_detail['created_on']); ?></div>
 						</div>
-						<h4><?php echo $studyset_detail['name']; ?></h4>
+						<h4><a href="<?php echo base_url(); ?>studyset/details/<?php echo $studyset_detail['study_set_id']; ?>"><?php echo $studyset_detail['name']; ?></a></h4>
 						
 						<div class="imgWrapper type1">
 							<figure>
@@ -1115,7 +1167,7 @@
 					$user_info = $this->db->get_where('user_info', array('userID' => $document_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> </figcaption>
+									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>added a new document</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">
@@ -1137,7 +1189,7 @@
 						<h4><?php echo $document_detail['document_name']; ?></h4>
 						<p><?php echo $document_detail['description']; ?> </p>
 						<div class="documentName">
-							<img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <?php echo $document_detail['featured_image']; ?>
+							<img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a href="<?php echo base_url(); ?>account/documentDetail/<?php echo base64_encode($document_detail['id']); ?>"><?php echo $document_detail['featured_image']; ?></a>
 						</div>
 						<div class="socialStatus">
 							<div class="leftStatus">
@@ -1578,7 +1630,7 @@
 					$user_info = $this->db->get_where('user_info', array('userID' => $question_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 														<div class="right">
-															<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> </figcaption>
+															<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>has posted a question</span></figcaption>
 															<div class="badgeList">
 																<ul>
 																	<li class="badge badge1">
@@ -1647,7 +1699,7 @@
 									</a>
 								</li>
 								<li>
-									<a>
+									<a href="<?php echo base_url(); ?>account/questionDetail/<?php echo base64_encode($question_detail['id']); ?>">
 										<img src="<?php echo base_url(); ?>assets_d/images/answers-grey.svg" alt="Down Arrow">
 										<span>Answer</span>
 									</a>

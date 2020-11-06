@@ -27,7 +27,15 @@ class Profile extends CI_Controller {
 			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
 		}
 
+		$friends_to = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
+		$friends_from = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
+		$peer_to = array_merge($friends_to, $friends_from);
+		$peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
+		$data['all_connections'] = $peer_to;
+		$data['all_requests'] = $peer_from;
 		$data['all_posts'] = $all_posts_array;
+		$data['connections'] = count($peer_to);
+		$data['requests'] = count($peer_from);
 		$data['index_menu']  = 'timeline';
 		$data['title']  = 'Timeline | Studypeers';
 		$this->load->view('user/profile/layouts/header', $data);
@@ -74,7 +82,7 @@ class Profile extends CI_Controller {
 		$count_uploaded_files = count( $_FILES['file']['name'] );
 		$files = $_FILES;
 		$image_extensions_arr = array('jpg', 'image/jpg', 'image/jpeg', 'image/png' , 'jpeg' , 'png' );
-		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg");
+		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg","video/mp4", "video/mov", "video/avi", "video/3gp", "video/mpeg");
 		$document_extension_arr = array('pdf', 'xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt');
 		$maxsize = 5242880; // 5MB
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
@@ -92,16 +100,17 @@ class Profile extends CI_Controller {
 						'error'    => $files['file']['error'][$i],
 						'size'     => $files['file']['size'][$i]
 				];
+				$original_name = $files['file']['name'][$i];
 				if($this->upload->do_upload('userfile'))
 				{
 					$data = $this->upload->data();
 					$F[] = $data["file_name"];
 					if(in_array($file_type, $image_extensions_arr)){
-						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
+						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
 					}elseif(in_array($file_type, $video_extensions_arr)){
-						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
+						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
 					}else{
-						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"]);
+						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
 					}
 				}
 		}
@@ -219,5 +228,101 @@ class Profile extends CI_Controller {
 		$this->load->view('user/profile/friends-timeline');
 		$this->load->view('user/profile/layouts/footer');
 	}
+
+	public function updateGeneralInfo(){
+		try {
+			$userdata = $this->session->userdata('user_data');
+			$users_array = [
+				'first_name' => $this->input->post('first_name'),
+				'last_name' => $this->input->post('last_name')
+				];
+			$user_info_array = [
+				'gender' => $this->input->post('gender'),
+				'dob' => $this->input->post('dob'),
+				'country' => $this->input->post('country'),
+				'field_interest' => $this->input->post('field_of_interest')
+			];
+
+			$this->db->where(array('id' => $userdata['user_id']));
+			$this->db->update('user',$users_array);
+			$this->db->where(array('userID' => $userdata['user_id']));
+			$this->db->update('user_info',$user_info_array);
+			redirect(site_url('Profile/timeline'));
+
+		} catch (\Exception $e) {
+			var_dump($e->getMessage());
+		}
+	}
+
+
+	public function updateAboutInfo(){
+		$userdata = $this->session->userdata['user_data'];
+		$this->db->where(array('id' => $userdata['user_id']));
+		$this->db->update('user',array('about' => $this->input->post('about_me')));
+		$this->db->where(array('userID' => $userdata['user_id']));
+		$this->db->update('user_info',array('high_school' => $this->input->post('high_school') , 'high_school_course_name' => $this->input->post('course_name'), 'high_school_course_year' => $this->input->post('course_year')));
+		redirect(site_url('Profile/timeline'));
+	}
+
+
+	public function updateSocialInfo(){
+		$userdata = $this->session->userdata['user_data'];
+		$this->db->where(array('userID' => $userdata['user_id']));
+		$this->db->update('user_info',array(
+			'fb_link' => $this->input->post('facebook_link') ,
+			'twitter_link' => $this->input->post('twitter_link'),
+			'linkedIn_link' => $this->input->post('linkedin_link'),
+			'youtube_link' => $this->input->post('youtube_link')
+		));
+		redirect(site_url('Profile/timeline'));
+
+	}
+
+	public function searchFriends()
+	{
+		$userdata = $this->session->userdata('user_data');
+		$search_term = $this->input->get('keyword');
+		$is_friend = $this->input->get('is_friend');
+		if($is_friend){
+			$status = 2;
+		}else{
+			$status = 1;
+		}
+		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+		$result = $query->result_array();
+		echo json_encode($result);
+	}
+
+	public function follow()
+	{
+		if($this->input->post()){
+			$peer_id    = $this->input->post('peer_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$insert_data = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id
+			);
+			$this->db->insert('follow_master', $insert_data);
+
+			echo true;
+		}
+	}
+
+	public function unfollow()
+	{
+		if($this->input->post()){
+			$peer_id    = $this->input->post('peer_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$check = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id
+			);
+			$this->db->where($check);
+			$this->db->delete('follow_master');
+			echo true;
+		}
+	}
+
+
 
 }

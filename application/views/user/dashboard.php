@@ -155,15 +155,18 @@
 															$chk_if_sent = $this->db->get_where('peer_master', array('peer_id' => $value['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
 														?>
 															<div class="peerList" id="peerList<?= $value['id']; ?>">
-																<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['id'] ?>">
+
 
 																<figure>
-																	<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
+																	<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['id'] ?>">
+																		<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
+																	</a>
 																	<div class="removePeer">
 																		<img src="<?php echo base_url(); ?>assets_d/images/close-peer.svg" alt="Close Peer Suggestions">
 																	</div>
 																</figure>
-																<h4><?php echo $value['nickname']; ?></h4>
+																<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['id'] ?>">
+																	<h4><?php echo $value['nickname']; ?></h4>
 																</a>
 
 																<p>0 mutual peers</p>
@@ -10082,6 +10085,121 @@
 						</div>
 					</div>
 				</section>
+
+<div class="modal fade" id="confirmationModalAttend" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                   <h4>Confirmation</h4>
+                   <div class="row">
+                     <h6 class="modalText" id="confirmationModalAttendHead">Are you sure to attend this Event !</h6>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group button">
+                                <input type="hidden" name="attend_event_id" id="attend_event_id">
+                                <button data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                <button type="button" class="filterBtn" onclick="attendEvent()">Yes</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="addEventModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+	        <div class="modal-body peers">
+	          	   <h4>Confirmation</h4>
+		           <div class="row">
+		           	 <h6 class="modalText">Are you sure to add this Event to Calendar</h6>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group button">
+								<form method="post" action="<?php echo base_url(); ?>account/addEventToCalender">
+									<input type="hidden" id="calender_event_id" name="calender_event_id" value="">
+									<input type="hidden" id="" name="dashboard" value="1">
+									<button type="button" data-dismiss="modal" class="transparentBtn highlight">No</button>
+									<button type="submit" class="filterBtn">Yes</button>
+								</form>
+							</div>
+						</div>
+					</div>
+	        </div>
+        </div>
+    </div>
+</div>	
+
+
+<div class="modal fade" id="removeFromScheduleModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-body peers">
+				<h4>Confirmation</h4>
+				<div class="row">
+					<h6 class="modalText">Are you sure you want to remove this event <br> from your schedule?</h6>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<form method="post" action="<?php echo base_url(); ?>account/removeEvent">
+							<div class="form-group button">
+								<input type="hidden" id="remove_event_id" name="remove_event_id">
+								<input type="hidden" id="" name="dashboard" value="1">
+								<button type="button" data-dismiss="modal" class="transparentBtn highlight">No</button>
+								<button type="submit" class="filterBtn">Yes</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="peersModalAttending" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-body peers">
+          <h4>Peers List Attending Event</h4>
+          <div class="searchPeer">
+            <div class="filterSearch">
+                <input type="text" placeholder="Search Peers" name="">
+                <button type="submit" class="searchBtn">
+                    <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                        <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+                        s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+                        c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+                    </svg>
+                </button>
+            </div>
+          </div>
+          <div class="peersList">
+            <div class="listHeader">
+                <h6>Peers</h6>
+                
+            </div>
+            <div class="listUserWrap" id="peersModalAttendingList">
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
 				
 
 <script type="text/javascript">
@@ -10099,6 +10217,47 @@
 		});
 	});
 
+	$(document).on('click','.attendEvent',function(){
+        var event_id = $(this).data('id');
+        var txt = $('#attend_text_'+event_id).html(); 
+        $("#attend_event_id").val(event_id);
+        if(txt == 'Attend'){
+            $('#confirmationModalAttendHead').html('Do you want to attend this Event !');
+        } else {
+            $('#confirmationModalAttendHead').html("Are you sure you don't want to attend this Event !");
+        }
+
+    });
+
+    $(document).on("click", ".addEvents", function () {
+	     var event_id = $(this).data('id');
+	     $(".modal-body #calender_event_id").val(event_id);
+	     
+	});
+
+	$(document).on("click", ".removeEvent", function () {
+	     var event_id = $(this).data('id');
+	     $(".modal-body #remove_event_id").val(event_id);
+	     
+	});
+
+    function attendEvent(){
+        var id = $("#attend_event_id").val();
+        var txt = $('#attend_text_'+id).html();
+        if(id != ''){
+            $.ajax({
+                url : '<?php echo base_url();?>account/attendSharedEvent',
+                type : 'post',
+                data : {"id" : id, "type" : txt},
+                success:function(result) {
+                    $("#confirmationModalAttend").modal('hide');
+                    $("#attend_text_"+id).html(result);
+                    $("#attend_event_id").val('');
+                }   
+            })
+        }
+    }
+
 
 	function loadDashboardFeeds(count){ 
 		$.ajax({
@@ -10112,5 +10271,21 @@
 			}
 		});
 	}
+
+	$(document).on('click','.peersModalAttending',function(){
+        var event_id = $(this).data('id'); 
+        
+        $.ajax({
+            url : '<?php echo base_url();?>account/getPeersEVentAttending',
+            type : 'post',
+            data : {"id" : event_id},
+            success:function(result) {
+                
+                $('#peersModalAttendingList').html(result);
+            }
+        })
+        
+
+    });
 
 </script>
