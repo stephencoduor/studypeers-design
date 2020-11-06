@@ -565,7 +565,7 @@
 		$.ajax({
 			url : '<?php echo base_url();?>account/unshareToPeerDocument',
 			type : 'post',
-			data : {"study_set_id" : share_document, 'peer_id': peer_id},
+			data : {"id" : share_document, 'peer_id': peer_id},
 			success:function(result) {
 				$('#share_count_'+share_document).html(result);
 				$("#action_"+peer_id).html('<button type="button" class="like" onclick="shareToPeer('+peer_id+')">share</button>');
