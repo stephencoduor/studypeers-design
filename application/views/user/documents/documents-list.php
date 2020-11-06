@@ -361,7 +361,7 @@
 														</svg> Delete
 													</a>
 												</div>	
-												<?php if($value['privacy'] == 1) { ?>
+												<?php if($value['privacy'] == 2) { ?>
 													<div class="edit shareDocument" data-id="<?= $value['id']; ?>">
 
 														<a data-toggle="modal" data-target="#peersModalShare">
