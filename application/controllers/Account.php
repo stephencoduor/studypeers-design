@@ -3013,7 +3013,7 @@ class Account extends CI_Controller {
             } else {
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array();
             }
-            $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'document', 'reference_id' => $study_set_id, 'status' => 1))->row_array();
+            $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'document', 'reference_id' => $document_id, 'status' => 1))->row_array();
             
             $html.= '<section class="list"><section class="left">
                         <figure>
