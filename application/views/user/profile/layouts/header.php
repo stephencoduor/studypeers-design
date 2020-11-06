@@ -26,10 +26,6 @@ $this->db->order_by('id', 'DESC');
 $this->db->limit('10');
 $last_notification = $this->db->get_where('notification_master', array('user_id' => $user_id, 'status!=' => 3))->result_array();
 ?>
-
-<body>
-<div class="loading">Loading&#8230;</div>
-
 <header>
     <section class="container-fluid">
         <section class="row">
@@ -204,7 +200,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
                                                     <li id="notification_<?= $value['id']; ?>" class="<?= $cls; ?>">
                                                         <a>
                                                             <figure>
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                                                <img src="<?php echo userImage($value['img_user_id']); ?>" alt="user">
                                                             </figure>
                                                             <div class="right">
                                                                 <h6><?php echo $value['notification']; ?></h6>
@@ -227,7 +223,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
                                                     <li id="notification_<?= $value['id']; ?>" class="<?= $cls; ?>">
                                                         <a>
                                                             <figure>
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                                                <img src="<?php echo userImage($value['img_user_id']); ?>" alt="user">
                                                             </figure>
                                                             <div class="right">
                                                                 <h6><?php echo $value['notification']; ?></h6>
@@ -248,7 +244,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
                                                     <li id="notification_<?= $value['id']; ?>" class="<?= $cls; ?>">
                                                         <a>
                                                             <figure>
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                                                <img src="<?php echo userImage($value['img_user_id']); ?>" alt="user">
                                                             </figure>
                                                             <div class="right">
                                                                 <h6><?php echo $value['notification']; ?></h6>
@@ -265,7 +261,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
                                                     <li id="notification_<?= $value['id']; ?>" class="<?= $cls; ?>">
                                                         <a>
                                                             <figure>
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                                                <img src="<?php echo userImage($value['img_user_id']); ?>" alt="user">
                                                             </figure>
                                                             <div class="right">
                                                                 <h6><?php echo $value['notification']; ?></h6>
@@ -312,9 +308,11 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
                                 ?>
                             </li>
                             <li class = "dropdown">
-                                <a href = "#" class = "dropdown-toggle" data-toggle = "dropdown">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user1.jpg" alt="User" >
-                                    <div class="dropIcon">
+                                <a href = "#" class = "dropdown-toggle header-user-img" data-toggle = "dropdown">
+                                    <figure>
+                                        <img src="<?php echo userImage($userdata['user_id']); ?>" alt="User" >
+                                    </figure>
+                                    <div class="dropIcon" style="float: right;margin-top: 10px;">
                                         <i class="fa fa-angle-down" aria-hidden="true"></i>
                                     </div>
                                 </a>

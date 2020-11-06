@@ -11,3 +11,4 @@ josebautista/*
 .cgi-bin
 /application/config/database.php
 error_log
+uploads/*

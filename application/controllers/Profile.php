@@ -27,10 +27,12 @@ class Profile extends CI_Controller {
 			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
 		}
 
-		$peer_to = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 1 OR a.status = 2) ORDER BY a.id DESC')->result_array();
-		$peer_from = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 1 OR a.status = 2) ORDER BY a.id DESC')->result_array();
-		$peers = array_merge($peer_to, $peer_from);
-		$data['peers'] = $peers;
+		$friends_to = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
+		$friends_from = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
+		$peer_to = array_merge($friends_to, $friends_from);
+		$peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
+		$data['all_connections'] = $peer_to;
+		$data['all_requests'] = $peer_from;
 		$data['all_posts'] = $all_posts_array;
 		$data['connections'] = count($peer_to);
 		$data['requests'] = count($peer_from);
@@ -275,6 +277,52 @@ class Profile extends CI_Controller {
 		redirect(site_url('Profile/timeline'));
 
 	}
+
+	public function searchFriends()
+	{
+		$userdata = $this->session->userdata('user_data');
+		$search_term = $this->input->get('keyword');
+		$is_friend = $this->input->get('is_friend');
+		if($is_friend){
+			$status = 2;
+		}else{
+			$status = 1;
+		}
+		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+		$result = $query->result_array();
+		echo json_encode($result);
+	}
+
+	public function follow()
+	{
+		if($this->input->post()){
+			$peer_id    = $this->input->post('peer_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$insert_data = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id
+			);
+			$this->db->insert('follow_master', $insert_data);
+
+			echo true;
+		}
+	}
+
+	public function unfollow()
+	{
+		if($this->input->post()){
+			$peer_id    = $this->input->post('peer_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$check = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id
+			);
+			$this->db->where($check);
+			$this->db->delete('follow_master');
+			echo true;
+		}
+	}
+
 
 
 }

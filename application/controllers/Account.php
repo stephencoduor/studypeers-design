@@ -534,16 +534,10 @@ class Account extends CI_Controller {
                                                                     </svg> Hide
                                                                 </a>
                                                             </div>
-                                                            <div class="edit invitePeer" data-id="'.$value['id'].'">
+                                                            <div class="edit attendEvent" data-id="'.$value['id'].'">
                                                                 <a data-toggle="modal" data-target="#confirmationModalAttend">
-                                                                    <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-                                                                        <path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
-                                                                            c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
-                                                                            s-38.5-85.3-85.3-85.3c-26.8,0-50.9,12.6-66.5,32.2l-135.6-74.8c3.6-10.5,5.5-21.7,5.5-33.4c0-13-2.4-25.4-6.8-36.9l132.5-73
-                                                                            c15.4,22.9,41.5,38.1,70.9,38.1c46.8,0,85.3-38.5,85.3-85.3S451.5,0.5,404.7,0.5S319.4,39,319.4,85.8z M449.4,404.2
-                                                                            c0,25-19.8,44.7-44.7,44.7S360,429.1,360,404.2c0-25,19.8-44.7,44.7-44.7S449.4,379.2,449.4,404.2z M104,305.3
-                                                                            c-34.3,0-62.4-28.1-62.4-62.4s28.1-62.4,62.4-62.4s62.4,28.1,62.4,62.4C166.5,277.3,138.4,305.3,104,305.3z M449.4,85.8
-                                                                            c0,25-19.8,44.7-44.7,44.7S360,110.7,360,85.8c0-25,19.8-44.7,44.7-44.7S449.4,60.9,449.4,85.8z"></path>
+                                                                    <svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
+                                                                        <path d="m452 512h-392c-33.085938 0-60-26.914062-60-60v-392c0-33.085938 26.914062-60 60-60h392c33.085938 0 60 26.914062 60 60v392c0 33.085938-26.914062 60-60 60zm-392-472c-11.027344 0-20 8.972656-20 20v392c0 11.027344 8.972656 20 20 20h392c11.027344 0 20-8.972656 20-20v-392c0-11.027344-8.972656-20-20-20zm370.898438 111.34375-29.800782-26.6875-184.964844 206.566406-107.351562-102.046875-27.558594 28.988281 137.21875 130.445313zm0 0"/>
                                                                     </svg> <span id="attend_text_'.$value['id'].'">';
                                                                     if($shared['status'] == 2){
                                                                         $html.='Unattend';
@@ -581,11 +575,14 @@ class Account extends CI_Controller {
                                                                 
                                                                 $count = count($peer_attending) - 3;
                                                                 
-                                                                if($count > 3) {
-                                                                    $html.= '<li class="more">
-                                                                    +'.$count.'
-                                                                </li>';
-                                                                }
+                                                                
+                                                                $html.= '<li class="more">
+                                                                    +';
+                                                                    if($count > 3) {
+                                                                        $html.= $count;
+                                                                    }
+                                                                $html.= '</li>';
+                                                                
                                                                 
                                                             $html.= '</ul>
                                                         </div>';
@@ -808,11 +805,12 @@ class Account extends CI_Controller {
                                                             }
                                                                 
                                                                 $count = count($peer_attending) - 3;
-                                                                if($count > 3) {
-                                                                    $html.= '<li class="more">
-                                                                    +'.$count.'
-                                                                </li>';
-                                                                }
+                                                                $html.= '<li class="more">
+                                                                    +';
+                                                                    if($count > 3) {
+                                                                        $html.= $count;
+                                                                    }
+                                                                $html.= '</li>';
                                                                 
                                                             $html.= '</ul>
                                                         </div>';
@@ -3000,6 +2998,42 @@ class Account extends CI_Controller {
         }
     }
 
+    public function getPeerToShare(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $document_id = $this->input->post('id');
+        $peer_id = $this->input->post('peer_id');
+
+        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
+
+        $html = '';
+
+        foreach ($peer_list as $key => $value) {
+            if($value['user_id'] == $user_id){
+                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array();
+            } else {
+                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array();
+            }
+            $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'document', 'reference_id' => $study_set_id, 'status' => 1))->row_array();
+            
+            $html.= '<section class="list"><section class="left">
+                        <figure>
+                            <img src="'.userImage($peer['userID']).'" alt="user">
+                        </figure>
+                        <figcaption>'.$peer['nickname'].'</figcaption>
+                    </section>
+                    <section class="action" id="action_'.$peer['userID'].'">';
+                    if(empty($chk_if_shared)){
+                        $html.= '<button type="button" class="like" onclick="shareToPeer('.$peer['userID'].')">share</button>';
+                    } else {
+                        $html.= '<button type="button" class="like" onclick="unshareToPeer('.$peer['userID'].')">shared</button>';
+                    }
+                    $html.= '</section>
+                </section>';
+            
+        }
+        echo $html;die;
+    }
+
     public function shareToPeerDocument(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $id = $this->input->post('id');
@@ -3054,6 +3088,36 @@ class Account extends CI_Controller {
         return 1;
     }
 
+
+    public function unshareToPeerDocument(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        $peer_id = $this->input->post('peer_id');
+
+        $this->db->order_by('share_master.id', 'desc');
+        $action_detail    = $this->db->get_where('share_master', array('reference' => 'document', 'reference_id' => $id, 'user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
+
+        $this->db->where(array('id' => $action_detail['id']));
+        $this->db->delete('share_master');
+
+        $this->db->where(array('action_id' => $action_detail['id']));
+        $this->db->delete('notification_master');
+
+        $this->updateShareCountDocumentDec($id);
+
+        $det = $this->db->get_where($this->db->dbprefix('document_master'), array('id'=>$id))->row_array(); 
+
+        
+        echo $det['shareCount'];die;
+    }
+
+    function updateShareCountDocumentDec($id){
+        $this->db->where('id',$id);
+        $this->db->set('shareCount', 'shareCount-1', FALSE);
+        $update_like = $this->db->update('document_master');
+        return 1;
+    }
+
     public function getPeerToInvite(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $id = $this->input->post('id');
@@ -3070,18 +3134,40 @@ class Account extends CI_Controller {
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
             }
             $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id'=>$peer['userID'], 'reference' => 'event', 'reference_id' => $id, 'status!=' => 4))->row_array(); 
-            if(empty($chk_if_shared)){
+            if(!empty($chk_if_shared)){
+                if($chk_if_shared['status'] != 2){
+                    $html.= '<section class="list"><section class="left">
+                            <figure>
+                                <img src="'.userImage($peer['userID']).'" alt="user">
+                            </figure>
+                            <figcaption>'.$peer['nickname'].'</figcaption>
+                        </section>
+                        <section class="action" id="action_'.$peer['userID'].'">';
+                        if(empty($chk_if_shared)){
+                            $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>';
+                        } else {
+                            $html.= '<button type="button" class="like" onclick="uninvitePeerEvent('.$peer['userID'].')">invited</button>';
+                        }
+                        $html.= '</section>
+                    </section>';
+                }
+            } else {
                 $html.= '<section class="list"><section class="left">
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
                             <figcaption>'.$peer['nickname'].'</figcaption>
                         </section>
-                        <section class="action" id="action_'.$peer['userID'].'">
-                            <button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>
-                        </section>
+                        <section class="action" id="action_'.$peer['userID'].'">';
+                        if(empty($chk_if_shared)){
+                            $html.= '<button type="button" class="like" onclick="inviteToPeer('.$peer['userID'].')">invite</button>';
+                        } else {
+                            $html.= '<button type="button" class="like" onclick="uninvitePeerEvent('.$peer['userID'].')">invited</button>';
+                        }
+                        $html.= '</section>
                     </section>';
             }
+            
         }
         echo $html;die;
     }
@@ -3093,6 +3179,7 @@ class Account extends CI_Controller {
         
 
         $peer_attending = $this->db->get_where('share_master', array('reference_id' => $id, 'reference' => 'event', 'status' => 2))->result_array();
+        $event_details = $this->db->get_where('event_master', array('id' => $id))->row_array();
 
         $html = '';
 
@@ -3101,14 +3188,22 @@ class Account extends CI_Controller {
             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['peer_id']))->row_array(); 
             
             
-                $html.= '<section class="list"><section class="left">
+                $html.= '<div id="remove_peer_'.$peer['userID'].'"><section class="list"><section class="left" >
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
                             <figcaption>'.$peer['nickname'].'</figcaption>
-                        </section>
+                        </section>';
+                        if($event_details['created_by'] == $user_id) {
+                            $html.= '<section class="action" >
+                    
+                            <button type="button" class="like" onclick="removePeer('.$peer['userID'].')">Remove</button></section>';
+                        } else {
+                            $html.= '<section class="action" >
+                    
+                            <button type="button" class="like">Attending</button></section></div>';
+                        }
                         
-                    </section>';
             
         }
         echo $html;die;
@@ -3156,6 +3251,38 @@ class Account extends CI_Controller {
         foreach ($get_active_token  as $key => $value) {
             $this->sendTestNotification($value['token'], 'Event Invitation', 'You have received an event invitation', $action_id);
         }
+        echo 1;die;
+    }
+
+    public function uninvitePeerEvent(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        $peer_id = $this->input->post('peer_id');
+
+        $this->db->order_by('share_master.id', 'desc');
+        $action_detail = $this->db->get_where('share_master', array('reference' =>  'event', 'reference_id' => $id, 'user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
+
+        $this->db->where(array('id' => $action_detail['id']));
+        $this->db->delete('share_master');
+
+        $this->db->where(array('action_id' => $action_detail['id']));
+        $this->db->delete('notification_master');
+
+        echo 1;die;
+    }
+
+    public function removePeerAttending(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        $peer_id = $this->input->post('peer_id');
+
+        $this->db->order_by('share_master.id', 'desc');
+        $action_detail = $this->db->get_where('share_master', array('reference' =>  'event', 'reference_id' => $id, 'user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
+
+        $this->db->where(array('id' => $action_detail['id']));
+        $this->db->delete('share_master');
+
+        
         echo 1;die;
     }
 

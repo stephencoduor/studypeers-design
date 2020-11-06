@@ -536,6 +536,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 
 			<script type="text/javascript">
 				function acceptRequest(id, action_id){
+					console.log("here");
 					$.ajax({
 						url : '<?php echo base_url();?>account/acceptRequest',
 						type : 'post',

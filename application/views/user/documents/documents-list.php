@@ -361,20 +361,22 @@
 														</svg> Delete
 													</a>
 												</div>	
-												<div class="edit shareDocument" data-id="<?= $value['id']; ?>">
+												<?php if($value['privacy'] == 2) { ?>
+													<div class="edit shareDocument" data-id="<?= $value['id']; ?>">
 
-													<a data-toggle="modal" data-target="#peersModalShare">
-														<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-															<path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
-																c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
-																s-38.5-85.3-85.3-85.3c-26.8,0-50.9,12.6-66.5,32.2l-135.6-74.8c3.6-10.5,5.5-21.7,5.5-33.4c0-13-2.4-25.4-6.8-36.9l132.5-73
-																c15.4,22.9,41.5,38.1,70.9,38.1c46.8,0,85.3-38.5,85.3-85.3S451.5,0.5,404.7,0.5S319.4,39,319.4,85.8z M449.4,404.2
-																c0,25-19.8,44.7-44.7,44.7S360,429.1,360,404.2c0-25,19.8-44.7,44.7-44.7S449.4,379.2,449.4,404.2z M104,305.3
-																c-34.3,0-62.4-28.1-62.4-62.4s28.1-62.4,62.4-62.4s62.4,28.1,62.4,62.4C166.5,277.3,138.4,305.3,104,305.3z M449.4,85.8
-																c0,25-19.8,44.7-44.7,44.7S360,110.7,360,85.8c0-25,19.8-44.7,44.7-44.7S449.4,60.9,449.4,85.8z"></path>
-														</svg> Share
-													</a>
-												</div>
+														<a data-toggle="modal" data-target="#peersModalShare">
+															<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
+																<path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
+																	c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
+																	s-38.5-85.3-85.3-85.3c-26.8,0-50.9,12.6-66.5,32.2l-135.6-74.8c3.6-10.5,5.5-21.7,5.5-33.4c0-13-2.4-25.4-6.8-36.9l132.5-73
+																	c15.4,22.9,41.5,38.1,70.9,38.1c46.8,0,85.3-38.5,85.3-85.3S451.5,0.5,404.7,0.5S319.4,39,319.4,85.8z M449.4,404.2
+																	c0,25-19.8,44.7-44.7,44.7S360,429.1,360,404.2c0-25,19.8-44.7,44.7-44.7S449.4,379.2,449.4,404.2z M104,305.3
+																	c-34.3,0-62.4-28.1-62.4-62.4s28.1-62.4,62.4-62.4s62.4,28.1,62.4,62.4C166.5,277.3,138.4,305.3,104,305.3z M449.4,85.8
+																	c0,25-19.8,44.7-44.7,44.7S360,110.7,360,85.8c0-25,19.8-44.7,44.7-44.7S449.4,60.9,449.4,85.8z"></path>
+															</svg> Share
+														</a>
+													</div>
+												<?php } ?>
 											<?php } else { ?>
 												<div class="delete removeSharedDoc" data-id="<?php echo $value['id'];?>">
 													<a data-toggle="modal" data-target="#confirmationModalRemove">										
@@ -551,9 +553,24 @@
 			data : {"id" : share_document, 'peer_id': peer_id},
 			success:function(result) {
 				$('#share_count_'+share_document).html(result);
-				$("#action_"+peer_id).html('<button type="button" class="like">shared</button>');
+				$("#action_"+peer_id).html('<button type="button" class="like" onclick="unshareToPeer('+peer_id+')">shared</button>');
 				// $("#share_studyset").val('');
 			}	
+		})
+	}
+
+	function unshareToPeer(peer_id){
+		var share_document = $('#share_document').val();
+
+		$.ajax({
+			url : '<?php echo base_url();?>account/unshareToPeerDocument',
+			type : 'post',
+			data : {"study_set_id" : share_document, 'peer_id': peer_id},
+			success:function(result) {
+				$('#share_count_'+share_document).html(result);
+				$("#action_"+peer_id).html('<button type="button" class="like" onclick="shareToPeer('+peer_id+')">share</button>');
+				// $("#share_studyset").val('');
+			}
 		})
 	}
 
@@ -561,7 +578,7 @@
 		var share_id = $(this).data('id');
 		$("#share_document").val(share_id);
 		$.ajax({
-			url : '<?php echo base_url();?>studyset/getPeerToShare',
+			url : '<?php echo base_url();?>account/getPeerToShare',
 			type : 'post',
 			data : {"id" : share_id},
 			success:function(result) {
