@@ -2635,11 +2635,11 @@ textarea{
 
 
 .faq_menu a:hover {
-background-color: #FFFFFF;
+background-color: #FFFFFF !important;
   
   color: #FF0066;
 }
 .faq_menu a:active {
   
-  color: #FF0066;
+  color: #FF0066 !important;
 }
