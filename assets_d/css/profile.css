@@ -2066,6 +2066,7 @@ shareOptionList celebrate*/
 }
 #profile .postWrapper {
     justify-content: space-between;
+    padding-top: 10px;
 }
 #profile .postWrapper h5 {
     font-size: 19px;
@@ -2170,6 +2171,11 @@ shareOptionList celebrate*/
     border:0;
     cursor: pointer;
     outline: none;
+    height: auto;
+    appearance: auto;
+    -webkit-appearance: auto;
+    -moz-appearance: auto;
+    -o-appearance: auto;
 }
 .userBoxWrapper {
     display: flex;
@@ -2224,7 +2230,8 @@ shareOptionList celebrate*/
     height:100%;
 }
 .userBoxWrapper.gridview .profileSection figure {
-    margin: auto;
+    margin: 0 auto;
+    float: none;
 }
 .profileSection h5 {
     font-size: 20px;
@@ -2713,7 +2720,48 @@ shareOptionList celebrate*/
     top: 0;
     padding: 0 20px 0 40px;
 }
+.editHeading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
 /*Ends*/
+#edit_about_info .list {
+    justify-content: flex-start;
+}
+#edit_about_info .list .heading {
+    min-width: 100px;
+}
+#edit_about_info .list .value {
+    width: 300px;
+}
+#update_about_info {
+    margin-right: 10px;
+}
+.edit_general_info {
+    width: 100%;
+}
+.edit_general_info .list .value {
+    width: 70%;
+}
+.profile_general_info {
+    width: 100%;
+}
+#cover_image_demo {
+    width:100%;
+}
+#cover_image_demo .cr-boundary {
+    width:90% !important;
+}
+#cover_image_demo .cr-slider-wrap {
+    width:95% !important;
+}
+
+@media(max-width: 767px) {
+    .modal-dialog {
+        width: 90%;
+    }
+}
 
 
 
