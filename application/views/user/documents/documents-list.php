@@ -578,7 +578,7 @@
 		var share_id = $(this).data('id');
 		$("#share_document").val(share_id);
 		$.ajax({
-			url : '<?php echo base_url();?>studyset/getPeerToShare',
+			url : '<?php echo base_url();?>account/getPeerToShare',
 			type : 'post',
 			data : {"id" : share_id},
 			success:function(result) {
