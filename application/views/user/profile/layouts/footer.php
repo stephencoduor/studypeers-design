@@ -807,9 +807,23 @@
                         $('.follow_'+peer_id).attr('id',1);
                     }
                 }
-            })
+            });
         });
 
+        $('.unfriend_peer').on("click", function(){
+            var peer_master_id = $(this).attr('id');
+            var url = '<?php echo base_url();?>Profile/unfriend';
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_master_id" : peer_master_id},
+                success:function(result) {
+                    if(result == 1){
+                        $('#remove_friend_'+peer_master_id).remove();
+                    }
+                }
+            })
+        });
 
 
     });
