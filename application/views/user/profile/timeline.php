@@ -122,9 +122,9 @@ die;*/
                             </div>
                             <div class="tabularLiist">
                                 <ul class="nav nav-tabs">
-                                    <li class="active"><a data-toggle="tab" href="#feed">Feeds</a></li>
+                                    <li class="<?php if(!isset($_GET['tab'])) { echo "active"; } ?>"><a data-toggle="tab" href="#feed">Feeds</a></li>
                                     <li><a data-toggle="tab" href="#profile">Profile</a></li>
-                                    <li><a data-toggle="tab" href="#peers">Peers</a></li>
+                                    <li class="<?php if(isset($_GET['tab']) && ($_GET['tab'] == 'peers')) { echo "active"; } ?>"><a data-toggle="tab" href="#peers">Peers</a></li>
                                     <li><a data-toggle="tab" href="#institution">Institutions</a></li>
                                     <li><a data-toggle="tab" href="#courses">Courses</a></li>
                                     <li><a data-toggle="tab" href="#professor">Professor</a></li>
@@ -134,7 +134,7 @@ die;*/
                         </div>
                     </div>
                     <div class="tab-content">
-                        <div id="feed" class="tab-pane fade in active">
+                        <div id="feed" class="tab-pane fade in <?php if(!isset($_GET['tab'])) { echo "active"; } ?>">
                             <div class="innerFeedTabs">
                                 <div class="tabularLiist">
                                     <ul class="nav nav-tabs">
@@ -1244,46 +1244,6 @@ die;*/
                             </li>
                             <li class="block" data-dismiss="modal" data-toggle="modal" href="#reportuser">
                                 <a href="javascript:void(0)">Block</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="deleteUser" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-            <div class="modal-body">
-                <div class="createHeader">
-                    <div class="closePost" data-dismiss="modal">
-                        <img src="images/close-grey.svg" alt="close">
-                    </div>
-                </div>
-                <h4>Remove Username from your peers list?</h4>
-                <div class="profileSection">
-                    <div class="profileViewToggleWrapper">
-                        <figure>
-                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                        </figure>
-                        <div class="changeView">
-                            <h5>Full Name</h5>
-                            <p>location name</p>
-                            <div class="followers">
-                                <span>25 </span> Followers
-                            </div>
-                        </div>
-                    </div>
-                    <div class="followOptionsWrapper">
-                        <ul>
-                            <li>
-                                <a href="javascript:void(0)">Cancel</a>
-                            </li>
-                            <li class="block" data-dismiss="modal" data-toggle="modal" href="#reportuser">
-                                <a href="javascript:void(0)">Remove</a>
                             </li>
                         </ul>
                     </div>
