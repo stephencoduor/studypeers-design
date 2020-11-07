@@ -560,7 +560,7 @@ $("#course_form").submit(function(e) {
            url: url,
            data: form.serialize() + '&page=' + pathname, // serializes the form's elements.
            success: function(data)
-           {    if(pathname == '/studypeers/account/dashboard') {
+           {    if(pathname == '/account/dashboard') {
                     $('#courseModal').modal('hide');
                     $('#course_count_dashboard').html(data);
                     $("#course_form")[0].reset();
