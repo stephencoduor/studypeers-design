@@ -17,8 +17,8 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
-<script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
 
 <script>
@@ -807,9 +807,23 @@
                         $('.follow_'+peer_id).attr('id',1);
                     }
                 }
-            })
+            });
         });
 
+        $('.unfriend_peer').on("click", function(){
+            var peer_master_id = $(this).attr('id');
+            var url = '<?php echo base_url();?>Profile/unfriend';
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_master_id" : peer_master_id},
+                success:function(result) {
+                    if(result == 1){
+                        $('#remove_friend_'+peer_master_id).remove();
+                    }
+                }
+            })
+        });
 
 
     });

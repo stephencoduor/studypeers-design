@@ -36,7 +36,7 @@
                         <div class="left">
                             <div class="userBoxWrapper gridview friend_container">
                                 <?php if(isset($all_connections)){ foreach($all_connections as $peer){ ?>
-                                <div class="card">
+                                <div class="card" id="remove_friend_<?php echo $peer['peer_master_id']; ?>">
                                     <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
                                         <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
                                     </div>
@@ -60,20 +60,16 @@
                                                         if($follow_status){
                                                             ?>
                                                             <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="0">UnFollow</a>
-
-
                                                             <?php
                                                         }else{
                                                             ?>
                                                             <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="1">Follow</a>
-
                                                             <?php
                                                         }
-
                                                     ?>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0)">Unfriend</a>
+                                                    <a href="javascript:void(0)" class="unfriend_peer" id="<?php echo $peer['peer_master_id']; ?>">Unfriend</a>
                                                 </li>
                                             </ul>
                                         </div>
