@@ -47,4 +47,13 @@ $(document).ready(function(){
     $(document).on('click', ".open-chat", function() {
         $(".chat-wrapper").removeClass("hide-chat");
     });
+
+    $("#myUL").on("click", "a", function(){
+        $(".chat-wrapper").addClass("small").removeClass("hide-chat");
+        $(".chat-wrapper").find(".chat-left").hide();
+    });
+    $(".chat-right").on("click", ".chat-close", function(){
+        $(".chat-wrapper").addClass("hide-chat").removeClass("small");
+        $(".chat-wrapper").find(".chat-left").show();
+    });
 });
