@@ -14,9 +14,11 @@
      padding:5px 10px;
  }
  .left-area{
+    width:50%;
     font-size:14px;
     font-weight: bold;
     color: #2a234f;
+    position: relative;
  }
  .left-area span{
      color:#129e84;
@@ -156,13 +158,17 @@ div.time{
     width: calc(100% - 275px);
     height:calc(100vh - 78px);
     position: fixed;
-    right: 0;
+    right:0;
     bottom: 0;
     z-index: 99;
     background: #fff;
     border: 1px solid #eae9ee;
     display: flex;
     align-items: flex-start;
+    transition:0.3s ease-in;
+}
+.chat-wrapper.hide-chat{
+    right: -100%;
 }
 .chat-wrapper .chat-dropdown-header{
     padding:10px 15px;
@@ -385,4 +391,85 @@ div.time{
     max-width:100%;
     height: auto;
     display: block;
+}
+.chat-wrapper.small{
+    width:340px;
+    height: 50%;
+    overflow-y: auto;
+}
+.chat-wrapper.small .chat-msg{
+    max-width:100%;
+}
+.chat-wrapper.small .message-sent{
+    max-width:100%;
+}
+.chat-wrapper.small .chat-header{
+    padding:10px;
+}
+.chat-wrapper.small .chat-body-wrap {
+    padding: 0 0 10px;
+}
+.chat-wrapper.small .chat-header-left figure {
+    width: 50px;
+    height: 50px;
+}
+.chat-wrapper .hide-on-big{
+    display:none;
+}
+.chat-wrapper.small .hide-on-big{
+    display:block;
+}
+.chat-wrapper.small .hide-on-small{
+    display:none;
+}
+.chat-wrapper:before{
+    width:275px;
+    height:100%;
+    position: absolute;
+    content:"";
+    left:-275px;
+    bottom:0;
+    background:rgba(0,0,0,0.5);
+}
+.chat-wrapper .chat-dropdown-header .right-area{
+    display: flex;
+}
+.for-mobile{
+    display: flex;
+    align-items:center;
+    position: absolute;
+    top:50%;
+    left:0;
+    transform: translateY(-50%);
+    z-index:9;
+    opacity:0;
+    transition:0.3s ease-in;
+}
+.chat-wrapper.small .chat-user-list li figure {
+    width: 30px;
+    height: 30px;
+}
+.for-mobile figure {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 50%;
+}
+.for-mobile img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+}
+
+.chat-wrapper.small .for-mobile{
+    opacity:1;
+}
+.chat-wrapper.small .chat-left .right-area a{
+    padding: 10px!important;
+}
+.hide-on-big a{
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
