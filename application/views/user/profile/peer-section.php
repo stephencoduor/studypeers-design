@@ -1,4 +1,4 @@
-<div id="peers" class="tab-pane fade in">
+<div id="peers" class="tab-pane fade in <?php if(isset($_GET['tab']) && ($_GET['tab'] == 'peers')) { echo "active"; } ?>"">
     <div class="innerFeedTabs">
         <div class="tabularLiist">
             <div class="TabsAndSortWrapper">
@@ -36,7 +36,7 @@
                         <div class="left">
                             <div class="userBoxWrapper gridview friend_container">
                                 <?php if(isset($all_connections)){ foreach($all_connections as $peer){ ?>
-                                <div class="card">
+                                <div class="card" id="remove_friend_<?php echo $peer['peer_master_id']; ?>">
                                     <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
                                         <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
                                     </div>
@@ -60,20 +60,16 @@
                                                         if($follow_status){
                                                             ?>
                                                             <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="0">UnFollow</a>
-
-
                                                             <?php
                                                         }else{
                                                             ?>
                                                             <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="1">Follow</a>
-
                                                             <?php
                                                         }
-
                                                     ?>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0)">Unfriend</a>
+                                                    <a href="javascript:void(0)" class="unfriend_peer" data-toggle="modal" data-target="#unfriend_peer" id="<?php echo $peer['peer_master_id']; ?>">Unfriend</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -125,6 +121,37 @@
                             </div>
                         </div>
                         <?php include 'right-side-content.php' ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<div class="modal fade" id="unfriend_peer" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Confirmation</h4>
+                <div class="profileSection">
+                <h4>Are you sure to remove this peer !</h4>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <form method="post" action="<?php echo base_url(); ?>profile/unfriend">
+                                <div class="form-group button">
+                                    <input type="hidden" name="peer_master_id" id="peer_master_id">
+                                    <button data-dismiss="modal" class="transparentBtn highlight cancelRemoveBtn">No</button>
+                                    <button type="submit" class="removeBtn">Yes</button>
+                                </div>
+                            </form>
+
+                        </div>
                     </div>
                 </div>
             </div>

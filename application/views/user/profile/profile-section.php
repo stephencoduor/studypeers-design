@@ -79,7 +79,7 @@
                                     </div>
                                 </div>
                                 <div class="list">
-                                    <div class="row">
+                                    <div>
                                         <button class="btn btn-primary" type="submit" id="update_general_information">Update</button>
                                         <button class="btn btn-default" type="button" id="show_general_info">Cancel</button>
                                     </div>
@@ -121,7 +121,7 @@
                     </div>
                     <div id="edit_about_info" style="display: none;">
                         <form method="post" action="<?php echo base_url().'Profile/updateAboutInfo' ?>">
-                            <div class="row">
+                            <div>
                                 <div class="list">
                                     <div class="heading">About Me</div>
                                     <div class="value">
@@ -186,11 +186,13 @@
                     </div>
 
                     <div class="useraboutWrapper social">
-                        <h5>Follow</h5>
-                        <div class="editWrapper" id="edit_social">
-                            <img src="<?php echo base_url(); ?>assets_d/images/edit.svg" alt="edit"> Edit
+                        <div class="editHeading">
+                            <h5>Follow</h5>
+                            <div class="editWrapper" id="edit_social">
+                                <img src="<?php echo base_url(); ?>assets_d/images/edit.svg" alt="edit"> Edit
+                            </div>
                         </div>
-                        <div class="row" id="social_info">
+                        <div id="social_info">
                             <ul>
                                 <li>
                                     <a href="<?php echo @$user_detail['fb_link']; ?>" target="_blank">
@@ -240,7 +242,7 @@
                                     <input type="text" class="form-control" name="youtube_link" value="<?php echo @$user_detail['youtube_link']; ?>"/>
                                 </div>
                             </div>
-                            <div class="row">
+                            <div>
                                 <button class="btn btn-primary" type="submit">Submit</button>
                                 <button class="btn btn-default" type="button" id="show_social_div">Cancel</button>
                             </div>

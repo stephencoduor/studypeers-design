@@ -207,7 +207,7 @@
                         Add a course
                     </div>
                 </div>
-                <form method="post" action="<?php echo base_url(); ?>account/postCourse" onsubmit="return validateCourse()" id="course_form">
+                <form method="post" action="<?php echo base_url(); ?>account/postCourse" id="course_form">
                     <div class="courseBox">
                         <div class="removeCourseBox" style="display: none;">
                             <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 

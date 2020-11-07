@@ -27,8 +27,8 @@ class Profile extends CI_Controller {
 			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
 		}
 
-		$friends_to = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
-		$friends_from = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
+		$friends_to = $this->db->query('SELECT *, a.id As peer_master_id from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
+		$friends_from = $this->db->query('SELECT *, a.id As peer_master_id  from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
 		$peer_to = array_merge($friends_to, $friends_from);
 		$peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
 		$data['all_connections'] = $peer_to;
@@ -280,7 +280,7 @@ class Profile extends CI_Controller {
 
 	public function searchFriends()
 	{
-		$userdata = $this->session->userdata('user_data');
+	/*	$userdata = $this->session->userdata('user_data');
 		$search_term = $this->input->get('keyword');
 		$is_friend = $this->input->get('is_friend');
 		if($is_friend){
@@ -290,7 +290,7 @@ class Profile extends CI_Controller {
 		}
 		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
 		$result = $query->result_array();
-		echo json_encode($result);
+		echo json_encode($result);*/
 	}
 
 	public function follow()
@@ -320,6 +320,16 @@ class Profile extends CI_Controller {
 			$this->db->where($check);
 			$this->db->delete('follow_master');
 			echo true;
+		}
+	}
+
+	public function unfriend()
+	{
+		if($this->input->post()){
+			$peer_master_id    = $this->input->post('peer_master_id');
+			$this->db->where('id', $peer_master_id);
+			$this->db->delete('peer_master');
+			redirect(site_url('Profile/timeline?tab=peers'));
 		}
 	}
 

@@ -11,6 +11,7 @@ a.navbar-brand{padding-left: 39px;}
 header .navbar-default ul li a,.navbar-brand{color:#b8bee3 !important;}
 .messageBox {background-color: #e8effd;border-radius: 8px;padding: 8px;}
 .nav li {vertical-align: middle;display: inline-block;float: none !important;}
+.nav li.user {width: 70px;}
 .nav li a {padding: 10px 15px !important;}
 .nav li a i{font-size:20px;color:#9592a7;}
 .nav li a span{position: absolute;top: 50%;left: 50%;margin-top:-30px;margin-left: 4px;background:#ea2e7e;border-radius: 50%;padding: 0.4em .7em .6em;}
@@ -29,7 +30,7 @@ header .navbar-default ul li a,.navbar-brand{color:#b8bee3 !important;}
 #searchForm form input[type="submit"]{border: 0;text-indent: -9999px;cursor: pointer; outline: 0; background: url(../images/srch_lens.png) no-repeat; position: absolute; top: 14px; right: 12px; width: 39px; height: 38px;}
 #searchForm a.close{font-size: 24px;color: #fff !important;text-decoration: none;position: fixed;right:25%;top: 43%;z-index: 99999 !important;opacity: 1;}
 .dashbody{width:100%;float:left;margin-top: 95px;}
-aside{top: 90px;height: 100%;z-index:99;position:fixed;width:276px;left:0;max-height:100%;-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-ms-transition: all 0.3s ease;
+aside{top: 80px;height: 100%;z-index:99;position:fixed;width:276px;left:0;max-height:100%;-webkit-transition: all 0.3s ease;-moz-transition: all 0.3s ease;-ms-transition: all 0.3s ease;
     -o-transition: all 0.3s ease;transition: all 0.3s ease;background:#fff;}
 .sidebar-content{max-height: calc(100% - 30px);
     height: calc(100% - 30px);
@@ -111,7 +112,7 @@ aside.active{transform: translateX(-310px);-webkit-transform: translateX(-310px)
     background: #fff;
     position: fixed;
     right: 0;
-    top: 89px !important;
+    top: 80px !important;
     left: auto !important;
     border-left: 1px solid #eae9ee;
     padding: 10px 15px;
@@ -653,8 +654,8 @@ a.filterBtn,a.sortMenu{
 }
 @media(max-width:1400px){
     header .navbar-default{margin:10px auto 0 auto;}
-    aside{top:80px;}
-    .rightsidemsgbar{top: 80px !important;z-index: 11;}
+    aside{top:70px;}
+    .rightsidemsgbar{top: 70px !important;z-index: 11;}
     .search{margin-top:5px;margin-left: 40px;}
     .desktopToggleButton {display: block;}
     .aside.active{

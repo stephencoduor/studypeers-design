@@ -7,10 +7,10 @@
             </div>
             <div class="modal-body">
                 <div class="row">
-                    <div class="col-md-8 text-center">
+                    <div class="col-md-8 col-xs-8 text-center">
                         <div id="image_demo" style="width:350px; margin-top:30px"></div>
                     </div>
-                    <div class="col-md-4" style="padding-top:30px;">
+                    <div class="col-md-4 col-xs-4" style="padding-top:30px;">
                         <br />
                         <br />
                         <br/>

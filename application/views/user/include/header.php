@@ -482,7 +482,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 					</section>
 					<section class="coursepanel">
 						<section class="courseheader header">
-							<h6>Courses (<?php echo count($get_course); ?>)</h6>
+							<h6>Courses (<span id="course_count_dashboard"><?php echo count($get_course); ?></span>)</h6>
 							<a class="userIcoList" data-toggle="modal" data-target="#courseModal"><i class="fa fa-plus"></i></a>
 						</section>
 						<?php foreach ($get_course as $key => $value) {

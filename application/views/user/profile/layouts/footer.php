@@ -17,8 +17,8 @@
 <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
-<script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
 
 <script>
@@ -732,6 +732,7 @@
                 url : '<?php echo base_url();?>Profile/searchFriends?keyword='+search_value+"&is_friend="+friend,
                 type : 'get',
                 success:function(result) {
+                    console.log(result);
                     /* for(var i = 0; i < result.length; i++){
                          if(friend == 0){
                              html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
@@ -807,9 +808,13 @@
                         $('.follow_'+peer_id).attr('id',1);
                     }
                 }
-            })
+            });
         });
 
+        $('.unfriend_peer').on("click", function(){
+            var peer_master_id = $(this).attr('id');
+            $('#peer_master_id').val(peer_master_id);
+        });
 
 
     });
