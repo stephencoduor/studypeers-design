@@ -2698,7 +2698,7 @@ class Account extends CI_Controller {
             
             }
             
-            if($page == '/studypeers/account/dashboard') {
+            if($page == '/account/dashboard') {
                 $course     = $this->db->get_where('course_master', array('status' => 1, 'user_id' => $user_id))->num_rows();
                 echo $course;die;
             } else {
