@@ -280,7 +280,7 @@ class Profile extends CI_Controller {
 
 	public function searchFriends()
 	{
-		$userdata = $this->session->userdata('user_data');
+	/*	$userdata = $this->session->userdata('user_data');
 		$search_term = $this->input->get('keyword');
 		$is_friend = $this->input->get('is_friend');
 		if($is_friend){
@@ -290,7 +290,7 @@ class Profile extends CI_Controller {
 		}
 		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
 		$result = $query->result_array();
-		echo json_encode($result);
+		echo json_encode($result);*/
 	}
 
 	public function follow()
@@ -329,9 +329,8 @@ class Profile extends CI_Controller {
 			$peer_master_id    = $this->input->post('peer_master_id');
 			$this->db->where('id', $peer_master_id);
 			$this->db->delete('peer_master');
-			echo true;
+			redirect(site_url('Profile/timeline?tab=peers'));
 		}
-		echo false;
 	}
 
 
