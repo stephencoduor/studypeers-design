@@ -542,3 +542,37 @@ $(window).resize(function() {
         $('.rightsidemsgbar').css("transform","translateX(0px)");
     }
 })
+
+
+
+$("#course_form").submit(function(e) {
+    var pathname = window.location.pathname;
+    
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var chk = validateCourse(); 
+    if(chk !== false) {
+        var form = $(this);
+        var url = form.attr('action');
+    
+        $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize() + '&page=' + pathname, // serializes the form's elements.
+           success: function(data)
+           {    if(pathname == '/account/dashboard') {
+                    $('#courseModal').modal('hide');
+                    $('#course_count_dashboard').html(data);
+                    $("#course_form")[0].reset();
+               } else {
+                    $('#courseModal').modal('hide');
+                    $('#course').html(data);
+                    $("#course_form")[0].reset();
+               }
+               
+           }
+         });
+    }
+
+    
+});

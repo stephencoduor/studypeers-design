@@ -193,7 +193,7 @@
 											Messages <span class="total-message">(03)</span>
 										</div>
 										<div class="right-area">
-											<a href="javascript:void(0)"><img src="assets/images/maximize.svg" alt="Maximize Icon"/></a>
+											<a href="javascript:void(0)" class="open-chat"><img src="assets/images/maximize.svg" alt="Maximize Icon"/></a>
 											<a href="javascript:void(0)"><img src="assets/images/new_message.svg" alt="New Message"/></a>
 										</div>
 									</div>
@@ -211,7 +211,7 @@
 										<div class="chat-user-list">
 											<ul id="myUL">
 												<li>
-													<a href="">
+													<a href="javascript:void(0)">
 														<figure>
 															<img src="assets/images/student-img.png" alt="">
 														</figure>
@@ -223,7 +223,7 @@
 													</a>
 												</li>
 												<li>
-													<a href="">
+													<a href="javascript:void(0)">
 														<figure>
 															<img src="assets/images/student-img.png" alt="">
 														</figure>
@@ -234,7 +234,7 @@
 													</a>
 												</li>
 												<li>
-													<a href="">
+													<a href="javascript:void(0)">
 														<figure>
 															<img src="assets/images/student-img.png" alt="">
 														</figure>
@@ -245,7 +245,7 @@
 													</a>
 												</li>
 												<li>
-													<a href="">
+													<a href="javascript:void(0)">
 														<figure>
 															<img src="assets/images/student-img.png" alt="">
 														</figure>
@@ -842,15 +842,23 @@
 		</section>
 	</section>
 	<!-- Modal -->
-	<div class="chat-wrapper">
+	<div class="chat-wrapper hide-chat">
 		<div class="chat-left">
 			<div class="chat-body-wrap">
 				<div class="chat-dropdown-header">
 					<div class="left-area">
-						Messages <span class="total-message">(03)</span>
+						<div class="for-mobile">
+							<figure>
+								<img src="assets/images/student-img.png" alt="Image">
+							</figure>
+							<strong>John Smith</strong>
+						</div>
+						<div class="hide-on-small">
+							Messages <span class="total-message">(03)</span>
+						</div>
 					</div>
 					<div class="right-area">
-						<a href="javascript:void(0)"><img src="assets/images/minimize.svg" alt="Maximize Icon"/></a>
+						<a href="javascript:void(0)" class="minimize"><img src="assets/images/minimize.svg" class="change-icon" alt="Maximize Icon"/></a>
 						<a href="javascript:void(0)"><img src="assets/images/new_message.svg" alt="New Message Icon"/></a>
 					</div>
 				</div>
@@ -924,8 +932,14 @@
 					<strong>John Smith</strong>
 				</div>
 				<div class="chat-header-right">
+					<div class="hide-on-big">
+						<a href="javascript:void(0)" class="maximize"><img src="assets/images/maximize.svg" class="change-icon" alt="Maximize Icon"/></a>
+					</div>
 					<a href="javascript:void(0)"><img src="assets/images/video-camera.svg" alt="Video Icon"/></a>
-					<a href="javascript:void(0)"><img src="assets/images/more.svg" alt="More Icon"/></a>
+					<a href="javascript:void(0)" class="hide-on-small"><img src="assets/images/more.svg" alt="More Icon"/></a>
+					<div class="hide-on-big">
+						<a href="javascript:void(0)" class="chat-close"><img src="assets/images/close.svg" alt="New Message Icon"/></a>
+					</div>
 				</div>
 			</div>
 			<div class="chat-content">
