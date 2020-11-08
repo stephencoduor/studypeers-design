@@ -66,8 +66,8 @@ die;*/
                                         <h4 class="name"><?php echo @$full_name; ?></h4>
                                         <h6 class="username"><?php echo @$user_detail['username'];?>  <span>Joined on <?php echo date("F jS, Y", strtotime($user_detail['added_on'])); ?></span></h6>
                                         <ul class="socialstatus">
-                                            <li> <span>25</span> Followers</li>
-                                            <li> <span>25</span> Following</li>
+                                            <li> <span><?php echo $followers; ?></span> Followers</li>
+                                            <li> <span><?php echo $followings; ?></span> Following</li>
                                             <li>
                                                 <a href="<?php echo @$user_detail['fb_link']; ?>">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg" alt="facebook">

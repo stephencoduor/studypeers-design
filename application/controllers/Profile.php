@@ -28,6 +28,10 @@ class Profile extends CI_Controller {
 			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
 			$all_posts_array[$res['id']]['post_comments'] = $post_comments_query;
 		}
+		//all followers
+		$followers = $this->db->query('SELECT COUNT(*) As total from follow_master where peer_id = '.$user_id)->row_array();
+		//all followings
+		$followings = $this->db->query('SELECT COUNT(*) As total from follow_master where user_id = '.$user_id)->row_array();
 
 		$friends_to = $this->db->query('SELECT *, a.id As peer_master_id from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
 		$friends_from = $this->db->query('SELECT *, a.id As peer_master_id  from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
@@ -38,6 +42,8 @@ class Profile extends CI_Controller {
 		$data['all_posts'] = $all_posts_array;
 		$data['connections'] = count($peer_to);
 		$data['requests'] = count($peer_from);
+		$data['followers'] = $followers['total'];
+		$data['followings'] = $followings['total'];
 		$data['index_menu']  = 'timeline';
 		$data['title']  = 'Timeline | Studypeers';
 		$this->load->view('user/profile/layouts/header', $data);
@@ -285,13 +291,18 @@ class Profile extends CI_Controller {
 		$userdata = $this->session->userdata('user_data');
 		$search_term = $this->input->get('keyword');
 		$is_friend = $this->input->get('is_friend');
+		$status = 2;
 		if($is_friend){
 			$status = 2;
+			$query = $this->db->query('SELECT * from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+			$result = $query->result_array();
 		}else{
 			$status = 1;
+			$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+			$result = $query->result_array();
 		}
-		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
-		$result = $query->result_array();
+		//
+
 		echo json_encode($result);
 	}
 

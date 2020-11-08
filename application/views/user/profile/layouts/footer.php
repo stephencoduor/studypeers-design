@@ -728,39 +728,43 @@
             var search_value = $(this).val();var html = '';
             var friend = selection_type;   // 0 => requests , 1 => friend
             if(friend == 0){
-                $('.friend_container').empty();
+                $('#request_container').html('');
             }else{
-                $('.request_container').empty();
+                $('#friend_container').html('');
             }
 
             $.ajax({
                 url : '<?php echo base_url();?>Profile/searchFriends?keyword='+search_value+"&is_friend="+friend,
                 type : 'get',
                 success:function(result) {
-                    console.log(result);
-                    /* for(var i = 0; i < result.length; i++){
+                     var result_json = JSON.parse(result);
+                     for(var i = 0; i < result_json.length; i++){
                          if(friend == 0){
-                             html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
-                             '<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div><div class="profileSection">'+
-                             '<div class="profileViewToggleWrapper"><figure>'+
-                             '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
-                             '</figure><div class="changeView"><h5>'+result[i].first_name+' '+result[i].last_name+'</h5><p>location name</p>'+
-                             '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">'+
-                             '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>'+
-                             '</div></div></div>';
-                             $('.friend_container').append(html);
+                             html += '<div class="card">';
+                             html += '<div class="profileSection">';
+                             html += '<div class="profileViewToggleWrapper"><figure>';
+                             html += '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">';
+                             html += '</figure><div class="changeView"><h5>'+result_json[i].first_name+' '+result_json[i].last_name+'</h5><p>location name</p>';
+                             html += '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">';
+                             html += '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>';
+                             html += '</div></div></div>';
                          }else{
-                             html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
-                             +'<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div>'+
-                             +'<div class="profileSection"><div class="profileViewToggleWrapper"><figure>'+
-                             +'<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
-                             +'</figure><div class="changeView"><h5>'+result[i].first_name+' '+result[i].last_name+'</h5><p>location name</p>'+
-                             +'<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>'+
-                             +'<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>'+
-                             +'</li><li><a href="javascript:void(0)">Unfriend</a></li></ul></div></div></div>';
-                             $('.request_container').append(html);
+                             html += '<div class="card">';
+                             html += '<div class="profileSection"><div class="profileViewToggleWrapper"><figure>';
+                             html += '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">';
+                             html += '</figure><div class="changeView"><h5>'+result_json[i].first_name+' '+result_json[i].last_name+'</h5><p>location name</p>';
+                             html += '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>';
+                             html += '<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>';
+                             html += '</li><li><a href="javascript:void(0)">Unfriend</a></li></ul></div></div></div>';
                          }
-                     }*/
+                     }
+
+                     if(friend == 0){
+                         $('#request_container').append(html);
+                     }else{
+                         $('#friend_container').append(html);
+                     }
+
                 }
             });
 
