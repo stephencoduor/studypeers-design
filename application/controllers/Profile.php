@@ -20,12 +20,18 @@ class Profile extends CI_Controller {
 			$post_videos_query = $this->db->query('SELECT * from post_videos where post_id = '.$res['reference_id'])->result_array();
 			$post_options_query = $this->db->query('SELECT * from post_poll_options where post_id = '.$res['reference_id'])->result_array();
 			$post_documents_query = $this->db->query('SELECT * from post_documents where post_id = '.$res['reference_id'])->result_array();
+			$post_comments_query = $this->db->query('SELECT * from comment_master where reference_id = '.$res['reference_id'])->result_array();
 			$all_posts_array[$res['id']]['post_details'] = $post_query;
 			$all_posts_array[$res['id']]['post_images'] = $post_images_query;
 			$all_posts_array[$res['id']]['post_videos'] = $post_videos_query;
 			$all_posts_array[$res['id']]['post_poll_options'] = $post_options_query;
 			$all_posts_array[$res['id']]['post_documents'] = $post_documents_query;
+			$all_posts_array[$res['id']]['post_comments'] = $post_comments_query;
 		}
+		//all followers
+		$followers = $this->db->query('SELECT COUNT(*) As total from follow_master where peer_id = '.$user_id)->row_array();
+		//all followings
+		$followings = $this->db->query('SELECT COUNT(*) As total from follow_master where user_id = '.$user_id)->row_array();
 
 		$friends_to = $this->db->query('SELECT *, a.id As peer_master_id from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
 		$friends_from = $this->db->query('SELECT *, a.id As peer_master_id  from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
@@ -36,6 +42,8 @@ class Profile extends CI_Controller {
 		$data['all_posts'] = $all_posts_array;
 		$data['connections'] = count($peer_to);
 		$data['requests'] = count($peer_from);
+		$data['followers'] = $followers['total'];
+		$data['followings'] = $followings['total'];
 		$data['index_menu']  = 'timeline';
 		$data['title']  = 'Timeline | Studypeers';
 		$this->load->view('user/profile/layouts/header', $data);
@@ -280,17 +288,22 @@ class Profile extends CI_Controller {
 
 	public function searchFriends()
 	{
-	/*	$userdata = $this->session->userdata('user_data');
+		$userdata = $this->session->userdata('user_data');
 		$search_term = $this->input->get('keyword');
 		$is_friend = $this->input->get('is_friend');
+		$status = 2;
 		if($is_friend){
 			$status = 2;
+			$query = $this->db->query('SELECT * from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+			$result = $query->result_array();
 		}else{
 			$status = 1;
+			$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+			$result = $query->result_array();
 		}
-		$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
-		$result = $query->result_array();
-		echo json_encode($result);*/
+		//
+
+		echo json_encode($result);
 	}
 
 	public function follow()
@@ -326,13 +339,84 @@ class Profile extends CI_Controller {
 	public function unfriend()
 	{
 		if($this->input->post()){
+
 			$peer_master_id    = $this->input->post('peer_master_id');
+			$detail = $this->db->get_where($this->db->dbprefix('peer_master'), array('id'=> $peer_master_id))->row_array();
+			//delete from friends table
+			$this->db->where(array('user_id' => $detail['user_id'], 'peer_id' => $detail['peer_id']));
+			$this->db->delete('friends');
+			$this->db->where(array('user_id' => $detail['peer_id'], 'peer_id' => $detail['user_id']));
+			$this->db->delete('friends');
+			//delete from peer master table
 			$this->db->where('id', $peer_master_id);
 			$this->db->delete('peer_master');
+
 			redirect(site_url('Profile/timeline?tab=peers'));
 		}
 	}
 
+	public function saveLikes()
+	{
+		if($this->input->post()){
+			$reference_id = $this->input->post('reference_id');
+			$like_option_id = $this->input->post('like_option_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
 
+			$this->db->where(array('reference_id' => $reference_id, 'like_option_id' => $like_option_id));
+			$this->db->delete('like_master');
+			//get post id from reference_master table
+			$reference_master = $this->db->query('SELECT * from reference_master WHERE id = '.$reference_id);
+			$result = $reference_master->row_array();
+			$insert_array = [
+				'reference' => 'Post',
+				'reference_id' => $result['reference_id'],
+				'like_option_id' => $like_option_id,
+				'user_id' => $user_id,
+				'status' => 1,
+				'created_at' => date('Y-m-d H:i:s')
+			];
+			$insert_like = $this->db->insert('like_master', $insert_array);
+
+
+            $post_detail = $this->db->query('SELECT * from posts WHERE id = '.$result['reference_id']);
+			$post_result = $post_detail->row_array();
+			$like_count_increment = $post_result['likes_count'] + 1;
+			$this->db->where(array('id' => $result['reference_id']));
+			$this->db->update('posts',array('likes_count' => $like_count_increment));
+			echo $like_count_increment;
+		}
+	}
+
+	public function saveComment(){
+		if($this->input->post()) {
+			$reference_id = $this->input->post('reference_id');
+			$comment = $this->input->post('comment');
+			$parent_id = $this->input->post('parent_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+			//get post id from reference_master table
+			$reference_master = $this->db->query('SELECT * from reference_master WHERE id = '.$reference_id);
+			$result = $reference_master->row_array();
+
+			$insert_array = [
+				'comment_parent_id' => $parent_id,
+				'reference' => 'Post',
+				'reference_id' => $result['reference_id'],
+				'user_id' => $user_id,
+				'type' => 0,
+				'comment' => $comment,
+				'status' => 1,
+				'created_at' => date('Y-m-d H:i:s')
+			];
+			$insert_comment = $this->db->insert('comment_master', $insert_array);
+
+			$post_detail = $this->db->query('SELECT * from posts WHERE id = '.$result['reference_id']);
+			$post_result = $post_detail->row_array();
+			$comment_count_increment = $post_result['comments_count'] + 1;
+			$this->db->where(array('id' => $result['reference_id']));
+			$this->db->update('posts',array('comments_count' => $comment_count_increment));
+			echo $comment_count_increment;
+		}
+	}
 
 }

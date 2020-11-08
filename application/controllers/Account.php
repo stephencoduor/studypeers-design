@@ -2890,6 +2890,23 @@ class Account extends CI_Controller {
             $detail = $this->db->get_where($this->db->dbprefix('peer_master'), array('id'=>$action_id))->row_array(); 
 
             if($detail['status'] == 1) {
+
+                $insert_into_friends = [
+                    'user_id' => $detail['user_id'],
+                    'peer_id' => $detail['peer_id'],
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ];
+                $this->db->insert('friends', $insert_into_friends);
+                $insert_into_friends = [
+                    'user_id' => $detail['peer_id'],
+                    'peer_id' => $detail['user_id'],
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'updated_at' => date('Y-m-d H:i:s')
+                ];
+                $this->db->insert('friends', $insert_into_friends);
+
+
                 $this->db->where(array('id' => $action_id));
                 $this->db->update('peer_master',array('status' => 2));
 

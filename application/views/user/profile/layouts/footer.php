@@ -470,25 +470,30 @@
         $('.hoverMenu li').on('click', function () {
             let togglesrc = $(this).parent().parent().siblings('a').find('img');
             let togglename = $(this).parent().parent().siblings('a').find('span');
+            let like_option_id = $(this).attr('id');
+            let reference_id = $(this).attr('data-id');
             if ($(this).hasClass('likeOption')) {
-                togglesrc.attr('src', 'assets_d/images/liked.svg');
+                togglesrc.attr('src', base_url+'assets_d/images/liked.svg');
                 togglename.text('Liked');
             } else if ($(this).hasClass('supportMenu')) {
-                togglesrc.attr('src', 'assets_d/images/support-dashboard.svg');
+                togglesrc.attr('src', base_url+'assets_d/images/support-dashboard.svg');
                 togglename.text('Support');
             } else if ($(this).hasClass('celebrateMenu')) {
-                togglesrc.attr('src', 'assets_d/images/celebrate-dashboard.svg');
+                togglesrc.attr('src', base_url+'assets_d/images/celebrate-dashboard.svg');
                 togglename.text('Celebrate');
             } else if ($(this).hasClass('curiousMenu')) {
-                togglesrc.attr('src', 'assets_d/images/curious-dashboard.svg');
+                togglesrc.attr('src', base_url+'assets_d/images/curious-dashboard.svg');
                 togglename.text('Curious');
             } else if ($(this).hasClass('insightMenu')) {
-                togglesrc.attr('src', 'assets_d/images/insight-dashboard.svg');
+                togglesrc.attr('src', base_url+'assets_d/images/insight-dashboard.svg');
                 togglename.text('Insight');
             } else if ($(this).hasClass('loveMenu')) {
-                togglesrc.attr('src', 'assets_d/images/love-dashboard.svg');
+                togglesrc.attr('src', base_url+'assets_d/images/love-dashboard.svg');
                 togglename.text('Love');
             }
+            saveLikeData(reference_id, like_option_id);
+
+
         });
         $('.innerReplyBox').slideUp();
         $('.leftStatus a.reply').on('click', function () {
@@ -723,39 +728,43 @@
             var search_value = $(this).val();var html = '';
             var friend = selection_type;   // 0 => requests , 1 => friend
             if(friend == 0){
-                $('.friend_container').empty();
+                $('#request_container').html('');
             }else{
-                $('.request_container').empty();
+                $('#friend_container').html('');
             }
 
             $.ajax({
                 url : '<?php echo base_url();?>Profile/searchFriends?keyword='+search_value+"&is_friend="+friend,
                 type : 'get',
                 success:function(result) {
-                    console.log(result);
-                    /* for(var i = 0; i < result.length; i++){
+                     var result_json = JSON.parse(result);
+                     for(var i = 0; i < result_json.length; i++){
                          if(friend == 0){
-                             html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
-                             '<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div><div class="profileSection">'+
-                             '<div class="profileViewToggleWrapper"><figure>'+
-                             '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
-                             '</figure><div class="changeView"><h5>'+result[i].first_name+' '+result[i].last_name+'</h5><p>location name</p>'+
-                             '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">'+
-                             '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>'+
-                             '</div></div></div>';
-                             $('.friend_container').append(html);
+                             html += '<div class="card">';
+                             html += '<div class="profileSection">';
+                             html += '<div class="profileViewToggleWrapper"><figure>';
+                             html += '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">';
+                             html += '</figure><div class="changeView"><h5>'+result_json[i].first_name+' '+result_json[i].last_name+'</h5><p>location name</p>';
+                             html += '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">';
+                             html += '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>';
+                             html += '</div></div></div>';
                          }else{
-                             html += '<div class="card"><div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">'+
-                             +'<img src="'+base_url+'assets_d/images/messagebox.svg" alt="Message"></div>'+
-                             +'<div class="profileSection"><div class="profileViewToggleWrapper"><figure>'+
-                             +'<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">'+
-                             +'</figure><div class="changeView"><h5>'+result[i].first_name+' '+result[i].last_name+'</h5><p>location name</p>'+
-                             +'<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>'+
-                             +'<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>'+
-                             +'</li><li><a href="javascript:void(0)">Unfriend</a></li></ul></div></div></div>';
-                             $('.request_container').append(html);
+                             html += '<div class="card">';
+                             html += '<div class="profileSection"><div class="profileViewToggleWrapper"><figure>';
+                             html += '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">';
+                             html += '</figure><div class="changeView"><h5>'+result_json[i].first_name+' '+result_json[i].last_name+'</h5><p>location name</p>';
+                             html += '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>';
+                             html += '<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>';
+                             html += '</li><li><a href="javascript:void(0)">Unfriend</a></li></ul></div></div></div>';
                          }
-                     }*/
+                     }
+
+                     if(friend == 0){
+                         $('#request_container').append(html);
+                     }else{
+                         $('#friend_container').append(html);
+                     }
+
                 }
             });
 
@@ -788,10 +797,11 @@
             })
         }
 
+        var url;
         $('.follow_now').on("click", function(){
             var peer_id = $(this).attr('data-id');
             var status = $(this).attr('id');
-            var url = '<?php echo base_url();?>Profile/follow';
+            url = '<?php echo base_url();?>Profile/follow';
             if(status == 0){
                 url = '<?php echo base_url();?>Profile/unfollow';
             }
@@ -816,8 +826,55 @@
             $('#peer_master_id').val(peer_master_id);
         });
 
+        $('.new_comment').on('keypress', function(event){
+            var reference_id = $(this).attr('data-id');
+            var comment = $(this).val();
+            var parent_id = $(this).attr('data-parent-id');
+            if (event.which == 13) {
+                event.preventDefault();
+                saveComment(parent_id, reference_id, comment);
+            }
+        });
+
+        $('.commentmsg').on("click", function(){
+            var id = $(this).attr('id');
+            $('#all_comments_section_'+id).hide();
+        });
+
+        /*$('.show_replies').on("click", function(){
+            var comment_id = $(this).attr('id');
+            $('#reply_box_'+comment_id).show();
+        });*/
+
 
     });
+
+
+    function saveLikeData(reference_id, like_option_id){
+        url = '<?php echo base_url();?>Profile/saveLikes';
+        $.ajax({
+            url : url,
+            type : 'post',
+            data : {"reference_id" : reference_id, 'like_option_id' : like_option_id},
+            success:function(result) {
+                console.log(result);
+                $('#total_likes_'+reference_id).text(result);
+            }
+        });
+    }
+
+    function saveComment(parent_id, reference_id, comment){
+        url = '<?php echo base_url();?>Profile/saveComment';
+        $.ajax({
+            url : url,
+            type : 'post',
+            data : {"parent_id" : parent_id, 'reference_id' : reference_id, 'comment' : comment},
+            success:function(result) {
+                console.log(result);
+            }
+        });
+    }
+
 </script>
 
 

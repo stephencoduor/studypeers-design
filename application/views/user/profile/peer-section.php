@@ -34,12 +34,9 @@
                 <div id="myconnections" class="tab-pane fade in active">
                     <div class="tabPaneWrapper">
                         <div class="left">
-                            <div class="userBoxWrapper gridview friend_container">
+                            <div class="userBoxWrapper gridview" id="friend_container">
                                 <?php if(isset($all_connections)){ foreach($all_connections as $peer){ ?>
                                 <div class="card" id="remove_friend_<?php echo $peer['peer_master_id']; ?>">
-                                    <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                    </div>
                                     <div class="profileSection">
                                         <div class="profileViewToggleWrapper">
                                             <figure>
@@ -84,12 +81,9 @@
                 <div id="requests" class="tab-pane fade in">
                     <div class="tabPaneWrapper">
                         <div class="left">
-                            <div class="userBoxWrapper gridview request_container">
+                            <div class="userBoxWrapper gridview" id="request_container">
                                 <?php if(isset($all_requests)){ foreach($all_requests as $peer){ ?>
                                     <div class="card" id="action_<?php echo $peer['action_id']; ?>">
-                                        <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                            <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                        </div>
                                         <div class="profileSection">
                                             <div class="profileViewToggleWrapper">
                                                 <figure>
