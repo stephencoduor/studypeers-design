@@ -192,8 +192,7 @@ die;*/
                                                     </div>
                                                     <?php
                                                     if(isset($all_posts)){
-                                                    foreach($all_posts as $posts) {
-
+                                                    foreach($all_posts as $key => $posts) {
                                                         ?>
                                                         <div class="box-card">
                                                             <div class="dropdown dropdownToggleMenu">
@@ -499,7 +498,7 @@ die;*/
                                                                                 <img
                                                                                     src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
                                                                                     alt="Like">
-                                                                                <span><?php echo @$posts['post_details']->likes_count; ?></span>
+                                                                                <span id="total_likes_<?php echo @$key; ?>"><?php echo @$posts['post_details']->likes_count; ?></span>
                                                                             </a>
                                                                         </div>
                                                                         <div class="rightStatus">
@@ -534,32 +533,32 @@ die;*/
                                                                                 </a>
                                                                                 <div class="hoverMenu">
                                                                                     <ul>
-                                                                                        <li class="likeOption">
+                                                                                        <li class="likeOption like_option_type" id="1" data-id="<?php echo $key; ?>">
                                                                                             <img
                                                                                                 src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
                                                                                                 alt="like">
                                                                                         </li>
-                                                                                        <li class="supportMenu">
+                                                                                        <li class="supportMenu like_option_type" id="2" data-id="<?php echo $key; ?>">
                                                                                             <img
                                                                                                 src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
                                                                                                 alt="like">
                                                                                         </li>
-                                                                                        <li class="celebrateMenu">
+                                                                                        <li class="celebrateMenu like_option_type" id="3" data-id="<?php echo $key; ?>">
                                                                                             <img
                                                                                                 src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg"
                                                                                                 alt="like">
                                                                                         </li>
-                                                                                        <li class="curiousMenu">
+                                                                                        <li class="curiousMenu like_option_type" id="4" data-id="<?php echo $key; ?>">
                                                                                             <img
                                                                                                 src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg"
                                                                                                 alt="like">
                                                                                         </li>
-                                                                                        <li class="insightMenu">
+                                                                                        <li class="insightMenu like_option_type" id="5" data-id="<?php echo $key; ?>">
                                                                                             <img
                                                                                                 src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg"
                                                                                                 alt="like">
                                                                                         </li>
-                                                                                        <li class="loveMenu">
+                                                                                        <li class="loveMenu like_option_type" id="6" data-id="<?php echo $key; ?>">
                                                                                             <img
                                                                                                 src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg"
                                                                                                 alt="like">
@@ -585,371 +584,125 @@ die;*/
                                                                             </li>
                                                                         </ul>
                                                                     </div>
-                                                                    <div class="commentBoxWrap">
+                                                                    <div class="commentBoxWrap" id="all_comments_section_<?php echo $key; ?>">
                                                                         <div class="comment-popularity">
                                                                             <div class="relevant">
-                                                                                <div class="value">Most Relevant</div>
-                                                                                <div class="caretIcon">
+                                                                               <!-- <div class="caretIcon">
                                                                                     <img
-                                                                                        src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg"
+                                                                                        src="<?php /*echo base_url(); */?>assets_d/images/down-arrow1.svg"
                                                                                         alt="down arrow">
-                                                                                </div>
+                                                                                </div>-->
                                                                             </div>
-                                                                            <div class="commentmsg">
+                                                                            <div class="commentmsg" id="<?php echo $key; ?>">
                                                                                 <a>Hide Comments</a>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="chatMsgBox">
-                                                                            <figure>
-                                                                                <img
-                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
-                                                                                    alt="User">
-                                                                            </figure>
-                                                                            <div class="right">
-                                                                                <div class="userWrapText">
-                                                                                    <h4>User Name</h4>
-                                                                                    <p>Lorem Ipsum is simply dummy text
-                                                                                        of the printing and</p>
-                                                                                    <div class="leftStatus">
-                                                                                        <a>
-                                                                                            <img
-                                                                                                src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
-                                                                                                alt="Like">
-                                                                                            <span>24</span>
-                                                                                        </a>
-                                                                                        <a>Like</a>
-                                                                                        <a>Reply</a>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="dotsBullet dropdown">
-                                                                                    <img
-                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
-                                                                                        alt="more"
-                                                                                        data-toggle="dropdown">
-                                                                                    <ul class="dropdown-menu"
-                                                                                        role="menu"
-                                                                                        aria-labelledby="menu1">
-                                                                                        <li role="presentation">
-                                                                                            <a role="menuitem"
-                                                                                               tabindex="-1"
-                                                                                               href="javascript:void(0);">
-                                                                                                <div class="left">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
-                                                                                                        alt="Save">
-                                                                                                </div>
-                                                                                                <div class="right">
-                                                                                                    <span>Hide/block</span>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li role="presentation">
-                                                                                            <a role="menuitem"
-                                                                                               tabindex="-1"
-                                                                                               href="javascript:void(0);">
-                                                                                                <div class="left">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                                        alt="Link">
-                                                                                                </div>
-                                                                                                <div class="right">
-                                                                                                    <span>Delete</span>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="chatMsgBox">
-                                                                            <figure>
-                                                                                <img
-                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
-                                                                                    alt="User">
-                                                                            </figure>
-                                                                            <div class="right">
-                                                                                <div class="userWrapText">
-                                                                                    <h4>User Name</h4>
-                                                                                    <p>Lorem Ipsum is simply dummy text
-                                                                                        of the printing and</p>
-                                                                                    <div class="leftStatus">
-                                                                                        <a>
-                                                                                            <img
-                                                                                                src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
-                                                                                                alt="Like">
-                                                                                            <span>24</span>
-                                                                                        </a>
-                                                                                        <a>Like</a>
-                                                                                        <a class="reply">Reply(2)</a>
-                                                                                        <div class="innerReplyBox">
-                                                                                            <figure>
-                                                                                                <img
-                                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
-                                                                                                    alt="User">
-                                                                                            </figure>
-                                                                                            <div class="right">
-                                                                                                <div
-                                                                                                    class="userWrapText">
-                                                                                                    <h4>User Name</h4>
-                                                                                                    <p>Lorem Ipsum is
-                                                                                                        simply dummy
-                                                                                                        text of the
-                                                                                                        printing and</p>
-                                                                                                    <div
-                                                                                                        class="leftStatus">
-                                                                                                        <a>Like</a>
+                                                                            <?php
+                                                                            foreach(@$posts['post_comments'] as $comments){
+                                                                                ?>
+                                                                                <div class="chatMsgBox">
+                                                                                    <figure>
+                                                                                        <img src="<?php echo userImage($comments['user_id']); ?>" />
+                                                                                    </figure>
+                                                                                    <div class="right">
+                                                                                        <div class="userWrapText">
+                                                                                            <h4>User Name</h4>
+                                                                                            <p><?php echo $comments['comment'] ?></p>
+                                                                                            <div class="leftStatus">
+                                                                                                <a>
+                                                                                                    <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
+                                                                                                    <span>0</span>
+                                                                                                </a>
+                                                                                                <a>Like</a>
+                                                                                                <a class="show_replies" id="<?php echo $comments['id'] ?>">Reply</a>
+                                                                                                <div class="innerReplyBox" id="reply_box_<?php echo $comments['id'] ?>">
+                                                                                                    <figure>
+                                                                                                        <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+                                                                                                    </figure>
+                                                                                                    <div class="right">
+                                                                                                        <div class="userWrapText">
+                                                                                                            <h4>User Name</h4>
+                                                                                                            <p>Lorem Ipsum is simply dummy text of the printing and</p>
+                                                                                                            <div class="leftStatus">
+                                                                                                                <a>Like</a>
+                                                                                                            </div>
+                                                                                                        </div>
+                                                                                                        <div class="dotsBullet dropdown">
+                                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
+                                                                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                                                                                <li role="presentation">
+                                                                                                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                                                                                        <div class="left">
+                                                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
+                                                                                                                        </div>
+                                                                                                                        <div class="right">
+                                                                                                                            <span>Hide/block</span>
+                                                                                                                        </div>
+                                                                                                                    </a>
+                                                                                                                </li>
+                                                                                                                <li role="presentation">
+                                                                                                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                                                                                        <div class="left">
+                                                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+                                                                                                                        </div>
+                                                                                                                        <div class="right">
+                                                                                                                            <span>Delete</span>
+                                                                                                                        </div>
+                                                                                                                    </a>
+                                                                                                                </li>
+                                                                                                            </ul>
+                                                                                                        </div>
                                                                                                     </div>
                                                                                                 </div>
-                                                                                                <div
-                                                                                                    class="dotsBullet dropdown">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
-                                                                                                        alt="more"
-                                                                                                        data-toggle="dropdown">
-                                                                                                    <ul class="dropdown-menu"
-                                                                                                        role="menu"
-                                                                                                        aria-labelledby="menu1">
-                                                                                                        <li role="presentation">
-                                                                                                            <a role="menuitem"
-                                                                                                               tabindex="-1"
-                                                                                                               href="javascript:void(0);">
-                                                                                                                <div
-                                                                                                                    class="left">
-                                                                                                                    <img
-                                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
-                                                                                                                        alt="Save">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="right">
-                                                                                                                    <span>Hide/block</span>
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </li>
-                                                                                                        <li role="presentation">
-                                                                                                            <a role="menuitem"
-                                                                                                               tabindex="-1"
-                                                                                                               href="javascript:void(0);">
-                                                                                                                <div
-                                                                                                                    class="left">
-                                                                                                                    <img
-                                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                                                        alt="Link">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="right">
-                                                                                                                    <span>Delete</span>
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </div>
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="innerReplyBox">
-                                                                                            <figure>
-                                                                                                <img
-                                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
-                                                                                                    alt="User">
-                                                                                            </figure>
-                                                                                            <div class="right">
-                                                                                                <div
-                                                                                                    class="userWrapText">
-                                                                                                    <h4>User Name</h4>
-                                                                                                    <p>Lorem Ipsum is
-                                                                                                        simply dummy
-                                                                                                        text of the
-                                                                                                        printing and</p>
-                                                                                                    <div
-                                                                                                        class="leftStatus">
-                                                                                                        <a>Like</a>
-                                                                                                    </div>
-                                                                                                </div>
-                                                                                                <div
-                                                                                                    class="dotsBullet dropdown">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
-                                                                                                        alt="more"
-                                                                                                        data-toggle="dropdown">
-                                                                                                    <ul class="dropdown-menu"
-                                                                                                        role="menu"
-                                                                                                        aria-labelledby="menu1">
-                                                                                                        <li role="presentation">
-                                                                                                            <a role="menuitem"
-                                                                                                               tabindex="-1"
-                                                                                                               href="javascript:void(0);">
-                                                                                                                <div
-                                                                                                                    class="left">
-                                                                                                                    <img
-                                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
-                                                                                                                        alt="Save">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="right">
-                                                                                                                    <span>Hide/block</span>
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </li>
-                                                                                                        <li role="presentation">
-                                                                                                            <a role="menuitem"
-                                                                                                               tabindex="-1"
-                                                                                                               href="javascript:void(0);">
-                                                                                                                <div
-                                                                                                                    class="left">
-                                                                                                                    <img
-                                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                                                        alt="Link">
-                                                                                                                </div>
-                                                                                                                <div
-                                                                                                                    class="right">
-                                                                                                                    <span>Delete</span>
-                                                                                                                </div>
-                                                                                                            </a>
-                                                                                                        </li>
-                                                                                                    </ul>
-                                                                                                </div>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                        <div class="commentWrapBox">
-                                                                                            <figure>
-                                                                                                <img
-                                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
-                                                                                                    alt="User">
-                                                                                            </figure>
-                                                                                            <input type="text" name=""
-                                                                                                   placeholder="Comment"
-                                                                                                   id="em_0">
-                                                                                            <div class="mediaAction">
-                                                                                                <button type="button">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/image.svg"
-                                                                                                        alt="Add Files">
-                                                                                                    <input type="file">
-                                                                                                </button>
-                                                                                            </div>
+                                                                                        <div class="dotsBullet dropdown">
+                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
+                                                                                            <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                                                                <li role="presentation">
+                                                                                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                                                                        <div class="left">
+                                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
+                                                                                                        </div>
+                                                                                                        <div class="right">
+                                                                                                            <span>Hide/block</span>
+                                                                                                        </div>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                                <li role="presentation">
+                                                                                                    <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                                                                        <div class="left">
+                                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+                                                                                                        </div>
+                                                                                                        <div class="right">
+                                                                                                            <span>Delete</span>
+                                                                                                        </div>
+                                                                                                    </a>
+                                                                                                </li>
+                                                                                            </ul>
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="dotsBullet dropdown">
-                                                                                    <img
-                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
-                                                                                        alt="more"
-                                                                                        data-toggle="dropdown">
-                                                                                    <ul class="dropdown-menu"
-                                                                                        role="menu"
-                                                                                        aria-labelledby="menu1">
-                                                                                        <li role="presentation">
-                                                                                            <a role="menuitem"
-                                                                                               tabindex="-1"
-                                                                                               href="javascript:void(0);">
-                                                                                                <div class="left">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
-                                                                                                        alt="Save">
-                                                                                                </div>
-                                                                                                <div class="right">
-                                                                                                    <span>Hide/block</span>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li role="presentation">
-                                                                                            <a role="menuitem"
-                                                                                               tabindex="-1"
-                                                                                               href="javascript:void(0);">
-                                                                                                <div class="left">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                                        alt="Link">
-                                                                                                </div>
-                                                                                                <div class="right">
-                                                                                                    <span>Delete</span>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="chatMsgBox">
-                                                                            <figure>
-                                                                                <img
-                                                                                    src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
-                                                                                    alt="User">
-                                                                            </figure>
-                                                                            <div class="right">
-                                                                                <div class="userWrapText">
-                                                                                    <h4>User Name</h4>
-                                                                                    <p>Lorem Ipsum is simply dummy text
-                                                                                        of the printing and</p>
-                                                                                    <div class="leftStatus">
-                                                                                        <a>
-                                                                                            <img
-                                                                                                src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
-                                                                                                alt="Like">
-                                                                                            <span>24</span>
-                                                                                        </a>
-                                                                                        <a>Like</a>
-                                                                                        <a>Reply</a>
+                                                                                <?php
+                                                                            }
+                                                                            ?>
+                                                                        <form >
+                                                                            <div class="chatMsgBox">
+                                                                                <div class="commentWrapBox">
+                                                                                    <figure>
+                                                                                        <img src="<?php echo userImage($user_detail['id']); ?>" />
+                                                                                    </figure>
+                                                                                    <input type="text" name="comment" class="new_comment" data-parent-id="0" data-id="<?php echo $key; ?>" placeholder="Comment" id="em_1">
+                                                                                    <div class="mediaAction">
+                                                                                        <button type="button">
+                                                                                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
+                                                                                            <input type="file">
+                                                                                        </button>
                                                                                     </div>
                                                                                 </div>
-                                                                                <div class="dotsBullet dropdown">
-                                                                                    <img
-                                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
-                                                                                        alt="more"
-                                                                                        data-toggle="dropdown">
-                                                                                    <ul class="dropdown-menu"
-                                                                                        role="menu"
-                                                                                        aria-labelledby="menu1">
-                                                                                        <li role="presentation">
-                                                                                            <a role="menuitem"
-                                                                                               tabindex="-1"
-                                                                                               href="javascript:void(0);">
-                                                                                                <div class="left">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
-                                                                                                        alt="Save">
-                                                                                                </div>
-                                                                                                <div class="right">
-                                                                                                    <span>Hide/block</span>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                        <li role="presentation">
-                                                                                            <a role="menuitem"
-                                                                                               tabindex="-1"
-                                                                                               href="javascript:void(0);">
-                                                                                                <div class="left">
-                                                                                                    <img
-                                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                                        alt="Link">
-                                                                                                </div>
-                                                                                                <div class="right">
-                                                                                                    <span>Delete</span>
-                                                                                                </div>
-                                                                                            </a>
-                                                                                        </li>
-                                                                                    </ul>
-                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="chatMsgBox">
-                                                                            <div class="commentWrapBox">
-                                                                                <figure>
-                                                                                    <img
-                                                                                        src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
-                                                                                        alt="User">
-                                                                                </figure>
-                                                                                <input type="text" name=""
-                                                                                       placeholder="Comment" id="em_1">
-                                                                                <div class="mediaAction">
-                                                                                    <button type="button">
-                                                                                        <img
-                                                                                            src="<?php echo base_url(); ?>assets_d/images/image.svg"
-                                                                                            alt="Add Files">
-                                                                                        <input type="file">
-                                                                                    </button>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
+                                                                        </form>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
