@@ -1521,6 +1521,12 @@
 			</div>
 		<?php } } else if($value['reference'] == 'question') { 
 			$question_detail = $this->db->get_where('question_master', array('id' => $value['reference_id']))->row_array();
+
+			$this->db->select('question_answer_master.*, user_info.nickname');
+	        $this->db->join('user_info','user_info.userID=question_answer_master.answered_by');
+	        $this->db->order_by('question_answer_master.vote_count', 'desc');   
+	        $this->db->limit('2');
+	        $answer_list = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id'=>$value['reference_id'], 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => 0))->result_array(); 
 		?>
 
 			<div class="box-card message">
@@ -1649,7 +1655,8 @@
 													</div>
 													<div class="timeline"><?php echo time_ago_in_php($question_detail['created_at']); ?></div>
 						</div>
-						<h4><?php echo $question_detail['question_title']; ?></h4></h4>
+						<h4><?php echo $question_detail['question_title']; ?></h4>
+						<p><?php echo $question_detail['textarea']; ?></p>
 						<div class="socialStatus">
 							<div class="leftStatus vote">
 								<a>
@@ -1699,7 +1706,7 @@
 									</a>
 								</li>
 								<li>
-									<a href="<?php echo base_url(); ?>account/questionDetail/<?php echo base64_encode($question_detail['id']); ?>">
+									<a onclick="showQAnsBox('<?php echo $question_detail['id']; ?>')">
 										<img src="<?php echo base_url(); ?>assets_d/images/answers-grey.svg" alt="Down Arrow">
 										<span>Answer</span>
 									</a>
@@ -1712,281 +1719,153 @@
 								</li>
 							</ul>
 						</div>
-						<div class="commentBoxWrap">
-							<div class="comment-popularity">
-								<div class="relevant">
-									<div class="value">Most Relevant</div>
-									<div class="caretIcon">
-										<img src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg" alt="down arrow">
+						<div class="dashboard-qa-answer" id="dashboard-qa-answer-<?php echo $question_detail['id']; ?>" style="display: none;">
+							<div class="comment-title">
+									<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M448 0H64C28.7 0 0 28.7 0 64v288c0 35.3 28.7 64 64 64h96v84c0 7.1 5.8 12 12 12 2.4 0 4.9-.7 7.1-2.4L304 416h144c35.3 0 64-28.7 64-64V64c0-35.3-28.7-64-64-64zm16 352c0 8.8-7.2 16-16 16H288l-12.8 9.6L208 428v-60H64c-8.8 0-16-7.2-16-16V64c0-8.8 7.2-16 16-16h384c8.8 0 16 7.2 16 16v288zm-96-216H144c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h224c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16zm-96 96H144c-8.8 0-16 7.2-16 16v16c0 8.8 7.2 16 16 16h128c8.8 0 16-7.2 16-16v-16c0-8.8-7.2-16-16-16z"></path></svg>
+									Answer	
+							</div>
+							<div class="commentAnswer">
+								<form method="post" action="#" onsubmit="return validateAnswer()">
+									<div class="form-group comment">
+										<input type="hidden" name="question_id" value="<?php echo $question_detail['id']; ?>">
+										<textarea name="answer" id="definition_<?= $question_detail['id']; ?>" cols="30" rows="6"></textarea>
+										<span class="custom_err" id="err_definition_<?= $question_detail['id']; ?>"></span>
+									</div>
+									<button type="submit" class="filterBtn"> 
+										Submit
+									</button>
+								</form>
+							</div>
+						</div>
+						<div class="dashboard-qa" style="margin-top: 10px;">
+							<?php foreach ($answer_list as $key => $value) { 
+							$user_id = $this->session->get_userdata()['user_data']['user_id']; 
+							$this->db->select('question_answer_master.*, user_info.nickname');
+        					$this->db->join('user_info','user_info.userID=question_answer_master.answered_by');
+							$get_reply = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id'=>$question_detail['id'], 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => $value['id']))->result_array(); 
+							$chk_user_upvote = $this->db->get_where($this->db->dbprefix('vote_master'), array('reference'=> 'answer', 'reference_id'=> $value['id'], 'user_id' => $user_id))->row_array();
+							if(!empty($chk_user_upvote)){
+								if($chk_user_upvote['type'] == 1){
+									$up_normal_s = 'display:none;';
+									$up_active_s = 'display:block;';
+									$down_normal_s = '';
+									$down_active_s = '';
+								} else {
+									$up_normal_s = '';
+									$up_active_s = '';
+									$down_normal_s = 'display:none;';
+									$down_active_s = 'display:block;';
+								}
+							} else {
+								$up_normal_s = '';
+								$up_active_s = '';
+								$down_normal_s = '';
+								$down_active_s = '';
+							}
+						?>
+							<div class="replyAnswerBox">		
+								<?php if($value['best_answer'] == 1) { ?>					
+									<div class="answerQuote">
+										<ul>
+											<li>
+												<a>
+													<svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.625" viewBox="0 0 16 14.625">
+													    <path id="prefix__star" d="M7.432 21.6a.889.889 0 0 1 1.219-.287.864.864 0 0 1 .287.287L11 24.943a.878.878 0 0 0 .575.4l3.91.8a.884.884 0 0 1 .689 1.045.911.911 0 0 1-.222.431l-2.613 2.767a.884.884 0 0 0-.235.7l.4 3.737a.885.885 0 0 1-.787.974.9.9 0 0 1-.434-.062l-3.75-1.565a.876.876 0 0 0-.68 0L4.1 35.743a.883.883 0 0 1-1.219-.911l.4-3.737a.9.9 0 0 0-.235-.7l-2.615-2.77a.884.884 0 0 1 .036-1.251.869.869 0 0 1 .433-.223l3.91-.8a.89.89 0 0 0 .575-.4z" transform="translate(-.189 -21.185)" style="fill:#185aeb"/>
+													</svg>
+													Best answer
+												</a>
+											</li>
+										</ul>
+									</div>
+								<?php } ?>
+								<div class="feedVoteWrap">
+									<div class="voteCount">
+										<div class="uparrow" id="uparrow_<?php echo $value['id']; ?>">
+											<svg xmlns="http://www.w3.org/2000/svg"  class="normalState" width="18.363" height="20" viewBox="0 0 18.363 20" onclick="voteAnswer('upvote', '<?php echo $value['id']; ?>')" style="<?= $up_normal_s; ?>">
+											    <g id="prefix__up-arrow" transform="translate(-31.008 -10.925)">
+											        <path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+											    </g>
+											</svg>										
+											<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20" style="<?= $up_active_s; ?>" onclick="removeVoteAnswer('upvote', '<?php echo $value['id']; ?>')">
+											    <g id="prefix__Layer_1" transform="translate(-31.008 -10.925)">
+											        <g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+											            <path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" style="fill:#1ae1bd"/>
+											        </g>
+											    </g>
+											</svg>
+										</div>
+										<div class="countt" id="count_<?php echo $value['id']; ?>">
+											<?php if($value['vote_count'] < 0){
+												echo "0";
+											} else {
+											 echo $value['vote_count']; 
+											}
+											?>
+										</div>
+										<div class="downarrow" id="downarrow_<?php echo $value['id']; ?>">
+											<svg xmlns="http://www.w3.org/2000/svg" width="18.363" height="20" class="normalState" viewBox="0 0 18.363 20" onclick="voteAnswer('downvote', '<?php echo $value['id']; ?>')" style="<?= $down_normal_s; ?>">
+											    <g id="prefix__up-arrow" transform="rotate(180 24.686 15.463)">
+											        <path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+											    </g>
+											</svg>
+											<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20" style="<?= $down_active_s; ?>" onclick="removeVoteAnswer('downvote', '<?php echo $value['id']; ?>')">
+											    <g id="prefix__Layer_1" transform="rotate(180 24.686 15.463)">
+											        <g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+											            <path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" />
+											        </g>
+											    </g>
+											</svg>
+										</div>
+									</div>
+									<div class="feed-card list">
+										<div class="right">
+											<div class="feed_card_inner">
+												<p><?php echo $value['answer']; ?></p>
+											</div>
+											<div class="feed_card_footer">
+												<div class="userWrap study-sets">
+													<div class="user-name">
+														<figure>
+															<img src="<?php echo userImage($value['answered_by']); ?>" alt="user">
+														</figure>
+														<figcaption><?php echo $value['nickname']; ?></figcaption>
+													</div>
+													<p class="date"><?php echo date('d/m/Y', strtotime($value['created_at'])); ?></p>
+												</div>
+												<div class="action">
+													<ul>
+														<li>
+															<a onclick="showReplyBox('<?php echo $value['id']; ?>')">
+																<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M14.062 257.94L190.06 433.88c30.21 30.21 81.94 8.7 81.94-33.94v-78.28c146.59 8.54 158.53 50.199 134.18 127.879-13.65 43.56 35.07 78.89 72.19 54.46C537.98 464.768 576 403.8 576 330.05c0-170.37-166.04-197.15-304-201.3V48.047c0-42.72-51.79-64.09-81.94-33.94L14.062 190.06c-18.75 18.74-18.75 49.14 0 67.88zM48 224L224 48v128.03c143.181.63 304 11.778 304 154.02 0 66.96-40 109.95-76.02 133.65C501.44 305.911 388.521 273.88 224 272.09V400L48 224z"></path></svg>
+																Reply
+															</a>
+														</li>
+														<?php if($value['best_answer'] == 0) { ?>	
+															<li>
+																<a data-toggle="modal" data-target="#confirmationModalBestAnswer" data-id="<?= $value['id']; ?>" class="select_best_answer">
+																	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.625" viewBox="0 0 16 14.625">
+																	    <path id="prefix__star" d="M7.432 21.6a.889.889 0 0 1 1.219-.287.864.864 0 0 1 .287.287L11 24.943a.878.878 0 0 0 .575.4l3.91.8a.884.884 0 0 1 .689 1.045.911.911 0 0 1-.222.431l-2.613 2.767a.884.884 0 0 0-.235.7l.4 3.737a.885.885 0 0 1-.787.974.9.9 0 0 1-.434-.062l-3.75-1.565a.876.876 0 0 0-.68 0L4.1 35.743a.883.883 0 0 1-1.219-.911l.4-3.737a.9.9 0 0 0-.235-.7l-2.615-2.77a.884.884 0 0 1 .036-1.251.869.869 0 0 1 .433-.223l3.91-.8a.89.89 0 0 0 .575-.4z" transform="translate(-.189 -21.185)" style="fill:#185aeb"/>
+																	</svg>
+																	Select best answer
+																</a>
+															</li>
+														<?php } ?>
+														<li class="report">
+															<a href="#" class="transAction reportQuestionAnswer" data-toggle="modal" data-target="#reportModal" data-id="<?php echo $value['id']; ?>">															
+																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+																    <path id="prefix__flag" d="M10.505 2.5c-1.535 0-2.916-1-5.06-1a6.936 6.936 0 0 0-2.523.474A1.5 1.5 0 1 0 .75 2.8v12.7a.5.5 0 0 0 .5.5h.5a.5.5 0 0 0 .5-.5v-2.608A8.6 8.6 0 0 1 6.245 12c1.535 0 2.916 1 5.06 1a7.26 7.26 0 0 0 4.017-1.249A1.5 1.5 0 0 0 16 10.5V3a1.5 1.5 0 0 0-2.091-1.379 8.938 8.938 0 0 1-3.404.879zm3.995 8a5.878 5.878 0 0 1-3.2 1c-1.873 0-3.188-1-5.06-1a10.719 10.719 0 0 0-3.995.75V4a5.878 5.878 0 0 1 3.2-1c1.873 0 3.188 1 5.06 1A10.685 10.685 0 0 0 14.5 3z" style="fill:#7f7b94"/>
+																</svg>
+																Report
+															</a>
+														</li>
+													</ul>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
-								<div class="commentmsg">
-									<a>Hide Comments</a>
-								</div>
 							</div>
-							<div class="chatMsgBox">
-								<figure>
-			    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-			    				</figure>
-			    				<div class="right">
-			    					<div class="userWrapText">
-			    						<h4>User Name</h4>
-			    						<p class="selectAns">Lorem Ipsum is simply dummy text of the printing and
-			    							<span class="best-answer">
-			    								<img src="<?php echo base_url(); ?>assets_d/images/like-answer.svg" alt="Like Answer"> Best answer
-			    							</span>
-			    						</p>
-			    						<div class="leftStatus">
-											<a>
-												<img src="<?php echo base_url(); ?>assets_d/images/up-arrow-grey1.svg" alt="Up Arrow">
-												<span>24</span>
-											</a>
-											<a>
-												<img src="<?php echo base_url(); ?>assets_d/images/down-arrow-grey1.svg" alt="Up Arrow">
-												<span>02</span>
-											</a>
-											<a>Reply</a>
-										</div>
-			    					</div>
-			    					<div class="dotsBullet dropdown">
-			    						<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-			    						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-										    <li role="presentation">
-									      		<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-									      			<div class="left">
-									      				<img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-									      			</div>
-									      			<div class="right">
-									      				<span>Hide/block</span>  
-									      			</div>
-										      	</a>
-											</li>
-										    <li role="presentation">
-										     	<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-											    	<div class="left">
-									      				<img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-									      			</div>
-									      			<div class="right">
-									      				<span>Delete</span>
-									      			</div>
-											    </a> 
-											</li>
-									    </ul>
-			    					</div>
-			    				</div>
-							</div>
-							<div class="chatMsgBox">
-								<figure>
-			    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-			    				</figure>
-			    				<div class="right">
-			    					<div class="userWrapText">
-			    						<h4>User Name</h4>
-			    						<p>Lorem Ipsum is simply dummy text of the printing and</p>
-			    						<div class="leftStatus">
-											<a>
-												<img src="<?php echo base_url(); ?>assets_d/images/up-arrow-dashboard.svg" alt="Up Arrow">
-												<span>24</span>
-											</a>
-											<a>
-												<img src="<?php echo base_url(); ?>assets_d/images/down-arrow-grey1.svg" alt="Up Arrow">
-												<span>02</span>
-											</a>
-											<a class="reply">Reply(2)</a>
-											<div class="innerReplyBox">
-												<figure>
-							    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-							    				</figure>
-							    				<div class="right">
-							    					<div class="userWrapText">
-							    						<h4>User Name</h4>
-							    						<p>Lorem Ipsum is simply dummy text of the printing and</p>
-							    						<div class="leftStatus">
-															<a>
-																<img src="<?php echo base_url(); ?>assets_d/images/up-arrow-dashboard.svg" alt="Up Arrow">
-																<span>24</span>
-															</a>
-															<a>
-																<img src="<?php echo base_url(); ?>assets_d/images/down-arrow-grey1.svg" alt="Up Arrow">
-																<span>02</span>
-															</a>
-														</div>
-													</div>
-							    					<div class="dotsBullet dropdown">
-							    						<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-							    						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-														    <li role="presentation">
-													      		<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-													      			<div class="left">
-													      				<img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-													      			</div>
-													      			<div class="right">
-													      				<span>Hide/block</span>  
-													      			</div>
-														      	</a>
-															</li>
-														    <li role="presentation">
-														     	<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-															    	<div class="left">
-													      				<img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-													      			</div>
-													      			<div class="right">
-													      				<span>Delete</span>
-													      			</div>
-															    </a> 
-															</li>
-													    </ul>
-							    					</div>
-												</div>
-					    					</div>
-											<div class="innerReplyBox">
-												<figure>
-							    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-							    				</figure>
-							    				<div class="right">
-							    					<div class="userWrapText">
-							    						<h4>User Name</h4>
-							    						<p>Lorem Ipsum is simply dummy text of the printing and</p>
-							    						<div class="leftStatus">
-															<a>
-																<img src="<?php echo base_url(); ?>assets_d/images/up-arrow-dashboard.svg" alt="Up Arrow">
-																<span>24</span>
-															</a>
-															<a>
-																<img src="<?php echo base_url(); ?>assets_d/images/down-arrow-grey1.svg" alt="Up Arrow">
-																<span>02</span>
-															</a>
-														</div>
-													</div>
-							    					<div class="dotsBullet dropdown">
-							    						<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-							    						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-														    <li role="presentation">
-													      		<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-													      			<div class="left">
-													      				<img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-													      			</div>
-													      			<div class="right">
-													      				<span>Hide/block</span>  
-													      			</div>
-														      	</a>
-															</li>
-														    <li role="presentation">
-														     	<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-															    	<div class="left">
-													      				<img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-													      			</div>
-													      			<div class="right">
-													      				<span>Delete</span>
-													      			</div>
-															    </a> 
-															</li>
-													    </ul>
-							    					</div>
-												</div>
-					    					</div>
-					    					<div class="commentWrapBox">
-					    						<figure>
-							    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-							    				</figure>
-							    				<input type="text" name="" placeholder="Comment" id="em_0">
-							    				<div class="mediaAction">
-									    			<button type="button">
-									    				<img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-									    				<input type="file">
-									    			</button>
-								    			</div>
-					    					</div>	
-										</div>
-			    					</div>
-			    					<div class="dotsBullet dropdown">
-			    						<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-			    						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-										    <li role="presentation">
-									      		<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-									      			<div class="left">
-									      				<img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-									      			</div>
-									      			<div class="right">
-									      				<span>Hide/block</span>  
-									      			</div>
-										      	</a>
-											</li>
-										    <li role="presentation">
-										     	<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-											    	<div class="left">
-									      				<img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-									      			</div>
-									      			<div class="right">
-									      				<span>Delete</span>
-									      			</div>
-											    </a> 
-											</li>
-									    </ul>
-			    					</div>
-								</div>
-							</div>
-							<div class="chatMsgBox">
-								<figure>
-			    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-			    				</figure>
-			    				<div class="right">
-			    					<div class="userWrapText">
-			    						<h4>User Name</h4>
-			    						<p>Lorem Ipsum is simply dummy text of the printing and</p>
-			    						<div class="leftStatus">
-											<a>
-												<img src="<?php echo base_url(); ?>assets_d/images/up-arrow-grey1.svg" alt="Up Arrow">
-												<span>24</span>
-											</a>
-											<a>
-												<img src="<?php echo base_url(); ?>assets_d/images/down-arrow-dashboard.svg" alt="Up Arrow">
-												<span>02</span>
-											</a>
-											<a>Reply</a>
-										</div>
-			    					</div>
-			    					<div class="dotsBullet dropdown">
-			    						<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-			    						<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-										    <li role="presentation">
-									      		<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-									      			<div class="left">
-									      				<img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-									      			</div>
-									      			<div class="right">
-									      				<span>Hide/block</span>  
-									      			</div>
-										      	</a>
-											</li>
-										    <li role="presentation">
-										     	<a role="menuitem" tabindex="-1" href="javascript:void(0);">
-											    	<div class="left">
-									      				<img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-									      			</div>
-									      			<div class="right">
-									      				<span>Delete</span>
-									      			</div>
-											    </a> 
-											</li>
-									    </ul>
-			    					</div>
-			    				</div>
-							</div>
-							<div class="chatMsgBox">
-								<div class="commentWrapBox">
-		    						<figure>
-				    					<img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-				    				</figure>
-				    				<input type="text" name="" placeholder="Comment" id="em_1">
-				    				<div class="mediaAction">
-						    			<button type="button">
-						    				<img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-						    				<input type="file">
-						    			</button>
-					    			</div>
-		    					</div>	
-		    				</div>
+						<?php } ?>
 		    			</div>
 					</div>
 				</div>
