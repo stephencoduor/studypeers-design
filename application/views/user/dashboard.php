@@ -10288,4 +10288,8 @@
 
     });
 
+    function showQAnsBox(id){
+    	$('#dashboard-qa-answer-'+id).show();
+    }
+
 </script>

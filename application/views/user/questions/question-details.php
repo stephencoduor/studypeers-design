@@ -362,7 +362,7 @@
 												<div class="userWrap study-sets">
 													<div class="user-name">
 														<figure>
-															<img src="<?php echo userImage($value['created_by']); ?>" alt="user">
+															<img src="<?php echo userImage($value['answered_by']); ?>" alt="user">
 														</figure>
 														<figcaption><?php echo $value['nickname']; ?></figcaption>
 													</div>
