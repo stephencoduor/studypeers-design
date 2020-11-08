@@ -1655,7 +1655,8 @@
 													</div>
 													<div class="timeline"><?php echo time_ago_in_php($question_detail['created_at']); ?></div>
 						</div>
-						<h4><?php echo $question_detail['question_title']; ?></h4></h4>
+						<h4><?php echo $question_detail['question_title']; ?></h4>
+						<p><?php echo $question_detail['textarea']; ?></p>
 						<div class="socialStatus">
 							<div class="leftStatus vote">
 								<a>
