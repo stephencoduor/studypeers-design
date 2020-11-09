@@ -800,8 +800,16 @@ die;*/
                                                                         <div class="chatMsgBox">
                                                                             <div class="commentWrapBox">
                                                                                 <figure>
-                                                                                    <img
-                                                                                        src="<?php echo userImage($user_detail['id']); ?>"/>
+                                                                                    <?php if(userImage(@$user_detail['id'])){
+                                                                                        ?>
+                                                                                        <img src="<?php echo userImage(@$user_detail['id']); ?>"/>
+                                                                                    <?php
+                                                                                    }else{
+                                                                                        ?>
+                                                                                        <img src="" />
+                                                                                    <?php
+                                                                                    }?>
+
                                                                                 </figure>
                                                                                 <input type="text" name="comment"
                                                                                        class="new_comment"

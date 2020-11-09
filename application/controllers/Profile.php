@@ -294,11 +294,11 @@ class Profile extends CI_Controller {
 		$status = 2;
 		if($is_friend){
 			$status = 2;
-			$query = $this->db->query('SELECT * from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+			$query = $this->db->query('SELECT *, b.id As friend_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$userdata['user_id'].' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
 			$result = $query->result_array();
 		}else{
 			$status = 1;
-			$query = $this->db->query('SELECT * from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+			$query = $this->db->query('SELECT *, b.id As friend_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$userdata['user_id'].' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
 			$result = $query->result_array();
 		}
 		//
@@ -430,6 +430,15 @@ class Profile extends CI_Controller {
 			//echo $comment_count_increment;
 			$comment_detail['counter'] = $comment_count_increment;
 			echo json_encode($comment_detail);
+		}
+	}
+
+
+	public function getUsersImageViaAjax()
+	{
+		if($this->input->post()) {
+			$user_id = $this->input->post('user_id');
+			return userImage($user_id);
 		}
 	}
 

@@ -738,12 +738,13 @@
                 type : 'get',
                 success:function(result) {
                      var result_json = JSON.parse(result);
+                    console.log(result_json);
                      for(var i = 0; i < result_json.length; i++){
                          if(friend == 0){
                              html += '<div class="card">';
                              html += '<div class="profileSection">';
                              html += '<div class="profileViewToggleWrapper"><figure>';
-                             html += '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">';
+                             html += '<img src="'+getUsersImage(result_json[i].friend_id)+'">';
                              html += '</figure><div class="changeView"><h5>'+result_json[i].first_name+' '+result_json[i].last_name+'</h5><p>location name</p>';
                              html += '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">';
                              html += '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>';
@@ -751,7 +752,7 @@
                          }else{
                              html += '<div class="card">';
                              html += '<div class="profileSection"><div class="profileViewToggleWrapper"><figure>';
-                             html += '<img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">';
+                             html += '<img src="'+getUsersImage(result_json[i].friend_id)+'">';
                              html += '</figure><div class="changeView"><h5>'+result_json[i].first_name+' '+result_json[i].last_name+'</h5><p>location name</p>';
                              html += '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>';
                              html += '<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>';
@@ -880,7 +881,7 @@
                 console.log(result_json.first_name);
                 console.log(reference_id);
                         content += '<div class="chatMsgBox">';
-                        content += '<figure><img src="'+base_url+'uploads/user-male.png"/></figure>';
+                        content += '<figure><img src="'+getUsersImage(result_json.user_id)+'"/></figure>';
                         content += '<div class="right"><div class="userWrapText"><h4>'+result_json.first_name+' '+result_json.last_name+'</h4>';
                         content += '<p>'+result_json.comment+'</p><div class="leftStatus"><a><img src="'+base_url+'assets_d/images/like-dashboard.svg" alt="Like"><span>0</span></a>';
                         content += '<a>Like</a><a class="show_replies" id="">Reply</a></div></div><div class="dotsBullet dropdown"><img src="'+base_url+'assets_d/images/more.svg" alt="more" data-toggle="dropdown">';
@@ -890,6 +891,17 @@
                         content += '<div class="left"><img src="'+base_url+'assets_d/images/trash.svg" alt="Link"></div><div class="right"><span>Delete</span></div>';
                         content += '</a></li></ul></div></div></div>';
                 $('.all_comments_'+reference_id).append(content);
+            }
+        });
+    }
+
+    function getUsersImage(user_id){
+        $.ajax({
+            url: '<?php echo base_url();?>Profile/getUsersImageViaAjax',
+            type: 'post',
+            data: {"user_id": user_id},
+            success: function (result) {
+                return result;
             }
         });
     }
