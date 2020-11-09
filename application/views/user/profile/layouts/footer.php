@@ -833,12 +833,14 @@
             if (event.which == 13) {
                 event.preventDefault();
                 saveComment(parent_id, reference_id, comment);
+                $(this).val('');
             }
         });
 
         $('.commentmsg').on("click", function(){
             var id = $(this).attr('id');
             $('#all_comments_section_'+id).hide();
+
         });
 
         /*$('.show_replies').on("click", function(){
@@ -865,12 +867,29 @@
 
     function saveComment(parent_id, reference_id, comment){
         url = '<?php echo base_url();?>Profile/saveComment';
+        var content = '';
+        var base_url = '<?php echo base_url(); ?>';
         $.ajax({
             url : url,
             type : 'post',
             data : {"parent_id" : parent_id, 'reference_id' : reference_id, 'comment' : comment},
             success:function(result) {
                 console.log(result);
+                var result_json = JSON.parse(result);
+                console.log(result_json);
+                console.log(result_json.first_name);
+                console.log(reference_id);
+                        content += '<div class="chatMsgBox">';
+                        content += '<figure><img src="'+base_url+'uploads/user-male.png"/></figure>';
+                        content += '<div class="right"><div class="userWrapText"><h4>'+result_json.first_name+' '+result_json.last_name+'</h4>';
+                        content += '<p>'+result_json.comment+'</p><div class="leftStatus"><a><img src="'+base_url+'assets_d/images/like-dashboard.svg" alt="Like"><span>0</span></a>';
+                        content += '<a>Like</a><a class="show_replies" id="">Reply</a></div></div><div class="dotsBullet dropdown"><img src="'+base_url+'assets_d/images/more.svg" alt="more" data-toggle="dropdown">';
+                        content += '<ul class="dropdown-menu" role="menu" aria-labelledby="menu1"><li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">';
+                        content += '<div class="left"><img src="'+base_url+'assets_d/images/restricted.svg" alt="Save"></div><div class="right"><span>Hide/block</span></div>';
+                        content += '</a></li><li role="presentation"><a role="menuitem" tabindex="-1" href="javascript:void(0);">';
+                        content += '<div class="left"><img src="'+base_url+'assets_d/images/trash.svg" alt="Link"></div><div class="right"><span>Delete</span></div>';
+                        content += '</a></li></ul></div></div></div>';
+                $('.all_comments_'+reference_id).append(content);
             }
         });
     }
