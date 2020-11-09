@@ -800,15 +800,27 @@ die;*/
                                                                         <div class="chatMsgBox">
                                                                             <div class="commentWrapBox">
                                                                                 <figure>
-                                                                                    <?php if(userImage(@$user_detail['id'])){
+                                                                                    <?php if (empty($user_detail['image'])) {
+
+                                                                                        if (strcasecmp($user_detail['gender'], 'male') == 0) {
+                                                                                            ?>
+                                                                                            <img id="currentProfilePicture"
+                                                                                                 src="<?php echo base_url(); ?>uploads/user-male.png" alt="User">
+                                                                                        <?php } else {
+                                                                                            ?>
+                                                                                            <img id="currentProfilePicture"
+                                                                                                 src="<?php echo base_url(); ?>uploads/user-female.png" alt="User">
+                                                                                            <?php
+                                                                                        }
+
+                                                                                    } else {
                                                                                         ?>
-                                                                                        <img src="<?php echo userImage(@$user_detail['id']); ?>"/>
-                                                                                    <?php
-                                                                                    }else{
-                                                                                        ?>
-                                                                                        <img src="" />
-                                                                                    <?php
-                                                                                    }?>
+                                                                                        <img id="currentProfilePicture"
+                                                                                             src="<?php echo base_url(); ?>uploads/users/<?php echo $user_detail['image']; ?>"
+                                                                                             alt="change profile banner"/>
+                                                                                        <?php
+                                                                                    }
+                                                                                    ?>
 
                                                                                 </figure>
                                                                                 <input type="text" name="comment"
