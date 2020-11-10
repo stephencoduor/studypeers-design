@@ -39,6 +39,10 @@
     object-fit: cover;
     object-position: center center;
 }
+.modal-dialog.modal-sm{
+    width:auto;
+    max-width:440px;
+}
 .changeProfileBanner {
     width:57px;
     height:57px;
