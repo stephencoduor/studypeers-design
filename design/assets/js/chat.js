@@ -74,11 +74,9 @@ $(document).ready(function(){
         $(".chat-right").find(".hide-on-small").removeClass("hide");
         $(".chat-right").find(".close-icon-wrap").removeClass("show");
         $(".chat-right").find(".start-conversation").removeClass("show");
+        $(".chat-right").find(".add-user").removeClass("active");
     });
-    $('#multiple').selectator({
-        showAllOptionsOnFocus: true,
-        searchFields: 'value text subtitle right'
-    });
+   
     $(".open-start-conversation").click(function(){
         $(".chat-wrapper").removeClass("hide-chat").addClass("small");
         $(".chat-wrapper").find(".chat-left").addClass("hide");
@@ -101,4 +99,58 @@ $(document).ready(function(){
         $(".chat-right").find(".close-icon-wrap").addClass("show");
         $(".chat-right").find(".start-conversation").addClass("show");
     });
+    $(document).on('click', ".done-link", function() {
+        $(".chat-right").find(".start-conversation").removeClass("show");
+        $(".chat-right").find(".chat-content").removeClass("hide");
+        $(".chat-right").find(".chat-footer").removeClass("hide");
+        $(".chat-right").find(".chat-header-left").find("h3").removeClass("show");
+        $(".chat-right").find(".chat-header-left").find(".basic-user-info").removeClass("hide");
+        $(".chat-right").find(".hide-on-big").find(".maximize").removeClass("hide").addClass("chat-big");
+        $(".chat-right").find(".add-user").addClass("active");
+    });
+    $(document).on('click', ".chat-big", function() {
+        $(".chat-left").removeClass("hide");
+    });
+
 });
+
+$('#multiple').selectator({
+    showAllOptionsOnFocus: true,
+    searchFields: 'value text subtitle right',
+    render: {
+        selected_item: function (_item, escape) {
+           
+            var html = '';
+            if (typeof _item.left !== 'undefined') 
+                html += '<div class="' + 'selectator_' + 'selected_item_left"><img src="' + escape(_item.left) + '"></div>';
+            if (typeof _item.right !== 'undefined') 
+                html += '<div class="' + 'selectator_' + 'selected_item_right">' + escape(_item.right) + '</div>';
+            html += '<div class="' + 'selectator_' + 'selected_item_title">' + ((typeof _item.text !== 'undefined') ? escape(_item.text) : '') + '</div>';
+            if (typeof _item.subtitle !== 'undefined') 
+                html += '<div class="' + 'selectator_' + 'selected_item_subtitle">' + escape(_item.subtitle) + '</div>';
+            html += '<div class="' + 'selectator_' + 'selected_item_remove">X</div>';
+
+            // check if the 
+            $(".done-link").addClass('show');
+            return html;
+        },
+        option: function (_item, escape) {
+            console.log("asdad");
+            var html = '';
+            if (typeof _item.left !== 'undefined') 
+                html += '<div class="' + 'selectator_' + 'option_left"><img src="' + escape(_item.left) + '"></div>';
+            if (typeof _item.right !== 'undefined') 
+                html += '<div class="' + 'selectator_' + 'option_right">' + escape(_item.right) + '</div>';
+            html += '<div class="' + 'selectator_' + 'option_title">' + ((typeof _item.text !== 'undefined') ? escape(_item.text) : '') + '</div>';
+            if (typeof _item.subtitle !== 'undefined') 
+                html += '<div class="' + 'selectator_' + 'option_subtitle">' + escape(_item.subtitle) + '</div>';
+
+            if($(".selectator_selected_items").html() == "") {
+                $(".done-link").removeClass('show');
+            };
+            return html;
+        }
+    },
+    
+});
+

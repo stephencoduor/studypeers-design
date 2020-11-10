@@ -37,6 +37,7 @@
 .selectator_element.multiple {
   padding-right: 20px !important;
   padding-bottom: 5px !important;
+  padding-left: 45px !important;
 }
 .selectator_element.single {
   height: 36px;
@@ -167,19 +168,19 @@
 }
 .multiple .selectator_selected_items .selectator_selected_item .selectator_selected_item_remove {
   display: inline-block;
-  font-weight: bold;
-  color: rgba(0,0,0,0.75);
-  margin: 0 0 0 5px;
-  cursor: pointer;
-  font-size: 60%;
-  line-height: 10px;
-  vertical-align: top;
-  border-radius: 0 2px 2px 0;
-  position: absolute;
-  right: 0;
-  top: 0;
-  bottom: 0;
-  padding: 7px 5px 4px 5px;
+    font-weight: bold;
+    color: rgba(0,0,0,0.75);
+    margin: 0 0 0 5px;
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 12px;
+    vertical-align: top;
+    border-radius: 0 2px 2px 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    padding: 7px 5px 4px 5px;
 }
 .multiple .selectator_selected_items .selectator_selected_item .selectator_selected_item_remove:hover {
   background-color: rgba(0,0,0,0.1);
@@ -262,6 +263,8 @@
   cursor: pointer;
   color: #000;
   min-height: 36px;
+  display: flex;
+  align-items:center;
 }
 .selectator_options .selectator_option.selectator_group_option {
   padding-left: 20px;
@@ -282,7 +285,7 @@
   border-radius: 2px;
 }
 .selectator_options .selectator_option .selectator_option_title {
-  margin-left: 40px;
+  margin-left: 10px;
 }
 .selectator_options .selectator_option .selectator_option_subtitle {
   font-size: 70%;

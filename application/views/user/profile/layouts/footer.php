@@ -231,13 +231,13 @@
         $image_crop = $('#image_demo').croppie({
             enableExif: true,
             viewport: {
-                width: 200,
-                height: 200,
-                type: 'square' //circle
+                width: 600,
+                height: 300,
+                type:'square'
             },
-            boundary: {
-                width: 300,
-                height: 300
+            boundary:{
+                width: 650,
+                height: 350
             }
         });
         $('#upload_image').on("change", function(){
