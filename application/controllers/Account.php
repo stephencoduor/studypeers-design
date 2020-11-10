@@ -2083,7 +2083,7 @@ class Account extends CI_Controller {
 
 
     public function bestAnswer(){
-        if($this->input->post()){
+        if($this->input->post()){ print_r($this->input->post());die;
             $question_id    = $this->input->post('best_question_id');
             $answer_id      = $this->input->post('answer_id');
 
