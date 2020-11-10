@@ -195,6 +195,7 @@ div.time{
     max-width:50%;
     display: flex;
     align-items:center;
+    position: relative;
 }
 .chat-header-right{
     max-width:50%;
@@ -236,6 +237,7 @@ div.time{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: relative;
 }
 .chat-footer{
     padding:15px;
@@ -472,4 +474,97 @@ div.time{
     display: flex;
     align-items: center;
     justify-content: center;
+}
+.basic-user-info{
+    width:100%;
+    display: flex;
+    align-items: center;
+}
+.chat-header-left h3{
+    width:100%;
+    white-space: nowrap;
+    font-size:16px;
+    margin:0;
+    position: absolute;
+    left:0;
+    top:50%;
+    transform: translateY(-50%);
+    opacity:0;
+    transition:0.3s ease-in;
+}
+.selectator_element{
+    min-height:48px!important;
+    padding-left:20px!important;
+    width:100%!important;
+    border-radius:100px!important;
+}
+.start-conversation{
+    padding:0 15px;
+    position: relative;
+}
+
+.start-conversation .searchBtn {
+    border: none;
+    background: none;
+    color: #185aeb;
+    box-shadow: none;
+    flex: 0 0 auto;
+    padding: 5px;
+    margin: 0;
+    height: 46px;
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 9;
+}
+.multiple .selectator_input{
+    padding: 0 0 0 15px!important;
+}
+.multiple .selectator_selected_items .selectator_selected_item{
+    padding: 5px 20px 4px 5px!important;
+    border-radius:100px!important;
+    overflow: hidden;
+}
+.basic-user-info.hide{
+    display:none;
+}
+.chat-header-left h3.show{
+    opacity:1;
+}
+.chat-right .chat-content.hide{
+    display: none;
+}
+.chat-right .chat-footer.hide{
+    display: none;
+}
+
+.start-conversation {
+    padding: 0 15px;
+    position: absolute;
+    width: 100%;
+    top: 62px;
+    z-index: 9;
+}
+.video-icon.hide{
+    display: none;
+}
+.chat-right .maximize.hide{
+    display:none;
+}
+.start-conversation{
+    display:none;
+}
+.start-conversation.show{
+    display:block;
+}
+
+.hide-on-small.hide{
+    display:none;
+}
+.chat-wrapper .close-icon-wrap.show {
+    display: block;
+}
+.start-conversation.show{
+    display: block;
 }
