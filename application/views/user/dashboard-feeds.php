@@ -1527,12 +1527,73 @@
 	        $this->db->order_by('question_answer_master.vote_count', 'desc');   
 	        $this->db->limit('2');
 	        $answer_list = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id'=>$value['reference_id'], 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => 0))->result_array(); 
-		?>
+			 $user_id = $this->session->get_userdata()['user_data']['user_id'];
+						 $chk_user_upvote = $this->db->get_where($this->db->dbprefix('vote_master'), array('reference'=> 'question', 'reference_id'=> $question_detail['id'], 'user_id' => $user_id))->row_array();
+							if(!empty($chk_user_upvote)){
+								if($chk_user_upvote['type'] == 1){
+									$up_normal_q = 'display:none;';
+									$up_active_q = 'display:block;';
+									$down_normal_q = '';
+									$down_active_q = '';
+								} else {
+									$up_normal_q = '';
+									$up_active_q = '';
+									$down_normal_q = 'display:none;';
+									$down_active_q = 'display:block;';
+								}
+							} else {
+								$up_normal_q = '';
+								$up_active_q = '';
+								$down_normal_q = '';
+								$down_active_q = '';
+							}
+						?>
 
 			<div class="box-card message">
 										<div class="eventMessage">
 											<img src="<?php echo base_url(); ?>assets_d/images/Q_A.svg" alt="Article"> Q&A
 										</div>
+										<div class="voteHeaderWrapper">
+							<div class="voteCount" style="position: absolute;left: -60px;top: 100px;">
+								<div class="uparrow" id="q_uparrow_<?= $question_detail['id']; ?>">
+									<svg xmlns="http://www.w3.org/2000/svg"  class="normalState" width="18.363" height="20" viewBox="0 0 18.363 20" onclick="voteQuestion('upvote', '<?php echo $question_detail['id']; ?>')" style="<?php echo $up_normal_q; ?>">
+									    <g id="prefix__up-arrow" transform="translate(-31.008 -10.925)">
+									        <path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+									    </g>
+									</svg>										
+									<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20" style="<?php echo $up_active_q; ?>" onclick="removeVoteQuestion('upvote', '<?php echo $question_detail['id']; ?>')">
+									    <g id="prefix__Layer_1" transform="translate(-31.008 -10.925)">
+									        <g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+									            <path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" style="fill:#1ae1bd"/>
+									        </g>
+									    </g>
+									</svg>
+								</div>
+								<div class="countt" id="q_count_<?= $question_detail['id']; ?>">
+									<?php if($question_detail['vote_count'] < 0) {
+										echo "0";
+									} else {
+										echo $question_detail['vote_count'];
+									} ?>
+										
+								</div>
+								<div class="downarrow" id="q_downarrow_<?= $question_detail['id']; ?>">
+									<svg xmlns="http://www.w3.org/2000/svg" width="18.363" height="20" class="normalState" viewBox="0 0 18.363 20" onclick="voteQuestion('downvote', '<?php echo $question_detail['id']; ?>')" style="<?php echo $down_normal_q; ?>">
+									    <g id="prefix__up-arrow" transform="rotate(180 24.686 15.463)">
+									        <path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+									    </g>
+									</svg>
+									<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20" style="<?php echo $down_active_q; ?>" onclick="removeVoteQuestion('downvote', '<?php echo $question_detail['id']; ?>')">
+									    <g id="prefix__Layer_1" transform="rotate(180 24.686 15.463)">
+									        <g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+									            <path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" />
+									        </g>
+									    </g>
+									</svg>
+								</div>
+							</div>
+								
+						</div>
 										<div class="dropdown dropdownToggleMenu">
 											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
 											<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
@@ -1655,31 +1716,34 @@
 													</div>
 													<div class="timeline"><?php echo time_ago_in_php($question_detail['created_at']); ?></div>
 						</div>
+
 						<h4><?php echo $question_detail['question_title']; ?></h4>
-						<p><?php echo $question_detail['textarea']; ?></p>
+						<div class="row">
+							<p><?php echo $question_detail['textarea']; ?></p>
+						</div>
 						<div class="socialStatus">
 							<div class="leftStatus vote">
-								<a>
+								<!-- <a>
 									<img src="<?php echo base_url(); ?>assets_d/images/up-arrow-dashboard.svg" alt="Up Arrow">
 									<span>24</span>
 								</a>
 								<a>
 									<img src="<?php echo base_url(); ?>assets_d/images/down-arrow-dashboard.svg" alt="Up Arrow">
 									<span>02</span>
-								</a>
+								</a> -->
 							</div>
 							<div class="rightStatus">
 								<ul>
 									<li>
 										<a>
 											<img src="<?php echo base_url(); ?>assets_d/images/views-grey.svg" alt="Views">
-											<span>12 views</span>
+											<span><?php echo $question_detail['view_count']; ?> views</span>
 										</a>
 									</li>
 									<li>
 										<a>
 											<img src="<?php echo base_url(); ?>assets_d/images/answers-grey.svg" alt="Answer">
-											<span>05</span>
+											<span><?php echo count($answer_list); ?></span>
 										</a>
 									</li>
 									<li>
@@ -1694,16 +1758,13 @@
 						<div class="socialAction">
 							<ul>
 								<li class="helpful">
-									<a>
-										<img src="<?php echo base_url(); ?>assets_d/images/up-arrow-grey.svg" class="helpful" alt="up Arrow">
-										<span>Helpful</span>
-									</a>
+
 								</li>
 								<li class="not-helpful">
-									<a>
+									<!-- <a>
 										<img src="<?php echo base_url(); ?>assets_d/images/down-arrow-grey.svg" class="not-helpful" alt="Down Arrow">
 										<span>Not Helpful</span>
-									</a>
+									</a> -->
 								</li>
 								<li>
 									<a onclick="showQAnsBox('<?php echo $question_detail['id']; ?>')">
@@ -1725,7 +1786,7 @@
 									Answer	
 							</div>
 							<div class="commentAnswer">
-								<form method="post" action="#" onsubmit="return validateAnswer()">
+								<form method="post" class="submitQuestionAnswer" id="<?= $question_detail['id']; ?>" action="<?php echo base_url(); ?>account/submitQuestionAnswer" onsubmit="return validateQuestionAnswer('<?= $question_detail['id']; ?>')">
 									<div class="form-group comment">
 										<input type="hidden" name="question_id" value="<?php echo $question_detail['id']; ?>">
 										<textarea name="answer" id="definition_<?= $question_detail['id']; ?>" cols="30" rows="6"></textarea>
@@ -1737,7 +1798,7 @@
 								</form>
 							</div>
 						</div>
-						<div class="dashboard-qa" style="margin-top: 10px;">
+						<div class="dashboard-qa" style="margin-top: 10px;" id="replyAnswerBox<?= $question_detail['id']; ?>">
 							<?php foreach ($answer_list as $key => $value) { 
 							$user_id = $this->session->get_userdata()['user_data']['user_id']; 
 							$this->db->select('question_answer_master.*, user_info.nickname');
@@ -1763,7 +1824,7 @@
 								$down_active_s = '';
 							}
 						?>
-							<div class="replyAnswerBox">		
+							<div class="replyAnswerBox" >		
 								<?php if($value['best_answer'] == 1) { ?>					
 									<div class="answerQuote">
 										<ul>
@@ -1835,7 +1896,7 @@
 												<div class="action">
 													<ul>
 														<li>
-															<a onclick="showReplyBox('<?php echo $value['id']; ?>')">
+															<a href="<?php echo base_url(); ?>account/questionDetail/<?php echo base64_encode($question_detail['id']); ?>" target="_blank">
 																<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M14.062 257.94L190.06 433.88c30.21 30.21 81.94 8.7 81.94-33.94v-78.28c146.59 8.54 158.53 50.199 134.18 127.879-13.65 43.56 35.07 78.89 72.19 54.46C537.98 464.768 576 403.8 576 330.05c0-170.37-166.04-197.15-304-201.3V48.047c0-42.72-51.79-64.09-81.94-33.94L14.062 190.06c-18.75 18.74-18.75 49.14 0 67.88zM48 224L224 48v128.03c143.181.63 304 11.778 304 154.02 0 66.96-40 109.95-76.02 133.65C501.44 305.911 388.521 273.88 224 272.09V400L48 224z"></path></svg>
 																Reply
 															</a>

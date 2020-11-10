@@ -127,24 +127,22 @@
 
 
 <div class="modal fade" id="unfriend_peer" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-sm">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
                 <h4>Confirmation</h4>
                 <div class="profileSection">
                 <h4>Are you sure to remove this peer !</h4>
-
                     <div class="row">
                         <div class="col-md-12">
                             <form method="post" action="<?php echo base_url(); ?>profile/unfriend">
                                 <div class="form-group button">
                                     <input type="hidden" name="peer_master_id" id="peer_master_id">
                                     <button data-dismiss="modal" class="transparentBtn highlight cancelRemoveBtn">No</button>
-                                    <button type="submit" class="removeBtn">Yes</button>
+                                    <button type="submit" class="filterBtn">Yes</button>
                                 </div>
                             </form>
-
                         </div>
                     </div>
                 </div>

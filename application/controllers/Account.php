@@ -1897,6 +1897,118 @@ class Account extends CI_Controller {
         }
     }
 
+
+    public function submitQuestionAnswer(){
+        if($this->input->post()){
+            $question_id   = $this->input->post('question_id');
+            $answer   = $this->input->post('answer');
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
+
+            $insertArr = array( 'question_id'   => $question_id,
+                                'answer'        => $answer,
+                                'answered_by'   => $user_id,
+                                
+                                'status'        => 1,
+                                'created_at'    => date('Y-m-d H:i:s')
+                            );
+            $this->db->insert('question_answer_master', $insertArr);
+
+            $this->db->select('question_answer_master.*, user_info.nickname');
+            $this->db->join('user_info','user_info.userID=question_answer_master.answered_by');
+            $this->db->order_by('question_answer_master.id', 'desc');   
+            
+            $value = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id'=>$question_id, 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => 0))->row_array(); 
+
+            $html = '<div class="replyAnswerBox">       
+                                
+                                <div class="feedVoteWrap">
+                                    <div class="voteCount">
+                                        <div class="uparrow" id="uparrow_'.$value['id'].'">
+                                            <svg xmlns="http://www.w3.org/2000/svg"  class="normalState" width="18.363" height="20" viewBox="0 0 18.363 20" onclick="voteAnswer(\'upvote\', '.$value['id'].')" style="">
+                                                <g id="prefix__up-arrow" transform="translate(-31.008 -10.925)">
+                                                    <path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+                                                </g>
+                                            </svg>                                      
+                                            <svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20" style="<?= $up_active_s; ?>" onclick="removeVoteAnswer(\'upvote\', '.$value['id'].')">
+                                                <g id="prefix__Layer_1" transform="translate(-31.008 -10.925)">
+                                                    <g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+                                                        <path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" style="fill:#1ae1bd"/>
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="countt" id="count_'.$value['id'].'">
+                                            0
+                                        </div>
+                                        <div class="downarrow" id="downarrow_'.$value['id'].'">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="18.363" height="20" class="normalState" viewBox="0 0 18.363 20" onclick="voteAnswer(\'downvote\', '.$value['id'].')" style="">
+                                                <g id="prefix__up-arrow" transform="rotate(180 24.686 15.463)">
+                                                    <path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+                                                </g>
+                                            </svg>
+                                            <svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20" style="<?= $down_active_s; ?>" onclick="removeVoteAnswer(\'downvote\', '.$value['id'].')">
+                                                <g id="prefix__Layer_1" transform="rotate(180 24.686 15.463)">
+                                                    <g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+                                                        <path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                    </div>
+                                    <div class="feed-card list">
+                                        <div class="right">
+                                            <div class="feed_card_inner">
+                                                <p>'.$value['answer'].'</p>
+                                            </div>
+                                            <div class="feed_card_footer">
+                                                <div class="userWrap study-sets">
+                                                    <div class="user-name">
+                                                        <figure>
+                                                            <img src="'.userImage($value['answered_by']).'" alt="user">
+                                                        </figure>
+                                                        <figcaption>'.$value['nickname'].'</figcaption>
+                                                    </div>
+                                                    <p class="date">'.date('d/m/Y', strtotime($value['created_at'])).'</p>
+                                                </div>
+                                                <div class="action">
+                                                    <ul>
+                                                        <li>
+                                                            <a onclick="showReplyBox('.$value['id'].')">
+                                                                <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><path d="M14.062 257.94L190.06 433.88c30.21 30.21 81.94 8.7 81.94-33.94v-78.28c146.59 8.54 158.53 50.199 134.18 127.879-13.65 43.56 35.07 78.89 72.19 54.46C537.98 464.768 576 403.8 576 330.05c0-170.37-166.04-197.15-304-201.3V48.047c0-42.72-51.79-64.09-81.94-33.94L14.062 190.06c-18.75 18.74-18.75 49.14 0 67.88zM48 224L224 48v128.03c143.181.63 304 11.778 304 154.02 0 66.96-40 109.95-76.02 133.65C501.44 305.911 388.521 273.88 224 272.09V400L48 224z"></path></svg>
+                                                                Reply
+                                                            </a>
+                                                        </li>
+                                                         
+                                                            <li>
+                                                                <a data-toggle="modal" data-target="#confirmationModalBestAnswer" data-id="'.$value['id'].'" class="select_best_answer">
+                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.625" viewBox="0 0 16 14.625">
+                                                                        <path id="prefix__star" d="M7.432 21.6a.889.889 0 0 1 1.219-.287.864.864 0 0 1 .287.287L11 24.943a.878.878 0 0 0 .575.4l3.91.8a.884.884 0 0 1 .689 1.045.911.911 0 0 1-.222.431l-2.613 2.767a.884.884 0 0 0-.235.7l.4 3.737a.885.885 0 0 1-.787.974.9.9 0 0 1-.434-.062l-3.75-1.565a.876.876 0 0 0-.68 0L4.1 35.743a.883.883 0 0 1-1.219-.911l.4-3.737a.9.9 0 0 0-.235-.7l-2.615-2.77a.884.884 0 0 1 .036-1.251.869.869 0 0 1 .433-.223l3.91-.8a.89.89 0 0 0 .575-.4z" transform="translate(-.189 -21.185)" style="fill:#185aeb"/>
+                                                                    </svg>
+                                                                    Select best answer
+                                                                </a>
+                                                            </li>
+                                                        
+                                                        <li class="report">
+                                                            <a href="#" class="transAction reportQuestionAnswer" data-toggle="modal" data-target="#reportModal" data-id="'.$value['id'].'">                                                          
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
+                                                                    <path id="prefix__flag" d="M10.505 2.5c-1.535 0-2.916-1-5.06-1a6.936 6.936 0 0 0-2.523.474A1.5 1.5 0 1 0 .75 2.8v12.7a.5.5 0 0 0 .5.5h.5a.5.5 0 0 0 .5-.5v-2.608A8.6 8.6 0 0 1 6.245 12c1.535 0 2.916 1 5.06 1a7.26 7.26 0 0 0 4.017-1.249A1.5 1.5 0 0 0 16 10.5V3a1.5 1.5 0 0 0-2.091-1.379 8.938 8.938 0 0 1-3.404.879zm3.995 8a5.878 5.878 0 0 1-3.2 1c-1.873 0-3.188-1-5.06-1a10.719 10.719 0 0 0-3.995.75V4a5.878 5.878 0 0 1 3.2-1c1.873 0 3.188 1 5.06 1A10.685 10.685 0 0 0 14.5 3z" style="fill:#7f7b94"/>
+                                                                </svg>
+                                                                Report
+                                                            </a>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>';
+                            echo $html;die;
+
+        }
+    }
+
+
     public function submitAnswerReply(){
         if($this->input->post()){
             $question_id   = $this->input->post('question_id');
@@ -1971,7 +2083,7 @@ class Account extends CI_Controller {
 
 
     public function bestAnswer(){
-        if($this->input->post()){
+        if($this->input->post()){ print_r($this->input->post());die;
             $question_id    = $this->input->post('best_question_id');
             $answer_id      = $this->input->post('answer_id');
 

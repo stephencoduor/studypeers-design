@@ -576,3 +576,40 @@ $("#course_form").submit(function(e) {
 
     
 });
+
+
+function validateQuestionAnswer(id){
+    var answer = $('#definition_'+id).val();
+    if(answer == ''){
+        $('#err_definition_'+id).html("This field is required").show();
+        return false;
+    } else {
+        $('#err_definition_'+id).html("").hide();
+    }
+}
+
+$(document).on('submit','form.submitQuestionAnswer',function(e){
+    var pathname = window.location.pathname;
+    var form = $(this);
+    var id = form.attr('id'); 
+    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+    var chk = validateQuestionAnswer(id); 
+    if(chk !== false) {
+        
+        var url = form.attr('action');
+    
+        $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize() + '&page=' + pathname, // serializes the form's elements.
+           success: function(data)
+           {    
+               $('#replyAnswerBox'+id).append(data);
+               $('#dashboard-qa-answer-'+id).hide();
+           }
+         });
+    }
+
+    
+});
