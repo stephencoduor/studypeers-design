@@ -10292,4 +10292,95 @@
     	$('#dashboard-qa-answer-'+id).show();
     }
 
+
+    function voteQuestion(type, question_id){
+		var url = '<?php echo base_url('account/voteQuestion') ?>';
+		$.ajax({
+	        url: url,
+	        type: 'POST',
+	        data: {'type': type, 'question_id': question_id},
+	        success: function(result) {
+	            if(type == 'upvote'){
+	            	$('#q_uparrow_'+question_id+' .normalState').hide();
+	            	$('#q_uparrow_'+question_id+' .activeState').show();
+	            	$('#q_downarrow_'+question_id+' .normalState').show();
+	            	$('#q_downarrow_'+question_id+' .activeState').hide();
+	            } else {
+	            	$('#q_downarrow_'+question_id+' .normalState').hide();
+	            	$('#q_downarrow_'+question_id+' .activeState').show();
+	            	$('#q_uparrow_'+question_id+' .normalState').show();
+	            	$('#q_uparrow_'+question_id+' .activeState').hide();
+	            }
+	            $('#q_count_'+question_id).html(result);
+	        }
+      	});
+	}
+
+
+	function removeVoteQuestion(type, question_id){
+		var url = '<?php echo base_url('account/removeVoteQuestion') ?>';
+		$.ajax({
+	        url: url,
+	        type: 'POST',
+	        data: {'type': type, 'question_id': question_id},
+	        success: function(result) {
+	            if(type == 'upvote'){
+	            	$('#q_uparrow_'+question_id+' .normalState').show();
+	            	$('#q_uparrow_'+question_id+' .activeState').hide();
+	            	
+	            } else {
+	            	$('#q_downarrow_'+question_id+' .normalState').show();
+	            	$('#q_downarrow_'+question_id+' .activeState').hide();
+	            	
+	            }
+	            $('#q_count_'+question_id).html(result);
+	        }
+      	});
+	}
+
+	function voteAnswer(type, answer_id){
+		var url = '<?php echo base_url('account/voteAnswer') ?>';
+		$.ajax({
+	        url: url,
+	        type: 'POST',
+	        data: {'type': type, 'answer_id': answer_id},
+	        success: function(result) {
+	            if(type == 'upvote'){
+	            	$('#uparrow_'+answer_id+' .normalState').hide();
+	            	$('#uparrow_'+answer_id+' .activeState').show();
+	            	$('#downarrow_'+answer_id+' .normalState').show();
+	            	$('#downarrow_'+answer_id+' .activeState').hide();
+	            } else {
+	            	$('#downarrow_'+answer_id+' .normalState').hide();
+	            	$('#downarrow_'+answer_id+' .activeState').show();
+	            	$('#uparrow_'+answer_id+' .normalState').show();
+	            	$('#uparrow_'+answer_id+' .activeState').hide();
+	            }
+	            $('#count_'+answer_id).html(result);
+	        }
+      	});
+	}
+
+
+	function removeVoteAnswer(type, answer_id){
+		var url = '<?php echo base_url('account/removeVoteAnswer') ?>';
+		$.ajax({
+	        url: url,
+	        type: 'POST',
+	        data: {'type': type, 'answer_id': answer_id},
+	        success: function(result) {
+	            if(type == 'upvote'){
+	            	$('#uparrow_'+answer_id+' .normalState').show();
+	            	$('#uparrow_'+answer_id+' .activeState').hide();
+	            	
+	            } else {
+	            	$('#downarrow_'+answer_id+' .normalState').show();
+	            	$('#downarrow_'+answer_id+' .activeState').hide();
+	            	
+	            }
+	            $('#count_'+answer_id).html(result);
+	        }
+      	});
+	}
+
 </script>
