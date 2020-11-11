@@ -734,6 +734,7 @@
                 type : 'get',
                 success:function(result) {
                     var result_json = JSON.parse(result);
+                    console.log(result_json);
                     if(friend == 0){
                         $('#request_container').html('');
                     }else{
@@ -824,8 +825,8 @@
         });
 
         $('.unfriend_peer').on("click", function(){
-            var peer_master_id = $(this).attr('id');
-            $('#peer_master_id').val(peer_master_id);
+            var friends_id = $(this).attr('id');
+            $('#friends_id').val(friends_id);
         });
 
         $('.new_comment').on('keypress', function(event){
@@ -904,9 +905,7 @@
             type: 'post',
             data: {"user_id": user_id},
             success: function (result) {
-                console.log(user_id);
                 var res = JSON.parse(result);
-                console.log(res);
                 document.getElementById("img_"+res.id).src = res.image;
             }
         });

@@ -36,7 +36,7 @@
                         <div class="left">
                             <div class="userBoxWrapper gridview" id="friend_container">
                                 <?php if(isset($all_connections)){ foreach($all_connections as $peer){ ?>
-                                <div class="card" id="remove_friend_<?php echo $peer['peer_master_id']; ?>">
+                                <div class="card" id="remove_friend_<?php echo $peer['friends_id']; ?>">
                                     <div class="profileSection">
                                         <div class="profileViewToggleWrapper">
                                             <figure>
@@ -66,7 +66,7 @@
                                                     ?>
                                                 </li>
                                                 <li>
-                                                    <a href="javascript:void(0)" class="unfriend_peer" data-toggle="modal" data-target="#unfriend_peer" id="<?php echo $peer['peer_master_id']; ?>">Unfriend</a>
+                                                    <a href="javascript:void(0)" class="unfriend_peer" data-toggle="modal" data-target="#unfriend_peer" id="<?php echo $peer['friends_id']; ?>">Unfriend</a>
                                                 </li>
                                             </ul>
                                         </div>
@@ -138,7 +138,7 @@
                         <div class="col-md-12">
                             <form method="post" action="<?php echo base_url(); ?>profile/unfriend">
                                 <div class="form-group button">
-                                    <input type="hidden" name="peer_master_id" id="peer_master_id">
+                                    <input type="hidden" name="friends_id" id="friends_id">
                                     <button data-dismiss="modal" class="transparentBtn highlight cancelRemoveBtn">No</button>
                                     <button type="submit" class="filterBtn">Yes</button>
                                 </div>
