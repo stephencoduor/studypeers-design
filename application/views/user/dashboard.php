@@ -10214,7 +10214,7 @@
 					</div>
 					<div class="row">
 						<div class="col-md-12">
-							<form method="post" action="<?php echo base_url(); ?>account/bestAnswer">
+							<form method="post" class="bestAnswerDashboard" action="<?php echo base_url(); ?>account/bestAnswerDashboard">
 								<div class="form-group button">
 									<input type="hidden" name="best_question_id" id="best_question_id" value="">
 									<input type="hidden" name="answer_id" id="answer_id">
@@ -10235,7 +10235,7 @@
         <div class="modal-content">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
 	        <div class="modal-body peers">
-	        	<form method="post" action="<?php echo base_url(); ?>account/reportAnswer" onsubmit="return validateReport()">
+	        	<form method="post" class="reportAnswerDashboard" action="<?php echo base_url(); ?>account/reportAnswerDashboard" onsubmit="return validateReport()">
 	          	   <h4>Reason</h4>
 		           <div class="row">
 						<div class="col-md-12">
@@ -10366,6 +10366,91 @@
         
 
     });
+
+
+    $(document).on("click", ".reportQuestionAnswerDashboard", function () {
+		var answer_id = $(this).data('id');
+		var question_id = $(this).data('value'); 
+		$(".modal-body #answer_id").val(answer_id);
+		$(".modal-body #report_question_id").val(question_id);
+
+	});
+
+	$(document).on("click", ".select_best_answer_dashboard", function () {
+		var answer_id = $(this).data('id');
+		var question_id = $(this).data('value'); 
+		$(".modal-body #answer_id").val(answer_id);
+		$(".modal-body #best_question_id").val(question_id);
+	});
+
+
+	$(document).on('submit','form.bestAnswerDashboard',function(e){
+	    
+	    var form = $(this);
+	    
+	    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var url = form.attr('action');
+    	var id = $('#answer_id').val();
+        $.ajax({
+           type: "POST",
+           url: url,
+           data: form.serialize(), // serializes the form's elements.
+           success: function(data)
+           {    
+           		$('.answerQuote').hide();
+           		$('#confirmationModalBestAnswer').modal('hide');
+                    
+                $(".bestAnswerDashboard")[0].reset();
+
+               	$('#answerQuote'+id).show();
+               	$('#bestAnswerModal'+id).hide();
+           }
+         });
+	    
+	});
+
+
+	function validateReport(){
+		var report_reason = $('#report_reason').val();
+	    if(report_reason == ''){
+	        $('#err_report_reason').html("This field is required").show();
+	        return false;
+	    } else {
+	        $('#err_report_reason').html("").hide();
+	    }
+	}
+
+
+	$(document).on('submit','form.reportAnswerDashboard',function(e){
+	    
+	    var form = $(this);
+	    
+	    e.preventDefault(); // avoid to execute the actual submit of the form.
+
+	    var chk = validateReport();
+
+	    if(chk !== false) {
+
+	        var url = form.attr('action');
+	    	var id = $('#answer_id').val();
+	        $.ajax({
+	           type: "POST",
+	           url: url,
+	           data: form.serialize(), // serializes the form's elements.
+	           success: function(data)
+	           {    
+	           		
+	           		$('#reportModal').modal('hide');
+	                    
+	                $(".reportAnswerDashboard")[0].reset();
+	               	$('#replyAnswerBox'+id).hide();
+	           }
+	         });
+	    }
+	    
+	});
+
 
     function showQAnsBox(id){
     	$('#dashboard-qa-answer-'+id).show();
