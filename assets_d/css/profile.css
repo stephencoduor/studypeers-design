@@ -1443,7 +1443,6 @@
 .peerSuggestionList .slick-track {
     padding-bottom: 0px;
 }
-.feeduserwrap {}
 .user-details {
     display: flex;
     align-items: flex-start;
@@ -1452,6 +1451,9 @@
 /*Modal Css Starts */
 .modal-dialog {
     width: 727px;
+}
+.modal-dialog.modal-lg {
+    width: 900px;
 }
 .modal-content {
     border-radius: 15px;
@@ -2781,7 +2783,7 @@ shareOptionList celebrate*/
     -ms-user-select: none;
     user-select: none;
 }
-.progress {
+.selectedPollOptions .progress {
     height: 30px;
     border-radius: 30px;
     margin-top: 50px;
@@ -2799,19 +2801,19 @@ shareOptionList celebrate*/
     margin-top: 50px;
     overflow: visible;
 }
-.progress .eventActionWrap ul li:nth-child(2) {
+.selectedPollOptions .progress .eventActionWrap ul li:nth-child(2) {
     right: 45px;
     left: auto;
 }
-.progress .eventActionWrap ul li:nth-child(3) {
+.selectedPollOptions .progress .eventActionWrap ul li:nth-child(3) {
     right: 30px;
     left: auto;
 }
-.progress .eventActionWrap ul li:nth-child(4) {
+.selectedPollOptions .progress .eventActionWrap ul li:nth-child(4) {
     right: 20px;
     left: auto;
 }
-.progress .eventActionWrap ul li:nth-child(5) {
+.selectedPollOptions .progress .eventActionWrap ul li:nth-child(5) {
     right: 10px;
     left: auto;
 }
@@ -2823,11 +2825,11 @@ shareOptionList celebrate*/
     align-items: center;
     justify-content: space-between;
 }
-.progressValues .leftValue {
+.selectedPollOptions .progressValues .leftValue {
     font-size: 16px;
     font-weight: 500;
 }
-.progressValues .rightValues {
+.selectedPollOptions .progressValues .rightValues {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -2835,13 +2837,13 @@ shareOptionList celebrate*/
     position: relative;
 }
 
-.progressValues .rightValues p {
+.selectedPollOptions .progressValues .rightValues p {
     font-size: 16px;
     font-weight: 500;
     margin-right: 10px;
 }
 
-.progress .eventActionWrap {
+.selectedPollOptions .progress .eventActionWrap {
     width: 50%;
     position: absolute;
     right: 0;
@@ -2856,28 +2858,28 @@ shareOptionList celebrate*/
     justify-content: flex-start;
     position: relative;
 }
-.progress .eventActionWrap ul li:first-child {
+.selectedPollOptions .progress .eventActionWrap ul li:first-child {
     right: 58px;
     left: auto;
 }
-.progress .eventActionWrap ul li {
+.selectedPollOptions .progress .eventActionWrap ul li {
     width: 25px;
     height: 25px;
     border: 1px solid #fff;
 }
 
-.progress .eventActionWrap ul li.more {
+.selectedPollOptions .progress .eventActionWrap ul li.more {
     font-size: 12px;
     font-weight: 400;
 }
-.progress .eventActionWrap ul li:last-child {
+.selectedPollOptions .progress .eventActionWrap ul li:last-child {
     right: 10px;
     left: auto;
 }
-.progress .eventActionWrap ul li img {
+.selectedPollOptions .progress .eventActionWrap ul li img {
     display: block;
 }
-.eventActionWrap ul li img {
+.selectedPollOptions .eventActionWrap ul li img {
     width: 100%;
     height: 100%;
 }
@@ -2907,7 +2909,7 @@ shareOptionList celebrate*/
     opacity: 0;
     cursor: pointer;
 }
-.checkmark {
+.selectedPollOptions .checkmark {
     position: absolute;
     top: 0;
     left: 0;
@@ -2925,4 +2927,53 @@ shareOptionList celebrate*/
 
 .dashRadioWrap .progress::after {
     display: none;
+}
+
+.transparentBtn.highlight {
+    color: #ea2e7e;
+    margin-right: 20px;
+}
+.transparentBtn.highlight:hover, .transparentBtn.highlight:focus {
+    background: #ea2e7e;
+    color: #fff;
+    outline: none;
+}
+.transparentBtn {
+    background-color: transparent;
+    border-radius: 4px;
+    padding: 14px 25px;
+    margin: 0 2px;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    margin-left: 15px;
+    border:solid 1px #ea2e7e;
+}
+.filterBtn {
+    padding: 15px 23px;
+    border-radius: 4px;
+    background-color: #185aeb;
+    border: 1px solid #185aeb;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    margin: 0;
+    transition: all 100ms ease-in-out;
+    white-space: nowrap;
+    height: 48px;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin: 0 8px 0 0;
+}
+.filterBtn:hover, .filterBtn:focus {
+    text-decoration: none;
+    color: #fff;
+    background-color: #5d8cf1;
+    outline: none;
 }

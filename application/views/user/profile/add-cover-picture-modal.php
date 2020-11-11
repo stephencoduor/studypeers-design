@@ -1,5 +1,5 @@
 <div id="uploadCoverImageModal" class="modal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -10,7 +10,6 @@
                     <div class="col-md-12 text-center">
                         <div id="cover_image_demo" style="width:100%; margin-top:30px"></div>
                     </div>
-
                 </div>
                 <div class="row">
                     <div class="col-md-4" style="padding-top:30px;">
