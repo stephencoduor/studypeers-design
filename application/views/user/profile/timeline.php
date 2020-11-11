@@ -804,18 +804,18 @@ die;*/
 
                                                                                         if (strcasecmp($user_detail['gender'], 'male') == 0) {
                                                                                             ?>
-                                                                                            <img id="currentProfilePicture"
+                                                                                            <img
                                                                                                  src="<?php echo base_url(); ?>uploads/user-male.png" alt="User">
                                                                                         <?php } else {
                                                                                             ?>
-                                                                                            <img id="currentProfilePicture"
+                                                                                            <img
                                                                                                  src="<?php echo base_url(); ?>uploads/user-female.png" alt="User">
                                                                                             <?php
                                                                                         }
 
                                                                                     } else {
                                                                                         ?>
-                                                                                        <img id="currentProfilePicture"
+                                                                                        <img
                                                                                              src="<?php echo base_url(); ?>uploads/users/<?php echo $user_detail['image']; ?>"
                                                                                              alt="change profile banner"/>
                                                                                         <?php

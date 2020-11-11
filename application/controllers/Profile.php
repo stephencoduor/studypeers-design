@@ -438,7 +438,9 @@ class Profile extends CI_Controller {
 	{
 		if($this->input->post()) {
 			$user_id = $this->input->post('user_id');
-			return userImage($user_id);
+			$response['image'] = userImage($user_id);
+			$response['id'] = $user_id;
+			echo json_encode($response);
 		}
 	}
 
