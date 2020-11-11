@@ -2066,6 +2066,33 @@ class Account extends CI_Controller {
         }
     }
 
+    public function reportAnswerDashboard(){
+        if($this->input->post()){
+            $answer_id              = $this->input->post('answer_id');
+            $report_reason          = $this->input->post('report_reason');
+            $report_description     = $this->input->post('report_description');
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
+
+            $question_id              = $this->input->post('report_question_id');
+
+            $insertArr = array( 'answer_id'             => $answer_id,
+                                'report_reason'         => $report_reason,
+                                'user_id'               => $user_id,
+                                'report_description'    => $report_description,
+                                'status'        => 1,
+                                'created_at'    => date('Y-m-d H:i:s')
+                            );
+
+            $this->db->insert('report_answer', $insertArr);
+
+
+            $this->db->where(array('id' => $answer_id));
+            $this->db->update('question_answer_master',array('status' => 2));
+
+            echo 1;die;
+        }
+    }
+
     public function removePeer(){
         if($this->input->post()){
             $peer_id              = $this->input->post('remove_peer_id');
@@ -2083,9 +2110,12 @@ class Account extends CI_Controller {
 
 
     public function bestAnswer(){
-        if($this->input->post()){ print_r($this->input->post());die;
+        if($this->input->post()){ 
             $question_id    = $this->input->post('best_question_id');
             $answer_id      = $this->input->post('answer_id');
+
+            $this->db->where(array('question_id' => $question_id));
+            $this->db->update('question_answer_master',array('best_answer' => 0));
 
             $this->db->where(array('id' => $answer_id));
             $this->db->update('question_answer_master',array('best_answer' => 1));
@@ -2095,6 +2125,21 @@ class Account extends CI_Controller {
                     </button></div>';
             $this->session->set_flashdata('flash_message', $message);
             redirect(site_url('account/questionDetail/'.base64_encode($question_id)), 'refresh');
+        }
+    }
+
+    public function bestAnswerDashboard(){
+        if($this->input->post()){ 
+            $question_id    = $this->input->post('best_question_id');
+            $answer_id      = $this->input->post('answer_id');
+
+            $this->db->where(array('question_id' => $question_id));
+            $this->db->update('question_answer_master',array('best_answer' => 0));
+
+            $this->db->where(array('id' => $answer_id));
+            $this->db->update('question_answer_master',array('best_answer' => 1));
+
+            echo 1;die;
         }
     }
 
