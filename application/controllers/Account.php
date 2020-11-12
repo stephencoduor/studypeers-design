@@ -1993,7 +1993,7 @@ class Account extends CI_Controller {
                                                         </li>
                                                          
                                                             <li>
-                                                                <a data-toggle="modal" data-target="#confirmationModalBestAnswer" data-id="'.$value['id'].'" data-value="'.$question_id.'" class="select_best_answer">
+                                                                <a data-toggle="modal" data-target="#confirmationModalBestAnswer" data-id="'.$value['id'].'" data-value="'.$question_id.'" class="select_best_answer_dashboard">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.625" viewBox="0 0 16 14.625">
                                                                         <path id="prefix__star" d="M7.432 21.6a.889.889 0 0 1 1.219-.287.864.864 0 0 1 .287.287L11 24.943a.878.878 0 0 0 .575.4l3.91.8a.884.884 0 0 1 .689 1.045.911.911 0 0 1-.222.431l-2.613 2.767a.884.884 0 0 0-.235.7l.4 3.737a.885.885 0 0 1-.787.974.9.9 0 0 1-.434-.062l-3.75-1.565a.876.876 0 0 0-.68 0L4.1 35.743a.883.883 0 0 1-1.219-.911l.4-3.737a.9.9 0 0 0-.235-.7l-2.615-2.77a.884.884 0 0 1 .036-1.251.869.869 0 0 1 .433-.223l3.91-.8a.89.89 0 0 0 .575-.4z" transform="translate(-.189 -21.185)" style="fill:#185aeb"/>
                                                                     </svg>
@@ -2002,7 +2002,7 @@ class Account extends CI_Controller {
                                                             </li>
                                                         
                                                         <li class="report">
-                                                            <a href="#" class="transAction reportQuestionAnswer" data-toggle="modal" data-target="#reportModal" data-id="'.$value['id'].'" data-value="'.$question_id.'">                                                          
+                                                            <a href="#" class="transAction reportQuestionAnswerDashboard" data-toggle="modal" data-target="#reportModal" data-id="'.$value['id'].'" data-value="'.$question_id.'">                                                          
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                                                                     <path id="prefix__flag" d="M10.505 2.5c-1.535 0-2.916-1-5.06-1a6.936 6.936 0 0 0-2.523.474A1.5 1.5 0 1 0 .75 2.8v12.7a.5.5 0 0 0 .5.5h.5a.5.5 0 0 0 .5-.5v-2.608A8.6 8.6 0 0 1 6.245 12c1.535 0 2.916 1 5.06 1a7.26 7.26 0 0 0 4.017-1.249A1.5 1.5 0 0 0 16 10.5V3a1.5 1.5 0 0 0-2.091-1.379 8.938 8.938 0 0 1-3.404.879zm3.995 8a5.878 5.878 0 0 1-3.2 1c-1.873 0-3.188-1-5.06-1a10.719 10.719 0 0 0-3.995.75V4a5.878 5.878 0 0 1 3.2-1c1.873 0 3.188 1 5.06 1A10.685 10.685 0 0 0 14.5 3z" style="fill:#7f7b94"/>
                                                                 </svg>
