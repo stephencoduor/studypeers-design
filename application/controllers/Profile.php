@@ -38,6 +38,9 @@ class Profile extends CI_Controller {
 		$peer_to = array_merge($friends_to, $friends_from);*/
 		$peer_to = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id ='.$user_id)->result_array();
 		$peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
+
+		$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$user_id)->result_array();
+		$data['blocked_users'] = $blocked_users;
 		$data['all_connections'] = $peer_to;
 		$data['all_requests'] = $peer_from;
 		$data['all_posts'] = $all_posts_array;
@@ -205,6 +208,14 @@ class Profile extends CI_Controller {
 	{
 		is_valid_logged_in();
 		$user_id = $_REQUEST['profile_id'];
+		$login_user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+		//check if user is blocked by same user
+		$check_query = $this->db->query('SELECT * from blocked_peers WHERE user_id = '.$login_user_id.' AND peer_id = '.$user_id)->row_array();
+		if(isset($check_query) && !empty($check_query)){
+			redirect(site_url('Profile/timeline'), 'refresh');
+		}
+
 		$query = $this->db->query('SELECT * from reference_master WHERE user_id = '.$user_id.' ORDER BY id DESC');
 		$user_details = $this->db->query('SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID WHERE a.id = '.$user_id.'');
 		$result = $query->result_array();
@@ -439,6 +450,35 @@ class Profile extends CI_Controller {
 			$response['image'] = userImage($user_id);
 			$response['id'] = $user_id;
 			echo json_encode($response);
+		}
+	}
+
+	public function blockPeer(){
+		if($this->input->post()){
+			$peer_id    = $this->input->post('peer_id');
+			$reason    = $this->input->post('reason');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$insert_array = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id,
+				'reason'		=> trim($reason)
+			);
+			$insert_comment = $this->db->insert('blocked_peers', $insert_array);
+			echo true;
+		}
+	}
+
+	public function unblockPeer(){
+		if($this->input->post()){
+			$peer_id    = $this->input->post('peer_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$check = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id
+			);
+			$this->db->where($check);
+			$this->db->delete('blocked_peers');
+			echo true;
 		}
 	}
 

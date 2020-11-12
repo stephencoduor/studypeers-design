@@ -893,35 +893,73 @@ die;*/
         <section class="view message">
             Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </section>
+
+        <section class="listBar">
+            <section class="listHeader">
+                <h6>Blocked Peers</h6>
+            </section>
+            <section class="listChatBox">
+                <?php
+                    foreach(@$blocked_users as $users){
+                ?>
+                        <section class="list">
+                            <section class="left">
+                                <figure>
+                                    <img src="<?php echo userImage($users['id']);?>" alt="user">
+                                </figure>
+                                <figcaption><?php echo $users['first_name'].' '.$users['last_name']; ?></figcaption>
+                            </section>
+                            <section class="action">
+                                <div class="dropdown">
+                                    <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                                    <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                                        <li class="removePeerSugg">
+                                            <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </section>
+                <?php
+                    }
+                ?>
+
+            </section>
+        </section>
+
+
+
         <section class="listBar">
             <section class="listHeader">
                 <h6>Peers</h6>
-                <a data-toggle="modal" data-target="#peersMessageModal">See More</a>
             </section>
             <section class="listChatBox">
+            <?php
+            foreach(@$all_connections as $users) {
+                ?>
                 <section class="list">
                     <section class="left">
                         <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            <img src="<?php echo userImage($users['id']);?>" alt="user">
                         </figure>
-                        <figcaption>Scholasticus Ipsum</figcaption>
+                        <figcaption><?php echo $users['first_name'].' '.$users['last_name']; ?></figcaption>
                     </section>
                     <section class="action">
-                        <i class="fa fa-ellipsis-v"></i>
+
+                        <div class="dropdown">
+
+                            <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                            <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                                <li class="removePeerSugg" data-id="<?php echo $users['id'];?>"><a href="javascript:void(0)"  data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
+
+                            </ul>
+                        </div>
                     </section>
                 </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="messagecount">12</span>
-                        </figure>
-                        <figcaption>Scholasticus Ipsum</figcaption>
-                    </section>
-                    <section class="action">
-                        <i class="fa fa-ellipsis-v"></i>
-                    </section>
-                </section>
+                <?php
+            }
+                ?>
+
             </section>
         </section>
         <section class="listBar">

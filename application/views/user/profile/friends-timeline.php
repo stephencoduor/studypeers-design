@@ -103,7 +103,7 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                         </a>
                                                     </li>
                                                     <li>
-                                                        <a role="menuitem" href="javascript:void(0);">
+                                                        <a role="menuitem" href="javascript:void(0);" class="block_user" id="<?php echo $user['id']; ?>">
                                                             <img src="<?php echo base_url(); ?>assets_d/images/block.svg" > Block
                                                         </a>
                                                     </li>
@@ -2327,19 +2327,20 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                 <div class="modal-body">
                     <div class="createHeader">
                         <div class="closePost" data-dismiss="modal">
-                            <img src="images/close-grey.svg" alt="close">
+                            <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
+                    <input type="text" name="friend_id" id="block_friend_id" />
                     <h4>Select Reason to report username</h4>
                     <div class="reportSection">
-                        <ul>
-                            <li class="active">
+                        <ul class="reasons">
+                            <li>
                                 <a>Reason</a>
                             </li>
                             <li>
                                 <a>Reason lorem ipsum</a>
                             </li>
-                            <li class="active">
+                            <li>
                                 <a>Reason lorem ipsum</a>
                             </li>
                             <li>
@@ -2362,7 +2363,7 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                 <a href="javascript:void(0)">Cancel</a>
                             </li>
                             <li class="block">
-                                <a href="javascript:void(0)">Report</a>
+                                <a href="javascript:void(0)" class="report_this_user">Report</a>
                             </li>
                         </ul>
                     </div>
@@ -2383,13 +2384,13 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                     </div>
                     <h4>Are you sure you want to block Username?</h4>
                     <div class="profileSection">
+                        <input type="text" name="friend_id" id="block_friend_id" />
                         <div class="profileViewToggleWrapper">
                             <figure>
                                 <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
                             </figure>
                             <div class="changeView">
                                 <h5>Full Name</h5>
-                                <p>location name</p>
                                 <div class="followers">
                                     <span>25 </span> Followers
                                 </div>
@@ -2398,7 +2399,7 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                         <div class="followOptionsWrapper">
                             <ul>
                                 <li>
-                                    <a href="javascript:void(0)">Cancel</a>
+                                    <a href="javascript:void(0);">Cancel</a>
                                 </li>
                                 <li class="block" data-dismiss="modal" data-toggle="modal" href="#reportuser">
                                     <a href="javascript:void(0)">Block</a>

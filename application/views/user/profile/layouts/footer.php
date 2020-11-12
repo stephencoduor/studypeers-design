@@ -851,6 +851,46 @@
             $('#reply_box_'+comment_id).show();
         });*/
 
+        $('.block_user').on("click", function(){
+            var friend_id = $(this).attr('id');
+            $('#block_friend_id').val(friend_id);
+            $('#blockUser').modal('show');
+        });
+
+        var reason;
+        $('.reasons').on('click', 'li', function() {
+            $('.reasons li.active').removeClass('active');
+            $(this).addClass('active');
+            reason = $(this).text();
+        });
+
+
+        $('.report_this_user').on("click", function(){
+            var blocked_friend_id = $('#block_friend_id').val();
+            url = '<?php echo base_url();?>Profile/blockPeer';
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_id" : blocked_friend_id, 'reason' : reason},
+                success:function(result) {
+                    window.location.href = '<?php echo base_url(); ?>Profile/timeline';
+                }
+            });
+        });
+
+        $('.unblock_peer').on("click", function(){
+            var blocked_friend_id = $(this).attr('id');
+            url = '<?php echo base_url();?>Profile/unblockPeer';
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_id" : blocked_friend_id},
+                success:function(result) {
+                    window.location.href = '<?php echo base_url(); ?>Account/dashboard';
+                }
+            });
+        });
+
 
     });
 
