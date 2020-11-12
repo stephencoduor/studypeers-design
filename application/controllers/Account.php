@@ -1919,7 +1919,7 @@ class Account extends CI_Controller {
             
             $value = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id'=>$question_id, 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => 0))->row_array(); 
 
-            $html = '<div class="replyAnswerBox" id="'.$value['id'].'">     
+            $html = '<div class="replyAnswerBox" id="replyAnswerBox'.$value['id'].'">     
 
                             <div class="answerQuote" id="answerQuote'.$value['id'].'" style="display:none;">
                                 <ul>
