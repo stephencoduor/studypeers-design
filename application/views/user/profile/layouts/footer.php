@@ -734,6 +734,7 @@
                 type : 'get',
                 success:function(result) {
                     var result_json = JSON.parse(result);
+                    console.log(result_json);
                     if(friend == 0){
                         $('#request_container').html('');
                     }else{
@@ -824,8 +825,8 @@
         });
 
         $('.unfriend_peer').on("click", function(){
-            var peer_master_id = $(this).attr('id');
-            $('#peer_master_id').val(peer_master_id);
+            var friends_id = $(this).attr('id');
+            $('#friends_id').val(friends_id);
         });
 
         $('.new_comment').on('keypress', function(event){
@@ -849,6 +850,46 @@
             var comment_id = $(this).attr('id');
             $('#reply_box_'+comment_id).show();
         });*/
+
+        $('.block_user').on("click", function(){
+            var friend_id = $(this).attr('id');
+            $('#block_friend_id').val(friend_id);
+            $('#blockUser').modal('show');
+        });
+
+        var reason;
+        $('.reasons').on('click', 'li', function() {
+            $('.reasons li.active').removeClass('active');
+            $(this).addClass('active');
+            reason = $(this).text();
+        });
+
+
+        $('.report_this_user').on("click", function(){
+            var blocked_friend_id = $('#block_friend_id').val();
+            url = '<?php echo base_url();?>Profile/blockPeer';
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_id" : blocked_friend_id, 'reason' : reason},
+                success:function(result) {
+                    window.location.href = '<?php echo base_url(); ?>Profile/timeline';
+                }
+            });
+        });
+
+        $('.unblock_peer').on("click", function(){
+            var blocked_friend_id = $(this).attr('id');
+            url = '<?php echo base_url();?>Profile/unblockPeer';
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_id" : blocked_friend_id},
+                success:function(result) {
+                    window.location.href = '<?php echo base_url(); ?>Account/dashboard';
+                }
+            });
+        });
 
 
     });
@@ -904,9 +945,7 @@
             type: 'post',
             data: {"user_id": user_id},
             success: function (result) {
-                console.log(user_id);
                 var res = JSON.parse(result);
-                console.log(res);
                 document.getElementById("img_"+res.id).src = res.image;
             }
         });

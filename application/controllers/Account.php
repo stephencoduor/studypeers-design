@@ -444,7 +444,7 @@ class Account extends CI_Controller {
                                                                 <figure>
                                                                     <img src="'.userImage($value['created_by']).'" alt="user">
                                                                 </figure>
-                                                                <figcaption>'.$user['nickname'].'</figcaption>
+                                                                <a href="'.base_url().'Profile/friends?profile_id='.$user['userID'].'"><figcaption>'.$user['nickname'].'</figcaption></a>
 
                                                             </div>';
                                                     if($value['created_by'] == $user_id) {
@@ -676,7 +676,7 @@ class Account extends CI_Controller {
                                                             <figure>
                                                                 <img src="'.userImage($value['created_by']).'" alt="user">
                                                             </figure>
-                                                            <figcaption>'.$user['nickname'].'</figcaption>
+                                                            <a href="'.base_url().'Profile/friends?profile_id='.$user['userID'].'"><figcaption>'.$user['nickname'].'</figcaption></a>
 
                                                         </div>'; 
                                                     if($value['created_by'] == $user_id) {
@@ -1919,7 +1919,20 @@ class Account extends CI_Controller {
             
             $value = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id'=>$question_id, 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => 0))->row_array(); 
 
-            $html = '<div class="replyAnswerBox">       
+            $html = '<div class="replyAnswerBox" id="replyAnswerBox'.$value['id'].'">     
+
+                            <div class="answerQuote" id="answerQuote'.$value['id'].'" style="display:none;">
+                                <ul>
+                                    <li>
+                                        <a>
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.625" viewBox="0 0 16 14.625">
+                                                <path id="prefix__star" d="M7.432 21.6a.889.889 0 0 1 1.219-.287.864.864 0 0 1 .287.287L11 24.943a.878.878 0 0 0 .575.4l3.91.8a.884.884 0 0 1 .689 1.045.911.911 0 0 1-.222.431l-2.613 2.767a.884.884 0 0 0-.235.7l.4 3.737a.885.885 0 0 1-.787.974.9.9 0 0 1-.434-.062l-3.75-1.565a.876.876 0 0 0-.68 0L4.1 35.743a.883.883 0 0 1-1.219-.911l.4-3.737a.9.9 0 0 0-.235-.7l-2.615-2.77a.884.884 0 0 1 .036-1.251.869.869 0 0 1 .433-.223l3.91-.8a.89.89 0 0 0 .575-.4z" transform="translate(-.189 -21.185)" style="fill:#185aeb"/>
+                                            </svg>
+                                            Best answer
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>  
                                 
                                 <div class="feedVoteWrap">
                                     <div class="voteCount">
@@ -1966,7 +1979,7 @@ class Account extends CI_Controller {
                                                         <figure>
                                                             <img src="'.userImage($value['answered_by']).'" alt="user">
                                                         </figure>
-                                                        <figcaption>'.$value['nickname'].'</figcaption>
+                                                        <a href="'.base_url().'Profile/friends?profile_id='.$value['answered_by'].'"><figcaption>'.$value['nickname'].'</figcaption></a>
                                                     </div>
                                                     <p class="date">'.date('d/m/Y', strtotime($value['created_at'])).'</p>
                                                 </div>
@@ -1979,8 +1992,8 @@ class Account extends CI_Controller {
                                                             </a>
                                                         </li>
                                                          
-                                                            <li>
-                                                                <a data-toggle="modal" data-target="#confirmationModalBestAnswer" data-id="'.$value['id'].'" class="select_best_answer">
+                                                            <li id="bestAnswerModal'.$value['id'].'" class="bestAnswerli">
+                                                                <a data-toggle="modal" data-target="#confirmationModalBestAnswer" data-id="'.$value['id'].'" data-value="'.$question_id.'" class="select_best_answer_dashboard">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.625" viewBox="0 0 16 14.625">
                                                                         <path id="prefix__star" d="M7.432 21.6a.889.889 0 0 1 1.219-.287.864.864 0 0 1 .287.287L11 24.943a.878.878 0 0 0 .575.4l3.91.8a.884.884 0 0 1 .689 1.045.911.911 0 0 1-.222.431l-2.613 2.767a.884.884 0 0 0-.235.7l.4 3.737a.885.885 0 0 1-.787.974.9.9 0 0 1-.434-.062l-3.75-1.565a.876.876 0 0 0-.68 0L4.1 35.743a.883.883 0 0 1-1.219-.911l.4-3.737a.9.9 0 0 0-.235-.7l-2.615-2.77a.884.884 0 0 1 .036-1.251.869.869 0 0 1 .433-.223l3.91-.8a.89.89 0 0 0 .575-.4z" transform="translate(-.189 -21.185)" style="fill:#185aeb"/>
                                                                     </svg>
@@ -1989,7 +2002,7 @@ class Account extends CI_Controller {
                                                             </li>
                                                         
                                                         <li class="report">
-                                                            <a href="#" class="transAction reportQuestionAnswer" data-toggle="modal" data-target="#reportModal" data-id="'.$value['id'].'">                                                          
+                                                            <a href="#" class="transAction reportQuestionAnswerDashboard" data-toggle="modal" data-target="#reportModal" data-id="'.$value['id'].'" data-value="'.$question_id.'">                                                          
                                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
                                                                     <path id="prefix__flag" d="M10.505 2.5c-1.535 0-2.916-1-5.06-1a6.936 6.936 0 0 0-2.523.474A1.5 1.5 0 1 0 .75 2.8v12.7a.5.5 0 0 0 .5.5h.5a.5.5 0 0 0 .5-.5v-2.608A8.6 8.6 0 0 1 6.245 12c1.535 0 2.916 1 5.06 1a7.26 7.26 0 0 0 4.017-1.249A1.5 1.5 0 0 0 16 10.5V3a1.5 1.5 0 0 0-2.091-1.379 8.938 8.938 0 0 1-3.404.879zm3.995 8a5.878 5.878 0 0 1-3.2 1c-1.873 0-3.188-1-5.06-1a10.719 10.719 0 0 0-3.995.75V4a5.878 5.878 0 0 1 3.2-1c1.873 0 3.188 1 5.06 1A10.685 10.685 0 0 0 14.5 3z" style="fill:#7f7b94"/>
                                                                 </svg>
@@ -2066,6 +2079,33 @@ class Account extends CI_Controller {
         }
     }
 
+    public function reportAnswerDashboard(){
+        if($this->input->post()){
+            $answer_id              = $this->input->post('answer_id');
+            $report_reason          = $this->input->post('report_reason');
+            $report_description     = $this->input->post('report_description');
+            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
+
+            $question_id              = $this->input->post('report_question_id');
+
+            $insertArr = array( 'answer_id'             => $answer_id,
+                                'report_reason'         => $report_reason,
+                                'user_id'               => $user_id,
+                                'report_description'    => $report_description,
+                                'status'        => 1,
+                                'created_at'    => date('Y-m-d H:i:s')
+                            );
+
+            $this->db->insert('report_answer', $insertArr);
+
+
+            $this->db->where(array('id' => $answer_id));
+            $this->db->update('question_answer_master',array('status' => 2));
+
+            echo 1;die;
+        }
+    }
+
     public function removePeer(){
         if($this->input->post()){
             $peer_id              = $this->input->post('remove_peer_id');
@@ -2083,9 +2123,12 @@ class Account extends CI_Controller {
 
 
     public function bestAnswer(){
-        if($this->input->post()){ print_r($this->input->post());die;
+        if($this->input->post()){ 
             $question_id    = $this->input->post('best_question_id');
             $answer_id      = $this->input->post('answer_id');
+
+            $this->db->where(array('question_id' => $question_id));
+            $this->db->update('question_answer_master',array('best_answer' => 0));
 
             $this->db->where(array('id' => $answer_id));
             $this->db->update('question_answer_master',array('best_answer' => 1));
@@ -2095,6 +2138,21 @@ class Account extends CI_Controller {
                     </button></div>';
             $this->session->set_flashdata('flash_message', $message);
             redirect(site_url('account/questionDetail/'.base64_encode($question_id)), 'refresh');
+        }
+    }
+
+    public function bestAnswerDashboard(){
+        if($this->input->post()){ 
+            $question_id    = $this->input->post('best_question_id');
+            $answer_id      = $this->input->post('answer_id');
+
+            $this->db->where(array('question_id' => $question_id));
+            $this->db->update('question_answer_master',array('best_answer' => 0));
+
+            $this->db->where(array('id' => $answer_id));
+            $this->db->update('question_answer_master',array('best_answer' => 1));
+
+            echo 1;die;
         }
     }
 
@@ -2380,7 +2438,7 @@ class Account extends CI_Controller {
                 <figure>
                     <img src="'.userImage($res['created_by']).'" alt="user">
                 </figure>
-                <figcaption>'.$user['nickname'].'</figcaption>
+                <a href="'.base_url().'Profile/friends?profile_id='.$user['userID'].'"><figcaption>'.$user['nickname'].'</figcaption></a>
             </div>  
         </div>';
         if(!empty($res['description'])){
@@ -2543,7 +2601,7 @@ class Account extends CI_Controller {
                             <img src="'.userImage($user_id).'" alt="User">
                         </figure>
                         <figcaption>
-                            <span class="name"> '.$user_info['nickname'].'</span>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$user_info['userID'].'"><span class="name"> '.$user_info['nickname'].'</span></a>
                             '.$comment.'                                                 
                             <div class="actionmsgMenu">
                                 <ul>
@@ -2600,7 +2658,7 @@ class Account extends CI_Controller {
                         <img src="'.userImage($user_id).'" alt="User">
                     </figure>
                     <figcaption>
-                        <span class="name">'.$user_info['nickname'].'</span>
+                        <a href="'.base_url().'Profile/friends?profile_id='.$user_info['userID'].'"><span class="name">'.$user_info['nickname'].'</span></a>
                         '.$comment.'                                            
                         
                     </figcaption></div>';
@@ -2686,7 +2744,7 @@ class Account extends CI_Controller {
                             <img src="'.userImage($user_id).'" alt="User">
                         </figure>
                         <figcaption>
-                            <span class="name"> '.$user_info['nickname'].'</span>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$user_info['userID'].'"><span class="name"> '.$user_info['nickname'].'</span></a>
                             <img src="'.base_url().'uploads/comments/'.$c_image.'" alt="comment" style="height: 70px;">                                                 
                             <div class="actionmsgMenu">
                                 <ul>
@@ -3148,7 +3206,7 @@ class Account extends CI_Controller {
                         <figure>
                             <img src="'.userImage($peer['userID']).'" alt="user">
                         </figure>
-                        <figcaption>'.$peer['nickname'].'</figcaption>
+                        <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                     </section>
                     <section class="action" id="action_'.$peer['userID'].'">';
                     if(empty($chk_if_shared)){
@@ -3269,7 +3327,7 @@ class Account extends CI_Controller {
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
-                            <figcaption>'.$peer['nickname'].'</figcaption>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                         </section>
                         <section class="action" id="action_'.$peer['userID'].'">';
                         if(empty($chk_if_shared)){
@@ -3285,7 +3343,7 @@ class Account extends CI_Controller {
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
-                            <figcaption>'.$peer['nickname'].'</figcaption>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                         </section>
                         <section class="action" id="action_'.$peer['userID'].'">';
                         if(empty($chk_if_shared)){
@@ -3321,7 +3379,7 @@ class Account extends CI_Controller {
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
-                            <figcaption>'.$peer['nickname'].'</figcaption>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                         </section>';
                         if($event_details['created_by'] == $user_id) {
                             $html.= '<section class="action" >

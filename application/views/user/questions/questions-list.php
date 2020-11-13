@@ -284,7 +284,7 @@
 														<figure>
 															<img src="<?php echo userImage($value['created_by']); ?>" alt="user">
 														</figure>
-														<figcaption><?php echo $value['nickname']; ?></figcaption>
+														<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['created_by'] ?>"><figcaption><?php echo $value['nickname']; ?></figcaption></a>
 													</div>
 													<div class="edit">
 														<a href="<?php echo base_url(); ?>account/editQuestion/<?php echo base64_encode($value['id']); ?>">

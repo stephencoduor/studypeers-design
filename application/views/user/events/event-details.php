@@ -44,12 +44,12 @@
 				</li>
 				<li>
 					<?php $user = $this->db->get_where('user_info', array('userID' => $event['created_by']))->row_array();  ?>
-					<a href="#">
+					
 						<figure>
 							<img src="<?php echo userImage($event['created_by']); ?>" alt="user">
 						</figure>
-						<figcaption><?= $user['nickname']; ?></figcaption>
-					</a>
+						<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$event['created_by'] ?>"><?= $user['nickname']; ?></a></figcaption>
+					
 				</li>
 			</ul>
 			<h4 class="eventname"><?php echo $event['event_name']; ?></h4>
@@ -273,7 +273,7 @@
 									<img src="<?php echo userImage($value['user_id']); ?>" alt="User">
 								</figure>
 								<figcaption>
-									<span class="name"> <?php echo $user_info['nickname'] ?></span>
+									<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['user_id'] ?>"><span class="name"> <?php echo $user_info['nickname'] ?></span></a>
 									<?php if($value['type'] == 1) { ?>
 										<img src="<?php echo base_url(); ?>uploads/comments/<?= $value['comment']; ?>" alt="comment" style="height: 70px;">
 									<?php } else { echo $value['comment']; } ?>
@@ -306,7 +306,7 @@
 												<img src="<?php echo userImage($value2['user_id']); ?>" alt="User">
 											</figure>
 											<figcaption>
-												<span class="name"><?= $user_info2['nickname'] ?></span>
+												<a href="<?php echo base_url().'Profile/friends?profile_id='.$value2['user_id'] ?>"><span class="name"><?= $user_info2['nickname'] ?></span></a>
 												<?php echo $value2['comment'] ?>
 
 											</figcaption>

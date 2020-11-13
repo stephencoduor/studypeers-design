@@ -2579,3 +2579,10 @@ shareOptionList celebrate*/
     margin-top: 20px;
     margin-bottom: 20px;
 }
+
+
+figcaption a {
+    font-weight: 700;
+    font-size: 16px;
+    color: #2a234f;
+}
