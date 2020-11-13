@@ -1045,3 +1045,10 @@ a.filterBtn,a.sortMenu{
 figure img {
     height: 100%;
 }
+
+
+figcaption a {
+    font-weight: 700;
+    font-size: 16px;
+    color: #2a234f;
+}

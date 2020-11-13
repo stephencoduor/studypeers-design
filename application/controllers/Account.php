@@ -1992,7 +1992,7 @@ class Account extends CI_Controller {
                                                             </a>
                                                         </li>
                                                          
-                                                            <li>
+                                                            <li id="bestAnswerModal'.$value['id'].'" class="bestAnswerli">
                                                                 <a data-toggle="modal" data-target="#confirmationModalBestAnswer" data-id="'.$value['id'].'" data-value="'.$question_id.'" class="select_best_answer_dashboard">
                                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.625" viewBox="0 0 16 14.625">
                                                                         <path id="prefix__star" d="M7.432 21.6a.889.889 0 0 1 1.219-.287.864.864 0 0 1 .287.287L11 24.943a.878.878 0 0 0 .575.4l3.91.8a.884.884 0 0 1 .689 1.045.911.911 0 0 1-.222.431l-2.613 2.767a.884.884 0 0 0-.235.7l.4 3.737a.885.885 0 0 1-.787.974.9.9 0 0 1-.434-.062l-3.75-1.565a.876.876 0 0 0-.68 0L4.1 35.743a.883.883 0 0 1-1.219-.911l.4-3.737a.9.9 0 0 0-.235-.7l-2.615-2.77a.884.884 0 0 1 .036-1.251.869.869 0 0 1 .433-.223l3.91-.8a.89.89 0 0 0 .575-.4z" transform="translate(-.189 -21.185)" style="fill:#185aeb"/>

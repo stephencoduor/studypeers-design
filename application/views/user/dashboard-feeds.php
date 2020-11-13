@@ -133,7 +133,7 @@
 											<?php } else { 
 												
 											?>
-												<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> 
+												<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a>
 											<?php } ?>
 											<span><?php echo $txt; ?></span> </figcaption>
 											<div class="badgeList">
@@ -687,7 +687,7 @@
 									$user_info = $this->db->get_where('user_info', array('userID' => $studyset_detail['user_id']))->row_array();
 									$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>added a new studyset</span></figcaption>
+									<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new studyset</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">
@@ -1167,7 +1167,7 @@
 					$user_info = $this->db->get_where('user_info', array('userID' => $document_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>added a new document</span></figcaption>
+									<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new document</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">
@@ -1697,7 +1697,7 @@
 					$user_info = $this->db->get_where('user_info', array('userID' => $question_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 														<div class="right">
-															<figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?> <span>has posted a question</span></figcaption>
+															<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>has posted a question</span></figcaption>
 															<div class="badgeList">
 																<ul>
 																	<li class="badge badge1">
@@ -1893,7 +1893,7 @@
 														<figure>
 															<img src="<?php echo userImage($value['answered_by']); ?>" alt="user">
 														</figure>
-														<figcaption><?php echo $value['nickname']; ?></figcaption>
+														<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['id'] ?>"><figcaption><?php echo $value['nickname']; ?></figcaption></a>
 													</div>
 													<p class="date"><?php echo date('d/m/Y', strtotime($value['created_at'])); ?></p>
 												</div>
@@ -1905,8 +1905,12 @@
 																Reply
 															</a>
 														</li>
-														<?php if($value['best_answer'] == 0) { ?>	
-															<li id="bestAnswerModal<?= $value['id']; ?>">
+														<?php if($value['best_answer'] == 0) { 
+															$modalDisplay = "";
+														} else {
+															$modalDisplay = "display:none;";
+														} ?>	
+															<li id="bestAnswerModal<?= $value['id']; ?>" class="bestAnswerli" style="<?= $modalDisplay; ?>">
 																<a data-toggle="modal" data-target="#confirmationModalBestAnswer" data-id="<?= $value['id']; ?>" data-value="<?= $question_detail['id']; ?>" class="select_best_answer_dashboard">
 																	<svg xmlns="http://www.w3.org/2000/svg" width="16" height="14.625" viewBox="0 0 16 14.625">
 																	    <path id="prefix__star" d="M7.432 21.6a.889.889 0 0 1 1.219-.287.864.864 0 0 1 .287.287L11 24.943a.878.878 0 0 0 .575.4l3.91.8a.884.884 0 0 1 .689 1.045.911.911 0 0 1-.222.431l-2.613 2.767a.884.884 0 0 0-.235.7l.4 3.737a.885.885 0 0 1-.787.974.9.9 0 0 1-.434-.062l-3.75-1.565a.876.876 0 0 0-.68 0L4.1 35.743a.883.883 0 0 1-1.219-.911l.4-3.737a.9.9 0 0 0-.235-.7l-2.615-2.77a.884.884 0 0 1 .036-1.251.869.869 0 0 1 .433-.223l3.91-.8a.89.89 0 0 0 .575-.4z" transform="translate(-.189 -21.185)" style="fill:#185aeb"/>
@@ -1914,7 +1918,7 @@
 																	Select best answer
 																</a>
 															</li>
-														<?php } ?>
+														
 														<li class="report">
 															<a href="#" class="transAction reportQuestionAnswerDashboard" data-toggle="modal" data-target="#reportModal" data-value="<?= $question_detail['id']; ?>" data-id="<?php echo $value['id']; ?>">															
 																<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16">
@@ -2055,7 +2059,7 @@
                                     <img src="<?php echo userImage($post_query->created_by); ?>" alt="user">
                                 </figure>
                                 <div class="right">
-                                    <figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?></figcaption>
+                                    <a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?></figcaption></a>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
