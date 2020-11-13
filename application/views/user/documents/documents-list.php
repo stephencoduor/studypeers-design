@@ -228,6 +228,7 @@
 												<div class="socialAction">
 													<ul>
 														<li class="likecountDoc">
+															asdjkfhasjkdfasdf
 															<a href="javascript:void(0)" data-id="<?php echo $value['id']; ?>">
 																<?php if($chk_if_liked == 0) { ?>
 																	<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>

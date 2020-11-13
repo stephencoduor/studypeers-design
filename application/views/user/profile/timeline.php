@@ -570,42 +570,43 @@ die;*/
                                                                             </a>
                                                                             <div class="hoverMenu">
                                                                                 <ul>
-                                                                                    <li class="likeOption like_option_type"
+                                                                                    
+                                                                                    <li data-toggle="tooltip" title="Like" class="likeOption like_option_type"
                                                                                         id="1"
                                                                                         data-id="<?php echo $key; ?>">
                                                                                         <img
                                                                                             src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
                                                                                             alt="like">
                                                                                     </li>
-                                                                                    <li class="supportMenu like_option_type"
+                                                                                    <li data-toggle="tooltip" title="Support" class="supportMenu like_option_type"
                                                                                         id="2"
                                                                                         data-id="<?php echo $key; ?>">
                                                                                         <img
                                                                                             src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
                                                                                             alt="like">
                                                                                     </li>
-                                                                                    <li class="celebrateMenu like_option_type"
+                                                                                    <li data-toggle="tooltip" title="Celebrate" class="celebrateMenu like_option_type"
                                                                                         id="3"
                                                                                         data-id="<?php echo $key; ?>">
                                                                                         <img
                                                                                             src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg"
                                                                                             alt="like">
                                                                                     </li>
-                                                                                    <li class="curiousMenu like_option_type"
+                                                                                    <li data-toggle="tooltip" title="Insightful" class="curiousMenu like_option_type"
                                                                                         id="4"
                                                                                         data-id="<?php echo $key; ?>">
                                                                                         <img
                                                                                             src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg"
                                                                                             alt="like">
                                                                                     </li>
-                                                                                    <li class="insightMenu like_option_type"
+                                                                                    <li data-toggle="tooltip" title="Curious" class="insightMenu like_option_type"
                                                                                         id="5"
                                                                                         data-id="<?php echo $key; ?>">
                                                                                         <img
                                                                                             src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg"
                                                                                             alt="like">
                                                                                     </li>
-                                                                                    <li class="loveMenu like_option_type"
+                                                                                    <li data-toggle="tooltip" title="Love" class="loveMenu like_option_type"
                                                                                         id="6"
                                                                                         data-id="<?php echo $key; ?>">
                                                                                         <img
