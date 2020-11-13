@@ -206,7 +206,7 @@
                                                                 <figure>
                                                                     <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
                                                                 </figure>
-                                                                <figcaption><?= $user['nickname']; ?></figcaption>
+                                                                <a href="<?php echo base_url().'Profile/friends?profile_id='.$value['created_by'] ?>"><figcaption><?= $user['nickname']; ?></figcaption></a>
                                                             </div>  
 
                                                             <?php if($value['created_by'] == $user_id) { ?>
@@ -412,7 +412,7 @@
                                                             <figure>
                                                                 <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
                                                             </figure>
-                                                            <figcaption><?= $user['nickname']; ?></figcaption>
+                                                            <a href="<?php echo base_url().'Profile/friends?profile_id='.$value['created_by'] ?>"><figcaption><?= $user['nickname']; ?></figcaption></a>
                                                         </div>  
                                                         <div class="edit">
                                                             <a href="<?php echo base_url(); ?>account/editEvent/<?php echo base64_encode($value['id']); ?>">

@@ -298,7 +298,7 @@
 													<figure>
 														<img src="<?php echo userImage($value['created_by']); ?>" alt="user">
 													</figure>
-													<figcaption><?php echo $value['nickname']; ?></figcaption>
+													<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['created_by'] ?>"><figcaption><?php echo $value['nickname']; ?></figcaption></a>
 												</div>
 											<?php if($value['created_by'] == $user_id) { ?>
 												<div class="edit">

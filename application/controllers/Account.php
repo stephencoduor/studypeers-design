@@ -444,7 +444,7 @@ class Account extends CI_Controller {
                                                                 <figure>
                                                                     <img src="'.userImage($value['created_by']).'" alt="user">
                                                                 </figure>
-                                                                <figcaption>'.$user['nickname'].'</figcaption>
+                                                                <a href="'.base_url().'Profile/friends?profile_id='.$user['userID'].'"><figcaption>'.$user['nickname'].'</figcaption></a>
 
                                                             </div>';
                                                     if($value['created_by'] == $user_id) {
@@ -676,7 +676,7 @@ class Account extends CI_Controller {
                                                             <figure>
                                                                 <img src="'.userImage($value['created_by']).'" alt="user">
                                                             </figure>
-                                                            <figcaption>'.$user['nickname'].'</figcaption>
+                                                            <a href="'.base_url().'Profile/friends?profile_id='.$user['userID'].'"><figcaption>'.$user['nickname'].'</figcaption></a>
 
                                                         </div>'; 
                                                     if($value['created_by'] == $user_id) {
@@ -1979,7 +1979,7 @@ class Account extends CI_Controller {
                                                         <figure>
                                                             <img src="'.userImage($value['answered_by']).'" alt="user">
                                                         </figure>
-                                                        <figcaption>'.$value['nickname'].'</figcaption>
+                                                        <a href="'.base_url().'Profile/friends?profile_id='.$value['answered_by'].'"><figcaption>'.$value['nickname'].'</figcaption></a>
                                                     </div>
                                                     <p class="date">'.date('d/m/Y', strtotime($value['created_at'])).'</p>
                                                 </div>
@@ -2438,7 +2438,7 @@ class Account extends CI_Controller {
                 <figure>
                     <img src="'.userImage($res['created_by']).'" alt="user">
                 </figure>
-                <figcaption>'.$user['nickname'].'</figcaption>
+                <a href="'.base_url().'Profile/friends?profile_id='.$user['userID'].'"><figcaption>'.$user['nickname'].'</figcaption></a>
             </div>  
         </div>';
         if(!empty($res['description'])){
@@ -2601,7 +2601,7 @@ class Account extends CI_Controller {
                             <img src="'.userImage($user_id).'" alt="User">
                         </figure>
                         <figcaption>
-                            <span class="name"> '.$user_info['nickname'].'</span>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$user_info['userID'].'"><span class="name"> '.$user_info['nickname'].'</span></a>
                             '.$comment.'                                                 
                             <div class="actionmsgMenu">
                                 <ul>
@@ -2658,7 +2658,7 @@ class Account extends CI_Controller {
                         <img src="'.userImage($user_id).'" alt="User">
                     </figure>
                     <figcaption>
-                        <span class="name">'.$user_info['nickname'].'</span>
+                        <a href="'.base_url().'Profile/friends?profile_id='.$user_info['userID'].'"><span class="name">'.$user_info['nickname'].'</span></a>
                         '.$comment.'                                            
                         
                     </figcaption></div>';
@@ -2744,7 +2744,7 @@ class Account extends CI_Controller {
                             <img src="'.userImage($user_id).'" alt="User">
                         </figure>
                         <figcaption>
-                            <span class="name"> '.$user_info['nickname'].'</span>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$user_info['userID'].'"><span class="name"> '.$user_info['nickname'].'</span></a>
                             <img src="'.base_url().'uploads/comments/'.$c_image.'" alt="comment" style="height: 70px;">                                                 
                             <div class="actionmsgMenu">
                                 <ul>
@@ -3206,7 +3206,7 @@ class Account extends CI_Controller {
                         <figure>
                             <img src="'.userImage($peer['userID']).'" alt="user">
                         </figure>
-                        <figcaption>'.$peer['nickname'].'</figcaption>
+                        <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                     </section>
                     <section class="action" id="action_'.$peer['userID'].'">';
                     if(empty($chk_if_shared)){
@@ -3327,7 +3327,7 @@ class Account extends CI_Controller {
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
-                            <figcaption>'.$peer['nickname'].'</figcaption>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                         </section>
                         <section class="action" id="action_'.$peer['userID'].'">';
                         if(empty($chk_if_shared)){
@@ -3343,7 +3343,7 @@ class Account extends CI_Controller {
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
-                            <figcaption>'.$peer['nickname'].'</figcaption>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                         </section>
                         <section class="action" id="action_'.$peer['userID'].'">';
                         if(empty($chk_if_shared)){
@@ -3379,7 +3379,7 @@ class Account extends CI_Controller {
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
-                            <figcaption>'.$peer['nickname'].'</figcaption>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                         </section>';
                         if($event_details['created_by'] == $user_id) {
                             $html.= '<section class="action" >

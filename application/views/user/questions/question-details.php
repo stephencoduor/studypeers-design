@@ -239,7 +239,7 @@
 									<figure>
 										<img src="<?php echo userImage($result['created_by']); ?>" alt="user">
 									</figure>
-									<figcaption><?php echo $result['nickname']; ?></figcaption>
+									<a href="<?php echo base_url().'Profile/friends?profile_id='.$result['created_by'] ?>"><figcaption><?php echo $result['nickname']; ?></figcaption></a>
 								</div>
 							</div>	
 						</div>
