@@ -798,7 +798,7 @@ die;*/
                                                                     </div>
 
                                                                     <form>
-                                                                        <div class="chatMsgBox">
+                                                                        <div class="chatMsgBox mb-0">
                                                                             <div class="commentWrapBox">
                                                                                 <figure>
                                                                                     <?php if (empty($user_detail['image'])) {
@@ -838,14 +838,22 @@ die;*/
                                                                                     </button>
                                                                                 </div>
                                                                             </div>
+                                                                            
                                                                         </div>
+                                                                        <div class="img-wrap-flex">
+                                                                            <div class="image-item">
+                                                                            <div class="close"><img src="http://localhost/studypeers/assets_d/images/close-pink.svg" class="remove_image" id="remove_image_1" alt="close"></div>
+                                                                                <figure>
+                                                                                    <img src="http://localhost/studypeers/uploads/users/cover/1605254961.png" alt="Image"/>
+                                                                                </figure>
+                                                                            </div>
+                                                                        </div>
+                                                                        
                                                                     </form>
-
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-
                                                     <?php
                                                 }
                                             }

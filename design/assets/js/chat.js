@@ -154,3 +154,53 @@ $('#multiple').selectator({
     
 });
 
+
+$(document).ready(function() {
+    var count = 0;
+    document.addEventListener('change', function(e) {
+        var ele = e.target;
+        if ($(e.target).is('input[type="file"]')) {
+            var files = e.target.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                if (file.type.match('image')) {
+                    var picreader = new FileReader();
+                    picreader.addEventListener("load", function(event) {
+                        var picture = event.target;
+                        showPreview(picture.result, ele);
+                    });
+                    picreader.readAsDataURL(file);
+                }
+            }
+        } else {
+            console.log('not file');
+        }
+    }, true);
+    var count = 1;
+    function showPreview(pic, ele) {
+        ele.previousElementSibling.src = pic;
+        ele.setAttribute('style', 'display:none;');
+        ele.nextElementSibling.setAttribute('style', 'display:block;');
+        ele.closest('li').classList.remove('add');
+        if ($('.uploadBtn').length < 5) {
+            $('.gallery').append(
+                ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
+            );
+            count = 1;
+        } else {
+            return false;
+        }
+    }
+    
+    $('body').on('click', '.removePic', function() {
+        $(this).parents('.uploadBtn').remove();
+        if ($('.uploadBtn.add').length) {
+            return false;
+        } else {
+            $('.gallery').append(
+                ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
+            );
+        }
+    });
+});
+
