@@ -31,7 +31,7 @@
                         <figure>
                             <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
                         </figure>
-                        <figcaption><?php echo $peer['nickname']; ?></figcaption>
+                        <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['userID']; ?>"><?php echo $peer['nickname']; ?></a></figcaption>
                     </section>
                     <section class="action">
                         
