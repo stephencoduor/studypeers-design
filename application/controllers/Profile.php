@@ -484,7 +484,23 @@ class Profile extends CI_Controller {
 
 	public function reportUser(){
 		if($this->input->post()){
-			print_r($this->input->post());die;
+			$report_user_id    = $this->input->post('report_user_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$report_reason = $this->input->post('report_reason');
+			$report_description = $this->input->post('report_description');
+
+			$insert_array = array(
+				'user_id'       => $user_id,
+				'report_user_id'       => $report_user_id,
+				'report_reason'		=> trim($report_reason),
+				'report_description'		=> trim($report_description),
+				'status' => 1,
+				'created_at' => date('Y-m-d H:i:s'),
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			$this->db->insert('blocked_peers', $insert_array);
+
+			redirect(site_url('Profile/friends?profile_id='.$report_user_id), 'refresh');
 		}
 	}
 
