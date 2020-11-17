@@ -2461,13 +2461,12 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                 <form method="post" action="<?php echo base_url(); ?>Profile/reportUser" onsubmit="return validateReport()">
                                    <h4>Reason</h4>
                                    <div class="row">
-                                    <input type="hidden" name="report_user_id" value="<?= $user_id; ?>">
+                                    
                                         <div class="col-md-12">
                                             <div class="form-group">
                                                 <label>Reason for Report</label>
                                                 <div class="reason">
-                                                    <input type="hidden" name="answer_id" id="answer_id">
-                                                    <input type="hidden" name="report_question_id" value="<?= $result['id']; ?>">
+                                                    <input type="hidden" name="report_user_id" value="<?= $user_id; ?>">
                                                     <select class="form-control" id="report_reason" name="report_reason">
                                                         <option value="">Select Reason</option>
                                                         <option value="Inappropriate Content">Inappropriate Content</option>
