@@ -2534,14 +2534,19 @@ function time_elapsed_string($datetime, $full = false) {
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
-function validateReport(){
-    var report_reason = $('#report_reason').val();
-    if(report_reason == ''){
-        $('#err_report_reason').html("This field is required").show();
-        return false;
-    } else {
-        $('#err_report_reason').html("").hide();
-    }
-}
+
 
 ?>
+
+
+<script type="text/javascript">
+    function validateReport() {
+        var report_reason = $('#report_reason').val();
+        if(report_reason == ''){
+            $('#err_report_reason').html("This field is required").show();
+            return false;
+        } else {
+            $('#err_report_reason').html("").hide();
+        }
+    }
+</script>
