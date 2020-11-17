@@ -3014,3 +3014,9 @@ shareOptionList celebrate*/
 .chatMsgBox.mb-0{
     margin-bottom:0;
 }
+.modalText {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 500;
+    color: #333;
+}
