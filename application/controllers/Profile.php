@@ -498,7 +498,7 @@ class Profile extends CI_Controller {
 				'created_at' => date('Y-m-d H:i:s'),
 				'updated_at' => date('Y-m-d H:i:s')
 			);
-			$this->db->insert('blocked_peers', $insert_array);
+			$this->db->insert('user_report_master', $insert_array);
 
 			redirect(site_url('Profile/friends?profile_id='.$report_user_id), 'refresh');
 		}
