@@ -98,9 +98,16 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                 <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="More Option">
                                                 <ul>
                                                     <li>
-                                                        <a role="menuitem" href="javascript:void(0);" data-toggle="modal" data-target="#reportModalUser" >
-                                                            <img src="<?php echo base_url(); ?>assets_d/images/report1.svg" > Report
-                                                        </a>
+                                                        <?php if(!empty($chk_if_reported)) { ?>
+                                                            <a role="menuitem" href="javascript:void(0);" data-toggle="modal" data-target="#cancelReportModalUser" >
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/report1.svg" > Report
+                                                            </a>
+                                                        <?php } else { ?>
+                                                            <a role="menuitem" href="javascript:void(0);" data-toggle="modal" data-target="#reportModalUser" >
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/report1.svg" > Report
+                                                            </a>
+                                                        <?php } ?>
+                                                        
                                                     </li>
                                                     <li>
                                                         <a role="menuitem" href="javascript:void(0);" class="block_user" id="<?php echo $user['id']; ?>">
@@ -2498,6 +2505,34 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                         </div>
                                     </div>
                                 </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="cancelReportModalUser" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="modal-body peers">
+                                   <h4>Confirmation</h4>
+                                   <div class="row">
+                                     <h6 class="modalText">Are you sure to cancel report of this user !</h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form method="post" action="<?php echo base_url(); ?>Profile/cancelUserReport">
+                                                <div class="form-group button">
+                                                    <input type="hidden" name="report_id" value="<?= $chk_if_reported['id']; ?>">
+                                                    <input type="hidden" name="report_user_id" value="<?= $user_id; ?>">
+                                                    <button type="button" class="transparentBtn highlight" data-dismiss="modal">No</button>
+                                                    <button type="submit" class="filterBtn">Yes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
                             </div>
                         </div>
                     </div>

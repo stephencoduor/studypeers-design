@@ -210,6 +210,9 @@ class Profile extends CI_Controller {
 		$user_id = $_REQUEST['profile_id'];
 		$login_user_id = $this->session->get_userdata()['user_data']['user_id'];
 
+		//check if user is reported by same user
+		$chk_if_reprted = $this->db->get_where($this->db->dbprefix('user_report_master'), array('user_id'=>$login_user_id, 'report_user_id' => $user_id, 'status' => 1))->row_array(); 
+
 		//check if user is blocked by same user
 		$check_query = $this->db->query('SELECT * from blocked_peers WHERE user_id = '.$login_user_id.' AND peer_id = '.$user_id)->row_array();
 		if(isset($check_query) && !empty($check_query)){
@@ -244,6 +247,7 @@ class Profile extends CI_Controller {
 		$data['user'] = $user_details->row_array();
 		$data['user_id'] = $user_id;
 		$data['is_request_sent'] = $is_request_sent;
+		$data['chk_if_reported']  = $chk_if_reprted;
 		$this->load->view('user/profile/layouts/header', $data);
 		$this->load->view('user/profile/friends-timeline');
 		$this->load->view('user/profile/layouts/footer');
@@ -500,6 +504,23 @@ class Profile extends CI_Controller {
 			);
 			$this->db->insert('user_report_master', $insert_array);
 
+			redirect(site_url('Profile/friends?profile_id='.$report_user_id), 'refresh');
+		}
+	}
+
+	public function cancelUserReport(){
+		if($this->input->post()){
+			$report_id    = $this->input->post('report_id');
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$report_user_id = $this->input->post('report_user_id');
+			
+			$update_arr = array(
+				'status'       => 3,
+				'updated_at' => date('Y-m-d H:i:s')
+			);
+			$this->db->where(array('id' => $report_id));
+			$this->db->update('user_report_master',$update_arr);
+			
 			redirect(site_url('Profile/friends?profile_id='.$report_user_id), 'refresh');
 		}
 	}
