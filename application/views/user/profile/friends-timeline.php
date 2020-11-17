@@ -98,7 +98,7 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                 <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="More Option">
                                                 <ul>
                                                     <li>
-                                                        <a role="menuitem" href="javascript:void(0);">
+                                                        <a role="menuitem" href="javascript:void(0);" data-toggle="modal" data-target="#reportModalUser" >
                                                             <img src="<?php echo base_url(); ?>assets_d/images/report1.svg" > Report
                                                         </a>
                                                     </li>
@@ -2451,6 +2451,59 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="reportModalUser" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="modal-body peers">
+                                <form method="post" action="<?php echo base_url(); ?>Profile/reportUser" onsubmit="return validateReport()">
+                                   <h4>Reason</h4>
+                                   <div class="row">
+                                    <input type="hidden" name="report_user_id" value="<?= $user_id; ?>">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Reason for Report</label>
+                                                <div class="reason">
+                                                    <input type="hidden" name="answer_id" id="answer_id">
+                                                    <input type="hidden" name="report_question_id" value="<?= $result['id']; ?>">
+                                                    <select class="form-control" id="report_reason" name="report_reason">
+                                                        <option value="">Select Reason</option>
+                                                        <option value="Inappropriate Content">Inappropriate Content</option>
+                                                        <option value="Spam">Spam</option>
+                                                        <option value="Promotional">Promotional</option>
+                                                        <option value="Uncivil">Uncivil</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                    <span class="custom_err" id="err_report_reason"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Reason</label>
+                                                <div class="reason droparea">
+                                                    <textarea id="report_description" name="report_description"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button type="submit" class="filterBtn reportBtn">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 <?php
 function time_elapsed_string($datetime, $full = false) {
     $now = new DateTime;
@@ -2479,6 +2532,16 @@ function time_elapsed_string($datetime, $full = false) {
 
     if (!$full) $string = array_slice($string, 0, 1);
     return $string ? implode(', ', $string) . ' ago' : 'just now';
+}
+
+function validateReport(){
+    var report_reason = $('#report_reason').val();
+    if(report_reason == ''){
+        $('#err_report_reason').html("This field is required").show();
+        return false;
+    } else {
+        $('#err_report_reason').html("").hide();
+    }
 }
 
 ?>

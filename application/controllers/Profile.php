@@ -482,4 +482,10 @@ class Profile extends CI_Controller {
 		}
 	}
 
+	public function reportUser(){
+		if($this->input->post()){
+			print_r($this->input->post());die;
+		}
+	}
+
 }
