@@ -213,11 +213,24 @@ class Profile extends CI_Controller {
 		//check if user is reported by same user
 		$chk_if_reprted = $this->db->get_where($this->db->dbprefix('user_report_master'), array('user_id'=>$login_user_id, 'report_user_id' => $user_id, 'status' => 1))->row_array(); 
 
+
+		//check if user is friend of same user
+		$chk_if_friend = $this->db->get_where($this->db->dbprefix('friends'), array('user_id'=>$login_user_id, 'peer_id' => $user_id))->row_array(); 
+
+		//check if user is friend of same user
+		$chk_if_follow = $this->db->get_where($this->db->dbprefix('follow_master'), array('user_id'=>$login_user_id, 'peer_id' => $user_id))->row_array(); 
+
+
 		//check if user is blocked by same user
 		$check_query = $this->db->query('SELECT * from blocked_peers WHERE user_id = '.$login_user_id.' AND peer_id = '.$user_id)->row_array();
 		if(isset($check_query) && !empty($check_query)){
 			redirect(site_url('Profile/timeline'), 'refresh');
 		}
+
+		//all followers
+		$followers = $this->db->query('SELECT COUNT(*) As total from follow_master where peer_id = '.$user_id)->row_array();
+		//all followings
+		$followings = $this->db->query('SELECT COUNT(*) As total from follow_master where user_id = '.$user_id)->row_array();
 
 		$query = $this->db->query('SELECT * from reference_master WHERE user_id = '.$user_id.' ORDER BY id DESC');
 		$user_details = $this->db->query('SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID WHERE a.id = '.$user_id.'');
@@ -248,6 +261,10 @@ class Profile extends CI_Controller {
 		$data['user_id'] = $user_id;
 		$data['is_request_sent'] = $is_request_sent;
 		$data['chk_if_reported']  = $chk_if_reprted;
+		$data['chk_if_friend']  = $chk_if_friend;
+		$data['chk_if_follow']  = $chk_if_follow;
+		$data['followers'] = $followers['total'];
+		$data['followings'] = $followings['total'];
 		$this->load->view('user/profile/layouts/header', $data);
 		$this->load->view('user/profile/friends-timeline');
 		$this->load->view('user/profile/layouts/footer');

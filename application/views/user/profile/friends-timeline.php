@@ -51,8 +51,8 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                             <h4 class="name"><?php echo $full_name; ?></h4>
                                             <h6 class="username"><?php echo $user['username'];?>  <span>Joined on <?php echo date("F jS, Y", strtotime($user['added_on'])); ?></span></h6>
                                             <ul class="socialstatus">
-                                                <li> <span>25</span> Followers</li>
-                                                <li> <span>25</span> Following</li>
+                                                <li> <span><?php echo $followers; ?></span> Followers</li>
+                                                <li> <span><?php echo $followings; ?></span> Following</li>
                                                 <li>
                                                     <a href="javascript:void(0)">
                                                         <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg" alt="facebook">
@@ -85,12 +85,22 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                 ?>
                                                 <li><a href="javascript:void(0);" onclick="cancelRequest(<?= $user_id ?>)" id="add_peer">Cancel Request</a></li>
 
-                                            <?php }else{?>
+                                            <?php }else{ 
+                                                if(!empty($chk_if_friend)) { ?>
+                                                    <li><a href="javascript:void(0);" id="add_peer">Peer</a></li>
+                                            <?php } else { ?>
                                                 <li><a href="javascript:void(0);" onclick="sendRequest(<?= $user_id ?>)" id="add_peer">Add Peer</a></li>
+                                            <?php }
+                                            ?>
 
                                                 <?php
                                             }?>
-                                            <li><a>Follow</a></li>
+                                            <?php if(!empty($chk_if_friend)) { ?>
+                                                <li><a href="javascript:void(0);">Following</a></li>
+                                            <?php } else { ?>
+                                                <li><a>Follow</a></li>
+                                            <?php } ?>
+                                            
                                             <li>
                                                 <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
                                             </li>
