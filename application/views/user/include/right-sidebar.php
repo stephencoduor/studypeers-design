@@ -25,25 +25,24 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                     } else {
                         $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
                     }
-            ?>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
-                            </figure>
-                            <figcaption><?php echo $peer['nickname']; ?></figcaption>
-                        </section>
-                        <section class="action">
-
-                            <div class="dropdown">
-
-                                <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
-                                <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                                    <li class="removePeerSugg" data-id="<?php echo $peer['userID']; ?>"><a href="javascript:void(0)" data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
-
-                                </ul>
-                            </div>
-                        </section>
+             ?>
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
+                        </figure>
+                        <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['userID']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                    </section>
+                    <section class="action">
+                        
+                        <div class="dropdown">
+  
+                          <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                          <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                            <li class="removePeerSugg" data-id="<?php echo $peer['userID'];?>"><a href="javascript:void(0)"  data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
+                            
+                          </ul>
+                        </div>
                     </section>
             <?php }
             } ?>
@@ -157,29 +156,24 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                         </button>
                     </div>
                 </div>
-                <div class="peersList">
-                    <div class="listHeader">
-                        <h6>Peers</h6>
-                    </div>
-                    <div class="listUserWrap">
+                <div class="listUserWrap">
 
-                        <?php foreach ($peer_list as $key => $value) {
-                            if ($value['user_id'] == $user_id) {
-                                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['peer_id']))->row_array();
-                            } else {
-                                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['user_id']))->row_array();
-                            }
-                        ?>
-                            <section class="list">
-                                <section class="left">
-                                    <figure>
-                                        <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
-                                    </figure>
-                                    <figcaption><?php echo $peer['nickname']; ?></figcaption>
-                                </section>
-                                <section class="action">
-                                    <button type="button" class="like">message</button>
-                                </section>
+                    <?php foreach ($peer_list as $key => $value) {
+                        if($value['user_id'] == $user_id){
+                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId'=>$value['peer_id']))->row_array(); 
+                        } else {
+                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId'=>$value['user_id']))->row_array(); 
+                        }
+                    ?>
+                        <section class="list">
+                            <section class="left">
+                                <figure>
+                                    <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
+                                </figure>
+                                <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['userID']; ?>" style="font-size: 16px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                            </section>
+                            <section class="action">
+                                <button type="button" class="like">message</button>
                             </section>
 
                         <?php } ?>
