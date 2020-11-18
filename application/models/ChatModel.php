@@ -32,4 +32,15 @@ class ChatModel extends CI_Model
 
         return $query->result_array();
     }
+
+    public function createGroup($insert)
+    {
+        $this->db->insert('user_chat_groups', $insert);
+        return $this->db->insert_id();
+    }
+
+    public function createUserInGroup($insert)
+    {
+        $this->db->insert_batch('user_chat_group_users', $insert);
+    }
 }

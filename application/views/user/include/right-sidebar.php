@@ -25,115 +25,115 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                     } else {
                         $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
                     }
-             ?>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
-                        </figure>
-                        <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['userID']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
-                    </section>
-                    <section class="action">
-                        
-                        <div class="dropdown">
-  
-                          <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
-                          <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                            <li class="removePeerSugg" data-id="<?php echo $peer['userID'];?>"><a href="javascript:void(0)"  data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
-                            
-                          </ul>
-                        </div>
-                    </section>
-            <?php }
+            ?>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
+                            </figure>
+                            <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['userID']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                        </section>
+                        <section class="action">
+
+                            <div class="dropdown">
+
+                                <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                                <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                                    <li class="removePeerSugg" data-id="<?php echo $peer['userID']; ?>"><a href="javascript:void(0)" data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
+
+                                </ul>
+                            </div>
+                        </section>
+                <?php }
             } ?>
 
 
+                    </section>
+        </section>
+        <section class="listBar">
+            <section class="listHeader">
+                <h6>Groups</h6>
+                <a><i class="fa fa-plus"></i></a>
+            </section>
+            <section class="listChatBox">
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                        </figure>
+                        <figcaption>The in group</figcaption>
+                    </section>
+                    <section class="action">
+                        <i class="fa fa-ellipsis-v"></i>
+                    </section>
+                </section>
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            <span class="messagecount">12</span>
+                        </figure>
+                        <figcaption>The in group</figcaption>
+                    </section>
+                    <section class="action">
+                        <i class="fa fa-ellipsis-v"></i>
+                    </section>
+                </section>
+            </section>
+        </section>
+        <section class="listBar">
+            <section class="listHeader">
+                <h6>Contacts</h6>
+            </section>
+            <section class="listChatBox">
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            <span class="circle online"></span>
+                        </figure>
+                        <figcaption>Angelina</figcaption>
+                    </section>
+                </section>
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            <span class="circle offline"></span>
+                        </figure>
+                        <figcaption>Angelina</figcaption>
+                    </section>
+                </section>
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            <span class="circle online"></span>
+                        </figure>
+                        <figcaption>Angelina</figcaption>
+                    </section>
+                </section>
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            <span class="circle offline"></span>
+                        </figure>
+                        <figcaption>Angelina</figcaption>
+                    </section>
+                </section>
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                            <span class="circle online"></span>
+                        </figure>
+                        <figcaption>Charles</figcaption>
+                    </section>
+                </section>
+            </section>
         </section>
     </section>
-    <section class="listBar">
-        <section class="listHeader">
-            <h6>Groups</h6>
-            <a><i class="fa fa-plus"></i></a>
-        </section>
-        <section class="listChatBox">
-            <section class="list">
-                <section class="left">
-                    <figure>
-                        <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                    </figure>
-                    <figcaption>The in group</figcaption>
-                </section>
-                <section class="action">
-                    <i class="fa fa-ellipsis-v"></i>
-                </section>
-            </section>
-            <section class="list">
-                <section class="left">
-                    <figure>
-                        <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                        <span class="messagecount">12</span>
-                    </figure>
-                    <figcaption>The in group</figcaption>
-                </section>
-                <section class="action">
-                    <i class="fa fa-ellipsis-v"></i>
-                </section>
-            </section>
-        </section>
-    </section>
-    <section class="listBar">
-        <section class="listHeader">
-            <h6>Contacts</h6>
-        </section>
-        <section class="listChatBox">
-            <section class="list">
-                <section class="left">
-                    <figure>
-                        <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                        <span class="circle online"></span>
-                    </figure>
-                    <figcaption>Angelina</figcaption>
-                </section>
-            </section>
-            <section class="list">
-                <section class="left">
-                    <figure>
-                        <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                        <span class="circle offline"></span>
-                    </figure>
-                    <figcaption>Angelina</figcaption>
-                </section>
-            </section>
-            <section class="list">
-                <section class="left">
-                    <figure>
-                        <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                        <span class="circle online"></span>
-                    </figure>
-                    <figcaption>Angelina</figcaption>
-                </section>
-            </section>
-            <section class="list">
-                <section class="left">
-                    <figure>
-                        <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                        <span class="circle offline"></span>
-                    </figure>
-                    <figcaption>Angelina</figcaption>
-                </section>
-            </section>
-            <section class="list">
-                <section class="left">
-                    <figure>
-                        <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                        <span class="circle online"></span>
-                    </figure>
-                    <figcaption>Charles</figcaption>
-                </section>
-            </section>
-        </section>
-    </section>
-</section>
 </section>
 </section>
 </section>
@@ -159,10 +159,10 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                 <div class="listUserWrap">
 
                     <?php foreach ($peer_list as $key => $value) {
-                        if($value['user_id'] == $user_id){
-                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId'=>$value['peer_id']))->row_array(); 
+                        if ($value['user_id'] == $user_id) {
+                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['peer_id']))->row_array();
                         } else {
-                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId'=>$value['user_id']))->row_array(); 
+                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['user_id']))->row_array();
                         }
                     ?>
                         <section class="list">
@@ -180,11 +180,11 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
 
 
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 
 <div class="modal fade" id="courseModal" role="dialog">
@@ -339,218 +339,164 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
 
 
 <div class="chat-wrapper hide-chat">
-	<div class="chat-left">
-		<div class="chat-body-wrap">
-			<div class="chat-dropdown-header">
-				<div class="left-area">
-					<div class="for-mobile">
-						<figure>
-							<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image">
-						</figure>
-						<strong>John Smith</strong>
-					</div>
-					<div class="hide-on-small">
-						Messages <span class="total-message">(03)</span>
-					</div>
-				</div>
-				<div class="right-area">
-					<a href="javascript:void(0)" class="minimize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/minimize.svg" class="change-icon" alt="Maximize Icon" /></a>
-					<a href="javascript:void(0)" class="open-big-start"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/new_message.svg" alt="New Message Icon" /></a>
-				</div>
-			</div>
-			<div class="search-list">
-				<button type="submit" class="searchBtn">
-					<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-						<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+    <div class="chat-left">
+        <div class="chat-body-wrap">
+            <div class="chat-dropdown-header">
+                <div class="left-area">
+                    <div class="for-mobile">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image">
+                        </figure>
+                        <strong>John Smith</strong>
+                    </div>
+                    <div class="hide-on-small">
+                        Messages <span class="total-message">(03)</span>
+                    </div>
+                </div>
+                <div class="right-area">
+                    <a href="javascript:void(0)" class="minimize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/minimize.svg" class="change-icon" alt="Maximize Icon" /></a>
+                    <a href="javascript:void(0)" class="open-big-start"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/new_message.svg" alt="New Message Icon" /></a>
+                </div>
+            </div>
+            <div class="search-list">
+                <button type="submit" class="searchBtn">
+                    <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                        <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
 			s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
 			c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-					</svg>
-				</button>
-				<input type="text" id="myUsers" onkeyup="searchUser()" placeholder="Find conversations" class="form-control">
-			</div>
-			<div class="chat-user-list">
-				<ul id="userList">
-					<li>
-						<a href="">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
-							</figure>
-							<div class="time">40 mins</div>
-							<div class="info-wrap">
-								User Name
-								<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
-							</figure>
-							<div class="info-wrap">
-								Group Name
-								<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
-							</figure>
-							<div class="info-wrap">
-								Group Name
-								<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-							</div>
-						</a>
-					</li>
-					<li>
-						<a href="">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
-							</figure>
-							<div class="info-wrap">
-								Group Name
-								<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-							</div>
-						</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-	</div>
-	<div class="chat-right">
-		<div class="chat-header">
-			<div class="chat-header-left">
-				<div class="basic-user-info">
-					<figure>
-						<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image" />
-					</figure>
-					<strong>John Smith</strong>
-				</div>
-				<h3>Start Conversation</h3>
-			</div>
-			<div class="chat-header-right">
-				<div class="hide-on-big">
-					<a href="javascript:void(0)" class="maximize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/maximize.svg" class="change-icon" alt="Maximize Icon" /></a>
-				</div>
-				<a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/video-camera.svg" alt="Video Icon" /></a>
-				<a href="javascript:void(0)" class="hide-on-small"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
-				<a href="javascript:void(0)" class="add-user"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
-				<div class="hide-on-big close-icon-wrap">
-					<a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/close.svg" alt="New Message Icon" /></a>
-				</div>
-			</div>
-		</div>
-		<div class="start-conversation">
-			<button type="submit" class="searchBtn">
-				<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-					<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+                    </svg>
+                </button>
+                <input type="text" id="myUsers" onkeyup="searchUser()" placeholder="Find conversations" class="form-control">
+            </div>
+            <div class="chat-user-list">
+                <ul id="userList">
+                    <li>
+                        <a href="">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
+                            </figure>
+                            <div class="time">40 mins</div>
+                            <div class="info-wrap">
+                                User Name
+                                <p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
+                            </figure>
+                            <div class="info-wrap">
+                                Group Name
+                                <p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
+                            </figure>
+                            <div class="info-wrap">
+                                Group Name
+                                <p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
+                            </figure>
+                            <div class="info-wrap">
+                                Group Name
+                                <p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="chat-right">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <div class="basic-user-info">
+                    <figure>
+                        <i class="fa fa-users" aria-hidden="true"></i>
+                    </figure>
+                    <strong>Group</strong>
+                </div>
+                <h3>Start Conversation</h3>
+            </div>
+            <div class="chat-header-right">
+                <div class="hide-on-big">
+                    <a href="javascript:void(0)" class="maximize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/maximize.svg" class="change-icon" alt="Maximize Icon" /></a>
+                </div>
+                <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/video-camera.svg" alt="Video Icon" /></a>
+                <a href="javascript:void(0)" class="hide-on-small"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
+                <a href="javascript:void(0)" class="add-user"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
+                <div class="hide-on-big close-icon-wrap">
+                    <a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/close.svg" alt="New Message Icon" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="start-conversation">
+            <button type="submit" class="searchBtn">
+                <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                    <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
 		s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
 		c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-				</svg>
-			</button>
-			<select id="multiple" name="select2" multiple></select>
-			<a href="javascript:void(0)" class="done-link">Done</a>
-		</div>
-		<div class="chat-content">
-			<div class="chat-body">
-				<div class="chat-date">
-					Sept 28
-				</div>
-				<div class="received-wrap">
-					<div class="message-received">
-						<div class="user-info">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image" />
-							</figure>
-							<div class="user-name">
-								<strong>User name</strong>
-								<span class="msg-tile">04:00</span>
-							</div>
-						</div>
-						<div class="chat-msg">
-							<p>Lorem ipsum dolor sit amet consectetur</p>
-						</div>
-					</div>
-				</div>
-				<div class="sent-wrap">
-					<div class="message-sent">
-						<div class="user-info">
-							<div class="user-name">
-								<strong>User name</strong>
-								<span class="msg-tile">04:00</span>
-							</div>
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image" />
-							</figure>
-						</div>
-						<div class="chat-msg">
-							<p>Lorem ipsum dolor sit amet consectetur</p>
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Connect-Peers.jpg" alt="Attached Image" />
-							</figure>
-						</div>
-					</div>
-				</div>
-				<div class="received-wrap">
-					<div class="message-received">
-						<div class="user-info">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image" />
-							</figure>
-							<div class="user-name">
-								<strong>User name</strong>
-								<span class="msg-tile">04:00</span>
-							</div>
-						</div>
-						<div class="chat-msg">
-							<p>Lorem ipsum dolor sit amet consectetur</p>
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Connect-Peers.jpg" alt="Attached Image" />
-							</figure>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<div class="chat-footer">
-			<div class="input-wrap">
-				<div class="img-preview">
-					<ul class="custom-image clearfix">
-						<li>
-							<ul class="custom-upload clearfix">
-								<li>
-									<div class="choose-imagefile-wrap">
-										<div class="result">
-											<div id="gal">
-												<ul class="gallery">
-													<li class="uploadBtn uploadBtnRestImage add">
-														<img class="img" src="" />
-														<input type="file" name="rest_image[]" class="rest_img" accept="image/*">
-														<a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>
-													</li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</li>
-							</ul>
-						</li>
-					</ul>
-				</div>
-				<div class="chat-input-wrap">
-					<input type="text" placeholder="Type your message here" class="form-control">
-					<div class="chat-action">
-						<a href="javascript:void(0)" class="imoji">
-							<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/emoji.svg" alt="Imozi Icon" />
-						</a>
-						<label class="file-upload"></label>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                </svg>
+            </button>
+            <form action="javascript:void(0);" id="chat_submit_group_form">
+                <select id="multiple" name="usergroupschats[]" multiple></select>
+                <a href="javascript:void(0)" class="done-link">Done</a>
+            </form>
+        </div>
+        <div class="chat-content">
+            <div class="chat-body" id="append_chat_records">
+
+            </div>
+        </div>
+        <div class="chat-footer">
+            <div class="input-wrap">
+                <div class="img-preview">
+                    <ul class="custom-image clearfix">
+                        <li>
+                            <ul class="custom-upload clearfix">
+                                <li>
+                                    <div class="choose-imagefile-wrap">
+                                        <div class="result">
+                                            <div id="gal">
+                                                <ul class="gallery">
+                                                    <li class="uploadBtn uploadBtnRestImage add">
+                                                        <img class="img" src="" />
+                                                        <input type="file" name="rest_image[]" class="rest_img" accept="image/*">
+                                                        <a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chat-input-wrap">
+                    <input type="text" placeholder="Type your message here" class="form-control">
+                    <div class="chat-action">
+                        <a href="javascript:void(0)" class="imoji">
+                            <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/emoji.svg" alt="Imozi Icon" />
+                        </a>
+                        <label class="file-upload"></label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 

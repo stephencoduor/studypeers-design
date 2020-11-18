@@ -49,6 +49,8 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
+	<script src="<?php echo base_url('assets_d/js/socket.io.js'); ?>"></script>
+
 </head>
 
 <?php
@@ -63,7 +65,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 ?>
 
 <body>
-
+	<input type="hidden" id="hidden_user_info" value="<?php echo json_encode($this->session->get_userdata()['user_data']); ?>">
 	<header>
 		<section class="container-fluid">
 			<section class="row">

@@ -41,7 +41,7 @@ class ChatController extends CI_Controller
 
                 foreach ($getFriends as $key => $val) {
 
-                    $data[$key]['id'] = $val['id'];
+                    $data[$key]['value'] = $val['id'];
                     $data[$key]['left'] = base_url() . 'uploads/users/' . $val['image'];
                     $data[$key]['text'] = $val['first_name'] . ' ' . $val['last_name'];
                     $data[$key]['subtitle'] = $val['username'];
@@ -55,6 +55,58 @@ class ChatController extends CI_Controller
             ];
         } catch (Exception $e) {
 
+            $response = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($response['code'])
+            ->set_output(json_encode($response['data']));
+    }
+
+    /**
+     * createUserGroup
+     * @param : 
+     */
+
+    public function createUserGroup()
+    {
+        try {
+            $users = $this->input->get('usergroupschats');
+
+            if (!is_array($users)) {
+                throw new Exception("Error processing request", 422);
+            }
+
+            #create new user group.
+            $userId =  $this->session->get_userdata()['user_data']['user_id'];
+
+            $createUserGroup = [];
+            $createGroup['user_id'] = $userId;
+
+            $getCreativeGroupId = $this->ChatModel->createGroup($createGroup);
+
+            $createUsersInGroup = [];
+
+            foreach ($users as $key => $val) {
+
+
+                $createUsersInGroup[$key]['group_id'] = $getCreativeGroupId;
+                $createUsersInGroup[$key]['peer_id'] = $val;
+            }
+
+            $this->ChatModel->createUserInGroup($createUsersInGroup);
+
+            $response = [
+                'code' => 200,
+                'message' => 'OK',
+                'data' => []
+            ];
+        } catch (\Exception $e) {
             $response = [
                 'code' => $e->getCode(),
                 'message' => $e->getMessage(),

@@ -31,6 +31,140 @@ function searchUser() {
   }
 }
 
+function receivingMessage(messageJson) {
+  var html =
+    '<div class="received-wrap"><div class="message-received"><div class="user-info">' +
+    '<figure><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image" /></figure>' +
+    '<div class="user-name"><strong>User name</strong><span class="msg-tile">04:00</span></div></div>' +
+    '<div class="chat-msg"><p>Lorem ipsum dolor sit amet consectetur</p></div></div></div>';
+}
+
+function sendMessage(messageJson) {
+  var html =
+    '<div class="sent-wrap"><div class="message-sent"><div class="user-info"><div class="user-name">' +
+    "<strong>User name</strong>" +
+    '<span class="msg-tile">04:00</span></div>' +
+    "<figure>" +
+    '<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image" />' +
+    "</figure>" +
+    "</div>" +
+    '<div class="chat-msg">' +
+    "<p>Lorem ipsum dolor sit amet consectetur</p>" +
+    "<figure>" +
+    '<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Connect-Peers.jpg" alt="Attached Image" />' +
+    "</figure></div></div></div>";
+}
+
+function appendChatRecords() {
+  var mainContent = '<div class="chat-date">Sept 28</div>';
+}
+
+function createGroupHTML() {
+  var $chatelement = $(".chat-right");
+  $chatelement.find(".start-conversation").removeClass("show");
+  $chatelement.find(".chat-content").removeClass("hide");
+  $chatelement.find(".chat-footer").removeClass("hide");
+  $chatelement
+    .find(".chat-header-left")
+    .find("h3")
+    .removeClass("show");
+  $chatelement
+    .find(".chat-header-left")
+    .find(".basic-user-info")
+    .removeClass("hide");
+  $chatelement
+    .find(".hide-on-big")
+    .find(".maximize")
+    .removeClass("hide")
+    .addClass("chat-big");
+  $chatelement.find(".add-user").addClass("active");
+}
+
+var CHAT_GROUP_ADDITIONS = {
+  _AJAX_SUBMIT_CHAT: function(data) {
+    $.ajax({
+      url: "submit-chat-users",
+      data: data,
+      success: function(data) {
+        createGroupHTML();
+        console.log(data);
+      },
+      error: function() {},
+      complete: function(data) {
+        console.log(data);
+      }
+    });
+  }
+};
+
+//--------------handle group chat create event--------------------------//
+
+$(document).on("click", ".done-link", function() {
+  var data = $("#chat_submit_group_form").serializeArray();
+  CHAT_GROUP_ADDITIONS._AJAX_SUBMIT_CHAT(data);
+});
+
+//--------------en of group chat create event-------------------------//
+
+//===============start socket chat =====================//
+
+//====================end of socket chat module ==============//
+
+$(document).ready(function() {
+  var count = 0;
+  document.addEventListener(
+    "change",
+    function(e) {
+      var ele = e.target;
+      if ($(e.target).is('input[type="file"]')) {
+        var files = e.target.files;
+        for (var i = 0; i < files.length; i++) {
+          var file = files[i];
+          if (file.type.match("image")) {
+            var picreader = new FileReader();
+            picreader.addEventListener("load", function(event) {
+              var picture = event.target;
+              showPreview(picture.result, ele);
+            });
+            picreader.readAsDataURL(file);
+          }
+        }
+      } else {
+        console.log("not file");
+      }
+    },
+    true
+  );
+  var count = 1;
+  function showPreview(pic, ele) {
+    ele.previousElementSibling.src = pic;
+    ele.setAttribute("style", "display:none;");
+    ele.nextElementSibling.setAttribute("style", "display:block;");
+    ele.closest("li").classList.remove("add");
+    if ($(".uploadBtn").length < 5) {
+      $(".gallery").append(
+        ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
+      );
+      count = 1;
+    } else {
+      return false;
+    }
+  }
+
+  $("body").on("click", ".removePic", function() {
+    $(this)
+      .parents(".uploadBtn")
+      .remove();
+    if ($(".uploadBtn.add").length) {
+      return false;
+    } else {
+      $(".gallery").append(
+        ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
+      );
+    }
+  });
+});
+
 $(document).ready(function() {
   $(document).on("click", ".minimize", function() {
     $(this)
@@ -277,89 +411,7 @@ $(document).ready(function() {
       .find(".start-conversation")
       .addClass("show");
   });
-  $(document).on("click", ".done-link", function() {
-    $(".chat-right")
-      .find(".start-conversation")
-      .removeClass("show");
-    $(".chat-right")
-      .find(".chat-content")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".chat-footer")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".chat-header-left")
-      .find("h3")
-      .removeClass("show");
-    $(".chat-right")
-      .find(".chat-header-left")
-      .find(".basic-user-info")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".hide-on-big")
-      .find(".maximize")
-      .removeClass("hide")
-      .addClass("chat-big");
-    $(".chat-right")
-      .find(".add-user")
-      .addClass("active");
-  });
   $(document).on("click", ".chat-big", function() {
     $(".chat-left").removeClass("hide");
-  });
-});
-
-$(document).ready(function() {
-  var count = 0;
-  document.addEventListener(
-    "change",
-    function(e) {
-      var ele = e.target;
-      if ($(e.target).is('input[type="file"]')) {
-        var files = e.target.files;
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          if (file.type.match("image")) {
-            var picreader = new FileReader();
-            picreader.addEventListener("load", function(event) {
-              var picture = event.target;
-              showPreview(picture.result, ele);
-            });
-            picreader.readAsDataURL(file);
-          }
-        }
-      } else {
-        console.log("not file");
-      }
-    },
-    true
-  );
-  var count = 1;
-  function showPreview(pic, ele) {
-    ele.previousElementSibling.src = pic;
-    ele.setAttribute("style", "display:none;");
-    ele.nextElementSibling.setAttribute("style", "display:block;");
-    ele.closest("li").classList.remove("add");
-    if ($(".uploadBtn").length < 5) {
-      $(".gallery").append(
-        ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
-      );
-      count = 1;
-    } else {
-      return false;
-    }
-  }
-
-  $("body").on("click", ".removePic", function() {
-    $(this)
-      .parents(".uploadBtn")
-      .remove();
-    if ($(".uploadBtn.add").length) {
-      return false;
-    } else {
-      $(".gallery").append(
-        ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
-      );
-    }
   });
 });
