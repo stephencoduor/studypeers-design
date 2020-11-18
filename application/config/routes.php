@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -60,6 +60,9 @@ $route['admin/(:any)/(:any)/(:any)/(:any)'] = "Admin/$1/$1/$1";
 $route['admin'] = "Admin/index";
 
 
+/**
+ * chat module routes
+ * 
+ */
 
-
-
+$route['account/find-my-peers'] = "ChatController/getPeers";

@@ -45,7 +45,10 @@
 		<!-- <link type="text/css" rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/jquery-te-1.4.0.css"> -->
 
 	<?php } ?>
+	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/fm.selectator.jquery.css'); ?>">
+
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
+
 </head>
 
 <?php
@@ -60,6 +63,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 ?>
 
 <body>
+
 	<header>
 		<section class="container-fluid">
 			<section class="row">
@@ -633,6 +637,12 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 					<span></span>
 					<span></span>
 				</div>
+
+				<!-- chat module html  -->
+
+
+				<!-- end of chat module html  -->
+
 
 				<script type="text/javascript">
 					function acceptRequest(id, action_id) {
