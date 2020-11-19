@@ -95,10 +95,10 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
 
                                                 <?php
                                             }?>
-                                            <?php if(!empty($chk_if_friend)) { ?>
-                                                <li><a href="javascript:void(0);">Following</a></li>
+                                            <?php if(!empty($chk_if_follow)) { ?>
+                                                <li><a href="javascript:void(0)" class="follow_now follow_<?php echo $user_id; ?>" data-id="<?php echo $user_id; ?>" id="0">UnFollow</a></li>
                                             <?php } else { ?>
-                                                <li><a>Follow</a></li>
+                                                <li><a href="javascript:void(0)" class="follow_now follow_<?php echo $user_id; ?>" data-id="<?php echo $user_id; ?>" id="1">Follow</a></li>
                                             <?php } ?>
                                             
                                             <li>
