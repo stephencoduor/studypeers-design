@@ -51,8 +51,8 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                             <h4 class="name"><?php echo $full_name; ?></h4>
                                             <h6 class="username"><?php echo $user['username'];?>  <span>Joined on <?php echo date("F jS, Y", strtotime($user['added_on'])); ?></span></h6>
                                             <ul class="socialstatus">
-                                                <li> <span>25</span> Followers</li>
-                                                <li> <span>25</span> Following</li>
+                                                <li> <span><?php echo $followers; ?></span> Followers</li>
+                                                <li> <span><?php echo $followings; ?></span> Following</li>
                                                 <li>
                                                     <a href="javascript:void(0)">
                                                         <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg" alt="facebook">
@@ -85,12 +85,22 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                 ?>
                                                 <li><a href="javascript:void(0);" onclick="cancelRequest(<?= $user_id ?>)" id="add_peer">Cancel Request</a></li>
 
-                                            <?php }else{?>
+                                            <?php }else{ 
+                                                if(!empty($chk_if_friend)) { ?>
+                                                    <li><a href="javascript:void(0);" id="add_peer">Peer</a></li>
+                                            <?php } else { ?>
                                                 <li><a href="javascript:void(0);" onclick="sendRequest(<?= $user_id ?>)" id="add_peer">Add Peer</a></li>
+                                            <?php }
+                                            ?>
 
                                                 <?php
                                             }?>
-                                            <li><a>Follow</a></li>
+                                            <?php if(!empty($chk_if_follow)) { ?>
+                                                <li><a href="javascript:void(0)" class="follow_now follow_<?php echo $user_id; ?>" data-id="<?php echo $user_id; ?>" id="0">UnFollow</a></li>
+                                            <?php } else { ?>
+                                                <li><a href="javascript:void(0)" class="follow_now follow_<?php echo $user_id; ?>" data-id="<?php echo $user_id; ?>" id="1">Follow</a></li>
+                                            <?php } ?>
+                                            
                                             <li>
                                                 <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
                                             </li>
@@ -98,9 +108,16 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                 <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="More Option">
                                                 <ul>
                                                     <li>
-                                                        <a role="menuitem" href="javascript:void(0);">
-                                                            <img src="<?php echo base_url(); ?>assets_d/images/report1.svg" > Report
-                                                        </a>
+                                                        <?php if(!empty($chk_if_reported)) { ?>
+                                                            <a role="menuitem" href="javascript:void(0);" data-toggle="modal" data-target="#cancelReportModalUser" >
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/report1.svg" > Report
+                                                            </a>
+                                                        <?php } else { ?>
+                                                            <a role="menuitem" href="javascript:void(0);" data-toggle="modal" data-target="#reportModalUser" >
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/report1.svg" > Report
+                                                            </a>
+                                                        <?php } ?>
+                                                        
                                                     </li>
                                                     <li>
                                                         <a role="menuitem" href="javascript:void(0);" class="block_user" id="<?php echo $user['id']; ?>">
@@ -2451,6 +2468,86 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="reportModalUser" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="modal-body peers">
+                                <form method="post" action="<?php echo base_url(); ?>Profile/reportUser" onsubmit="return validateReport()">
+                                   <h4>Reason</h4>
+                                   <div class="row">
+                                    
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Reason for Report</label>
+                                                <div class="reason">
+                                                    <input type="hidden" name="report_user_id" value="<?= $user_id; ?>">
+                                                    <select class="form-control" id="report_reason" name="report_reason">
+                                                        <option value="">Select Reason</option>
+                                                        <option value="Inappropriate Content">Inappropriate Content</option>
+                                                        <option value="Spam">Spam</option>
+                                                        <option value="Promotional">Promotional</option>
+                                                        <option value="Uncivil">Uncivil</option>
+                                                        <option value="Other">Other</option>
+                                                    </select>
+                                                    <span class="custom_err" id="err_report_reason"></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label>Reason</label>
+                                                <div class="reason droparea">
+                                                    <textarea id="report_description" name="report_description"></textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <button type="submit" class="filterBtn reportBtn">Submit</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="modal fade" id="cancelReportModalUser" role="dialog">
+                    <div class="modal-dialog">
+                        <!-- Modal content-->
+                        <div class="modal-content">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                            <div class="modal-body peers">
+                                   <h4>Confirmation</h4>
+                                   <div class="row">
+                                     <h6 class="modalText">Are you sure to cancel report of this user !</h6>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <form method="post" action="<?php echo base_url(); ?>Profile/cancelUserReport">
+                                                <div class="form-group button">
+                                                    <input type="hidden" name="report_id" value="<?= $chk_if_reported['id']; ?>">
+                                                    <input type="hidden" name="report_user_id" value="<?= $user_id; ?>">
+                                                    <button type="button" class="transparentBtn highlight" data-dismiss="modal">No</button>
+                                                    <button type="submit" class="filterBtn">Yes</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
 <?php
 function time_elapsed_string($datetime, $full = false) {
     $now = new DateTime;
@@ -2481,4 +2578,19 @@ function time_elapsed_string($datetime, $full = false) {
     return $string ? implode(', ', $string) . ' ago' : 'just now';
 }
 
+
+
 ?>
+
+
+<script type="text/javascript">
+    function validateReport() {
+        var report_reason = $('#report_reason').val();
+        if(report_reason == ''){
+            $('#err_report_reason').html("This field is required").show();
+            return false;
+        } else {
+            $('#err_report_reason').html("").hide();
+        }
+    }
+</script>
