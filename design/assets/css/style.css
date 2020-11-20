@@ -2184,13 +2184,14 @@ img{
     font-size: 50px;
 }
 .info-section h3 {
-    font-size: 40px;
+    font-size: 38px;
     color: #333;
     font-weight: 500;
     margin:15px 0 15px;
 }
 .info-section p{
-    font-size: 18px;
+    font-size: 17px;
+    font-weight:500;
     line-height: 1.4;
     text-align: left;
 }
