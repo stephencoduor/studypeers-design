@@ -485,6 +485,22 @@ class Profile extends CI_Controller {
 				'reason'		=> trim($reason)
 			);
 			$insert_comment = $this->db->insert('blocked_peers', $insert_array);
+
+			$check = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id
+			);
+			$this->db->where($check);
+			$this->db->delete('friends');
+
+			$check2 = array(
+				'user_id'       => $peer_id,
+				'peer_id'       => $user_id
+			);
+			$this->db->where($check2);
+			$this->db->delete('friends');
+
+
 			redirect(site_url('Profile/friends?profile_id='.$peer_id), 'refresh');
 		}
 	}

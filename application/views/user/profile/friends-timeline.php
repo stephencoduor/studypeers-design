@@ -120,7 +120,7 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                         
                                                     </li>
                                                     <li>
-                                                        <a role="menuitem" href="javascript:void(0);" class="block_user" id="<?php echo $user['id']; ?>">
+                                                        <a role="menuitem" href="javascript:void(0);" class="block_user" id="<?php echo $user['userID']; ?>">
                                                             <img src="<?php echo base_url(); ?>assets_d/images/block.svg" > Block
                                                         </a>
                                                     </li>
