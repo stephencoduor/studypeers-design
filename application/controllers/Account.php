@@ -50,7 +50,7 @@ class Account extends CI_Controller {
 
         
         
-        $data['peer_suggestion'] = $this->db->query("SELECT `user`.*, `university`.`SchoolName`, `user_info`.`nickname` FROM `user_info` JOIN `university` ON `university`.`university_id`=`user_info`.`intitutionID` JOIN `user` ON `user`.`id`=`user_info`.`userID` WHERE `user_info`.`intitutionID` = '".$user_info['intitutionID']."' AND `user`.`is_verified` = 1 AND `user`.`id` != '".$user_id."' AND `user`.`id` NOT IN (SELECT peer_id from peer_master where user_id = '".$user_id."' AND status = 2) AND `user`.`id` NOT IN (SELECT user_id from peer_master where peer_id = '".$user_id."' AND (status = 2 OR status = 1)) ORDER BY `user`.`id` DESC ")->result_array(); 
+        $data['peer_suggestion'] = $this->db->query("SELECT `user`.*, `university`.`SchoolName`, `user_info`.`nickname` FROM `user_info` JOIN `university` ON `university`.`university_id`=`user_info`.`intitutionID` JOIN `user` ON `user`.`id`=`user_info`.`userID` WHERE `user_info`.`intitutionID` = '".$user_info['intitutionID']."' AND `user`.`is_verified` = 1 AND `user`.`id` != '".$user_id."' AND `user`.`id` NOT IN (SELECT peer_id from friends where user_id = '".$user_id."') ORDER BY `user`.`id` DESC ")->result_array(); 
 
 
         $data['peer_requests'] = $this->db->get_where('peer_master', array('peer_id' => $user_id, 'status' => 1))->result_array();
