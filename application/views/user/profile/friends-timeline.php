@@ -2347,8 +2347,10 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                             <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
-                    <input type="text" name="friend_id" id="block_friend_id" />
-                    <h4>Select Reason to report username</h4>
+                    <form method="post" action="<?php echo base_url(); ?>Profile/blockPeer">
+                    <input type="hidden" name="friend_id" id="block_friend_id" />
+                    <input type="hidden" name="reason" id="block_reason" />
+                    <h4>Select Reason to report <?php echo $user['username'];?></h4>
                     <div class="reportSection">
                         <ul class="reasons">
                             <li>
@@ -2377,10 +2379,10 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                     <div class="followOptionsWrapper">
                         <ul>
                             <li>
-                                <a href="javascript:void(0)">Cancel</a>
+                                <a href="javascript:void(0)" data-dismiss="modal">Cancel</a>
                             </li>
                             <li class="block">
-                                <a href="javascript:void(0)" class="report_this_user">Report</a>
+                                <button type="submit" href="javascript:void(0)" class="report_this_user" style="background: transparent;border: none;color: #f24881;font-size: 18px;">Block</button>
                             </li>
                         </ul>
                     </div>
@@ -2399,24 +2401,24 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                             <img src="images/close-grey.svg" alt="close">
                         </div>
                     </div>
-                    <h4>Are you sure you want to block Username?</h4>
+                    <h4>Are you sure you want to block <?php echo $user['username'];?>?</h4>
                     <div class="profileSection">
-                        <input type="text" name="friend_id" id="block_friend_id" />
+                        <input type="hidden" name="friend_id" id="block_friend_id" />
                         <div class="profileViewToggleWrapper">
                             <figure>
-                                <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
+                                <img src="<?php echo userImage($user_id); ?>">
                             </figure>
                             <div class="changeView">
-                                <h5>Full Name</h5>
+                                <h5><?php echo $full_name;?></h5>
                                 <div class="followers">
-                                    <span>25 </span> Followers
+                                    <span><?php echo $followers; ?> </span> Followers
                                 </div>
                             </div>
                         </div>
                         <div class="followOptionsWrapper">
                             <ul>
                                 <li>
-                                    <a href="javascript:void(0);">Cancel</a>
+                                    <a href="javascript:void(0);" data-dismiss="modal">Cancel</a>
                                 </li>
                                 <li class="block" data-dismiss="modal" data-toggle="modal" href="#reportuser">
                                     <a href="javascript:void(0)">Block</a>

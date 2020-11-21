@@ -903,7 +903,7 @@ die;*/
             Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
         </section>
 
-        <section class="listBar">
+        <section class="listBar" style="display: none;">
             <section class="listHeader">
                 <h6>Blocked Peers</h6>
             </section>
