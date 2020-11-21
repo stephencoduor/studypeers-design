@@ -3058,6 +3058,13 @@ class Account extends CI_Controller {
                     'updated_at' => date('Y-m-d H:i:s')
                 ];
                 $this->db->insert('friends', $insert_into_friends);
+
+                $insert_data = array(
+                    'user_id'       => $detail['user_id'],
+                    'peer_id'       => $detail['peer_id'],
+                );
+                $this->db->insert('follow_master', $insert_data);
+
                 $insert_into_friends = [
                     'user_id' => $detail['peer_id'],
                     'peer_id' => $detail['user_id'],
@@ -3065,6 +3072,12 @@ class Account extends CI_Controller {
                     'updated_at' => date('Y-m-d H:i:s')
                 ];
                 $this->db->insert('friends', $insert_into_friends);
+
+                $insert_data = array(
+                    'user_id'       => $detail['peer_id'],
+                    'peer_id'       => $detail['user_id'],
+                );
+                $this->db->insert('follow_master', $insert_data);
 
 
                 $this->db->where(array('id' => $action_id));

@@ -44,11 +44,12 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                                 </ul>
                             </div>
                         </section>
+                    </section>
                 <?php }
             } ?>
 
 
-                    </section>
+                    
         </section>
         <section class="listBar">
             <section class="listHeader">
