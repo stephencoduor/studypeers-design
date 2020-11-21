@@ -1,4 +1,4 @@
-var socket = io("http://studypeers.dev:3000/");
+var socket = io("https://studypeers.dev:3000/");
 var userData = $("#hidden_user_info").val();
 var chatAppendElementSmall = $("#append_chat_records");
 
