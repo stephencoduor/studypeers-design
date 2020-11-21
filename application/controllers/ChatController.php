@@ -87,8 +87,11 @@ class ChatController extends CI_Controller
 
             array_push($users, $userId);
 
+            $chatMembersList = $this->ChatModel->getChatMembersList($users);
+
             $createGroup = [];
             $createGroup['user_id'] = $userId;
+            $createGroup['group_name'] = implode(',', array_column($chatMembersList, 'username'));
 
             $getCreativeGroupId = $this->ChatModel->createGroup($createGroup);
 
@@ -104,14 +107,14 @@ class ChatController extends CI_Controller
 
             #get chat user groups.
 
-            $chatMembersList = $this->ChatModel->getChatMembersList($users);
+
 
             $response = [
                 'code' => 200,
                 'message' => 'OK',
                 'data' => [
                     'groupId' => $getCreativeGroupId,
-                    'users' => $chatMembersList
+                    'users' => $chatMembersList,
                 ]
             ];
         } catch (\Exception $e) {
