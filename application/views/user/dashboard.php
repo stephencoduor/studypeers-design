@@ -173,7 +173,7 @@
 												<p>0 mutual peers</p>
 												<?php if(!empty($chk_if_follow)) { ?>
 	                                                
-	                                                <button type="button" class="follow_peer follow_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" id="0">Follow</button>
+	                                                <button type="button" class="follow_peer follow_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" id="0">Unfollow</button>
 	                                            <?php } else { ?>
 	                                                
 	                                                <button type="button" class="follow_peer follow_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" id="1">Follow</button>
