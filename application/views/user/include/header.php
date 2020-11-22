@@ -49,7 +49,10 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
 	<script src="<?php echo base_url('assets_d/js/socket.io.js'); ?>"></script>
+
 
 </head>
 
@@ -65,7 +68,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 ?>
 
 <body>
-	<input type="hidden" id="hidden_user_info" value="<?php echo json_encode($this->session->get_userdata()['user_data']); ?>">
+	<input type="hidden" id="hidden_user_info" value='<?php echo json_encode($this->session->get_userdata()['user_data']); ?>'>
 	<header>
 		<section class="container-fluid">
 			<section class="row">
@@ -357,63 +360,16 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</div>
 											<div class="chat-user-list">
 												<ul id="myUL">
-													<li>
-														<a href="javascript:void(0)">
-															<figure>
-																<img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="">
-															</figure>
-															<div class="time">40 mins</div>
-															<div class="info-wrap">
-																User Name
-																<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="javascript:void(0)">
-															<figure>
-																<img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="">
-															</figure>
-															<div class="info-wrap">
-																Group Name
-																<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="javascript:void(0)">
-															<figure>
-																<img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="">
-															</figure>
-															<div class="info-wrap">
-																Group Name
-																<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-															</div>
-														</a>
-													</li>
-													<li>
-														<a href="javascript:void(0)">
-															<figure>
-																<img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="">
-															</figure>
-															<div class="info-wrap">
-																Group Name
-																<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-															</div>
-														</a>
-													</li>
+
 												</ul>
 											</div>
 										</div>
 										<div class="see-all">
-											<a href="">See All</a>
+											<a href="javascript:void(0);">See All</a>
 										</div>
 									</div>
 
 								</li>
-
-
-
 
 
 								<li class="user">

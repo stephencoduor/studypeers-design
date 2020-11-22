@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -72,10 +72,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $active_group = 'default';
 $query_builder = TRUE;
-if($_SERVER['SERVER_NAME'] == 'localhost'){
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$username = 'root';
 	$pwd = '';
-}  else {
+} else {
 	$username = 'studypee_studypeers';
 	$pwd = ')Fm]m${zpiO_';
 }

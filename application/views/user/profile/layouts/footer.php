@@ -862,6 +862,7 @@
             $('.reasons li.active').removeClass('active');
             $(this).addClass('active');
             reason = $(this).text();
+            $('#block_reason').val(reason);
         });
 
 

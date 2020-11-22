@@ -31,34 +31,6 @@ function searchUser() {
   }
 }
 
-function receivingMessage(messageJson) {
-  var html =
-    '<div class="received-wrap"><div class="message-received"><div class="user-info">' +
-    '<figure><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image" /></figure>' +
-    '<div class="user-name"><strong>User name</strong><span class="msg-tile">04:00</span></div></div>' +
-    '<div class="chat-msg"><p>Lorem ipsum dolor sit amet consectetur</p></div></div></div>';
-}
-
-function sendMessage(messageJson) {
-  var html =
-    '<div class="sent-wrap"><div class="message-sent"><div class="user-info"><div class="user-name">' +
-    "<strong>User name</strong>" +
-    '<span class="msg-tile">04:00</span></div>' +
-    "<figure>" +
-    '<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="Image" />' +
-    "</figure>" +
-    "</div>" +
-    '<div class="chat-msg">' +
-    "<p>Lorem ipsum dolor sit amet consectetur</p>" +
-    "<figure>" +
-    '<img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Connect-Peers.jpg" alt="Attached Image" />' +
-    "</figure></div></div></div>";
-}
-
-function appendChatRecords() {
-  var mainContent = '<div class="chat-date">Sept 28</div>';
-}
-
 function createGroupHTML() {
   var $chatelement = $(".chat-right");
   $chatelement.find(".start-conversation").removeClass("show");
@@ -78,6 +50,7 @@ function createGroupHTML() {
     .removeClass("hide")
     .addClass("chat-big");
   $chatelement.find(".add-user").addClass("active");
+  console.log("code block");
 }
 
 var CHAT_GROUP_ADDITIONS = {
@@ -86,13 +59,26 @@ var CHAT_GROUP_ADDITIONS = {
       url: "submit-chat-users",
       data: data,
       success: function(data) {
+        if (parseInt(data.code) == 200) {
+          var groupName = [];
+          var groupMemberIds = [];
+          $("#current_group_id").val(data.data.groupId);
+          if (data.data.users.length > 0) {
+            data.data.users.forEach(function(item, index) {
+              groupName.push(item.username);
+              groupMemberIds.push(item.id);
+            });
+          }
+          $("#group_name_id").html(groupName.join(" , "));
+          $("#multiple").selectator("removeSelection");
+          $("#curren_group_members").val(JSON.stringify(groupMemberIds));
+        }
         createGroupHTML();
-        console.log(data);
       },
-      error: function() {},
-      complete: function(data) {
-        console.log(data);
-      }
+      error: function() {
+        alert("Error process request");
+      },
+      complete: function(data) {}
     });
   }
 };
@@ -105,10 +91,6 @@ $(document).on("click", ".done-link", function() {
 });
 
 //--------------en of group chat create event-------------------------//
-
-//===============start socket chat =====================//
-
-//====================end of socket chat module ==============//
 
 $(document).ready(function() {
   var count = 0;

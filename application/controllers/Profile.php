@@ -39,7 +39,7 @@ class Profile extends CI_Controller {
 		$peer_to = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id ='.$user_id)->result_array();
 		$peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
 
-		$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$user_id)->result_array();
+		$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id)->result_array();
 		$data['blocked_users'] = $blocked_users;
 		$data['all_connections'] = $peer_to;
 		$data['all_requests'] = $peer_from;
@@ -476,7 +476,7 @@ class Profile extends CI_Controller {
 
 	public function blockPeer(){
 		if($this->input->post()){
-			$peer_id    = $this->input->post('peer_id');
+			$peer_id    = $this->input->post('friend_id');
 			$reason    = $this->input->post('reason');
 			$user_id = $this->session->get_userdata()['user_data']['user_id'];
 			$insert_array = array(
@@ -485,7 +485,23 @@ class Profile extends CI_Controller {
 				'reason'		=> trim($reason)
 			);
 			$insert_comment = $this->db->insert('blocked_peers', $insert_array);
-			echo true;
+
+			$check = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id
+			);
+			$this->db->where($check);
+			$this->db->delete('friends');
+
+			$check2 = array(
+				'user_id'       => $peer_id,
+				'peer_id'       => $user_id
+			);
+			$this->db->where($check2);
+			$this->db->delete('friends');
+
+
+			redirect(site_url('Profile/friends?profile_id='.$peer_id), 'refresh');
 		}
 	}
 

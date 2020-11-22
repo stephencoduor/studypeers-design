@@ -1,10 +1,9 @@
 <?php
 $user_id = $this->session->get_userdata()['user_data']['user_id'];
 
-$peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '" . $user_id . "' OR `peer_id` = '" . $user_id . "') AND `status` = 2")
-    ->result_array();
+$peer_list = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id ='.$user_id)->result_array();
 
-
+$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id)->result_array();
 
 ?>
 
@@ -12,6 +11,40 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
     <section class="view message">
         Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
     </section>
+
+    <section class="listBar">
+            <section class="listHeader">
+                <h6>Blocked Peers</h6>
+            </section>
+            <section class="listChatBox">
+                <?php
+                    foreach(@$blocked_users as $users){
+                ?>
+                        <section class="list">
+                            <section class="left">
+                                <figure>
+                                    <img src="<?php echo userImage($users['id']);?>" alt="user">
+                                </figure>
+                                <figcaption><?php echo $users['first_name'].' '.$users['last_name']; ?></figcaption>
+                            </section>
+                            <section class="action">
+                                <div class="dropdown">
+                                    <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                                    <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                                        <li class="removePeerSugg">
+                                            <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </section>
+                <?php
+                    }
+                ?>
+
+            </section>
+        </section>
+
     <section class="listBar">
         <section class="listHeader">
             <h6>Peers</h6>
@@ -427,7 +460,7 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                     <figure>
                         <i class="fa fa-users" aria-hidden="true"></i>
                     </figure>
-                    <strong>Group</strong>
+                    <strong id="group_name_id">Group</strong>
                 </div>
                 <h3>Start Conversation</h3>
             </div>
@@ -456,10 +489,12 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                 <a href="javascript:void(0)" class="done-link">Done</a>
             </form>
         </div>
-        <div class="chat-content">
+        <div class="chat-content" id="chat_window_content">
             <div class="chat-body" id="append_chat_records">
 
             </div>
+            <input type="hidden" id="current_group_id">
+            <input type="hidden" id="curren_group_members">
         </div>
         <div class="chat-footer">
             <div class="input-wrap">
@@ -487,8 +522,10 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                     </ul>
                 </div>
                 <div class="chat-input-wrap">
-                    <input type="text" placeholder="Type your message here" class="form-control">
+                    <input type="text" placeholder="Type your message here" id="send_message_input" class="form-control">
+
                     <div class="chat-action">
+                        <i class="fa fa-paper-plane" id="send_button_chat" aria-hidden="true"></i>
                         <a href="javascript:void(0)" class="imoji">
                             <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/emoji.svg" alt="Imozi Icon" />
                         </a>
@@ -499,7 +536,6 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
         </div>
     </div>
 </div>
-
 
 
 

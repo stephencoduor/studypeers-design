@@ -85,8 +85,13 @@ class ChatController extends CI_Controller
             #create new user group.
             $userId =  $this->session->get_userdata()['user_data']['user_id'];
 
-            $createUserGroup = [];
+            array_push($users, $userId);
+
+            $chatMembersList = $this->ChatModel->getChatMembersList($users);
+
+            $createGroup = [];
             $createGroup['user_id'] = $userId;
+            $createGroup['group_name'] = implode(',', array_column($chatMembersList, 'username'));
 
             $getCreativeGroupId = $this->ChatModel->createGroup($createGroup);
 
@@ -94,17 +99,23 @@ class ChatController extends CI_Controller
 
             foreach ($users as $key => $val) {
 
-
                 $createUsersInGroup[$key]['group_id'] = $getCreativeGroupId;
                 $createUsersInGroup[$key]['peer_id'] = $val;
             }
 
             $this->ChatModel->createUserInGroup($createUsersInGroup);
 
+            #get chat user groups.
+
+
+
             $response = [
                 'code' => 200,
                 'message' => 'OK',
-                'data' => []
+                'data' => [
+                    'groupId' => $getCreativeGroupId,
+                    'users' => $chatMembersList,
+                ]
             ];
         } catch (\Exception $e) {
             $response = [
@@ -117,6 +128,47 @@ class ChatController extends CI_Controller
         return $this->output
             ->set_content_type('application/json')
             ->set_status_header($response['code'])
-            ->set_output(json_encode($response['data']));
+            ->set_output(json_encode($response));
+    }
+
+    /**
+     * getUserChat
+     * @param : userId
+     */
+
+    public function getUserChat()
+    {
+        try {
+
+            $userId =  $this->session->get_userdata()['user_data']['user_id'];
+
+
+            $result = $this->ChatModel->getUserGroups($userId);
+
+            $data = [];
+
+            if (!empty($result)) {
+
+                $data = array_column($result, 'group_id');
+            }
+
+            $response = [
+                'code' => 200,
+                'message' => 'OK',
+                'data' => $data
+            ];
+        } catch (Exception $e) {
+
+            $response = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($response['code'])
+            ->set_output(json_encode($response, JSON_NUMERIC_CHECK));
     }
 }
