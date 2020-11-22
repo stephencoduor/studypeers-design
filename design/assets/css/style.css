@@ -204,6 +204,7 @@ header .nav li a:focus:after {
     background-size: cover;
     background-position:center center;
     background-attachment:initial;
+    
 }
 .study-tools-landing{
     background: url('../images/Study-Tools-bg.jpg') no-repeat 0 0;
