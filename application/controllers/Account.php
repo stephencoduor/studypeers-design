@@ -41,6 +41,34 @@ class Account extends CI_Controller {
         return $peer;
     }
 
+
+    function peerListStringDashboard($user_id){
+        $peer_list = $this->db->query("SELECT * FROM `friends` WHERE (`user_id` = '".$user_id ."')")->result_array();
+        $peer = array();
+        foreach ($peer_list as $key => $value) {
+            
+            $chk_if_follow =  $this->db->query("SELECT * FROM `follow_master` WHERE (`user_id` = '".$user_id ."' AND `peer_id` = '".$value['peer_id']."')")->row_array();
+            if(!empty($chk_if_follow)) {
+                array_push($peer, $value['peer_id']);
+            }
+           
+        }
+        $follow_list = $this->db->query("SELECT * FROM `follow_master` WHERE (`user_id` = '".$user_id ."')")->result_array();
+        foreach ($follow_list as $key => $value) {
+            
+            $chk_if_follow =  $this->db->query("SELECT * FROM `follow_master` WHERE (`user_id` = '".$user_id ."' AND `peer_id` = '".$value['peer_id']."')")->row_array();
+            if( in_array( $value['peer_id'] ,$peer ) ){
+                
+            } else {
+                array_push($peer, $value['peer_id']);
+            }
+            
+           
+        }
+        return $peer;
+    }
+
+
     public function dashboard(){
         is_valid_logged_in(); 
 
@@ -81,7 +109,7 @@ class Account extends CI_Controller {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
-        $peerList = $this->peerListString($user_id);
+        $peerList = $this->peerListStringDashboard($user_id);
 
 
         $this->db->select('reference_master.*,');
@@ -3063,7 +3091,10 @@ class Account extends CI_Controller {
                     'user_id'       => $detail['user_id'],
                     'peer_id'       => $detail['peer_id'],
                 );
-                $this->db->insert('follow_master', $insert_data);
+                $insert_data_chk = $this->db->get_where($this->db->dbprefix('follow_master'), $insert_data)->row_array(); 
+                if(empty($insert_data_chk)){
+                    $this->db->insert('follow_master', $insert_data);
+                }
 
                 $insert_into_friends = [
                     'user_id' => $detail['peer_id'],
@@ -3077,7 +3108,10 @@ class Account extends CI_Controller {
                     'user_id'       => $detail['peer_id'],
                     'peer_id'       => $detail['user_id'],
                 );
-                $this->db->insert('follow_master', $insert_data);
+                $insert_data_chk = $this->db->get_where($this->db->dbprefix('follow_master'), $insert_data)->row_array(); 
+                if(empty($insert_data_chk)){
+                    $this->db->insert('follow_master', $insert_data);
+                }
 
 
                 $this->db->where(array('id' => $action_id));
