@@ -27,7 +27,7 @@ class Account extends CI_Controller {
     }
 
     function peerListString($user_id){
-        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
+        $peer_list = $this->db->query("SELECT * FROM `friends` WHERE (`user_id` = '".$user_id ."')")->result_array();
         $peer = array();
         foreach ($peer_list as $key => $value) {
             if($value['user_id'] == $user_id){
@@ -3323,7 +3323,7 @@ class Account extends CI_Controller {
         $id = $this->input->post('id');
         
 
-        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
+        $peer_list = $this->db->query("SELECT * FROM `friends` WHERE (`user_id` = '".$user_id ."')")->result_array();
 
         $html = '';
 

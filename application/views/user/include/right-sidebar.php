@@ -545,4 +545,17 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         $("#remove_peer_id").val(peer_id);
 
     });
+
+    $('.unblock_peer').on("click", function(){
+            var blocked_friend_id = $(this).attr('id');
+            url = '<?php echo base_url();?>Profile/unblockPeer';
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_id" : blocked_friend_id},
+                success:function(result) {
+                    window.location.href = '<?php echo base_url(); ?>Account/dashboard';
+                }
+            });
+        });
 </script>

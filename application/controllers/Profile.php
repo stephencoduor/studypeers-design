@@ -493,12 +493,18 @@ class Profile extends CI_Controller {
 			$this->db->where($check);
 			$this->db->delete('friends');
 
+			$this->db->where($check);
+			$this->db->delete('follow_master');
+
 			$check2 = array(
 				'user_id'       => $peer_id,
 				'peer_id'       => $user_id
 			);
 			$this->db->where($check2);
 			$this->db->delete('friends');
+
+			$this->db->where($check2);
+			$this->db->delete('follow_master');
 
 
 			redirect(site_url('Profile/friends?profile_id='.$peer_id), 'refresh');

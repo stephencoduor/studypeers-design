@@ -153,6 +153,7 @@
 										<?php foreach ($peer_suggestion as $key => $value) {
 											$user_id = $this->session->get_userdata()['user_data']['user_id'];
 											$chk_if_sent = $this->db->get_where('peer_master', array('peer_id' => $value['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+											$chk_if_follow = $this->db->get_where($this->db->dbprefix('follow_master'), array('user_id'=>$user_id, 'peer_id' =>  $value['id']))->row_array(); 
 										?>
 											<div class="peerList" id="peerList<?= $value['id']; ?>">
 
@@ -170,7 +171,14 @@
 												</a>
 
 												<p>0 mutual peers</p>
-												<button type="button" class="follow_peer">Follow</button>
+												<?php if(!empty($chk_if_follow)) { ?>
+	                                                
+	                                                <button type="button" class="follow_peer follow_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" id="0">Follow</button>
+	                                            <?php } else { ?>
+	                                                
+	                                                <button type="button" class="follow_peer follow_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" id="1">Follow</button>
+	                                            <?php } ?>
+												
 												<?php if (!empty($chk_if_sent)) { ?>
 													<button type="button" class="add_peer" onclick="cancelRequest('<?= $value['id']; ?>')" id="add_peer_<?= $value['id']; ?>">Cancel Request</button>
 												<?php } else { ?>
@@ -10568,4 +10576,27 @@
 			}
 		});
 	}
+
+	$('.follow_peer').on("click", function(){
+            var peer_id = $(this).attr('data-id');
+            var status = $(this).attr('id');
+            url = '<?php echo base_url();?>Profile/follow';
+            if(status == 0){
+                url = '<?php echo base_url();?>Profile/unfollow';
+            }
+            $.ajax({
+                url : url,
+                type : 'post',
+                data : {"peer_id" : peer_id},
+                success:function(result) {
+                    if(status == 1){
+                        $('.follow_'+peer_id).html('Unfollow');
+                        $('.follow_'+peer_id).attr('id',0);
+                    }else{
+                        $('.follow_'+peer_id).html('Follow');
+                        $('.follow_'+peer_id).attr('id',1);
+                    }
+                }
+            });
+        });
 </script>
