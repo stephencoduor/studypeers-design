@@ -49,7 +49,10 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
+	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
+
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+
 
 	<script src="<?php echo base_url('assets_d/js/socket.io.js'); ?>"></script>
 
