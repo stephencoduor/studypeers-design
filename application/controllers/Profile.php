@@ -39,7 +39,7 @@ class Profile extends CI_Controller {
 		$peer_to = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id ='.$user_id)->result_array();
 		$peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
 
-		$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.user_id = b.id WHERE a.user_id = '.$user_id)->result_array();
+		$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id)->result_array();
 		$data['blocked_users'] = $blocked_users;
 		$data['all_connections'] = $peer_to;
 		$data['all_requests'] = $peer_from;
@@ -273,6 +273,24 @@ class Profile extends CI_Controller {
 	public function updateGeneralInfo(){
 		try {
 			$userdata = $this->session->userdata('user_data');
+			$location_txt   = $this->input->post('location');
+			$url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($location_txt)."&key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU";
+                        
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);    
+            $responseJson = curl_exec($ch);
+            curl_close($ch);
+
+            $response = json_decode($responseJson); 
+            
+            if ($response->status == 'OK') {
+                $latitude = $response->results[0]->geometry->location->lat;
+                $longitude = $response->results[0]->geometry->location->lng;
+            } else {
+                $latitude = 0;
+                $longitude = 0;
+            }
 			$users_array = [
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name')
@@ -280,7 +298,9 @@ class Profile extends CI_Controller {
 			$user_info_array = [
 				'gender' => $this->input->post('gender'),
 				'dob' => $this->input->post('dob'),
-				'country' => $this->input->post('country'),
+				'user_location' => $location_txt,
+				'user_latitude' => $latitude,
+				'user_longitude' => $longitude,
 				'field_interest' => $this->input->post('field_of_interest')
 			];
 
@@ -476,8 +496,8 @@ class Profile extends CI_Controller {
 
 	public function blockPeer(){
 		if($this->input->post()){
-			$peer_id    = $this->input->post('peer_id');
-			$reason    = $this->input->post('reason');
+			$peer_id    = $this->input->post('friend_id');
+			$reason    = '';
 			$user_id = $this->session->get_userdata()['user_data']['user_id'];
 			$insert_array = array(
 				'user_id'       => $user_id,
@@ -485,7 +505,29 @@ class Profile extends CI_Controller {
 				'reason'		=> trim($reason)
 			);
 			$insert_comment = $this->db->insert('blocked_peers', $insert_array);
-			echo true;
+
+			$check = array(
+				'user_id'       => $user_id,
+				'peer_id'       => $peer_id
+			);
+			$this->db->where($check);
+			$this->db->delete('friends');
+
+			$this->db->where($check);
+			$this->db->delete('follow_master');
+
+			$check2 = array(
+				'user_id'       => $peer_id,
+				'peer_id'       => $user_id
+			);
+			$this->db->where($check2);
+			$this->db->delete('friends');
+
+			$this->db->where($check2);
+			$this->db->delete('follow_master');
+
+
+			redirect(site_url('Profile/friends?profile_id='.$peer_id), 'refresh');
 		}
 	}
 

@@ -862,6 +862,7 @@
             $('.reasons li.active').removeClass('active');
             $(this).addClass('active');
             reason = $(this).text();
+            $('#block_reason').val(reason);
         });
 
 
@@ -957,6 +958,59 @@
         $('[data-toggle="tooltip"]').tooltip();
     });
 </script>
+
+
+<script>
+         
+        function myMap() {
+            var mapProp= {
+              center:new google.maps.LatLng(51.508742,-0.120850),
+              zoom:5,
+        };
+            var map = new google.maps.Map(document.getElementById("googleMap"),mapProp);
+        }
+
+       
+    var placeSearch, autocomplete;
+    var componentForm = {
+        street_number: 'short_name',
+        route: 'long_name',
+        locality: 'long_name',
+        administrative_area_level_1: 'short_name',
+        country: 'long_name',
+        postal_code: 'short_name'
+    };
+
+    function initAutocomplete() {
+        
+            autocomplete = new google.maps.places.Autocomplete((document.getElementById('location_txt')),
+        {types: ['geocode']});
+        
+        
+    }
+
+    
+    function geolocate() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(function(position) {
+                console.log(position);
+                var geolocation = {
+                    lat: position.coords.latitude,
+                    lng: position.coords.longitude
+                };
+                var circle = new google.maps.Circle({
+                    center: geolocation,
+                    radius: position.coords.accuracy
+                });
+                autocomplete.setBounds(circle.getBounds());
+                console.log(lat); console.log(lng);
+            });
+        }
+    }
+
+</script>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script> 
 
 </body>
 </html>

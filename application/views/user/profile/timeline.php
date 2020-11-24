@@ -1,6 +1,6 @@
 <?php
 $userdata = $this->session->userdata('user_data');
-$user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = " . $userdata['user_id'])->row_array();
+$user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = " . $userdata['user_id'])->row_array(); 
 $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
 
 /*echo '<pre/>';
@@ -100,10 +100,12 @@ die;*/
                                         </a>
                                     </li>
                                 </ul>
-                                <div class="location">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/pin.svg" alt="location"> location
-                                    name
-                                </div>
+                                <?php if(!empty($user_detail['user_location'])) { ?>
+                                    <div class="location">
+                                        <img src="<?php echo base_url(); ?>assets_d/images/pin.svg" alt="location"> <?php echo $user_detail['user_location']; ?>
+                                        name
+                                    </div>
+                                <?php } ?>
                             </div>
                             <div class="shareProfile" id="copyShareLink">
                                 <input type="hidden" id="sharelink"
@@ -844,7 +846,7 @@ die;*/
                                                                             <div class="image-item">
                                                                             <div class="close"><img src="http://localhost/studypeers/assets_d/images/close-pink.svg" class="remove_image" id="remove_image_1" alt="close"></div>
                                                                                 <figure>
-                                                                                    <img src="http://localhost/studypeers/uploads/users/cover/1605254961.png" alt="Image"/>
+                                                                                    <img src="https://studypeers.dev/uploads/users/cover/1604851468.png" alt="Image"/>
                                                                                 </figure>
                                                                             </div>
                                                                         </div>

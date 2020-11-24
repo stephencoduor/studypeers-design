@@ -428,7 +428,7 @@ class Studyset extends CI_Controller {
         $study_set_id = $this->input->post('study_set_id');
         $peer_id = $this->input->post('peer_id');
 
-        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
+        $peer_list = $this->db->query("SELECT * FROM `friends` WHERE (`user_id` = '".$user_id ."')")->result_array();
 
         $html = '';
 

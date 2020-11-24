@@ -28,8 +28,8 @@
                                 <div class="value"><?php echo date('d-m-Y', strtotime($user_detail['dob']));?></div>
                             </div>
                             <div class="list">
-                                <div class="heading">Country</div>
-                                <div class="value"><?php echo $user_detail['country'];?></div>
+                                <div class="heading">Location</div>
+                                <div class="value"><?php echo $user_detail['user_location'];?></div>
                             </div>
                             <div class="list">
                                 <div class="heading">Field of interest</div>
@@ -67,9 +67,9 @@
                                     </div>
                                 </div>
                                 <div class="list">
-                                    <div class="heading">Country</div>
+                                    <div class="heading">Location</div>
                                     <div class="value">
-                                        <input class="form-control" style="height: 48px;margin-bottom: 20px;" type="text" placeholder="Country" name="country" value="<?= $user_detail['country']; ?>" >
+                                        <input class="form-control" style="height: 48px;margin-bottom: 20px;" type="text" placeholder="Location" name="location" value="<?= $user_detail['user_location']; ?>" id="location_txt" onfocus="geolocate()">
                                     </div>
                                 </div>
                                 <div class="list">
