@@ -103,7 +103,7 @@ die;*/
                                 <?php if(!empty($user_detail['user_location'])) { ?>
                                     <div class="location">
                                         <img src="<?php echo base_url(); ?>assets_d/images/pin.svg" alt="location"> <?php echo $user_detail['user_location']; ?>
-                                        name
+                                        
                                     </div>
                                 <?php } ?>
                             </div>
@@ -844,7 +844,7 @@ die;*/
                                                                         </div>
                                                                         <div class="img-wrap-flex">
                                                                             <div class="image-item">
-                                                                            <div class="close"><img src="http://localhost/studypeers/assets_d/images/close-pink.svg" class="remove_image" id="remove_image_1" alt="close"></div>
+                                                                            <div class="close"><img src="https://studypeers.dev/assets_d/images/close-pink.svg" class="remove_image" id="remove_image_1" alt="close"></div>
                                                                                 <figure>
                                                                                     <img src="https://studypeers.dev/uploads/users/cover/1604851468.png" alt="Image"/>
                                                                                 </figure>

@@ -178,7 +178,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <div class="modal-body peers">
                 <h4>Peers List</h4>
-                <div class="searchPeer">
+                <div class="searchPeer" style="margin-bottom: 10px;">
                     <div class="filterSearch">
                         <input type="text" placeholder="Search Peers" name="">
                         <button type="submit" class="searchBtn">

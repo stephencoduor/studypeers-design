@@ -71,9 +71,12 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                     </a>
                                                 </li>
                                             </ul>
-                                            <div class="location">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/pin.svg" alt="location"> location name
-                                            </div>
+                                            <?php if(!empty($user_detail['user_location'])) { ?>
+                                                <div class="location">
+                                                    <img src="<?php echo base_url(); ?>assets_d/images/pin.svg" alt="location"> <?php echo $user['user_location']; ?>
+                                                    
+                                                </div>
+                                            <?php } ?>
                                         </div>
                                         <div class="shareProfile" id="copyShareLink" >
                                             <input type="hidden" id="sharelink" value="<?php echo base_url().'Profile/shareLink/'.$user['username']; ?>" />
@@ -2401,7 +2404,7 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                             <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
-                    <h4>Are you sure you want to block <?php echo $user['username'];?>?</h4>
+                    <h4>Are you sure you want to block this user?</h4>
                     <div class="profileSection">
                         
                         <div class="profileViewToggleWrapper">
