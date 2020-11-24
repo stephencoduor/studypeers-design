@@ -2347,7 +2347,7 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                             <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
-                    <form method="post" action="<?php echo base_url(); ?>Profile/blockPeer">
+                    
                     <input type="hidden" name="friend_id" id="block_friend_id" />
                     <input type="hidden" name="reason" id="block_reason" />
                     <h4>Select Reason to report <?php echo $user['username'];?></h4>
@@ -2398,12 +2398,12 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                 <div class="modal-body">
                     <div class="createHeader">
                         <div class="closePost" data-dismiss="modal">
-                            <img src="images/close-grey.svg" alt="close">
+                            <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
                     <h4>Are you sure you want to block <?php echo $user['username'];?>?</h4>
                     <div class="profileSection">
-                        <input type="hidden" name="friend_id" id="block_friend_id" />
+                        
                         <div class="profileViewToggleWrapper">
                             <figure>
                                 <img src="<?php echo userImage($user_id); ?>">
@@ -2416,14 +2416,20 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                             </div>
                         </div>
                         <div class="followOptionsWrapper">
-                            <ul>
-                                <li>
-                                    <a href="javascript:void(0);" data-dismiss="modal">Cancel</a>
-                                </li>
-                                <li class="block" data-dismiss="modal" data-toggle="modal" href="#reportuser">
-                                    <a href="javascript:void(0)">Block</a>
-                                </li>
-                            </ul>
+                            
+                                
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);" data-dismiss="modal">Cancel</a>
+                                    </li>
+                                    <li class="block">
+                                        <form method="post" action="<?php echo base_url(); ?>Profile/blockPeer">
+                                            <input type="hidden" name="friend_id" id="block_friend_id" value="<?php echo $user_id; ?>" />
+                                            <button type="submit" href="javascript:void(0)" class="" style="background: transparent;border: none;color: #f24881;font-size: 18px;">Block</button>
+                                        </form>
+                                    </li>
+                                </ul>
+                            
                         </div>
                     </div>
                 </div>

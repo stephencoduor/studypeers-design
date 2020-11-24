@@ -209,6 +209,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             <section class="action">
                                 <button type="button" class="like">message</button>
                             </section>
+                        </section>
 
                         <?php } ?>
 

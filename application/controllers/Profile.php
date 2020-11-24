@@ -273,6 +273,24 @@ class Profile extends CI_Controller {
 	public function updateGeneralInfo(){
 		try {
 			$userdata = $this->session->userdata('user_data');
+			$location_txt   = $this->input->post('location');
+			$url = "https://maps.googleapis.com/maps/api/geocode/json?address=".urlencode($location_txt)."&key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU";
+                        
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, $url);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);    
+            $responseJson = curl_exec($ch);
+            curl_close($ch);
+
+            $response = json_decode($responseJson); 
+            
+            if ($response->status == 'OK') {
+                $latitude = $response->results[0]->geometry->location->lat;
+                $longitude = $response->results[0]->geometry->location->lng;
+            } else {
+                $latitude = 0;
+                $longitude = 0;
+            }
 			$users_array = [
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name')
@@ -280,7 +298,9 @@ class Profile extends CI_Controller {
 			$user_info_array = [
 				'gender' => $this->input->post('gender'),
 				'dob' => $this->input->post('dob'),
-				'country' => $this->input->post('country'),
+				'user_location' => $location_txt,
+				'user_latitude' => $latitude,
+				'user_longitude' => $longitude,
 				'field_interest' => $this->input->post('field_of_interest')
 			];
 
@@ -477,7 +497,7 @@ class Profile extends CI_Controller {
 	public function blockPeer(){
 		if($this->input->post()){
 			$peer_id    = $this->input->post('friend_id');
-			$reason    = $this->input->post('reason');
+			$reason    = '';
 			$user_id = $this->session->get_userdata()['user_data']['user_id'];
 			$insert_array = array(
 				'user_id'       => $user_id,
