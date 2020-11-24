@@ -45,11 +45,11 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
                             </div>
                         </section>
                     </section>
-                <?php }
+            <?php }
             } ?>
 
 
-                    
+
         </section>
         <section class="listBar">
             <section class="listHeader">
@@ -371,51 +371,7 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
             </div>
             <div class="chat-user-list">
                 <ul id="userList">
-                    <li>
-                        <a href="">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
-                            </figure>
-                            <div class="time">40 mins</div>
-                            <div class="info-wrap">
-                                User Name
-                                <p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
-                            </figure>
-                            <div class="info-wrap">
-                                Group Name
-                                <p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
-                            </figure>
-                            <div class="info-wrap">
-                                Group Name
-                                <p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-                            </div>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="">
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/student-img.png" alt="">
-                            </figure>
-                            <div class="info-wrap">
-                                Group Name
-                                <p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-                            </div>
-                        </a>
-                    </li>
+
                 </ul>
             </div>
         </div>
@@ -425,7 +381,7 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
             <div class="chat-header-left">
                 <div class="basic-user-info">
                     <figure>
-                        <i class="fa fa-users" aria-hidden="true"></i>
+                        <i class="fa fa-users fa-3x" aria-hidden="true"></i>
                     </figure>
                     <strong id="group_name_id">Group</strong>
                 </div>
@@ -462,6 +418,7 @@ $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '"
             </div>
             <input type="hidden" id="current_group_id">
             <input type="hidden" id="curren_group_members">
+            <input type="hidden" id="curren_group_name_id">
         </div>
         <div class="chat-footer">
             <div class="input-wrap">

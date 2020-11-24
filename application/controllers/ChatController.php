@@ -42,7 +42,7 @@ class ChatController extends CI_Controller
                 foreach ($getFriends as $key => $val) {
 
                     $data[$key]['value'] = $val['id'];
-                    $data[$key]['left'] = base_url() . 'uploads/users/' . $val['image'];
+                    $data[$key]['left'] = empty($val['image']) ? base_url() . 'uploads/user-male.png' : base_url() . 'uploads/users/' . $val['image'];
                     $data[$key]['text'] = $val['first_name'] . ' ' . $val['last_name'];
                     $data[$key]['subtitle'] = $val['username'];
                 }
@@ -156,6 +156,39 @@ class ChatController extends CI_Controller
                 'code' => 200,
                 'message' => 'OK',
                 'data' => $data
+            ];
+        } catch (Exception $e) {
+
+            $response = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($response['code'])
+            ->set_output(json_encode($response, JSON_NUMERIC_CHECK));
+    }
+
+    /**
+     *  getUserGroupNames
+     */
+
+    public function getUserGroupNames()
+    {
+
+        try {
+
+            $userId =  $this->session->get_userdata()['user_data']['user_id'];
+
+            $result = $this->ChatModel->getUserGroupsNames($userId);
+
+            $response = [
+                'code' => 200,
+                'message' => 'OK',
+                'data' => $result
             ];
         } catch (Exception $e) {
 

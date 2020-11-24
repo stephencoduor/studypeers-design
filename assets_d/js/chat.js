@@ -53,6 +53,32 @@ function createGroupHTML() {
   console.log("code block");
 }
 
+function formatTopMessageGroupListNameOnAdd(messageJson) {
+  var html =
+    "<li class='message-top-header' data-groupId='" +
+    messageJson.group_id +
+    "' data-groupmembers='" +
+    JSON.stringify(messageJson.group_members) +
+    "' data-groupname='" +
+    messageJson.group_name +
+    "' '>" +
+    '<a href="javascript:void(0)">' +
+    "<figure>" +
+    '<i class="fa fa-users fa-3x" aria-hidden="true"></i>' +
+    "</figure>" +
+    '<div class="time">' +
+    messageJson.time +
+    "</div>" +
+    '<div class="info-wrap">' +
+    messageJson.group_name +
+    "<p>" +
+    messageJson.message +
+    "</p>" +
+    "</div></a></li>";
+
+  return html;
+}
+
 var CHAT_GROUP_ADDITIONS = {
   _AJAX_SUBMIT_CHAT: function(data) {
     $.ajax({
@@ -70,8 +96,22 @@ var CHAT_GROUP_ADDITIONS = {
             });
           }
           $("#group_name_id").html(groupName.join(" , "));
+          $("#curren_group_name_id").val(groupName.join(" , "));
           $("#multiple").selectator("removeSelection");
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
+
+          var messageJson = {
+            group_id: data.data.groupId,
+            group_members: groupMemberIds,
+            group_name: groupName.join(" , "),
+            send_profile_image: "",
+            time: moment().format("h:mm"),
+            message: ""
+          };
+
+          var html = formatTopMessageGroupListNameOnAdd(messageJson);
+          var currentList = $("#userList").html();
+          $("#userList").html(html + currentList);
         }
         createGroupHTML();
       },
@@ -79,6 +119,24 @@ var CHAT_GROUP_ADDITIONS = {
         alert("Error process request");
       },
       complete: function(data) {}
+    });
+  },
+  _AJX_USER_CHAT_GROUP_ON_ADD: function() {
+    $.ajax({
+      url: "get-user-groups",
+      success: function(data) {
+        if (parseInt(data.code) == 200) {
+          if (data.data) {
+            socket.emit("loadmessage", JSON.stringify({ groupIds: data.data }));
+          }
+        }
+      },
+      error: function() {
+        alert("Error process request");
+      },
+      complete: function(data) {
+        console.log(data);
+      }
     });
   }
 };
@@ -370,6 +428,7 @@ $(document).ready(function() {
   });
 
   $(".open-big-start").click(function() {
+    //  $(".open-start-conversation").trigger("click");
     $(".chat-right")
       .find(".chat-content")
       .addClass("hide");
@@ -393,6 +452,102 @@ $(document).ready(function() {
       .find(".start-conversation")
       .addClass("show");
   });
+
+  $("#multiple").selectator({
+    showAllOptionsOnFocus: true,
+    searchFields: "value text subtitle right",
+    minSearchLength: 1,
+    load: function(search, callback) {
+      if (search.length < this.minSearchLength) return callback();
+      $.ajax({
+        url: "find-my-peers",
+        data: { search: search },
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+          callback(data);
+        },
+        error: function() {
+          callback();
+        }
+      });
+    },
+    render: {
+      selected_item: function(_item, escape) {
+        var html = "";
+        if (typeof _item.left !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'selected_item_left"><img src="' +
+            escape(_item.left) +
+            '"></div>';
+        if (typeof _item.right !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'selected_item_right">' +
+            escape(_item.right) +
+            "</div>";
+        html +=
+          '<div class="' +
+          "selectator_" +
+          'selected_item_title">' +
+          (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+          "</div>";
+        if (typeof _item.subtitle !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'selected_item_subtitle">' +
+            escape(_item.subtitle) +
+            "</div>";
+        html +=
+          '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
+
+        // check if the
+        $(".done-link").addClass("show");
+        return html;
+      },
+      option: function(_item, escape) {
+        console.log("asdad");
+        var html = "";
+        if (typeof _item.left !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_left"><img src="' +
+            escape(_item.left) +
+            '"></div>';
+        if (typeof _item.right !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_right">' +
+            escape(_item.right) +
+            "</div>";
+        html +=
+          '<div class="' +
+          "selectator_" +
+          'option_title">' +
+          (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+          "</div>";
+        if (typeof _item.subtitle !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_subtitle">' +
+            escape(_item.subtitle) +
+            "</div>";
+
+        if ($(".selectator_selected_items").html() == "") {
+          $(".done-link").removeClass("show");
+        }
+        return html;
+      }
+    }
+  });
+
   $(document).on("click", ".chat-big", function() {
     $(".chat-left").removeClass("hide");
   });
