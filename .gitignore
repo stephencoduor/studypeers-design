@@ -12,3 +12,4 @@ josebautista/*
 /application/config/database.php
 error_log
 uploads/*
+assets_d/js/socket-config.js

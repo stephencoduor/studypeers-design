@@ -67,4 +67,22 @@ class ChatModel extends CI_Model
     {
         $this->db->insert_batch('user_chat_group_users', $insert);
     }
+
+    public function getUserGroupsNames($userId)
+    {
+
+        $query =  $this->db->select('user_chat_groups.*')
+
+            ->from('user_chat_group_users')
+
+            ->join('user_chat_groups', 'user_chat_groups.group_id = user_chat_groups.id', 'INNER')
+
+            ->where('user_chat_group_users.peer_id', $userId)
+
+            ->get();
+
+
+
+        return $query->result_array();
+    }
 }

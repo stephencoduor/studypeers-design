@@ -68,3 +68,4 @@ $route['admin'] = "Admin/index";
 $route['account/find-my-peers'] = "ChatController/getPeers";
 $route['account/submit-chat-users'] = "ChatController/createUserGroup";
 $route['account/get-user-groups'] = "ChatController/getUserChat";
+$route['account/get-user-group-chat-name'] = "ChatController/getUserGroupNames";
