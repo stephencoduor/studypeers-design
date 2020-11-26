@@ -340,8 +340,8 @@ div.time {
   border-radius: 50%;
   display: inline-block;
   position: absolute;
-  top: -5px;
-  right: -5px;
+  bottom: 0;
+  right:0;
 }
 .user-status.online{
   background:green;
