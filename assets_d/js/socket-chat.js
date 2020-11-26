@@ -211,7 +211,7 @@ function receivingMessage(messageJson) {
     '<div class="received-wrap"><div class="message-received"><div class="user-info">' +
     '<figure><img src="' +
     messageJson.send_profile_image +
-    '" alt="Image" /><span class="user-status"></span></figure>' +
+    '" alt="Image" /><span class="user-status online"></span></figure>' +
     '<div class="user-name"><strong>' +
     messageJson.from_user_name +
     '</strong><span class="msg-tile">' +
@@ -263,7 +263,7 @@ function sendMessage(messageJson) {
     '<img src="' +
     messageJson.send_profile_image +
     '" alt="Image" />' +
-    '<span class="user-status"></span>' +
+    '<span class="user-status online"></span>' +
     "</figure>" +
     "</div>" +
     '<div class="chat-msg">' +
