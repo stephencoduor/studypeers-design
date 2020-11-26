@@ -335,7 +335,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 								<li class="message dropdown">
 									<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
 										<div class="messageBox">
-											<img src="<?php echo base_url(); ?>assets_d/images/message.svg" alt="chat">
+											<img src="<?php echo base_url(); ?>assets_d/images/message.svg" alt="chat" id="message_icon_id">
 										</div>
 										<span class="label label-success" id="chat_message_count"></span>
 									</a>

@@ -1,9 +1,9 @@
 <?php
 $user_id = $this->session->get_userdata()['user_data']['user_id'];
 
-$peer_list = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id ='.$user_id)->result_array();
+$peer_list = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id =' . $user_id)->result_array();
 
-$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id)->result_array();
+$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = ' . $user_id)->result_array();
 
 ?>
 
@@ -13,37 +13,37 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
     </section>
 
     <section class="listBar">
-            <section class="listHeader">
-                <h6>Blocked Peers</h6>
-            </section>
-            <section class="listChatBox">
-                <?php
-                    foreach(@$blocked_users as $users){
-                ?>
-                        <section class="list">
-                            <section class="left">
-                                <figure>
-                                    <img src="<?php echo userImage($users['id']);?>" alt="user">
-                                </figure>
-                                <figcaption><?php echo $users['first_name'].' '.$users['last_name']; ?></figcaption>
-                            </section>
-                            <section class="action">
-                                <div class="dropdown">
-                                    <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
-                                    <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                                        <li class="removePeerSugg">
-                                            <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </section>
-                        </section>
-                <?php
-                    }
-                ?>
-
-            </section>
+        <section class="listHeader">
+            <h6>Blocked Peers</h6>
         </section>
+        <section class="listChatBox">
+            <?php
+            foreach (@$blocked_users as $users) {
+            ?>
+                <section class="list">
+                    <section class="left">
+                        <figure>
+                            <img src="<?php echo userImage($users['id']); ?>" alt="user">
+                        </figure>
+                        <figcaption><?php echo $users['first_name'] . ' ' . $users['last_name']; ?></figcaption>
+                    </section>
+                    <section class="action">
+                        <div class="dropdown">
+                            <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                            <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                                <li class="removePeerSugg">
+                                    <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+                </section>
+            <?php
+            }
+            ?>
+
+        </section>
+    </section>
 
     <section class="listBar">
         <section class="listHeader">
@@ -211,7 +211,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             </section>
                         </section>
 
-                        <?php } ?>
+                    <?php } ?>
 
 
 
@@ -454,6 +454,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="curren_group_members">
             <input type="hidden" id="curren_group_name_id">
         </div>
+        <span id="user_typing_id"></span>
         <div class="chat-footer">
             <div class="input-wrap">
                 <div class="img-preview">
@@ -504,16 +505,18 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
     });
 
-    $('.unblock_peer').on("click", function(){
-            var blocked_friend_id = $(this).attr('id');
-            url = '<?php echo base_url();?>Profile/unblockPeer';
-            $.ajax({
-                url : url,
-                type : 'post',
-                data : {"peer_id" : blocked_friend_id},
-                success:function(result) {
-                    window.location.href = '<?php echo base_url(); ?>Account/dashboard';
-                }
-            });
+    $('.unblock_peer').on("click", function() {
+        var blocked_friend_id = $(this).attr('id');
+        url = '<?php echo base_url(); ?>Profile/unblockPeer';
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                "peer_id": blocked_friend_id
+            },
+            success: function(result) {
+                window.location.href = '<?php echo base_url(); ?>Account/dashboard';
+            }
         });
+    });
 </script>
