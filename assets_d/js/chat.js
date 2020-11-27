@@ -1,18 +1,9 @@
 function myFunction() {
-  let input, filter, ul, li, a, i, txtValue;
-  input = document.getElementById("myInput");
-  filter = input.value.toUpperCase();
-  ul = document.getElementById("myUL");
-  li = ul.getElementsByTagName("li");
-  for (i = 0; i < li.length; i++) {
-    a = li[i].getElementsByTagName("a")[0];
-    txtValue = a.textContent || a.innerText;
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      li[i].style.display = "";
-    } else {
-      li[i].style.display = "none";
-    }
+  var input = $("#myInput").val();
+  if (input == "") {
+    $("#myUL").html("");
   }
+  socket.emit("searchmessage", JSON.stringify({ searchTerm: input }));
 }
 function searchUser() {
   let input, filter, ul, li, a, i, txtValue;
@@ -91,7 +82,7 @@ var CHAT_GROUP_ADDITIONS = {
           $("#current_group_id").val(data.data.groupId);
           if (data.data.users.length > 0) {
             data.data.users.forEach(function(item, index) {
-              groupName.push(item.username);
+              groupName.push(item.first_name);
               groupMemberIds.push(item.id);
             });
           }
@@ -148,6 +139,11 @@ $(document).on("click", ".done-link", function() {
   CHAT_GROUP_ADDITIONS._AJAX_SUBMIT_CHAT(data);
 });
 
+$("body").on("click", "#message_icon_id", function() {
+  var UserInfo = JSON.parse(userData);
+  socket.emit("getmyreadmessage", JSON.stringify({ user: UserInfo }));
+});
+
 //--------------en of group chat create event-------------------------//
 
 $(document).ready(function() {
@@ -181,7 +177,7 @@ $(document).ready(function() {
     ele.setAttribute("style", "display:none;");
     ele.nextElementSibling.setAttribute("style", "display:block;");
     ele.closest("li").classList.remove("add");
-    if ($(".uploadBtn").length < 5) {
+    if ($(".uploadBtn").length < 1) {
       $(".gallery").append(
         ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
       );

@@ -91,7 +91,7 @@ class ChatController extends CI_Controller
 
             $createGroup = [];
             $createGroup['user_id'] = $userId;
-            $createGroup['group_name'] = implode(',', array_column($chatMembersList, 'username'));
+            $createGroup['group_name'] = implode(',', array_column($chatMembersList, 'first_name'));
 
             $getCreativeGroupId = $this->ChatModel->createGroup($createGroup);
 

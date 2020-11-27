@@ -45,7 +45,7 @@ class Login extends CI_Controller
             $user['user_id']    = $row->id;
             $user['role_id']    = $row->role_id;
             $user['role']       = get_user_role('user_role', $row->id);
-            $user['username']   = $row->username;
+            $user['first_name']   = $row->first_name;
             $user['profileImage'] = empty($row->image) ? base_url() . 'uploads/user-male.png' : base_url() . '/uploads/users/' . $row->image;
             $user['user_login']   = 1;
             if ($row->role_id == 2) {
