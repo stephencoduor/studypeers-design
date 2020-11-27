@@ -23,6 +23,36 @@
 
 <script>
 
+    $(document).ready(function() {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyFeeds',
+            type: 'post',
+            data: {
+                "count": 0
+            },
+            success: function(result) {
+
+                $('#timeline-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreFeeds(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyFeeds',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmore_' + count).hide(1000);
+                $('#timeline-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+
     $(function() {
         $(".progress").each(function() {
             var value = $(this).attr('data-value');
