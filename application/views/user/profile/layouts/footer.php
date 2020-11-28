@@ -21,8 +21,43 @@
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
 
-<script>
 
+
+<?php if($_REQUEST['profile_id']) { ?>
+<script>
+    $(document).ready(function() {
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
+            type: 'post',
+            data: {
+                "count": 0, "friend_id": friend_id
+            },
+            success: function(result) {
+
+                $('#timeline-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreFeeds(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyFeeds',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmore_' + count).hide(1000);
+                $('#timeline-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+</script>
+<?php } else { ?>
+<script>
     $(document).ready(function() {
         $.ajax({
             url: '<?php echo base_url(); ?>Profile/getMyFeeds',
@@ -52,6 +87,12 @@
             }
         });
     }
+</script>
+<?php } ?>
+
+
+
+    <script>
 
     $(function() {
         $(".progress").each(function() {

@@ -160,10 +160,48 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                             <li><a data-toggle="tab" href="#events">Events</a></li>
                                             <li><a data-toggle="tab" href="#studySessions">Study Sessions</a></li>
                                         </ul>
+                                        <div class="tab-content">
+                                            <div id="all" class="tab-pane fade in active">
+                                                <div class="tabPaneWrapper">
+                                                    <div class="left">
+                                                        
+                                                        <div id="timeline-feeds">
+                                                            <div class="box-card message">
+                                                                <div class="createBox">
+                                                                    <p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p>
+                                                                </div>
+                                                            </div>
+                                                        </div>
 
+
+                                                        <div class="blankFeed">
+                                                            <div class="noFeedWrapper">
+                                                                <figure>
+                                                                    <img
+                                                                        src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png"
+                                                                        alt="No Feed">
+                                                                </figure>
+                                                                <h4>Nothing to display</h4>
+                                                                <p>Add [username] as your peer to view her latest updates</p>
+                                                                <button type="button" class="event_action">Add Peer</button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    
+                                                </div>
+                                            </div>
+                                            <div id="posts" class="tab-pane fade in">Posts</div>
+                                            <div id="questions" class="tab-pane fade in">Questions</div>
+                                            <div id="documents" class="tab-pane fade in">Documents</div>
+                                            <div id="articles" class="tab-pane fade in">Articles</div>
+                                            <div id="studySets" class="tab-pane fade in">Study Sets</div>
+                                            <div id="events" class="tab-pane fade in">Events</div>
+                                            <div id="studySessions" class="tab-pane fade in">Study Sessions</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            
                             <div id="profile" class="tab-pane fade in">
                                 <div class="tabPaneWrapper">
                                     <div class="left">
