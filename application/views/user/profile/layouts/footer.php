@@ -23,7 +23,7 @@
 
 
 
-<?php if($_REQUEST['profile_id']) { ?>
+<?php if(isset($_REQUEST['profile_id'])) { ?>
 <script>
     $(document).ready(function() {
         var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
