@@ -2253,8 +2253,8 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li>
-                                    <a>
+                                <li <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="opacity: 0.7;cursor: not-allowed;" <?php } ?>>
+                                    <a <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="cursor: not-allowed;" <?php } ?>>
                                         <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
                                         <span>Comment</span>
                                     </a>

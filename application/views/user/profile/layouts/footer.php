@@ -122,6 +122,12 @@
         $(this).parent().slideUp();
         $('.feedPostMessages a').show();
     });
+    $('#returnPrivacy').on('click',function() {
+        $("#privacy_val_public").prop("checked", true);
+        $("#allow_comment").prop("checked", true);
+        $('.privacyContent ul li').removeClass('active');
+        $('#privacy_li_public').addClass('active');
+    });
     $(document).ready(function() {
         $('.loading').hide();
         var base_url = $('#base').val();
@@ -276,7 +282,12 @@
             var url = $(this).attr('action');
             var html_content = CKEDITOR.instances['messagepostarea'].getData();
             var privacy = $("input:radio.privacy_val:checked").val();
-            var allow_comment = $('#allow_comment').val();
+            
+            if($('#allow_comment').is(':checked')){
+                var allow_comment = 1;
+            } else {
+                var allow_comment = 0;
+            } 
             formData.append('html_content', html_content);
             formData.append('privacy', privacy);
             formData.append('allow_comment', allow_comment);
