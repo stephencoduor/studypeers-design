@@ -87,6 +87,36 @@
             }
         });
     }
+
+    $(document).on("click", ".loadPosts", function(){
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyPosts',
+            type: 'post',
+            data: {
+                "count": 0
+            },
+            success: function(result) {
+
+                $('#timeline-post-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMorePosts(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyPosts',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmorepost_' + count).hide(1000);
+                $('#timeline-post-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
 </script>
 <?php } ?>
 

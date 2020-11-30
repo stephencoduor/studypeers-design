@@ -164,7 +164,7 @@ die;*/
                         <div class="tabularLiist">
                             <ul class="nav nav-tabs">
                                 <li class="active"><a data-toggle="tab" href="#all">All</a></li>
-                                <li><a data-toggle="tab" href="#posts">Posts</a></li>
+                                <li><a class="loadPosts" data-toggle="tab" href="#posts">Posts</a></li>
                                 <li><a data-toggle="tab" href="#questions">Questions</a></li>
                                 <li><a data-toggle="tab" href="#documents">Documents</a></li>
                                 <li><a data-toggle="tab" href="#articles">Articles</a></li>
@@ -249,7 +249,15 @@ die;*/
                                         <?php include_once 'right-side-content.php' ?>
                                     </div>
                                 </div>
-                                <div id="posts" class="tab-pane fade in">Posts</div>
+                                <div id="posts" class="tab-pane fade in">
+                                    <div id="timeline-post-feeds">
+                                        <div class="box-card message">
+                                            <div class="createBox">
+                                                <p class="text-center" style="padding-bottom: 20px;">Loading Posts..</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div id="questions" class="tab-pane fade in">Questions</div>
                                 <div id="documents" class="tab-pane fade in">Documents</div>
                                 <div id="articles" class="tab-pane fade in">Articles</div>

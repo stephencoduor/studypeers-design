@@ -2569,8 +2569,14 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
 ?>
 
 <?php if($loadMore == 1) { ?>
-    <div class="loadMoreWrapper loadmore" id="loadmore_<?= $nextOffset; ?>">
-        <button type="button" onclick="loadMoreFeeds(<?= $nextOffset; ?>);"> Load More</button>
+    <?php if($ifTabs == 0) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmore_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreFeeds(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 1) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmorepost_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMorePosts(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } ?>
+        
     </div>
 <?php } else { ?>
     <div class="loadMoreWrapper reached">
