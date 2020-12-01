@@ -207,6 +207,36 @@
             }
         });
     }
+
+    $(document).on("click", ".loadEvents", function(){
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyEvents',
+            type: 'post',
+            data: {
+                "count": 0
+            },
+            success: function(result) {
+
+                $('#timeline-events-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreStudyset(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyEvents',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmorevent_' + count).hide(1000);
+                $('#timeline-events-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
 </script>
 <?php } ?>
 

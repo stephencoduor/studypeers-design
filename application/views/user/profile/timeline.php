@@ -169,7 +169,7 @@ die;*/
                                 <li><a class="loadDocuments" data-toggle="tab" href="#documents">Documents</a></li>
                                 <li><a data-toggle="tab" href="#articles">Articles</a></li>
                                 <li><a class="loadstudySets" data-toggle="tab" href="#studySets">Study Sets</a></li>
-                                <li><a data-toggle="tab" href="#events">Events</a></li>
+                                <li><a class="loadEvents" data-toggle="tab" href="#events">Events</a></li>
                                 <li><a data-toggle="tab" href="#studySessions">Study Sessions</a></li>
                             </ul>
                             <div class="tab-content">
@@ -286,7 +286,16 @@ die;*/
                                         </div>
                                     </div>
                                 </div>
-                                <div id="events" class="tab-pane fade in">Events</div>
+                                <div id="events" class="tab-pane fade in">
+                                    
+                                    <div id="timeline-events-feeds">
+                                        <div class="box-card message">
+                                            <div class="createBox">
+                                                <p class="text-center" style="padding-bottom: 20px;">Loading Events..</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                                 <div id="studySessions" class="tab-pane fade in">Study Sessions</div>
                             </div>
                         </div>

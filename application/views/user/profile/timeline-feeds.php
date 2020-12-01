@@ -2584,6 +2584,9 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
     <?php } else if($ifTabs == 4) { ?>
         <div class="loadMoreWrapper loadmore" id="loadmorestudyset_<?= $nextOffset; ?>">
             <button type="button" onclick="loadMoreStudyset(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 5) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmorevent_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreEvent(<?= $nextOffset; ?>);"> Load More</button>
     <?php } ?>
         
     </div>
