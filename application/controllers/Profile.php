@@ -183,6 +183,44 @@ class Profile extends CI_Controller {
             $data['loadMore'] = 0;
         }
         $data['nextOffset'] = $offset+1;
+        $data['ifTabs'] =4;
+        $html = $this->load->view('user/profile/timeline-feeds', $data, true);
+        echo $html;
+    }
+
+    public function getMyEvents(){
+
+
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $offset     = $this->input->post('count'); 
+        $count      = $offset*10; 
+        
+
+
+        $this->db->select('reference_master.*,');
+        $this->db->from('reference_master');
+        $this->db->where("reference_master.status",1);
+        $this->db->where("reference_master.reference",'event');
+        $this->db->where("reference_master.user_id",$user_id);
+        
+        $total_feeds = $this->db->get()->num_rows();
+
+        $this->db->select('reference_master.*,');
+        $this->db->from('reference_master');
+        $this->db->where("reference_master.status",1);
+        $this->db->where("reference_master.reference",'event');
+        $this->db->where("reference_master.user_id",$user_id);
+        
+        $this->db->limit(10, $count);
+        $this->db->order_by('reference_master.id', 'desc');
+        $data['feeds'] = $this->db->get()->result_array(); 
+        // echo $this->db->last_query();die;
+        if($count+10 < $total_feeds){
+            $data['loadMore'] = 1;
+        } else {
+            $data['loadMore'] = 0;
+        }
+        $data['nextOffset'] = $offset+1;
         $data['ifTabs'] =5;
         $html = $this->load->view('user/profile/timeline-feeds', $data, true);
         echo $html;
