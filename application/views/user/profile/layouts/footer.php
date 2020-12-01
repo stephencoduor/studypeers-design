@@ -2,6 +2,7 @@
 <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
+<script src="<?php echo base_url(); ?>assets_d/js/fm.selectator.jquery.js"></script>
 <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>
@@ -1213,6 +1214,11 @@
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script> 
-
+<script>
+    $('#multiple-select').selectator({
+        showAllOptionsOnFocus: true,
+        searchFields: 'value text subtitle right'
+    });
+</script>
 </body>
 </html>
