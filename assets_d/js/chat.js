@@ -174,6 +174,7 @@ $(document).ready(function() {
   var count = 1;
   function showPreview(pic, ele) {
     ele.previousElementSibling.src = pic;
+    $("#current_image_upload_src").val(pic);
     ele.setAttribute("style", "display:none;");
     ele.nextElementSibling.setAttribute("style", "display:block;");
     ele.closest("li").classList.remove("add");
@@ -198,6 +199,7 @@ $(document).ready(function() {
         ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
       );
     }
+    $("#current_image_upload_src").val("");
   });
 });
 

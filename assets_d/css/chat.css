@@ -54,7 +54,7 @@
 .chat-user-list li .info-wrap {
   width: calc(100% - 60px);
   padding-left: 10px;
-  padding-right:20px;
+  padding-right: 20px;
   word-break: break-work;
 }
 .chat-user-list li a {
@@ -341,13 +341,13 @@ div.time {
   display: inline-block;
   position: absolute;
   bottom: 0;
-  right:0;
+  right: 0;
 }
-.user-status.online{
-  background:green;
+.user-status.online {
+  background: green;
 }
-.user-status.offline{
-  background:green;
+.user-status.offline {
+  background: red;
 }
 .user-name strong {
   margin-right: 15px;
@@ -740,7 +740,7 @@ a.done-link.show {
   border: 1px solid #ccc;
 }
 
-.chat-user-list li.active{
+.chat-user-list li.active {
   background: #f0f2f5;
 }
 .chat-user-list li.active:before {

@@ -453,6 +453,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="current_group_id">
             <input type="hidden" id="curren_group_members">
             <input type="hidden" id="curren_group_name_id">
+            <input type="hidden" id="current_image_upload_src">
         </div>
         <span id="user_typing_id"></span>
         <div class="chat-footer">
@@ -466,7 +467,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                                         <div class="result">
                                             <div id="gal">
                                                 <ul class="gallery">
-                                                    <li class="uploadBtn uploadBtnRestImage add">
+                                                    <li class="uploadBtn uploadBtnRestImage add" id="append_image_after_upload">
                                                         <img class="img" src="" />
                                                         <input type="file" name="rest_image[]" class="rest_img" accept="image/*">
                                                         <a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>
