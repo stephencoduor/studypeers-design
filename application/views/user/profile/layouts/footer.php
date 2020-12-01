@@ -117,6 +117,96 @@
             }
         });
     }
+
+    $(document).on("click", ".loadQuestions", function(){
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyQuestions',
+            type: 'post',
+            data: {
+                "count": 0
+            },
+            success: function(result) {
+
+                $('#timeline-questions-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreQuestions(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyQuestions',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmorequestion_' + count).hide(1000);
+                $('#timeline-questions-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+
+    $(document).on("click", ".loadDocuments", function(){
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyDocuments',
+            type: 'post',
+            data: {
+                "count": 0
+            },
+            success: function(result) {
+
+                $('#timeline-documents-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreDocuments(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyDocuments',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmoredocument_' + count).hide(1000);
+                $('#timeline-documents-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+
+    $(document).on("click", ".loadstudySets", function(){
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyStudyset',
+            type: 'post',
+            data: {
+                "count": 0
+            },
+            success: function(result) {
+
+                $('#timeline-studyset-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreStudyset(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyStudyset',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmorestudyset_' + count).hide(1000);
+                $('#timeline-studyset-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
 </script>
 <?php } ?>
 
