@@ -550,3 +550,5 @@ $(document).ready(function() {
     $(".chat-left").removeClass("hide");
   });
 });
+
+

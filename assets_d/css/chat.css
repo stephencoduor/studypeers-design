@@ -64,6 +64,14 @@
   font-size: 14px;
   font-weight: bold;
   color: #2a234f;
+  position: relative;
+  word-break: break-word;
+  padding-right: 30px;
+}
+.chat-user-list li a .info-wrap .badge{
+  position: absolute;
+    right: 10px;
+    top: 40px;
 }
 .chat-user-list li {
   width: 100% !important;
@@ -85,6 +93,8 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   margin-bottom: 0;
+  position: relative;
+  padding-right:15px;
 }
 .search-list .form-control {
   border-radius: 100px;
@@ -359,6 +369,7 @@ div.time {
 .user-info figure img {
   width: 100%;
   height: 100%;
+  border-radius:50%;
   object-fit: cover;
   object-position: center center;
 }
@@ -410,13 +421,15 @@ div.time {
 }
 .received-wrap .chat-msg figure {
   width: 100%;
+  height:240px;
   padding-bottom: 10px;
   overflow: hidden;
 }
 .received-wrap .chat-msg figure img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit:cover;
+  object-position:center center;
 }
 .sent-wrap .chat-msg figure {
   width: 100%;
@@ -745,4 +758,77 @@ a.done-link.show {
 }
 .chat-user-list li.active:before {
   opacity: 1;
+}
+
+.selectator_input{
+  width:100%!important;
+  height:40px!important;
+}
+
+.avatar-upload {
+  position: relative;
+  max-width: 205px;
+  margin: 15px auto;
+}
+.avatar-upload .avatar-edit {
+  position: absolute;
+  right: 12px;
+  z-index: 1;
+  top: 10px;
+}
+.avatar-upload .avatar-edit input {
+  display: none;
+}
+.avatar-upload .avatar-edit input + label {
+  display: inline-block;
+  width: 34px;
+  height: 34px;
+  margin-bottom: 0;
+  border-radius: 100%;
+  background: #fff;
+  border: 1px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
+  cursor: pointer;
+  font-weight: normal;
+  transition: all 0.2s ease-in-out;
+}
+.modal-dialog.modal-sm.chat-setting{
+  width:320px;
+}
+.modal-footer.text-center{
+  text-align:center;
+}
+.modal-dialog.modal-sm.chat-setting .event_action{
+  padding:10px 25px;
+}
+.avatar-upload .avatar-edit input + label:hover {
+  background: #f1f1f1;
+  border-color: #d6d6d6;
+}
+.avatar-upload .avatar-edit input + label:after {
+  content: "\f040";
+  font-family: "FontAwesome";
+  color: #757575;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  margin: auto;
+}
+.avatar-upload .avatar-preview {
+  width: 192px;
+  height: 192px;
+  position: relative;
+  border-radius: 100%;
+  border: 6px solid #f8f8f8;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+}
+.avatar-upload .avatar-preview > div {
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
 }
