@@ -1,15 +1,18 @@
 <?php
 ob_start();
-defined('BASEPATH') OR exit('No direct script access allowed');
-require_once APPPATH.'/vendor/facebook/graph-sdk/src/Facebook/autoload.php';
-require_once APPPATH.'/vendor/oauth/http.php';
-require_once APPPATH.'/vendor/oauth/oauth_client.php';
+defined('BASEPATH') or exit('No direct script access allowed');
+require_once APPPATH . '/vendor/facebook/graph-sdk/src/Facebook/autoload.php';
+require_once APPPATH . '/vendor/oauth/http.php';
+require_once APPPATH . '/vendor/oauth/oauth_client.php';
+
 use Facebook\FacebookRequest;
 use Facebook\Helpers\FacebookRedirectLoginHelper;
 
-class SocialLogin extends CI_Controller {
+class SocialLogin extends CI_Controller
+{
 
-	public function __construct() {
+	public function __construct()
+	{
 
 		parent::__construct();
 		$this->load->database();
@@ -32,13 +35,13 @@ class SocialLogin extends CI_Controller {
 		$client->setApplicationName($google_config['google']['application_name']);
 		$client->setClientId($google_config['google']['client_id']);
 		$client->setClientSecret($google_config['google']['client_secret']);
-		$client->setRedirectUri( base_url($google_config['google']['redirect_uri']));
+		$client->setRedirectUri(base_url($google_config['google']['redirect_uri']));
 		$client->addScope("email");
 		$client->addScope("profile");
 		//Send Client Request
 		$objOAuthService = new Google_Service_Oauth2($client);
 		$authUrl = $client->createAuthUrl();
-		header('Location: '.$authUrl);
+		header('Location: ' . $authUrl);
 	}
 
 
@@ -78,28 +81,28 @@ class SocialLogin extends CI_Controller {
 		$insert['registration_type'] = 2;
 		$insert['image'] = $user->picture;
 		$this->save_user_info($insert);
-
 	}
 
 	/**
 	 * Function to initiate facebook login
 	 */
-	public function facebook(){
+	public function facebook()
+	{
 
 		$fb = new \Facebook\Facebook([
 			'app_id' => $this->config->item('facebook_app_id'),
 			'app_secret' => $this->config->item('facebook_app_secret'),
 			'default_graph_version' => $this->config->item('facebook_graph_version'),
-			'persistent_data_handler'=>'session'
+			'persistent_data_handler' => 'session'
 		]);
 		$this->session->set_userdata('social_signup', 'register');
 
 		$helper = $fb->getRedirectLoginHelper();
 
-		$permissions = ['public_profile','email'];
+		$permissions = ['public_profile', 'email'];
 		// For more permissions like user location etc you need to send your application for review
-		$loginUrl = $helper->getLoginUrl(base_url().'/socialLogin/facebookCallback', $permissions);
-		header("location: ".$loginUrl);
+		$loginUrl = $helper->getLoginUrl(base_url() . '/socialLogin/facebookCallback', $permissions);
+		header("location: " . $loginUrl);
 	}
 
 	/**
@@ -114,7 +117,7 @@ class SocialLogin extends CI_Controller {
 				'app_id' => $this->config->item('facebook_app_id'),
 				'app_secret' => $this->config->item('facebook_app_secret'),
 				'default_graph_version' => $this->config->item('facebook_graph_version'),
-				'persistent_data_handler'=>'session'
+				'persistent_data_handler' => 'session'
 				//'default_access_token' => $app_id.'|'.$app_secret
 			]);
 
@@ -124,7 +127,7 @@ class SocialLogin extends CI_Controller {
 			}
 			$accessToken = $helper->getAccessToken();
 
-			$res = $this->curl_file_get_contents('https://graph.facebook.com/v2.6/oauth/access_token?grant_type=fb_exchange_token&client_id='.$app_id.'&client_secret='.$app_secret.'&fb_exchange_token='.$accessToken.'');
+			$res = $this->curl_file_get_contents('https://graph.facebook.com/v2.6/oauth/access_token?grant_type=fb_exchange_token&client_id=' . $app_id . '&client_secret=' . $app_secret . '&fb_exchange_token=' . $accessToken . '');
 			$res = json_decode($res);
 			$long_live_access_token = $res->access_token;
 			$response = $fb->get('/me?fields=id,name,email', $long_live_access_token);
@@ -136,20 +139,20 @@ class SocialLogin extends CI_Controller {
 			$insert['email'] = $me->getProperty('email');
 			$insert['social_login_id'] = $me->getProperty('id');
 			$insert['registration_type'] = 3;
-			$insert['image'] = 'https://graph.facebook.com/'.$me->getProperty('id').'/picture?type=large';
+			$insert['image'] = 'https://graph.facebook.com/' . $me->getProperty('id') . '/picture?type=large';
 			$insert['long_live_token'] = $long_live_access_token;
 			$this->save_user_info($insert);
 		} catch (\Exception $e) {
 			redirect(base_url() . 'home/login');
 		}
-
 	}
 
 	/**
 	 * Function to save social login data in users table
 	 * @param $data
 	 */
-	public function save_user_info($data){
+	public function save_user_info($data)
+	{
 		error_reporting(E_ALL ^ E_NOTICE);
 
 		try {
@@ -157,8 +160,8 @@ class SocialLogin extends CI_Controller {
 			$is_register = 0;
 			/*check user's social login id is already exists or not in users table
 			if yes then login or register as a new user*/
-			$res = $this->user_model->check_email_with_registration_type($data['email'],$data['registration_type']);
-			if(count($res) > 0) {
+			$res = $this->user_model->check_email_with_registration_type($data['email'], $data['registration_type']);
+			if (count($res) > 0) {
 				$user_details = $res[0];
 				$is_register = 1;
 			}
@@ -166,29 +169,30 @@ class SocialLogin extends CI_Controller {
 			 * Check email exists or not
 			 */
 			$result = $this->user_model->check_email_duplicacy($data['email']);
-			if(count($result) > 0){
+			if (count($result) > 0) {
 				//update social login id
 				if ($data['registration_type'] == 2) {
-					$this->user_model->update_data('user','id = '.$result[0]->id.'',['google_id' => $data['social_login_id']]);
+					$this->user_model->update_data('user', 'id = ' . $result[0]->id . '', ['google_id' => $data['social_login_id']]);
 				}
 				if ($data['registration_type'] == 3) {
-					$this->user_model->update_data('user','id = '.$result[0]->id.'',['fb_id' => $data['social_login_id']]);
+					$this->user_model->update_data('user', 'id = ' . $result[0]->id . '', ['fb_id' => $data['social_login_id']]);
 				}
 				if ($data['registration_type'] == 4) {
-					$this->user_model->update_data('user','id = '.$result[0]->id.'',['linkedin_id' => $data['social_login_id']]);
+					$this->user_model->update_data('user', 'id = ' . $result[0]->id . '', ['linkedin_id' => $data['social_login_id']]);
 				}
 				if ($data['registration_type'] == 5) {
-					$this->user_model->update_data('user','id = '.$result[0]->id.'',['microsoft_id' => $data['social_login_id']]);
+					$this->user_model->update_data('user', 'id = ' . $result[0]->id . '', ['microsoft_id' => $data['social_login_id']]);
 				}
 				$user_details = $result[0];
 				$is_register = 1;
 			}
-			if($is_register == 1){
+			if ($is_register == 1) {
 				$user['first_name'] = $user_details->first_name;
 				$user['last_name'] = $user_details->last_name;
 				$user['email'] = $user_details->email;
 				$user['registration_type'] = $data['registration_type'];
 				$user['image'] = $user_details->image;
+				$user['profileImage'] = empty($user_details->image) ? base_url() . 'uploads/user-male.png' : base_url() . '/uploads/users/' . $user_details->image;
 				$user['user_id'] = $user_details->id;
 				$user['username'] = $user_details->username;
 				$user['is_logged_in'] = 2;
@@ -196,27 +200,26 @@ class SocialLogin extends CI_Controller {
 				$this->session->unset_userdata('social_signup');
 				//redirect to user's dashboard
 				redirect(base_url() . 'account/dashboard');
-			}
-			else{
+			} else {
 				$name = $data['name'];
 				$split_name = $this->split_name($name);
 				$insert['first_name'] = $split_name[0];
 				$insert['last_name'] = $split_name[1];
 				$insert['email'] = $data['email'];
-				if($data['registration_type'] == 2){
+				if ($data['registration_type'] == 2) {
 					$insert['google_id'] = $data['social_login_id'];
 				}
-				if($data['registration_type'] == 3){
+				if ($data['registration_type'] == 3) {
 					$insert['fb_id'] = $data['social_login_id'];
 					$insert['long_live_token'] = $data['long_live_token'];
 				}
 				$insert['registration_type'] = $data['registration_type'];
-				$file_name = 'user_image_'.time().'.jpg';
-				$local_file = 'uploads/users/'.$file_name;
+				$file_name = 'user_image_' . time() . '.jpg';
+				$local_file = 'uploads/users/' . $file_name;
 				$remote_file = $data['image'];
 
 				$ch = curl_init();
-				$fp = fopen ($local_file, 'w+');
+				$fp = fopen($local_file, 'w+');
 				$ch = curl_init($remote_file);
 				curl_setopt($ch, CURLOPT_TIMEOUT, 50);
 				curl_setopt($ch, CURLOPT_FILE, $fp);
@@ -228,13 +231,15 @@ class SocialLogin extends CI_Controller {
 				$insert['image'] = $file_name;
 				$user = $this->user_model->insert_data('user', $insert);
 				$insert['user_id'] = $user;
-				$insert['username'] = 'user'.$user; //generate user_id
-				$this->user_model->update_data('user','id = '.$user.'',['username' => 'user'.$user]);
+				$insert['username'] = 'user' . $user; //generate user_id
+				$this->user_model->update_data('user', 'id = ' . $user . '', ['username' => 'user' . $user]);
 				$insert['is_logged_in'] = 1;
+				$insert['profileImage'] = base_url() . '/uploads/users/' . $file_name;
+
 				$this->session->set_userdata('user_data', $insert);
 				$users = $this->session->get_userdata()['user_data'];
 				$this->session->unset_userdata('social_signup');
-				redirect(base_url().'home/sign_up');
+				redirect(base_url() . 'home/sign_up');
 			}
 		} catch (\Exception $e) {
 			echo '<pre/>';
@@ -243,10 +248,11 @@ class SocialLogin extends CI_Controller {
 	}
 
 	// uses regex that accepts any word character or hyphen in last name
-	protected function split_name($name) {
+	protected function split_name($name)
+	{
 		$name = trim($name);
 		$last_name = (strpos($name, ' ') === false) ? '' : preg_replace('#.*\s([\w-]*)$#', '$1', $name);
-		$first_name = trim( preg_replace('#'.$last_name.'#', '', $name ) );
+		$first_name = trim(preg_replace('#' . $last_name . '#', '', $name));
 		return array($first_name, $last_name);
 	}
 
@@ -260,31 +266,32 @@ class SocialLogin extends CI_Controller {
 		$client->setApplicationName($google_config['google']['application_name']);
 		$client->setClientId($google_config['google']['client_id']);
 		$client->setClientSecret($google_config['google']['client_secret']);
-		$client->setRedirectUri( base_url($google_config['google']['redirect_uri']));
+		$client->setRedirectUri(base_url($google_config['google']['redirect_uri']));
 		$client->addScope("email");
 		$client->addScope("profile");
 		//Send Client Request
 		$objOAuthService = new Google_Service_Oauth2($client);
 		$authUrl = $client->createAuthUrl();
-		header('Location: '.$authUrl);
+		header('Location: ' . $authUrl);
 	}
 
-	public function facebookLogin(){
+	public function facebookLogin()
+	{
 
 		$fb = new \Facebook\Facebook([
 			'app_id' => $this->config->item('facebook_app_id'),
 			'app_secret' => $this->config->item('facebook_app_secret'),
 			'default_graph_version' => $this->config->item('facebook_graph_version'),
-			'persistent_data_handler'=>'session'
+			'persistent_data_handler' => 'session'
 		]);
 		$this->session->set_userdata('social_signup', 'login');
 
 		$helper = $fb->getRedirectLoginHelper();
 
-		$permissions = ['public_profile','email'];
+		$permissions = ['public_profile', 'email'];
 		// For more permissions like user location etc you need to send your application for review
-		$loginUrl = $helper->getLoginUrl(base_url().'/socialLogin/facebookCallback', $permissions);
-		header("location: ".$loginUrl);
+		$loginUrl = $helper->getLoginUrl(base_url() . '/socialLogin/facebookCallback', $permissions);
+		header("location: " . $loginUrl);
 	}
 
 	public function linkedinCallback()
@@ -297,42 +304,41 @@ class SocialLogin extends CI_Controller {
 		$client->client_id = $this->config->item('linkedin_app_id');
 		$client->client_secret = $this->config->item('linkedin_app_secret');
 		$client->scope = $this->config->item('linkedin_scope');
-        
-        if (strlen($client->client_id) == 0 || strlen($client->client_secret) == 0)
+
+		if (strlen($client->client_id) == 0 || strlen($client->client_secret) == 0)
 			die('Please go to LinkedIn Apps page');
-        
-        try{
-            if (($success = $client->Initialize())) {
-    			if (($success = $client->Process())) {
-    			 	if (strlen($client->authorization_error)) {
-    				    echo $client->authorization_error;
-    					$client->error = $client->authorization_error;
-    					$success = false;
-    				} elseif (strlen($client->access_token)) {
-                        $profile_data = json_decode($this->getProfileDetails($client->access_token));
-					    $email_data = json_decode($this->getEmailAddress($client->access_token));        
-					    $first_name = $profile_data->localizedFirstName;
-    			        $last_name = $profile_data->localizedLastName;
-    			        $email = $email_data->elements[0]->{"handle~"}->emailAddress;
-    			        $insert['name'] = $first_name.' '.$last_name;
-				        $insert['email'] = $email;
-				        $insert['social_login_id'] = $profile_data->id;
-				        $insert['registration_type'] = 4;
-				        $insert['image'] = '';
-				        $this->save_user_info($insert);
-    				}
-    			}
-    		}else{
-    		    redirect(base_url());
-    		}
-        }
-        catch(\Exception $e){
-            redirect(base_url());
-        }
-		
+
+		try {
+			if (($success = $client->Initialize())) {
+				if (($success = $client->Process())) {
+					if (strlen($client->authorization_error)) {
+						echo $client->authorization_error;
+						$client->error = $client->authorization_error;
+						$success = false;
+					} elseif (strlen($client->access_token)) {
+						$profile_data = json_decode($this->getProfileDetails($client->access_token));
+						$email_data = json_decode($this->getEmailAddress($client->access_token));
+						$first_name = $profile_data->localizedFirstName;
+						$last_name = $profile_data->localizedLastName;
+						$email = $email_data->elements[0]->{"handle~"}->emailAddress;
+						$insert['name'] = $first_name . ' ' . $last_name;
+						$insert['email'] = $email;
+						$insert['social_login_id'] = $profile_data->id;
+						$insert['registration_type'] = 4;
+						$insert['image'] = '';
+						$this->save_user_info($insert);
+					}
+				}
+			} else {
+				redirect(base_url());
+			}
+		} catch (\Exception $e) {
+			redirect(base_url());
+		}
 	}
 
-    public function getProfileDetails($access_token){
+	public function getProfileDetails($access_token)
+	{
 		$curl = curl_init();
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => "https://api.linkedin.com/v2/me/",
@@ -343,7 +349,7 @@ class SocialLogin extends CI_Controller {
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => "GET",
 			CURLOPT_HTTPHEADER => array(
-				"authorization: Bearer ".$access_token,
+				"authorization: Bearer " . $access_token,
 				"cache-control: no-cache"
 			),
 		));
@@ -357,19 +363,20 @@ class SocialLogin extends CI_Controller {
 		}
 	}
 
-	public function getEmailAddress($access_token){
+	public function getEmailAddress($access_token)
+	{
 		$curl = curl_init();
 
 		curl_setopt_array($curl, array(
 			CURLOPT_URL => "https://api.linkedin.com/v2/emailAddress?q=members&projection=(elements*(handle~))",
 			CURLOPT_RETURNTRANSFER => true,
 			CURLOPT_ENCODING => "",
-			CURLOPT_MAXREDIRS => 10,    
+			CURLOPT_MAXREDIRS => 10,
 			CURLOPT_TIMEOUT => 30,
 			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
 			CURLOPT_CUSTOMREQUEST => "GET",
 			CURLOPT_HTTPHEADER => array(
-				"authorization: Bearer ".$access_token,
+				"authorization: Bearer " . $access_token,
 				"cache-control: no-cache"
 			),
 		));
@@ -387,53 +394,51 @@ class SocialLogin extends CI_Controller {
 	}
 
 
-    public function microsoftLogin()
+	public function microsoftLogin()
 	{
-			$client_id = $this->config->item('ms_client_id');
-			$redirect_uri = $this->config->item('ms_redirect_url');
-			//$redirect_uri = "http://localhost/studypeers/socialLogin/microsoftCallback"; //you can also use localhost url for testing but first add url into microsoft app redirect url then you can use localhost url
-			$urls = 'https://login.live.com/oauth20_authorize.srf?client_id='.$client_id.'&scope=wl.signin%20wl.basic%20wl.emails%20wl.contacts_emails&response_type=code&redirect_uri='.$redirect_uri;
-			header("Location: " .$urls);
+		$client_id = $this->config->item('ms_client_id');
+		$redirect_uri = $this->config->item('ms_redirect_url');
+		//$redirect_uri = "http://localhost/studypeers/socialLogin/microsoftCallback"; //you can also use localhost url for testing but first add url into microsoft app redirect url then you can use localhost url
+		$urls = 'https://login.live.com/oauth20_authorize.srf?client_id=' . $client_id . '&scope=wl.signin%20wl.basic%20wl.emails%20wl.contacts_emails&response_type=code&redirect_uri=' . $redirect_uri;
+		header("Location: " . $urls);
 	}
 
 	public function microsoftCallback()
 	{
-		if(isset($_GET['code']) && $_GET['code'] != "")
-		{
+		if (isset($_GET['code']) && $_GET['code'] != "") {
 			$auth_code = $_GET["code"];
 			$client_id = $this->config->item('ms_client_id');
 			$client_secret = $this->config->item('ms_client_secret');
 			$redirect_uri = $this->config->item('ms_redirect_url');
 
 			$fields = array(
-				'code'=>  urlencode($auth_code),
-				'client_id'=>  urlencode($client_id),
-				'client_secret'=>  urlencode($client_secret),
-				'redirect_uri'=>  urlencode($redirect_uri),
-				'grant_type'=>  urlencode('authorization_code')
+				'code' =>  urlencode($auth_code),
+				'client_id' =>  urlencode($client_id),
+				'client_secret' =>  urlencode($client_secret),
+				'redirect_uri' =>  urlencode($redirect_uri),
+				'grant_type' =>  urlencode('authorization_code')
 			);
 
 			$post = '';
-			foreach($fields as $key=>$value)
-			{
-				$post .= $key.'='.$value.'&';
+			foreach ($fields as $key => $value) {
+				$post .= $key . '=' . $value . '&';
 			}
-			$post = rtrim($post,'&');
+			$post = rtrim($post, '&');
 			$curl = curl_init();
-			curl_setopt($curl,CURLOPT_URL,'https://login.live.com/oauth20_token.srf');
-			curl_setopt($curl,CURLOPT_POST,5);
-			curl_setopt($curl,CURLOPT_POSTFIELDS,$post);
-			curl_setopt($curl, CURLOPT_RETURNTRANSFER,TRUE);
-			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER,0);
+			curl_setopt($curl, CURLOPT_URL, 'https://login.live.com/oauth20_token.srf');
+			curl_setopt($curl, CURLOPT_POST, 5);
+			curl_setopt($curl, CURLOPT_POSTFIELDS, $post);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, TRUE);
+			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
 			$result = curl_exec($curl);
 			curl_close($curl);
 			$response =  json_decode($result);
 			$accesstoken = $response->access_token;
-			$get_profile_url='https://apis.live.net/v5.0/me?access_token='.$accesstoken;
-			$xmlprofile_res=$this->curl_file_get_contents($get_profile_url);
+			$get_profile_url = 'https://apis.live.net/v5.0/me?access_token=' . $accesstoken;
+			$xmlprofile_res = $this->curl_file_get_contents($get_profile_url);
 			$profile_res = json_decode($xmlprofile_res, true);
 
-			if($profile_res) {
+			if ($profile_res) {
 				$insert['name'] = $profile_res['name'];
 				$insert['email'] = $profile_res['emails']['account'];
 				$insert['social_login_id'] = $profile_res['id'];
@@ -444,7 +449,8 @@ class SocialLogin extends CI_Controller {
 		}
 	}
 
-	function curl_file_get_contents($url) {
+	function curl_file_get_contents($url)
+	{
 		$curl = curl_init();
 		curl_setopt($curl, CURLOPT_AUTOREFERER, TRUE);
 		curl_setopt($curl, CURLOPT_HEADER, 0);
@@ -455,8 +461,4 @@ class SocialLogin extends CI_Controller {
 		curl_close($curl);
 		return $data;
 	}
-
-
 }
-
-?>
