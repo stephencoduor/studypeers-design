@@ -2575,6 +2575,15 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
     <?php } else if($ifTabs == 1) { ?>
         <div class="loadMoreWrapper loadmore" id="loadmorepost_<?= $nextOffset; ?>">
             <button type="button" onclick="loadMorePosts(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 2) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmorequestion_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreQuestions(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 3) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmoredocument_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreDocuments(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 4) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmorestudyset_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreStudyset(<?= $nextOffset; ?>);"> Load More</button>
     <?php } ?>
         
     </div>
