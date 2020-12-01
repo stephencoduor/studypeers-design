@@ -210,7 +210,7 @@ $(document).ready(function() {
       .addClass("small");
     $(this)
       .find(".change-icon")
-      .prop("src", "assets_d/chat-assets/images/maximize.svg");
+      .prop("src", "../assets_d/chat-assets/images/maximize.svg");
     $(this)
       .parents(".chat-wrapper")
       .find(".chat-left")
@@ -222,7 +222,7 @@ $(document).ready(function() {
       .removeClass("small");
     $(this)
       .find(".change-icon")
-      .prop("src", "assets_d/chat-assets/images/minimize.svg");
+      .prop("src", "../assets_d/chat-assets/images/minimize.svg");
     $(this)
       .parents(".chat-wrapper")
       .find(".chat-left")

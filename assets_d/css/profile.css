@@ -249,11 +249,18 @@
     justify-content: flex-start;
 }
 .tabPaneWrapper .left {
-    width:70%;
-    padding-right: 25px;
+    width:100%;
+    
 }
 .tabPaneWrapper .right {
-    width:30%;
+    width:270px;
+    padding-left:25px;
+}
+.left .feeduserwrap .imgWrapper figure{
+    border-radius: 0;
+}
+#groupMember .modal-dialog {
+    width: 380px;
 }
 .boxwrap {
     width: 100%;
@@ -3538,4 +3545,15 @@ figcaption a {
     font-weight: 700;
     font-size: 16px;
     color: #2a234f;
+}
+#groupMember .modal-content .selectator_element.multiple{
+    padding-left:10px!important;
+    padding-top:5px!important;
+}
+#groupMember .modal-content .selectator_input{
+    width:100%;
+    margin-top:5px!important;
+}
+#groupMember .modal-content .multiple .selectator_selected_items .selectator_selected_item{
+    margin-top:0!important;
 }

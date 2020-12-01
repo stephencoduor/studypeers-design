@@ -426,7 +426,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                     <a href="javascript:void(0)" class="maximize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/maximize.svg" class="change-icon" alt="Maximize Icon" /></a>
                 </div>
                 <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/video-camera.svg" alt="Video Icon" /></a>
-                <a href="javascript:void(0)" class="hide-on-small"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
+                <a href="javascript:void(0)" class="hide-on-small" data-toggle="modal" data-target="#chat-setting-popup"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
                 <a href="javascript:void(0)" class="add-user"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
                 <div class="hide-on-big close-icon-wrap">
                     <a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/close.svg" alt="New Message Icon" /></a>
@@ -497,7 +497,35 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
     </div>
 </div>
 
-
+<div class="modal fade" id="chat-setting-popup" role="dialog">
+    <div class="modal-dialog modal-sm chat-setting">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Chat Setting</h4>
+        </div>
+        <div class="modal-body">
+            <div class="avatar-upload">
+                <div class="avatar-edit">
+                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                    <label for="imageUpload"></label>
+                </div>
+                <div class="avatar-preview">
+                    <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
+                </div>
+            </div>
+            <div class="form-group">
+                <input type="text" name="" class="form-control"/>
+            </div>
+        </div>
+        <div class="modal-footer text-center">
+            <button type="button" class="event_action">Submit</button>
+        </div>
+      </div>
+    </div>
+  </div>
 
 <script type="text/javascript">
     $(document).on('click', '.removePeerSugg', function() {
@@ -520,4 +548,20 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             }
         });
     });
+</script>
+<script>
+function readURLImage(input) {
+  if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+          $('#imagePreview').css('background-image', 'url('+e.target.result +')');
+          $('#imagePreview').hide();
+          $('#imagePreview').fadeIn(650);
+      }
+      reader.readAsDataURL(input.files[0]);
+  }
+}
+$("#imageUpload").change(function() {
+    readURLImage(this);
+});
 </script>

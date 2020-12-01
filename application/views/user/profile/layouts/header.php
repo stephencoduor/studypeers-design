@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.tw.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/loader.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/croppie.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/fm.selectator.jquery.css">
     <!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url(); ?>assets_d/css/dashboard-new.css"> -->
     <!-- <link rel="stylesheet" type="text/css" href="<?php //echo base_url(); ?>assets_d/css/schedule.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

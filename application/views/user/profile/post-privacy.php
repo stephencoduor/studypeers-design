@@ -100,7 +100,7 @@
                             </a>
                         </li>
                         <li>
-                            <a>
+                            <a data-toggle="modal" data-target="#groupMember">
                                 <label class="dashRadioWrap">
                                     <div class="privacyTxtWrap">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.49" viewBox="0 0 20 17.49">
@@ -133,6 +133,33 @@
                 </div>
                 <div class="settingWrapper">
                     <button type="button" class="event_action" data-dismiss="modal" data-toggle="modal" href="#createPost"> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="groupMember" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="createHeader">
+                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Group Members</h4>
+                </div>
+                <select id="multiple-select" name="select2" multiple class="form-control">
+					<option value="1">Lorem ipsum 1</option>
+					<option value="2">Lorem ipsum 2</option>
+					<option value="3">Lorem ipsum 3</option>
+					<option value="4">Lorem ipsum 4</option>
+					<option value="5">Lorem ipsum 5</option>
+					<option value="6">Lorem ipsum 6</option>
+					<option value="7">Lorem ipsum 7</option>
+					<option value="8">Lorem ipsum 8</option>
+					<option value="9">Lorem ipsum 9</option>
+					<option value="10">Lorem ipsum 10</option>
+                </select>
+                <div class="settingWrapper">
+                    <button type="button" class="event_action"> Save</button>
                 </div>
             </div>
         </div>

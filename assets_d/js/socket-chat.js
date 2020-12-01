@@ -1,4 +1,4 @@
-var socket = io("https://localhost:3000/", {
+var socket = io("https://studypeers.dev:3000/", {
   "sync disconnect on unload": true
 });
 var userData = $("#hidden_user_info").val();
