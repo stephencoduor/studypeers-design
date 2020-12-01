@@ -1527,27 +1527,27 @@
 	        $this->db->order_by('question_answer_master.vote_count', 'desc');   
 	        $this->db->limit('2');
 	        $answer_list = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id'=>$value['reference_id'], 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => 0))->result_array(); 
-			 $user_id = $this->session->get_userdata()['user_data']['user_id'];
-						 $chk_user_upvote = $this->db->get_where($this->db->dbprefix('vote_master'), array('reference'=> 'question', 'reference_id'=> $question_detail['id'], 'user_id' => $user_id))->row_array();
-							if(!empty($chk_user_upvote)){
-								if($chk_user_upvote['type'] == 1){
-									$up_normal_q = 'display:none;';
-									$up_active_q = 'display:block;';
-									$down_normal_q = '';
-									$down_active_q = '';
-								} else {
-									$up_normal_q = '';
-									$up_active_q = '';
-									$down_normal_q = 'display:none;';
-									$down_active_q = 'display:block;';
-								}
-							} else {
-								$up_normal_q = '';
-								$up_active_q = '';
-								$down_normal_q = '';
-								$down_active_q = '';
-							}
-						?>
+			$user_id = $this->session->get_userdata()['user_data']['user_id'];
+			$chk_user_upvote = $this->db->get_where($this->db->dbprefix('vote_master'), array('reference'=> 'question', 'reference_id'=> $question_detail['id'], 'user_id' => $user_id))->row_array();
+				if(!empty($chk_user_upvote)){
+					if($chk_user_upvote['type'] == 1){
+						$up_normal_q = 'display:none;';
+						$up_active_q = 'display:block;';
+						$down_normal_q = '';
+						$down_active_q = '';
+					} else {
+						$up_normal_q = '';
+						$up_active_q = '';
+						$down_normal_q = 'display:none;';
+						$down_active_q = 'display:block;';
+					}
+				} else {
+					$up_normal_q = '';
+					$up_active_q = '';
+					$down_normal_q = '';
+					$down_active_q = '';
+				}
+		?>
 
 			<div class="box-card message">
 										<div class="eventMessage">
@@ -1956,6 +1956,22 @@
 			$user_info = $this->db->get_where('user_info', array('userID' => $post_query->created_by))->row_array();
 			$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); 
 
+			$chk_view = 0; $user_img = 'default';
+			
+			if($user_id == $post_query->created_by) {
+				$chk_view = 1;
+			} else {
+				if(($post_query->privacy_id != 3)){
+					$chk_view = 1;
+				}
+
+				if(($post_query->privacy_id == 2)){
+					$user_img = 'anonymous';
+				}
+			}
+
+			if($chk_view == 1) {
+
 		?>
 			<div class="box-card">
                 <div class="dropdown dropdownToggleMenu">
@@ -2055,11 +2071,19 @@
                         <div class="user-details">
                             <div class="user-name">
                                 <figure>
+                                	<?php if($user_img == 'default') { ?>
+                                		<img src="<?php echo userImage($post_query->created_by); ?>" alt="user">
+                                	<?php } else { ?>
+                                		<img src="<?php echo base_url(); ?>uploads/user-anonymous.png" alt="user">
+                                	<?php } ?>
                                     
-                                    <img src="<?php echo userImage($post_query->created_by); ?>" alt="user">
                                 </figure>
                                 <div class="right">
-                                    <a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?></figcaption></a>
+                                	<?php if($user_img == 'default') { ?>
+                                    	<a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?></figcaption></a>
+                                    <?php } else { ?>
+                                    	<figcaption>Anonymous User</figcaption>
+                                    <?php } ?>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -2229,8 +2253,8 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li>
-                                    <a>
+                                <li <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="opacity: 0.7;cursor: not-allowed;" <?php } ?>>
+                                    <a <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="cursor: not-allowed;" <?php } ?>>
                                         <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
                                         <span>Comment</span>
                                     </a>
@@ -2496,7 +2520,7 @@
                 </div>
             </div>
 
-		<?php }
+		<?php } }
 	?>
 							
 <?php

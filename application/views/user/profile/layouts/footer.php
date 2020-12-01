@@ -21,7 +21,108 @@
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
 
+
+
+<?php if(isset($_REQUEST['profile_id'])) { ?>
 <script>
+    $(document).ready(function() {
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
+            type: 'post',
+            data: {
+                "count": 0, "friend_id": friend_id
+            },
+            success: function(result) {
+
+                $('#timeline-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreFeeds(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyFeeds',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmore_' + count).hide(1000);
+                $('#timeline-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+</script>
+<?php } else { ?>
+<script>
+    $(document).ready(function() {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyFeeds',
+            type: 'post',
+            data: {
+                "count": 0
+            },
+            success: function(result) {
+
+                $('#timeline-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreFeeds(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyFeeds',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmore_' + count).hide(1000);
+                $('#timeline-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+
+    $(document).on("click", ".loadPosts", function(){
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyPosts',
+            type: 'post',
+            data: {
+                "count": 0
+            },
+            success: function(result) {
+
+                $('#timeline-post-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMorePosts(count) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getMyPosts',
+            type: 'post',
+            data: {
+                "count": count
+            },
+            success: function(result) {
+                $('#loadmorepost_' + count).hide(1000);
+                $('#timeline-post-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+</script>
+<?php } ?>
+
+
+
+    <script>
 
     $(function() {
         $(".progress").each(function() {
@@ -50,6 +151,12 @@
     $('.fullMessage a').on('click',function() {
         $(this).parent().slideUp();
         $('.feedPostMessages a').show();
+    });
+    $('#returnPrivacy').on('click',function() {
+        $("#privacy_val_public").prop("checked", true);
+        $("#allow_comment").prop("checked", true);
+        $('.privacyContent ul li').removeClass('active');
+        $('#privacy_li_public').addClass('active');
     });
     $(document).ready(function() {
         $('.loading').hide();
@@ -205,7 +312,12 @@
             var url = $(this).attr('action');
             var html_content = CKEDITOR.instances['messagepostarea'].getData();
             var privacy = $("input:radio.privacy_val:checked").val();
-            var allow_comment = $('#allow_comment').val();
+            
+            if($('#allow_comment').is(':checked')){
+                var allow_comment = 1;
+            } else {
+                var allow_comment = 0;
+            } 
             formData.append('html_content', html_content);
             formData.append('privacy', privacy);
             formData.append('allow_comment', allow_comment);

@@ -5,14 +5,14 @@
             <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
             <div class="modal-body">
                 <div class="createHeader">
-                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"  data-dismiss="modal" data-toggle="modal" href="#createPost"> Post Privacy</h4>
+                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" id="returnPrivacy"  data-dismiss="modal" data-toggle="modal" href="#createPost"> Post Privacy</h4>
                     <div class="closePost" data-dismiss="modal">
                         <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                     </div>
                 </div>
                 <div class="privacyContent">
                     <ul>
-                        <li class="active">
+                        <li class="active" id="privacy_li_public">
                             <a>
                                 <label class="dashRadioWrap">
                                     <div class="privacyTxtWrap">
@@ -26,7 +26,7 @@
                                             </g>
                                         </svg> <h4>Public</h4>
                                     </div>
-                                    <input type="radio" class="privacy_val" checked="checked" value="1" name="radio">
+                                    <input type="radio" class="privacy_val" id="privacy_val_public" checked="checked" value="1" name="radio">
                                     <span class="checkmark"></span>
                                 </label>
                             </a>
@@ -126,13 +126,13 @@
                     <h4>Allow comments on this post</h4>
                     <div class="right">
                         <label class="switch">
-                            <input type="checkbox" id="allow_comment" checked>
+                            <input type="checkbox" id="allow_comment" checked value="1" name="allow_comment">
                             <span class="slider round"></span>
                         </label>
                     </div>
                 </div>
                 <div class="settingWrapper">
-                    <button type="button" class="event_action"> Save</button>
+                    <button type="button" class="event_action" data-dismiss="modal" data-toggle="modal" href="#createPost"> Save</button>
                 </div>
             </div>
         </div>
