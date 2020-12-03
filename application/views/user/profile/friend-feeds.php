@@ -1711,6 +1711,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
             
             $document_detail = $this->db->get_where('document_master', array('id' => $value['reference_id']))->row_array();
             $chk_if_shared = $this->db->get_where('share_master', array('reference_id' => $value['reference_id'], 'reference' => 'document', 'peer_id' => $user_id, 'status' => 1))->row_array();
+            $chk_view = 0;
             if(($document_detail['privacy'] == 1) || !empty($chk_if_shared)){
                 $chk_view = 1;
             }
