@@ -146,18 +146,69 @@
             });
         });
 
-        function loadMoreDocuments(count) {
+        $(document).on("click", ".loadstudySets", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
             $.ajax({
-                url: '<?php echo base_url(); ?>Profile/getUserDocuments',
+                url: '<?php echo base_url(); ?>Profile/getUserStudyset',
+                type: 'post',
+                data: {
+                    "count": 0,
+                    "friend_id": friend_id
+                },
+                success: function(result) {
+
+                    $('#timeline-studyset-feeds').html(result);
+                    $('.commentBoxWrap').hide();
+                }
+            });
+        });
+
+        function loadMoreStudyset(count) {
+            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $.ajax({
+                url: '<?php echo base_url(); ?>Profile/getUserStudyset',
                 type: 'post',
                 data: {
                     "count": count,
                     "friend_id": friend_id
                 },
                 success: function(result) {
-                    $('#loadmoredocument_' + count).hide(1000);
-                    $('#timeline-documents-feeds').append(result);
+                    $('#loadmorestudyset_' + count).hide(1000);
+                    $('#timeline-studyset-feeds').append(result);
+                    $('.commentBoxWrap').hide();
+                }
+            });
+        }
+
+        $(document).on("click", ".loadEvents", function() {
+            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $.ajax({
+                url: '<?php echo base_url(); ?>Profile/getUserEvents',
+                type: 'post',
+                data: {
+                    "count": 0,
+                    "friend_id": friend_id
+                },
+                success: function(result) {
+
+                    $('#timeline-events-feeds').html(result);
+                    $('.commentBoxWrap').hide();
+                }
+            });
+        });
+
+        function loadMoreEvent(count) {
+            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $.ajax({
+                url: '<?php echo base_url(); ?>Profile/getUserEvents',
+                type: 'post',
+                data: {
+                    "count": count,
+                    "friend_id": friend_id
+                },
+                success: function(result) {
+                    $('#loadmorevent_' + count).hide(1000);
+                    $('#timeline-events-feeds').append(result);
                     $('.commentBoxWrap').hide();
                 }
             });
@@ -330,7 +381,7 @@
             });
         });
 
-        function loadMoreStudyset(count) {
+        function loadMoreEvent(count) {
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getMyEvents',
                 type: 'post',

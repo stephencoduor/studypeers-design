@@ -5,11 +5,14 @@
 
         <?php
             $complete_per = 40;
-            if(isset($user_detail['about']) && isset($user_detail['high_School'])){
+            if(!empty($user_detail['about']) && !empty($user_detail['high_School'])){
                 $complete_per += 30;
             }
-            if(isset($user_detail['fb_link'])){
-                $complete_per += 30;
+            if(!empty($user_detail['fb_link'])){
+                $complete_per += 15;
+            }
+            if(!empty($user_detail['user_location'])){
+                $complete_per += 15;
             }
         ?>
         <div class="profileProgressBar">
