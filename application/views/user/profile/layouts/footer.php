@@ -722,16 +722,19 @@
         $('#copyShareLink').on("click", function(){
             /* Get the text field */
             var copyText = document.getElementById("sharelink");
+            copyText.type = 'text';
             /* Select the text field */
             copyText.select();
             /* Copy the text inside the text field */
             document.execCommand("copy");
+            copyText.type = 'hidden';
             /* Alert the copied text */
-            alert("Copied to clipboard ");
+            var tooltip = document.getElementById("myTooltip");
+            tooltip.innerHTML = "Copied Link";
         });
 
 
-
+        
 
 
 
