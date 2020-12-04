@@ -45,6 +45,20 @@ function createGroupHTML() {
 }
 
 function formatTopMessageGroupListNameOnAdd(messageJson) {
+  var currentProfile =
+    '<img id="group_image_id_' +
+    messageJson.group_id +
+    '" src="../assets_d/images/default-group.png">';
+
+  if (messageJson.group_image) {
+    currentProfile =
+      '<img id="group_image_id_' +
+      messageJson.group_id +
+      '" src="' +
+      messageJson.group_image +
+      '">';
+  }
+
   var html =
     "<li class='message-top-header' id='group_id_" +
     messageJson.group_id +
@@ -57,7 +71,7 @@ function formatTopMessageGroupListNameOnAdd(messageJson) {
     "''>" +
     '<a href="javascript:void(0)">' +
     "<figure>" +
-    '<i class="fa fa-users fa-3x" aria-hidden="true"></i>' +
+    currentProfile +
     "</figure>" +
     '<div class="time">' +
     messageJson.time +
@@ -176,18 +190,20 @@ $(document).ready(function() {
   );
   var count = 1;
   function showPreview(pic, ele) {
-    ele.previousElementSibling.src = pic;
-    $("#current_image_upload_src").val(pic);
-    ele.setAttribute("style", "display:none;");
-    ele.nextElementSibling.setAttribute("style", "display:block;");
-    ele.closest("li").classList.remove("add");
-    if ($(".uploadBtn").length < 1) {
-      $(".gallery").append(
-        ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
-      );
-      count = 1;
-    } else {
-      return false;
+    if (ele.length > 0) {
+      ele.previousElementSibling.src = pic;
+      $("#current_image_upload_src").val(pic);
+      ele.setAttribute("style", "display:none;");
+      ele.nextElementSibling.setAttribute("style", "display:block;");
+      ele.closest("li").classList.remove("add");
+      if ($(".uploadBtn").length < 1) {
+        $(".gallery").append(
+          ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
+        );
+        count = 1;
+      } else {
+        return false;
+      }
     }
   }
 
@@ -551,5 +567,45 @@ $(document).ready(function() {
 
   $(document).on("click", ".chat-big", function() {
     $(".chat-left").removeClass("hide");
+  });
+});
+
+function readURLImage(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $("#current_group_profile_image").val(e.target.result);
+      $("#imagePreview").css(
+        "background-image",
+        "url(" + e.target.result + ")"
+      );
+      $("#imagePreview").hide();
+      $("#imagePreview").fadeIn(650);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+$("#imageUpload").change(function() {
+  readURLImage(this);
+});
+
+$(document).ready(function() {
+  $(".emojis-wysiwyg").emojioneArea({
+    inline: true,
+    hideSource: true,
+    events: {
+      // Enter key as submit button --> working
+      keyup: function(editor, event) {
+        if (
+          event.which == 13 &&
+          ($.trim(editor.text()).length > 0 || $.trim(editor.html()).length > 0)
+        ) {
+          $("#send_button_chat").click();
+          event.preventDefault();
+          event.stopPropagation();
+          editor.focus();
+        }
+      }
+    }
   });
 });
