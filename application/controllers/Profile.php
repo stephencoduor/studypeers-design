@@ -398,6 +398,92 @@ class Profile extends CI_Controller {
         echo $html;
     }
 
+    public function getUserStudyset(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $friend_id = $this->input->post('friend_id'); 
+        $offset     = $this->input->post('count'); 
+        $count      = $offset*10; 
+
+        $chk_if_friend = $this->db->get_where($this->db->dbprefix('friends'), array('user_id'=>$user_id, 'peer_id' => $friend_id))->row_array(); 
+
+        $chk_if_follow = $this->db->get_where($this->db->dbprefix('follow_master'), array('user_id'=>$user_id, 'peer_id' => $friend_id))->row_array();
+
+        $data['friend_id']      = $friend_id;
+        $data['chk_if_friend']  = $chk_if_friend;
+        $data['chk_if_follow']  = $chk_if_follow; 
+        
+        $this->db->select('reference_master.*,');
+        $this->db->from('reference_master');
+        $this->db->where("reference_master.status",1);
+        $this->db->where("reference_master.reference",'studyset');
+        $this->db->where("reference_master.user_id",$friend_id);
+        
+        $total_feeds = $this->db->get()->num_rows();
+
+        $this->db->select('reference_master.*,');
+        $this->db->from('reference_master');
+        $this->db->where("reference_master.status",1);
+        $this->db->where("reference_master.reference",'studyset');
+        $this->db->where("reference_master.user_id",$friend_id);
+        
+        $this->db->limit(10, $count);
+        $this->db->order_by('reference_master.id', 'desc');
+        $data['feeds'] = $this->db->get()->result_array(); 
+        // echo $this->db->last_query();die;
+        if($count+10 < $total_feeds){
+            $data['loadMore'] = 1;
+        } else {
+            $data['loadMore'] = 0;
+        }
+        $data['nextOffset'] = $offset+1;
+        $data['ifTabs'] =4;
+        $html = $this->load->view('user/profile/friend-feeds', $data, true);
+        echo $html;
+    }
+
+    public function getUserEvents(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $friend_id = $this->input->post('friend_id'); 
+        $offset     = $this->input->post('count'); 
+        $count      = $offset*10; 
+
+        $chk_if_friend = $this->db->get_where($this->db->dbprefix('friends'), array('user_id'=>$user_id, 'peer_id' => $friend_id))->row_array(); 
+
+        $chk_if_follow = $this->db->get_where($this->db->dbprefix('follow_master'), array('user_id'=>$user_id, 'peer_id' => $friend_id))->row_array();
+
+        $data['friend_id']      = $friend_id;
+        $data['chk_if_friend']  = $chk_if_friend;
+        $data['chk_if_follow']  = $chk_if_follow; 
+        
+        $this->db->select('reference_master.*,');
+        $this->db->from('reference_master');
+        $this->db->where("reference_master.status",1);
+        $this->db->where("reference_master.reference",'event');
+        $this->db->where("reference_master.user_id",$friend_id);
+        
+        $total_feeds = $this->db->get()->num_rows();
+
+        $this->db->select('reference_master.*,');
+        $this->db->from('reference_master');
+        $this->db->where("reference_master.status",1);
+        $this->db->where("reference_master.reference",'event');
+        $this->db->where("reference_master.user_id",$friend_id);
+        
+        $this->db->limit(10, $count);
+        $this->db->order_by('reference_master.id', 'desc');
+        $data['feeds'] = $this->db->get()->result_array(); 
+        // echo $this->db->last_query();die;
+        if($count+10 < $total_feeds){
+            $data['loadMore'] = 1;
+        } else {
+            $data['loadMore'] = 0;
+        }
+        $data['nextOffset'] = $offset+1;
+        $data['ifTabs'] =5;
+        $html = $this->load->view('user/profile/friend-feeds', $data, true);
+        echo $html;
+    }
+
 	public function timeline()
 	{
 		is_valid_logged_in();

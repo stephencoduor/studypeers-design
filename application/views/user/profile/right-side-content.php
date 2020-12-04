@@ -9,7 +9,10 @@
                 $complete_per += 30;
             }
             if(isset($user_detail['fb_link'])){
-                $complete_per += 30;
+                $complete_per += 15;
+            }
+            if(isset($user_detail['user_location'])){
+                $complete_per += 15;
             }
         ?>
         <div class="profileProgressBar">
