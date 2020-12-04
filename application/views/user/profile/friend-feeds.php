@@ -1711,6 +1711,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
             
             $document_detail = $this->db->get_where('document_master', array('id' => $value['reference_id']))->row_array();
             $chk_if_shared = $this->db->get_where('share_master', array('reference_id' => $value['reference_id'], 'reference' => 'document', 'peer_id' => $user_id, 'status' => 1))->row_array();
+            $chk_view = 0;
             if(($document_detail['privacy'] == 1) || !empty($chk_if_shared)){
                 $chk_view = 1;
             }
@@ -2600,8 +2601,26 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
 ?>
 
 <?php if($loadMore == 1) { ?>
-    <div class="loadMoreWrapper loadmore" id="loadmore_<?= $nextOffset; ?>">
-        <button type="button" onclick="loadMoreFeeds(<?= $nextOffset; ?>);"> Load More</button>
+    <?php if($ifTabs == 0) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmore_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreFeeds(<?= $nextOffset; ?>);"> Load More</button>
+        
+    <?php } else if($ifTabs == 1) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmorepost_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMorePosts(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 2) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmorequestion_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreQuestions(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 3) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmoredocument_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreDocuments(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 4) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmorestudyset_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreStudyset(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } else if($ifTabs == 5) { ?>
+        <div class="loadMoreWrapper loadmore" id="loadmorevent_<?= $nextOffset; ?>">
+            <button type="button" onclick="loadMoreEvent(<?= $nextOffset; ?>);"> Load More</button>
+    <?php } ?>
     </div>
 <?php } else { ?>
     <div class="loadMoreWrapper reached">

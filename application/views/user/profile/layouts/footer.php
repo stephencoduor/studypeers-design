@@ -42,20 +42,119 @@
         });
     });
 
-    function loadMoreFeeds(count) {
+    function loadMoreFeeds(count) { 
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
         $.ajax({
-            url: '<?php echo base_url(); ?>Profile/getMyFeeds',
+            url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
             type: 'post',
             data: {
-                "count": count
+                "count": count, "friend_id": friend_id
             },
             success: function(result) {
+                console.log(result);
                 $('#loadmore_' + count).hide(1000);
                 $('#timeline-feeds').append(result);
                 $('.commentBoxWrap').hide();
             }
         });
     }
+
+    $(document).on("click", ".loadPosts", function(){
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getUserPosts',
+            type: 'post',
+            data: {
+                "count": 0, "friend_id": friend_id
+            },
+            success: function(result) {
+
+                $('#timeline-post-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMorePosts(count) {
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getUserPosts',
+            type: 'post',
+            data: {
+                "count": count, "friend_id": friend_id
+            },
+            success: function(result) {
+                $('#loadmorepost_' + count).hide(1000);
+                $('#timeline-post-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+
+    $(document).on("click", ".loadQuestions", function(){
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getUserQuestions',
+            type: 'post',
+            data: {
+                "count": 0, "friend_id": friend_id
+            },
+            success: function(result) {
+
+                $('#timeline-questions-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreQuestions(count) {
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getUserQuestions',
+            type: 'post',
+            data: {
+                "count": count, "friend_id": friend_id
+            },
+            success: function(result) {
+                $('#loadmorequestion_' + count).hide(1000);
+                $('#timeline-questions-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+
+    $(document).on("click", ".loadDocuments", function(){
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getUserDocuments',
+            type: 'post',
+            data: {
+                "count": 0, "friend_id": friend_id
+            },
+            success: function(result) {
+
+                $('#timeline-documents-feeds').html(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    });
+
+    function loadMoreDocuments(count) {
+        var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getUserDocuments',
+            type: 'post',
+            data: {
+                "count": count, "friend_id": friend_id
+            },
+            success: function(result) {
+                $('#loadmoredocument_' + count).hide(1000);
+                $('#timeline-documents-feeds').append(result);
+                $('.commentBoxWrap').hide();
+            }
+        });
+    }
+
 </script>
 <?php } else { ?>
 <script>

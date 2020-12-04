@@ -21,6 +21,12 @@
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 <script>
+    $('#multiple-select').selectator({
+        showAllOptionsOnFocus: true,
+        searchFields: 'value text subtitle right'
+    });
+</script>
+<script>
 	$('.storyRoom').slick({
 		infinite: false,
 		slidesToShow: 5.5,

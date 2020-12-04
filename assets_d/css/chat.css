@@ -286,10 +286,10 @@ div.time {
   position: absolute;
 }
 .imoji {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  margin-right: 5px;
+  margin-right: 2px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -300,10 +300,16 @@ div.time {
 }
 .chat-input-wrap {
   position: relative;
+  display: flex;
+  align-items: center;
+  
+}
+.text-area-wrap{
+  width:calc(100% - 130px);
 }
 .file-upload {
-  width: 36px;
-  height: 36px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -388,6 +394,7 @@ div.time {
   text-align: left;
 }
 .chat-msg p {
+  word-break: break-all;
   margin-bottom: 5px;
 }
 .message-received {
@@ -442,7 +449,7 @@ div.time {
   display: block;
 }
 .chat-wrapper.small {
-  width: 340px;
+  width: 360px;
   height: 50%;
   overflow-y: auto;
 }
@@ -543,7 +550,7 @@ div.time {
   min-height: 48px !important;
   padding-left: 20px !important;
   width: 100% !important;
-  border-radius: 100px !important;
+  border-radius: 24px !important;
 }
 .start-conversation {
   padding: 0 15px;
@@ -831,4 +838,42 @@ a.done-link.show {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.chat-input-wrap textarea.form-control{
+  min-height:48px;
+}
+
+.media-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in;
+}
+.media-icon:hover {
+  background-color: #f0f2f5;
+}
+
+.send-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in;
+  background-color: transparent;
+  outline:none;
+  border:none;
+}
+.send-btn:hover {
+  background-color: #f0f2f5;
+}
+#groupMember .modal-dialog {
+  width: 380px;
 }

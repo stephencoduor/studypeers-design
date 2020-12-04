@@ -147,16 +147,16 @@
                     <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Group Members</h4>
                 </div>
                 <select id="multiple-select" name="select2" multiple class="form-control">
-					<option value="1">Lorem ipsum 1</option>
-					<option value="2">Lorem ipsum 2</option>
-					<option value="3">Lorem ipsum 3</option>
-					<option value="4">Lorem ipsum 4</option>
-					<option value="5">Lorem ipsum 5</option>
-					<option value="6">Lorem ipsum 6</option>
-					<option value="7">Lorem ipsum 7</option>
-					<option value="8">Lorem ipsum 8</option>
-					<option value="9">Lorem ipsum 9</option>
-					<option value="10">Lorem ipsum 10</option>
+                    <option value="1" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 1</option>
+					<option value="2" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 2</option>
+					<option value="3" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 3</option>
+					<option value="4" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 4</option>
+					<option value="5" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 5</option>
+					<option value="6" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 6</option>
+					<option value="7" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 7</option>
+					<option value="8" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 8</option>
+					<option value="9" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 9</option>
+					<option value="10" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 10</option>
                 </select>
                 <div class="settingWrapper">
                     <button type="button" class="event_action"> Save</button>

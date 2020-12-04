@@ -427,7 +427,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 </div>
                 <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/video-camera.svg" alt="Video Icon" /></a>
                 <a href="javascript:void(0)" class="hide-on-small" data-toggle="modal" data-target="#chat-setting-popup"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
-                <a href="javascript:void(0)" class="add-user"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
+                <a href="javascript:void(0)" class="add-user" data-toggle="modal" data-target="#groupMember"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
                 <div class="hide-on-big close-icon-wrap">
                     <a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/close.svg" alt="New Message Icon" /></a>
                 </div>
@@ -482,12 +482,18 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                     </ul>
                 </div>
                 <div class="chat-input-wrap">
-                    <input type="text" placeholder="Type your message here" id="send_message_input" class="form-control">
-
+                    <div class="text-area-wrap">
+                        <textarea placeholder="Type your message here" id="send_message_input" class="form-control"></textarea>
+                    </div>
                     <div class="chat-action">
-                        <i class="fa fa-paper-plane" id="send_button_chat" aria-hidden="true"></i>
+                        <button type="button" id="send_button_chat" class="send-btn">
+                            <i class="fa fa-paper-plane"  aria-hidden="true"></i>
+                        </button>
                         <a href="javascript:void(0)" class="imoji">
                             <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/emoji.svg" alt="Imozi Icon" />
+                        </a>
+                        <a href="javascript:void(0)" class="media-icon">
+                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Imozi Icon" />
                         </a>
                         <label class="file-upload"></label>
                     </div>
@@ -526,6 +532,32 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
       </div>
     </div>
   </div>
+  <div class="modal fade" id="groupMember" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="createHeader">
+                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Group Members</h4>
+                </div>
+                <select id="multiple-select" name="select2" multiple class="form-control">
+					<option value="1" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 1</option>
+					<option value="2" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 2</option>
+					<option value="3" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 3</option>
+					<option value="4" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 4</option>
+					<option value="5" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 5</option>
+					<option value="6" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 6</option>
+					<option value="7" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 7</option>
+					<option value="8" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 8</option>
+					<option value="9" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 9</option>
+					<option value="10" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 10</option>
+                </select>
+                <div class="settingWrapper">
+                    <button type="button" class="event_action"> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript">
     $(document).on('click', '.removePeerSugg', function() {
