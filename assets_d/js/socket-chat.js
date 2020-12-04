@@ -132,6 +132,12 @@ socket.on("receivemessage", function(msg) {
   var groupId = msg.group_id;
   var groupMemberIds = msg.group_members;
 
+  if (!$("#group_id_" + groupId).length) {
+    var html = formatTopMessageGroupListName(msg);
+    var currentList = $("#userList").html();
+    $("#userList").html(currentList + html);
+  }
+
   if ($("#group_id_" + groupId).hasClass("active")) {
     $("#current_group_id").val(groupId);
     $("#curren_group_members").val(JSON.stringify(groupMemberIds));
@@ -499,10 +505,10 @@ function formatTopMessageGroupListName(messageJson) {
     messageJson.time +
     "</div>" +
     '<div class="info-wrap">' +
+    '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
     messageJson.group_name +
     "<p>" +
     messageJson.message +
-    '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
     "</p>" +
     "</div></a></li>";
 

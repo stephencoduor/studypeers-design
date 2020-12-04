@@ -107,14 +107,15 @@ class ChatController extends CI_Controller
 
             #get chat user groups.
 
-
+            $sendMembersList = $this->ChatModel->getChatMembersList($users);
 
             $response = [
                 'code' => 200,
                 'message' => 'OK',
                 'data' => [
                     'groupId' => $getCreativeGroupId,
-                    'users' => $chatMembersList,
+                    'groupInfo' => $createGroup,
+                    'users' => $sendMembersList,
                 ]
             ];
         } catch (\Exception $e) {

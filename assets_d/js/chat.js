@@ -46,13 +46,15 @@ function createGroupHTML() {
 
 function formatTopMessageGroupListNameOnAdd(messageJson) {
   var html =
-    "<li class='message-top-header' data-groupId='" +
+    "<li class='message-top-header' id='group_id_" +
+    messageJson.group_id +
+    "'  data-groupId='" +
     messageJson.group_id +
     "' data-groupmembers='" +
     JSON.stringify(messageJson.group_members) +
     "' data-groupname='" +
     messageJson.group_name +
-    "' '>" +
+    "''>" +
     '<a href="javascript:void(0)">' +
     "<figure>" +
     '<i class="fa fa-users fa-3x" aria-hidden="true"></i>' +
@@ -61,6 +63,7 @@ function formatTopMessageGroupListNameOnAdd(messageJson) {
     messageJson.time +
     "</div>" +
     '<div class="info-wrap">' +
+    '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
     messageJson.group_name +
     "<p>" +
     messageJson.message +
@@ -86,15 +89,15 @@ var CHAT_GROUP_ADDITIONS = {
               groupMemberIds.push(item.id);
             });
           }
-          $("#group_name_id").html(groupName.join(" , "));
-          $("#curren_group_name_id").val(groupName.join(" , "));
+          $("#group_name_id").html(data.data.groupInfo.group_name);
+          $("#curren_group_name_id").val(data.data.groupInfo.group_name);
           $("#multiple").selectator("removeSelection");
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
 
           var messageJson = {
             group_id: data.data.groupId,
             group_members: groupMemberIds,
-            group_name: groupName.join(" , "),
+            group_name: data.data.groupInfo.group_name,
             send_profile_image: "",
             time: moment().format("h:mm"),
             message: ""
