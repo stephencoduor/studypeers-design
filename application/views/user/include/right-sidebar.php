@@ -467,12 +467,8 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                                     <div class="choose-imagefile-wrap">
                                         <div class="result">
                                             <div id="gal">
-                                                <ul class="gallery">
-                                                    <li class="uploadBtn uploadBtnRestImage add" id="append_image_after_upload">
-                                                        <img class="img" src="" />
-                                                        <input type="file" name="rest_image[]" class="rest_img" accept="image/*">
-                                                        <a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>
-                                                    </li>
+                                                <ul class="gallery" id="append_image_after_upload">
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -492,9 +488,10 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         </button>
 
                         <a href="javascript:void(0)" class="media-icon">
-                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Imozi Icon" />
+                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Imozi Icon" id="image_icon_selector" />
                         </a>
                         <label class="file-upload"></label>
+                        <input type="file" for="file-upload" class="rest_img" id="upload_second_image_chat" style="display:none;" accept="image/*">
                     </div>
                 </div>
             </div>

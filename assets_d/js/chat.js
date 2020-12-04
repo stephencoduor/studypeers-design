@@ -164,60 +164,10 @@ $("body").on("click", "#message_icon_id", function() {
 //--------------en of group chat create event-------------------------//
 
 $(document).ready(function() {
-  var count = 0;
-  document.addEventListener(
-    "change",
-    function(e) {
-      var ele = e.target;
-      if ($(e.target).is('input[type="file"]')) {
-        var files = e.target.files;
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          if (file.type.match("image")) {
-            var picreader = new FileReader();
-            picreader.addEventListener("load", function(event) {
-              var picture = event.target;
-              showPreview(picture.result, ele);
-            });
-            picreader.readAsDataURL(file);
-          }
-        }
-      } else {
-        console.log("not file");
-      }
-    },
-    true
-  );
-  var count = 1;
-  function showPreview(pic, ele) {
-    if (ele.length > 0) {
-      ele.previousElementSibling.src = pic;
-      $("#current_image_upload_src").val(pic);
-      ele.setAttribute("style", "display:none;");
-      ele.nextElementSibling.setAttribute("style", "display:block;");
-      ele.closest("li").classList.remove("add");
-      if ($(".uploadBtn").length < 1) {
-        $(".gallery").append(
-          ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
-        );
-        count = 1;
-      } else {
-        return false;
-      }
-    }
-  }
-
   $("body").on("click", ".removePic", function() {
     $(this)
       .parents(".uploadBtn")
       .remove();
-    if ($(".uploadBtn.add").length) {
-      return false;
-    } else {
-      $(".gallery").append(
-        ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
-      );
-    }
     $("#current_image_upload_src").val("");
   });
 });
@@ -585,27 +535,101 @@ function readURLImage(input) {
     reader.readAsDataURL(input.files[0]);
   }
 }
+var count = 0;
+
+function showPreviewChatImage(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    var ele = input;
+    reader.onload = function(e) {
+      ele.previousElementSibling.src = e.target.result;
+      $("#current_image_upload_src").val(e.target.result);
+      $("#append_image_after_upload").html(
+        ' <li class="uploadBtn uploadBtnRestImage add">' +
+          '<img class="img" src="' +
+          e.target.result +
+          '" />' +
+          '<a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>' +
+          "</li>"
+      );
+      e.target.result = "";
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
 $("#imageUpload").change(function() {
   readURLImage(this);
 });
 
-$(document).ready(function() {
-  $(".emojis-wysiwyg").emojioneArea({
-    inline: true,
-    hideSource: true,
-    events: {
-      // Enter key as submit button --> working
-      keyup: function(editor, event) {
-        if (
-          event.which == 13 &&
-          ($.trim(editor.text()).length > 0 || $.trim(editor.html()).length > 0)
-        ) {
-          $("#send_button_chat").click();
-          event.preventDefault();
-          event.stopPropagation();
-          editor.focus();
-        }
+$("body").on("change", "#upload_second_image_chat", function() {
+  showPreviewChatImage(this);
+});
+
+$("#image_icon_selector").click(function() {
+  $("#upload_second_image_chat").trigger("click");
+});
+
+function sendMessageToUser() {
+  var UserInfo = JSON.parse(userData);
+  var unreadMembers = [];
+  var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+  if (otherGroupMembers) {
+    otherGroupMembers.forEach(function(item, index) {
+      if (item != UserInfo.user_id) {
+        unreadMembers.push(item);
+      }
+    });
+  }
+
+  var currentGroupId = $("#current_group_id").val();
+
+  var message = {
+    to_user_id: 0,
+    to_user_name: "",
+    from_user_id: UserInfo.user_id,
+    from_user_name: UserInfo.first_name,
+    send_profile_image: UserInfo.profileImage,
+    is_read: "unread",
+    group_id: $("#current_group_id").val(),
+    group_name: $("#curren_group_name_id").val(),
+    group_image: $("#group_image_id_" + currentGroupId).attr("src"),
+    group_members: JSON.parse($("#curren_group_members").val()),
+    unread_members: unreadMembers,
+    read_members: [],
+    message: $(".emojionearea-editor").html(),
+    media_url: $("#current_image_upload_src").val(),
+    emoji: null,
+    time: moment().format("h:mm"),
+    created: new Date().toISOString()
+  };
+
+  socket.emit("sendmessage", JSON.stringify(message));
+
+  sendMessage(message, "online");
+
+  $(".emojionearea-editor").html("");
+  $("#send_message_input").val("");
+  $("#current_image_upload_src").val("");
+  $("#append_image_after_upload").html("");
+}
+
+$(".emojis-wysiwyg").emojioneArea({
+  inline: true,
+  hideSource: true,
+  resize: true,
+  events: {
+    // Enter key as submit button --> working
+    keyup: function(editor, event) {
+      if (
+        event.which == 13 &&
+        ($.trim(editor.text()).length > 0 || $.trim(editor.html()).length > 0)
+      ) {
+        sendMessageToUser();
+        event.preventDefault();
+        event.stopPropagation();
+        editor.focus();
       }
     }
-  });
+  }
 });

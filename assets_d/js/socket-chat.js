@@ -185,7 +185,7 @@ $("body").on("click", "#submit_new_group_member", function() {
 // send message stanza.
 
 $("body").on("click", "#send_button_chat", function(event) {
-  if ($("#send_message_input").val() == "") return false;
+  if ($.trim($(".emojionearea-editor").html()) == "") return false;
 
   var UserInfo = JSON.parse(userData);
   var unreadMembers = [];
@@ -221,15 +221,12 @@ $("body").on("click", "#send_button_chat", function(event) {
   };
 
   socket.emit("sendmessage", JSON.stringify(message));
-
   sendMessage(message, "online");
 
   $(".emojionearea-editor").html("");
+  $("#send_message_input").val("");
   $("#current_image_upload_src").val("");
-  $("#append_image_after_upload").html(
-    '<li class="uploadBtn add"><img class="img" src>' +
-      '<input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
-  );
+  $("#append_image_after_upload").html("");
 });
 
 $("body").on("click", "#submit_button_chat_setting", function() {
