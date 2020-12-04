@@ -1,4 +1,4 @@
-var socket = io("https://studypeers.dev:3000/", {
+var socket = io("https://localhost:3000/", {
   "sync disconnect on unload": true
 });
 var userData = $("#hidden_user_info").val();
@@ -55,9 +55,138 @@ socket.on("receivetyping", data => {
   }
 });
 
+$("body").on("click", "#open_add_new_group_memeber", function() {
+  $("#groupMember").modal("show");
+  var groupId = $("#current_group_id").val();
+  $("#hidde_add_group_id").val(groupId);
+  $("#multiple-select").selectator({
+    showAllOptionsOnFocus: true,
+    searchFields: "value text subtitle right",
+    minSearchLength: 1,
+    load: function(search, callback) {
+      if (search.length < this.minSearchLength) return callback();
+      $.ajax({
+        url: "find-my-peers",
+        data: { search: search },
+        type: "GET",
+        dataType: "json",
+        success: function(data) {
+          callback(data);
+        },
+        error: function() {
+          callback();
+        }
+      });
+    },
+    render: {
+      selected_item: function(_item, escape) {
+        var html = "";
+        if (typeof _item.left !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'selected_item_left"><img src="' +
+            escape(_item.left) +
+            '"></div>';
+        if (typeof _item.right !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'selected_item_right">' +
+            escape(_item.right) +
+            "</div>";
+        html +=
+          '<div class="' +
+          "selectator_" +
+          'selected_item_title">' +
+          (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+          "</div>";
+        if (typeof _item.subtitle !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'selected_item_subtitle">' +
+            escape(_item.subtitle) +
+            "</div>";
+        html +=
+          '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
+
+        // check if the
+        $(".done-link").addClass("show");
+        return html;
+      },
+      option: function(_item, escape) {
+        console.log("asdad");
+        var html = "";
+        if (typeof _item.left !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_left"><img src="' +
+            escape(_item.left) +
+            '"></div>';
+        if (typeof _item.right !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_right">' +
+            escape(_item.right) +
+            "</div>";
+        html +=
+          '<div class="' +
+          "selectator_" +
+          'option_title">' +
+          (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+          "</div>";
+        if (typeof _item.subtitle !== "undefined")
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_subtitle">' +
+            escape(_item.subtitle) +
+            "</div>";
+
+        if ($(".selectator_selected_items").html() == "") {
+          $(".done-link").removeClass("show");
+        }
+        return html;
+      }
+    }
+  });
+});
+
+$("body").on("click", "#submit_new_group_member", function() {
+  var formEle = $("#add_new_group_member_form");
+  $.ajax({
+    url: formEle.attr("action"),
+    data: formEle.serializeArray(),
+    success: function(data) {
+      if (parseInt(data.code) == 200) {
+        var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+        data.data.users.forEach(function(item, index) {
+          var readCurrentIndex = otherGroupMembers.indexOf(item.id);
+          if (readCurrentIndex == -1) {
+            otherGroupMembers.push(item.id);
+          }
+        });
+        $("#curren_group_members").val(JSON.stringify(otherGroupMembers));
+      }
+    },
+    error: function() {
+      alert("Something went wrong. Please try again");
+    },
+    complete: function() {
+      alert("Group members added");
+      $("#groupMember").modal("hide");
+    }
+  });
+});
+
 // send message stanza.
 
 $("body").on("click", "#send_button_chat", function(event) {
+  if ($("#send_message_input").val() == "") return false;
+
   var UserInfo = JSON.parse(userData);
   var unreadMembers = [];
   var otherGroupMembers = JSON.parse($("#curren_group_members").val());
@@ -69,6 +198,8 @@ $("body").on("click", "#send_button_chat", function(event) {
     });
   }
 
+  var currentGroupId = $("#current_group_id").val();
+
   var message = {
     to_user_id: 0,
     to_user_name: "",
@@ -78,10 +209,11 @@ $("body").on("click", "#send_button_chat", function(event) {
     is_read: "unread",
     group_id: $("#current_group_id").val(),
     group_name: $("#curren_group_name_id").val(),
+    group_image: $("#group_image_id_" + currentGroupId).attr("src"),
     group_members: JSON.parse($("#curren_group_members").val()),
     unread_members: unreadMembers,
     read_members: [],
-    message: $("#send_message_input").val(),
+    message: $(".emojionearea-editor").html(),
     media_url: $("#current_image_upload_src").val(),
     emoji: null,
     time: moment().format("h:mm"),
@@ -92,14 +224,26 @@ $("body").on("click", "#send_button_chat", function(event) {
 
   sendMessage(message, "online");
 
-  $("#send_message_input").val("");
+  $(".emojionearea-editor").html("");
   $("#current_image_upload_src").val("");
   $("#append_image_after_upload").html(
     '<li class="uploadBtn add"><img class="img" src>' +
       '<input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
   );
+});
 
-  return false;
+$("body").on("click", "#submit_button_chat_setting", function() {
+  var updateSetting = {
+    group_id: $("#current_group_id").val(),
+    group_name: $("#group_name_setting_id").val(),
+    group_image: $("#current_group_profile_image").val()
+  };
+  socket.emit("updategroupsetting", JSON.stringify(updateSetting));
+});
+
+socket.on("groupsettingupdated", data => {
+  console.log("group settting updated");
+  SOCKET_CHAT._AJX_USER_CHAT_GROUP();
 });
 
 // set user status as online or offline.
@@ -131,6 +275,12 @@ socket.on("receivemessage", function(msg) {
   var userId = userInfo.user_id;
   var groupId = msg.group_id;
   var groupMemberIds = msg.group_members;
+
+  if (!$("#group_id_" + groupId).length) {
+    var html = formatTopMessageGroupListName(msg);
+    var currentList = $("#userList").html();
+    $("#userList").html(currentList + html);
+  }
 
   if ($("#group_id_" + groupId).hasClass("active")) {
     $("#current_group_id").val(groupId);
@@ -246,6 +396,7 @@ socket.on("loadinitgroupmessage", data => {
       groupListMessage += formatTopMessageGroupListName(item);
     });
   }
+  $(".close").trigger("click");
   $("#userList").html(groupListMessage);
 });
 
@@ -335,6 +486,8 @@ $("body").on("click", ".message-top-header", function() {
   $("#curren_group_members").val(groupMemberIds);
   $("#curren_group_name_id").val(groupName);
   $("#group_name_id").html(groupName);
+  var groupImageData = $("#group_image_id_" + groupId).attr("src");
+  $("#common_image_group_preview").attr("src", groupImageData);
   var findMessages = {
     groupId: groupId
   };
@@ -481,6 +634,20 @@ function formatTopMessageHeader(messageJson) {
 }
 
 function formatTopMessageGroupListName(messageJson) {
+  var currentProfile =
+    '<img id="group_image_id_' +
+    messageJson.group_id +
+    '" src="../assets_d/images/default-group.png">';
+
+  if (messageJson.group_image) {
+    currentProfile =
+      '<img id="group_image_id_' +
+      messageJson.group_id +
+      '" src="' +
+      messageJson.group_image +
+      '">';
+  }
+
   var html =
     "<li class='message-top-header' id='group_id_" +
     messageJson.group_id +
@@ -493,16 +660,16 @@ function formatTopMessageGroupListName(messageJson) {
     "' '>" +
     '<a href="javascript:void(0)">' +
     "<figure>" +
-    '<i class="fa fa-users fa-3x" aria-hidden="true"></i>' +
+    currentProfile +
     "</figure>" +
     '<div class="time">' +
     messageJson.time +
     "</div>" +
     '<div class="info-wrap">' +
+    '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
     messageJson.group_name +
     "<p>" +
     messageJson.message +
-    '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
     "</p>" +
     "</div></a></li>";
 

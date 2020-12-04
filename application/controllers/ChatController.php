@@ -107,14 +107,15 @@ class ChatController extends CI_Controller
 
             #get chat user groups.
 
-
+            $sendMembersList = $this->ChatModel->getChatMembersList($users);
 
             $response = [
                 'code' => 200,
                 'message' => 'OK',
                 'data' => [
                     'groupId' => $getCreativeGroupId,
-                    'users' => $chatMembersList,
+                    'groupInfo' => $createGroup,
+                    'users' => $sendMembersList,
                 ]
             ];
         } catch (\Exception $e) {
@@ -203,5 +204,59 @@ class ChatController extends CI_Controller
             ->set_content_type('application/json')
             ->set_status_header($response['code'])
             ->set_output(json_encode($response, JSON_NUMERIC_CHECK));
+    }
+
+    /**
+     * addNewGroupMember
+     * @param : getArra
+     */
+
+    public function addNewGroupMember()
+    {
+
+        try {
+            $users = $this->input->get('users');
+            $groupId = $this->input->get('group_id');
+
+            if (!is_array($users)) {
+                throw new Exception("Error processing request", 422);
+            }
+
+            #create new user group.
+
+            $createUsersInGroup = [];
+
+            foreach ($users as $key => $val) {
+
+                $createUsersInGroup[$key]['group_id'] = $groupId;
+                $createUsersInGroup[$key]['peer_id'] = $val;
+            }
+
+            $this->ChatModel->createUserInGroup($createUsersInGroup);
+
+            #get chat user groups.
+
+            $sendMembersList = $this->ChatModel->getChatMembersList($users);
+
+            $response = [
+                'code' => 200,
+                'message' => 'OK',
+                'data' => [
+                    'groupId' => $groupId,
+                    'users' => $sendMembersList,
+                ]
+            ];
+        } catch (\Exception $e) {
+            $response = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($response['code'])
+            ->set_output(json_encode($response));
     }
 }
