@@ -1,36 +1,10 @@
-var socket = io("https://studypeers.dev:3000/", {
+var socket = io("https://localhost:3000/", {
   "sync disconnect on unload": true
 });
 var userData = $("#hidden_user_info").val();
 var chatAppendElementSmall = $("#append_chat_records");
 var clearTimerId;
 var latestMessage = 0;
-
-var input = document.getElementById("send_message_input");
-
-// Execute a function when the user releases a key on the keyboard
-input.addEventListener("keyup", function(event) {
-  // Number 13 is the "Enter" key on the keyboard
-  var UserInfo = JSON.parse(userData);
-
-  socket.emit(
-    "usertyping",
-    JSON.stringify({
-      user: UserInfo,
-      currentGroup: $("#current_group_id").val()
-    })
-  );
-  if (event.keyCode === 13) {
-    // Cancel the default action, if needed
-    event.preventDefault();
-    // Trigger the button element with a click
-    $("#user_typing_id").text("");
-
-    if (input.value != "") {
-      document.getElementById("send_button_chat").click();
-    }
-  }
-});
 
 setInterval(function() {
   //clear user is typing message
@@ -293,7 +267,7 @@ socket.on("receivemessage", function(msg) {
     }
 
     const readIndex = readMembers.indexOf(userId);
-    if (readIndex > -1) {
+    if (readIndex == -1) {
       readMembers.splice(readIndex, 1);
     }
     socket.emit(
@@ -334,7 +308,7 @@ socket.on("receivemessage", function(msg) {
     }
 
     const readIndex = readMembers.indexOf(userId);
-    if (readIndex > -1) {
+    if (readIndex == -1) {
       readMembers.splice(readIndex, 1);
     }
     socket.emit(
@@ -348,6 +322,7 @@ socket.on("receivemessage", function(msg) {
   }
 
   if ($(".chat-wrapper").hasClass("hide-chat")) {
+    console.log("inner 1--->");
     $("#group_id_" + groupId).addClass("active");
     $("#current_group_id").val(groupId);
     $("#curren_group_members").val(JSON.stringify(groupMemberIds));
@@ -358,22 +333,27 @@ socket.on("receivemessage", function(msg) {
       "isonline",
       JSON.stringify({ user_id: msg.from_user_id, message: msg })
     );
+    socket.emit("getgroupmessages", JSON.stringify({ groupId: groupId }));
     createGroupHTML();
   }
 
-  if ($(".chat-left").hasClass("hide")) {
-    $("#group_id_" + groupId).addClass("active");
-    $("#current_group_id").val(groupId);
-    $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-    $("#curren_group_name_id").val(msg.group_name);
-    $("#group_name_id").text(msg.group_name);
-    $(".open-start-conversation").trigger("click");
-    socket.emit(
-      "isonline",
-      JSON.stringify({ user_id: msg.from_user_id, message: msg })
-    );
-    createGroupHTML();
-  }
+  // if (
+  //   $(".chat-left").hasClass("hide") &&
+  //   !$(".chat-wrapper").hasClass("small")
+  // ) {
+  //   console.log("inner 2--->");
+  //   $("#group_id_" + groupId).addClass("active");
+  //   $("#current_group_id").val(groupId);
+  //   $("#curren_group_members").val(JSON.stringify(groupMemberIds));
+  //   $("#curren_group_name_id").val(msg.group_name);
+  //   $("#group_name_id").text(msg.group_name);
+  //   $(".open-start-conversation").trigger("click");
+  //   socket.emit(
+  //     "isonline",
+  //     JSON.stringify({ user_id: msg.from_user_id, message: msg })
+  //   );
+  //   createGroupHTML();
+  // }
 
   //  receivingMessage(msg);
 });
@@ -418,7 +398,7 @@ socket.on("showinitmessage", data => {
     data.forEach(function(item, index) {
       messageContent += formatTopMessageHeader(item);
     });
-    if (!latestMessage) $("#myUL").html(messageContent);
+    $("#myUL").html(messageContent);
   }
 });
 
@@ -496,7 +476,12 @@ $("body").on("click", ".message-top-header", function() {
   $(this)
     .find(".badge")
     .attr("data-batch", 0);
-  $(this).toggleClass("active");
+  if ($("#group_id_" + groupId).length > 0) {
+    $("#group_id_" + groupId)
+      .removeClass("active")
+      .addClass("active");
+  }
+
   socket.emit("getgroupmessages", JSON.stringify(findMessages));
 });
 
@@ -542,7 +527,7 @@ function receivingMessage(messageJson, status) {
   }
 
   const readIndex = readMembers.indexOf(userId);
-  if (readIndex > -1) {
+  if (readIndex == -1) {
     readMembers.splice(readIndex, 1);
   }
 
@@ -618,7 +603,7 @@ function formatTopMessageHeader(messageJson) {
     '" alt="">' +
     "</figure>" +
     '<div class="time">' +
-    messageJson.time +
+    moment(messageJson.created).fromNow() +
     "</div>" +
     '<div class="info-wrap">' +
     messageJson.from_user_name +
@@ -748,7 +733,7 @@ function receivingInitialMessage(messageJson, status) {
   }
 
   const readIndex = readMembers.indexOf(userId);
-  if (readIndex > -1) {
+  if (readIndex == -1) {
     readMembers.splice(readIndex, 1);
   }
 

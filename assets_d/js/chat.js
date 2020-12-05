@@ -190,6 +190,9 @@ var CHAT_GROUP_ADDITIONS = {
           var html = formatTopMessageGroupListNameOnAdd(messageJson);
           var currentList = $("#userList").html();
           $("#userList").html(html + currentList);
+          $("#append_chat_records").html("");
+          $(".message-top-header").removeClass("active");
+          $("#group_id_" + messageJson.group_id).addClass("active");
         }
         createGroupHTML();
       },
@@ -228,6 +231,7 @@ $(document).on("click", ".done-link", function() {
 
 $("body").on("click", "#message_icon_id", function() {
   var UserInfo = JSON.parse(userData);
+  $("#chat_message_count").text(0);
   socket.emit("getmyreadmessage", JSON.stringify({ user: UserInfo }));
 });
 
@@ -268,7 +272,7 @@ $(document).ready(function() {
       .show();
   });
 
-  $(document).on("click", ".open-chat", function() {
+  $(document).on("click", ".open-chat,.see-all", function() {
     $(".chat-wrapper").removeClass("hide-chat");
   });
 
@@ -622,7 +626,7 @@ function showPreviewChatImage(input) {
           '<a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>' +
           "</li>"
       );
-      e.target.result = "";
+      $("#upload_second_image_chat").val("");
     };
     reader.readAsDataURL(input.files[0]);
   }
@@ -751,12 +755,25 @@ $(".emojis-wysiwyg").emojioneArea({
     keyup: function(editor, event) {
       if (
         event.which == 13 &&
-        ($.trim(editor.text()).length > 0 || $.trim(editor.html()).length > 0)
+        ($.trim(editor.text()).length > 0 ||
+          $.trim(editor.html()).length > 0 ||
+          $("#current_image_upload_src").val())
       ) {
         sendMessageToUser();
         event.preventDefault();
         event.stopPropagation();
         editor.focus();
+      } else {
+        // Number 13 is the "Enter" key on the keyboard
+        var UserInfo = JSON.parse(userData);
+
+        socket.emit(
+          "usertyping",
+          JSON.stringify({
+            user: UserInfo,
+            currentGroup: $("#current_group_id").val()
+          })
+        );
       }
     }
   }
