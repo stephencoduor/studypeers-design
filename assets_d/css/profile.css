@@ -3573,6 +3573,9 @@ figcaption a {
     padding:0 10px;
     position: relative;
 }
+.custom-tabs li a img{
+    width:20px;
+}
 .custom-tabs a.active:before{
     position: absolute;
     content:"";
@@ -3645,10 +3648,10 @@ figcaption a {
 .small-icon img{
     width:15px;
 }
-.all-wrap,.likes,.claps{
+.all-wrap,.likes,.claps,.support-wrap,.curious-wrap,.insight-wrap,.love-wrap{
     display:none;
 }
-.all-wrap,.likes, .claps{
+.all-wrap,.likes,.claps,.support-wrap,.curious-wrap,.insight-wrap,.love-wrap{
     height: 60vh;
     overflow-y: auto;
 }
