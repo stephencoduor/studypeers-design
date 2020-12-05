@@ -1326,19 +1326,19 @@
                 "reaction_id": reaction_id, "reference_id": reference_id, "reference": reference
             },
             success: function(result) {
-                $('#'+reference+'_total_likes_'+reference_id).html(result);
+                $('.'+reference+'_total_likes_'+reference_id).html(result);
                 if(reaction_id == 1) {
-                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Like</span>');
+                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Like</span>');
                 } else if(reaction_id == 2) {
-                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Support</span>');
+                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Support</span>');
                 } else if(reaction_id == 3) {
-                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Celebrate</span>');
+                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Celebrate</span>');
                 } else if(reaction_id == 4) {
-                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Insightful</span>');
+                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Insightful</span>');
                 } else if(reaction_id == 5) {
-                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Curious</span>');
+                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Curious</span>');
                 } else if(reaction_id == 6) {
-                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Love</span>');
+                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Love</span>');
                 }
             }
         });
