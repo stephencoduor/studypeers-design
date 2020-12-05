@@ -3650,6 +3650,7 @@ figcaption a {
 .all-wrap,.likes, .claps{
     height: 60vh;
     overflow-y: auto;
+}
 .tooltip {
   position: relative;
   display: inline-block;
