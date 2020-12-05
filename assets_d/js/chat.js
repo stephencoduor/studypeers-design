@@ -1,3 +1,73 @@
+var Upload = function(file) {
+  this.file = file;
+};
+
+Upload.prototype.getType = function() {
+  return this.file.type;
+};
+Upload.prototype.getSize = function() {
+  return this.file.size;
+};
+Upload.prototype.getName = function() {
+  return this.file.name;
+};
+Upload.prototype.doUpload = function() {
+  var that = this;
+  var formData = new FormData();
+
+  // add assoc key values, this will be posts values
+  formData.append("file", this.file, this.getName());
+  formData.append("upload_file", true);
+
+  $.ajax({
+    type: "POST",
+    url: $("#submit_upload_document_form").attr("action"),
+    xhr: function() {
+      var myXhr = $.ajaxSettings.xhr();
+      if (myXhr.upload) {
+        myXhr.upload.addEventListener("progress", that.progressHandling, false);
+      }
+      return myXhr;
+    },
+    success: function(data) {
+      if (data.status) {
+        var url = data.url;
+        sendDocumentMessage(url);
+      } else {
+        alert(data.data);
+      }
+      var progress_bar_id = "#progress-wrp";
+      $(progress_bar_id + " .status").text("");
+    },
+    error: function(error) {
+      // handle error
+    },
+    async: true,
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    timeout: 60000
+  });
+};
+
+Upload.prototype.progressHandling = function(event) {
+  var percent = 0;
+  var position = event.loaded || event.position;
+  var total = event.total;
+  var progress_bar_id = "#progress-wrp";
+  if (event.lengthComputable) {
+    percent = Math.ceil((position / total) * 100);
+  }
+  // update progressbars classes so it fits your code
+  $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
+  $(progress_bar_id + " .status").text(percent + "%");
+};
+
+//Change id to your id
+
+//------------------------------------file upload --------------------------------//
+
 function myFunction() {
   var input = $("#myInput").val();
   if (input == "") {
@@ -570,6 +640,20 @@ $("#image_icon_selector").click(function() {
   $("#upload_second_image_chat").trigger("click");
 });
 
+$("#any_document_upload").click(function() {
+  $("#upload_first_image_document").trigger("click");
+});
+
+$("body").on("change", "#upload_first_image_document", function() {
+  var file = $(this)[0].files[0];
+  var upload = new Upload(file);
+
+  // maby check size or type here with upload.getSize() and upload.getType()
+
+  // execute upload
+  upload.doUpload();
+});
+
 function sendMessageToUser() {
   var UserInfo = JSON.parse(userData);
   var unreadMembers = [];
@@ -598,6 +682,50 @@ function sendMessageToUser() {
     unread_members: unreadMembers,
     read_members: [],
     message: $(".emojionearea-editor").html(),
+    media_url: $("#current_image_upload_src").val(),
+    emoji: null,
+    time: moment().format("h:mm"),
+    created: new Date().toISOString()
+  };
+
+  socket.emit("sendmessage", JSON.stringify(message));
+
+  sendMessage(message, "online");
+
+  $(".emojionearea-editor").html("");
+  $("#send_message_input").val("");
+  $("#current_image_upload_src").val("");
+  $("#append_image_after_upload").html("");
+}
+
+function sendDocumentMessage(url) {
+  var UserInfo = JSON.parse(userData);
+  var unreadMembers = [];
+  var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+  if (otherGroupMembers) {
+    otherGroupMembers.forEach(function(item, index) {
+      if (item != UserInfo.user_id) {
+        unreadMembers.push(item);
+      }
+    });
+  }
+
+  var currentGroupId = $("#current_group_id").val();
+
+  var message = {
+    to_user_id: 0,
+    to_user_name: "",
+    from_user_id: UserInfo.user_id,
+    from_user_name: UserInfo.first_name,
+    send_profile_image: UserInfo.profileImage,
+    is_read: "unread",
+    group_id: $("#current_group_id").val(),
+    group_name: $("#curren_group_name_id").val(),
+    group_image: $("#group_image_id_" + currentGroupId).attr("src"),
+    group_members: JSON.parse($("#curren_group_members").val()),
+    unread_members: unreadMembers,
+    read_members: [],
+    message: url,
     media_url: $("#current_image_upload_src").val(),
     emoji: null,
     time: moment().format("h:mm"),
