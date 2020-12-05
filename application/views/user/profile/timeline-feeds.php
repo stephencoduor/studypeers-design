@@ -326,7 +326,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
 
                             <div class="socialStatus">
                                 <div class="leftStatus">
-                                    <a id="Post_total_likes_<?php echo $value['reference_id']; ?>">
+                                    <a class="Post_total_likes_<?php echo $value['reference_id']; ?>">
                                         <?php echo $reaction_html; ?>
                                     </a>
                                 </div>
@@ -353,8 +353,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             </div>
                             <div class="socialAction">
                                 <ul>
-                                    <li class="likeMenu" id="likeMenu<?php echo $value['reference_id']; ?>">
-                                        <a id="Post_likeMenu_<?php echo $value['reference_id']; ?>">
+                                    <li class="likeMenu">
+                                        <a class="Post_likeMenu_<?php echo $value['reference_id']; ?>">
                                             <?php if(empty($chk_user_reaction)) { ?>
                                                 <img
                                                     src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
@@ -903,9 +903,9 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 </div>
                                 <div class="socialStatus">
                                     <div class="leftStatus">
-                                        <a id="event_total_likes_<?php echo $value['reference_id']; ?>">
-                                        <?php echo $reaction_html; ?>
-                                    </a>
+                                        <a class="event_total_likes_<?php echo $value['reference_id']; ?>">
+                                            <?php echo $reaction_html; ?>
+                                        </a>
                                     </div>
                                     <div class="rightStatus">
                                         <ul>
@@ -927,7 +927,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 <div class="socialAction">
                                     <ul>
                                         <li class="likeMenu">
-                                            <a id="event_likeMenu_<?php echo $value['reference_id']; ?>">
+                                            <a class="event_likeMenu_<?php echo $value['reference_id']; ?>">
                                                 <?php if(empty($chk_user_reaction)) { ?>
                                                     <img
                                                         src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
@@ -1269,6 +1269,10 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
             $studyset_detail = $this->db->get_where('study_sets', array('study_set_id' => $value['reference_id']))->row_array();
             
             $chk_view = 1;
+
+            $reaction_html = getReactionByReference($value['reference_id'], 'studyset');
+
+            $chk_user_reaction = $this->db->get_where('reaction_master', array('user_id'=>$user_id, 'reference_id' => $value['reference_id'], 'reference' => 'studyset'))->row_array();
             
             
         ?>
@@ -1413,10 +1417,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         
                         <div class="socialStatus">
                             <div class="leftStatus">
-                                <a>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Like">
-                                    <span>24</span>
+                                <a class="studyset_total_likes_<?php echo $value['reference_id']; ?>">
+                                    <?php echo $reaction_html; ?>
                                 </a>
                             </div>
                             <div class="rightStatus">
@@ -1446,29 +1448,73 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         <div class="socialAction">
                             <ul>
                                 <li class="likeMenu">
-                                    <a>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/like-grey.svg" class="likepost" alt="Like">
-                                        <span>Like</span>
+                                    <a class="studyset_likeMenu_<?php echo $value['reference_id']; ?>">
+                                        <?php if(empty($chk_user_reaction)) { ?>
+                                            <img
+                                                src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
+                                                class="likepost" alt="Like">
+                                            <span>Like</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 1) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> 
+                                            <span style="color: #185aeb;">Like</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 2) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" class="likepost" alt="Like"><span style="color: #185aeb;">Support</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 3) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Celebrate</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 4) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" class="likepost" alt="Like"><span style="color: #185aeb;">Insightful</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 5) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" class="likepost" alt="Like"><span style="color: #185aeb;">Curious</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 6) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> 
+                                            <span style="color: #185aeb;">Love</span>
+                                        <?php } ?>
+                                            
                                     </a>
                                     <div class="hoverMenu">
                                         <ul>
-                                            <li class="likeOption">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="like">
+                                            
+                                            <li data-toggle="tooltip" title="Like" onclick="saveReaction('1', '<?php echo $value['reference_id']; ?>', 'studyset')" class="likeOption like_option_type"
+                                                id="1"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
+                                                    alt="like">
                                             </li>
-                                            <li class="supportMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="like">
-                                            </li>                                                                   
-                                            <li class="celebrateMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="like">
-                                            </li>                                                               
-                                            <li class="curiousMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="like">
-                                            </li>                                                               
-                                            <li class="insightMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="like">
-                                            </li>                                                               
-                                            <li class="loveMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="like">
+                                            <li data-toggle="tooltip" onclick="saveReaction('2', '<?php echo $value['reference_id']; ?>', 'studyset')" title="Support" class="supportMenu like_option_type"
+                                                id="2"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
+                                                    alt="like">
+                                            </li>
+                                            <li data-toggle="tooltip" onclick="saveReaction('3', '<?php echo $value['reference_id']; ?>', 'studyset')" title="Celebrate" class="celebrateMenu like_option_type"
+                                                id="3"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg"
+                                                    alt="like">
+                                            </li>
+                                            <li data-toggle="tooltip" onclick="saveReaction('4', '<?php echo $value['reference_id']; ?>', 'studyset')" title="Insightful" class="curiousMenu like_option_type"
+                                                id="4"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg"
+                                                    alt="like">
+                                            </li>
+                                            <li data-toggle="tooltip" onclick="saveReaction('5', '<?php echo $value['reference_id']; ?>', 'studyset')" title="Curious" class="insightMenu like_option_type"
+                                                id="5"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg"
+                                                    alt="like">
+                                            </li>
+                                            <li data-toggle="tooltip" onclick="saveReaction('6', '<?php echo $value['reference_id']; ?>', 'studyset')" title="Love" class="loveMenu like_option_type"
+                                                id="6"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg"
+                                                    alt="like">
                                             </li>
                                         </ul>
                                     </div>
@@ -1745,6 +1791,9 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
             $document_detail = $this->db->get_where('document_master', array('id' => $value['reference_id']))->row_array();
             $chk_view = 1;
             
+            $reaction_html = getReactionByReference($value['reference_id'], 'document');
+
+            $chk_user_reaction = $this->db->get_where('reaction_master', array('user_id'=>$user_id, 'reference_id' => $value['reference_id'], 'reference' => 'document'))->row_array();
             
         ?> 
             <div class="box-card message">
@@ -1880,10 +1929,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         </div>
                         <div class="socialStatus">
                             <div class="leftStatus">
-                                <a>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Like">
-                                    <span>24</span>
+                                <a class="document_total_likes_<?php echo $value['reference_id']; ?>">
+                                    <?php echo $reaction_html; ?>
                                 </a>
                             </div>
                             <div class="rightStatus">
@@ -1913,29 +1960,73 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         <div class="socialAction">
                             <ul>
                                 <li class="likeMenu">
-                                    <a>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/like-grey.svg" class="likepost" alt="Like">
-                                        <span>Like</span>
+                                    <a class="document_likeMenu_<?php echo $value['reference_id']; ?>">
+                                        <?php if(empty($chk_user_reaction)) { ?>
+                                            <img
+                                                src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
+                                                class="likepost" alt="Like">
+                                            <span>Like</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 1) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> 
+                                            <span style="color: #185aeb;">Like</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 2) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" class="likepost" alt="Like"><span style="color: #185aeb;">Support</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 3) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Celebrate</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 4) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" class="likepost" alt="Like"><span style="color: #185aeb;">Insightful</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 5) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" class="likepost" alt="Like"><span style="color: #185aeb;">Curious</span>
+                                        <?php } else if($chk_user_reaction['reaction_id'] == 6) { ?>
+                                            <img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> 
+                                            <span style="color: #185aeb;">Love</span>
+                                        <?php } ?>
+                                            
                                     </a>
                                     <div class="hoverMenu">
                                         <ul>
-                                            <li class="likeOption">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="like">
+                                            
+                                            <li data-toggle="tooltip" title="Like" onclick="saveReaction('1', '<?php echo $value['reference_id']; ?>', 'document')" class="likeOption like_option_type"
+                                                id="1"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
+                                                    alt="like">
                                             </li>
-                                            <li class="supportMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="like">
-                                            </li>                                                                   
-                                            <li class="celebrateMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="like">
-                                            </li>                                                               
-                                            <li class="curiousMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="like">
-                                            </li>                                                               
-                                            <li class="insightMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="like">
-                                            </li>                                                               
-                                            <li class="loveMenu">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="like">
+                                            <li data-toggle="tooltip" onclick="saveReaction('2', '<?php echo $value['reference_id']; ?>', 'document')" title="Support" class="supportMenu like_option_type"
+                                                id="2"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
+                                                    alt="like">
+                                            </li>
+                                            <li data-toggle="tooltip" onclick="saveReaction('3', '<?php echo $value['reference_id']; ?>', 'document')" title="Celebrate" class="celebrateMenu like_option_type"
+                                                id="3"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg"
+                                                    alt="like">
+                                            </li>
+                                            <li data-toggle="tooltip" onclick="saveReaction('4', '<?php echo $value['reference_id']; ?>', 'document')" title="Insightful" class="curiousMenu like_option_type"
+                                                id="4"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg"
+                                                    alt="like">
+                                            </li>
+                                            <li data-toggle="tooltip" onclick="saveReaction('5', '<?php echo $value['reference_id']; ?>', 'document')" title="Curious" class="insightMenu like_option_type"
+                                                id="5"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg"
+                                                    alt="like">
+                                            </li>
+                                            <li data-toggle="tooltip" onclick="saveReaction('6', '<?php echo $value['reference_id']; ?>', 'document')" title="Love" class="loveMenu like_option_type"
+                                                id="6"
+                                                data-id="<?php echo $key; ?>">
+                                                <img
+                                                    src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg"
+                                                    alt="like">
                                             </li>
                                         </ul>
                                     </div>
@@ -2208,6 +2299,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
             </div>
         <?php } else if($value['reference'] == 'question') { 
             $question_detail = $this->db->get_where('question_master', array('id' => $value['reference_id']))->row_array();
+
+
 
             $this->db->select('question_answer_master.*, user_info.nickname');
             $this->db->join('user_info','user_info.userID=question_answer_master.answered_by');
