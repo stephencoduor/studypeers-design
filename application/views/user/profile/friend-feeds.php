@@ -2640,86 +2640,19 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
         <div class="modal-body">
             <ul class="custom-tabs">
                 <li><a href="javascript:void(0)" class="all-links active">All</a></li>
-                <li><a href="javascript:void(0)" class="total-likes"><img src="<?php echo base_url(); ?>assets_d/images/like-icon.svg" alt="Image"/> 12</a></li>
-                <li><a href="javascript:void(0)" class="total-claps"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/> 15</a></li>
+                <li><a href="javascript:void(0)" class="total-likes"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/> 12</a></li>
+                <li><a href="javascript:void(0)" class="total-claps"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/> 15</a></li>
+                <li><a href="javascript:void(0)" class="support-links"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/> 12</a></li>
+                <li><a href="javascript:void(0)" class="curious-links"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/> 15</a></li>
+                <li><a href="javascript:void(0)" class="insight-links"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/> 15</a></li>
+                <li><a href="javascript:void(0)" class="love-links"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/> 15</a></li>
+                
             </ul>
             <div class="tab-content">
                 <div class="all-wrap show">
                     <div class="user-info-wrap">
                         <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-icon.svg" alt="Image"/></span>
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/></span>
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
                             </figure>
@@ -2733,79 +2666,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 <div class="likes">
                     <div class="user-info-wrap">
                         <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/></span>
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
                             </figure>
@@ -2819,7 +2680,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 <div class="claps">
                     <div class="user-info-wrap">
                         <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>  
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/></span>  
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
                             </figure>
@@ -2829,9 +2690,11 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             <p>Software Engineer || <span>Microsoft</span></p>
                         </div>
                     </div>
+                </div>
+                <div class="support-wrap">
                     <div class="user-info-wrap">
                         <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>  
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/></span>  
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
                             </figure>
@@ -2841,9 +2704,11 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             <p>Software Engineer || <span>Microsoft</span></p>
                         </div>
                     </div>
+                </div>
+                <div class="curious-wrap">
                     <div class="user-info-wrap">
                         <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>  
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/></span>  
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
                             </figure>
@@ -2853,9 +2718,11 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             <p>Software Engineer || <span>Microsoft</span></p>
                         </div>
                     </div>
+                </div>
+                <div class="insight-wrap">
                     <div class="user-info-wrap">
                         <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>  
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/></span>  
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
                             </figure>
@@ -2865,33 +2732,11 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             <p>Software Engineer || <span>Microsoft</span></p>
                         </div>
                     </div>
+                </div>
+                <div class="love-wrap">
                     <div class="user-info-wrap">
                         <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>  
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>  
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/clap-icon.svg" alt="Image"/></span>  
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/></span>  
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
                             </figure>
@@ -2913,20 +2758,44 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
         $(".all-links").click(function(){
             $(this).addClass("active");
             $(".all-wrap").addClass("show");
-            $(".likes,.claps").removeClass("show");
-            $(".total-likes,.total-claps").removeClass("active");
-        })
+            $(".likes,.claps,.support-wrap,.curious-wrap,.love-wrap,.insight-wrap").removeClass("show");
+            $(".total-likes,.total-claps,.support-links,.curious-links,.insight-links,.love-links").removeClass("active");
+        });
         $(".total-likes").click(function(){
             $(this).addClass("active");
             $(".likes").addClass("show");
-            $(".all-wrap,.claps").removeClass("show");
-            $(".all-links,.total-claps").removeClass("active");
-        })
+            $(".all-wrap,.claps,.support-wrap,.curious-wrap,.love-wrap,.insight-wrap").removeClass("show");
+            $(".all-links,.total-claps,.support-links,.curious-links,.insight-links,.love-links").removeClass("active");
+        });
         $(".total-claps").click(function(){
             $(this).addClass("active");
             $(".claps").addClass("show");
-            $(".all-wrap,.likes").removeClass("show");
-            $(".total-likes,.all-links").removeClass("active");
-        })
+            $(".all-wrap,.likes,.support-wrap,.curious-wrap,.love-wrap,.insight-wrap").removeClass("show");
+            $(".total-likes,.all-links,.support-links,.curious-links,.insight-links,.love-links").removeClass("active");
+        });
+        $(".support-links").click(function(){
+            $(this).addClass("active");
+            $(".support-wrap").addClass("show");
+            $(".all-wrap,.likes,.claps,.curious-wrap,.love-wrap,.insight-wrap").removeClass("show");
+            $(".all-links,.total-claps,.all-links,.curious-links,insight-links,.love-links").removeClass("active");
+        });
+        $(".curious-links").click(function(){
+            $(this).addClass("active");
+            $(".curious-wrap").addClass("show");
+            $(".all-wrap,.likes,.claps,.support-wrap,.insight-wrap,.love-wrap").removeClass("show");
+            $(".all-links,.total-claps,.all-links,.support-links,.insight-links,.love-links").removeClass("active");
+        });
+        $(".insight-links").click(function(){
+            $(this).addClass("active");
+            $(".insight-wrap").addClass("show");
+            $(".all-wrap,.likes,.claps,.support-wrap,.curious-wrap,.love-wrap").removeClass("show");
+            $(".all-links,.total-claps,.all-links,.support-links,.curious-links,.love-links").removeClass("active");
+        });
+        $(".love-links").click(function(){
+            $(this).addClass("active");
+            $(".love-wrap").addClass("show");
+            $(".all-wrap,.likes,.claps,.support-wrap,.curious-wrap,.insight-wrap").removeClass("show");
+            $(".all-links,.total-claps,.all-links,.support-links,.curious-links,.insight-links").removeClass("active");
+        });
     });
 </script>
