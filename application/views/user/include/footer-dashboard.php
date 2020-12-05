@@ -11,21 +11,17 @@
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/slick.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script> -->
+<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script> -->
 <!-- Starr Rating -->
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>
-<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script>
+<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script> -->
+<!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script> -->
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
+<script src="<?php echo base_url('assets_d/js/emojionearea-master/dist/emojionearea.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
-<script>
-    $('#multiple-select').selectator({
-        showAllOptionsOnFocus: true,
-        searchFields: 'value text subtitle right'
-    });
-</script>
+
 <script>
 	$('.storyRoom').slick({
 		infinite: false,
@@ -162,12 +158,12 @@
 		vid.play();
 		vid.setAttribute("controls", "controls");
 	});
-	$(document).ready(function(e) {
-		$("#em_0,#em_1").emojiPicker({
-			width: '320px',
-			height: '328px'
-		});
-	});
+	// $(document).ready(function(e) {
+	// 	$("#em_0,#em_1").emojiPicker({
+	// 		width: '320px',
+	// 		height: '328px'
+	// 	});
+	// });
 	$('.socialAction li.helpful a').on('click', function() {
 		let togglesrc = $(this).find('img');
 		let togglename = $(this).find('span');

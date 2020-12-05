@@ -68,10 +68,10 @@
   word-break: break-word;
   padding-right: 30px;
 }
-.chat-user-list li a .info-wrap .badge{
+.chat-user-list li a .info-wrap .badge {
   position: absolute;
-    right: 10px;
-    top: 40px;
+  right: 10px;
+  top: 40px;
 }
 .chat-user-list li {
   width: 100% !important;
@@ -94,7 +94,7 @@
   text-overflow: ellipsis;
   margin-bottom: 0;
   position: relative;
-  padding-right:15px;
+  padding-right: 15px;
 }
 .search-list .form-control {
   border-radius: 100px;
@@ -363,7 +363,7 @@ div.time {
   background: green;
 }
 .user-status.offline {
-  background: red;
+  background: #90848fe8;
 }
 .user-name strong {
   margin-right: 15px;
@@ -375,7 +375,7 @@ div.time {
 .user-info figure img {
   width: 100%;
   height: 100%;
-  border-radius:50%;
+  border-radius: 50%;
   object-fit: cover;
   object-position: center center;
 }
@@ -428,15 +428,15 @@ div.time {
 }
 .received-wrap .chat-msg figure {
   width: 100%;
-  height:240px;
+  height: 240px;
   padding-bottom: 10px;
   overflow: hidden;
 }
 .received-wrap .chat-msg figure img {
   width: 100%;
   height: 100%;
-  object-fit:cover;
-  object-position:center center;
+  object-fit: cover;
+  object-position: center center;
 }
 .sent-wrap .chat-msg figure {
   width: 100%;
@@ -767,9 +767,9 @@ a.done-link.show {
   opacity: 1;
 }
 
-.selectator_input{
-  width:100%!important;
-  height:40px!important;
+.selectator_input {
+  width: 100% !important;
+  height: 40px !important;
 }
 
 .avatar-upload {
@@ -799,14 +799,14 @@ a.done-link.show {
   font-weight: normal;
   transition: all 0.2s ease-in-out;
 }
-.modal-dialog.modal-sm.chat-setting{
-  width:320px;
+.modal-dialog.modal-sm.chat-setting {
+  width: 320px;
 }
-.modal-footer.text-center{
-  text-align:center;
+.modal-footer.text-center {
+  text-align: center;
 }
-.modal-dialog.modal-sm.chat-setting .event_action{
-  padding:10px 25px;
+.modal-dialog.modal-sm.chat-setting .event_action {
+  padding: 10px 25px;
 }
 .avatar-upload .avatar-edit input + label:hover {
   background: #f1f1f1;

@@ -1,3 +1,73 @@
+var Upload = function(file) {
+  this.file = file;
+};
+
+Upload.prototype.getType = function() {
+  return this.file.type;
+};
+Upload.prototype.getSize = function() {
+  return this.file.size;
+};
+Upload.prototype.getName = function() {
+  return this.file.name;
+};
+Upload.prototype.doUpload = function() {
+  var that = this;
+  var formData = new FormData();
+
+  // add assoc key values, this will be posts values
+  formData.append("file", this.file, this.getName());
+  formData.append("upload_file", true);
+
+  $.ajax({
+    type: "POST",
+    url: $("#submit_upload_document_form").attr("action"),
+    xhr: function() {
+      var myXhr = $.ajaxSettings.xhr();
+      if (myXhr.upload) {
+        myXhr.upload.addEventListener("progress", that.progressHandling, false);
+      }
+      return myXhr;
+    },
+    success: function(data) {
+      if (data.status) {
+        var url = data.url;
+        sendDocumentMessage(url);
+      } else {
+        alert(data.data);
+      }
+      var progress_bar_id = "#progress-wrp";
+      $(progress_bar_id + " .status").text("");
+    },
+    error: function(error) {
+      // handle error
+    },
+    async: true,
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    timeout: 60000
+  });
+};
+
+Upload.prototype.progressHandling = function(event) {
+  var percent = 0;
+  var position = event.loaded || event.position;
+  var total = event.total;
+  var progress_bar_id = "#progress-wrp";
+  if (event.lengthComputable) {
+    percent = Math.ceil((position / total) * 100);
+  }
+  // update progressbars classes so it fits your code
+  $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
+  $(progress_bar_id + " .status").text(percent + "%");
+};
+
+//Change id to your id
+
+//------------------------------------file upload --------------------------------//
+
 function myFunction() {
   var input = $("#myInput").val();
   if (input == "") {
@@ -45,22 +115,39 @@ function createGroupHTML() {
 }
 
 function formatTopMessageGroupListNameOnAdd(messageJson) {
+  var currentProfile =
+    '<img id="group_image_id_' +
+    messageJson.group_id +
+    '" src="../assets_d/images/default-group.png">';
+
+  if (messageJson.group_image) {
+    currentProfile =
+      '<img id="group_image_id_' +
+      messageJson.group_id +
+      '" src="' +
+      messageJson.group_image +
+      '">';
+  }
+
   var html =
-    "<li class='message-top-header' data-groupId='" +
+    "<li class='message-top-header' id='group_id_" +
+    messageJson.group_id +
+    "'  data-groupId='" +
     messageJson.group_id +
     "' data-groupmembers='" +
     JSON.stringify(messageJson.group_members) +
     "' data-groupname='" +
     messageJson.group_name +
-    "' '>" +
+    "''>" +
     '<a href="javascript:void(0)">' +
     "<figure>" +
-    '<i class="fa fa-users fa-3x" aria-hidden="true"></i>' +
+    currentProfile +
     "</figure>" +
     '<div class="time">' +
     messageJson.time +
     "</div>" +
     '<div class="info-wrap">' +
+    '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
     messageJson.group_name +
     "<p>" +
     messageJson.message +
@@ -86,15 +173,15 @@ var CHAT_GROUP_ADDITIONS = {
               groupMemberIds.push(item.id);
             });
           }
-          $("#group_name_id").html(groupName.join(" , "));
-          $("#curren_group_name_id").val(groupName.join(" , "));
+          $("#group_name_id").html(data.data.groupInfo.group_name);
+          $("#curren_group_name_id").val(data.data.groupInfo.group_name);
           $("#multiple").selectator("removeSelection");
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
 
           var messageJson = {
             group_id: data.data.groupId,
             group_members: groupMemberIds,
-            group_name: groupName.join(" , "),
+            group_name: data.data.groupInfo.group_name,
             send_profile_image: "",
             time: moment().format("h:mm"),
             message: ""
@@ -147,58 +234,10 @@ $("body").on("click", "#message_icon_id", function() {
 //--------------en of group chat create event-------------------------//
 
 $(document).ready(function() {
-  var count = 0;
-  document.addEventListener(
-    "change",
-    function(e) {
-      var ele = e.target;
-      if ($(e.target).is('input[type="file"]')) {
-        var files = e.target.files;
-        for (var i = 0; i < files.length; i++) {
-          var file = files[i];
-          if (file.type.match("image")) {
-            var picreader = new FileReader();
-            picreader.addEventListener("load", function(event) {
-              var picture = event.target;
-              showPreview(picture.result, ele);
-            });
-            picreader.readAsDataURL(file);
-          }
-        }
-      } else {
-        console.log("not file");
-      }
-    },
-    true
-  );
-  var count = 1;
-  function showPreview(pic, ele) {
-    ele.previousElementSibling.src = pic;
-    $("#current_image_upload_src").val(pic);
-    ele.setAttribute("style", "display:none;");
-    ele.nextElementSibling.setAttribute("style", "display:block;");
-    ele.closest("li").classList.remove("add");
-    if ($(".uploadBtn").length < 1) {
-      $(".gallery").append(
-        ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
-      );
-      count = 1;
-    } else {
-      return false;
-    }
-  }
-
   $("body").on("click", ".removePic", function() {
     $(this)
       .parents(".uploadBtn")
       .remove();
-    if ($(".uploadBtn.add").length) {
-      return false;
-    } else {
-      $(".gallery").append(
-        ' <li class="uploadBtn add"><img class="img" src><input type="file"><a href="javascript:void(0);" class="removePic"><i class="fa fa-times"></i></a></li>'
-      );
-    }
     $("#current_image_upload_src").val("");
   });
 });
@@ -549,4 +588,176 @@ $(document).ready(function() {
   $(document).on("click", ".chat-big", function() {
     $(".chat-left").removeClass("hide");
   });
+});
+
+function readURLImage(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    reader.onload = function(e) {
+      $("#current_group_profile_image").val(e.target.result);
+      $("#imagePreview").css(
+        "background-image",
+        "url(" + e.target.result + ")"
+      );
+      $("#imagePreview").hide();
+      $("#imagePreview").fadeIn(650);
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+var count = 0;
+
+function showPreviewChatImage(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    var ele = input;
+    reader.onload = function(e) {
+      ele.previousElementSibling.src = e.target.result;
+      $("#current_image_upload_src").val(e.target.result);
+      $("#append_image_after_upload").html(
+        ' <li class="uploadBtn uploadBtnRestImage add">' +
+          '<img class="img" src="' +
+          e.target.result +
+          '" />' +
+          '<a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>' +
+          "</li>"
+      );
+      e.target.result = "";
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+$("#imageUpload").change(function() {
+  readURLImage(this);
+});
+
+$("body").on("change", "#upload_second_image_chat", function() {
+  showPreviewChatImage(this);
+});
+
+$("#image_icon_selector").click(function() {
+  $("#upload_second_image_chat").trigger("click");
+});
+
+$("#any_document_upload").click(function() {
+  $("#upload_first_image_document").trigger("click");
+});
+
+$("body").on("change", "#upload_first_image_document", function() {
+  var file = $(this)[0].files[0];
+  var upload = new Upload(file);
+
+  // maby check size or type here with upload.getSize() and upload.getType()
+
+  // execute upload
+  upload.doUpload();
+});
+
+function sendMessageToUser() {
+  var UserInfo = JSON.parse(userData);
+  var unreadMembers = [];
+  var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+  if (otherGroupMembers) {
+    otherGroupMembers.forEach(function(item, index) {
+      if (item != UserInfo.user_id) {
+        unreadMembers.push(item);
+      }
+    });
+  }
+
+  var currentGroupId = $("#current_group_id").val();
+
+  var message = {
+    to_user_id: 0,
+    to_user_name: "",
+    from_user_id: UserInfo.user_id,
+    from_user_name: UserInfo.first_name,
+    send_profile_image: UserInfo.profileImage,
+    is_read: "unread",
+    group_id: $("#current_group_id").val(),
+    group_name: $("#curren_group_name_id").val(),
+    group_image: $("#group_image_id_" + currentGroupId).attr("src"),
+    group_members: JSON.parse($("#curren_group_members").val()),
+    unread_members: unreadMembers,
+    read_members: [],
+    message: $(".emojionearea-editor").html(),
+    media_url: $("#current_image_upload_src").val(),
+    emoji: null,
+    time: moment().format("h:mm"),
+    created: new Date().toISOString()
+  };
+
+  socket.emit("sendmessage", JSON.stringify(message));
+
+  sendMessage(message, "online");
+
+  $(".emojionearea-editor").html("");
+  $("#send_message_input").val("");
+  $("#current_image_upload_src").val("");
+  $("#append_image_after_upload").html("");
+}
+
+function sendDocumentMessage(url) {
+  var UserInfo = JSON.parse(userData);
+  var unreadMembers = [];
+  var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+  if (otherGroupMembers) {
+    otherGroupMembers.forEach(function(item, index) {
+      if (item != UserInfo.user_id) {
+        unreadMembers.push(item);
+      }
+    });
+  }
+
+  var currentGroupId = $("#current_group_id").val();
+
+  var message = {
+    to_user_id: 0,
+    to_user_name: "",
+    from_user_id: UserInfo.user_id,
+    from_user_name: UserInfo.first_name,
+    send_profile_image: UserInfo.profileImage,
+    is_read: "unread",
+    group_id: $("#current_group_id").val(),
+    group_name: $("#curren_group_name_id").val(),
+    group_image: $("#group_image_id_" + currentGroupId).attr("src"),
+    group_members: JSON.parse($("#curren_group_members").val()),
+    unread_members: unreadMembers,
+    read_members: [],
+    message: url,
+    media_url: $("#current_image_upload_src").val(),
+    emoji: null,
+    time: moment().format("h:mm"),
+    created: new Date().toISOString()
+  };
+
+  socket.emit("sendmessage", JSON.stringify(message));
+
+  sendMessage(message, "online");
+
+  $(".emojionearea-editor").html("");
+  $("#send_message_input").val("");
+  $("#current_image_upload_src").val("");
+  $("#append_image_after_upload").html("");
+}
+
+$(".emojis-wysiwyg").emojioneArea({
+  inline: true,
+  hideSource: true,
+  resize: true,
+  events: {
+    // Enter key as submit button --> working
+    keyup: function(editor, event) {
+      if (
+        event.which == 13 &&
+        ($.trim(editor.text()).length > 0 || $.trim(editor.html()).length > 0)
+      ) {
+        sendMessageToUser();
+        event.preventDefault();
+        event.stopPropagation();
+        editor.focus();
+      }
+    }
+  }
 });

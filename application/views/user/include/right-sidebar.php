@@ -415,7 +415,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <div class="chat-header-left">
                 <div class="basic-user-info">
                     <figure>
-                        <i class="fa fa-users fa-3x" aria-hidden="true"></i>
+                        <img id="common_image_group_preview" src="../assets_d/images/default-group.png">
                     </figure>
                     <strong id="group_name_id">Group</strong>
                 </div>
@@ -427,7 +427,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 </div>
                 <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/video-camera.svg" alt="Video Icon" /></a>
                 <a href="javascript:void(0)" class="hide-on-small" data-toggle="modal" data-target="#chat-setting-popup"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
-                <a href="javascript:void(0)" class="add-user" data-toggle="modal" data-target="#groupMember"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
+                <a href="javascript:void(0)" class="add-user" id="open_add_new_group_memeber"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
                 <div class="hide-on-big close-icon-wrap">
                     <a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/close.svg" alt="New Message Icon" /></a>
                 </div>
@@ -454,8 +454,13 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="curren_group_members">
             <input type="hidden" id="curren_group_name_id">
             <input type="hidden" id="current_image_upload_src">
+            <input type="hidden" id="current_group_profile_setting">
         </div>
         <span id="user_typing_id"></span>
+        <div id="progress-wrp">
+            <div class="progress-bar"></div>
+            <div class="status"></div>
+        </div>
         <div class="chat-footer">
             <div class="input-wrap">
                 <div class="img-preview">
@@ -466,12 +471,8 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                                     <div class="choose-imagefile-wrap">
                                         <div class="result">
                                             <div id="gal">
-                                                <ul class="gallery">
-                                                    <li class="uploadBtn uploadBtnRestImage add" id="append_image_after_upload">
-                                                        <img class="img" src="" />
-                                                        <input type="file" name="rest_image[]" class="rest_img" accept="image/*">
-                                                        <a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>
-                                                    </li>
+                                                <ul class="gallery" id="append_image_after_upload">
+
                                                 </ul>
                                             </div>
                                         </div>
@@ -481,21 +482,28 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         </li>
                     </ul>
                 </div>
+
+
+
                 <div class="chat-input-wrap">
+
                     <div class="text-area-wrap">
-                        <textarea placeholder="Type your message here" id="send_message_input" class="form-control"></textarea>
+                        <textarea placeholder="Type your message here" id="send_message_input" class="form-control emojis-wysiwyg"></textarea>
                     </div>
                     <div class="chat-action">
                         <button type="button" id="send_button_chat" class="send-btn">
-                            <i class="fa fa-paper-plane"  aria-hidden="true"></i>
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
                         </button>
-                        <a href="javascript:void(0)" class="imoji">
-                            <img src="<?php echo base_url(); ?>assets_d/chat-assets/images/emoji.svg" alt="Imozi Icon" />
-                        </a>
+
                         <a href="javascript:void(0)" class="media-icon">
-                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Imozi Icon" />
+                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Imozi Icon" id="image_icon_selector" />
                         </a>
-                        <label class="file-upload"></label>
+                        <label class="file-upload" id="any_document_upload"></label>
+                        <input type="file" for="file-upload" class="rest_img" id="upload_second_image_chat" style="display:none;" accept="image/*">
+                        <form action="<?php echo base_url('account/upload-document-server'); ?>" enctype="multipart/form-data" method="post" id="submit_upload_document_form">
+                            <input type="file" class="rest_img" id="upload_first_image_document" style="display:none;" accept="">
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -505,58 +513,51 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
 <div class="modal fade" id="chat-setting-popup" role="dialog">
     <div class="modal-dialog modal-sm chat-setting">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Chat Setting</h4>
-        </div>
-        <div class="modal-body">
-            <div class="avatar-upload">
-                <div class="avatar-edit">
-                    <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-                    <label for="imageUpload"></label>
-                </div>
-                <div class="avatar-preview">
-                    <div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);"></div>
-                </div>
-            </div>
-            <div class="form-group">
-                <input type="text" name="" class="form-control"/>
-            </div>
-        </div>
-        <div class="modal-footer text-center">
-            <button type="button" class="event_action">Submit</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="modal fade" id="groupMember" role="dialog">
-    <div class="modal-dialog">
+
+        <!-- Modal content-->
         <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Chat Setting</h4>
+            </div>
             <div class="modal-body">
-                <div class="createHeader">
-                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Group Members</h4>
+                <div class="avatar-upload">
+                    <div class="avatar-edit">
+                        <input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+                        <label for="imageUpload"></label>
+                    </div>
+                    <div class="avatar-preview">
+                        <div id="imagePreview" style="background-image: url('../assets_d/images/default-group.png');"></div>
+                    </div>
                 </div>
-                <select id="multiple-select" name="select2" multiple class="form-control">
-					<option value="1" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 1</option>
-					<option value="2" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 2</option>
-					<option value="3" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 3</option>
-					<option value="4" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 4</option>
-					<option value="5" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 5</option>
-					<option value="6" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 6</option>
-					<option value="7" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 7</option>
-					<option value="8" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 8</option>
-					<option value="9" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 9</option>
-					<option value="10" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 10</option>
-                </select>
-                <div class="settingWrapper">
-                    <button type="button" class="event_action"> Save</button>
+                <div class="form-group">
+                    <input type="text" id="group_name_setting_id" name="Enter group name" class="form-control" required />
+                </div>
+            </div>
+            <div class="modal-footer text-center">
+                <button type="button" id="submit_button_chat_setting" class="event_action">Submit</button>
+            </div>
+            <input type="hidden" id="current_group_profile_image">
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="groupMember" role="dialog">
+    <form action="<?php echo base_url('account/add-new-group-member'); ?>" method="get" id="add_new_group_member_form">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="createHeader">
+                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Group Members</h4>
+                    </div>
+                    <select id="multiple-select" name="users[]" multiple class="form-control"></select>
+                    <div class="settingWrapper">
+                        <button type="button" id="submit_new_group_member" class="event_action"> Save</button>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
+        <input type="hidden" name="group_id" id="hidde_add_group_id">
+    </form>
 </div>
 
 <script type="text/javascript">
@@ -580,20 +581,4 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             }
         });
     });
-</script>
-<script>
-function readURLImage(input) {
-  if (input.files && input.files[0]) {
-      var reader = new FileReader();
-      reader.onload = function(e) {
-          $('#imagePreview').css('background-image', 'url('+e.target.result +')');
-          $('#imagePreview').hide();
-          $('#imagePreview').fadeIn(650);
-      }
-      reader.readAsDataURL(input.files[0]);
-  }
-}
-$("#imageUpload").change(function() {
-    readURLImage(this);
-});
 </script>

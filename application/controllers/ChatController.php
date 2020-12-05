@@ -107,14 +107,15 @@ class ChatController extends CI_Controller
 
             #get chat user groups.
 
-
+            $sendMembersList = $this->ChatModel->getChatMembersList($users);
 
             $response = [
                 'code' => 200,
                 'message' => 'OK',
                 'data' => [
                     'groupId' => $getCreativeGroupId,
-                    'users' => $chatMembersList,
+                    'groupInfo' => $createGroup,
+                    'users' => $sendMembersList,
                 ]
             ];
         } catch (\Exception $e) {
@@ -203,5 +204,105 @@ class ChatController extends CI_Controller
             ->set_content_type('application/json')
             ->set_status_header($response['code'])
             ->set_output(json_encode($response, JSON_NUMERIC_CHECK));
+    }
+
+    /**
+     * addNewGroupMember
+     * @param : getArra
+     */
+
+    public function addNewGroupMember()
+    {
+
+        try {
+            $users = $this->input->get('users');
+            $groupId = $this->input->get('group_id');
+
+            if (!is_array($users)) {
+                throw new Exception("Error processing request", 422);
+            }
+
+            #create new user group.
+
+            $createUsersInGroup = [];
+
+            foreach ($users as $key => $val) {
+
+                $createUsersInGroup[$key]['group_id'] = $groupId;
+                $createUsersInGroup[$key]['peer_id'] = $val;
+            }
+
+            $this->ChatModel->createUserInGroup($createUsersInGroup);
+
+            #get chat user groups.
+
+            $sendMembersList = $this->ChatModel->getChatMembersList($users);
+
+            $response = [
+                'code' => 200,
+                'message' => 'OK',
+                'data' => [
+                    'groupId' => $groupId,
+                    'users' => $sendMembersList,
+                ]
+            ];
+        } catch (\Exception $e) {
+            $response = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($response['code'])
+            ->set_output(json_encode($response));
+    }
+
+    /**
+     * uploadDocumentServer
+     * @param : null
+     */
+
+    public function uploadDocumentServer()
+    {
+        try {
+
+            $config['upload_path'] = './uploads/users/';
+            $config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|mov|pdf|xlsx|xls|doc|docx|txt|ppt|pptx|zip';
+            $config['encrypt_name'] = TRUE;
+            $config['remove_spaces'] = TRUE;  //it will remove all spaces
+
+            $this->load->library('upload', $config);
+            $url = "";
+
+            if (!$this->upload->do_upload('file')) {
+                $this->success  = false;
+                $this->response = $this->upload->display_errors();
+            } else {
+                $this->success  = true;
+                $this->response = $this->upload->data();
+                $url = base_url() . 'uploads/users/' . $this->response['file_name'];
+            }
+
+            $response = [
+                'code' => 200,
+                'status' => $this->success,
+                'data' => $this->response,
+                'url' => $url
+            ];
+        } catch (Exception $e) {
+            $response = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($response['code'])
+            ->set_output(json_encode($response));
     }
 }
