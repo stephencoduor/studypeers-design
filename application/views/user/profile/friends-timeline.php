@@ -78,9 +78,15 @@ $full_name      = $user['first_name'].' '.$user['last_name'];
                                                 </div>
                                             <?php } ?>
                                         </div>
-                                        <div class="shareProfile" id="copyShareLink" >
-                                            <input type="hidden" id="sharelink" value="<?php echo base_url().'Profile/shareLink/'.$user['username']; ?>" />
-                                            <img src="<?php echo base_url(); ?>assets_d/images/share-profile1.svg" alt="share profile"> Share Profile
+                                        <input type="hidden" id="sharelink"
+                                           value="<?php echo base_url() . 'Profile/friends?profile_id=' . @$user_id; ?>"/>
+                                        <div class="tooltip" style="opacity: inherit;">
+                                            <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
+                                                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+                                                
+                                                <img src="<?php echo base_url(); ?>assets_d/images/share-profile1.svg"
+                                                     alt="share profile"> Copy Profile Link
+                                            </div>
                                         </div>
                                         <div class="shareMenu shareOption">
                                         <ul>

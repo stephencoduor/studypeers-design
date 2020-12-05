@@ -1,5 +1,6 @@
 <?php
 $userdata = $this->session->userdata('user_data');
+$log_user_id = $this->session->get_userdata()['user_data']['user_id'];
 $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = " . $userdata['user_id'])->row_array(); 
 $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
 
@@ -108,7 +109,7 @@ die;*/
                                 <?php } ?>
                             </div>
                             <input type="hidden" id="sharelink"
-                                           value="<?php echo base_url() . 'Profile/shareLink/' . @$userdata['username']; ?>"/>
+                                           value="<?php echo base_url() . 'Profile/friends?profile_id=' . @$log_user_id; ?>"/>
                             <div class="tooltip" style="opacity: inherit;">
                                 <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
                                     <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
