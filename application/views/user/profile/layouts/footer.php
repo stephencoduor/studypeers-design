@@ -1316,6 +1316,13 @@
     });
 
 
+    function saveReaction(reaction_id, reference_id, refrence){
+
+        $('#'+refrence+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Like</span>');
+        
+    }
+
+
     function saveLikeData(reference_id, like_option_id) {
         url = '<?php echo base_url(); ?>Profile/saveLikes';
         $.ajax({

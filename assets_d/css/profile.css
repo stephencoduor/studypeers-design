@@ -707,6 +707,7 @@
 .likeMenu:hover .hoverMenu {
     display: block;
 }
+
 .alertMessage {
     width: 45px;
     height: 45px;
