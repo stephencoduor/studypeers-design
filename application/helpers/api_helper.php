@@ -769,6 +769,57 @@ function userImage($user_id){
     }
 }
 
+ function getReactionByReference($reference_id, $reference){
+    $tableRecord = & get_instance();
+    $tableRecord
+        ->load
+        ->database();
+
+        $chk_if_like = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '1'))->row_array();
+        $chk_if_support = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '2'))->row_array();
+        $chk_if_celebrate = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '3'))->row_array();
+        $chk_if_insightful = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '4'))->row_array();
+        $chk_if_curious = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '5'))->row_array();
+        $chk_if_love = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '6'))->row_array();
+        $like_count_increment = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference))->num_rows();
+
+            $html = '';
+
+            if(!empty($chk_if_like)){
+                $html.='<img src="'.base_url().'assets_d/images/like-dashboard.svg"
+                                            alt="Like">';
+            }
+
+            if(!empty($chk_if_support)){
+                $html.='<img src="'.base_url().'assets_d/images/support-dashboard.svg"
+                                            alt="Like">';
+            }
+
+            if(!empty($chk_if_celebrate)){
+                $html.='<img src="'.base_url().'assets_d/images/celebrate-dashboard.svg"
+                                            alt="Like">';
+            }
+
+            if(!empty($chk_if_insightful)){
+                $html.='<img src="'.base_url().'assets_d/images/curious-dashboard.svg"
+                                            alt="Like">';
+            }
+
+            if(!empty($chk_if_curious)){
+                $html.='<img src="'.base_url().'assets_d/images/insight-dashboard.svg"
+                                            alt="Like">';
+            }
+
+            if(!empty($chk_if_love)){
+                $html.='<img src="'.base_url().'assets_d/images/love-dashboard.svg"
+                                            alt="Like">';
+            }
+
+            $html.='<span>'.$like_count_increment.'</span>';
+
+            return $html;
+    }
+
 function checkFollowStatus($user_id , $peer_id){
         $tableRecord = & get_instance();
         $tableRecord
