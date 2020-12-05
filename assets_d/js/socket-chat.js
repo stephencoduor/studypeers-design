@@ -159,7 +159,11 @@ $("body").on("click", "#submit_new_group_member", function() {
 // send message stanza.
 
 $("body").on("click", "#send_button_chat", function(event) {
-  if ($.trim($(".emojionearea-editor").html()) == "") return false;
+  if (
+    $.trim($(".emojionearea-editor").html()) == "" &&
+    $.trim($("#current_image_upload_src").val()) == ""
+  )
+    return false;
 
   var UserInfo = JSON.parse(userData);
   var unreadMembers = [];
