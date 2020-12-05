@@ -1,4 +1,4 @@
-var socket = io("https://studypeers.dev:3000/", {
+var socket = io("https://localhost:3000/", {
   "sync disconnect on unload": true
 });
 var userData = $("#hidden_user_info").val();
@@ -209,12 +209,54 @@ $("body").on("click", "#submit_button_chat_setting", function() {
     group_name: $("#group_name_setting_id").val(),
     group_image: $("#current_group_profile_image").val()
   };
+  if ($("#group_id_" + updateSetting.group_id).length > 0) {
+    $("#group_image_id_" + updateSetting.group_id).attr(
+      "src",
+      updateSetting.group_image
+    );
+    $("#group_id_" + updateSetting.group_id)
+      .find(".info-wrap")
+      .html(
+        '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
+          updateSetting.group_name +
+          "<p></p>"
+      );
+  }
+
+  var ImageData = $("#current_group_profile_image").val();
+  var newGroupName = $("#group_name_setting_id").val();
+
+  if (ImageData && newGroupName) {
+    $("#common_image_group_preview").attr("src", ImageData);
+    $("#group_name_id").text(newGroupName);
+  }
+
+  $("#group_name_setting_id").val("");
+  $("#current_group_profile_image").val("");
+  $("#imagePreview").css(
+    "background-image",
+    "url('../assets_d/images/default-group.png')"
+  );
+
+  $(".close").trigger("click");
+
   socket.emit("updategroupsetting", JSON.stringify(updateSetting));
 });
 
 socket.on("groupsettingupdated", data => {
-  console.log("group settting updated");
-  SOCKET_CHAT._AJX_USER_CHAT_GROUP();
+  if ($("#group_id_" + data.group_id).length > 0) {
+    $("#group_image_id_" + data.group_id).attr("src", data.group_image);
+    $("#group_id_" + data.group_id)
+      .find(".info-wrap")
+      .html(
+        '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
+          data.group_name +
+          "<p></p>"
+      );
+
+    $("#common_image_group_preview").attr("src", data.group_image);
+    $("#group_name_id").text(data.group_name);
+  }
 });
 
 // set user status as online or offline.
@@ -373,7 +415,6 @@ socket.on("loadinitgroupmessage", data => {
       groupListMessage += formatTopMessageGroupListName(item);
     });
   }
-  $(".close").trigger("click");
   $("#userList").html(groupListMessage);
 });
 
