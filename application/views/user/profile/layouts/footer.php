@@ -1316,10 +1316,35 @@
     });
 
 
-    function saveReaction(reaction_id, reference_id, refrence){
+    function saveReaction(reaction_id, reference_id, reference){
 
-        $('#'+refrence+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Like</span>');
+        url = '<?php echo base_url(); ?>Profile/saveReaction';
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                "reaction_id": reaction_id, "reference_id": reference_id, "reference": reference
+            },
+            success: function(result) {
+                $('#'+reference+'_total_likes_'+reference_id).html(result);
+                if(reaction_id == 1) {
+                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Like</span>');
+                } else if(reaction_id == 2) {
+                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Support</span>');
+                } else if(reaction_id == 3) {
+                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Celebrate</span>');
+                } else if(reaction_id == 4) {
+                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Insightful</span>');
+                } else if(reaction_id == 5) {
+                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Curious</span>');
+                } else if(reaction_id == 6) {
+                    $('#'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Love</span>');
+                }
+            }
+        });
+
         
+
     }
 
 

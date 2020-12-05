@@ -1061,4 +1061,48 @@ class Profile extends CI_Controller {
 		}
 	}
 
+
+    public function saveReaction(){
+        if($this->input->post()){
+            $reference_id = $this->input->post('reference_id');
+            $reaction_id = $this->input->post('reaction_id');
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+            $reference = $this->input->post('reference');
+
+            //check is same user already liked the post
+            $check_row_exists = $this->db->get_where($this->db->dbprefix('reaction_master'), array('user_id'=>$user_id, 'reference_id' => $reference_id, 'reference' => $reference))->row_array();
+
+            
+            if(!isset($check_row_exists)){
+                if($reference == 'Post') {
+                    $post_result = $this->db->get_where($this->db->dbprefix('posts'), array('id' => $reference_id))->row_array();
+                    $like_count_increment = $post_result['likes_count'] + 1;
+                    $this->db->where(array('id' => $reference_id));
+                    $this->db->update('posts',array('likes_count' => $like_count_increment));
+                }
+            }
+            
+
+            //delete old reaction from like master table if exists
+            $this->db->where(array('user_id'=>$user_id, 'reference_id' => $reference_id, 'reference' => $reference));
+            $this->db->delete('reaction_master');
+            //insert new entry of like
+            $insert_array = [
+                'reference'     => $reference,
+                'reference_id'  => $reference_id,
+                'reaction_id'   => $reaction_id,
+                'user_id'       => $user_id,
+                'created_at'    => date('Y-m-d H:i:s')
+            ];
+            $insert_like = $this->db->insert('reaction_master', $insert_array);
+
+            $html = getReactionByReference($reference_id, $reference);
+
+            echo $html;
+        }
+    }
+
+
+    
+
 }
