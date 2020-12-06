@@ -105,7 +105,7 @@
         <?php } ?>
     </div>
     <div class="insight-wrap">
-        <?php foreach ($insightful_result as $key => $value) { ?>
+        <?php foreach ($curious_result as $key => $value) { ?>
             <div class="user-info-wrap">
                 <div class="user-image">
                     <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/></span>  
@@ -121,7 +121,7 @@
         <?php } ?>
     </div>
     <div class="love-wrap">
-        <?php foreach ($insightful_result as $key => $value) { ?>
+        <?php foreach ($love_result as $key => $value) { ?>
             <div class="user-info-wrap">
                 <div class="user-image">
                     <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/></span>  
