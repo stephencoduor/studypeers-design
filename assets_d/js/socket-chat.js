@@ -1,4 +1,4 @@
-var socket = io("https://studypeers.dev:3000/", {
+var socket = io("https://localhost:3000/", {
   "sync disconnect on unload": true
 });
 var userData = $("#hidden_user_info").val();
@@ -429,12 +429,12 @@ socket.on("initmessage", data => {
     data.forEach(function(item, index) {
       messageContent += formatTopMessageHeader(item);
     });
-    latestMessage = messageContent;
-    $("#myUL").html(messageContent);
   }
 
   $("#chat_message_count").text(messageCount);
-  $(".left-area").text("Messages(" + messageCount + ")");
+  $(".left-area").html(
+    "Messages <span class='total-message'>(" + messageCount + ")</span>"
+  );
 });
 
 socket.on("showinitmessage", data => {
@@ -633,6 +633,12 @@ function sendMessage(messageJson, status) {
 }
 
 function formatTopMessageHeader(messageJson) {
+  var total = 0;
+
+  if (messageJson.total) {
+    total = messageJson.total;
+  }
+
   var html =
     "<li class='message-top-header' data-groupId='" +
     messageJson.group_id +
@@ -644,14 +650,18 @@ function formatTopMessageHeader(messageJson) {
     '<a href="javascript:void(0)">' +
     "<figure>" +
     '<img src="' +
-    messageJson.send_profile_image +
+    messageJson.group_image +
     '" alt="">' +
     "</figure>" +
     '<div class="time">' +
     moment(messageJson.created).fromNow() +
     "</div>" +
     '<div class="info-wrap">' +
-    messageJson.from_user_name +
+    "</span>" +
+    messageJson.group_name +
+    "(" +
+    total +
+    ")" +
     "<p>" +
     messageJson.message +
     "</p>" +
