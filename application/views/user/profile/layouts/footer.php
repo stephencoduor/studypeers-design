@@ -1,3 +1,127 @@
+<div class="modal fade" id="reations-popup" role="dialog">
+    <div class="modal-dialog modal-sm reation-popup">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Reactions</h4>
+        </div>
+        <div class="modal-body" id="modal-reaction-body">
+            <ul class="custom-tabs">
+                <li><a href="javascript:void(0)" class="all-links active">All</a></li>
+                <li><a href="javascript:void(0)" class="total-likes"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/> 12</a></li>
+                <li><a href="javascript:void(0)" class="total-claps"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/> 15</a></li>
+                <li><a href="javascript:void(0)" class="support-links"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/> 12</a></li>
+                <li><a href="javascript:void(0)" class="curious-links"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/> 15</a></li>
+                <li><a href="javascript:void(0)" class="insight-links"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/> 15</a></li>
+                <li><a href="javascript:void(0)" class="love-links"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/> 15</a></li>
+                
+            </ul>
+            <div class="tab-content">
+                <div class="all-wrap show">
+                    <div class="user-info-wrap">
+                        <div class="user-image">
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/></span>
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
+                            </figure>
+                        </div>
+                        <div class="user-info">
+                            <h3>Arijit Mukherjii . <span>1st</span></h3>
+                            <p>Software Engineer || <span>Microsoft</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="likes">
+                    <div class="user-info-wrap">
+                        <div class="user-image">
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/></span>
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
+                            </figure>
+                        </div>
+                        <div class="user-info">
+                            <h3>Arijit Mukherjii . <span>1st</span></h3>
+                            <p>Software Engineer || <span>Microsoft</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="claps">
+                    <div class="user-info-wrap">
+                        <div class="user-image">
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/></span>  
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
+                            </figure>
+                        </div>
+                        <div class="user-info">
+                            <h3>Arijit Mukherjii . <span>1st</span></h3>
+                            <p>Software Engineer || <span>Microsoft</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="support-wrap">
+                    <div class="user-info-wrap">
+                        <div class="user-image">
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/></span>  
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
+                            </figure>
+                        </div>
+                        <div class="user-info">
+                            <h3>Arijit Mukherjii . <span>1st</span></h3>
+                            <p>Software Engineer || <span>Microsoft</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="curious-wrap">
+                    <div class="user-info-wrap">
+                        <div class="user-image">
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/></span>  
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
+                            </figure>
+                        </div>
+                        <div class="user-info">
+                            <h3>Arijit Mukherjii . <span>1st</span></h3>
+                            <p>Software Engineer || <span>Microsoft</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="insight-wrap">
+                    <div class="user-info-wrap">
+                        <div class="user-image">
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/></span>  
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
+                            </figure>
+                        </div>
+                        <div class="user-info">
+                            <h3>Arijit Mukherjii . <span>1st</span></h3>
+                            <p>Software Engineer || <span>Microsoft</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="love-wrap">
+                    <div class="user-info-wrap">
+                        <div class="user-image">
+                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/></span>  
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
+                            </figure>
+                        </div>
+                        <div class="user-info">
+                            <h3>Arijit Mukherjii . <span>1st</span></h3>
+                            <p>Software Engineer || <span>Microsoft</span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
@@ -22,6 +146,27 @@
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
 
+
+<script>
+    
+
+    function getAllReactionData(reference_id, reference){
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getAllReactionData',
+            type: 'post',
+            data: {
+                "count": 0,
+                "reference_id": reference_id, "reference": reference
+            },
+            success: function(result) {
+
+                $('#modal-reaction-body').html(result);
+                $('#reations-popup').modal('show');
+            }
+        });
+    }
+
+</script>
 
 
 <?php if (isset($_REQUEST['profile_id'])) { ?>
