@@ -347,7 +347,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
 
                             <div class="socialStatus">
                                 <div class="leftStatus">
-                                    <a class="Post_total_likes_<?php echo $value['reference_id']; ?>">
+                                    <a class="Post_total_likes_<?php echo $value['reference_id']; ?>" onclick="getAllReactionData('<?php echo $value['reference_id']; ?>', 'Post')">
                                         <?php echo $reaction_html; ?>
                                     </a>
                                 </div>
@@ -928,7 +928,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 </div>
                                 <div class="socialStatus">
                                     <div class="leftStatus">
-                                        <a class="event_total_likes_<?php echo $value['reference_id']; ?>">
+                                        <a class="event_total_likes_<?php echo $value['reference_id']; ?>" onclick="getAllReactionData('<?php echo $value['reference_id']; ?>', 'event')">
                                             <?php echo $reaction_html; ?>
                                         </a>
                                     </div>
@@ -1444,7 +1444,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         
                         <div class="socialStatus">
                             <div class="leftStatus">
-                                <a class="studyset_total_likes_<?php echo $value['reference_id']; ?>">
+                                <a class="studyset_total_likes_<?php echo $value['reference_id']; ?>" onclick="getAllReactionData('<?php echo $value['reference_id']; ?>', 'studyset')">
                                     <?php echo $reaction_html; ?>
                                 </a>
                             </div>
@@ -1961,7 +1961,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         </div>
                         <div class="socialStatus">
                             <div class="leftStatus">
-                                <a class="document_total_likes_<?php echo $value['reference_id']; ?>">
+                                <a class="document_total_likes_<?php echo $value['reference_id']; ?>" onclick="getAllReactionData('<?php echo $value['reference_id']; ?>', 'document')">
                                     <?php echo $reaction_html; ?>
                                 </a>
                             </div>
