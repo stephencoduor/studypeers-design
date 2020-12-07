@@ -33,8 +33,10 @@
                     </figure>
                 </div>
                 <div class="user-info">
-                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?> . <span>1st</span></h3>
-                    <p>Software Engineer || <span>Microsoft</span></p>
+                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
+                     <!-- . <span>1st</span> -->
+                    </h3>
+                    <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
             </div>
         <?php } ?>
@@ -50,8 +52,10 @@
                     </figure>
                 </div>
                 <div class="user-info">
-                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?> . <span>1st</span></h3>
-                    <p>Software Engineer || <span>Microsoft</span></p>
+                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
+                     <!-- . <span>1st</span> -->
+                    </h3>
+                    <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
             </div>
         <?php } ?>
@@ -66,8 +70,10 @@
                     </figure>
                 </div>
                 <div class="user-info">
-                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?> . <span>1st</span></h3>
-                    <p>Software Engineer || <span>Microsoft</span></p>
+                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
+                     <!-- . <span>1st</span> -->
+                    </h3>
+                    <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
             </div>
         <?php } ?>
@@ -82,8 +88,10 @@
                     </figure>
                 </div>
                 <div class="user-info">
-                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>  . <span>1st</span></h3>
-                    <p>Software Engineer || <span>Microsoft</span></p>
+                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
+                     <!-- . <span>1st</span> -->
+                    </h3>
+                    <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
             </div>
         <?php } ?>
@@ -98,8 +106,10 @@
                     </figure>
                 </div>
                 <div class="user-info">
-                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?> . <span>1st</span></h3>
-                    <p>Software Engineer || <span>Microsoft</span></p>
+                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
+                     <!-- . <span>1st</span> -->
+                    </h3>
+                    <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
             </div>
         <?php } ?>
@@ -114,8 +124,10 @@
                     </figure>
                 </div>
                 <div class="user-info">
-                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?> . <span>1st</span></h3>
-                    <p>Software Engineer || <span>Microsoft</span></p>
+                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
+                     <!-- . <span>1st</span> -->
+                    </h3>
+                    <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
             </div>
         <?php } ?>
@@ -130,8 +142,10 @@
                     </figure>
                 </div>
                 <div class="user-info">
-                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?> . <span>1st</span></h3>
-                    <p>Software Engineer || <span>Microsoft</span></p>
+                    <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
+                     <!-- . <span>1st</span> -->
+                    </h3>
+                    <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
             </div>
         <?php } ?>
