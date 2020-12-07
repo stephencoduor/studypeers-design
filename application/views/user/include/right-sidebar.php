@@ -375,6 +375,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
 <div class="chat-wrapper hide-chat">
     <div class="chat-left">
+    <a href="javascript:void(0)" class="main-close"><img src="http://localhost/studypeers/assets_d/chat-assets/images/close.svg" alt="New Message Icon"></a>
         <div class="chat-body-wrap">
             <div class="chat-dropdown-header">
                 <div class="left-area">
@@ -426,7 +427,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                     <a href="javascript:void(0)" class="maximize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/maximize.svg" class="change-icon" alt="Maximize Icon" /></a>
                 </div>
                 <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/video-camera.svg" alt="Video Icon" /></a>
-                <a href="javascript:void(0)" class="hide-on-small" data-toggle="modal" data-target="#chat-setting-popup"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
+                <a href="javascript:void(0)" class="hide-on-smallasd" data-toggle="modal" data-target="#chat-setting-popup"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
                 <a href="javascript:void(0)" class="add-user" id="open_add_new_group_memeber"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
                 <div class="hide-on-big close-icon-wrap">
                     <a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/close.svg" alt="New Message Icon" /></a>
@@ -447,6 +448,18 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             </form>
         </div>
         <div class="chat-content" id="chat_window_content">
+        <div class="grp-member-center-message">
+            <div class="info-message">Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum assumenda sit asperiores vitae minus amet. Voluptatem dignissimos maxime natus similique sapiente iure autem saepe nam, dolor consectetur. Minus, velit facere.</div>
+        </div>
+        <div class="loader-wrap">
+												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+<g>
+  <path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#ea2e7e" stroke-width="12"></path>
+  <path d="M49 3L49 27L61 15L49 3" fill="#ea2e7e"></path>
+  <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+</g>
+</svg>
+												</div>
             <div class="chat-body" id="append_chat_records">
 
             </div>
@@ -548,6 +561,9 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <div class="modal-body">
                     <div class="createHeader">
                         <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Group Members</h4>
+                        <div class="closePost" data-dismiss="modal">
+                            <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
+                        </div>
                     </div>
                     <select id="multiple-select" name="users[]" multiple class="form-control"></select>
                     <div class="settingWrapper">

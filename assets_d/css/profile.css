@@ -3658,6 +3658,7 @@ figcaption a {
 .tooltip {
   position: relative;
   display: inline-block;
+  z-index: initial;
 }
 
 .tooltip .tooltiptext {
