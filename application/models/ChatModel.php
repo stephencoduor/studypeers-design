@@ -81,7 +81,21 @@ class ChatModel extends CI_Model
 
             ->get();
 
+        return $query->result_array();
+    }
 
+
+
+    public function getMyGroupMembers($groupId)
+    {
+
+        $query =  $this->db->select('*')
+
+            ->from('user_chat_group_users')
+
+            ->where('user_chat_group_users.group_id', $groupId)
+
+            ->get();
 
         return $query->result_array();
     }

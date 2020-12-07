@@ -40,8 +40,8 @@ $("body").on("click", "#open_add_new_group_memeber", function() {
     load: function(search, callback) {
       if (search.length < this.minSearchLength) return callback();
       $.ajax({
-        url: "find-my-peers",
-        data: { search: search },
+        url: "add-new-peers",
+        data: { search: search, id: groupId },
         type: "GET",
         dataType: "json",
         success: function(data) {
@@ -134,6 +134,11 @@ $("body").on("click", "#submit_new_group_member", function() {
   $.ajax({
     url: formEle.attr("action"),
     data: formEle.serializeArray(),
+    beforeSend: function() {
+      $("#submit_new_group_member").html(
+        '<i class="fa fa-refresh fa-spin" style="font-size:24px"></i>'
+      );
+    },
     success: function(data) {
       if (parseInt(data.code) == 200) {
         var otherGroupMembers = JSON.parse($("#curren_group_members").val());
@@ -151,6 +156,7 @@ $("body").on("click", "#submit_new_group_member", function() {
     },
     complete: function() {
       alert("Group members added");
+      $("#submit_new_group_member").html("save");
       $("#groupMember").modal("hide");
     }
   });
