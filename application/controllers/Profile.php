@@ -41,6 +41,66 @@ class Profile extends CI_Controller {
         echo $html;
     }
 
+
+    public function getAllReactionData(){
+        $reference_id  = $this->input->post('reference_id'); 
+        $reference     = $this->input->post('reference'); 
+
+
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->join('user','user.id=reaction_master.user_id');
+        
+        $this->db->order_by('reaction_master.id', 'desc');
+        $data['all_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference))->result_array(); 
+
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->join('user','user.id=reaction_master.user_id');
+        
+        $this->db->order_by('reaction_master.id', 'desc');
+        $data['like_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '1'))->result_array(); 
+
+
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->join('user','user.id=reaction_master.user_id');
+        
+        $this->db->order_by('reaction_master.id', 'desc');
+        $data['support_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '2'))->result_array(); 
+
+
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->join('user','user.id=reaction_master.user_id');
+        
+        $this->db->order_by('reaction_master.id', 'desc');
+        $data['celebrate_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '3'))->result_array(); 
+
+
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->join('user','user.id=reaction_master.user_id');
+        
+        $this->db->order_by('reaction_master.id', 'desc');
+        $data['insightful_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '4'))->result_array(); 
+
+
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->join('user','user.id=reaction_master.user_id');
+        
+        $this->db->order_by('reaction_master.id', 'desc');
+        $data['curious_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '5'))->result_array(); 
+
+
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->join('user','user.id=reaction_master.user_id');
+        
+        $this->db->order_by('reaction_master.id', 'desc');
+        $data['love_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '6'))->result_array(); 
+
+
+        $html = $this->load->view('user/profile/reaction-modal', $data, true);
+        echo $html;
+
+
+    }
+
     public function getMyPosts(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $offset     = $this->input->post('count'); 

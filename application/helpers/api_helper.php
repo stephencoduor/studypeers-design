@@ -815,7 +815,7 @@ function userImage($user_id){
                                             alt="Like">';
             }
 
-            $html.='<span>'.$like_count_increment.'</span>';
+            $html.='<span onclick="getAllReactionData(\''.$reference_id.'\', \''.$reference.'\')">'.$like_count_increment.'</span>';
 
             return $html;
     }
