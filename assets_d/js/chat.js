@@ -248,6 +248,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $(document).on("click", ".minimize", function() {
+    $("body").removeClass("hide-scroll");
     $(this)
       .parents(".chat-wrapper")
       .addClass("small");
@@ -263,6 +264,7 @@ $(document).ready(function() {
       .addClass("show");
   });
   $(document).on("click", ".maximize", function() {
+    $("body").addClass("hide-scroll");
     $(".chat-right")
       .find(".close-icon-wrap")
       .addClass("hide");
@@ -280,6 +282,7 @@ $(document).ready(function() {
 
   $(document).on("click", ".open-chat,.see-all", function() {
     $(".chat-wrapper").removeClass("hide-chat");
+    $("body").addClass("hide-scroll");
     $(".chat-right")
     .find(".close-icon-wrap")
     .addClass("hide");

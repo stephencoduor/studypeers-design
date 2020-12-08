@@ -56,6 +56,9 @@
 }
 .chat-user-list li a {
   padding: 0 !important;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .chat-user-list li a .info-wrap {
   font-size: 14px;
@@ -74,6 +77,8 @@
   width: 100% !important;
   padding: 5px 10px;
   position: relative;
+  display: flex;
+  align-items: center;
 }
 .chat-user-list li:first-child {
   padding-top: 10px;
@@ -942,4 +947,7 @@ span.file-icon {
   align-items: center;
   width: 100%;
   justify-content: center;
+}
+.hide-scroll{
+  overflow: hidden;
 }
