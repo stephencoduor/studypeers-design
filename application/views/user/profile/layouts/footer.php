@@ -127,6 +127,7 @@
 <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/fm.selectator.jquery.js"></script>
+
 <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>
@@ -146,7 +147,11 @@
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
 
-
+<script>
+    $(document).ready(function(){
+        $("#multiple-select").selectator();
+    });
+</script>
 <script>
     
 

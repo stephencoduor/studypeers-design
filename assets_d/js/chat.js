@@ -31,7 +31,7 @@ Upload.prototype.doUpload = function() {
     },
     success: function(data) {
       if (data.status) {
-        var url = data.url;
+        var url = "<span class='attachment-view'><span class='file-icon'><img src='http://localhost/studypeers//assets_d/images/pdf.svg' alt='Icon'></span>"+"<a href=''>"+data.url+"</a></span>";
         sendDocumentMessage(url);
       } else {
         alert(data.data);
@@ -248,6 +248,7 @@ $(document).ready(function() {
 
 $(document).ready(function() {
   $(document).on("click", ".minimize", function() {
+    $("body").removeClass("hide-scroll");
     $(this)
       .parents(".chat-wrapper")
       .addClass("small");
@@ -258,8 +259,15 @@ $(document).ready(function() {
       .parents(".chat-wrapper")
       .find(".chat-left")
       .hide();
+      $(".chat-right")
+      .find(".close-icon-wrap")
+      .addClass("show");
   });
   $(document).on("click", ".maximize", function() {
+    $("body").addClass("hide-scroll");
+    $(".chat-right")
+      .find(".close-icon-wrap")
+      .addClass("hide");
     $(this)
       .parents(".chat-wrapper")
       .removeClass("small");
@@ -274,6 +282,10 @@ $(document).ready(function() {
 
   $(document).on("click", ".open-chat,.see-all", function() {
     $(".chat-wrapper").removeClass("hide-chat");
+    $("body").addClass("hide-scroll");
+    $(".chat-right")
+    .find(".close-icon-wrap")
+    .addClass("hide");
   });
 
   $("#myUL").on("click", "a", function() {
@@ -362,9 +374,9 @@ $(document).ready(function() {
     $(".chat-right")
       .find(".chat-footer")
       .addClass("hide");
-    $(".chat-right")
-      .find(".video-icon")
-      .addClass("hide");
+    // $(".chat-right")
+    //   .find(".video-icon")
+    //   .addClass("hide");
     $(".chat-right")
       .find(".maximize")
       .addClass("hide");
@@ -476,9 +488,9 @@ $(document).ready(function() {
     $(".chat-right")
       .find(".chat-footer")
       .addClass("hide");
-    $(".chat-right")
-      .find(".video-icon")
-      .addClass("hide");
+    // $(".chat-right")
+    //   .find(".video-icon")
+    //   .addClass("hide");
     $(".chat-header-left")
       .find("h3")
       .addClass("show");

@@ -98,7 +98,7 @@
 .multiple .selectator_selected_items .selectator_selected_item {
   background-color: #fafafa;
   display: inline-block;
-  margin: 5px 0 0 5px;
+  margin: 5px 0 5px 5px;
   padding: 3px 20px 2px 5px;
   font-size: 80%;
   border-radius: 2px;
