@@ -375,7 +375,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
 <div class="chat-wrapper hide-chat">
     <div class="chat-left">
-        <a href="javascript:void(0)" class="main-close"><img src="http://localhost/studypeers/assets_d/chat-assets/images/close.svg" alt="New Message Icon"></a>
+        <a href="javascript:void(0)" class="main-close"><img src="<?php echo base_url('assets_d/chat-assets/images/close.svg'); ?>" alt="New Message Icon"></a>
         <div class="chat-body-wrap">
             <div class="chat-dropdown-header">
                 <div class="left-area">
