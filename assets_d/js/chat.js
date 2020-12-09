@@ -22,6 +22,10 @@ Upload.prototype.doUpload = function() {
   $.ajax({
     type: "POST",
     url: $("#submit_upload_document_form").attr("action"),
+    beforeSend: function() {
+      var progress_bar_id = "#progress-wrp";
+      $(progress_bar_id).show();
+    },
     xhr: function() {
       var myXhr = $.ajaxSettings.xhr();
       if (myXhr.upload) {
@@ -31,8 +35,14 @@ Upload.prototype.doUpload = function() {
     },
     success: function(data) {
       if (data.status) {
-        var url = "<span class='attachment-view'><span class='file-icon'><img src='http://localhost/studypeers//assets_d/images/pdf.svg' alt='Icon'></span>"+"<a href=''>"+data.url+"</a></span>";
-        sendDocumentMessage(url);
+        var url =
+          "<span class='attachment-view'><span class='file-icon'><img src='http://localhost/studypeers//assets_d/images/pdf.svg' alt='Icon'></span>" +
+          "<a href='" +
+          data.url +
+          "'>" +
+          data.data.orig_name +
+          "</a></span>";
+        sendDocumentMessage(url, data.url);
       } else {
         alert(data.data);
       }
@@ -47,7 +57,11 @@ Upload.prototype.doUpload = function() {
     cache: false,
     contentType: false,
     processData: false,
-    timeout: 60000
+    timeout: 60000,
+    complete: function() {
+      var progress_bar_id = "#progress-wrp";
+      $(progress_bar_id).hide();
+    }
   });
 };
 
@@ -231,6 +245,8 @@ $(document).on("click", ".done-link", function() {
 
 $("body").on("click", "#message_icon_id", function() {
   var UserInfo = JSON.parse(userData);
+  $("#myUL").html("");
+  $(".loader-wrap").show();
   $("#chat_message_count").text(0);
   socket.emit("getmyreadmessage", JSON.stringify({ user: UserInfo }));
 });
@@ -259,7 +275,7 @@ $(document).ready(function() {
       .parents(".chat-wrapper")
       .find(".chat-left")
       .hide();
-      $(".chat-right")
+    $(".chat-right")
       .find(".close-icon-wrap")
       .addClass("show");
   });
@@ -284,8 +300,8 @@ $(document).ready(function() {
     $(".chat-wrapper").removeClass("hide-chat");
     $("body").addClass("hide-scroll");
     $(".chat-right")
-    .find(".close-icon-wrap")
-    .addClass("hide");
+      .find(".close-icon-wrap")
+      .addClass("hide");
   });
 
   $("#myUL").on("click", "a", function() {
@@ -699,6 +715,8 @@ function sendMessageToUser() {
     read_members: [],
     message: $(".emojionearea-editor").html(),
     media_url: $("#current_image_upload_src").val(),
+    new_member_added: 0,
+    document_url: null,
     emoji: null,
     time: moment().format("h:mm"),
     created: new Date().toISOString()
@@ -714,7 +732,35 @@ function sendMessageToUser() {
   $("#append_image_after_upload").html("");
 }
 
-function sendDocumentMessage(url) {
+function sendMessageAsNewMemberAdded(messageJson, status) {
+  console.log(messageJson);
+  var html =
+    '<div class="grp-member-center-message">' +
+    '<div class="info-message">' +
+    messageJson.message +
+    "</div>" +
+    "</div>";
+
+  chatAppendElementSmall.append(html);
+
+  chatWindow = document.getElementById("chat_window_content");
+  var xH = chatWindow.scrollHeight;
+  chatWindow.scrollTo(0, xH);
+}
+
+function sendMessageAsNewMemberAddedByGroupId(messageJson, status) {
+  console.log(messageJson);
+  var html =
+    '<div class="grp-member-center-message">' +
+    '<div class="info-message">' +
+    messageJson.message +
+    "</div>" +
+    "</div>";
+
+  return html;
+}
+
+function sendDocumentMessage(messageDocument, url) {
   var UserInfo = JSON.parse(userData);
   var unreadMembers = [];
   var otherGroupMembers = JSON.parse($("#curren_group_members").val());
@@ -741,8 +787,10 @@ function sendDocumentMessage(url) {
     group_members: JSON.parse($("#curren_group_members").val()),
     unread_members: unreadMembers,
     read_members: [],
-    message: url,
+    message: messageDocument,
     media_url: $("#current_image_upload_src").val(),
+    new_member_added: 0,
+    document_url: url,
     emoji: null,
     time: moment().format("h:mm"),
     created: new Date().toISOString()

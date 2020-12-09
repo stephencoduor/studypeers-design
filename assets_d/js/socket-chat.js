@@ -129,6 +129,52 @@ $("body").on("click", "#open_add_new_group_memeber", function() {
   });
 });
 
+function sendMessageAsGroupMemberAdded(msg) {
+  var UserInfo = JSON.parse(userData);
+  var unreadMembers = [];
+  var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+  if (otherGroupMembers) {
+    otherGroupMembers.forEach(function(item, index) {
+      if (item != UserInfo.user_id) {
+        unreadMembers.push(item);
+      }
+    });
+  }
+
+  var currentGroupId = $("#current_group_id").val();
+
+  var message = {
+    to_user_id: 0,
+    to_user_name: "",
+    from_user_id: UserInfo.user_id,
+    from_user_name: UserInfo.first_name,
+    send_profile_image: UserInfo.profileImage,
+    is_read: "unread",
+    group_id: $("#current_group_id").val(),
+    group_name: $("#curren_group_name_id").val(),
+    group_image: $("#group_image_id_" + currentGroupId).attr("src"),
+    group_members: JSON.parse($("#curren_group_members").val()),
+    unread_members: unreadMembers,
+    read_members: [],
+    message: msg,
+    media_url: $("#current_image_upload_src").val(),
+    new_member_added: 1,
+    document_url: null,
+    emoji: null,
+    time: moment().format("h:mm"),
+    created: new Date().toISOString()
+  };
+
+  socket.emit("sendmessage", JSON.stringify(message));
+
+  sendMessageAsNewMemberAdded(message, "online");
+
+  $(".emojionearea-editor").html("");
+  $("#send_message_input").val("");
+  $("#current_image_upload_src").val("");
+  $("#append_image_after_upload").html("");
+}
+
 $("body").on("click", "#submit_new_group_member", function() {
   var formEle = $("#add_new_group_member_form");
   $.ajax({
@@ -142,20 +188,28 @@ $("body").on("click", "#submit_new_group_member", function() {
     success: function(data) {
       if (parseInt(data.code) == 200) {
         var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+        var groupMembers = [];
         data.data.users.forEach(function(item, index) {
           var readCurrentIndex = otherGroupMembers.indexOf(item.id);
           if (readCurrentIndex == -1) {
             otherGroupMembers.push(item.id);
+            groupMembers.push(item.first_name);
           }
         });
-        $("#curren_group_members").val(JSON.stringify(otherGroupMembers));
+
+        if (groupMembers.length > 0) {
+          var msg = "Group member added " + groupMembers.join(", ");
+          $("#curren_group_members").val(JSON.stringify(otherGroupMembers));
+          sendMessageAsGroupMemberAdded(msg);
+        }
+      } else {
+        alert(data.message);
       }
     },
     error: function() {
       alert("Something went wrong. Please try again");
     },
     complete: function() {
-      alert("Group members added");
       $("#submit_new_group_member").html("save");
       $("#groupMember").modal("hide");
     }
@@ -199,6 +253,8 @@ $("body").on("click", "#send_button_chat", function(event) {
     read_members: [],
     message: $(".emojionearea-editor").html(),
     media_url: $("#current_image_upload_src").val(),
+    new_member_added: 0,
+    document_url: null,
     emoji: null,
     time: moment().format("h:mm"),
     created: new Date().toISOString()
@@ -444,13 +500,15 @@ socket.on("initmessage", data => {
 });
 
 socket.on("showinitmessage", data => {
-  var messageContent = "";
+  var messageContent = "<span class='text-center'>No Messages Available</span>";
   if (data.length > 0) {
+    messageContent = "";
     data.forEach(function(item, index) {
       messageContent += formatTopMessageHeader(item);
     });
-    $("#myUL").html(messageContent);
   }
+  $(".loader-wrap").hide();
+  $("#myUL").html(messageContent);
 });
 
 socket.on("receivesearchmessage", data => {
@@ -480,10 +538,18 @@ socket.on("groupmessages", function(data) {
   if (data.length > 0) {
     data.forEach(function(item, index) {
       if (item.from_user_id == userInfo.user_id) {
-        mainContent += sendInitialMessage(item, "");
+        if (item.new_member_added) {
+          mainContent += sendMessageAsNewMemberAddedByGroupId(item, "");
+        } else {
+          mainContent += sendInitialMessage(item, "");
+        }
       } else {
-        mainContent += receivingInitialMessage(item, "");
-        otherUserIds.push(item);
+        if (item.new_member_added) {
+          mainContent += sendMessageAsNewMemberAddedByGroupId(item, "");
+        } else {
+          mainContent += receivingInitialMessage(item, "");
+          otherUserIds.push(item);
+        }
       }
     });
 
@@ -640,10 +706,17 @@ function sendMessage(messageJson, status) {
 
 function formatTopMessageHeader(messageJson) {
   var total = 0;
+  var message = messageJson.message;
 
   if (messageJson.total) {
     total = messageJson.total;
   }
+
+  if (messageJson.document_url) {
+    message = "Document";
+  }
+
+  console.log(messageJson);
 
   var html =
     "<li class='message-top-header' data-groupId='" +
@@ -669,7 +742,7 @@ function formatTopMessageHeader(messageJson) {
     total +
     ")" +
     "<p>" +
-    messageJson.message +
+    message +
     "</p>" +
     "</div></a></li>";
 
@@ -677,6 +750,8 @@ function formatTopMessageHeader(messageJson) {
 }
 
 function formatTopMessageGroupListName(messageJson) {
+  var message = messageJson.message;
+
   var currentProfile =
     '<img id="group_image_id_' +
     messageJson.group_id +
@@ -689,6 +764,10 @@ function formatTopMessageGroupListName(messageJson) {
       '" src="' +
       messageJson.group_image +
       '">';
+  }
+
+  if (messageJson.document_url) {
+    message = "Document";
   }
 
   var html =
@@ -712,7 +791,7 @@ function formatTopMessageGroupListName(messageJson) {
     '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
     messageJson.group_name +
     "<p>" +
-    messageJson.message +
+    message +
     "</p>" +
     "</div></a></li>";
 
