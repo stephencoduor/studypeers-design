@@ -36,7 +36,7 @@ Upload.prototype.doUpload = function() {
     success: function(data) {
       if (data.status) {
         var url =
-          "<span class='attachment-view'><span class='file-icon'><img src='http://localhost/studypeers//assets_d/images/pdf.svg' alt='Icon'></span>" +
+          "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/pdf.svg' alt='Icon'></span>" +
           "<a href='" +
           data.url +
           "'>" +
