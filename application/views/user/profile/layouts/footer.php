@@ -1557,6 +1557,31 @@
             }
         });
     }
+
+    function showCommentBoxWrap(reference,reference_id){
+        $('#'+reference+'_comment_'+reference_id).show();
+    }
+
+
+    function postCommentByReference(event, reference, reference_id, comment) { 
+            if (event.which == 13) {
+                
+                if(comment != ''){
+                    var url = '<?php echo base_url('profile/addCommentByRefrence') ?>';
+                    $.ajax({
+                      url: url,
+                      type: 'POST',
+                      data: {'comment': comment, 'reference_id': reference_id, 'reference': reference},
+                      success: function(result) {
+                        $('#'+reference+'_commentappend_'+reference_id).append(result);
+
+                        $('#comment_input_'+reference+'_'+reference_id).val('');
+                      }
+                  });
+                }
+             }
+        };
+
 </script>
 <script>
     $(document).ready(function() {

@@ -1163,6 +1163,75 @@ class Profile extends CI_Controller {
     }
 
 
-    
+    public function addCommentByRefrence(){
+        if($this->input->post()){
+            $comment = $this->input->post('comment');
+            $reference_id = $this->input->post('reference_id');
+            $reference = $this->input->post('reference');
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+            $insertArr = array( 'reference' => $reference,
+                                'reference_id' => $reference_id,
+                                'user_id' => $user_id,
+                                'comment' => $comment,
+                                'status' => '1',
+                                'created_at' => date('Y-m-d H:i:s')
+
+                            );
+
+            $this->db->insert('comment_master', $insertArr);
+            $comment_id = $this->db->insert_id();
+
+            $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
+
+            $html = '<div class="chatMsgBox">
+                                        <figure>
+                                            <img src="'.userImage($user_id).'" alt="User">
+                                        </figure>
+                                        <div class="right">
+                                            <div class="userWrapText">
+                                                <h4>'.$user_info['nickname'].'</h4>
+                                                <p>'.$comment.'</p>
+                                                <div class="leftStatus">
+                                                    <a>
+                                                        <img src="'.base_url().'assets_d/images/like-dashboard.svg" alt="Like">
+                                                        <span>24</span>
+                                                    </a>
+                                                    <a>Like</a>
+                                                    <a>Reply</a>
+                                                </div>
+                                            </div>
+                                            <div class="dotsBullet dropdown">
+                                                <img src="'.base_url().'assets_d/images/more.svg" alt="more" data-toggle="dropdown">
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="'.base_url().'assets_d/images/restricted.svg" alt="Save">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Hide/block</span>  
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="'.base_url().'assets_d/images/trash.svg" alt="Link">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Delete</span>
+                                                            </div>
+                                                        </a> 
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>';
+
+            
+            echo $html;die;
+        }
+    }
 
 }
