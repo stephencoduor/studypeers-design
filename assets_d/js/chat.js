@@ -296,81 +296,12 @@ $(document).ready(function() {
       .show();
   });
 
-  $(document).on("click", ".open-chat,.see-all", function() {
-    $(".chat-wrapper").removeClass("hide-chat");
-    $("body").addClass("hide-scroll");
-    $(".chat-right")
-      .find(".close-icon-wrap")
-      .addClass("hide");
+  $("body").on("click", ".open-chat,.see-all", function() {
+    showBigGroupChatWindow();
   });
 
-  $("#myUL").on("click", "a", function() {
-    $(".chat-wrapper")
-      .addClass("small")
-      .removeClass("hide-chat");
-    $(".chat-wrapper")
-      .find(".chat-left")
-      .hide();
-  });
-  $(".chat-right").on("click", ".chat-close", function() {
-    $(".chat-wrapper")
-      .addClass("hide-chat")
-      .removeClass("small");
-    $(".chat-wrapper")
-      .find(".chat-left")
-      .show();
-
-    $(".chat-wrapper")
-      .addClass("hide-chat")
-      .removeClass("small");
-    $(".chat-wrapper")
-      .find(".chat-left")
-      .removeClass("hide");
-    $(".chat-header-left")
-      .find("h3")
-      .removeClass("show");
-    $(".basic-user-info").removeClass("hide");
-    $(".chat-right")
-      .find(".chat-content")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".chat-footer")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".video-icon")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".maximize")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".start-conversation")
-      .removeClass("show");
-
-    $(".chat-right")
-      .find(".chat-content")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".chat-footer")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".video-icon")
-      .removeClass("hide");
-    $(".chat-header-left")
-      .find("h3")
-      .removeClass("show");
-    $(".basic-user-info").removeClass("hide");
-    $(".chat-right")
-      .find(".hide-on-small")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".close-icon-wrap")
-      .removeClass("show");
-    $(".chat-right")
-      .find(".start-conversation")
-      .removeClass("show");
-    $(".chat-right")
-      .find(".add-user")
-      .removeClass("active");
+  $("body").on("click", ".main-close", function() {
+    removeElementAfterAddingNewGroup();
   });
 
   $(".open-start-conversation").click(function() {
@@ -804,6 +735,75 @@ function sendDocumentMessage(messageDocument, url) {
   $("#send_message_input").val("");
   $("#current_image_upload_src").val("");
   $("#append_image_after_upload").html("");
+}
+
+function showBigGroupChatWindow() {
+  $(".chat-wrapper").removeClass("hide-chat");
+  $("body").addClass("hide-scroll");
+  $(".chat-right")
+    .find(".close-icon-wrap")
+    .addClass("hide");
+}
+
+function removeElementAfterAddingNewGroup() {
+  $(".chat-wrapper")
+    .addClass("hide-chat")
+    .removeClass("small");
+  $(".chat-wrapper")
+    .find(".chat-left")
+    .show();
+
+  $(".chat-wrapper")
+    .addClass("hide-chat")
+    .removeClass("small");
+  $(".chat-wrapper")
+    .find(".chat-left")
+    .removeClass("hide");
+  $(".chat-header-left")
+    .find("h3")
+    .removeClass("show");
+  $(".basic-user-info").removeClass("hide");
+  $(".chat-right")
+    .find(".chat-content")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".chat-footer")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".video-icon")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".maximize")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".start-conversation")
+    .removeClass("show");
+
+  $(".chat-right")
+    .find(".chat-content")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".chat-footer")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".video-icon")
+    .removeClass("hide");
+  $(".chat-header-left")
+    .find("h3")
+    .removeClass("show");
+  $(".basic-user-info").removeClass("hide");
+  $(".chat-right")
+    .find(".hide-on-small")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".close-icon-wrap")
+    .removeClass("show");
+  $(".chat-right")
+    .find(".start-conversation")
+    .removeClass("show");
+  $(".chat-right")
+    .find(".add-user")
+    .removeClass("active");
 }
 
 $(".emojis-wysiwyg").emojioneArea({

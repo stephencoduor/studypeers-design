@@ -390,7 +390,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                     </div>
                 </div>
                 <div class="right-area">
-                    <a href="javascript:void(0)" class="minimize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/minimize.svg" class="change-icon" alt="Maximize Icon" /></a>
+                    <!-- <a href="javascript:void(0)" class="minimize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/minimize.svg" class="change-icon" alt="Maximize Icon" /></a> -->
                     <a href="javascript:void(0)" class="open-big-start"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/new_message.svg" alt="New Message Icon" /></a>
                 </div>
             </div>
@@ -429,9 +429,9 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/video-camera.svg" alt="Video Icon" /></a>
                 <a href="javascript:void(0)" class="hide-on-smallasd" data-toggle="modal" data-target="#chat-setting-popup"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
                 <a href="javascript:void(0)" class="add-user" id="open_add_new_group_memeber"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
-                <div class="hide-on-big close-icon-wrap">
+                <!-- <div class="hide-on-big close-icon-wrap">
                     <a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/close.svg" alt="New Message Icon" /></a>
-                </div>
+                </div> -->
             </div>
         </div>
         <div class="start-conversation">
