@@ -246,6 +246,7 @@ $(document).on("click", ".done-link", function() {
 });
 
 $("body").on("click", "#message_icon_id", function() {
+  $(".chat-dropdown").toggle();
   var UserInfo = JSON.parse(userData);
   $("#myUL").html("");
   $(".loader-wrap").show();
@@ -300,6 +301,7 @@ $(document).ready(function() {
 
   $("body").on("click", ".open-chat,.see-all", function() {
     showBigGroupChatWindow();
+    
   });
 
   $("body").on("click", ".main-close", function() {
@@ -745,6 +747,7 @@ function showBigGroupChatWindow() {
   $(".chat-right")
     .find(".close-icon-wrap")
     .addClass("hide");
+    $(".chat-dropdown").hide();
 }
 
 function removeElementAfterAddingNewGroup() {
