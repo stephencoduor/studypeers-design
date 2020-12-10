@@ -1569,23 +1569,59 @@
 
 
     function postCommentByReference(event, reference, reference_id, comment) { 
-            if (event.which == 13) {
-                
-                if(comment != ''){
-                    var url = '<?php echo base_url('profile/addCommentByRefrence') ?>';
-                    $.ajax({
-                      url: url,
-                      type: 'POST',
-                      data: {'comment': comment, 'reference_id': reference_id, 'reference': reference},
-                      success: function(result) {
-                        $('#'+reference+'_commentappend_'+reference_id).append(result);
+        if (event.which == 13) {
+            
+            if(comment != ''){
+                var url = '<?php echo base_url('profile/addCommentByRefrence') ?>';
+                $.ajax({
+                  url: url,
+                  type: 'POST',
+                  data: {'comment': comment, 'reference_id': reference_id, 'reference': reference},
+                  success: function(result) {
+                    $('#'+reference+'_commentappend_'+reference_id).append(result);
 
-                        $('#comment_input_'+reference+'_'+reference_id).val('');
-                      }
-                  });
-                }
-             }
-        };
+                    $('#comment_input_'+reference+'_'+reference_id).val('');
+                  }
+              });
+            }
+         }
+    }
+
+    function postCommentReply(event, comment_id, comment){
+        if (event.which == 13) {
+            
+            if(comment != ''){
+            var url = '<?php echo base_url('profile/postCommentReply') ?>';
+            $.ajax({
+              url: url,
+              type: 'POST',
+              data: {'comment': comment, 'comment_id': comment_id},
+              success: function(result) {
+                $('#commentreply_box_'+comment_id).append(result);
+                $("#comment_reply_"+comment_id).val('');
+              }
+            });
+         }
+        }
+    }
+
+    function likeCommentByReference(comment_id){
+        var url = '<?php echo base_url('profile/likeCommentByReference') ?>';
+        $.ajax({
+          url: url,
+          type: 'POST',
+          data: {'comment_id': comment_id},
+          success: function(result) {
+            $('#reactcomment_'+comment_id).show();
+            $('#comment_like_count_'+comment_id).html(result); 
+            if($('#like_text_'+comment_id).text() == 'Like') { 
+                $('#like_text_'+comment_id).text('Liked');
+            } else {
+                $('#like_text_'+comment_id).text('Like');
+            }
+          }
+        });
+    }
 
 </script>
 <script>
