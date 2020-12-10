@@ -210,6 +210,8 @@ $("body").on("click", "#submit_new_group_member", function() {
       alert("Something went wrong. Please try again");
     },
     complete: function() {
+      $("#multiple-select").selectator("destroy");
+      $("#multiple-select").empty();
       $("#submit_new_group_member").html("save");
       $("#groupMember").modal("hide");
     }

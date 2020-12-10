@@ -189,7 +189,6 @@ var CHAT_GROUP_ADDITIONS = {
           }
           $("#group_name_id").html(data.data.groupInfo.group_name);
           $("#curren_group_name_id").val(data.data.groupInfo.group_name);
-          $("#multiple").selectator("removeSelection");
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
 
           var messageJson = {
@@ -213,7 +212,10 @@ var CHAT_GROUP_ADDITIONS = {
       error: function() {
         alert("Error process request");
       },
-      complete: function(data) {}
+      complete: function() {
+        $("#multiple").selectator("destroy");
+        $("#multiple").empty();
+      }
     });
   },
   _AJX_USER_CHAT_GROUP_ON_ADD: function() {
@@ -451,101 +453,101 @@ $(document).ready(function() {
     $(".chat-right")
       .find(".start-conversation")
       .addClass("show");
-  });
 
-  $("#multiple").selectator({
-    showAllOptionsOnFocus: true,
-    searchFields: "value text subtitle right",
-    minSearchLength: 1,
-    load: function(search, callback) {
-      if (search.length < this.minSearchLength) return callback();
-      $.ajax({
-        url: "find-my-peers",
-        data: { search: search },
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-          callback(data);
-        },
-        error: function() {
-          callback();
-        }
-      });
-    },
-    render: {
-      selected_item: function(_item, escape) {
-        var html = "";
-        if (typeof _item.left !== "undefined")
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'selected_item_left"><img src="' +
-            escape(_item.left) +
-            '"></div>';
-        if (typeof _item.right !== "undefined")
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'selected_item_right">' +
-            escape(_item.right) +
-            "</div>";
-        html +=
-          '<div class="' +
-          "selectator_" +
-          'selected_item_title">' +
-          (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
-          "</div>";
-        if (typeof _item.subtitle !== "undefined")
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'selected_item_subtitle">' +
-            escape(_item.subtitle) +
-            "</div>";
-        html +=
-          '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
-
-        // check if the
-        $(".done-link").addClass("show");
-        return html;
+    $("#multiple").selectator({
+      showAllOptionsOnFocus: true,
+      searchFields: "value text subtitle right",
+      minSearchLength: 1,
+      load: function(search, callback) {
+        if (search.length < this.minSearchLength) return callback();
+        $.ajax({
+          url: "find-my-peers",
+          data: { search: search },
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            callback(data);
+          },
+          error: function() {
+            callback();
+          }
+        });
       },
-      option: function(_item, escape) {
-        console.log("asdad");
-        var html = "";
-        if (typeof _item.left !== "undefined")
+      render: {
+        selected_item: function(_item, escape) {
+          var html = "";
+          if (typeof _item.left !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_left"><img src="' +
+              escape(_item.left) +
+              '"></div>';
+          if (typeof _item.right !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_right">' +
+              escape(_item.right) +
+              "</div>";
           html +=
             '<div class="' +
             "selectator_" +
-            'option_left"><img src="' +
-            escape(_item.left) +
-            '"></div>';
-        if (typeof _item.right !== "undefined")
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'option_right">' +
-            escape(_item.right) +
+            'selected_item_title">' +
+            (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
             "</div>";
-        html +=
-          '<div class="' +
-          "selectator_" +
-          'option_title">' +
-          (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
-          "</div>";
-        if (typeof _item.subtitle !== "undefined")
+          if (typeof _item.subtitle !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_subtitle">' +
+              escape(_item.subtitle) +
+              "</div>";
           html +=
-            '<div class="' +
-            "selectator_" +
-            'option_subtitle">' +
-            escape(_item.subtitle) +
-            "</div>";
+            '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
 
-        if ($(".selectator_selected_items").html() == "") {
-          $(".done-link").removeClass("show");
+          // check if the
+          $(".done-link").addClass("show");
+          return html;
+        },
+        option: function(_item, escape) {
+          console.log("asdad");
+          var html = "";
+          if (typeof _item.left !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_left"><img src="' +
+              escape(_item.left) +
+              '"></div>';
+          if (typeof _item.right !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_right">' +
+              escape(_item.right) +
+              "</div>";
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_title">' +
+            (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+            "</div>";
+          if (typeof _item.subtitle !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_subtitle">' +
+              escape(_item.subtitle) +
+              "</div>";
+
+          if ($(".selectator_selected_items").html() == "") {
+            $(".done-link").removeClass("show");
+          }
+          return html;
         }
-        return html;
       }
-    }
+    });
   });
 
   $(document).on("click", ".chat-big", function() {
