@@ -191,6 +191,13 @@ div.time {
   font-size: 12px;
   font-style: normal;
 }
+#myUL span.text-center {
+  width: 100%;
+  text-align: center;
+  display: inline-block;
+  padding: 100px 0;
+  color: #ff0000;
+}
 .chat-wrapper {
   width: calc(100% - 275px);
   height: calc(100vh - 78px);
