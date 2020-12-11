@@ -210,6 +210,8 @@ $("body").on("click", "#submit_new_group_member", function() {
       alert("Something went wrong. Please try again");
     },
     complete: function() {
+      $("#multiple-select").selectator("destroy");
+      $("#multiple-select").empty();
       $("#submit_new_group_member").html("save");
       $("#groupMember").modal("hide");
     }
@@ -334,6 +336,11 @@ socket.on("connect", function() {
     status: "online"
   };
   socket.emit("online", JSON.stringify(online));
+  socket.emit(
+    "loadgroupmessage",
+    JSON.stringify({ user_id: UserInfo.user_id })
+  );
+  socket.emit("loadmessage", JSON.stringify({ userId: UserInfo.user_id }));
 });
 
 socket.on("connection_closed", function(data) {
@@ -348,7 +355,7 @@ socket.on("connection_closed", function(data) {
 // handle message after broadcast.
 
 socket.on("receivemessage", function(msg) {
-  // console.log(msg);
+  console.log(msg);
   // check if chat window is open or not.
   var userInfo = JSON.parse(userData);
   var userId = userInfo.user_id;
@@ -436,7 +443,7 @@ socket.on("receivemessage", function(msg) {
     $("#curren_group_members").val(JSON.stringify(groupMemberIds));
     $("#curren_group_name_id").val(msg.group_name);
     $("#group_name_id").text(msg.group_name);
-    $(".open-start-conversation").trigger("click");
+    $(".open-chat").trigger("click");
     socket.emit(
       "isonline",
       JSON.stringify({ user_id: msg.from_user_id, message: msg })
@@ -444,26 +451,6 @@ socket.on("receivemessage", function(msg) {
     socket.emit("getgroupmessages", JSON.stringify({ groupId: groupId }));
     createGroupHTML();
   }
-
-  // if (
-  //   $(".chat-left").hasClass("hide") &&
-  //   !$(".chat-wrapper").hasClass("small")
-  // ) {
-  //   console.log("inner 2--->");
-  //   $("#group_id_" + groupId).addClass("active");
-  //   $("#current_group_id").val(groupId);
-  //   $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-  //   $("#curren_group_name_id").val(msg.group_name);
-  //   $("#group_name_id").text(msg.group_name);
-  //   $(".open-start-conversation").trigger("click");
-  //   socket.emit(
-  //     "isonline",
-  //     JSON.stringify({ user_id: msg.from_user_id, message: msg })
-  //   );
-  //   createGroupHTML();
-  // }
-
-  //  receivingMessage(msg);
 });
 
 socket.on("knowstatus", data => {
@@ -568,7 +555,8 @@ socket.on("groupmessages", function(data) {
     //   });
     // }
 
-    createGroupHTML();
+    // createGroupHTML();
+    showBigGroupChatWindow();
   }
 });
 
@@ -599,6 +587,7 @@ $("body").on("click", ".message-top-header", function() {
       .addClass("active");
   }
 
+  $(".open-chat").trigger("click");
   socket.emit("getgroupmessages", JSON.stringify(findMessages));
 });
 
@@ -751,6 +740,11 @@ function formatTopMessageHeader(messageJson) {
 
 function formatTopMessageGroupListName(messageJson) {
   var message = messageJson.message;
+  var total = 0;
+
+  if (messageJson.total) {
+    total = messageJson.total;
+  }
 
   var currentProfile =
     '<img id="group_image_id_' +
@@ -788,7 +782,9 @@ function formatTopMessageGroupListName(messageJson) {
     messageJson.time +
     "</div>" +
     '<div class="info-wrap">' +
-    '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
+    '<span class="badge badge-pill badge-primary" data-batch="0">' +
+    total +
+    "</span>" +
     messageJson.group_name +
     "<p>" +
     message +
@@ -801,38 +797,6 @@ function formatTopMessageGroupListName(messageJson) {
 function appendChatRecords() {
   var mainContent = '<div class="chat-date">Sept 28</div>';
 }
-
-$(document).ready(function() {
-  SOCKET_CHAT._AJX_USER_CHAT_GROUP();
-  // SOCKET_CHAT.AJAX_LOAD_UNREAD_MESSAGE();
-});
-
-var SOCKET_CHAT = {
-  _AJX_USER_CHAT_GROUP: function() {
-    $.ajax({
-      url: "get-user-groups",
-      success: function(data) {
-        if (parseInt(data.code) == 200) {
-          if (data.data) {
-            socket.emit(
-              "loadgroupmessage",
-              JSON.stringify({ groupIds: data.data })
-            );
-          }
-        }
-      },
-      error: function() {
-        alert("Error process request");
-      },
-      complete: function() {
-        var userInfo = JSON.parse(userData);
-        var userId = userInfo.user_id;
-        socket.emit("loadmessage", JSON.stringify({ userId: userId }));
-      }
-    });
-  },
-  AJAX_LOAD_UNREAD_MESSAGE: function() {}
-};
 
 function receivingInitialMessage(messageJson, status) {
   var figureHTML = messageJson.media_url

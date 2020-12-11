@@ -189,7 +189,6 @@ var CHAT_GROUP_ADDITIONS = {
           }
           $("#group_name_id").html(data.data.groupInfo.group_name);
           $("#curren_group_name_id").val(data.data.groupInfo.group_name);
-          $("#multiple").selectator("removeSelection");
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
 
           var messageJson = {
@@ -213,7 +212,10 @@ var CHAT_GROUP_ADDITIONS = {
       error: function() {
         alert("Error process request");
       },
-      complete: function(data) {}
+      complete: function() {
+        $("#multiple").selectator("destroy");
+        $("#multiple").empty();
+      }
     });
   },
   _AJX_USER_CHAT_GROUP_ON_ADD: function() {
@@ -244,6 +246,7 @@ $(document).on("click", ".done-link", function() {
 });
 
 $("body").on("click", "#message_icon_id", function() {
+  $(".chat-dropdown").toggle();
   var UserInfo = JSON.parse(userData);
   $("#myUL").html("");
   $(".loader-wrap").show();
@@ -296,81 +299,13 @@ $(document).ready(function() {
       .show();
   });
 
-  $(document).on("click", ".open-chat,.see-all", function() {
-    $(".chat-wrapper").removeClass("hide-chat");
-    $("body").addClass("hide-scroll");
-    $(".chat-right")
-      .find(".close-icon-wrap")
-      .addClass("hide");
+  $("body").on("click", ".open-chat,.see-all", function() {
+    showBigGroupChatWindow();
+    
   });
 
-  $("#myUL").on("click", "a", function() {
-    $(".chat-wrapper")
-      .addClass("small")
-      .removeClass("hide-chat");
-    $(".chat-wrapper")
-      .find(".chat-left")
-      .hide();
-  });
-  $(".chat-right").on("click", ".chat-close", function() {
-    $(".chat-wrapper")
-      .addClass("hide-chat")
-      .removeClass("small");
-    $(".chat-wrapper")
-      .find(".chat-left")
-      .show();
-
-    $(".chat-wrapper")
-      .addClass("hide-chat")
-      .removeClass("small");
-    $(".chat-wrapper")
-      .find(".chat-left")
-      .removeClass("hide");
-    $(".chat-header-left")
-      .find("h3")
-      .removeClass("show");
-    $(".basic-user-info").removeClass("hide");
-    $(".chat-right")
-      .find(".chat-content")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".chat-footer")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".video-icon")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".maximize")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".start-conversation")
-      .removeClass("show");
-
-    $(".chat-right")
-      .find(".chat-content")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".chat-footer")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".video-icon")
-      .removeClass("hide");
-    $(".chat-header-left")
-      .find("h3")
-      .removeClass("show");
-    $(".basic-user-info").removeClass("hide");
-    $(".chat-right")
-      .find(".hide-on-small")
-      .removeClass("hide");
-    $(".chat-right")
-      .find(".close-icon-wrap")
-      .removeClass("show");
-    $(".chat-right")
-      .find(".start-conversation")
-      .removeClass("show");
-    $(".chat-right")
-      .find(".add-user")
-      .removeClass("active");
+  $("body").on("click", ".main-close", function() {
+    removeElementAfterAddingNewGroup();
   });
 
   $(".open-start-conversation").click(function() {
@@ -520,101 +455,101 @@ $(document).ready(function() {
     $(".chat-right")
       .find(".start-conversation")
       .addClass("show");
-  });
 
-  $("#multiple").selectator({
-    showAllOptionsOnFocus: true,
-    searchFields: "value text subtitle right",
-    minSearchLength: 1,
-    load: function(search, callback) {
-      if (search.length < this.minSearchLength) return callback();
-      $.ajax({
-        url: "find-my-peers",
-        data: { search: search },
-        type: "GET",
-        dataType: "json",
-        success: function(data) {
-          callback(data);
-        },
-        error: function() {
-          callback();
-        }
-      });
-    },
-    render: {
-      selected_item: function(_item, escape) {
-        var html = "";
-        if (typeof _item.left !== "undefined")
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'selected_item_left"><img src="' +
-            escape(_item.left) +
-            '"></div>';
-        if (typeof _item.right !== "undefined")
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'selected_item_right">' +
-            escape(_item.right) +
-            "</div>";
-        html +=
-          '<div class="' +
-          "selectator_" +
-          'selected_item_title">' +
-          (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
-          "</div>";
-        if (typeof _item.subtitle !== "undefined")
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'selected_item_subtitle">' +
-            escape(_item.subtitle) +
-            "</div>";
-        html +=
-          '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
-
-        // check if the
-        $(".done-link").addClass("show");
-        return html;
+    $("#multiple").selectator({
+      showAllOptionsOnFocus: true,
+      searchFields: "value text subtitle right",
+      minSearchLength: 1,
+      load: function(search, callback) {
+        if (search.length < this.minSearchLength) return callback();
+        $.ajax({
+          url: "find-my-peers",
+          data: { search: search },
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            callback(data);
+          },
+          error: function() {
+            callback();
+          }
+        });
       },
-      option: function(_item, escape) {
-        console.log("asdad");
-        var html = "";
-        if (typeof _item.left !== "undefined")
+      render: {
+        selected_item: function(_item, escape) {
+          var html = "";
+          if (typeof _item.left !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_left"><img src="' +
+              escape(_item.left) +
+              '"></div>';
+          if (typeof _item.right !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_right">' +
+              escape(_item.right) +
+              "</div>";
           html +=
             '<div class="' +
             "selectator_" +
-            'option_left"><img src="' +
-            escape(_item.left) +
-            '"></div>';
-        if (typeof _item.right !== "undefined")
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'option_right">' +
-            escape(_item.right) +
+            'selected_item_title">' +
+            (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
             "</div>";
-        html +=
-          '<div class="' +
-          "selectator_" +
-          'option_title">' +
-          (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
-          "</div>";
-        if (typeof _item.subtitle !== "undefined")
+          if (typeof _item.subtitle !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_subtitle">' +
+              escape(_item.subtitle) +
+              "</div>";
           html +=
-            '<div class="' +
-            "selectator_" +
-            'option_subtitle">' +
-            escape(_item.subtitle) +
-            "</div>";
+            '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
 
-        if ($(".selectator_selected_items").html() == "") {
-          $(".done-link").removeClass("show");
+          // check if the
+          $(".done-link").addClass("show");
+          return html;
+        },
+        option: function(_item, escape) {
+          console.log("asdad");
+          var html = "";
+          if (typeof _item.left !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_left"><img src="' +
+              escape(_item.left) +
+              '"></div>';
+          if (typeof _item.right !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_right">' +
+              escape(_item.right) +
+              "</div>";
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_title">' +
+            (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+            "</div>";
+          if (typeof _item.subtitle !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_subtitle">' +
+              escape(_item.subtitle) +
+              "</div>";
+
+          if ($(".selectator_selected_items").html() == "") {
+            $(".done-link").removeClass("show");
+          }
+          return html;
         }
-        return html;
       }
-    }
+    });
   });
 
   $(document).on("click", ".chat-big", function() {
@@ -804,6 +739,76 @@ function sendDocumentMessage(messageDocument, url) {
   $("#send_message_input").val("");
   $("#current_image_upload_src").val("");
   $("#append_image_after_upload").html("");
+}
+
+function showBigGroupChatWindow() {
+  $(".chat-wrapper").removeClass("hide-chat");
+  $("body").addClass("hide-scroll");
+  $(".chat-right")
+    .find(".close-icon-wrap")
+    .addClass("hide");
+    $(".chat-dropdown").hide();
+}
+
+function removeElementAfterAddingNewGroup() {
+  $(".chat-wrapper")
+    .addClass("hide-chat")
+    .removeClass("small");
+  $(".chat-wrapper")
+    .find(".chat-left")
+    .show();
+
+  $(".chat-wrapper")
+    .addClass("hide-chat")
+    .removeClass("small");
+  $(".chat-wrapper")
+    .find(".chat-left")
+    .removeClass("hide");
+  $(".chat-header-left")
+    .find("h3")
+    .removeClass("show");
+  $(".basic-user-info").removeClass("hide");
+  $(".chat-right")
+    .find(".chat-content")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".chat-footer")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".video-icon")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".maximize")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".start-conversation")
+    .removeClass("show");
+
+  $(".chat-right")
+    .find(".chat-content")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".chat-footer")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".video-icon")
+    .removeClass("hide");
+  $(".chat-header-left")
+    .find("h3")
+    .removeClass("show");
+  $(".basic-user-info").removeClass("hide");
+  $(".chat-right")
+    .find(".hide-on-small")
+    .removeClass("hide");
+  $(".chat-right")
+    .find(".close-icon-wrap")
+    .removeClass("show");
+  $(".chat-right")
+    .find(".start-conversation")
+    .removeClass("show");
+  $(".chat-right")
+    .find(".add-user")
+    .removeClass("active");
 }
 
 $(".emojis-wysiwyg").emojioneArea({

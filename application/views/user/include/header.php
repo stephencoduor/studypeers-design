@@ -339,21 +339,21 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 
 
 								<li class="message dropdown">
-									<a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+									<a href="javascript:void(0)" class="show-chat-dropdown">
 										<div class="messageBox">
 											<img src="<?php echo base_url(); ?>assets_d/images/message.svg" alt="chat" id="message_icon_id">
 										</div>
 										<span class="label label-success" id="chat_message_count"></span>
 									</a>
 
-									<div class="chat-dropdown dropdown-menu">
+									<div class="chat-dropdown">
 										<div class="chat-dropdown-header">
 											<div class="left-area">
 												Messages <span class="total-message">(03)</span>
 											</div>
 											<div class="right-area">
 												<a href="javascript:void(0)" class="open-chat"><img src="<?php echo base_url(); ?>assets_d/images/maximize.svg" alt="Maximize Icon" /></a>
-												<a href="javascript:void(0)" class="open-start-conversation"><img src="<?php echo base_url(); ?>assets_d/images/new_message.svg" alt="New Message" /></a>
+												<!-- <a href="javascript:void(0)" class="open-start-conversation"><img src="<?php echo base_url(); ?>assets_d/images/new_message.svg" alt="New Message" /></a> -->
 											</div>
 										</div>
 										<div class="chat-body-wrap">
@@ -372,13 +372,13 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 
 												</ul>
 												<div class="loader-wrap">
-												<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
-<g>
-  <path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#ea2e7e" stroke-width="12"></path>
-  <path d="M49 3L49 27L61 15L49 3" fill="#ea2e7e"></path>
-  <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
-</g>
-</svg>
+													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+														<g>
+															<path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#ea2e7e" stroke-width="12"></path>
+															<path d="M49 3L49 27L61 15L49 3" fill="#ea2e7e"></path>
+															<animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+														</g>
+													</svg>
 												</div>
 											</div>
 										</div>
