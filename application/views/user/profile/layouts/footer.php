@@ -396,7 +396,28 @@
             });
         }
 
+        $(document).on("click", ".loadAll", function() {
+            $('#timeline-post-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Posts..</p></div></div>');
+            $('#timeline-questions-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Questions..</p></div></div>');
+            $('#timeline-documents-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Documents..</p></div></div>');
+            $('#timeline-studyset-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Studysets..</p></div></div>');
+            $('#timeline-events-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Events..</p></div></div>');
+            $.ajax({
+                url: '<?php echo base_url(); ?>Profile/getMyFeeds',
+                type: 'post',
+                data: {
+                    "count": 0
+                },
+                success: function(result) {
+
+                    $('#timeline-feeds').html(result);
+                    $('.commentBoxWrap').hide();
+                }
+            });
+        });
+
         $(document).on("click", ".loadPosts", function() {
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getMyPosts',
                 type: 'post',
@@ -427,6 +448,7 @@
         }
 
         $(document).on("click", ".loadQuestions", function() {
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getMyQuestions',
                 type: 'post',
@@ -457,6 +479,7 @@
         }
 
         $(document).on("click", ".loadDocuments", function() {
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getMyDocuments',
                 type: 'post',
@@ -487,6 +510,7 @@
         }
 
         $(document).on("click", ".loadstudySets", function() {
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getMyStudyset',
                 type: 'post',
@@ -517,6 +541,7 @@
         }
 
         $(document).on("click", ".loadEvents", function() {
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getMyEvents',
                 type: 'post',
@@ -1603,6 +1628,34 @@
             });
          }
         }
+    }
+
+    function postImageComment(reference, reference_id){
+        var file_data = $('#comment_image_'+reference+'_'+reference_id).prop('files')[0];   
+        var form_data = new FormData();     
+                    
+        form_data.append('file', file_data);
+        form_data.append('reference_id', reference_id);
+        form_data.append('reference', reference);
+        // alert(form_data);  
+        var url = '<?php echo base_url('profile/postImgComment') ?>';                           
+        $.ajax({
+            url: url, // point to server-side PHP script 
+            dataType: 'text',  // what to expect back from the PHP script, if anything
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,                         
+            type: 'post',
+            success: function(result){
+                $('#'+reference+'_commentappend_'+reference_id).append(result);
+                $('#comment_image_'+reference+'_'+reference_id).val('');
+            }
+        });
+    }
+
+    function showReplyBox(id){
+        $('#show_reply_box_'+id).show();
     }
 
     function likeCommentByReference(comment_id){

@@ -168,7 +168,7 @@ die;*/
                     <div class="innerFeedTabs">
                         <div class="tabularLiist">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#all">All</a></li>
+                                <li class="active loadAll"><a data-toggle="tab" href="#all">All</a></li>
                                 <li><a class="loadPosts" data-toggle="tab" href="#posts">Posts</a></li>
                                 <li><a class="loadQuestions" data-toggle="tab" href="#questions">Questions</a></li>
                                 <li><a class="loadDocuments" data-toggle="tab" href="#documents">Documents</a></li>
