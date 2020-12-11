@@ -740,7 +740,7 @@ function formatTopMessageHeader(messageJson) {
 
 function formatTopMessageGroupListName(messageJson) {
   var message = messageJson.message;
-  var total = 0;
+  var total = "";
 
   if (messageJson.total) {
     total = messageJson.total;

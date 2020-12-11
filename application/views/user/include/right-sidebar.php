@@ -474,7 +474,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         </div>
         <div class="chat-footer">
             <div class="input-wrap">
-                <div class="img-preview">
+                <div class="img-preview hide">
                     <ul class="custom-image clearfix">
                         <li>
                             <ul class="custom-upload clearfix">

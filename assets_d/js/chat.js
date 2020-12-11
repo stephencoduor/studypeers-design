@@ -256,13 +256,15 @@ $("body").on("click", "#message_icon_id", function() {
 
 //--------------en of group chat create event-------------------------//
 
-$(document).ready(function() {
-  $("body").on("click", ".removePic", function() {
-    $(this)
-      .parents(".uploadBtn")
-      .remove();
-    $("#current_image_upload_src").val("");
-  });
+$("body").on("click", ".removePic", function() {
+  $(this)
+    .closest(".custom-image")
+    .parent()
+    .addClass("hide");
+  $(this)
+    .parents(".uploadBtn")
+    .remove();
+  $("#current_image_upload_src").val("");
 });
 
 $(document).ready(function() {
@@ -301,7 +303,6 @@ $(document).ready(function() {
 
   $("body").on("click", ".open-chat,.see-all", function() {
     showBigGroupChatWindow();
-    
   });
 
   $("body").on("click", ".main-close", function() {
@@ -581,6 +582,10 @@ function showPreviewChatImage(input) {
     reader.onload = function(e) {
       ele.previousElementSibling.src = e.target.result;
       $("#current_image_upload_src").val(e.target.result);
+      $("#append_image_after_upload")
+        .closest(".custom-image")
+        .parent()
+        .removeClass("hide");
       $("#append_image_after_upload").html(
         ' <li class="uploadBtn uploadBtnRestImage add">' +
           '<img class="img" src="' +
@@ -747,7 +752,7 @@ function showBigGroupChatWindow() {
   $(".chat-right")
     .find(".close-icon-wrap")
     .addClass("hide");
-    $(".chat-dropdown").hide();
+  $(".chat-dropdown").hide();
 }
 
 function removeElementAfterAddingNewGroup() {
