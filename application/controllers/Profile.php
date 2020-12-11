@@ -5,6 +5,7 @@ class Profile extends CI_Controller {
 	function __construct(){
 		parent::__construct();
 		$this->load->model('upload_model');
+        $this->load->library('upload');
 	}
 
 	public function getMyFeeds(){
@@ -1235,7 +1236,7 @@ class Profile extends CI_Controller {
     }
 
 
-     public function postCommentReply(){
+    public function postCommentReply(){
         if($this->input->post()){
             $comment = $this->input->post('comment');
             
@@ -1353,6 +1354,108 @@ class Profile extends CI_Controller {
             $count = $this->db->get_where('comment_like_master', array('comment_id' => $comment_id, 'status' => 1))->num_rows();
             echo $count;
         }
+    }
+
+
+    public function uploadCommentImg($f_n, $name) {
+            $fileTypes = array('jpg', 'jpeg', 'gif', 'png', 'zip', 'xlsx', 'cad', 'pdf', 'doc', 'docx', 'ppt', 'pptx', 'pps', 'ppsx', 'odt', 'xls', 'xlsx', '.mp3', 'm4a', 'ogg', 'wav', 'mp4', 'm4v', 'mov', 'wmv' ); // Allowed file extensions
+
+            $imagename  = time();
+            $config['upload_path']      = 'uploads/comments/';
+            $config['allowed_types']    = $fileTypes;
+            $config['max_size']         = '0';
+            $logo_file_name             = '';
+            $config['file_name']        =   $imagename;
+            $this->upload->initialize($config);
+
+            // $this->load->library('upload', $config);
+
+            if ($this->upload->do_upload($f_n)) {
+                $logo_data = $this->upload->data();             
+                $logo_file_name = $logo_data['file_name'];
+            }
+
+            if (!empty($logo_file_name)) {
+                $img = $logo_file_name;
+            } else {
+                $img = 'default.png';
+            }
+            return $img;
+    }
+
+
+    public function postImgComment(){
+        
+        if($this->input->post()){
+            
+            $reference_id = $this->input->post('reference_id');
+            $reference = $this->input->post('reference');
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+            $c_image = $this->uploadCommentImg('file', $_FILES['file']['name']);
+
+            $insertArr = array( 'reference' => $reference,
+                                'reference_id' => $reference_id,
+                                'user_id' => $user_id,
+                                'comment' => $c_image,
+                                'type'   => 1,
+                                'status' => '1',
+                                'created_at' => date('Y-m-d H:i:s')
+
+                            );
+
+            $this->db->insert('comment_master', $insertArr);
+            $comment_id = $this->db->insert_id();
+
+            $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
+
+            $html = '<div class="chatMsgBox">
+                                        <figure>
+                                            <img src="'.userImage($user_id).'" alt="User">
+                                        </figure>
+                                        <div class="right">
+                                            <div class="userWrapText">
+                                                <h4>'.$user_info['nickname'].'</h4>
+                                                <img src="'.base_url().'uploads/comments/'.$c_image.'" alt="comment" style="height: 70px;">
+                                                <div class="leftStatus">
+                                                    <a id="reactcomment_'.$comment_id.'" style="display:none;">
+                                                        <img src="'.base_url().'assets_d/images/like-dashboard.svg" alt="Like">
+                                                        <span id="comment_like_count_'.$comment_id.'">0</span>
+                                                    </a>
+                                                    <a onclick="likeCommentByReference('.$comment_id.')" id="like_text_'.$comment_id.'">Like</a>
+                                                    <a>Reply</a>
+                                                </div>
+                                            </div>
+                                            <div class="dotsBullet dropdown">
+                                                <img src="'.base_url().'assets_d/images/more.svg" alt="more" data-toggle="dropdown">
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="'.base_url().'assets_d/images/restricted.svg" alt="Save">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Hide/block</span>  
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="'.base_url().'assets_d/images/trash.svg" alt="Link">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Delete</span>
+                                                            </div>
+                                                        </a> 
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>';
+            echo $html;die;
+        }
+    
     }
 
 }
