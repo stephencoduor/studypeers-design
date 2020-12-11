@@ -793,7 +793,15 @@ a.done-link.show {
   border-radius: 24px;
   border: 1px solid #ccc;
 }
-
+.chat-footer .input-wrap .emojionearea.emojionearea-inline {
+  min-height:48px;
+}
+.emojionearea.emojionearea-inline>.emojionearea-editor{
+  top:10px;
+}
+.emojionearea.emojionearea-inline>.emojionearea-button{
+  top:13px;
+}
 .chat-user-list li.active {
   background: #f0f2f5;
 }
