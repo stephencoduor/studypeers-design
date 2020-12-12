@@ -618,7 +618,7 @@ class Profile extends CI_Controller {
 		$insertArr = array(
 			'post_content_html' 	=> $html_content,
 			'privacy_id'   			=> $privacy,
-			'is_comment_on'    		=> $is_comment_on,
+			'is_comment_on'    		=> $allow_comment,
 			'created_by'        	=> $user_id,
 			'created_at'    		=> date('Y-m-d H:i:s'),
 			'updated_at'    		=> date('Y-m-d H:i:s')
@@ -1199,7 +1199,18 @@ class Profile extends CI_Controller {
                                                         <span id="comment_like_count_'.$comment_id.'">0</span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('.$comment_id.')" id="like_text_'.$comment_id.'">Like</a>
-                                                    <a>Reply</a>
+                                                    <a onclick="showReplyBox('.$comment_id.')">Reply</a>
+                                                    <div id="show_reply_box_'.$comment_id.'" style="display: none;">
+                                                        <div id="commentreply_box_'.$comment_id.'">
+                                                        </div>
+                                                        <div class="commentWrapBox">
+                                                            <figure>
+                                                                <img src="'.userImage($user_id).'" alt="User">
+                                                            </figure>
+                                                            <input type="text" name="" placeholder="Reply" id="comment_reply_'.$comment_id.'" onkeypress="postCommentReply(event,'.$comment_id.', this.value)">
+                                                            
+                                                        </div> 
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="dotsBullet dropdown">
@@ -1261,7 +1272,7 @@ class Profile extends CI_Controller {
 
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
-            $html = '<div class="innerReplyBox" >
+            $html = '<div class="innerReplyBox">
                                                         <figure>
                                                             <img src="'.userImage($user_id).'"
                                                                 alt="User">
@@ -1274,7 +1285,11 @@ class Profile extends CI_Controller {
                                                                 <p>'.$comment.'</p>
                                                                 <div
                                                                     class="leftStatus">
-                                                                    <a>Like</a>
+                                                                    <a id="reactcomment_'.$comment_id.'" style="display:none;">
+                                                                            <img src="'.base_url().'assets_d/images/like-dashboard.svg" alt="Like">
+                                                                            <span id="comment_like_count_'.$comment_id.'"></span>
+                                                                    </a>
+                                                                    <a onclick="likeCommentByReference('.$comment_id.')" id="like_text_'.$comment_id.'">Like</a>
                                                                 </div>
                                                             </div>
                                                             <div
@@ -1423,7 +1438,18 @@ class Profile extends CI_Controller {
                                                         <span id="comment_like_count_'.$comment_id.'">0</span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('.$comment_id.')" id="like_text_'.$comment_id.'">Like</a>
-                                                    <a>Reply</a>
+                                                    <a onclick="showReplyBox('.$comment_id.')">Reply</a>
+                                                    <div id="show_reply_box_'.$comment_id.'" style="display: none;">
+                                                        <div id="commentreply_box_'.$comment_id.'">
+                                                        </div>
+                                                        <div class="commentWrapBox">
+                                                            <figure>
+                                                                <img src="'.userImage($user_id).'" alt="User">
+                                                            </figure>
+                                                            <input type="text" name="" placeholder="Reply" id="comment_reply_'.$comment_id.'" onkeypress="postCommentReply(event,'.$comment_id.', this.value)">
+                                                            
+                                                        </div> 
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="dotsBullet dropdown">
