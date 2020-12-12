@@ -618,7 +618,7 @@ class Profile extends CI_Controller {
 		$insertArr = array(
 			'post_content_html' 	=> $html_content,
 			'privacy_id'   			=> $privacy,
-			'is_comment_on'    		=> $is_comment_on,
+			'is_comment_on'    		=> $allow_comment,
 			'created_by'        	=> $user_id,
 			'created_at'    		=> date('Y-m-d H:i:s'),
 			'updated_at'    		=> date('Y-m-d H:i:s')
