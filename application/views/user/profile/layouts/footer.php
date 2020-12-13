@@ -213,6 +213,7 @@
 
         $(document).on("click", ".loadPosts", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserPosts',
                 type: 'post',
@@ -247,6 +248,7 @@
 
         $(document).on("click", ".loadQuestions", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserQuestions',
                 type: 'post',
@@ -281,6 +283,7 @@
 
         $(document).on("click", ".loadDocuments", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserDocuments',
                 type: 'post',
@@ -298,6 +301,7 @@
 
         $(document).on("click", ".loadstudySets", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserStudyset',
                 type: 'post',
@@ -332,6 +336,7 @@
 
         $(document).on("click", ".loadEvents", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserEvents',
                 type: 'post',
@@ -363,6 +368,28 @@
                 }
             });
         }
+
+        $(document).on("click", ".loadAll", function() {
+            $('#timeline-post-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Posts..</p></div></div>');
+            $('#timeline-questions-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Questions..</p></div></div>');
+            $('#timeline-documents-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Documents..</p></div></div>');
+            $('#timeline-studyset-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Studysets..</p></div></div>');
+            $('#timeline-events-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Events..</p></div></div>');
+            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $.ajax({
+                url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
+                type: 'post',
+                data: {
+                    "count": 0,
+                    "friend_id": friend_id
+                },
+                success: function(result) {
+
+                    $('#timeline-feeds').html(result);
+                    $('.commentBoxWrap').hide();
+                }
+            });
+        });
     </script>
 <?php } else { ?>
     <script>
