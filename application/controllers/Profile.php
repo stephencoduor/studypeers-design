@@ -588,7 +588,7 @@ class Profile extends CI_Controller {
 		$data['followings'] = $followings['total'];
 		$data['index_menu']  = 'timeline';
 		$data['title']  = 'Timeline | Studypeers';
-		$this->load->view('user/profile/layouts/header', $data);
+		$this->load->view('user/include/header', $data);
 		$this->load->view('user/profile/timeline');
 		$this->load->view('user/profile/add-post');
 		$this->load->view('user/profile/post-privacy');
@@ -803,7 +803,7 @@ class Profile extends CI_Controller {
 		$data['chk_if_follow']  = $chk_if_follow;
 		$data['followers'] = $followers['total'];
 		$data['followings'] = $followings['total'];
-		$this->load->view('user/profile/layouts/header', $data);
+		$this->load->view('user/include/header', $data);
 		$this->load->view('user/profile/friends-timeline');
 		$this->load->view('user/profile/layouts/footer');
 	}

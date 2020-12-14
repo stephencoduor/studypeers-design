@@ -16,10 +16,10 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/star-rating-svg.css">
 	<link href='<?php echo base_url(); ?>assets_d/css/fullCalendar.css' rel='stylesheet' />
-	<?php if ($index_menu != 'questions' && $index_menu != 'dashboard') { ?>
+	<?php if ($index_menu != 'questions' && $index_menu != 'dashboard' && $index_menu != 'timeline') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/study-set.css">
 	<?php } ?>
-	<?php if ($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'dashboard') { ?>
+	<?php if ($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'dashboard' && $index_menu != 'timeline') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/schedule.css">
 	<?php } ?>
 	<link href='<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.min.css' rel='stylesheet' />
@@ -31,8 +31,15 @@
 
 	<?php } ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/university.css">
-	<?php if ($index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'events' && $index_menu != 'dashboard') { ?>
+	<?php if ($index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'events' && $index_menu != 'dashboard' && $index_menu != 'timeline') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/document.css">
+	<?php } ?>
+
+	<?php if ($index_menu == 'timeline') { ?>
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/profile.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/loader.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/croppie.css">
+
 	<?php } ?>
 
 	<!-- Emoji Data -->
