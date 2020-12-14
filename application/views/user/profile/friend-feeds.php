@@ -657,7 +657,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 </div>
 <?php       }
            } if($value['reference'] == 'event') { 
-                
+                $chk_view = 0;
                 $event_detail = $this->db->get_where('event_master', array('id' => $value['reference_id']))->row_array();
                 $chk_if_shared = $this->db->get_where('share_master', array('reference_id' => $value['reference_id'], 'reference' => 'event', 'peer_id' => $user_id, 'status!=' => 4))->row_array();
                 if(($event_detail['privacy'] == 1) || !empty($chk_if_shared)){
@@ -1198,7 +1198,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         </div>
                     </div>
         <?php  } } else if($value['reference'] == 'studyset') {  
-            
+            $chk_view = 0;
             $studyset_detail = $this->db->get_where('study_sets', array('study_set_id' => $value['reference_id']))->row_array();
             
             $chk_if_shared = $this->db->get_where('share_master', array('reference_id' => $value['reference_id'], 'reference' => 'studyset', 'peer_id' => $user_id, 'status' => 1))->row_array();
