@@ -428,8 +428,10 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         </div>
                                     </li>
                                     
-                                    <li  <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')" <?php } ?>>
+                                    <li class="tooltip"  <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')" <?php } ?>>
+                                        <span class="tooltiptext">Comment is disabled</span>
                                         <a <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="cursor: not-allowed;" <?php } ?>>
+                                            
                                             <img
                                                 src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
                                                 alt="comment">
