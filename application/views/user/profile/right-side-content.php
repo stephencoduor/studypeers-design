@@ -56,7 +56,7 @@
         }?>
 
     </div>
-    <div class="boxwrap">
+    <!-- <div class="boxwrap">
         <h6>Latest Updates</h6>
         <p>Peers</p>
         <div class="listBox">
@@ -98,5 +98,5 @@
         <div class="listBox last">
             <div class="listWrap">Nothing to show</div>
         </div>
-    </div>
+    </div> -->
 </div>
