@@ -1,11 +1,28 @@
 <ul class="custom-tabs">
     <li><a href="javascript:void(0)" class="all-links active">All</a></li>
-    <li><a href="javascript:void(0)" class="total-likes"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/> <?php echo count($like_result); ?></a></li>
-    <li><a href="javascript:void(0)" class="total-claps"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/> <?php echo count($celebrate_result); ?> </a></li>
-    <li><a href="javascript:void(0)" class="support-links"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/> <?php echo count($support_result); ?> </a></li>
-    <li><a href="javascript:void(0)" class="curious-links"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/> <?php echo count($insightful_result); ?> </a></li>
-    <li><a href="javascript:void(0)" class="insight-links"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/> <?php echo count($curious_result); ?> </a></li>
-    <li><a href="javascript:void(0)" class="love-links"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/> <?php echo count($love_result); ?> </a></li>
+
+    <?php if(count($like_result) != 0) { ?>
+        <li><a href="javascript:void(0)" class="total-likes"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/> <?php echo count($like_result); ?></a></li>
+    <?php } ?>
+    
+    <?php if(count($celebrate_result) != 0) { ?>
+        <li><a href="javascript:void(0)" class="total-claps"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/> <?php echo count($celebrate_result); ?> </a></li>
+    <?php } ?>
+
+    <?php if(count($support_result) != 0) { ?>
+        <li><a href="javascript:void(0)" class="support-links"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/> <?php echo count($support_result); ?> </a></li>
+    <?php } ?>
+
+    <?php if(count($insightful_result) != 0) { ?>
+        <li><a href="javascript:void(0)" class="curious-links"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/> <?php echo count($insightful_result); ?> </a></li>
+    <?php } ?>
+
+    <?php if(count($curious_result) != 0) { ?>
+        <li><a href="javascript:void(0)" class="insight-links"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/> <?php echo count($curious_result); ?> </a></li>
+    <?php } ?>
+    <?php if(count($love_result) != 0) { ?>
+        <li><a href="javascript:void(0)" class="love-links"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/> <?php echo count($love_result); ?> </a></li>
+    <?php } ?>
     
 </ul>
 <div class="tab-content">

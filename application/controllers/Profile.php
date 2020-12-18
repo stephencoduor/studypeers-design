@@ -1199,7 +1199,7 @@ class Profile extends CI_Controller {
                                                         <span id="comment_like_count_'.$comment_id.'">0</span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('.$comment_id.')" id="like_text_'.$comment_id.'">Like</a>
-                                                    <a onclick="showReplyBox('.$comment_id.')">Reply</a>
+                                                    <a onclick="showReplyBox('.$comment_id.')">Reply <span style="display:none;" id="comment_reply_count_'.$comment_id.'">(0)</span></a>
                                                     <div id="show_reply_box_'.$comment_id.'" style="display: none;">
                                                         <div id="commentreply_box_'.$comment_id.'">
                                                         </div>
@@ -1252,6 +1252,7 @@ class Profile extends CI_Controller {
             $comment = $this->input->post('comment');
             
             $comment_id = $this->input->post('comment_id');
+            $parent_id = $comment_id;
 
             $comment_details = $this->db->get_where('comment_master', array('id' => $comment_id))->row_array();
 
@@ -1271,6 +1272,8 @@ class Profile extends CI_Controller {
             $comment_id = $this->db->insert_id();
 
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
+
+            $comment_replies = $this->db->get_where('comment_master', array('comment_parent_id' => $parent_id, 'status' => 1))->num_rows();
 
             $html = '<div class="innerReplyBox">
                                                         <figure>
@@ -1337,7 +1340,11 @@ class Profile extends CI_Controller {
                                                             </div>
                                                         </div>
                                                     </div>';
-            echo $html;die;
+
+            $count = '('.$comment_replies.')';
+            $result['html'] = $html; 
+            $result['count'] = $count; 
+            print_r(json_encode($result));die;
 
         }
     }
@@ -1438,7 +1445,7 @@ class Profile extends CI_Controller {
                                                         <span id="comment_like_count_'.$comment_id.'">0</span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('.$comment_id.')" id="like_text_'.$comment_id.'">Like</a>
-                                                    <a onclick="showReplyBox('.$comment_id.')">Reply</a>
+                                                    <a onclick="showReplyBox('.$comment_id.')">Reply <span style="display:none;" id="comment_reply_count_'.$comment_id.'">(0)</span></a>
                                                     <div id="show_reply_box_'.$comment_id.'" style="display: none;">
                                                         <div id="commentreply_box_'.$comment_id.'">
                                                         </div>

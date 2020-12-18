@@ -3659,6 +3659,7 @@ figcaption a {
   position: relative;
   display: inline-block;
   z-index: initial;
+  opacity: 1;
 }
 
 .tooltip .tooltiptext {
@@ -3674,7 +3675,7 @@ figcaption a {
   bottom: 150%;
   left: 50%;
   margin-left: -75px;
-  opacity: 0;
+  
   transition: opacity 0.3s;
 }
 

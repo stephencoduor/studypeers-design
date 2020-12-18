@@ -360,7 +360,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                 <img
                                                     src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
                                                     alt="comment">
-                                                <span><?php echo @$posts['post_details']->comments_count; ?></span>
+                                                <span><?php echo count($get_comments); ?></span>
                                             </a>
                                         </li>
                                         <li>
@@ -477,7 +477,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     
@@ -910,7 +910,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             <li>
                                                 <a>
                                                     <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                                    <span data-toggle="modal" data-target="#reations-popup" >05</span>
+                                                    <span data-toggle="modal" data-target="#reations-popup" ><?php echo count($get_comments); ?></span>
                                                 </a>
                                             </li>
                                             <li>
@@ -1019,7 +1019,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('event', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     
@@ -1370,7 +1370,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                            <span>05</span>
+                                            <span><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
                                     <li>
@@ -1479,7 +1479,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('studyset', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     
@@ -1824,7 +1824,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                            <span>05</span>
+                                            <span><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
                                     <li>
@@ -1933,7 +1933,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('document', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     

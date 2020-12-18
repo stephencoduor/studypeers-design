@@ -1697,6 +1697,10 @@
         $('#'+reference+'_comment_'+reference_id).show();
     }
 
+    function hideCommentBoxWrap(reference,reference_id){
+        $('#'+reference+'_comment_'+reference_id).hide();
+    }
+
 
     function postCommentByReference(event, reference, reference_id, comment) { 
         if (event.which == 13) {
@@ -1726,8 +1730,11 @@
               url: url,
               type: 'POST',
               data: {'comment': comment, 'comment_id': comment_id},
+              dataType: 'json',
               success: function(result) {
-                $('#commentreply_box_'+comment_id).append(result);
+                $('#commentreply_box_'+comment_id).append(result.html);
+                $('#comment_reply_count_'+comment_id).show();
+                $('#comment_reply_count_'+comment_id).html(result.count);
                 $("#comment_reply_"+comment_id).val('');
               }
             });
@@ -1770,13 +1777,24 @@
           type: 'POST',
           data: {'comment_id': comment_id},
           success: function(result) {
-            $('#reactcomment_'+comment_id).show();
-            $('#comment_like_count_'+comment_id).html(result); 
-            if($('#like_text_'+comment_id).text() == 'Like') { 
-                $('#like_text_'+comment_id).text('Liked');
+            if(result != 0) {
+                $('#reactcomment_'+comment_id).show();
+                $('#comment_like_count_'+comment_id).html(result); 
+                if($('#like_text_'+comment_id).text() == 'Like') { 
+                    $('#like_text_'+comment_id).text('Liked');
+                } else {
+                    $('#like_text_'+comment_id).text('Like');
+                }
             } else {
-                $('#like_text_'+comment_id).text('Like');
+                $('#reactcomment_'+comment_id).hide();
+                $('#comment_like_count_'+comment_id).html(result); 
+                if($('#like_text_'+comment_id).text() == 'Like') { 
+                    $('#like_text_'+comment_id).text('Liked');
+                } else {
+                    $('#like_text_'+comment_id).text('Like');
+                }
             }
+            
           }
         });
     }
