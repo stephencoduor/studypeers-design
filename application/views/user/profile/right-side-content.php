@@ -53,7 +53,7 @@
         
             
             <div class="completeNow">
-                <button data-toggle="tab" href="#profile" class="event_action">Complete Now</button>
+                <button data-toggle="tab" href="#profile" class="event_action" onclick="activateProfileTab()">Complete Now</button>
             </div>
     
 

@@ -145,11 +145,11 @@ die;*/
                         </div>
                     </div>
                     <div class="tabularLiist">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" id="main-tab">
                             <li class="<?php if (!isset($_GET['tab'])) {
                                 echo "active";
                             } ?>"><a data-toggle="tab" href="#feed">Feeds</a></li>
-                            <li><a data-toggle="tab" href="#profile">Profile</a></li>
+                            <li id="profile-tab"><a data-toggle="tab" href="#profile">Profile</a></li>
                             <li class="<?php if (isset($_GET['tab']) && ($_GET['tab'] == 'peers')) {
                                 echo "active";
                             } ?>"><a data-toggle="tab" href="#peers">Peers</a></li>

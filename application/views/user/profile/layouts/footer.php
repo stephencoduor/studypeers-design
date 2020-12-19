@@ -895,7 +895,8 @@
         });
         $('#addPostForm').on("submit", function(e) {
             e.preventDefault();
-            $('.loading').show();
+            $('.ajax-loading').show();
+            $('#createPost').modal('hide');
 
             var formData = new FormData(this);
             var url = $(this).attr('action');
@@ -907,9 +908,16 @@
             } else {
                 var allow_comment = 0;
             }
+
+            if ($("#bell-announcement").hasClass("notification-disabled")) {
+                var announcement = 0;
+            } else {
+                var announcement = 1;  
+            }
             formData.append('html_content', html_content);
             formData.append('privacy', privacy);
             formData.append('allow_comment', allow_comment);
+            formData.append('announcement', announcement);
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -922,7 +930,7 @@
                     if (result == true) {
                         window.location.href = base_url + 'Profile/redirect_page?status=' + result;
                     }
-                    $('.loading').hide();
+                    $('.ajax-loading').hide();
                 }
             });
 
@@ -2075,6 +2083,11 @@
                 $('#q_count_' + question_id).html(result);
             }
         });
+    }
+
+    function activateProfileTab(){
+        $('#main-tab li').removeClass('active');
+        $('#profile-tab').addClass('active');
     }
 </script>
 

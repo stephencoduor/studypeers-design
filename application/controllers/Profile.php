@@ -611,6 +611,7 @@ class Profile extends CI_Controller {
 		$privacy = $this->input->post('privacy');
 		$allow_comment = $this->input->post('allow_comment');
 		$is_comment_on = 0;
+        $announcement  = $this->input->post('announcement');
 
 		if($allow_comment == 'on'){
 			$is_comment_on = 1;
@@ -619,6 +620,7 @@ class Profile extends CI_Controller {
 			'post_content_html' 	=> $html_content,
 			'privacy_id'   			=> $privacy,
 			'is_comment_on'    		=> $allow_comment,
+            'is_announcement'       => $announcement,
 			'created_by'        	=> $user_id,
 			'created_at'    		=> date('Y-m-d H:i:s'),
 			'updated_at'    		=> date('Y-m-d H:i:s')

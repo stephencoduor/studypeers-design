@@ -27,7 +27,13 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
             $get_comments = $this->db->get_where('comment_master', array('reference_id' => $value['reference_id'], 'reference' => 'Post', 'comment_parent_id' => 0, 'status' => 1))->result_array();
 
 ?>
-                <div class="box-card">
+                <div class="box-card message">
+                    <?php if($posts['post_details']->is_announcement == 1) { ?>
+                        <div class="eventMessage">
+                            <img src="<?php echo base_url(); ?>assets_d/images/alert.svg" alt="Ring"> 
+                        </div>
+                    <?php } ?>
+                    
                     <div class="dropdown dropdownToggleMenu">
                         <img
                             src="<?php echo base_url(); ?>assets_d/images/more.svg"

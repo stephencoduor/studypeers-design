@@ -1076,3 +1076,30 @@ figcaption a {
 .tooltip:hover .tooltiptext {
   visibility: visible;
 }
+
+.ajax-loading{
+    display: none;
+    position: fixed;
+    z-index: 999;
+    height: 1em;
+    /*width: 2em;*/
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 200px;
+    right: 0;
+}
+
+.ajax-loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    background: radial-gradient(rgba(20, 20, 20,.4), rgba(0, 0, 0, .4));
+
+  background: -webkit-radial-gradient(rgba(20, 20, 20,.4), rgba(0, 0, 0,.4));
+}
