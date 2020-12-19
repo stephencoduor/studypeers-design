@@ -1185,6 +1185,8 @@ class Profile extends CI_Controller {
 
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
+            $count = $this->db->get_where('comment_master', array('reference_id' => $reference_id, 'reference' => $reference, 'comment_parent_id' => 0, 'status' => 1))->num_rows();
+
             $html = '<div class="chatMsgBox">
                                         <figure>
                                             <img src="'.userImage($user_id).'" alt="User">
@@ -1241,8 +1243,56 @@ class Profile extends CI_Controller {
                                         </div>
                                     </div>';
 
-            
-            echo $html;die;
+            $result['html'] = $html;
+            $result['count'] = $count;
+            print_r(json_encode($result));die;
+        }
+    }
+
+
+    public function deletePost(){
+        if($this->input->post()){
+            $delete_reference_id = $this->input->post('delete_reference_id');
+
+            $reference_details = $this->db->get_where('reference_master', array('reference_id' => $delete_reference_id))->row_array();
+
+            if($reference_details['reference'] == 'Post'){
+                $this->db->where(array('id' => $delete_reference_id));
+                $this->db->delete('posts');
+
+                $this->db->where(array('post_id' => $delete_reference_id));
+                $this->db->delete('post_documents');
+
+                $this->db->where(array('post_id' => $delete_reference_id));
+                $this->db->delete('post_images');
+
+                $this->db->where(array('post_id' => $delete_reference_id));
+                $this->db->delete('post_poll_options');
+
+                $this->db->where(array('post_id' => $delete_reference_id));
+                $this->db->delete('post_videos');
+
+                $this->db->query("DELETE FROM comment_like_master WHERE comment_id in (select id from comment_master where reference_id = $delete_reference_id AND reference = 'Post')");
+
+                
+
+                $this->db->where(array("comment_master.reference_id"=>$delete_reference_id,"comment_master.reference"=>'Post'));
+                $this->db->delete('comment_master');
+
+                $this->db->where(array("reaction_master.reference_id"=>$delete_reference_id,"reaction_master.reference"=>'Post'));
+                $this->db->delete('reaction_master');
+
+                $this->db->where(array('reference_id' => $delete_reference_id));
+                $this->db->delete('reference_master');
+            }
+
+            $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Posts Deleted Successfully.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button></div>';
+            $this->session->set_flashdata('flash_message', $message);
+
+            redirect(site_url('Profile/timeline'));
+
         }
     }
 
@@ -1431,6 +1481,8 @@ class Profile extends CI_Controller {
 
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
+            $count = $this->db->get_where('comment_master', array('reference_id' => $reference_id, 'reference' => $reference, 'comment_parent_id' => 0, 'status' => 1))->num_rows();
+
             $html = '<div class="chatMsgBox">
                                         <figure>
                                             <img src="'.userImage($user_id).'" alt="User">
@@ -1486,7 +1538,9 @@ class Profile extends CI_Controller {
                                             </div>
                                         </div>
                                     </div>';
-            echo $html;die;
+            $result['html'] = $html;
+            $result['count'] = $count;
+            print_r(json_encode($result));die;
         }
     
     }

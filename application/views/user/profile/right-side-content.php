@@ -1,20 +1,23 @@
 <div class="right">
+    <?php
+        $complete_per = 40;
+        if(!empty($user_detail['about']) && !empty($user_detail['high_School'])){
+            $complete_per += 30;
+        }
+        if(!empty($user_detail['fb_link'])){
+            $complete_per += 15;
+        }
+        if(!empty($user_detail['user_location'])){
+            $complete_per += 15;
+        }
+    ?>
+    <?php if($complete_per != 100){ ?>
     <div class="boxwrap completeProfile">
         <h6>Complete your profile</h6>
         <p>Current status of your profile</p>
 
-        <?php
-            $complete_per = 40;
-            if(!empty($user_detail['about']) && !empty($user_detail['high_School'])){
-                $complete_per += 30;
-            }
-            if(!empty($user_detail['fb_link'])){
-                $complete_per += 15;
-            }
-            if(!empty($user_detail['user_location'])){
-                $complete_per += 15;
-            }
-        ?>
+        
+        
         <div class="profileProgressBar">
             <div class="progress mx-auto" data-value='<?php echo $complete_per ; ?>'>
 															          <span class="progress-left">
@@ -47,15 +50,15 @@
                 <div class="complete">Complete</div>
             </div>
         </div>
-        <?php if($complete_per != 100){
-            ?>
+        
+            
             <div class="completeNow">
-                <button type="button" class="event_action">Complete Now</button>
+                <button data-toggle="tab" href="#profile" class="event_action">Complete Now</button>
             </div>
-            <?php
-        }?>
+    
 
     </div>
+    <?php } ?>
     <!-- <div class="boxwrap">
         <h6>Latest Updates</h6>
         <p>Peers</p>

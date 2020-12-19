@@ -34,6 +34,21 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             alt="toggle" data-toggle="dropdown">
                         <ul class="dropdown-menu" role="menu"
                             aria-labelledby="menu1">
+                            <li role="presentation" class="deleteReferenceById" data-toggle="modal" data-target="#confirmationModalDeletePost" data-id="<?= $value['reference_id']; ?>">
+                                <a role="menuitem" tabindex="-1"
+                                   href="javascript:void(0);">
+                                    <div class="left">
+                                        <img
+                                            src="<?php echo base_url(); ?>assets_d/images/hide.svg"
+                                            alt="Hide Post">
+                                    </div>
+                                    <div class="right">
+                                        <span>Delete this post</span>
+                                        <p>I don't want to keep this post in my
+                                            feed</p>
+                                    </div>
+                                </a>
+                            </li>
                             <li role="presentation">
                                 <a role="menuitem" tabindex="-1"
                                    href="javascript:void(0);">
@@ -339,7 +354,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                 <img
                                                     src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
                                                     alt="comment">
-                                                <span><?php echo count($get_comments); ?></span>
+                                                <span id="Post_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                             </a>
                                         </li>
                                         <li>
@@ -428,8 +443,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         </div>
                                     </li>
                                     
-                                    <li class="tooltip"  <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')" <?php } ?>>
-                                        <span class="tooltiptext">Comment is disabled</span>
+                                    <li  <?php if (@$posts['post_details']->is_comment_on != 1) { ?>  class="tooltip" style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')" <?php } ?>>
+                                        <?php if (@$posts['post_details']->is_comment_on != 1) { ?><span class="tooltiptext">Comment is disabled</span><?php } ?>
                                         <a <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="cursor: not-allowed;" <?php } ?>>
                                             
                                             <img
@@ -495,7 +510,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                         <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
-                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <?php if(!empty($comment_replies)) { ?> (<?php echo count($comment_replies); ?>) <?php } ?> </a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
                                                     <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
                                                         <div id="commentreply_box_<?php echo $value['id']; ?>">
                                                             <?php foreach ($comment_replies as $key2 => $value2) { 
@@ -887,7 +903,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             <li>
                                                 <a>
                                                     <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                                    <span><?php echo count($get_comments); ?></span>
+                                                    <span id="event_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                                 </a>
                                             </li>
                                             <li>
@@ -1033,7 +1049,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                         <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
-                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <?php if(!empty($comment_replies)) { ?> (<?php echo count($comment_replies); ?>) <?php } ?> </a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
                                                     <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
                                                         <div id="commentreply_box_<?php echo $value['id']; ?>">
                                                             <?php foreach ($comment_replies as $key2 => $value2) { 
@@ -1345,7 +1362,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                            <span><?php echo count($get_comments); ?></span>
+                                            <span id="studyset_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
                                     <li>
@@ -1795,7 +1812,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                            <span><?php echo count($get_comments); ?></span>
+                                            <span id="document_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
                                     <li>
@@ -1941,7 +1958,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                         <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
-                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <?php if(!empty($comment_replies)) { ?> (<?php echo count($comment_replies); ?>) <?php } ?> </a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
                                                     <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
                                                         <div id="commentreply_box_<?php echo $value['id']; ?>">
                                                             <?php foreach ($comment_replies as $key2 => $value2) { 

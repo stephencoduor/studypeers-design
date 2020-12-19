@@ -149,6 +149,33 @@
     </div>
 </div>
 
+<div class="modal fade" id="confirmationModalDeletePost" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Confirmation</h4>
+                <div class="row">
+                    <h6 class="modalText">Are you sure to delete this Post !</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form method="post" action="<?php echo base_url(); ?>profile/deletePost">
+                            <div class="form-group button">
+                                <input type="hidden" name="delete_reference_id" id="delete_reference_id" value="">
+                                
+                                <button type="button" class="transparentBtn highlight" data-dismiss="modal">No</button>
+                                <button type="submit" class="filterBtn">Yes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="modal fade" id="reportModal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
@@ -1711,9 +1738,10 @@
                   url: url,
                   type: 'POST',
                   data: {'comment': comment, 'reference_id': reference_id, 'reference': reference},
+                  dataType: 'json',
                   success: function(result) {
-                    $('#'+reference+'_commentappend_'+reference_id).append(result);
-
+                    $('#'+reference+'_commentappend_'+reference_id).append(result.html);
+                    $('#'+reference+'_comment_count_'+reference_id).html(result.count);
                     $('#comment_input_'+reference+'_'+reference_id).val('');
                   }
               });
@@ -1759,8 +1787,10 @@
             processData: false,
             data: form_data,                         
             type: 'post',
+            dataType: 'json',
             success: function(result){
-                $('#'+reference+'_commentappend_'+reference_id).append(result);
+                $('#'+reference+'_commentappend_'+reference_id).append(result.html);
+                $('#'+reference+'_comment_count_'+reference_id).html(result.count);
                 $('#comment_image_'+reference+'_'+reference_id).val('');
             }
         });
@@ -1927,6 +1957,12 @@
         var question_id = $(this).data('value');
         $(".modal-body #answer_id").val(answer_id);
         $(".modal-body #best_question_id").val(question_id);
+    });
+
+    $(document).on("click", ".deleteReferenceById", function() {
+        var ref_id = $(this).data('id');
+        $(".modal-body #delete_reference_id").val(ref_id);
+
     });
 
     function validateReport() { 
