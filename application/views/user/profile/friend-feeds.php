@@ -284,73 +284,107 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 }
                             }
                             ?>
-                            <?php if (count($posts['post_poll_options']) > 0) {
-                                
-                                foreach ($posts['post_poll_options'] as $options) {
+                            <?php if (count($posts['post_poll_options']) > 0) { 
+                                $total = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id']))->num_rows();
+                                $user_chk_option = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id'], 'user_id' => $login_user_id))->row_array();
+                                $option_id = '';
+                                if(!empty($user_chk_option)){
+                                    $option_id = $user_chk_option['poll_option_id'];
+                                }
+                            ?>
+                                <div id="poll_div_<?= $value['reference_id']; ?>">
+                                    <?php foreach ($posts['post_poll_options'] as $options) {
+                                        $chk = '';
+                                        if(@$options['id'] == $option_id) {
+                                            $chk = 'checked="checked"';
+                                        }
+
+                                        $count = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id'], 'poll_option_id' => @$options['id']))->num_rows();
+                                        if($count != 0) {
+                                            $per = ($count / $total)*100;
+                                        } else {
+                                            $per = 0;
+                                        }
+                                        $this->db->select('user_poll_data.*,user.username,user.first_name, user.last_name');
+                                        $this->db->join('user','user.id=user_poll_data.user_id');
+                                        
+                                        $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$value['reference_id'], 'poll_option_id' => @$options['id']))->result_array(); 
                                     ?>
-                                    <div class="selectedPollOptions">
-                                        <label class="dashRadioWrap">
-                                            <div class="progressBar">
-                                                <div class="progress">
-                                                    <div class="progressValues">
-                                                        <div class="leftValue">
-                                                            <?php echo @$options['options']; ?>
-                                                        </div>
-                                                        <div
-                                                            class="rightValues">
-                                                            <p>75%</p>
+                                        <div class="selectedPollOptions">
+                                            <label class="dashRadioWrap">
+                                                <div class="progressBar">
+                                                    <div class="progress">
+                                                        <div class="progressValues">
+                                                            <div class="leftValue">
+                                                                <?php echo @$options['options']; ?>
+                                                            </div>
                                                             <div
-                                                                class="eventActionWrap">
-                                                                <ul>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li class="more">
-                                                                        +5
-                                                                    </li>
-                                                                </ul>
+                                                                class="rightValues">
+                                                                <p><?= $per; ?>%</p>
+                                                                <?php if(!empty($user_list)) { ?>
+                                                                <div class="eventActionWrap userPollList" data-toggle="modal" data-id="<?= @$options['id']; ?>" data-target="#userPollList">
+                                                                    <ul>
+                                                                        <?php if(!empty($user_list[0])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[0]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[1])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[1]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[2])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[2]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[3])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[3]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[4])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[4]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } $left_count = count($user_list) - 5; ?>
+                                                                        <?php if($left_count > 0) { ?>
+                                                                            <li class="more">
+                                                                                +<?= $left_count; ?>
+                                                                            </li>
+                                                                        <?php } ?>
+                                                                    </ul>
+                                                                </div>
+                                                                <?php } ?>
                                                             </div>
                                                         </div>
+                                                        <div class="progress-bar"
+                                                             role="progressbar"
+                                                             aria-valuenow="<?= $per; ?>"
+                                                             aria-valuemin="0"
+                                                             aria-valuemax="100"
+                                                             style="width:<?= $per; ?>%"></div>
                                                     </div>
-                                                    <div class="progress-bar"
-                                                         role="progressbar"
-                                                         aria-valuenow="75"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"
-                                                         style="width:70%"></div>
                                                 </div>
-                                            </div>
-                                            <input type="radio"
-                                                   checked="checked"
-                                                   name="radio">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <?php
-                                }
-                            }
+                                                <input type="radio" <?= $chk; ?> name="radio" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <?php
+                                    } ?>
+                                </div>
+                            <?php }
                             ?>
 
                             <div class="socialStatus">

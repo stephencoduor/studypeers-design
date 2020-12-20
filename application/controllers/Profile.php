@@ -1683,7 +1683,7 @@ class Profile extends CI_Controller {
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
                             <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
-                        </section>';
+                        </section></div>';
                         
                         
             
