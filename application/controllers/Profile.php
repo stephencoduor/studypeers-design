@@ -1594,7 +1594,7 @@ class Profile extends CI_Controller {
                                                                 class="rightValues">
                                                                 <p>'.$per.'%</p>';
                                                                 if(!empty($user_list)) { 
-                                                                $html.= '<div class="eventActionWrap">
+                                                                $html.= '<div class="eventActionWrap userPollList" data-toggle="modal" data-id="'.$value['id'].'" data-target="#userPollList">
                                                                     <ul>';
                                                                         if(!empty($user_list[0])) { 
                                                                             $html.= '<li>
@@ -1661,6 +1661,34 @@ class Profile extends CI_Controller {
             echo $html;die;
 
         }
+    }
+
+
+    public function getPeersPollList(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        
+
+        $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('poll_option_id' => $id))->result_array(); 
+
+        $html = '';
+
+        foreach ($user_list as $key => $value) {
+            
+            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
+            
+            
+                $html.= '<div ><section class="list"><section class="left" >
+                            <figure>
+                                <img src="'.userImage($peer['userID']).'" alt="user">
+                            </figure>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
+                        </section>';
+                        
+                        
+            
+        }
+        echo $html;die;
     }
 
 }

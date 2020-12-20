@@ -317,7 +317,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                                 class="rightValues">
                                                                 <p><?= $per; ?>%</p>
                                                                 <?php if(!empty($user_list)) { ?>
-                                                                <div class="eventActionWrap">
+                                                                <div class="eventActionWrap userPollList" data-toggle="modal" data-id="<?= @$options['id']; ?>" data-target="#userPollList">
                                                                     <ul>
                                                                         <?php if(!empty($user_list[0])) { ?>
                                                                         <li>
