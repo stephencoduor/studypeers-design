@@ -2089,6 +2089,21 @@
         $('#main-tab li').removeClass('active');
         $('#profile-tab').addClass('active');
     }
+
+    function savePollOption(post_id, option_id){
+        var url = '<?php echo base_url('profile/savePollOption') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'post_id': post_id,
+                'option_id': option_id
+            },
+            success: function(result) {
+                $('#poll_div_' + post_id).html(result);
+            }
+        });
+    }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script>

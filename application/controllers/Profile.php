@@ -1547,4 +1547,120 @@ class Profile extends CI_Controller {
     
     }
 
+
+    public function savePollOption(){
+        if($this->input->post()){
+            $post_id    = $this->input->post('post_id');
+            $option_id  = $this->input->post('option_id');
+            $user_id    = $this->session->get_userdata()['user_data']['user_id'];
+
+            $this->db->where(array('post_id' => $post_id, 'user_id' => $user_id));
+            $this->db->delete('user_poll_data');
+
+            $insertArr = array( 'user_id' => $user_id, 
+                                'post_id' => $post_id,
+                                'poll_option_id' => $option_id,
+                                'created_at' => date('Y-m-d H:i:s')
+                            );
+            $this->db->insert('user_poll_data', $insertArr);
+
+            $poll = $this->db->get_where('post_poll_options', array('post_id' => $post_id, 'status' => 1))->result_array();
+            $total = $this->db->get_where('user_poll_data', array('post_id' => $post_id))->num_rows();
+            $html = '';
+            foreach ($poll as $key => $value) {
+                $chk = '';
+                if($value['id'] == $option_id) {
+                    $chk = 'checked="checked"';
+                }
+
+                $count = $this->db->get_where('user_poll_data', array('post_id' => $post_id, 'poll_option_id' => $value['id']))->num_rows();
+                if($count != 0) {
+                    $per = ($count / $total)*100;
+                } else {
+                    $per = 0;
+                }
+
+                $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$post_id, 'poll_option_id' =>$value['id']))->result_array();
+
+                $html.= '<div class="selectedPollOptions">
+                                            <label class="dashRadioWrap">
+                                                <div class="progressBar">
+                                                    <div class="progress">
+                                                        <div class="progressValues">
+                                                            <div class="leftValue">
+                                                                '.$value['options'].'
+                                                            </div>
+                                                            <div
+                                                                class="rightValues">
+                                                                <p>'.$per.'%</p>';
+                                                                if(!empty($user_list)) { 
+                                                                $html.= '<div class="eventActionWrap">
+                                                                    <ul>';
+                                                                        if(!empty($user_list[0])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[0]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        
+                                                                        if(!empty($user_list[1])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[1]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        if(!empty($user_list[2])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[2]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        if(!empty($user_list[3])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[3]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        if(!empty($user_list[4])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[4]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        $left_count = count($user_list) - 5;
+                                                                        if($left_count > 0) { 
+                                                                            $html.= '<li class="more">
+                                                                                +'.$left_count.'
+                                                                            </li>';
+                                                                        }
+                                                                        
+                                                                    $html.= '</ul>
+                                                                </div>';
+                                                                } 
+                                                            $html.= '</div>
+                                                        </div>
+                                                        <div class="progress-bar"
+                                                             role="progressbar"
+                                                             aria-valuenow="'.$per.'"
+                                                             aria-valuemin="0"
+                                                             aria-valuemax="100"
+                                                             style="width:'.$per.'%"></div>
+                                                    </div>
+                                                </div>
+                                                <input type="radio" '.$chk.' name="radio" onclick="savePollOption('.$post_id.', '.$value['id'].')">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>';
+            }
+
+            echo $html;die;
+
+        }
+    }
+
 }

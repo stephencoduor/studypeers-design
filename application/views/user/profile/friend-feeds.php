@@ -285,6 +285,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             }
                             ?>
                             <?php if (count($posts['post_poll_options']) > 0) {
+                                
                                 foreach ($posts['post_poll_options'] as $options) {
                                     ?>
                                     <div class="selectedPollOptions">
