@@ -3702,3 +3702,16 @@ figcaption a {
   visibility: visible;
   opacity: 1;
 }
+#timeline-feeds .imgWrapper figure{
+    width:50%;
+    padding:0 5px;
+    margin:0;
+    border:none;
+}
+#timeline-feeds .box-card  .imgWrapper{
+    width:100%;
+    margin:0 -5px;
+}
+#timeline-feeds .box-card .imgWrapper.type2 figure:first-child{
+    border-right:none;
+}
