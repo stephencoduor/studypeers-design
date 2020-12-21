@@ -145,11 +145,11 @@ die;*/
                         </div>
                     </div>
                     <div class="tabularLiist">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs" id="main-tab">
                             <li class="<?php if (!isset($_GET['tab'])) {
                                 echo "active";
                             } ?>"><a data-toggle="tab" href="#feed">Feeds</a></li>
-                            <li><a data-toggle="tab" href="#profile">Profile</a></li>
+                            <li id="profile-tab"><a data-toggle="tab" href="#profile">Profile</a></li>
                             <li class="<?php if (isset($_GET['tab']) && ($_GET['tab'] == 'peers')) {
                                 echo "active";
                             } ?>"><a data-toggle="tab" href="#peers">Peers</a></li>
@@ -317,163 +317,7 @@ die;*/
             </div>
         </div>
     </section>
-    <section class="rightsidemsgbar">
-        <section class="view message">
-            Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
-        </section>
-
-        <section class="listBar">
-            <section class="listHeader">
-                <h6>Blocked Peers</h6>
-            </section>
-            <section class="listChatBox">
-                <?php
-                    foreach(@$blocked_users as $users){
-                ?>
-                        <section class="list">
-                            <section class="left">
-                                <figure>
-                                    <img src="<?php echo userImage($users['id']);?>" alt="user">
-                                </figure>
-                                <figcaption><?php echo $users['first_name'].' '.$users['last_name']; ?></figcaption>
-                            </section>
-                            <section class="action">
-                                <div class="dropdown">
-                                    <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
-                                    <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                                        <li class="removePeerSugg">
-                                            <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </section>
-                        </section>
-                <?php
-                    }
-                ?>
-
-            </section>
-        </section>
-
-
-
-        <section class="listBar">
-            <section class="listHeader">
-                <h6>Peers</h6>
-            </section>
-            <section class="listChatBox">
-            <?php
-            foreach(@$all_connections as $users) {
-                ?>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo userImage($users['id']);?>" alt="user">
-                        </figure>
-                        <figcaption><?php echo $users['first_name'].' '.$users['last_name']; ?></figcaption>
-                    </section>
-                    <section class="action">
-
-                        <div class="dropdown">
-
-                            <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
-                            <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                                <li class="removePeerSugg" data-id="<?php echo $users['id'];?>"><a href="javascript:void(0)"  data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
-
-                            </ul>
-                        </div>
-                    </section>
-                </section>
-                <?php
-            }
-                ?>
-
-            </section>
-        </section>
-        <section class="listBar">
-            <section class="listHeader">
-                <h6>Groups</h6>
-                <a><i class="fa fa-plus"></i></a>
-            </section>
-            <section class="listChatBox">
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                        </figure>
-                        <figcaption>The in group</figcaption>
-                    </section>
-                    <section class="action">
-                        <i class="fa fa-ellipsis-v"></i>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="messagecount">12</span>
-                        </figure>
-                        <figcaption>The in group</figcaption>
-                    </section>
-                    <section class="action">
-                        <i class="fa fa-ellipsis-v"></i>
-                    </section>
-                </section>
-            </section>
-        </section>
-        <section class="listBar">
-            <section class="listHeader">
-                <h6>Contacts</h6>
-            </section>
-            <section class="listChatBox">
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle online"></span>
-                        </figure>
-                        <figcaption>Angelina</figcaption>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle offline"></span>
-                        </figure>
-                        <figcaption>Angelina</figcaption>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle online"></span>
-                        </figure>
-                        <figcaption>Angelina</figcaption>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle offline"></span>
-                        </figure>
-                        <figcaption>Angelina</figcaption>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle online"></span>
-                        </figure>
-                        <figcaption>Charles</figcaption>
-                    </section>
-                </section>
-            </section>
-        </section>
-    </section>
+    <?php $this->load->view('user/include/right-sidebar'); ?>
     </section>
     </section>
     </section>

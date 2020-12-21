@@ -27,13 +27,34 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
             $get_comments = $this->db->get_where('comment_master', array('reference_id' => $value['reference_id'], 'reference' => 'Post', 'comment_parent_id' => 0, 'status' => 1))->result_array();
 
 ?>
-                <div class="box-card">
+                <div class="box-card message">
+                    <?php if($posts['post_details']->is_announcement == 1) { ?>
+                        <div class="eventMessage">
+                            <img src="<?php echo base_url(); ?>assets_d/images/alert.svg" alt="Ring"> 
+                        </div>
+                    <?php } ?>
+                    
                     <div class="dropdown dropdownToggleMenu">
                         <img
                             src="<?php echo base_url(); ?>assets_d/images/more.svg"
                             alt="toggle" data-toggle="dropdown">
                         <ul class="dropdown-menu" role="menu"
                             aria-labelledby="menu1">
+                            <li role="presentation" class="deleteReferenceById" data-toggle="modal" data-target="#confirmationModalDeletePost" data-id="<?= $value['reference_id']; ?>">
+                                <a role="menuitem" tabindex="-1"
+                                   href="javascript:void(0);">
+                                    <div class="left">
+                                        <img
+                                            src="<?php echo base_url(); ?>assets_d/images/hide.svg"
+                                            alt="Hide Post">
+                                    </div>
+                                    <div class="right">
+                                        <span>Delete this post</span>
+                                        <p>I don't want to keep this post in my
+                                            feed</p>
+                                    </div>
+                                </a>
+                            </li>
                             <li role="presentation">
                                 <a role="menuitem" tabindex="-1"
                                    href="javascript:void(0);">
@@ -258,72 +279,107 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 }
                             }
                             ?>
-                            <?php if (count($posts['post_poll_options']) > 0) {
-                                foreach ($posts['post_poll_options'] as $options) {
+                            <?php if (count($posts['post_poll_options']) > 0) { 
+                                $total = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id']))->num_rows();
+                                $user_chk_option = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id'], 'user_id' => $user_id))->row_array();
+                                $option_id = '';
+                                if(!empty($user_chk_option)){
+                                    $option_id = $user_chk_option['poll_option_id'];
+                                }
+                            ?>
+                                <div id="poll_div_<?= $value['reference_id']; ?>">
+                                    <?php foreach ($posts['post_poll_options'] as $options) {
+                                        $chk = '';
+                                        if(@$options['id'] == $option_id) {
+                                            $chk = 'checked="checked"';
+                                        }
+
+                                        $count = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id'], 'poll_option_id' => @$options['id']))->num_rows();
+                                        if($count != 0) {
+                                            $per = ($count / $total)*100;
+                                        } else {
+                                            $per = 0;
+                                        }
+                                        $this->db->select('user_poll_data.*,user.username,user.first_name, user.last_name');
+                                        $this->db->join('user','user.id=user_poll_data.user_id');
+                                        
+                                        $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$value['reference_id'], 'poll_option_id' => @$options['id']))->result_array(); 
                                     ?>
-                                    <div class="selectedPollOptions">
-                                        <label class="dashRadioWrap">
-                                            <div class="progressBar">
-                                                <div class="progress">
-                                                    <div class="progressValues">
-                                                        <div class="leftValue">
-                                                            <?php echo @$options['options']; ?>
-                                                        </div>
-                                                        <div
-                                                            class="rightValues">
-                                                            <p>75%</p>
+                                        <div class="selectedPollOptions">
+                                            <label class="dashRadioWrap">
+                                                <div class="progressBar">
+                                                    <div class="progress">
+                                                        <div class="progressValues">
+                                                            <div class="leftValue">
+                                                                <?php echo @$options['options']; ?>
+                                                            </div>
                                                             <div
-                                                                class="eventActionWrap">
-                                                                <ul>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li class="more">
-                                                                        +5
-                                                                    </li>
-                                                                </ul>
+                                                                class="rightValues">
+                                                                <p><?= $per; ?>%</p>
+                                                                <?php if(!empty($user_list)) { ?>
+                                                                <div class="eventActionWrap userPollList" data-toggle="modal" data-id="<?= @$options['id']; ?>" data-target="#userPollList">
+                                                                    <ul>
+                                                                        <?php if(!empty($user_list[0])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[0]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[1])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[1]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[2])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[2]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[3])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[3]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[4])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[4]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } $left_count = count($user_list) - 5; ?>
+                                                                        <?php if($left_count > 0) { ?>
+                                                                            <li class="more">
+                                                                                +<?= $left_count; ?>
+                                                                            </li>
+                                                                        <?php } ?>
+                                                                    </ul>
+                                                                </div>
+                                                                <?php } ?>
                                                             </div>
                                                         </div>
+                                                        <div class="progress-bar"
+                                                             role="progressbar"
+                                                             aria-valuenow="<?= $per; ?>"
+                                                             aria-valuemin="0"
+                                                             aria-valuemax="100"
+                                                             style="width:<?= $per; ?>%"></div>
                                                     </div>
-                                                    <div class="progress-bar"
-                                                         role="progressbar"
-                                                         aria-valuenow="75"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"
-                                                         style="width:70%"></div>
                                                 </div>
-                                            </div>
-                                            <input type="radio"
-                                                   checked="checked"
-                                                   name="radio">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <?php
-                                }
-                            }
+                                                <input type="radio" <?= $chk; ?> name="radio" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <?php
+                                    } ?>
+                                </div>
+                            <?php }
                             ?>
 
                             <div class="socialStatus">
@@ -339,7 +395,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                 <img
                                                     src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
                                                     alt="comment">
-                                                <span><?php echo @$posts['post_details']->comments_count; ?></span>
+                                                <span id="Post_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                             </a>
                                         </li>
                                         <li>
@@ -428,8 +484,10 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         </div>
                                     </li>
                                     
-                                    <li  <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')" <?php } ?>>
+                                    <li  <?php if (@$posts['post_details']->is_comment_on != 1) { ?>  class="tooltip" style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')" <?php } ?>>
+                                        <?php if (@$posts['post_details']->is_comment_on != 1) { ?><span class="tooltiptext">Comment is disabled</span><?php } ?>
                                         <a <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="cursor: not-allowed;" <?php } ?>>
+                                            
                                             <img
                                                 src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
                                                 alt="comment">
@@ -456,7 +514,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     
@@ -493,7 +551,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                         <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
-                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <?php if(!empty($comment_replies)) { ?> (<?php echo count($comment_replies); ?>) <?php } ?> </a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
                                                     <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
                                                         <div id="commentreply_box_<?php echo $value['id']; ?>">
                                                             <?php foreach ($comment_replies as $key2 => $value2) { 
@@ -885,7 +944,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             <li>
                                                 <a>
                                                     <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                                    <span>05</span>
+                                                    <span id="event_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                                 </a>
                                             </li>
                                             <li>
@@ -994,7 +1053,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('event', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     
@@ -1031,7 +1090,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                         <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
-                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <?php if(!empty($comment_replies)) { ?> (<?php echo count($comment_replies); ?>) <?php } ?> </a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
                                                     <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
                                                         <div id="commentreply_box_<?php echo $value['id']; ?>">
                                                             <?php foreach ($comment_replies as $key2 => $value2) { 
@@ -1343,7 +1403,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                            <span>05</span>
+                                            <span id="studyset_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
                                     <li>
@@ -1452,7 +1512,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('studyset', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     
@@ -1489,7 +1549,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                         <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
-                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <?php if(!empty($comment_replies)) { ?> (<?php echo count($comment_replies); ?>) <?php } ?> </a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
                                                     <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
                                                         <div id="commentreply_box_<?php echo $value['id']; ?>" >
                                                             <?php foreach ($comment_replies as $key2 => $value2) { 
@@ -1792,7 +1853,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                            <span>05</span>
+                                            <span id="document_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
                                     <li>
@@ -1901,7 +1962,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('document', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     
@@ -1938,7 +1999,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                         <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
-                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <?php if(!empty($comment_replies)) { ?> (<?php echo count($comment_replies); ?>) <?php } ?> </a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
                                                     <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
                                                         <div id="commentreply_box_<?php echo $value['id']; ?>">
                                                             <?php foreach ($comment_replies as $key2 => $value2) { 

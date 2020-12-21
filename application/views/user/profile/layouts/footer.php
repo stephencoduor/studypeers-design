@@ -122,6 +122,146 @@
     </div>
 </div>
 
+<div class="modal fade" id="confirmationModalBestAnswer" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Confirmation</h4>
+                <div class="row">
+                    <h6 class="modalText">Are you sure to select this as Best Answer !</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form method="post" class="bestAnswerDashboard" action="<?php echo base_url(); ?>account/bestAnswerDashboard">
+                            <div class="form-group button">
+                                <input type="hidden" name="best_question_id" id="best_question_id" value="">
+                                <input type="hidden" name="answer_id" id="answer_id">
+                                <button type="button" class="transparentBtn highlight" data-dismiss="modal">No</button>
+                                <button type="submit" class="filterBtn">Yes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmationModalDeletePost" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Confirmation</h4>
+                <div class="row">
+                    <h6 class="modalText">Are you sure to delete this Post !</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form method="post" action="<?php echo base_url(); ?>profile/deletePost">
+                            <div class="form-group button">
+                                <input type="hidden" name="delete_reference_id" id="delete_reference_id" value="">
+                                
+                                <button type="button" class="transparentBtn highlight" data-dismiss="modal">No</button>
+                                <button type="submit" class="filterBtn">Yes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="reportModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <form method="post" class="reportAnswerDashboard" action="<?php echo base_url(); ?>account/reportAnswerDashboard" onsubmit="return validateReport()">
+                    <h4>Reason</h4>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Reason for Report</label>
+                                <div class="reason">
+                                    <input type="hidden" name="answer_id" id="answer_id">
+                                    <input type="hidden" name="report_question_id" value="">
+                                    <select class="form-control" id="reportqa_reason" name="report_reason">
+                                        <option value="">Select Reason</option>
+                                        <option value="Inappropriate Content">Inappropriate Content</option>
+                                        <option value="Spam">Spam</option>
+                                        <option value="Promotional">Promotional</option>
+                                        <option value="Uncivil">Uncivil</option>
+                                        <option value="Other">Other</option>
+                                    </select>
+                                    <span class="custom_err" id="err_reportqa_reason"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label>Reason</label>
+                                <div class="reason droparea">
+                                    <textarea id="report_description" name="report_description"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="submit" class="filterBtn reportBtn">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="userPollList" role="dialog">
+    <div class="modal-dialog">
+      <!-- Modal content-->
+      <div class="modal-content">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <div class="modal-body peers">
+          <h4>Peer List </h4>
+          <div class="searchPeer">
+            <div class="filterSearch">
+                <input type="text" placeholder="Search Peers" name="">
+                <button type="submit" class="searchBtn">
+                    <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                        <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+                        s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+                        c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+                    </svg>
+                </button>
+            </div>
+          </div>
+          <div class="peersList">
+            <div class="listHeader">
+                <h6>Peers</h6>
+                
+            </div>
+            
+            <div class="listUserWrap" id="userPollListModal">
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
@@ -213,6 +353,7 @@
 
         $(document).on("click", ".loadPosts", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserPosts',
                 type: 'post',
@@ -247,6 +388,7 @@
 
         $(document).on("click", ".loadQuestions", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserQuestions',
                 type: 'post',
@@ -281,6 +423,7 @@
 
         $(document).on("click", ".loadDocuments", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserDocuments',
                 type: 'post',
@@ -298,6 +441,7 @@
 
         $(document).on("click", ".loadstudySets", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserStudyset',
                 type: 'post',
@@ -332,6 +476,7 @@
 
         $(document).on("click", ".loadEvents", function() {
             var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserEvents',
                 type: 'post',
@@ -363,6 +508,28 @@
                 }
             });
         }
+
+        $(document).on("click", ".loadAll", function() {
+            $('#timeline-post-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Posts..</p></div></div>');
+            $('#timeline-questions-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Questions..</p></div></div>');
+            $('#timeline-documents-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Documents..</p></div></div>');
+            $('#timeline-studyset-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Studysets..</p></div></div>');
+            $('#timeline-events-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Events..</p></div></div>');
+            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            $.ajax({
+                url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
+                type: 'post',
+                data: {
+                    "count": 0,
+                    "friend_id": friend_id
+                },
+                success: function(result) {
+
+                    $('#timeline-feeds').html(result);
+                    $('.commentBoxWrap').hide();
+                }
+            });
+        });
     </script>
 <?php } else { ?>
     <script>
@@ -763,7 +930,8 @@
         });
         $('#addPostForm').on("submit", function(e) {
             e.preventDefault();
-            $('.loading').show();
+            $('.ajax-loading').show();
+            $('#createPost').modal('hide');
 
             var formData = new FormData(this);
             var url = $(this).attr('action');
@@ -775,9 +943,16 @@
             } else {
                 var allow_comment = 0;
             }
+
+            if ($("#bell-announcement").hasClass("notification-disabled")) {
+                var announcement = 0;
+            } else {
+                var announcement = 1;  
+            }
             formData.append('html_content', html_content);
             formData.append('privacy', privacy);
             formData.append('allow_comment', allow_comment);
+            formData.append('announcement', announcement);
             $.ajax({
                 type: 'POST',
                 url: url,
@@ -790,7 +965,7 @@
                     if (result == true) {
                         window.location.href = base_url + 'Profile/redirect_page?status=' + result;
                     }
-                    $('.loading').hide();
+                    $('.ajax-loading').hide();
                 }
             });
 
@@ -1592,6 +1767,10 @@
         $('#'+reference+'_comment_'+reference_id).show();
     }
 
+    function hideCommentBoxWrap(reference,reference_id){
+        $('#'+reference+'_comment_'+reference_id).hide();
+    }
+
 
     function postCommentByReference(event, reference, reference_id, comment) { 
         if (event.which == 13) {
@@ -1602,9 +1781,10 @@
                   url: url,
                   type: 'POST',
                   data: {'comment': comment, 'reference_id': reference_id, 'reference': reference},
+                  dataType: 'json',
                   success: function(result) {
-                    $('#'+reference+'_commentappend_'+reference_id).append(result);
-
+                    $('#'+reference+'_commentappend_'+reference_id).append(result.html);
+                    $('#'+reference+'_comment_count_'+reference_id).html(result.count);
                     $('#comment_input_'+reference+'_'+reference_id).val('');
                   }
               });
@@ -1621,8 +1801,11 @@
               url: url,
               type: 'POST',
               data: {'comment': comment, 'comment_id': comment_id},
+              dataType: 'json',
               success: function(result) {
-                $('#commentreply_box_'+comment_id).append(result);
+                $('#commentreply_box_'+comment_id).append(result.html);
+                $('#comment_reply_count_'+comment_id).show();
+                $('#comment_reply_count_'+comment_id).html(result.count);
                 $("#comment_reply_"+comment_id).val('');
               }
             });
@@ -1647,8 +1830,10 @@
             processData: false,
             data: form_data,                         
             type: 'post',
+            dataType: 'json',
             success: function(result){
-                $('#'+reference+'_commentappend_'+reference_id).append(result);
+                $('#'+reference+'_commentappend_'+reference_id).append(result.html);
+                $('#'+reference+'_comment_count_'+reference_id).html(result.count);
                 $('#comment_image_'+reference+'_'+reference_id).val('');
             }
         });
@@ -1665,13 +1850,24 @@
           type: 'POST',
           data: {'comment_id': comment_id},
           success: function(result) {
-            $('#reactcomment_'+comment_id).show();
-            $('#comment_like_count_'+comment_id).html(result); 
-            if($('#like_text_'+comment_id).text() == 'Like') { 
-                $('#like_text_'+comment_id).text('Liked');
+            if(result != 0) {
+                $('#reactcomment_'+comment_id).show();
+                $('#comment_like_count_'+comment_id).html(result); 
+                if($('#like_text_'+comment_id).text() == 'Like') { 
+                    $('#like_text_'+comment_id).text('Liked');
+                } else {
+                    $('#like_text_'+comment_id).text('Like');
+                }
             } else {
-                $('#like_text_'+comment_id).text('Like');
+                $('#reactcomment_'+comment_id).hide();
+                $('#comment_like_count_'+comment_id).html(result); 
+                if($('#like_text_'+comment_id).text() == 'Like') { 
+                    $('#like_text_'+comment_id).text('Liked');
+                } else {
+                    $('#like_text_'+comment_id).text('Like');
+                }
             }
+            
           }
         });
     }
@@ -1732,6 +1928,234 @@
             });
         }
     }
+
+    function showQAnsBox(id) {
+        $('#dashboard-qa-answer-' + id).show();
+    }
+
+    $(document).on('submit', 'form.bestAnswerDashboard', function(e) {
+
+        var form = $(this);
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var url = form.attr('action');
+        var id = $('#answer_id').val();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: form.serialize(), // serializes the form's elements.
+            success: function(data) {
+                $('.bestAnswerli').show();
+                $('.answerQuote').hide();
+                $('#confirmationModalBestAnswer').modal('hide');
+
+                $(".bestAnswerDashboard")[0].reset();
+
+                $('#answerQuote' + id).show();
+                $('#bestAnswerModal' + id).hide();
+            }
+        });
+
+    });
+
+    $(document).on('submit', 'form.reportAnswerDashboard', function(e) {
+
+        var form = $(this);
+
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        var chk = validateReport();
+
+        if (chk !== false) {
+
+            var url = form.attr('action');
+            var id = $('#answer_id').val();
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data) {
+
+                    $('#reportModal').modal('hide');
+
+                    $(".reportAnswerDashboard")[0].reset();
+                    $('#replyAnswerBox' + id).hide();
+                }
+            });
+        }
+
+    });
+
+    $(document).on("click", ".reportQuestionAnswerDashboard", function() {
+        var answer_id = $(this).data('id');
+        var question_id = $(this).data('value');
+        $(".modal-body #answer_id").val(answer_id);
+        $(".modal-body #report_question_id").val(question_id);
+
+    });
+
+    $(document).on("click", ".select_best_answer_dashboard", function() {
+        var answer_id = $(this).data('id');
+        var question_id = $(this).data('value');
+        $(".modal-body #answer_id").val(answer_id);
+        $(".modal-body #best_question_id").val(question_id);
+    });
+
+    $(document).on("click", ".deleteReferenceById", function() {
+        var ref_id = $(this).data('id');
+        $(".modal-body #delete_reference_id").val(ref_id);
+
+    });
+
+    function validateReport() { 
+        var report_reason = $('#reportqa_reason').val();
+        if (report_reason == '') {
+            $('#err_reportqa_reason').html("This field is required").show();
+            return false;
+        } else {
+            $('#err_reportqa_reason').html("").hide();
+        }
+    }
+
+    function voteAnswer(type, answer_id) {
+        var url = '<?php echo base_url('account/voteAnswer') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'type': type,
+                'answer_id': answer_id
+            },
+            success: function(result) {
+                if (type == 'upvote') {
+                    $('#uparrow_' + answer_id + ' .normalState').hide();
+                    $('#uparrow_' + answer_id + ' .activeState').show();
+                    $('#downarrow_' + answer_id + ' .normalState').show();
+                    $('#downarrow_' + answer_id + ' .activeState').hide();
+                } else {
+                    $('#downarrow_' + answer_id + ' .normalState').hide();
+                    $('#downarrow_' + answer_id + ' .activeState').show();
+                    $('#uparrow_' + answer_id + ' .normalState').show();
+                    $('#uparrow_' + answer_id + ' .activeState').hide();
+                }
+                $('#count_' + answer_id).html(result);
+            }
+        });
+    }
+
+
+    function removeVoteAnswer(type, answer_id) {
+        var url = '<?php echo base_url('account/removeVoteAnswer') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'type': type,
+                'answer_id': answer_id
+            },
+            success: function(result) {
+                if (type == 'upvote') {
+                    $('#uparrow_' + answer_id + ' .normalState').show();
+                    $('#uparrow_' + answer_id + ' .activeState').hide();
+
+                } else {
+                    $('#downarrow_' + answer_id + ' .normalState').show();
+                    $('#downarrow_' + answer_id + ' .activeState').hide();
+
+                }
+                $('#count_' + answer_id).html(result);
+            }
+        });
+    }
+
+    function voteQuestion(type, question_id) {
+        var url = '<?php echo base_url('account/voteQuestion') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'type': type,
+                'question_id': question_id
+            },
+            success: function(result) {
+                if (type == 'upvote') {
+                    $('#q_uparrow_' + question_id + ' .normalState').hide();
+                    $('#q_uparrow_' + question_id + ' .activeState').show();
+                    $('#q_downarrow_' + question_id + ' .normalState').show();
+                    $('#q_downarrow_' + question_id + ' .activeState').hide();
+                } else {
+                    $('#q_downarrow_' + question_id + ' .normalState').hide();
+                    $('#q_downarrow_' + question_id + ' .activeState').show();
+                    $('#q_uparrow_' + question_id + ' .normalState').show();
+                    $('#q_uparrow_' + question_id + ' .activeState').hide();
+                }
+                $('#q_count_' + question_id).html(result);
+            }
+        });
+    }
+
+
+    function removeVoteQuestion(type, question_id) {
+        var url = '<?php echo base_url('account/removeVoteQuestion') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'type': type,
+                'question_id': question_id
+            },
+            success: function(result) {
+                if (type == 'upvote') {
+                    $('#q_uparrow_' + question_id + ' .normalState').show();
+                    $('#q_uparrow_' + question_id + ' .activeState').hide();
+
+                } else {
+                    $('#q_downarrow_' + question_id + ' .normalState').show();
+                    $('#q_downarrow_' + question_id + ' .activeState').hide();
+
+                }
+                $('#q_count_' + question_id).html(result);
+            }
+        });
+    }
+
+    function activateProfileTab(){
+        $('#main-tab li').removeClass('active');
+        $('#profile-tab').addClass('active');
+    }
+
+    function savePollOption(post_id, option_id){
+        var url = '<?php echo base_url('profile/savePollOption') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'post_id': post_id,
+                'option_id': option_id
+            },
+            success: function(result) {
+                $('#poll_div_' + post_id).html(result);
+            }
+        });
+    }
+
+
+    $(document).on('click','.userPollList',function(){
+        var option_id = $(this).data('id'); 
+        
+        $.ajax({
+            url : '<?php echo base_url();?>profile/getPeersPollList',
+            type : 'post',
+            data : {"id" : option_id},
+            success:function(result) {
+                
+                $('#userPollListModal').html(result);
+            }
+        })
+        
+
+    });
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script>

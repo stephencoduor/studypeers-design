@@ -588,7 +588,7 @@ class Profile extends CI_Controller {
 		$data['followings'] = $followings['total'];
 		$data['index_menu']  = 'timeline';
 		$data['title']  = 'Timeline | Studypeers';
-		$this->load->view('user/profile/layouts/header', $data);
+		$this->load->view('user/include/header', $data);
 		$this->load->view('user/profile/timeline');
 		$this->load->view('user/profile/add-post');
 		$this->load->view('user/profile/post-privacy');
@@ -611,6 +611,7 @@ class Profile extends CI_Controller {
 		$privacy = $this->input->post('privacy');
 		$allow_comment = $this->input->post('allow_comment');
 		$is_comment_on = 0;
+        $announcement  = $this->input->post('announcement');
 
 		if($allow_comment == 'on'){
 			$is_comment_on = 1;
@@ -619,6 +620,7 @@ class Profile extends CI_Controller {
 			'post_content_html' 	=> $html_content,
 			'privacy_id'   			=> $privacy,
 			'is_comment_on'    		=> $allow_comment,
+            'is_announcement'       => $announcement,
 			'created_by'        	=> $user_id,
 			'created_at'    		=> date('Y-m-d H:i:s'),
 			'updated_at'    		=> date('Y-m-d H:i:s')
@@ -803,7 +805,7 @@ class Profile extends CI_Controller {
 		$data['chk_if_follow']  = $chk_if_follow;
 		$data['followers'] = $followers['total'];
 		$data['followings'] = $followings['total'];
-		$this->load->view('user/profile/layouts/header', $data);
+		$this->load->view('user/include/header', $data);
 		$this->load->view('user/profile/friends-timeline');
 		$this->load->view('user/profile/layouts/footer');
 	}
@@ -1185,6 +1187,8 @@ class Profile extends CI_Controller {
 
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
+            $count = $this->db->get_where('comment_master', array('reference_id' => $reference_id, 'reference' => $reference, 'comment_parent_id' => 0, 'status' => 1))->num_rows();
+
             $html = '<div class="chatMsgBox">
                                         <figure>
                                             <img src="'.userImage($user_id).'" alt="User">
@@ -1199,7 +1203,7 @@ class Profile extends CI_Controller {
                                                         <span id="comment_like_count_'.$comment_id.'">0</span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('.$comment_id.')" id="like_text_'.$comment_id.'">Like</a>
-                                                    <a onclick="showReplyBox('.$comment_id.')">Reply</a>
+                                                    <a onclick="showReplyBox('.$comment_id.')">Reply <span style="display:none;" id="comment_reply_count_'.$comment_id.'">(0)</span></a>
                                                     <div id="show_reply_box_'.$comment_id.'" style="display: none;">
                                                         <div id="commentreply_box_'.$comment_id.'">
                                                         </div>
@@ -1241,8 +1245,56 @@ class Profile extends CI_Controller {
                                         </div>
                                     </div>';
 
-            
-            echo $html;die;
+            $result['html'] = $html;
+            $result['count'] = $count;
+            print_r(json_encode($result));die;
+        }
+    }
+
+
+    public function deletePost(){
+        if($this->input->post()){
+            $delete_reference_id = $this->input->post('delete_reference_id');
+
+            $reference_details = $this->db->get_where('reference_master', array('reference_id' => $delete_reference_id))->row_array();
+
+            if($reference_details['reference'] == 'Post'){
+                $this->db->where(array('id' => $delete_reference_id));
+                $this->db->delete('posts');
+
+                $this->db->where(array('post_id' => $delete_reference_id));
+                $this->db->delete('post_documents');
+
+                $this->db->where(array('post_id' => $delete_reference_id));
+                $this->db->delete('post_images');
+
+                $this->db->where(array('post_id' => $delete_reference_id));
+                $this->db->delete('post_poll_options');
+
+                $this->db->where(array('post_id' => $delete_reference_id));
+                $this->db->delete('post_videos');
+
+                $this->db->query("DELETE FROM comment_like_master WHERE comment_id in (select id from comment_master where reference_id = $delete_reference_id AND reference = 'Post')");
+
+                
+
+                $this->db->where(array("comment_master.reference_id"=>$delete_reference_id,"comment_master.reference"=>'Post'));
+                $this->db->delete('comment_master');
+
+                $this->db->where(array("reaction_master.reference_id"=>$delete_reference_id,"reaction_master.reference"=>'Post'));
+                $this->db->delete('reaction_master');
+
+                $this->db->where(array('reference_id' => $delete_reference_id));
+                $this->db->delete('reference_master');
+            }
+
+            $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Posts Deleted Successfully.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button></div>';
+            $this->session->set_flashdata('flash_message', $message);
+
+            redirect(site_url('Profile/timeline'));
+
         }
     }
 
@@ -1252,6 +1304,7 @@ class Profile extends CI_Controller {
             $comment = $this->input->post('comment');
             
             $comment_id = $this->input->post('comment_id');
+            $parent_id = $comment_id;
 
             $comment_details = $this->db->get_where('comment_master', array('id' => $comment_id))->row_array();
 
@@ -1271,6 +1324,8 @@ class Profile extends CI_Controller {
             $comment_id = $this->db->insert_id();
 
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
+
+            $comment_replies = $this->db->get_where('comment_master', array('comment_parent_id' => $parent_id, 'status' => 1))->num_rows();
 
             $html = '<div class="innerReplyBox">
                                                         <figure>
@@ -1337,7 +1392,11 @@ class Profile extends CI_Controller {
                                                             </div>
                                                         </div>
                                                     </div>';
-            echo $html;die;
+
+            $count = '('.$comment_replies.')';
+            $result['html'] = $html; 
+            $result['count'] = $count; 
+            print_r(json_encode($result));die;
 
         }
     }
@@ -1424,6 +1483,8 @@ class Profile extends CI_Controller {
 
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
+            $count = $this->db->get_where('comment_master', array('reference_id' => $reference_id, 'reference' => $reference, 'comment_parent_id' => 0, 'status' => 1))->num_rows();
+
             $html = '<div class="chatMsgBox">
                                         <figure>
                                             <img src="'.userImage($user_id).'" alt="User">
@@ -1438,7 +1499,7 @@ class Profile extends CI_Controller {
                                                         <span id="comment_like_count_'.$comment_id.'">0</span>
                                                     </a>
                                                     <a onclick="likeCommentByReference('.$comment_id.')" id="like_text_'.$comment_id.'">Like</a>
-                                                    <a onclick="showReplyBox('.$comment_id.')">Reply</a>
+                                                    <a onclick="showReplyBox('.$comment_id.')">Reply <span style="display:none;" id="comment_reply_count_'.$comment_id.'">(0)</span></a>
                                                     <div id="show_reply_box_'.$comment_id.'" style="display: none;">
                                                         <div id="commentreply_box_'.$comment_id.'">
                                                         </div>
@@ -1479,9 +1540,155 @@ class Profile extends CI_Controller {
                                             </div>
                                         </div>
                                     </div>';
-            echo $html;die;
+            $result['html'] = $html;
+            $result['count'] = $count;
+            print_r(json_encode($result));die;
         }
     
+    }
+
+
+    public function savePollOption(){
+        if($this->input->post()){
+            $post_id    = $this->input->post('post_id');
+            $option_id  = $this->input->post('option_id');
+            $user_id    = $this->session->get_userdata()['user_data']['user_id'];
+
+            $this->db->where(array('post_id' => $post_id, 'user_id' => $user_id));
+            $this->db->delete('user_poll_data');
+
+            $insertArr = array( 'user_id' => $user_id, 
+                                'post_id' => $post_id,
+                                'poll_option_id' => $option_id,
+                                'created_at' => date('Y-m-d H:i:s')
+                            );
+            $this->db->insert('user_poll_data', $insertArr);
+
+            $poll = $this->db->get_where('post_poll_options', array('post_id' => $post_id, 'status' => 1))->result_array();
+            $total = $this->db->get_where('user_poll_data', array('post_id' => $post_id))->num_rows();
+            $html = '';
+            foreach ($poll as $key => $value) {
+                $chk = '';
+                if($value['id'] == $option_id) {
+                    $chk = 'checked="checked"';
+                }
+
+                $count = $this->db->get_where('user_poll_data', array('post_id' => $post_id, 'poll_option_id' => $value['id']))->num_rows();
+                if($count != 0) {
+                    $per = ($count / $total)*100;
+                } else {
+                    $per = 0;
+                }
+
+                $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$post_id, 'poll_option_id' =>$value['id']))->result_array();
+
+                $html.= '<div class="selectedPollOptions">
+                                            <label class="dashRadioWrap">
+                                                <div class="progressBar">
+                                                    <div class="progress">
+                                                        <div class="progressValues">
+                                                            <div class="leftValue">
+                                                                '.$value['options'].'
+                                                            </div>
+                                                            <div
+                                                                class="rightValues">
+                                                                <p>'.$per.'%</p>';
+                                                                if(!empty($user_list)) { 
+                                                                $html.= '<div class="eventActionWrap userPollList" data-toggle="modal" data-id="'.$value['id'].'" data-target="#userPollList">
+                                                                    <ul>';
+                                                                        if(!empty($user_list[0])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[0]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        
+                                                                        if(!empty($user_list[1])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[1]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        if(!empty($user_list[2])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[2]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        if(!empty($user_list[3])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[3]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        if(!empty($user_list[4])) { 
+                                                                            $html.= '<li>
+                                                                                <img
+                                                                                    src="'.userImage($user_list[4]['user_id']).'"
+                                                                                    alt="user">
+                                                                            </li>';
+                                                                        }
+                                                                        $left_count = count($user_list) - 5;
+                                                                        if($left_count > 0) { 
+                                                                            $html.= '<li class="more">
+                                                                                +'.$left_count.'
+                                                                            </li>';
+                                                                        }
+                                                                        
+                                                                    $html.= '</ul>
+                                                                </div>';
+                                                                } 
+                                                            $html.= '</div>
+                                                        </div>
+                                                        <div class="progress-bar"
+                                                             role="progressbar"
+                                                             aria-valuenow="'.$per.'"
+                                                             aria-valuemin="0"
+                                                             aria-valuemax="100"
+                                                             style="width:'.$per.'%"></div>
+                                                    </div>
+                                                </div>
+                                                <input type="radio" '.$chk.' name="radio" onclick="savePollOption('.$post_id.', '.$value['id'].')">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>';
+            }
+
+            echo $html;die;
+
+        }
+    }
+
+
+    public function getPeersPollList(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $id = $this->input->post('id');
+        
+
+        $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('poll_option_id' => $id))->result_array(); 
+
+        $html = '';
+
+        foreach ($user_list as $key => $value) {
+            
+            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
+            
+            
+                $html.= '<div ><section class="list"><section class="left" >
+                            <figure>
+                                <img src="'.userImage($peer['userID']).'" alt="user">
+                            </figure>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
+                        </section></div>';
+                        
+                        
+            
+        }
+        echo $html;die;
     }
 
 }

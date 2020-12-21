@@ -1052,3 +1052,54 @@ figcaption a {
     font-size: 16px;
     color: #2a234f;
 }
+
+
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+}
+
+.ajax-loading{
+    display: none;
+    position: fixed;
+    z-index: 999;
+    height: 1em;
+    /*width: 2em;*/
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 200px;
+    right: 0;
+}
+
+.ajax-loading:before {
+  content: '';
+  display: block;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+    background: radial-gradient(rgba(20, 20, 20,.4), rgba(0, 0, 0, .4));
+
+  background: -webkit-radial-gradient(rgba(20, 20, 20,.4), rgba(0, 0, 0,.4));
+}

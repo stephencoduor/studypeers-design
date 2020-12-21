@@ -16,10 +16,10 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/star-rating-svg.css">
 	<link href='<?php echo base_url(); ?>assets_d/css/fullCalendar.css' rel='stylesheet' />
-	<?php if ($index_menu != 'questions' && $index_menu != 'dashboard') { ?>
+	<?php if ($index_menu != 'questions' && $index_menu != 'dashboard' && $index_menu != 'timeline') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/study-set.css">
 	<?php } ?>
-	<?php if ($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'dashboard') { ?>
+	<?php if ($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'dashboard' && $index_menu != 'timeline') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/schedule.css">
 	<?php } ?>
 	<link href='<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.min.css' rel='stylesheet' />
@@ -31,8 +31,15 @@
 
 	<?php } ?>
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/university.css">
-	<?php if ($index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'events' && $index_menu != 'dashboard') { ?>
+	<?php if ($index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'events' && $index_menu != 'dashboard' && $index_menu != 'timeline') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/document.css">
+	<?php } ?>
+
+	<?php if ($index_menu == 'timeline') { ?>
+		<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/profile.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/loader.css">
+		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/croppie.css">
+
 	<?php } ?>
 
 	<!-- Emoji Data -->
@@ -77,6 +84,15 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 ?>
 
 <body>
+	<div class="ajax-loading">
+		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+			<g>
+				<path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#ea2e7e" stroke-width="12"></path>
+				<path d="M49 3L49 27L61 15L49 3" fill="#ea2e7e"></path>
+				<animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+			</g>
+		</svg>
+	</div>
 	<input type="hidden" id="hidden_user_info" value='<?php echo json_encode($this->session->get_userdata()['user_data']); ?>'>
 	<header>
 		<section class="container-fluid">

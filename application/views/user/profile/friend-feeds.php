@@ -44,9 +44,16 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 $reaction_html = getReactionByReference($value['reference_id'], 'Post');
 
                 $chk_user_reaction = $this->db->get_where('reaction_master', array('user_id'=>$login_user_id, 'reference_id' => $value['reference_id'], 'reference' => 'Post'))->row_array();
+
+                $get_comments = $this->db->get_where('comment_master', array('reference_id' => $value['reference_id'], 'reference' => 'Post', 'comment_parent_id' => 0, 'status' => 1))->result_array();
                       
 ?>
-                <div class="box-card">
+                <div class="box-card message">
+                    <?php if($posts['post_details']->is_announcement == 1) { ?>
+                        <div class="eventMessage">
+                            <img src="<?php echo base_url(); ?>assets_d/images/alert.svg" alt="Ring"> 
+                        </div>
+                    <?php } ?>
                     <div class="dropdown dropdownToggleMenu">
                         <img
                             src="<?php echo base_url(); ?>assets_d/images/more.svg"
@@ -277,72 +284,107 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 }
                             }
                             ?>
-                            <?php if (count($posts['post_poll_options']) > 0) {
-                                foreach ($posts['post_poll_options'] as $options) {
+                            <?php if (count($posts['post_poll_options']) > 0) { 
+                                $total = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id']))->num_rows();
+                                $user_chk_option = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id'], 'user_id' => $login_user_id))->row_array();
+                                $option_id = '';
+                                if(!empty($user_chk_option)){
+                                    $option_id = $user_chk_option['poll_option_id'];
+                                }
+                            ?>
+                                <div id="poll_div_<?= $value['reference_id']; ?>">
+                                    <?php foreach ($posts['post_poll_options'] as $options) {
+                                        $chk = '';
+                                        if(@$options['id'] == $option_id) {
+                                            $chk = 'checked="checked"';
+                                        }
+
+                                        $count = $this->db->get_where('user_poll_data', array('post_id' => $value['reference_id'], 'poll_option_id' => @$options['id']))->num_rows();
+                                        if($count != 0) {
+                                            $per = ($count / $total)*100;
+                                        } else {
+                                            $per = 0;
+                                        }
+                                        $this->db->select('user_poll_data.*,user.username,user.first_name, user.last_name');
+                                        $this->db->join('user','user.id=user_poll_data.user_id');
+                                        
+                                        $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$value['reference_id'], 'poll_option_id' => @$options['id']))->result_array(); 
                                     ?>
-                                    <div class="selectedPollOptions">
-                                        <label class="dashRadioWrap">
-                                            <div class="progressBar">
-                                                <div class="progress">
-                                                    <div class="progressValues">
-                                                        <div class="leftValue">
-                                                            <?php echo @$options['options']; ?>
-                                                        </div>
-                                                        <div
-                                                            class="rightValues">
-                                                            <p>75%</p>
+                                        <div class="selectedPollOptions">
+                                            <label class="dashRadioWrap">
+                                                <div class="progressBar">
+                                                    <div class="progress">
+                                                        <div class="progressValues">
+                                                            <div class="leftValue">
+                                                                <?php echo @$options['options']; ?>
+                                                            </div>
                                                             <div
-                                                                class="eventActionWrap">
-                                                                <ul>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li>
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/user.jpg"
-                                                                            alt="user">
-                                                                    </li>
-                                                                    <li class="more">
-                                                                        +5
-                                                                    </li>
-                                                                </ul>
+                                                                class="rightValues">
+                                                                <p><?= $per; ?>%</p>
+                                                                <?php if(!empty($user_list)) { ?>
+                                                                <div class="eventActionWrap userPollList" data-toggle="modal" data-id="<?= @$options['id']; ?>" data-target="#userPollList">
+                                                                    <ul>
+                                                                        <?php if(!empty($user_list[0])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[0]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[1])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[1]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[2])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[2]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[3])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[3]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } ?>
+                                                                        <?php if(!empty($user_list[4])) { ?>
+                                                                        <li>
+                                                                            <img
+                                                                                src="<?= userImage($user_list[4]['user_id']); ?>"
+                                                                                alt="user">
+                                                                        </li>
+                                                                        <?php } $left_count = count($user_list) - 5; ?>
+                                                                        <?php if($left_count > 0) { ?>
+                                                                            <li class="more">
+                                                                                +<?= $left_count; ?>
+                                                                            </li>
+                                                                        <?php } ?>
+                                                                    </ul>
+                                                                </div>
+                                                                <?php } ?>
                                                             </div>
                                                         </div>
+                                                        <div class="progress-bar"
+                                                             role="progressbar"
+                                                             aria-valuenow="<?= $per; ?>"
+                                                             aria-valuemin="0"
+                                                             aria-valuemax="100"
+                                                             style="width:<?= $per; ?>%"></div>
                                                     </div>
-                                                    <div class="progress-bar"
-                                                         role="progressbar"
-                                                         aria-valuenow="75"
-                                                         aria-valuemin="0"
-                                                         aria-valuemax="100"
-                                                         style="width:70%"></div>
                                                 </div>
-                                            </div>
-                                            <input type="radio"
-                                                   checked="checked"
-                                                   name="radio">
-                                            <span class="checkmark"></span>
-                                        </label>
-                                    </div>
-                                    <?php
-                                }
-                            }
+                                                <input type="radio" <?= $chk; ?> name="radio" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')">
+                                                <span class="checkmark"></span>
+                                            </label>
+                                        </div>
+                                        <?php
+                                    } ?>
+                                </div>
+                            <?php }
                             ?>
 
                             <div class="socialStatus">
@@ -358,7 +400,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                 <img
                                                     src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
                                                     alt="comment">
-                                                <span><?php echo @$posts['post_details']->comments_count; ?></span>
+                                                <span id="Post_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                             </a>
                                         </li>
                                         <li>
@@ -447,7 +489,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         </div>
                                     </li>
                                     
-                                    <li <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="opacity: 0.7;cursor: not-allowed;" <?php } ?>>
+                                    <li <?php if (@$posts['post_details']->is_comment_on != 1) { ?> class="tooltip" style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')" <?php } ?>>
+                                        <?php if (@$posts['post_details']->is_comment_on != 1) { ?><span class="tooltiptext">Comment is disabled</span><?php } ?>
                                         <a <?php if (@$posts['post_details']->is_comment_on != 1) { ?> style="cursor: not-allowed;" <?php } ?>>
                                             <img
                                                 src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg"
@@ -466,227 +509,197 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     </li>
                                 </ul>
                             </div>
-                            <div class="commentBoxWrap"
-                                 id="all_comments_section_<?php echo $key; ?>">
-                                <div class="comment-popularity">
-                                    <div class="relevant">
-                                        <!-- <div class="caretIcon">
-                                                <img
-                                                    src="<?php /*echo base_url(); */ ?>assets_d/images/down-arrow1.svg"
-                                                    alt="down arrow">
-                                            </div>-->
-                                    </div>
-                                    <div class="commentmsg"
-                                         id="<?php echo $key; ?>">
-                                        <a>Hide Comments</a>
-                                    </div>
-                                </div>
-                                <div class="all_comments_<?php echo $key; ?>">
-                                    <?php
-                                    if (@$posts['post_details']->is_comment_on == 1) {
-                                        foreach (@$posts['post_comments'] as $comments) {
-                                            ?>
-                                            <div class="chatMsgBox">
-                                                <figure>
-                                                    <img
-                                                        src="<?php echo userImage($comments['user_id']); ?>"/>
-                                                </figure>
-                                                <div class="right">
-                                                    <div class="userWrapText">
-                                                        <h4><?php echo $comments['first_name']; ?> <?php echo $comments['last_name']; ?></h4>
-                                                        <p><?php echo $comments['comment'] ?></p>
-                                                        <div class="leftStatus">
-                                                            <a>
-                                                                <img
-                                                                    src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
-                                                                    alt="Like">
-                                                                <span>0</span>
-                                                            </a>
-                                                            <a>Like</a>
-                                                            <a class="show_replies"
-                                                               id="<?php echo $comments['id'] ?>">Reply</a>
-                                                            <div class="innerReplyBox"
-                                                                 id="reply_box_<?php echo $comments['id'] ?>">
-                                                                <figure>
-                                                                    <img
-                                                                        src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg"
-                                                                        alt="User">
-                                                                </figure>
-                                                                <div
-                                                                    class="right">
-                                                                    <div
-                                                                        class="userWrapText">
-                                                                        <h4>User
-                                                                            Name</h4>
-                                                                        <p>Lorem
-                                                                            Ipsum
-                                                                            is
-                                                                            simply
-                                                                            dummy
-                                                                            text
-                                                                            of
-                                                                            the
-                                                                            printing
-                                                                            and</p>
-                                                                        <div
-                                                                            class="leftStatus">
-                                                                            <a>Like</a>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div
-                                                                        class="dotsBullet dropdown">
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/more.svg"
-                                                                            alt="more"
-                                                                            data-toggle="dropdown">
-                                                                        <ul class="dropdown-menu"
-                                                                            role="menu"
-                                                                            aria-labelledby="menu1">
-                                                                            <li role="presentation">
-                                                                                <a role="menuitem"
-                                                                                   tabindex="-1"
-                                                                                   href="javascript:void(0);">
-                                                                                    <div
-                                                                                        class="left">
-                                                                                        <img
-                                                                                            src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
-                                                                                            alt="Save">
-                                                                                    </div>
-                                                                                    <div
-                                                                                        class="right">
-                                                                                        <span>Hide/block</span>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </li>
-                                                                            <li role="presentation">
-                                                                                <a role="menuitem"
-                                                                                   tabindex="-1"
-                                                                                   href="javascript:void(0);">
-                                                                                    <div
-                                                                                        class="left">
-                                                                                        <img
-                                                                                            src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                            alt="Link">
-                                                                                    </div>
-                                                                                    <div
-                                                                                        class="right">
-                                                                                        <span>Delete</span>
-                                                                                    </div>
-                                                                                </a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div
-                                                        class="dotsBullet dropdown">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                        <ul class="dropdown-menu" role="menu"
-                                                            aria-labelledby="menu1">
-                                                            <li role="presentation">
-                                                                <a role="menuitem"
-                                                                   tabindex="-1"
-                                                                   href="javascript:void(0);">
-                                                                    <div
-                                                                        class="left">
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
-                                                                            alt="Save">
-                                                                    </div>
-                                                                    <div
-                                                                        class="right">
-                                                                        <span>Hide/block</span>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li role="presentation">
-                                                                <a role="menuitem"
-                                                                   tabindex="-1"
-                                                                   href="javascript:void(0);">
-                                                                    <div
-                                                                        class="left">
-                                                                        <img
-                                                                            src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                            alt="Link">
-                                                                    </div>
-                                                                    <div
-                                                                        class="right">
-                                                                        <span>Delete</span>
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <?php
-                                        }
-                                    }
-                                    ?>
-                                </div>
-
-                                <form>
-                                    <div class="chatMsgBox mb-0">
-                                        <div class="commentWrapBox">
-                                            <figure>
-                                                <?php if (empty($user_detail['image'])) {
-
-                                                    if (strcasecmp($user_detail['gender'], 'male') == 0) {
-                                                        ?>
-                                                        <img
-                                                             src="<?php echo base_url(); ?>uploads/user-male.png" alt="User">
-                                                    <?php } else {
-                                                        ?>
-                                                        <img
-                                                             src="<?php echo base_url(); ?>uploads/user-female.png" alt="User">
-                                                        <?php
-                                                    }
-
-                                                } else {
-                                                    ?>
-                                                    <img
-                                                         src="<?php echo base_url(); ?>uploads/users/<?php echo $user_detail['image']; ?>"
-                                                         alt="change profile banner"/>
-                                                    <?php
-                                                }
-                                                ?>
-
-                                            </figure>
-                                            <input type="text" name="comment"
-                                                   class="new_comment"
-                                                   data-parent-id="0"
-                                                   data-id="<?php echo $key; ?>"
-                                                   placeholder="Comment" id="em_1">
-                                            <div class="mediaAction">
-                                                <button type="button">
-                                                    <img
-                                                        src="<?php echo base_url(); ?>assets_d/images/image.svg"
-                                                        alt="Add Files">
-                                                    <input type="file">
-                                                </button>
+                            <div class="commentBoxWrap" id="Post_comment_<?php echo $value['reference_id']; ?>">
+                                    <div class="comment-popularity">
+                                        <div class="relevant">
+                                            <div class="value">Most Relevant</div>
+                                            <div class="caretIcon">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg" alt="down arrow">
                                             </div>
                                         </div>
-                                        
-                                    </div>
-                                    <div class="img-wrap-flex">
-                                        <div class="image-item">
-                                        <div class="close"><img src="https://studypeers.dev/assets_d/images/close-pink.svg" class="remove_image" id="remove_image_1" alt="close"></div>
-                                            <figure>
-                                                <img src="https://studypeers.dev/uploads/users/cover/1604851468.png" alt="Image"/>
-                                            </figure>
+                                        <div class="commentmsg">
+                                            <a onclick="hideCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
                                     
-                                </form>
+                                    <div id="Post_commentappend_<?php echo $value['reference_id']; ?>">
+                                        <?php foreach ($get_comments as $key => $value) { 
+                                            $comment_user = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
+                                            $count_like = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1))->num_rows();
+
+                                            if($count_like == 0){
+                                                $css = 'display: none;';
+                                            } else {
+                                                $css = '';
+                                            } 
+
+                                            $if_user_liked = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1, 'user_id' => $login_user_id))->num_rows();
+
+                                            $comment_replies = $this->db->get_where('comment_master', array('comment_parent_id' => $value['id'], 'status' => 1))->result_array();
+                                        ?>
+                                            <div class="chatMsgBox">
+                                        <figure>
+                                            <img src="<?php echo userImage($value['user_id']); ?>" alt="User">
+                                        </figure>
+                                        <div class="right">
+                                            <div class="userWrapText">
+                                                <h4><?php echo $comment_user['nickname']; ?></h4>
+                                                <?php if($value['type'] == 1) { ?>
+                                                    <img src="<?php echo base_url(); ?>uploads/comments/<?= $value['comment']; ?>" alt="comment" style="height: 70px;">
+                                                <?php } else { ?>
+                                                    <p><?php echo $value['comment']; ?></p>
+                                                <?php } ?>
+                                                <div class="leftStatus">
+                                                    <a id="reactcomment_<?php echo $value['id']; ?>" style="<?= $css; ?>">
+                                                        <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
+                                                        <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
+                                                    </a>
+                                                    <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
+                                                    <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
+                                                        <div id="commentreply_box_<?php echo $value['id']; ?>">
+                                                            <?php foreach ($comment_replies as $key2 => $value2) { 
+                                                                $user_info = $this->db->get_where('user_info', array('userID' => $value2['user_id']))->row_array();
+                                                                $count_like2 = $this->db->get_where('comment_like_master', array('comment_id' => $value2['id'], 'status' => 1))->num_rows();
+
+                                                                if($count_like2 == 0){
+                                                                    $css2 = 'display: none;';
+                                                                } else {
+                                                                    $css2 = '';
+                                                                } 
+
+                                                                $if_user_liked2 = $this->db->get_where('comment_like_master', array('comment_id' => $value2['id'], 'status' => 1, 'user_id' => $login_user_id))->num_rows();
+                                                            ?>
+                                                                <div class="innerReplyBox" >
+                                                            <figure>
+                                                                <img src="<?php echo userImage($value2['user_id']); ?>"
+                                                                    alt="User">
+                                                            </figure>
+                                                            <div
+                                                                class="right">
+                                                                <div
+                                                                    class="userWrapText">
+                                                                    <h4><?php echo $user_info['nickname']; ?></h4>
+                                                                    <p><?php echo $value2['comment']; ?></p>
+                                                                    
+                                                                    <div class="leftStatus">
+                                                                        <a id="reactcomment_<?php echo $value2['id']; ?>" style="<?= $css2; ?>">
+                                                                            <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
+                                                                            <span id="comment_like_count_<?php echo $value2['id']; ?>"><?php echo $count_like2; ?></span>
+                                                                        </a>
+                                                                        <a onclick="likeCommentByReference('<?php echo $value2['id']; ?>')" id="like_text_<?php echo $value2['id']; ?>"><?php if($if_user_liked2 == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
+                                                                    </div>
+                                                                </div>
+                                                                <div
+                                                                    class="dotsBullet dropdown">
+                                                                    <img
+                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                        alt="more"
+                                                                        data-toggle="dropdown">
+                                                                    <ul class="dropdown-menu"
+                                                                        role="menu"
+                                                                        aria-labelledby="menu1">
+                                                                        <li role="presentation">
+                                                                            <a role="menuitem"
+                                                                               tabindex="-1"
+                                                                               href="javascript:void(0);">
+                                                                                <div
+                                                                                    class="left">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                        alt="Save">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="right">
+                                                                                    <span>Hide/block</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li role="presentation">
+                                                                            <a role="menuitem"
+                                                                               tabindex="-1"
+                                                                               href="javascript:void(0);">
+                                                                                <div
+                                                                                    class="left">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                        alt="Link">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="right">
+                                                                                    <span>Delete</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <?php } ?>
+                                                            
+                                                        </div>
+                                                        <div class="commentWrapBox">
+                                                            <figure>
+                                                                <img src="<?php echo userImage($login_user_id); ?>" alt="User">
+                                                            </figure>
+                                                            <input type="text" name="" placeholder="Reply" id="comment_reply_<?php echo $value['id'] ?>" onkeypress="postCommentReply(event,'<?php echo $value['id'] ?>', this.value)">
+                                                            
+                                                        </div> 
+                                                    </div>
+                                                     
+                                                </div>
+                                            </div>
+                                            <div class="dotsBullet dropdown">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Hide/block</span>  
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Delete</span>
+                                                            </div>
+                                                        </a> 
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <?php } ?>
+                                    </div>
+                                    <div class="chatMsgBox">
+                                        <div class="commentWrapBox">
+                                            <figure>
+                                                <img src="<?php echo userImage($login_user_id);  ?>" alt="User">
+                                            </figure>
+                                            <input type="text" name="" placeholder="Comment" id="comment_input_Post_<?php echo $value['reference_id']; ?>" data-id="Post" class="commentReference" onkeypress="postCommentByReference(event, 'Post', '<?php echo $value['reference_id']; ?>', this.value)">
+                                            <div class="mediaAction">
+                                                <button type="button">
+                                                    <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
+                                                    <input type="file" id="comment_image_Post_<?php echo $value['reference_id']; ?>" onchange="postImageComment('Post', '<?php echo $value['reference_id']; ?>')">
+                                                </button>
+                                            </div>
+                                        </div>  
+                                    </div>
                             </div>
                         </div>
                     </div>
                 </div>
 <?php       }
            } if($value['reference'] == 'event') { 
-                
+                $chk_view = 0;
                 $event_detail = $this->db->get_where('event_master', array('id' => $value['reference_id']))->row_array();
                 $chk_if_shared = $this->db->get_where('share_master', array('reference_id' => $value['reference_id'], 'reference' => 'event', 'peer_id' => $user_id, 'status!=' => 4))->row_array();
                 if(($event_detail['privacy'] == 1) || !empty($chk_if_shared)){
@@ -703,6 +716,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                     $reaction_html = getReactionByReference($value['reference_id'], 'event');
 
                     $chk_user_reaction = $this->db->get_where('reaction_master', array('user_id'=>$login_user_id, 'reference_id' => $value['reference_id'], 'reference' => 'event'))->row_array();
+
+                    $get_comments = $this->db->get_where('comment_master', array('reference_id' => $value['reference_id'], 'reference' => 'event', 'comment_parent_id' => 0, 'status' => 1))->result_array();
                 
 ?>
                     <!-- Event -->
@@ -937,7 +952,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             <li>
                                                 <a>
                                                     <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                                    <span data-toggle="modal" data-target="#reations-popup" >05</span>
+                                                    <span id="event_comment_count_<?php echo $value['reference_id']; ?>" ><?php echo count($get_comments); ?></span>
                                                 </a>
                                             </li>
                                             <li>
@@ -1023,7 +1038,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                 </ul>
                                             </div>
                                         </li>
-                                        <li>
+                                        <li onclick="showCommentBoxWrap('event', '<?php echo $value['reference_id']; ?>')">
                                             <a>
                                                 <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
                                                 <span>Comment</span>
@@ -1037,7 +1052,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="commentBoxWrap">
+                                <div class="commentBoxWrap" id="event_comment_<?php echo $value['reference_id']; ?>">
                                     <div class="comment-popularity">
                                         <div class="relevant">
                                             <div class="value">Most Relevant</div>
@@ -1046,158 +1061,136 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>
                                         <div class="commentmsg">
-                                            <a>Hide Comments</a>
+                                            <a onclick="hideCommentBoxWrap('event', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
-                                    <div class="chatMsgBox">
+                                    
+                                    <div id="event_commentappend_<?php echo $value['reference_id']; ?>">
+                                        <?php foreach ($get_comments as $key => $value) { 
+                                            $comment_user = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
+                                            $count_like = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1))->num_rows();
+
+                                            if($count_like == 0){
+                                                $css = 'display: none;';
+                                            } else {
+                                                $css = '';
+                                            } 
+
+                                            $if_user_liked = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1, 'user_id' => $login_user_id))->num_rows();
+
+                                            $comment_replies = $this->db->get_where('comment_master', array('comment_parent_id' => $value['id'], 'status' => 1))->result_array();
+                                        ?>
+                                            <div class="chatMsgBox">
                                         <figure>
-                                            <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+                                            <img src="<?php echo userImage($value['user_id']); ?>" alt="User">
                                         </figure>
                                         <div class="right">
                                             <div class="userWrapText">
-                                                <h4>User Name</h4>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and</p>
+                                                <h4><?php echo $comment_user['nickname']; ?></h4>
+                                                <?php if($value['type'] == 1) { ?>
+                                                    <img src="<?php echo base_url(); ?>uploads/comments/<?= $value['comment']; ?>" alt="comment" style="height: 70px;">
+                                                <?php } else { ?>
+                                                    <p><?php echo $value['comment']; ?></p>
+                                                <?php } ?>
                                                 <div class="leftStatus">
-                                                    <a>
+                                                    <a id="reactcomment_<?php echo $value['id']; ?>" style="<?= $css; ?>">
                                                         <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                        <span>24</span>
+                                                        <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
                                                     </a>
-                                                    <a>Like</a>
-                                                    <a>Reply</a>
-                                                </div>
-                                            </div>
-                                            <div class="dotsBullet dropdown">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                    <li role="presentation">
-                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                            <div class="left">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                            </div>
-                                                            <div class="right">
-                                                                <span>Hide/block</span>  
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li role="presentation">
-                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                            <div class="left">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                            </div>
-                                                            <div class="right">
-                                                                <span>Delete</span>
-                                                            </div>
-                                                        </a> 
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="chatMsgBox">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                        </figure>
-                                        <div class="right">
-                                            <div class="userWrapText">
-                                                <h4>User Name</h4>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                <div class="leftStatus">
-                                                    <a>
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                        <span>24</span>
-                                                    </a>
-                                                    <a>Like</a>
-                                                    <a class="reply">Reply(2)</a>
-                                                    <div class="innerReplyBox">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                        </figure>
-                                                        <div class="right">
-                                                            <div class="userWrapText">
-                                                                <h4>User Name</h4>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                                <div class="leftStatus">
-                                                                    <a>Like</a>
+                                                    <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
+                                                    <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
+                                                        <div id="commentreply_box_<?php echo $value['id']; ?>">
+                                                            <?php foreach ($comment_replies as $key2 => $value2) { 
+                                                                $user_info = $this->db->get_where('user_info', array('userID' => $value2['user_id']))->row_array();
+                                                                $count_like2 = $this->db->get_where('comment_like_master', array('comment_id' => $value2['id'], 'status' => 1))->num_rows();
+
+                                                                if($count_like2 == 0){
+                                                                    $css2 = 'display: none;';
+                                                                } else {
+                                                                    $css2 = '';
+                                                                } 
+
+                                                                $if_user_liked2 = $this->db->get_where('comment_like_master', array('comment_id' => $value2['id'], 'status' => 1, 'user_id' => $login_user_id))->num_rows();
+                                                            ?>
+                                                                <div class="innerReplyBox" >
+                                                            <figure>
+                                                                <img src="<?php echo userImage($value2['user_id']); ?>"
+                                                                    alt="User">
+                                                            </figure>
+                                                            <div
+                                                                class="right">
+                                                                <div
+                                                                    class="userWrapText">
+                                                                    <h4><?php echo $user_info['nickname']; ?></h4>
+                                                                    <p><?php echo $value2['comment']; ?></p>
+                                                                    
+                                                                    <div class="leftStatus">
+                                                                        <a id="reactcomment_<?php echo $value2['id']; ?>" style="<?= $css2; ?>">
+                                                                            <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
+                                                                            <span id="comment_like_count_<?php echo $value2['id']; ?>"><?php echo $count_like2; ?></span>
+                                                                        </a>
+                                                                        <a onclick="likeCommentByReference('<?php echo $value2['id']; ?>')" id="like_text_<?php echo $value2['id']; ?>"><?php if($if_user_liked2 == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
+                                                                    </div>
+                                                                </div>
+                                                                <div
+                                                                    class="dotsBullet dropdown">
+                                                                    <img
+                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                        alt="more"
+                                                                        data-toggle="dropdown">
+                                                                    <ul class="dropdown-menu"
+                                                                        role="menu"
+                                                                        aria-labelledby="menu1">
+                                                                        <li role="presentation">
+                                                                            <a role="menuitem"
+                                                                               tabindex="-1"
+                                                                               href="javascript:void(0);">
+                                                                                <div
+                                                                                    class="left">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                        alt="Save">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="right">
+                                                                                    <span>Hide/block</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li role="presentation">
+                                                                            <a role="menuitem"
+                                                                               tabindex="-1"
+                                                                               href="javascript:void(0);">
+                                                                                <div
+                                                                                    class="left">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                        alt="Link">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="right">
+                                                                                    <span>Delete</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
                                                                 </div>
                                                             </div>
-                                                            <div class="dotsBullet dropdown">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                    <li role="presentation">
-                                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                            <div class="left">
-                                                                                <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                            </div>
-                                                                            <div class="right">
-                                                                                <span>Hide/block</span>  
-                                                                            </div>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li role="presentation">
-                                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                            <div class="left">
-                                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                            </div>
-                                                                            <div class="right">
-                                                                                <span>Delete</span>
-                                                                            </div>
-                                                                        </a> 
-                                                                    </li>
-                                                                </ul>
                                                             </div>
+                                                            <?php } ?>
+                                                            
                                                         </div>
+                                                        <div class="commentWrapBox">
+                                                            <figure>
+                                                                <img src="<?php echo userImage($login_user_id); ?>" alt="User">
+                                                            </figure>
+                                                            <input type="text" name="" placeholder="Reply" id="comment_reply_<?php echo $value['id'] ?>" onkeypress="postCommentReply(event,'<?php echo $value['id'] ?>', this.value)">
+                                                            
+                                                        </div> 
                                                     </div>
-                                                    <div class="innerReplyBox">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                        </figure>
-                                                        <div class="right">
-                                                            <div class="userWrapText">
-                                                                <h4>User Name</h4>
-                                                                <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                                <div class="leftStatus">
-                                                                    <a>Like</a>
-                                                                </div>
-                                                            </div>
-                                                            <div class="dotsBullet dropdown">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                                    <li role="presentation">
-                                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                            <div class="left">
-                                                                                <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                            </div>
-                                                                            <div class="right">
-                                                                                <span>Hide/block</span>  
-                                                                            </div>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li role="presentation">
-                                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                            <div class="left">
-                                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                            </div>
-                                                                            <div class="right">
-                                                                                <span>Delete</span>
-                                                                            </div>
-                                                                        </a> 
-                                                                    </li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="commentWrapBox">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                        </figure>
-                                                        <input type="text" name="" placeholder="Comment" id="em_0">
-                                                        <div class="mediaAction">
-                                                            <button type="button">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-                                                                <input type="file">
-                                                            </button>
-                                                        </div>
-                                                    </div>  
+                                                     
                                                 </div>
                                             </div>
                                             <div class="dotsBullet dropdown">
@@ -1226,61 +1219,19 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                 </ul>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="chatMsgBox">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                        </figure>
-                                        <div class="right">
-                                            <div class="userWrapText">
-                                                <h4>User Name</h4>
-                                                <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                <div class="leftStatus">
-                                                    <a>
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                        <span>24</span>
-                                                    </a>
-                                                    <a>Like</a>
-                                                    <a>Reply</a>
-                                                </div>
-                                            </div>
-                                            <div class="dotsBullet dropdown">
-                                                <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                    <li role="presentation">
-                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                            <div class="left">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                            </div>
-                                                            <div class="right">
-                                                                <span>Hide/block</span>  
-                                                            </div>
-                                                        </a>
-                                                    </li>
-                                                    <li role="presentation">
-                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                            <div class="left">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                            </div>
-                                                            <div class="right">
-                                                                <span>Delete</span>
-                                                            </div>
-                                                        </a> 
-                                                    </li>
-                                                </ul>
-                                            </div>
                                         </div>
+                                        <?php } ?>
                                     </div>
                                     <div class="chatMsgBox">
                                         <div class="commentWrapBox">
                                             <figure>
-                                                <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
+                                                <img src="<?php echo userImage($login_user_id);  ?>" alt="User">
                                             </figure>
-                                            <input type="text" name="" placeholder="Comment" id="em_1">
+                                            <input type="text" name="" placeholder="Comment" id="comment_input_event_<?php echo $value['reference_id']; ?>" data-id="event" class="commentReference" onkeypress="postCommentByReference(event, 'event', '<?php echo $value['reference_id']; ?>', this.value)">
                                             <div class="mediaAction">
                                                 <button type="button">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-                                                    <input type="file">
+                                                    <input type="file" id="comment_image_event_<?php echo $value['reference_id']; ?>" onchange="postImageComment('event', '<?php echo $value['reference_id']; ?>')">
                                                 </button>
                                             </div>
                                         </div>  
@@ -1290,7 +1241,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         </div>
                     </div>
         <?php  } } else if($value['reference'] == 'studyset') {  
-            
+            $chk_view = 0;
             $studyset_detail = $this->db->get_where('study_sets', array('study_set_id' => $value['reference_id']))->row_array();
             
             $chk_if_shared = $this->db->get_where('share_master', array('reference_id' => $value['reference_id'], 'reference' => 'studyset', 'peer_id' => $user_id, 'status' => 1))->row_array();
@@ -1301,6 +1252,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 $reaction_html = getReactionByReference($value['reference_id'], 'studyset');
 
                 $chk_user_reaction = $this->db->get_where('reaction_master', array('user_id'=>$login_user_id, 'reference_id' => $value['reference_id'], 'reference' => 'studyset'))->row_array();
+
+                $get_comments = $this->db->get_where('comment_master', array('reference_id' => $value['reference_id'], 'reference' => 'studyset', 'comment_parent_id' => 0, 'status' => 1))->result_array();
             
         ?>
 
@@ -1460,7 +1413,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                            <span>05</span>
+                                            <span id="studyset_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
                                     <li>
@@ -1546,7 +1499,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         </ul>
                                     </div>
                                 </li>
-                                <li>
+                                <li onclick="showCommentBoxWrap('studyset', '<?php echo $value['reference_id']; ?>')">
                                     <a>
                                         <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
                                         <span>Comment</span>
@@ -1560,254 +1513,190 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 </li>
                             </ul>
                         </div>
-                        <div class="commentBoxWrap">
-                            <div class="comment-popularity">
-                                <div class="relevant">
-                                    <div class="value">Most Relevant</div>
-                                    <div class="caretIcon">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg" alt="down arrow">
-                                    </div>
-                                </div>
-                                <div class="commentmsg">
-                                    <a>Hide Comments</a>
-                                </div>
-                            </div>
-                            <div class="chatMsgBox">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                </figure>
-                                <div class="right">
-                                    <div class="userWrapText">
-                                        <h4>User Name</h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                        <div class="leftStatus">
-                                            <a>
-                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                <span>24</span>
-                                            </a>
-                                            <a>Like</a>
-                                            <a>Reply</a>
+                        <div class="commentBoxWrap" id="studyset_comment_<?php echo $value['reference_id']; ?>">
+                                    <div class="comment-popularity">
+                                        <div class="relevant">
+                                            <div class="value">Most Relevant</div>
+                                            <div class="caretIcon">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg" alt="down arrow">
+                                            </div>
+                                        </div>
+                                        <div class="commentmsg">
+                                            <a onclick="hideCommentBoxWrap('studyset', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
-                                    <div class="dotsBullet dropdown">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Hide/block</span>  
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chatMsgBox">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                </figure>
-                                <div class="right">
-                                    <div class="userWrapText">
-                                        <h4>User Name</h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                        <div class="leftStatus">
-                                            <a>
-                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                <span>24</span>
-                                            </a>
-                                            <a>Like</a>
-                                            <a class="reply">Reply(2)</a>
-                                            <div class="innerReplyBox">
-                                                <figure>
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                </figure>
-                                                <div class="right">
-                                                    <div class="userWrapText">
-                                                        <h4>User Name</h4>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                        <div class="leftStatus">
-                                                            <a>Like</a>
+                                    
+                                    <div id="studyset_commentappend_<?php echo $value['reference_id']; ?>">
+                                        <?php foreach ($get_comments as $key => $value) { 
+                                            $comment_user = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
+                                            $count_like = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1))->num_rows();
+
+                                            if($count_like == 0){
+                                                $css = 'display: none;';
+                                            } else {
+                                                $css = '';
+                                            } 
+
+                                            $if_user_liked = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1, 'user_id' => $login_user_id))->num_rows();
+
+                                            $comment_replies = $this->db->get_where('comment_master', array('comment_parent_id' => $value['id'], 'status' => 1))->result_array();
+                                        ?>
+                                            <div class="chatMsgBox">
+                                        <figure>
+                                            <img src="<?php echo userImage($value['user_id']); ?>" alt="User">
+                                        </figure>
+                                        <div class="right">
+                                            <div class="userWrapText">
+                                                <h4><?php echo $comment_user['nickname']; ?></h4>
+                                                <?php if($value['type'] == 1) { ?>
+                                                    <img src="<?php echo base_url(); ?>uploads/comments/<?= $value['comment']; ?>" alt="comment" style="height: 70px;">
+                                                <?php } else { ?>
+                                                    <p><?php echo $value['comment']; ?></p>
+                                                <?php } ?>
+                                                <div class="leftStatus">
+                                                    <a id="reactcomment_<?php echo $value['id']; ?>" style="<?= $css; ?>">
+                                                        <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
+                                                        <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
+                                                    </a>
+                                                    <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
+                                                    <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
+                                                        <div id="commentreply_box_<?php echo $value['id']; ?>">
+                                                            <?php foreach ($comment_replies as $key2 => $value2) { 
+                                                                $user_info = $this->db->get_where('user_info', array('userID' => $value2['user_id']))->row_array();
+                                                                $count_like2 = $this->db->get_where('comment_like_master', array('comment_id' => $value2['id'], 'status' => 1))->num_rows();
+
+                                                                if($count_like2 == 0){
+                                                                    $css2 = 'display: none;';
+                                                                } else {
+                                                                    $css2 = '';
+                                                                } 
+
+                                                                $if_user_liked2 = $this->db->get_where('comment_like_master', array('comment_id' => $value2['id'], 'status' => 1, 'user_id' => $login_user_id))->num_rows();
+                                                            ?>
+                                                                <div class="innerReplyBox" >
+                                                            <figure>
+                                                                <img src="<?php echo userImage($value2['user_id']); ?>"
+                                                                    alt="User">
+                                                            </figure>
+                                                            <div
+                                                                class="right">
+                                                                <div
+                                                                    class="userWrapText">
+                                                                    <h4><?php echo $user_info['nickname']; ?></h4>
+                                                                    <p><?php echo $value2['comment']; ?></p>
+                                                                    
+                                                                    <div class="leftStatus">
+                                                                        <a id="reactcomment_<?php echo $value2['id']; ?>" style="<?= $css2; ?>">
+                                                                            <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
+                                                                            <span id="comment_like_count_<?php echo $value2['id']; ?>"><?php echo $count_like2; ?></span>
+                                                                        </a>
+                                                                        <a onclick="likeCommentByReference('<?php echo $value2['id']; ?>')" id="like_text_<?php echo $value2['id']; ?>"><?php if($if_user_liked2 == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
+                                                                    </div>
+                                                                </div>
+                                                                <div
+                                                                    class="dotsBullet dropdown">
+                                                                    <img
+                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                        alt="more"
+                                                                        data-toggle="dropdown">
+                                                                    <ul class="dropdown-menu"
+                                                                        role="menu"
+                                                                        aria-labelledby="menu1">
+                                                                        <li role="presentation">
+                                                                            <a role="menuitem"
+                                                                               tabindex="-1"
+                                                                               href="javascript:void(0);">
+                                                                                <div
+                                                                                    class="left">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                        alt="Save">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="right">
+                                                                                    <span>Hide/block</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li role="presentation">
+                                                                            <a role="menuitem"
+                                                                               tabindex="-1"
+                                                                               href="javascript:void(0);">
+                                                                                <div
+                                                                                    class="left">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                        alt="Link">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="right">
+                                                                                    <span>Delete</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <?php } ?>
+                                                            
                                                         </div>
+                                                        <div class="commentWrapBox">
+                                                            <figure>
+                                                                <img src="<?php echo userImage($login_user_id); ?>" alt="User">
+                                                            </figure>
+                                                            <input type="text" name="" placeholder="Reply" id="comment_reply_<?php echo $value['id'] ?>" onkeypress="postCommentReply(event,'<?php echo $value['id'] ?>', this.value)">
+                                                            
+                                                        </div> 
                                                     </div>
-                                                    <div class="dotsBullet dropdown">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                    <div class="left">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <span>Hide/block</span>  
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                    <div class="left">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <span>Delete</span>
-                                                                    </div>
-                                                                </a> 
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                     
                                                 </div>
                                             </div>
-                                            <div class="innerReplyBox">
-                                                <figure>
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                </figure>
-                                                <div class="right">
-                                                    <div class="userWrapText">
-                                                        <h4>User Name</h4>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                        <div class="leftStatus">
-                                                            <a>Like</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dotsBullet dropdown">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                    <div class="left">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <span>Hide/block</span>  
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                    <div class="left">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <span>Delete</span>
-                                                                    </div>
-                                                                </a> 
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                            <div class="dotsBullet dropdown">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Hide/block</span>  
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Delete</span>
+                                                            </div>
+                                                        </a> 
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="commentWrapBox">
-                                                <figure>
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                </figure>
-                                                <input type="text" name="" placeholder="Comment" id="em_0">
-                                                <div class="mediaAction">
-                                                    <button type="button">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-                                                        <input type="file">
-                                                    </button>
-                                                </div>
-                                            </div>  
                                         </div>
-                                    </div>
-                                    <div class="dotsBullet dropdown">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Hide/block</span>  
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chatMsgBox">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                </figure>
-                                <div class="right">
-                                    <div class="userWrapText">
-                                        <h4>User Name</h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                        <div class="leftStatus">
-                                            <a>
-                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                <span>24</span>
-                                            </a>
-                                            <a>Like</a>
-                                            <a>Reply</a>
                                         </div>
+                                        <?php } ?>
                                     </div>
-                                    <div class="dotsBullet dropdown">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Hide/block</span>  
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
+                                    <div class="chatMsgBox">
+                                        <div class="commentWrapBox">
+                                            <figure>
+                                                <img src="<?php echo userImage($login_user_id);  ?>" alt="User">
+                                            </figure>
+                                            <input type="text" name="" placeholder="Comment" id="comment_input_studyset_<?php echo $value['reference_id']; ?>" data-id="studyset" class="commentReference" onkeypress="postCommentByReference(event, 'studyset', '<?php echo $value['reference_id']; ?>', this.value)">
+                                            <div class="mediaAction">
+                                                <button type="button">
+                                                    <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
+                                                    <input type="file" id="comment_image_studyset_<?php echo $value['reference_id']; ?>" onchange="postImageComment('studyset', '<?php echo $value['reference_id']; ?>')">
+                                                </button>
+                                            </div>
+                                        </div>  
                                     </div>
-                                </div>
-                            </div>
-                            <div class="chatMsgBox">
-                                <div class="commentWrapBox">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                    </figure>
-                                    <input type="text" name="" placeholder="Comment" id="em_1">
-                                    <div class="mediaAction">
-                                        <button type="button">
-                                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-                                            <input type="file">
-                                        </button>
-                                    </div>
-                                </div>  
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -1827,6 +1716,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 $reaction_html = getReactionByReference($value['reference_id'], 'document');
 
                 $chk_user_reaction = $this->db->get_where('reaction_master', array('user_id'=>$login_user_id, 'reference_id' => $value['reference_id'], 'reference' => 'document'))->row_array();
+
+                $get_comments = $this->db->get_where('comment_master', array('reference_id' => $value['reference_id'], 'reference' => 'document', 'comment_parent_id' => 0, 'status' => 1))->result_array();
         ?> 
             <div class="box-card message">
                 <div class="eventMessage">
@@ -1977,7 +1868,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
-                                            <span>05</span>
+                                            <span id="document_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
                                     <li>
@@ -2063,7 +1954,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         </ul>
                                     </div>
                                 </li>
-                                <li>
+                                <li onclick="showCommentBoxWrap('document', '<?php echo $value['reference_id']; ?>')">
                                     <a>
                                         <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
                                         <span>Comment</span>
@@ -2077,254 +1968,190 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 </li>
                             </ul>
                         </div>
-                        <div class="commentBoxWrap">
-                            <div class="comment-popularity">
-                                <div class="relevant">
-                                    <div class="value">Most Relevant</div>
-                                    <div class="caretIcon">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg" alt="down arrow">
-                                    </div>
-                                </div>
-                                <div class="commentmsg">
-                                    <a>Hide Comments</a>
-                                </div>
-                            </div>
-                            <div class="chatMsgBox">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                </figure>
-                                <div class="right">
-                                    <div class="userWrapText">
-                                        <h4>User Name</h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                        <div class="leftStatus">
-                                            <a>
-                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                <span>24</span>
-                                            </a>
-                                            <a>Like</a>
-                                            <a>Reply</a>
+                        <div class="commentBoxWrap" id="document_comment_<?php echo $value['reference_id']; ?>">
+                                    <div class="comment-popularity">
+                                        <div class="relevant">
+                                            <div class="value">Most Relevant</div>
+                                            <div class="caretIcon">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/down-arrow1.svg" alt="down arrow">
+                                            </div>
+                                        </div>
+                                        <div class="commentmsg">
+                                            <a onclick="hideCommentBoxWrap('document', '<?php echo $value['reference_id']; ?>')">Hide Comments</a>
                                         </div>
                                     </div>
-                                    <div class="dotsBullet dropdown">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Hide/block</span>  
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chatMsgBox">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                </figure>
-                                <div class="right">
-                                    <div class="userWrapText">
-                                        <h4>User Name</h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                        <div class="leftStatus">
-                                            <a>
-                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                <span>24</span>
-                                            </a>
-                                            <a>Like</a>
-                                            <a class="reply">Reply(2)</a>
-                                            <div class="innerReplyBox">
-                                                <figure>
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                </figure>
-                                                <div class="right">
-                                                    <div class="userWrapText">
-                                                        <h4>User Name</h4>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                        <div class="leftStatus">
-                                                            <a>Like</a>
+                                    
+                                    <div id="document_commentappend_<?php echo $value['reference_id']; ?>">
+                                        <?php foreach ($get_comments as $key => $value) { 
+                                            $comment_user = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
+                                            $count_like = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1))->num_rows();
+
+                                            if($count_like == 0){
+                                                $css = 'display: none;';
+                                            } else {
+                                                $css = '';
+                                            } 
+
+                                            $if_user_liked = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1, 'user_id' => $login_user_id))->num_rows();
+
+                                            $comment_replies = $this->db->get_where('comment_master', array('comment_parent_id' => $value['id'], 'status' => 1))->result_array();
+                                        ?>
+                                            <div class="chatMsgBox">
+                                        <figure>
+                                            <img src="<?php echo userImage($value['user_id']); ?>" alt="User">
+                                        </figure>
+                                        <div class="right">
+                                            <div class="userWrapText">
+                                                <h4><?php echo $comment_user['nickname']; ?></h4>
+                                                <?php if($value['type'] == 1) { ?>
+                                                    <img src="<?php echo base_url(); ?>uploads/comments/<?= $value['comment']; ?>" alt="comment" style="height: 70px;">
+                                                <?php } else { ?>
+                                                    <p><?php echo $value['comment']; ?></p>
+                                                <?php } ?>
+                                                <div class="leftStatus">
+                                                    <a id="reactcomment_<?php echo $value['id']; ?>" style="<?= $css; ?>">
+                                                        <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
+                                                        <span id="comment_like_count_<?php echo $value['id']; ?>"><?php echo $count_like; ?></span>
+                                                    </a>
+                                                    <a onclick="likeCommentByReference('<?php echo $value['id']; ?>')" id="like_text_<?php echo $value['id']; ?>"><?php if($if_user_liked == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
+                                                    <?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
+                                                    <a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span>  </a>
+                                                    <div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
+                                                        <div id="commentreply_box_<?php echo $value['id']; ?>">
+                                                            <?php foreach ($comment_replies as $key2 => $value2) { 
+                                                                $user_info = $this->db->get_where('user_info', array('userID' => $value2['user_id']))->row_array();
+                                                                $count_like2 = $this->db->get_where('comment_like_master', array('comment_id' => $value2['id'], 'status' => 1))->num_rows();
+
+                                                                if($count_like2 == 0){
+                                                                    $css2 = 'display: none;';
+                                                                } else {
+                                                                    $css2 = '';
+                                                                } 
+
+                                                                $if_user_liked2 = $this->db->get_where('comment_like_master', array('comment_id' => $value2['id'], 'status' => 1, 'user_id' => $login_user_id))->num_rows();
+                                                            ?>
+                                                                <div class="innerReplyBox" >
+                                                            <figure>
+                                                                <img src="<?php echo userImage($value2['user_id']); ?>"
+                                                                    alt="User">
+                                                            </figure>
+                                                            <div
+                                                                class="right">
+                                                                <div
+                                                                    class="userWrapText">
+                                                                    <h4><?php echo $user_info['nickname']; ?></h4>
+                                                                    <p><?php echo $value2['comment']; ?></p>
+                                                                    
+                                                                    <div class="leftStatus">
+                                                                        <a id="reactcomment_<?php echo $value2['id']; ?>" style="<?= $css2; ?>">
+                                                                            <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
+                                                                            <span id="comment_like_count_<?php echo $value2['id']; ?>"><?php echo $count_like2; ?></span>
+                                                                        </a>
+                                                                        <a onclick="likeCommentByReference('<?php echo $value2['id']; ?>')" id="like_text_<?php echo $value2['id']; ?>"><?php if($if_user_liked2 == 1) { echo 'Liked'; } else { echo 'Like'; } ?></a>
+                                                                    </div>
+                                                                </div>
+                                                                <div
+                                                                    class="dotsBullet dropdown">
+                                                                    <img
+                                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                                                        alt="more"
+                                                                        data-toggle="dropdown">
+                                                                    <ul class="dropdown-menu"
+                                                                        role="menu"
+                                                                        aria-labelledby="menu1">
+                                                                        <li role="presentation">
+                                                                            <a role="menuitem"
+                                                                               tabindex="-1"
+                                                                               href="javascript:void(0);">
+                                                                                <div
+                                                                                    class="left">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                                                        alt="Save">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="right">
+                                                                                    <span>Hide/block</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                        <li role="presentation">
+                                                                            <a role="menuitem"
+                                                                               tabindex="-1"
+                                                                               href="javascript:void(0);">
+                                                                                <div
+                                                                                    class="left">
+                                                                                    <img
+                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                                        alt="Link">
+                                                                                </div>
+                                                                                <div
+                                                                                    class="right">
+                                                                                    <span>Delete</span>
+                                                                                </div>
+                                                                            </a>
+                                                                        </li>
+                                                                    </ul>
+                                                                </div>
+                                                            </div>
+                                                            </div>
+                                                            <?php } ?>
+                                                            
                                                         </div>
+                                                        <div class="commentWrapBox">
+                                                            <figure>
+                                                                <img src="<?php echo userImage($login_user_id); ?>" alt="User">
+                                                            </figure>
+                                                            <input type="text" name="" placeholder="Reply" id="comment_reply_<?php echo $value['id'] ?>" onkeypress="postCommentReply(event,'<?php echo $value['id'] ?>', this.value)">
+                                                            
+                                                        </div> 
                                                     </div>
-                                                    <div class="dotsBullet dropdown">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                    <div class="left">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <span>Hide/block</span>  
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                    <div class="left">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <span>Delete</span>
-                                                                    </div>
-                                                                </a> 
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                     
                                                 </div>
                                             </div>
-                                            <div class="innerReplyBox">
-                                                <figure>
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                </figure>
-                                                <div class="right">
-                                                    <div class="userWrapText">
-                                                        <h4>User Name</h4>
-                                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                                        <div class="leftStatus">
-                                                            <a>Like</a>
-                                                        </div>
-                                                    </div>
-                                                    <div class="dotsBullet dropdown">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                    <div class="left">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <span>Hide/block</span>  
-                                                                    </div>
-                                                                </a>
-                                                            </li>
-                                                            <li role="presentation">
-                                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                                    <div class="left">
-                                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                                    </div>
-                                                                    <div class="right">
-                                                                        <span>Delete</span>
-                                                                    </div>
-                                                                </a> 
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                            <div class="dotsBullet dropdown">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
+                                                <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Hide/block</span>  
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    <li role="presentation">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                            <div class="left">
+                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+                                                            </div>
+                                                            <div class="right">
+                                                                <span>Delete</span>
+                                                            </div>
+                                                        </a> 
+                                                    </li>
+                                                </ul>
                                             </div>
-                                            <div class="commentWrapBox">
-                                                <figure>
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                                </figure>
-                                                <input type="text" name="" placeholder="Comment" id="em_0">
-                                                <div class="mediaAction">
-                                                    <button type="button">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-                                                        <input type="file">
-                                                    </button>
-                                                </div>
-                                            </div>  
                                         </div>
-                                    </div>
-                                    <div class="dotsBullet dropdown">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Hide/block</span>  
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="chatMsgBox">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                </figure>
-                                <div class="right">
-                                    <div class="userWrapText">
-                                        <h4>User Name</h4>
-                                        <p>Lorem Ipsum is simply dummy text of the printing and</p>
-                                        <div class="leftStatus">
-                                            <a>
-                                                <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
-                                                <span>24</span>
-                                            </a>
-                                            <a>Like</a>
-                                            <a>Reply</a>
                                         </div>
+                                        <?php } ?>
                                     </div>
-                                    <div class="dotsBullet dropdown">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="more" data-toggle="dropdown">
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/restricted.svg" alt="Save">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Hide/block</span>  
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </a> 
-                                            </li>
-                                        </ul>
+                                    <div class="chatMsgBox">
+                                        <div class="commentWrapBox">
+                                            <figure>
+                                                <img src="<?php echo userImage($login_user_id);  ?>" alt="User">
+                                            </figure>
+                                            <input type="text" name="" placeholder="Comment" id="comment_input_document_<?php echo $value['reference_id']; ?>" data-id="document" class="commentReference" onkeypress="postCommentByReference(event, 'document', '<?php echo $value['reference_id']; ?>', this.value)">
+                                            <div class="mediaAction">
+                                                <button type="button">
+                                                    <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
+                                                    <input type="file" id="comment_image_document_<?php echo $value['reference_id']; ?>" onchange="postImageComment('document', '<?php echo $value['reference_id']; ?>')">
+                                                </button>
+                                            </div>
+                                        </div>  
                                     </div>
-                                </div>
-                            </div>
-                            <div class="chatMsgBox">
-                                <div class="commentWrapBox">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/ct_user.jpg" alt="User">
-                                    </figure>
-                                    <input type="text" name="" placeholder="Comment" id="em_1">
-                                    <div class="mediaAction">
-                                        <button type="button">
-                                            <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-                                            <input type="file">
-                                        </button>
-                                    </div>
-                                </div>  
-                            </div>
                         </div>
                     </div>
                 </div>
