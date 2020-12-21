@@ -848,3 +848,44 @@ $(".emojis-wysiwyg").emojioneArea({
     }
   }
 });
+
+//-------------------------------------//
+// hack CodePen to load pens as pages
+
+var nextPenSlugs = [
+  "3d9a3b8092ebcf9bc4a72672b81df1ac",
+  "2cde50c59ea73c47aec5bd26343ce287",
+  "d83110c5f71ea23ba5800b6b1a4a95c4"
+];
+
+function getPenPath() {
+  var slug = nextPenSlugs[this.loadCount];
+  if (slug) {
+    return "https://cdpn.io/desandro/debug/" + slug;
+  }
+}
+
+//-------------------------------------//
+
+var $container = $("#append_chat_records").infiniteScroll({
+  path: getPenPath,
+  append: false,
+  responseType: "text",
+  status: ".page-load-status"
+});
+
+// get Infinite Scroll instance
+var infScroll = $container.data("infiniteScroll");
+
+$container.on("load.infiniteScroll", function(event, response) {
+  console.log("Testingload--->");
+  var data = JSON.parse(response);
+  $statusBar.text("Loaded page: " + infScroll.pageIndex);
+
+  // // get posts from response
+  // var $posts = $(response).find(".post");
+  // // append posts after images loaded
+  // $posts.imagesLoaded(function() {
+  //   $container.infiniteScroll("appendItems", $posts);
+  // });
+});

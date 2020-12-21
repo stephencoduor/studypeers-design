@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 50 50" style="enable-background:new 0 0 50 50;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFFFFF;}
+	.st1{fill:#E6E6FE;}
+	.st2{fill:#546DE5;}
+</style>
+<g id="camera-circle" transform="translate(-1056 -274)">
+	<g id="Ellipse_26" transform="translate(1056 274)">
+		<g>
+			<circle class="st0" cx="25" cy="25" r="25"/>
+		</g>
+		<g>
+			<path class="st1" d="M25,50C11.2,50,0,38.8,0,25S11.2,0,25,0s25,11.2,25,25S38.8,50,25,50z M25,2C12.3,2,2,12.3,2,25
+				c0,12.7,10.3,23,23,23c12.7,0,23-10.3,23-23C48,12.3,37.7,2,25,2z"/>
+		</g>
+	</g>
+	<g id="ic_add_a_photo_24px">
+		<path class="st2" d="M1072.6,291.3v-2.9h1.9v2.9h2.9v1.9h-2.9v2.9h-1.9v-2.9h-2.9v-1.9L1072.6,291.3z M1075.5,297v-2.9h2.9v-2.9
+			h6.7l1.7,1.9h3c1,0,1.9,0.9,1.9,1.9v11.4c0,1-0.9,1.9-1.9,1.9h-15.2c-1,0-1.9-0.9-1.9-1.9V297H1075.5z M1082.2,305.6
+			c2.6,0,4.8-2.1,4.8-4.8s-2.1-4.8-4.8-4.8s-4.8,2.1-4.8,4.8l0,0C1077.4,303.5,1079.5,305.6,1082.2,305.6L1082.2,305.6z
+			 M1079.1,300.8c0,1.7,1.4,3,3,3s3-1.4,3-3c0-1.7-1.4-3-3-3C1080.5,297.8,1079.1,299.1,1079.1,300.8
+			C1079.1,300.8,1079.1,300.8,1079.1,300.8z"/>
+	</g>
+</g>
+</svg>

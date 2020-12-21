@@ -458,8 +458,16 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                     </g>
                 </svg>
             </div>
-            <div class="chat-body" id="append_chat_records">
-
+            <div class="chat-body" id="append_chat_records"></div>
+            <div class="page-load-status">
+                <div class="loader-ellips infinite-scroll-request">
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                </div>
+                <p class="infinite-scroll-last">End of content</p>
+                <p class="infinite-scroll-error">No more pages to load</p>
             </div>
             <input type="hidden" id="current_group_id">
             <input type="hidden" id="curren_group_members">

@@ -27,7 +27,7 @@
   padding: 10px 0;
 }
 .chat-user-list li a {
-  width:100%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
@@ -123,10 +123,9 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%,-50%);
-  
+  transform: translate(-50%, -50%);
 }
-.loader-wrap svg{
+.loader-wrap svg {
   width: 50px;
   height: 50px;
 }
@@ -325,11 +324,10 @@ div.time {
   position: relative;
   display: flex;
   align-items: center;
-  
 }
-.text-area-wrap{
-  width:calc(100% - 100px);
-  padding-left:10px;
+.text-area-wrap {
+  width: calc(100% - 100px);
+  padding-left: 10px;
 }
 .file-upload {
   width: 30px;
@@ -426,11 +424,11 @@ div.time {
   justify-content: flex-start;
   width: 100%;
 }
-.message-received .chat-msg{
-  max-width:100%;
+.message-received .chat-msg {
+  max-width: 100%;
 }
 .message-received {
-  max-width:50%;
+  max-width: 50%;
   display: flex;
   flex-direction: column;
   margin-bottom: 15px;
@@ -794,13 +792,13 @@ a.done-link.show {
   border: 1px solid #ccc;
 }
 .chat-footer .input-wrap .emojionearea.emojionearea-inline {
-  min-height:48px;
+  min-height: 48px;
 }
-.emojionearea.emojionearea-inline>.emojionearea-editor{
-  top:10px;
+.emojionearea.emojionearea-inline > .emojionearea-editor {
+  top: 10px;
 }
-.emojionearea.emojionearea-inline>.emojionearea-button{
-  top:13px;
+.emojionearea.emojionearea-inline > .emojionearea-button {
+  top: 13px;
 }
 .chat-user-list li.active {
   background: #f0f2f5;
@@ -882,8 +880,8 @@ a.done-link.show {
   background-position: center;
 }
 
-.chat-input-wrap textarea.form-control{
-  min-height:48px;
+.chat-input-wrap textarea.form-control {
+  min-height: 48px;
 }
 
 .media-icon {
@@ -910,8 +908,8 @@ a.done-link.show {
   justify-content: center;
   transition: 0.3s ease-in;
   background-color: transparent;
-  outline:none;
-  border:none;
+  outline: none;
+  border: none;
 }
 .send-btn:hover {
   background-color: #f0f2f5;
@@ -919,43 +917,43 @@ a.done-link.show {
 #groupMember .modal-dialog {
   width: 380px;
 }
-.choose-imagefile-wrap .removePic{
+.choose-imagefile-wrap .removePic {
   display: block;
 }
-.modal-content .selectator_element.multiple{
-  padding-left:15px!important;
+.modal-content .selectator_element.multiple {
+  padding-left: 15px !important;
 }
-.multiple .selectator_input{
-  padding-left:0!important;
+.multiple .selectator_input {
+  padding-left: 0 !important;
 }
 .main-close {
   position: absolute;
   top: 2px;
   left: 5px;
 }
-.grp-member-center-message{
-text-align:center;   
-padding:0 15px;
+.grp-member-center-message {
+  text-align: center;
+  padding: 0 15px;
 }
-.info-message{
-  display:inline-block;
+.info-message {
+  display: inline-block;
   padding: 5px 15px 5px;
-    background-color: #f1f1f1;
-    border-radius: 10px 10px 10px 10px;
+  background-color: #f1f1f1;
+  border-radius: 10px 10px 10px 10px;
 }
-.multiple .selectator_input{
-  max-width:100%!important;
+.multiple .selectator_input {
+  max-width: 100% !important;
 }
 div#progress-wrp {
   padding: 0 15px;
   display: flex;
   align-items: center;
 }
-div#progress-wrp .progress-bar{
-  width:25%!important;
-  height:10px!important;
-  border-radius:3px!important;
-  background: #ea2e7e!important;
+div#progress-wrp .progress-bar {
+  width: 25% !important;
+  height: 10px !important;
+  border-radius: 3px !important;
+  background: #ea2e7e !important;
 }
 .attachment-view {
   width: 180px;
@@ -966,7 +964,7 @@ div#progress-wrp .progress-bar{
   justify-content: space-between;
   flex-direction: column;
   border: solid 1px #c3c3c3;
-  background-color:#fff;
+  background-color: #fff;
 }
 span.file-icon {
   height: 40%;
@@ -975,17 +973,17 @@ span.file-icon {
   width: 100%;
   justify-content: center;
 }
-.hide-scroll{
+.hide-scroll {
   overflow: hidden;
 }
-.chat-user-list .info-wrap p img{
-  width:20px;
-  margin-left:4px;
+.chat-user-list .info-wrap p img {
+  width: 20px;
+  margin-left: 4px;
 }
-.chat-dropdown{
+.chat-dropdown {
   position: absolute;
-  width:340px;
-  right:0;
+  width: 340px;
+  right: 0;
   top: 66px;
   background-color: #fff;
   z-index: 9;
@@ -993,4 +991,11 @@ span.file-icon {
 }
 .file-icon img {
   height: 100%;
+}
+.page-load-status {
+  display: none; /* hidden by default */
+  padding-top: 20px;
+  border-top: 1px solid #ddd;
+  text-align: center;
+  color: #777;
 }

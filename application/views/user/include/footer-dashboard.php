@@ -19,6 +19,7 @@
 <!-- <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script> -->
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url('assets_d/js/emojionearea-master/dist/emojionearea.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/infinite-scroll.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 

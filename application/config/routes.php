@@ -72,3 +72,36 @@ $route['account/get-user-groups'] = "ChatController/getUserChat";
 $route['account/get-user-group-chat-name'] = "ChatController/getUserGroupNames";
 $route['account/add-new-group-member'] = "ChatController/addNewGroupMember";
 $route['account/upload-document-server'] = "ChatController/uploadDocumentServer";
+
+/**
+ * login routes
+ * 
+ */
+
+$route['login'] = "LoginController/index";
+$route['signup'] = "LoginController/signUp";
+$route['login/verify-otp'] = "LoginController/verifyOTP";
+$route['login/resend-otp-page'] = "LoginController/resendOTPPage";
+$route['submit'] = "LoginController/submitSignUpForm";
+$route['submit-login-form'] = "LoginController/submitLoginForm";
+$route['logout'] = "HomeController/logoutUser";
+
+
+$route['complete-step'] = "BaseController/index";
+
+/**
+ * step submit routes.
+ */
+
+$route['home/step-register'] = "HomeController/stepRegisterPage";
+$route['submit-step-one'] = "HomeController/submitStepWiseData";
+$route['home/step-two-page'] = "HomeController/stepTwoPage";
+$route['get-my-university-list'] = "HomeController/getMyUniversityList";
+$route['get-university-field-list'] = "HomeController/getFieldList";
+$route['get-university-major-field'] = "HomeController/getMajorList";
+
+
+$route['upload-document-regisration'] = "HomeController/uploadDocument";
+$route['home/step-three-page'] = "HomeController/stepThreePage";
+
+$route['home/step-four-page']  = "HomeController/stepFourPage";
