@@ -1992,6 +1992,11 @@ shareOptionList celebrate*/
     -ms-transform: translate(0,-12px) scale(1.6);
     -o-transform: translate(0,-12px) scale(1.6);
 }
+.loader-wrap svg{
+    width:50px;
+    height:50px;
+    display:inline-block;
+}
 .likeMenu:hover .hoverMenu {
     display: block;
 }
@@ -3602,11 +3607,14 @@ figcaption a {
     height:60px;
     border-radius:50%;
     position: relative;
+    overflow: hidden;
 }
 .user-image figure img{
     width:100%;
     height:100%;
+    border-radius:50%;
     object-fit: cover;
+    object-position: center center;
 }
 .custom-tabs{
     padding-bottom:10px;
@@ -3693,4 +3701,17 @@ figcaption a {
 .tooltip:hover .tooltiptext {
   visibility: visible;
   opacity: 1;
+}
+#timeline-feeds .imgWrapper figure{
+    width:50%;
+    padding:0 5px;
+    margin:0;
+    border:none;
+}
+#timeline-feeds .box-card  .imgWrapper{
+    width:100%;
+    margin:0 -5px;
+}
+#timeline-feeds .box-card .imgWrapper.type2 figure:first-child{
+    border-right:none;
 }

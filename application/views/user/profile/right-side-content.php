@@ -1,5 +1,4 @@
-<div class="right">
-    <?php
+<?php
         $complete_per = 40;
         if(!empty($user_detail['about']) && !empty($user_detail['high_School'])){
             $complete_per += 30;
@@ -12,6 +11,8 @@
         }
     ?>
     <?php if($complete_per != 100){ ?>
+<div class="right">
+   
     <div class="boxwrap completeProfile">
         <h6>Complete your profile</h6>
         <p>Current status of your profile</p>
@@ -58,7 +59,7 @@
     
 
     </div>
-    <?php } ?>
+    
     <!-- <div class="boxwrap">
         <h6>Latest Updates</h6>
         <p>Peers</p>
@@ -103,3 +104,4 @@
         </div>
     </div> -->
 </div>
+<?php } ?>

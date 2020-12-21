@@ -638,6 +638,9 @@
 .box-card .imgWrapper.type2 figure:first-child {
     border-right: 8px solid #fff;
 }
+.box-card .imgWrapper figure{
+    margin-bottom:8px;
+}
 .box-card  .imgWrapper.type3 figure {
     width: 50%;
     height: 230px;
@@ -1883,7 +1886,7 @@ shareOptionList celebrate*/
         line-height: 1.4;
     }
     .eventActionWrap {
-        flex-flow: :column wrap;
+        flex-flow:column wrap;
         justify-content: flex-start;
         margin: 40px 0 20px 0;
     }
