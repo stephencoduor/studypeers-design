@@ -143,7 +143,7 @@ class SocialLogin extends CI_Controller
 			$insert['long_live_token'] = $long_live_access_token;
 			$this->save_user_info($insert);
 		} catch (\Exception $e) {
-			redirect(base_url() . 'home/login');
+			redirect(base_url('login'));
 		}
 	}
 
@@ -239,7 +239,7 @@ class SocialLogin extends CI_Controller
 				$this->session->set_userdata('user_data', $insert);
 				$users = $this->session->get_userdata()['user_data'];
 				$this->session->unset_userdata('social_signup');
-				redirect(base_url() . 'home/sign_up');
+				redirect(base_url('home/step-register'));
 			}
 		} catch (\Exception $e) {
 			echo '<pre/>';

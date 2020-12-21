@@ -55,10 +55,10 @@
                         <div class="connect-with">
                             <strong>or connect with</strong>
                             <div class="link-with">
-                                <a href=""><img src="assets/images/google.png" alt="Icon" /></a>
-                                <a href=""><img src="assets/images/facebook.png" alt="Icon" /></a>
-                                <a href=""><img src="assets/images/twitter.png" alt="Icon" /></a>
-                                <a href=""><img src="assets/images/linkedin.png" alt="Icon" /></a>
+                                <a href="<?php echo base_url('socialLogin/googleLogin'); ?>"><img src="assets/images/google.png" alt="Icon" /></a>
+                                <a href="<?php echo base_url('socialLogin/facebookLogin') ?>"><img src="assets/images/facebook.png" alt="Icon" /></a>
+                                <a href="<?php echo base_url('socialLogin/microsoftLogin') ?>"><img src="assets/images/twitter.png" alt="Icon" /></a>
+                                <a href="<?php echo base_url('socialLogin/linkedinCallback') ?>"><img src="assets/images/linkedin.png" alt="Icon" /></a>
                             </div>
                         </div>
                     </div>
