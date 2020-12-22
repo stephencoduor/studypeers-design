@@ -636,7 +636,8 @@ class Profile extends CI_Controller {
 		$image_extensions_arr = array('jpg', 'image/jpg', 'image/jpeg', 'image/png' , 'jpeg' , 'png' );
 		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg","video/mp4", "video/mov", "video/avi", "video/3gp", "video/mpeg");
 		$document_extension_arr = array('pdf', 'xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt');
-		$maxsize = 5242880; // 5MB
+		$maxsize = 5242880; // 5MB 
+        $res = [];
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
 		{
 			$file_type = $files['file']['type'][$i]; echo $file_type;
@@ -654,7 +655,7 @@ class Profile extends CI_Controller {
 				];
 				$original_name = $files['file']['name'][$i];
 				if($this->upload->do_upload('userfile'))
-				{
+				{   $res[] = $file_type;
 					$data = $this->upload->data();
 					$F[] = $data["file_name"];
 					if(in_array($file_type, $image_extensions_arr)){
@@ -664,7 +665,9 @@ class Profile extends CI_Controller {
 					}else{
 						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
 					}
-				}
+				} else {
+                    $res[] = 'error'.$i;
+                }
 		}
 
 		//save poll data
@@ -697,7 +700,8 @@ class Profile extends CI_Controller {
 				'modifyDate' => date('Y-m-d H:i:s')
 		);
 		$insert_reference = $this->db->insert('reference_master', $insert_reference);
-		echo $insert_reference;
+        print_r(json_encode($res));
+		// echo $insert_reference;
 	}
 
 	public function redirect_page(){
