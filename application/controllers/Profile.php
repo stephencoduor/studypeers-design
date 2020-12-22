@@ -598,7 +598,9 @@ class Profile extends CI_Controller {
 	}
 
 	public function savePost()
-	{
+	{  
+        
+
 		$all_posts = $this->input->post();
 		$this->load->helper(array('form', 'url'));
 		is_valid_logged_in();
@@ -631,40 +633,46 @@ class Profile extends CI_Controller {
 
 		$this->upload->initialize($config);
 		$F = array();
-		$count_uploaded_files = count( $_FILES['file']['name'] );
-		$files = $_FILES;
+		$count_uploaded_files = count( $_FILES['file']['name'] ); 
+		$files = $_FILES; 
 		$image_extensions_arr = array('jpg', 'image/jpg', 'image/jpeg', 'image/png' , 'jpeg' , 'png' );
 		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg","video/mp4", "video/mov", "video/avi", "video/3gp", "video/mpeg");
 		$document_extension_arr = array('pdf', 'xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt');
-		$maxsize = 5242880; // 5MB
+		$maxsize = 5242880; // 5MB 
+        $res = [];
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
 		{
-			$file_type = $files['file']['type'][$i];
-			if($files['file']['size'][$i] > $maxsize){
-				echo 'file size is too large';
-				die;
-			}
-			// Check extension
-				$_FILES['userfile'] = [
-						'name'     => $files['file']['name'][$i],
-						'type'     => $files['file']['type'][$i],
-						'tmp_name' => $files['file']['tmp_name'][$i],
-						'error'    => $files['file']['error'][$i],
-						'size'     => $files['file']['size'][$i]
-				];
-				$original_name = $files['file']['name'][$i];
-				if($this->upload->do_upload('userfile'))
-				{
-					$data = $this->upload->data();
-					$F[] = $data["file_name"];
-					if(in_array($file_type, $image_extensions_arr)){
-						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
-					}elseif(in_array($file_type, $video_extensions_arr)){
-						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
-					}else{
-						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
-					}
-				}
+            if(!empty($files['file']['name'][$i])){
+    			$file_type = $files['file']['type'][$i]; 
+    			if($files['file']['size'][$i] > $maxsize){
+    				echo 'file size is too large';
+    				die;
+    			}
+    			// Check extension
+    				$_FILES['userfile'] = [
+    						'name'     => $files['file']['name'][$i],
+    						'type'     => $files['file']['type'][$i],
+    						'tmp_name' => $files['file']['tmp_name'][$i],
+    						'error'    => $files['file']['error'][$i],
+    						'size'     => $files['file']['size'][$i]
+    				];
+    				$original_name = $files['file']['name'][$i];
+    				if($this->upload->do_upload('userfile'))
+    				{   
+    					$data = $this->upload->data();
+    					$F[] = $data["file_name"];
+    					if(in_array($file_type, $image_extensions_arr)){
+    						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
+    					}else if(in_array($file_type, $video_extensions_arr)){
+    						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
+    					}else{
+    						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
+    					}
+    				} else {
+                        $error = array('error' => $this->upload->display_errors());
+                        $res[] = $error;
+                    }
+            }
 		}
 
 		//save poll data
@@ -697,6 +705,7 @@ class Profile extends CI_Controller {
 				'modifyDate' => date('Y-m-d H:i:s')
 		);
 		$insert_reference = $this->db->insert('reference_master', $insert_reference);
+        // print_r(json_encode($res));
 		echo $insert_reference;
 	}
 
@@ -1652,8 +1661,8 @@ class Profile extends CI_Controller {
                                                              style="width:'.$per.'%"></div>
                                                     </div>
                                                 </div>
-                                                <input type="radio" '.$chk.' name="radio" onclick="savePollOption('.$post_id.', '.$value['id'].')">
-                                                <span class="checkmark"></span>
+                                                <input type="radio" '.$chk.' name="radio" >
+                                                <span class="checkmark" onclick="savePollOption('.$post_id.', '.$value['id'].')"></span>
                                             </label>
                                         </div>';
             }

@@ -310,6 +310,15 @@ img{
     margin: 0!important;
     transform: translateY(-50%)!important;
 }
+.login-container .select2-container .select2-selection--single{
+    height:48px!important;
+}
+.login-container .select2-container--default .select2-selection--single .select2-selection__rendered{
+    line-height:48px!important;
+}
+.login-container .select2-selection__arrow{
+    display:none;
+}
 .upload-institute label img{
     width:16px;
     margin-right:5px;
@@ -451,4 +460,31 @@ html,body{
     .header-menu li{
         margin-right:10px;
     }
+}
+
+.badges-list{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.badge-item{
+    min-height: 32px;
+    word-break: break-all;
+    padding: 8px 20px 8px 12px;
+    margin:0 10px 10px 0;
+    border-radius: 16px;
+    align-items: center;
+    background-color: #e0e0e0;
+    color: rgb(24 90 235);
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.2;
+    position: relative;
+}
+a.remove-badge{
+    color: #ea2e7e;
+    position: absolute;
+    right:8px;
+    top:8px;
+    z-index:9;
 }

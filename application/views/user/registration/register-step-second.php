@@ -16,6 +16,9 @@
 
                                     </select>
                                 </div>
+                                <div class="badges-list">
+                                    <span class="badge-item">Bhuneshwar Kumar Chauhan Bhuneshwar Kumar Chauhan <a href="javascript:void(0)" class="remove-badge"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                                </div>
                             </div>
                         </div>
                         <div class="row">

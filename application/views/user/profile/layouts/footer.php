@@ -812,7 +812,7 @@
                         counter++;
                     };
                     reader.readAsDataURL(file); // convert to base64 string
-                } else {
+                } else { 
                     reader.onload = function() {
                         var blob = new Blob([reader.result], {
                             type: file.type
@@ -830,14 +830,14 @@
                                 video.removeEventListener('timeupdate', timeupdate);
                             }
                         });
-                        var snapImage = function() {
+                        var snapImage = function() { 
                             var canvas = document.createElement('canvas');
                             canvas.width = video.videoWidth;
                             canvas.height = video.videoHeight;
                             canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
                             var image = canvas.toDataURL();
                             var success = image.length > 100000;
-                            if (success) {
+                            if (success) { 
                                 var html_image = '<div class="col-md-4" id="delete_video_' + video_counter + '"><div class="uloadedImage"><figure><img src="' + image + '" alt="image" id="image' + video_counter + '"></figure>' +
                                     '<div class="close"><img src="' + base_url + 'assets_d/images/close-pink.svg" class="remove_video" id="remove_video_' + video_counter + '" alt="close"></div></div></div>';
                                 $('#image_row').append(html_image);
@@ -961,7 +961,7 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function(result) {
+                success: function(result) { console.log(result);
                     if (result == true) {
                         window.location.href = base_url + 'Profile/redirect_page?status=' + result;
                     }

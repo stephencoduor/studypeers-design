@@ -372,8 +372,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                              style="width:<?= $per; ?>%"></div>
                                                     </div>
                                                 </div>
-                                                <input type="radio" <?= $chk; ?> name="radio" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')">
-                                                <span class="checkmark"></span>
+                                                <input type="radio" <?= $chk; ?> name="radio" >
+                                                <span class="checkmark" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')"></span>
                                             </label>
                                         </div>
                                         <?php
