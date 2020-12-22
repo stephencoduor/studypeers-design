@@ -667,7 +667,8 @@ class Profile extends CI_Controller {
     						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
     					}
     				} else {
-                        $res[] = 'error'.$i;
+                        $error = array('error' => $this->upload->display_errors());
+                        $res[] = $error;
                     }
             }
 		}
