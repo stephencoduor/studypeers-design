@@ -138,3 +138,24 @@ $(document).ready(function() {
     placeholder: "--Field of interest--"
   });
 });
+
+$("body").on("click", "#submit_new_university_name", function() {
+  var input = $("#input_new_university_name").val();
+  if ($.trim(input) == "") return false;
+
+  var newInput =
+    '<span class="badge-item">' +
+    input +
+    ' <a href="javascript:void(0)" class="remove-badge" id="remove_university_data"><i class="fa fa-times" aria-hidden="true"></i></a></span>';
+  $("#show_manual_added_university").html(newInput);
+  $("#university_selection").prop("disabled", true);
+  $("#manual_university").val(input);
+  $(".close").trigger("click");
+});
+
+$("body").on("click", "#remove_university_data", function() {
+  $("#show_manual_added_university").html("");
+  $("#input_new_university_name").val("");
+  $("#manual_university").val("");
+  $("#university_selection").prop("disabled", false);
+});

@@ -241,12 +241,12 @@ class HomeController extends BaseController
         $UniverData = $this->RegistrationModel->getUniversityById($data['university']);
 
         $updateUniversityInformation = [];
-        $updateUniversityInformation['intitutionID'] = $UniverData['university_id'];
+        $updateUniversityInformation['intitutionID'] = empty($UniverData['university_id']) ? 0 : $UniverData['university_id'];
         $updateUniversityInformation['institute_type'] = 1; // currently existing one.
         $updateUniversityInformation['intitution_email'] = $data['email'];
         $updateUniversityInformation['manual_verification'] = empty($data['manual_verification']) ? 0 : 1;
         $updateUniversityInformation['intitution_idcard'] = $data['file_name'];
-        $updateUniversityInformation['add_institute'] = ""; // new university name if added by user
+        $updateUniversityInformation['add_institute'] = empty($data['manual_university']) ? "" : $data['manual_university']; // new university name if added by user
 
         $this->user_model->update_data('user_info', [
             'userID' => $this->user_id
@@ -275,9 +275,14 @@ class HomeController extends BaseController
 
     public function validateWhereYouStudy($data)
     {
-        if (empty($data['university'])) {
-            throw new Exception("University is field is required", 422);
+
+        if (empty($data['manual_university'])) {
+
+            if (empty($data['university'])) {
+                throw new Exception("University is field is required", 422);
+            }
         }
+
 
         if (!isset($data['dont_have_email'])) {
 
