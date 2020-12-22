@@ -631,7 +631,7 @@ class Profile extends CI_Controller {
 
 		$this->upload->initialize($config);
 		$F = array();
-		$count_uploaded_files = count( $_FILES['file']['name'] );
+		$count_uploaded_files = count( $_FILES['file']['name'] ); echo $count_uploaded_files;die;
 		$files = $_FILES;
 		$image_extensions_arr = array('jpg', 'image/jpg', 'image/jpeg', 'image/png' , 'jpeg' , 'png' );
 		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg","video/mp4", "video/mov", "video/avi", "video/3gp", "video/mpeg");
