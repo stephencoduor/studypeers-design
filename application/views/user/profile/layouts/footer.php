@@ -961,9 +961,9 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function(result) {
+                success: function(result) { console.log(result);
                     if (result == true) {
-                        window.location.href = base_url + 'Profile/redirect_page?status=' + result;
+                        // window.location.href = base_url + 'Profile/redirect_page?status=' + result;
                     }
                     $('.ajax-loading').hide();
                 }
