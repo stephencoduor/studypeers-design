@@ -598,7 +598,10 @@ class Profile extends CI_Controller {
 	}
 
 	public function savePost()
-	{
+	{  
+        ini_set('post_max_size', '64M');
+        ini_set('upload_max_filesize', '64M');
+
 		$all_posts = $this->input->post();
 		$this->load->helper(array('form', 'url'));
 		is_valid_logged_in();
