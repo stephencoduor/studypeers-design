@@ -16,8 +16,7 @@
 
                                     </select>
                                 </div>
-                                <div class="badges-list">
-                                    <span class="badge-item">Bhuneshwar Kumar Chauhan Bhuneshwar Kumar Chauhan <a href="javascript:void(0)" class="remove-badge"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                                <div class="badges-list" id="show_manual_added_university">
                                 </div>
                             </div>
                         </div>
@@ -80,6 +79,7 @@
                         </div>
                     </div>
                     <input type="hidden" name="step" value="two">
+                    <input type="hidden" name="manual_university" id="manual_university">
                 </form>
             </div>
         </div>
@@ -97,7 +97,7 @@
                         <div class="form-group">
                             <p>Tell us your university name se we can manually
                                 verify it.</p>
-                            <input type="text" name="" class="form-control form-control--lg" placeholder="Enter institute name">
+                            <input type="text" id="input_new_university_name" class="form-control form-control--lg" placeholder="Enter institute name">
                         </div>
 
                     </div>
@@ -105,7 +105,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group text-right">
-                            <button type="button" class="filterBtn">Continue</button>
+                            <button type="button" id="submit_new_university_name" class="filterBtn">Continue</button>
                         </div>
                     </div>
                 </div>

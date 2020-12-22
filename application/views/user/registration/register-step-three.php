@@ -16,8 +16,7 @@
 
                                     </select>
                                 </div>
-                                <div class="badges-list">
-                                    <span class="badge-item">Bhuneshwar Kumar Chauhan Bhuneshwar Kumar Chauhan <a href="javascript:void(0)" class="remove-badge"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                                <div class="badges-list" id="manual_addition_field_of_study">
                                 </div>
                             </div>
                         </div>
@@ -35,8 +34,7 @@
 
                                     </select>
                                 </div>
-                                <div class="badges-list">
-                                    <span class="badge-item">Bhuneshwar Kumar Chauhan Bhuneshwar Kumar Chauhan <a href="javascript:void(0)" class="remove-badge"><i class="fa fa-times" aria-hidden="true"></i></a></span>
+                                <div class="badges-list" id="html_major_show">
                                 </div>
                             </div>
                         </div>
@@ -87,6 +85,9 @@
                         </div>
                     </div>
                     <input type="hidden" name="step" value="three">
+                    <input type="hidden" name="manual_field" id="manual_field_of_interest">
+                    <input type="hidden" name="manual_major" id="manual_major_hidden">
+
                 </form>
             </div>
         </div>
@@ -104,7 +105,7 @@
                         <div class="form-group">
                             <p>Tell us your Field Of Study so we can manually
                                 verify it.</p>
-                            <input type="text" name="" class="form-control form-control--lg" placeholder="Enter your field of study">
+                            <input type="text" id="field_of_interest_manual_id" class="form-control form-control--lg" placeholder="Enter your field of study">
                         </div>
 
                     </div>
@@ -112,7 +113,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group text-right">
-                            <button type="submit" class="filterBtn">Continue</button>
+                            <button type="buton" id="buton_manual_fied_of_interest" class="filterBtn">Continue</button>
                         </div>
                     </div>
                 </div>
@@ -132,7 +133,7 @@
                         <div class="form-group">
                             <p>Tell us your Field Of Study we can manually
                                 verify it.</p>
-                            <input type="text" name="" class="form-control form-control--lg" placeholder="Enter your major">
+                            <input type="text" id="major_input_manual" class="form-control form-control--lg" placeholder="Enter your major">
                         </div>
 
                     </div>
@@ -140,7 +141,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="form-group text-right">
-                            <button type="submit" class="filterBtn">Continue</button>
+                            <button type="button" id="button_major_manual" class="filterBtn">Continue</button>
                         </div>
                     </div>
                 </div>
