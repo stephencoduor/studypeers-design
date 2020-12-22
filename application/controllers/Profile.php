@@ -639,7 +639,7 @@ class Profile extends CI_Controller {
 		$maxsize = 5242880; // 5MB
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
 		{
-			$file_type = $files['file']['type'][$i];
+			$file_type = $files['file']['type'][$i]; echo $file_type;die;
 			if($files['file']['size'][$i] > $maxsize){
 				echo 'file size is too large';
 				die;
@@ -659,7 +659,7 @@ class Profile extends CI_Controller {
 					$F[] = $data["file_name"];
 					if(in_array($file_type, $image_extensions_arr)){
 						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
-					}elseif(in_array($file_type, $video_extensions_arr)){
+					}else if(in_array($file_type, $video_extensions_arr)){
 						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
 					}else{
 						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
