@@ -606,6 +606,7 @@ class Profile extends CI_Controller {
 		is_valid_logged_in();
 		$config['upload_path'] = './uploads/posts/';
 		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|mov|pdf|xlsx|xls|doc|docx|txt|ppt|pptx';
+        $config['max_size'] = '1000000';
 		$config['encrypt_name'] = TRUE;
 		$config['remove_spaces']=TRUE;  //it will remove all spaces
 		$user_id = $this->session->get_userdata()['user_data']['user_id'];
