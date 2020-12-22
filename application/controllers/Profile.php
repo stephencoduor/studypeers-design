@@ -6,6 +6,11 @@ class Profile extends CI_Controller {
 		parent::__construct();
 		$this->load->model('upload_model');
         $this->load->library('upload');
+        ini_set( 'memory_limit', '200M' );
+        ini_set('upload_max_filesize', '200M');  
+        ini_set('post_max_size', '200M');  
+        ini_set('max_input_time', 3600);  
+        ini_set('max_execution_time', 3600);
 	}
 
 	public function getMyFeeds(){
@@ -607,6 +612,8 @@ class Profile extends CI_Controller {
 		$config['upload_path'] = './uploads/posts/';
 		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|mov|pdf|xlsx|xls|doc|docx|txt|ppt|pptx';
         $config['max_size'] = '1000000';
+$config['max_width']  = '1024000';
+$config['max_height']  = '768000';
 		$config['encrypt_name'] = TRUE;
 		$config['remove_spaces']=TRUE;  //it will remove all spaces
 		$user_id = $this->session->get_userdata()['user_data']['user_id'];
