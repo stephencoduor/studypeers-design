@@ -169,12 +169,13 @@ class HomeController extends BaseController
         $updateUserInfo = [];
         $updateUserInfo['degree'] = $data['degree'];
         $updateUserInfo['field_interest'] = $data['field_of_interest'];
-        $updateUserInfo['course'] = $data['field'];
-        $updateUserInfo['major'] = $data['major'];
-        $updateUserInfo['field_type'] = 1; //2 for manual for entry
-        $updateUserInfo['major_type'] = 1; // 2 for manual entry
-        $updateUserInfo['add_major'] = ""; // manual major name
-        $updateUserInfo['add_course'] = ""; // manual field name
+        $updateUserInfo['course'] = empty($data['manual_field']) ? 0 : $data['field'];
+        $updateUserInfo['major'] = empty($data['manual_major']) ? 0 :  $data['major'];
+        $updateUserInfo['session'] = $data['session'];
+        $updateUserInfo['field_type'] = empty($data['manual_field']) ? 1 : 2; //2 for manual for entry
+        $updateUserInfo['major_type'] = empty($data['manual_major'])  ? 1 : 2; // 2 for manual entry
+        $updateUserInfo['add_major'] = empty($data['manual_major']) ? "" :  $data['manual_major'];; // manual major name
+        $updateUserInfo['add_course'] = empty($data['manual_field']) ? "" : $data['manual_field'];; // manual field name
         $updateUserInfo['manual_verification'] = 0; //1 for manual case
 
         $this->user_model->update_data('user_info', [
@@ -206,14 +207,20 @@ class HomeController extends BaseController
 
     public function validateWhatAreYouStudy($data)
     {
+        if ($data['manual_field']) {
 
-        if (empty($data['field'])) {
-            throw new Exception("University field is required", 422);
+            if (empty($data['field'])) {
+                throw new Exception("Field of study field is required", 422);
+            }
         }
 
-        if (empty($data['major'])) {
-            throw new Exception("Major field is required", 422);
+        if ($data['manual_major']) {
+
+            if (empty($data['major'])) {
+                throw new Exception("Major field is required", 422);
+            }
         }
+
 
         if (empty($data['degree'])) {
             throw new Exception("Degree field is required", 422);

@@ -139,6 +139,8 @@ $(document).ready(function() {
   });
 });
 
+//----------------------------------second form manual fields-------------------------//
+
 $("body").on("click", "#submit_new_university_name", function() {
   var input = $("#input_new_university_name").val();
   if ($.trim(input) == "") return false;
@@ -159,3 +161,52 @@ $("body").on("click", "#remove_university_data", function() {
   $("#manual_university").val("");
   $("#university_selection").prop("disabled", false);
 });
+
+//------------------------------------end of second form fields ------------------------//
+
+//-----------------------------third form manual fields ---------------------------//
+$("body").on("click", "#buton_manual_fied_of_interest", function() {
+  var input = $("#field_of_interest_manual_id").val();
+  if ($.trim(input) == "") return false;
+
+  var newInput =
+    '<span class="badge-item">' +
+    input +
+    ' <a href="javascript:void(0)" class="remove-badge" id="remove_field_of_study_data"><i class="fa fa-times" aria-hidden="true"></i></a></span>';
+  $("#manual_addition_field_of_study").html(newInput);
+  $("#field_of_study").prop("disabled", true);
+  $("#manual_field_of_interest").val(input);
+  $(".close").trigger("click");
+});
+
+$("body").on("click", "#remove_field_of_study_data", function() {
+  $("#manual_addition_field_of_study").html("");
+  $("#manual_field_of_interest").val("");
+  $("#field_of_interest_manual_id").val("");
+  $("#field_of_study").prop("disabled", false);
+});
+
+//--------------------------------------form third manual field of interest ---------------------//
+
+$("body").on("click", "#button_major_manual", function() {
+  var input = $("#major_input_manual").val();
+  if ($.trim(input) == "") return false;
+
+  var newInput =
+    '<span class="badge-item">' +
+    input +
+    ' <a href="javascript:void(0)" class="remove-badge" id="remove_field_of_study_data"><i class="fa fa-times" aria-hidden="true"></i></a></span>';
+  $("#html_major_show").html(newInput);
+  $("#major_field_of_study").prop("disabled", true);
+  $("#manual_major_hidden").val(input);
+  $(".close").trigger("click");
+});
+
+$("body").on("click", "#remove_field_of_study_data", function() {
+  $("#html_major_show").html("");
+  $("#manual_major_hidden").val("");
+  $("#major_input_manual").val("");
+  $("#major_field_of_study").prop("disabled", false);
+});
+
+//---------------------------- manual verification ----------------------------------------//
