@@ -98,7 +98,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                         <a href="javascript:void(0)">
                                             <button type="button" class="choose_btn shareBtn">
                                                 <img src="<?php echo base_url(); ?>assets_d/images/choose-file.svg" alt="Choose File"> Choose File
-                                                <input type="file" name="filedoc[]" id="document" multiple="multiple"/>
+                                                <input type="file" name="file[]" id="document" multiple="multiple"/>
                                             </button>
                                         </a>
                                     </li>

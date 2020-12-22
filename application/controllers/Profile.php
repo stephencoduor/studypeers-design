@@ -632,14 +632,14 @@ class Profile extends CI_Controller {
 		$this->upload->initialize($config);
 		$F = array();
 		$count_uploaded_files = count( $_FILES['file']['name'] ); 
-		$files = $_FILES; print_r($files);die;
+		$files = $_FILES; 
 		$image_extensions_arr = array('jpg', 'image/jpg', 'image/jpeg', 'image/png' , 'jpeg' , 'png' );
 		$video_extensions_arr = array("mp4","avi","3gp","mov","mpeg","video/mp4", "video/mov", "video/avi", "video/3gp", "video/mpeg");
 		$document_extension_arr = array('pdf', 'xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt');
 		$maxsize = 5242880; // 5MB
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
 		{
-			$file_type = $files['file']['type'][$i]; echo $file_type;die;
+			$file_type = $files['file']['type'][$i]; echo $file_type;
 			if($files['file']['size'][$i] > $maxsize){
 				echo 'file size is too large';
 				die;
