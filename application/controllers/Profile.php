@@ -599,8 +599,7 @@ class Profile extends CI_Controller {
 
 	public function savePost()
 	{  
-        ini_set('post_max_size', '64M');
-        ini_set('upload_max_filesize', '64M');
+        
 
 		$all_posts = $this->input->post();
 		$this->load->helper(array('form', 'url'));
@@ -644,7 +643,7 @@ class Profile extends CI_Controller {
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
 		{
             if(!empty($files['file']['name'][$i])){
-    			$file_type = $files['file']['type'][$i]; echo $file_type;
+    			$file_type = $files['file']['type'][$i]; 
     			if($files['file']['size'][$i] > $maxsize){
     				echo 'file size is too large';
     				die;
@@ -659,7 +658,7 @@ class Profile extends CI_Controller {
     				];
     				$original_name = $files['file']['name'][$i];
     				if($this->upload->do_upload('userfile'))
-    				{   $res[] = $file_type;
+    				{   
     					$data = $this->upload->data();
     					$F[] = $data["file_name"];
     					if(in_array($file_type, $image_extensions_arr)){
@@ -706,8 +705,8 @@ class Profile extends CI_Controller {
 				'modifyDate' => date('Y-m-d H:i:s')
 		);
 		$insert_reference = $this->db->insert('reference_master', $insert_reference);
-        print_r(json_encode($res));
-		// echo $insert_reference;
+        // print_r(json_encode($res));
+		echo $insert_reference;
 	}
 
 	public function redirect_page(){
