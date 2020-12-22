@@ -1652,8 +1652,8 @@ class Profile extends CI_Controller {
                                                              style="width:'.$per.'%"></div>
                                                     </div>
                                                 </div>
-                                                <input type="radio" '.$chk.' name="radio" onclick="savePollOption('.$post_id.', '.$value['id'].')">
-                                                <span class="checkmark"></span>
+                                                <input type="radio" '.$chk.' name="radio" >
+                                                <span class="checkmark" onclick="savePollOption('.$post_id.', '.$value['id'].')"></span>
                                             </label>
                                         </div>';
             }
