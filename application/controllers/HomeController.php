@@ -238,7 +238,11 @@ class HomeController extends BaseController
     {
         $this->validateWhereYouStudy($data);
 
-        $UniverData = $this->RegistrationModel->getUniversityById($data['university']);
+        $UniverData  = [];
+
+        if (!empty($data['university'])) {
+            $UniverData = $this->RegistrationModel->getUniversityById($data['university']);
+        }
 
         $updateUniversityInformation = [];
         $updateUniversityInformation['intitutionID'] = empty($UniverData['university_id']) ? 0 : $UniverData['university_id'];
