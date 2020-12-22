@@ -598,7 +598,10 @@ class Profile extends CI_Controller {
 	}
 
 	public function savePost()
-	{
+	{  
+        ini_set('post_max_size', '64M');
+        ini_set('upload_max_filesize', '64M');
+
 		$all_posts = $this->input->post();
 		$this->load->helper(array('form', 'url'));
 		is_valid_logged_in();
@@ -640,34 +643,37 @@ class Profile extends CI_Controller {
         $res = [];
 		for( $i = 0; $i < $count_uploaded_files; $i++ )
 		{
-			$file_type = $files['file']['type'][$i]; echo $file_type;
-			if($files['file']['size'][$i] > $maxsize){
-				echo 'file size is too large';
-				die;
-			}
-			// Check extension
-				$_FILES['userfile'] = [
-						'name'     => $files['file']['name'][$i],
-						'type'     => $files['file']['type'][$i],
-						'tmp_name' => $files['file']['tmp_name'][$i],
-						'error'    => $files['file']['error'][$i],
-						'size'     => $files['file']['size'][$i]
-				];
-				$original_name = $files['file']['name'][$i];
-				if($this->upload->do_upload('userfile'))
-				{   $res[] = $file_type;
-					$data = $this->upload->data();
-					$F[] = $data["file_name"];
-					if(in_array($file_type, $image_extensions_arr)){
-						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
-					}else if(in_array($file_type, $video_extensions_arr)){
-						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
-					}else{
-						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
-					}
-				} else {
-                    $res[] = 'error'.$i;
-                }
+            if(!empty($files['file']['name'][$i])){
+    			$file_type = $files['file']['type'][$i]; echo $file_type;
+    			if($files['file']['size'][$i] > $maxsize){
+    				echo 'file size is too large';
+    				die;
+    			}
+    			// Check extension
+    				$_FILES['userfile'] = [
+    						'name'     => $files['file']['name'][$i],
+    						'type'     => $files['file']['type'][$i],
+    						'tmp_name' => $files['file']['tmp_name'][$i],
+    						'error'    => $files['file']['error'][$i],
+    						'size'     => $files['file']['size'][$i]
+    				];
+    				$original_name = $files['file']['name'][$i];
+    				if($this->upload->do_upload('userfile'))
+    				{   $res[] = $file_type;
+    					$data = $this->upload->data();
+    					$F[] = $data["file_name"];
+    					if(in_array($file_type, $image_extensions_arr)){
+    						$this->upload_model->save_image($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
+    					}else if(in_array($file_type, $video_extensions_arr)){
+    						$this->upload_model->save_video($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type);
+    					}else{
+    						$this->upload_model->save_document($inserted_post_id, '/uploads/posts/'.$data["file_name"], $file_type, $original_name);
+    					}
+    				} else {
+                        $error = array('error' => $this->upload->display_errors());
+                        $res[] = $error;
+                    }
+            }
 		}
 
 		//save poll data
