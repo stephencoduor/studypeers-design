@@ -315,7 +315,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                             </div>
                                                             <div
                                                                 class="rightValues">
-                                                                <p><?= $per; ?>%</p>
+                                                                <p><?php echo round($per, 1); ?>%</p>
                                                                 <?php if(!empty($user_list)) { ?>
                                                                 <div class="eventActionWrap userPollList" data-toggle="modal" data-id="<?= @$options['id']; ?>" data-target="#userPollList">
                                                                     <ul>
