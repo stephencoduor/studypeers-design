@@ -925,6 +925,12 @@
             document_counter--;
         });
 
+        $(document).on('click', '#shareWithPeer', function() { 
+            $('#privacyPost').modal('hide');
+        });
+
+
+
         $(document).on('click', '#save_post_from_ajax', function() {
             $('#addPostForm').submit();
         });
@@ -963,7 +969,7 @@
                 processData: false,
                 success: function(result) { console.log(result);
                     if (result == true) {
-                        // window.location.href = base_url + 'Profile/redirect_page?status=' + result;
+                        window.location.href = base_url + 'Profile/redirect_page?status=' + result;
                     }
                     $('.ajax-loading').hide();
                 }
@@ -1115,6 +1121,8 @@
             width: '320px',
             height: '328px'
         });
+
+        
 
         $('.socialAction li.helpful a').on('click', function() {
             let togglesrc = $(this).find('img');
@@ -1927,6 +1935,12 @@
                 console.log(lng);
             });
         }
+    }
+
+
+    function backToPostPrivacy(){
+        $('#groupMember').modal('hide');
+        $('#privacyPost').modal('show');
     }
 
     function showQAnsBox(id) {
