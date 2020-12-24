@@ -713,8 +713,8 @@ $config['max_height']  = '768000';
 				'modifyDate' => date('Y-m-d H:i:s')
 		);
 		$insert_reference = $this->db->insert('reference_master', $insert_reference);
-        print_r(json_encode($res));
-		// echo $insert_reference;
+        // print_r(json_encode($res));
+		echo $insert_reference;
 	}
 
 	public function redirect_page(){
