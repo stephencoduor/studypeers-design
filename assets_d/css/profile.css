@@ -259,6 +259,9 @@
     width:270px;
     padding-left:25px;
 }
+.tabPaneWrapper .dropdown-menu .right{
+    padding-left:0;
+}
 .left .feeduserwrap .imgWrapper figure{
     border-radius: 0;
 }
@@ -1899,7 +1902,7 @@ shareOptionList celebrate*/
 }
 .pollsWrapper {
     width:100%;
-    padding: 0 10px;
+    padding: 15px 10px 0;
 }
 .pollsWrapper .pollsform .form-group {
     width: 48%;
@@ -3704,7 +3707,7 @@ figcaption a {
 }
 #timeline-feeds .imgWrapper figure{
     width:50%;
-    padding:0 5px;
+    padding:0 5px 10px;
     margin:0;
     border:none;
 }

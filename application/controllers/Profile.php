@@ -1599,8 +1599,11 @@ $config['max_height']  = '768000';
 
                 $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$post_id, 'poll_option_id' =>$value['id']))->result_array();
 
-                $html.= '<div class="selectedPollOptions">
+                $html.= '<div class="selectedPollOptions"><div class="flex-option-row">
                                             <label class="dashRadioWrap">
+                                            <input type="radio" '.$chk.' name="radio" >
+                                                <span class="checkmark" onclick="savePollOption('.$post_id.', '.$value['id'].')"></span>
+                                            </label>
                                                 <div class="progressBar">
                                                     <div class="progress">
                                                         <div class="progressValues">
@@ -1669,9 +1672,7 @@ $config['max_height']  = '768000';
                                                              style="width:'.$per.'%"></div>
                                                     </div>
                                                 </div>
-                                                <input type="radio" '.$chk.' name="radio" >
-                                                <span class="checkmark" onclick="savePollOption('.$post_id.', '.$value['id'].')"></span>
-                                            </label>
+                                            </div>
                                         </div>';
             }
 
