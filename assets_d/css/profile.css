@@ -256,7 +256,7 @@
     
 }
 .tabPaneWrapper .right {
-    width:270px;
+    min-width:270px;
     padding-left:25px;
 }
 .tabPaneWrapper .dropdown-menu .right{
