@@ -1110,6 +1110,12 @@ figcaption a {
     top: 21px;
     left: 0;
 }
+.box-card .dropdown .dropdown-menu{
+    z-index:99;
+}
+*{
+    word-break: break-all;
+}
 .flex-option-row .progressBar{
     width:calc(100% - 35px);
 }
