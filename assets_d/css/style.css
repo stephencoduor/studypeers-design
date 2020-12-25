@@ -1113,6 +1113,9 @@ figcaption a {
 .box-card .dropdown .dropdown-menu{
     z-index:99;
 }
+.tabPaneWrapper .user-details .user-name .right{
+    padding-left:0;
+}
 *{
     word-break: break-all;
 }
