@@ -2170,6 +2170,110 @@
         
 
     });
+
+
+    $("#multiple-select").selectator({ 
+      showAllOptionsOnFocus: true,
+      searchFields: "value text subtitle right",
+      minSearchLength: 1,
+      load: function(search, callback) {
+        if (search.length < this.minSearchLength) return callback();
+        $.ajax({
+          url: "find-my-peers",
+          data: { search: search },
+          type: "GET",
+          dataType: "json",
+          success: function(data) {
+            callback(data);
+          },
+          error: function() {
+            callback();
+          }
+        });
+      },
+      render: {
+        selected_item: function(_item, escape) {
+          var html = "";
+          if (typeof _item.left !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_left"><img src="' +
+              escape(_item.left) +
+              '"></div>';
+          if (typeof _item.right !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_right">' +
+              escape(_item.right) +
+              "</div>";
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'selected_item_title">' +
+            (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+            "</div>";
+          if (typeof _item.subtitle !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'selected_item_subtitle">' +
+              escape(_item.subtitle) +
+              "</div>";
+          html +=
+            '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
+
+          // check if the
+          $(".done-link").addClass("show");
+          return html;
+        },
+        option: function(_item, escape) {
+          console.log("asdad");
+          var html = "";
+          if (typeof _item.left !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_left"><img src="' +
+              escape(_item.left) +
+              '"></div>';
+          if (typeof _item.right !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_right">' +
+              escape(_item.right) +
+              "</div>";
+          html +=
+            '<div class="' +
+            "selectator_" +
+            'option_title">' +
+            (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+            "</div>";
+          if (typeof _item.subtitle !== "undefined")
+            html +=
+              '<div class="' +
+              "selectator_" +
+              'option_subtitle">' +
+              escape(_item.subtitle) +
+              "</div>";
+
+          if ($(".selectator_selected_items").html() == "") {
+            $(".done-link").removeClass("show");
+          }
+          return html;
+        }
+      }
+    });
+
+    function saveSelectedPeer(){
+        $("#multiple-select option").each(function()
+        {
+            // Add $(this).val() to your list
+            alert($(this).val());
+        });
+    }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script>
