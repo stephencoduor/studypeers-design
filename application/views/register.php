@@ -29,6 +29,9 @@
                             <input type="password" id="conf_password" name="conf_password" required class="form-control form-control--lg" placeholder="Confirm Password">
                         </div>
                         <div class="form-group">
+                            <span class="ap-field-errors" id="error_reg"></span>
+                        </div>
+                        <div class="form-group">
                             <button type="submit" class="filterBtn" id="user_register">Continue</button>
                         </div>
                         <div class="form-group">

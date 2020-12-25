@@ -26,6 +26,10 @@ class HomeController extends BaseController
     {
         $data = [];
 
+        $data['userData'] = $this->user_model->getUserById($this->user_id);
+
+        $data['existinData'] = $this->user_model->getUserInfo($this->user_id);
+
         $this->includeTemplate('user/registration/register-step-first', $data);
     }
 

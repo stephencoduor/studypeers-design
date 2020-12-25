@@ -56,6 +56,10 @@ class LoginController extends CI_Controller
             $validateUserLogin = $this->user_model->validateUserLogin($post['email'], sanitizer($post['password']));
 
 
+            if (empty($validateUserLogin)) {
+                throw new Exception("Invalid user login attempt", 422);
+            }
+
             $sessionData['is_logged_in'] = 1;
             $sessionData['user_id']    = $validateUserLogin['id'];
             $sessionData['role_id']    = $validateUserLogin['role_id'];
@@ -64,10 +68,6 @@ class LoginController extends CI_Controller
             $sessionData['profileImage'] = empty($validateUserLogin['image']) ? base_url() . 'uploads/user-male.png' : base_url() . '/uploads/users/' . $validateUserLogin['image'];
             $sessionData['user_login']   = 1;
             $sessionData['form_step'] = $validateUserLogin['form_step'];
-
-            if (empty($validateUserLogin)) {
-                throw new Exception("Invalid user login attempt", 422);
-            }
 
             # check if form is complete or not.
 
