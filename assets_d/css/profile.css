@@ -256,8 +256,11 @@
     
 }
 .tabPaneWrapper .right {
-    width:270px;
+    min-width:270px;
     padding-left:25px;
+}
+.tabPaneWrapper .dropdown-menu .right{
+    padding-left:0;
 }
 .left .feeduserwrap .imgWrapper figure{
     border-radius: 0;
@@ -924,7 +927,7 @@
     border-radius: 30px;
     min-height: 56px;
     width: 100% !important;
-    padding: 10px 25px;
+    padding: 10px 70px 10px 25px;
     outline: none;
 }
 .emojiPickerIconWrap {
@@ -1899,7 +1902,7 @@ shareOptionList celebrate*/
 }
 .pollsWrapper {
     width:100%;
-    padding: 0 10px;
+    padding: 15px 10px 0;
 }
 .pollsWrapper .pollsform .form-group {
     width: 48%;
@@ -3704,7 +3707,7 @@ figcaption a {
 }
 #timeline-feeds .imgWrapper figure{
     width:50%;
-    padding:0 5px;
+    padding:0 5px 10px;
     margin:0;
     border:none;
 }
@@ -3714,4 +3717,25 @@ figcaption a {
 }
 #timeline-feeds .box-card .imgWrapper.type2 figure:first-child{
     border-right:none;
+}
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #f7f7f7 inset !important;
+    box-shadow: 0 0 0 30px #f7f7f7 inset !important;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ea2e7e;
+    border-radius:6px;
 }

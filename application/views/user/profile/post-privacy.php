@@ -100,7 +100,7 @@
                             </a>
                         </li>
                         <li>
-                            <a data-toggle="modal" data-target="#groupMember">
+                            <a id="shareWithPeer" data-toggle="modal" data-target="#groupMember" >
                                 <label class="dashRadioWrap">
                                     <div class="privacyTxtWrap">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.49" viewBox="0 0 20 17.49">
@@ -113,7 +113,7 @@
                                                 <path id="Path_6646" data-name="Path 6646" d="M21,84.934A2.469,2.469,0,1,0,18.535,87.4,2.472,2.472,0,0,0,21,84.934Zm0,0" transform="translate(-15.439 -79.244)" />
                                                 <path id="Path_6647" data-name="Path 6647" d="M374.473,84.934A2.469,2.469,0,1,0,372,87.4,2.472,2.472,0,0,0,374.473,84.934Zm0,0" transform="translate(-355.101 -79.244)" />
                                             </g>
-                                        </svg> <h4>Group Members</h4>
+                                        </svg> <h4>Share With Peers</h4>
                                     </div>
                                     <input type="radio" class="privacy_val" name="radio" value="5">
                                     <span class="checkmark"></span>
@@ -139,30 +139,5 @@
     </div>
 </div>
 
-<div class="modal fade" id="groupMember" role="dialog">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="createHeader">
-                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Group Members</h4>
-                </div>
-                <select id="multiple-select" name="select2" multiple class="form-control">
-                    <option value="1" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 1</option>
-					<option value="2" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 2</option>
-					<option value="3" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 3</option>
-					<option value="4" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 4</option>
-					<option value="5" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 5</option>
-					<option value="6" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 6</option>
-					<option value="7" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 7</option>
-					<option value="8" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 8</option>
-					<option value="9" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 9</option>
-					<option value="10" data-left="<?php echo base_url(); ?>assets_d/images/student-img.png">Lorem ipsum 10</option>
-                </select>
-                <div class="settingWrapper">
-                    <button type="button" class="event_action"> Save</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+
 

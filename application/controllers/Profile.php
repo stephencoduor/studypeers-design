@@ -6,6 +6,11 @@ class Profile extends CI_Controller {
 		parent::__construct();
 		$this->load->model('upload_model');
         $this->load->library('upload');
+        ini_set( 'memory_limit', '200M' );
+        ini_set('upload_max_filesize', '200M');  
+        ini_set('post_max_size', '200M');  
+        ini_set('max_input_time', 3600);  
+        ini_set('max_execution_time', 3600);
 	}
 
 	public function getMyFeeds(){
@@ -606,6 +611,9 @@ class Profile extends CI_Controller {
 		is_valid_logged_in();
 		$config['upload_path'] = './uploads/posts/';
 		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|mov|pdf|xlsx|xls|doc|docx|txt|ppt|pptx';
+        $config['max_size'] = '1000000';
+$config['max_width']  = '1024000';
+$config['max_height']  = '768000';
 		$config['encrypt_name'] = TRUE;
 		$config['remove_spaces']=TRUE;  //it will remove all spaces
 		$user_id = $this->session->get_userdata()['user_data']['user_id'];
@@ -1591,8 +1599,11 @@ class Profile extends CI_Controller {
 
                 $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$post_id, 'poll_option_id' =>$value['id']))->result_array();
 
-                $html.= '<div class="selectedPollOptions">
+                $html.= '<div class="selectedPollOptions"><div class="flex-option-row">
                                             <label class="dashRadioWrap">
+                                            <input type="radio" '.$chk.' name="radio" >
+                                                <span class="checkmark" onclick="savePollOption('.$post_id.', '.$value['id'].')"></span>
+                                            </label>
                                                 <div class="progressBar">
                                                     <div class="progress">
                                                         <div class="progressValues">
@@ -1661,9 +1672,7 @@ class Profile extends CI_Controller {
                                                              style="width:'.$per.'%"></div>
                                                     </div>
                                                 </div>
-                                                <input type="radio" '.$chk.' name="radio" >
-                                                <span class="checkmark" onclick="savePollOption('.$post_id.', '.$value['id'].')"></span>
-                                            </label>
+                                            </div>
                                         </div>';
             }
 
@@ -1698,6 +1707,52 @@ class Profile extends CI_Controller {
             
         }
         echo $html;die;
+    }
+
+    public function getPeers()
+    {
+        try {
+
+            $userId =  $this->session->get_userdata()['user_data']['user_id'];
+            $search = $this->input->get('search');
+
+            if (empty($userId)) {
+                throw new Exception("Error processing request", 422);
+            }
+
+            $getFriends = $this->upload_model->getFriendsByUserId($userId, $search);
+
+            $data = [];
+
+            if (!empty($getFriends)) {
+
+                foreach ($getFriends as $key => $val) {
+
+                    $data[$key]['value'] = $val['id'];
+                    $data[$key]['left'] = userImage($val['id']);
+                    $data[$key]['text'] = $val['first_name'] . ' ' . $val['last_name'];
+                    $data[$key]['subtitle'] = $val['username'];
+                }
+            }
+
+            $response = [
+                'code' => 200,
+                'message' => 'OK',
+                'data' => $data
+            ];
+        } catch (Exception $e) {
+
+            $response = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($response['code'])
+            ->set_output(json_encode($response['data']));
     }
 
 }

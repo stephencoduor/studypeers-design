@@ -33,9 +33,9 @@
                     <span class="small-icon">
                         <?php if($value['reaction_id'] == 1) { ?>
                             <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/>
-                        <?php } else if($value['reaction_id'] == 2) { ?>
-                            <img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/>
                         <?php } else if($value['reaction_id'] == 3) { ?>
+                            <img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/>
+                        <?php } else if($value['reaction_id'] == 2) { ?>
                             <img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/>
                         <?php } else if($value['reaction_id'] == 4) { ?>
                             <img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/>

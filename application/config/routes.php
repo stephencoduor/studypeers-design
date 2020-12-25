@@ -105,3 +105,5 @@ $route['upload-document-regisration'] = "HomeController/uploadDocument";
 $route['home/step-three-page'] = "HomeController/stepThreePage";
 
 $route['home/step-four-page']  = "HomeController/stepFourPage";
+
+$route['Profile/find-my-peers'] = "Profile/getPeers";

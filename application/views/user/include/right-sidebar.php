@@ -560,20 +560,20 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         </div>
     </div>
 </div>
-<div class="modal fade" id="groupMember" role="dialog">
+<div class="modal fade" id="groupMember" role="dialog" >
     <form action="<?php echo base_url('account/add-new-group-member'); ?>" method="get" id="add_new_group_member_form">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="createHeader">
-                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Group Members</h4>
+                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" onclick="backToPostPrivacy()"> Share with peers</h4>
                         <div class="closePost" data-dismiss="modal">
                             <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
                     <select id="multiple-select" name="users[]" multiple class="form-control"></select>
                     <div class="settingWrapper">
-                        <button type="button" id="submit_new_group_member" class="event_action"> Save</button>
+                        <button type="button" id="submit_new_group_member" class="event_action" onclick="saveSelectedPeer()"> Save</button>
                     </div>
                 </div>
             </div>
