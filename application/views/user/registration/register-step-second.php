@@ -48,7 +48,7 @@
                             <div class="form-group col-sm-12 checkbox-wrap">
                                 <div class="form-group checkbox">
                                     <label class="custom-check font-weight-normal">Request manual email verification
-                                        <input name="manual_verification" type="checkbox">
+                                        <input name="manual_verification" id="manual_verification" type="checkbox">
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <div class="form-group upload-institute">
                                         <input type="text" name="file_name" id="university_uplaod_file_path" readonly class="form-control form-control--lg" placeholder="Upload institute ID">
-                                        <label for="upload-file"><img src="assets/registration-assets/images/upload.svg" alt="Icon"> Upload <input type="file" name="file" id="upload-file" /></label>
+                                        <label for="upload-file"><img src="assets/registration-assets/images/upload.svg" alt="Icon"> Upload <input type="file" disabled name="file" id="upload-file" /></label>
                                     </div>
                                 </div>
                             </div>

@@ -18,9 +18,23 @@ var registration = /** @class */ (function() {
         },
         error: function(data) {
           if (data.status == 422) {
-            alert(data.responseJSON.message);
+            $.toast({
+              heading: "Error",
+              text: data.responseJSON.message,
+              icon: "error",
+              position: "mid-center",
+              hideAfter: 3000,
+              stack: false
+            });
           } else {
-            alert("Something went wrong");
+            $.toast({
+              heading: "Error",
+              text: "Something went wrong",
+              icon: "error",
+              position: "mid-center",
+              hideAfter: 3000,
+              stack: false
+            });
           }
         },
         complete: function(data) {
@@ -72,9 +86,25 @@ $("body").on("click", "#dont_have_email_address_id", function() {
   if (isChecked) {
     // disable email field //
     $("#institute_email_address").val("");
+    $("#university_selection")
+      .val(null)
+      .trigger("change");
+
     $("#institute_email_address").prop("disabled", true);
+    $("#university_selection").prop("disabled", true);
+    $("#upload-file").prop("disabled", false);
+    $("#manual_verification").prop("checked", true);
   } else {
     $("#institute_email_address").prop("disabled", false);
+    $("#university_selection").prop("disabled", false);
+    var input = $("#input_new_university_name").val();
+    if ($.trim(input) == "") {
+      $("#upload-file").val("");
+      $("#upload-file").prop("disabled", true);
+      $("#university_uplaod_file_path").val("");
+    } else {
+      return false;
+    }
   }
 });
 
@@ -99,7 +129,7 @@ $("#upload-file").on("change", function(e) {
 
 $(document).ready(function() {
   $("#university_selection").select2({
-    placeholder: "Select or search your University",
+    placeholder: "Select or search your University --",
     ajax: {
       url: "get-my-university-list",
       dataType: "json"
@@ -107,7 +137,7 @@ $(document).ready(function() {
   });
 
   $("#field_of_study").select2({
-    placeholder: "Select or search your University",
+    placeholder: "Select or search your Field of Study --",
     ajax: {
       url: "get-university-field-list",
       dataType: "json"
@@ -115,7 +145,7 @@ $(document).ready(function() {
   });
 
   $("#major_field_of_study").select2({
-    placeholder: "--Select or search your field of study--",
+    placeholder: "--Select or search your Major --",
     ajax: {
       url: "get-university-major-field",
       data: function(term, page) {
@@ -151,6 +181,9 @@ $("body").on("click", "#submit_new_university_name", function() {
     ' <a href="javascript:void(0)" class="remove-badge" id="remove_university_data"><i class="fa fa-times" aria-hidden="true"></i></a></span>';
   $("#show_manual_added_university").html(newInput);
   $("#university_selection").prop("disabled", true);
+  $("#manual_verification").prop("checked", true);
+  $("#dont_have_email_address_id").prop("checked", true);
+  $("#upload-file").prop("disabled", false);
   $("#manual_university").val(input);
   $(".close").trigger("click");
 });
@@ -160,6 +193,9 @@ $("body").on("click", "#remove_university_data", function() {
   $("#input_new_university_name").val("");
   $("#manual_university").val("");
   $("#university_selection").prop("disabled", false);
+  $("#manual_verification").prop("checked", false);
+  $("#dont_have_email_address_id").prop("checked", false);
+  $("#upload-file").prop("disabled", true);
 });
 
 //------------------------------------end of second form fields ------------------------//
@@ -175,7 +211,14 @@ $("body").on("click", "#buton_manual_fied_of_interest", function() {
     ' <a href="javascript:void(0)" class="remove-badge" id="remove_field_of_study_data"><i class="fa fa-times" aria-hidden="true"></i></a></span>';
   $("#manual_addition_field_of_study").html(newInput);
   $("#field_of_study").prop("disabled", true);
+  $("#major_field_of_study").prop("disabled", true);
   $("#manual_field_of_interest").val(input);
+  $("#field_of_study")
+    .val(null)
+    .trigger("change");
+  $("#major_field_of_study")
+    .val(null)
+    .trigger("change");
   $(".close").trigger("click");
 });
 
@@ -184,6 +227,7 @@ $("body").on("click", "#remove_field_of_study_data", function() {
   $("#manual_field_of_interest").val("");
   $("#field_of_interest_manual_id").val("");
   $("#field_of_study").prop("disabled", false);
+  $("#major_field_of_study").prop("disabled", false);
 });
 
 //--------------------------------------form third manual field of interest ---------------------//
@@ -199,6 +243,9 @@ $("body").on("click", "#button_major_manual", function() {
   $("#html_major_show").html(newInput);
   $("#major_field_of_study").prop("disabled", true);
   $("#manual_major_hidden").val(input);
+  $("#major_field_of_study")
+    .val(null)
+    .trigger("change");
   $(".close").trigger("click");
 });
 
@@ -209,4 +256,20 @@ $("body").on("click", "#remove_field_of_study_data", function() {
   $("#major_field_of_study").prop("disabled", false);
 });
 
+$("body").on("click", "#manual_verification", function() {
+  var input = $("#input_new_university_name").val();
+  if ($.trim(input) != "") return false;
+});
+
 //---------------------------- manual verification ----------------------------------------//
+
+$("body").on("change", ".dispaly_name_selection", function() {
+  $("#nick_name_selection_input").prop("readonly", true);
+  if ($(this).is(":checked")) {
+    var dataName = $(this).attr("data-name");
+    $("#nick_name_selection_input").val(dataName);
+    if ($(this).val() == "nick_name") {
+      $("#nick_name_selection_input").prop("readonly", false);
+    }
+  }
+});

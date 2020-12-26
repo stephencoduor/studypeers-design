@@ -262,4 +262,32 @@ class User_model extends CI_Model
 
         return $query->row_array();
     }
+
+    public function getUserInfo($id)
+    {
+        $query =   $this->db->select('*')
+
+            ->from('user_info')
+
+            ->where('userID', $id)
+
+            ->get();
+
+
+        return $query->row_array();
+    }
+
+    public function getUserById($id)
+    {
+        $query =   $this->db->select('*')
+
+            ->from('user')
+
+            ->where('id', $id)
+
+            ->get();
+
+
+        return $query->row_array();
+    }
 }

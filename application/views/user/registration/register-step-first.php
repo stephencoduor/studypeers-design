@@ -14,12 +14,12 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" name="first_name" maxlength="50" class="form-control form-control--lg" placeholder="First Name" required>
+                                    <input type="text" value="<?php echo empty($userData['first_name']) ? '' : $userData['first_name']; ?>" name="first_name" maxlength="50" class="form-control form-control--lg" placeholder="First Name" required>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <input type="text" name="last_name" maxlength="50" class="form-control form-control--lg" placeholder="Last Name" required>
+                                    <input type="text" name="last_name" value="<?php echo empty($userData['last_name']) ? '' : $userData['last_name']; ?>" maxlength="50" class="form-control form-control--lg" placeholder="Last Name" required>
                                 </div>
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                                             <input type="tel" class="country_select" id="country_code" name="country_code" placeholder="" autocomplete="off" value="">
                                         </div>
                                     </div>
-                                    <input class="form-control" type="text" maxlength="15" name="mobile_no" onkeypress='validate(event)' required>
+                                    <input class="form-control" value="<?php echo empty($userData['phone']) ? '' : $userData['phone']; ?>" type="text" maxlength="15" name="mobile_no" onkeypress='validate(event)' required>
                                 </div>
                             </div>
                         </div>
@@ -61,28 +61,56 @@
 											  V87.2h61.3v68.6V155.9z"></path>
                                         </svg>
                                     </span>
-                                    <input type="text" class="form-control" name="dob" id="start-date" required>
+                                    <input type="text" value="<?php echo empty($existinData['dob']) ? '' : $existinData['dob']; ?>" class="form-control" name="dob" id="start-date" required>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-sm-12">
-                                <label>Gender</label>
-                                <div class="flex-item-row">
-                                    <label class="custom-radio">
-                                        <input type="radio" name="gender" checked="checked" value="male" required="">
-                                        <span class="checkmark"></span>Male
-                                    </label>
-                                    <label class="custom-radio">
-                                        <input type="radio" name="gender" value="female" required="">
-                                        <span class="checkmark"></span>Female
-                                    </label>
-                                    <label class="custom-radio">
-                                        <input type="radio" name="gender" value="other" required="">
-                                        <span class="checkmark"></span>Other
-                                    </label>
+                            <?php if (empty($existinData['gender'])) : ?>
+
+                                <div class="form-group col-sm-12">
+                                    <label>Gender</label>
+                                    <div class="flex-item-row">
+                                        <label class="custom-radio">
+                                            <input type="radio" name="gender" checked="checked" value="male" required="">
+                                            <span class="checkmark"></span>Male
+                                        </label>
+                                        <label class="custom-radio">
+                                            <input type="radio" name="gender" value="female" required="">
+                                            <span class="checkmark"></span>Female
+                                        </label>
+                                        <label class="custom-radio">
+                                            <input type="radio" name="gender" value="other" required="">
+                                            <span class="checkmark"></span>Other
+                                        </label>
+                                    </div>
                                 </div>
-                            </div>
+
+                            <?php endif; ?>
+
+                            <?php if (!empty($existinData['gender'])) : ?>
+
+                                <div class="form-group col-sm-12">
+                                    <label>Gender</label>
+                                    <div class="flex-item-row">
+                                        <label class="custom-radio">
+                                            <input type="radio" name="gender" <?php if ($existinData['gender'] == 'male') : ?>checked="checked" <?php endif; ?> value="male" required="">
+                                            <span class="checkmark"></span>Male
+                                        </label>
+                                        <label class="custom-radio">
+                                            <input type="radio" name="gender" <?php if ($existinData['gender'] == 'female') : ?>checked="checked" <?php endif; ?> value="female" required="">
+                                            <span class="checkmark"></span>Female
+                                        </label>
+                                        <label class="custom-radio">
+                                            <input type="radio" name="gender" <?php if ($existinData['gender'] == 'other') : ?>checked="checked" <?php endif; ?> value="other" required="">
+                                            <span class="checkmark"></span>Other
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                            <?php endif; ?>
+
                         </div>
                         <div class="form-group text-right">
                             <!-- <a href="where-are-studying.html" class="filterBtn">Continue</a> -->

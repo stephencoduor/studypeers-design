@@ -811,7 +811,9 @@ a.done-link.show {
   /* width: 100% !important; */
   height: 40px !important;
 }
-
+.modal-content .selectator_input{
+  height:30px!important;
+}
 .avatar-upload {
   position: relative;
   max-width: 205px;
