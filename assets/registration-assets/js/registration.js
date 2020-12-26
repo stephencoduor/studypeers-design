@@ -185,6 +185,9 @@ $("body").on("click", "#submit_new_university_name", function() {
   $("#dont_have_email_address_id").prop("checked", true);
   $("#upload-file").prop("disabled", false);
   $("#manual_university").val(input);
+  $("#university_selection")
+    .val(null)
+    .trigger("change");
   $(".close").trigger("click");
 });
 
