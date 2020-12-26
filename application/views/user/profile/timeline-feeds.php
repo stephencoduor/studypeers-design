@@ -859,9 +859,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         <?php } else { ?>
                                                 <a href="#" class="removeEvent" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">Remove From Calendar</a>
                                         <?php } } else { 
-                                                    $this->db->order_by('share_master.id', 'desc');
-                                                    $shared = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array();
-                                                if($shared['schedule_master_id'] == 0) { ?>
+                                                $shared = $this->db->get_where('schedule_master', array('event_master_id' => $event_detail['id'], 'status' => 1))->row_array();
+                                                if(empty($shared)) { ?>
                                                     <a href="#" class="addEvents" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#addEventModal">Add to Calendar</a>
 
                                                 <?php } else { ?>

@@ -262,6 +262,72 @@
     </div>
 </div>
 
+
+<div class="modal fade" id="addEventModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Confirmation</h4>
+                <div class="row">
+                    <h6 class="modalText">Are you sure to add this Event to Calendar</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group button">
+                            <form method="post" action="<?php echo base_url(); ?>account/addEventToCalender">
+                                <input type="hidden" id="calender_event_id" name="calender_event_id" value="">
+                                <?php if (isset($_REQUEST['profile_id'])) { ?>
+                                    <input type="hidden" id="" name="profile" value="<?= $_REQUEST['profile_id']; ?>">
+                                <?php } else { ?>
+                                    <input type="hidden" id="" name="timeline" value="1">
+                                <?php }  ?>
+                                <button type="button" data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                <button type="submit" class="filterBtn">Yes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="modal fade" id="removeFromScheduleModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Confirmation</h4>
+                <div class="row">
+                    <h6 class="modalText">Are you sure you want to remove this event <br> from your schedule?</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form method="post" action="<?php echo base_url(); ?>account/removeEvent">
+                            <div class="form-group button">
+                                <input type="hidden" id="remove_event_id" name="remove_event_id">
+                                <?php if (isset($_REQUEST['profile_id'])) { ?>
+                                    <input type="hidden" id="" name="profile" value="<?= $_REQUEST['profile_id']; ?>">
+                                <?php } else { ?>
+                                    <input type="hidden" id="" name="timeline" value="1">
+                                <?php }  ?>
+                                <button type="button" data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                <button type="submit" class="filterBtn">Yes</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
@@ -874,6 +940,18 @@
             $('#delete_video_' + video_id[2]).remove();
             $('#imgInp' + video_id[2]).val('');
             video_counter--;
+        });
+
+        $(document).on("click", ".addEvents", function() {
+            var event_id = $(this).data('id');
+            $(".modal-body #calender_event_id").val(event_id);
+
+        });
+
+        $(document).on("click", ".removeEvent", function() {
+            var event_id = $(this).data('id');
+            $(".modal-body #remove_event_id").val(event_id);
+
         });
 
         $(document).on('change', '.image_upload_button', function() {
