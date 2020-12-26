@@ -26,9 +26,11 @@ class RegistrationModel extends CI_Model
 
         if (!empty($search)) {
             $query->group_start();
-            $query->like('SchoolName', $search, 'both');
+            $query->like('SchoolName', $search, 'before');
             $query->group_end();
         }
+
+        $query->order_by('SchoolName', 'ASC');
 
         $query->limit(20);
 
@@ -47,9 +49,11 @@ class RegistrationModel extends CI_Model
 
         if (!empty($search)) {
             $query->group_start();
-            $query->like('name', $search, 'both');
+            $query->like('name', $search, 'before');
             $query->group_end();
         }
+
+        $query->order_by('name', 'ASC');
 
         $query->where('status', 1); // all active records.
 
@@ -77,9 +81,11 @@ class RegistrationModel extends CI_Model
 
         if (!empty($search)) {
             $query->group_start();
-            $query->like('name', $search, 'both');
+            $query->like('name', $search, 'before');
             $query->group_end();
         }
+
+        $query->order_by('name', 'ASC');
 
         $query->limit(20);
 
