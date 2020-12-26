@@ -1,7 +1,7 @@
 <section class="home-body">
     <div class="login-container">
         <div class="flex-row align-center">
-            <a href="<?php echo base_url('home/step-three-page'); ?>" class="prev-link"><img src="assets/registration-assets/images/prev-icon.svg" alt="Prev Icon" /></a>
+            <!-- <a href="<?php echo base_url('home/step-three-page'); ?>" class="prev-link"><img src="assets/registration-assets/images/prev-icon.svg" alt="Prev Icon" /></a> -->
             <form action="<?php echo base_url('submit-step-one'); ?>" id="submit_step_one_form">
                 <div class="flex-item">
                     <div class="content-right">
