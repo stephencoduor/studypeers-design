@@ -37,6 +37,7 @@
 <script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script src="assets/registration-assets/js/jquery.star-rating-svg.js"></script>
+<script src="assets/js/jquery-toast-plugin-master/src/jquery.toast.js"></script>
 <!-- <script src="assets/registration-assets/js/jquery.mCustomScrollbar.concat.min.js"></script>     -->
 <script src="https://momentjs.com/downloads/moment.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>

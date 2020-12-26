@@ -18,9 +18,23 @@ var registration = /** @class */ (function() {
         },
         error: function(data) {
           if (data.status == 422) {
-            alert(data.responseJSON.message);
+            $.toast({
+              heading: "Error",
+              text: data.responseJSON.message,
+              icon: "error",
+              position: "mid-center",
+              hideAfter: 3000,
+              stack: false
+            });
           } else {
-            alert("Something went wrong");
+            $.toast({
+              heading: "Error",
+              text: "Something went wrong",
+              icon: "error",
+              position: "mid-center",
+              hideAfter: 3000,
+              stack: false
+            });
           }
         },
         complete: function(data) {
