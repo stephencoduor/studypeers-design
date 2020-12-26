@@ -639,6 +639,21 @@ $config['max_height']  = '768000';
 		$inserted_post_id = $this->db->insert_id();
 		$this->load->library('upload', $config);
 
+        if($privacy == 5){
+            $shareWithPeersId = $this->input->post('shareWithPeersId');
+
+            $peersIds = explode(',', $shareWithPeersId);
+            foreach ($peersIds as &$val) {
+                $insertArry = array(
+                    'post_id'     => $inserted_post_id,
+                    'peer_id'            => $val,
+                    
+                    'created'            => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('post_share_with_peers', $insertArry);
+            }
+        }
+
 		$this->upload->initialize($config);
 		$F = array();
 		$count_uploaded_files = count( $_FILES['file']['name'] ); 

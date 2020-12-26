@@ -2268,11 +2268,17 @@
     });
 
     function saveSelectedPeer(){
+        $('#groupMember').modal('hide');
+        $('#createPost').modal('show');
+        var output_string = "";
         $("#multiple-select option").each(function()
         {
             // Add $(this).val() to your list
-            alert($(this).val());
+            
+            output_string = output_string + $(this).val() + ", ";
         });
+        output_string = output_string.substr(0, output_string.length - 2);
+        $('#shareWithPeersId').val(output_string);
     }
 </script>
 

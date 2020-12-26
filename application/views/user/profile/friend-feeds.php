@@ -21,23 +21,31 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
             $university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array();
 
             $chk_view = 0; 
-            
-            if(!empty($chk_if_follow)) {
-                if($post_query->privacy_id == 1 || $post_query->privacy_id == 5){
-                    $chk_view = 1;
-                }
-            }
-            if(!empty($chk_if_friend)) {
-                if($post_query->privacy_id == 1 || $post_query->privacy_id == 4){
-                    $chk_view = 1;
-                }
-            } 
 
-            if(empty($chk_if_friend) && empty($chk_if_follow)) {
-                if($post_query->privacy_id == 1){
-                    $chk_view = 1;
+            if($post_query->privacy_id == 5){
+                $chk_if_shared_with = $this->db->get_where('post_share_with_peers', array('post_id' => $value['reference_id'], 'peer_id' => $login_user_id))->row_array();
+                if(!empty($chk_if_shared_with)) {
+                    $chk_view = 1; 
                 }
-            }   
+            } else {
+            
+                if(!empty($chk_if_follow)) {
+                    if($post_query->privacy_id == 1){
+                        $chk_view = 1;
+                    }
+                }
+                if(!empty($chk_if_friend)) {
+                    if($post_query->privacy_id == 1 || $post_query->privacy_id == 4){
+                        $chk_view = 1;
+                    }
+                } 
+
+                if(empty($chk_if_friend) && empty($chk_if_follow)) {
+                    if($post_query->privacy_id == 1){
+                        $chk_view = 1;
+                    }
+                } 
+            }  
 
             if($chk_view == 1) {
 
