@@ -369,6 +369,7 @@ class HomeController extends BaseController
             'id' => $this->user_id,
         ], $updateNewUserInfo);
 
+
         $createAdditionInfo['userID'] = $this->user_id;
         $createAdditionInfo['dob']    = $data['dob'];
         $createAdditionInfo['gender'] = $data['gender'];
@@ -455,9 +456,6 @@ class HomeController extends BaseController
     }
 
 
-
-
-
     /**
      * validationStepOne
      */
@@ -482,6 +480,18 @@ class HomeController extends BaseController
 
         if (empty($data['dob'])) {
             throw new Exception("DOB field is required", 422);
+        }
+
+        if (!empty($data['dob'])) {
+
+            $dateOfBirth = date('Y-m-d', strtotime($data['dob']));
+            $today = date("Y-m-d");
+            $diff = date_diff(date_create($dateOfBirth), date_create($today));
+            $age = $diff->format('%y');
+
+            if ($age < 13) {
+                throw new Exception("Minimum age required is 13 years.", 422);
+            }
         }
 
 
