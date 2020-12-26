@@ -1776,11 +1776,28 @@
                 } else if(reaction_id == 6) {
                     $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Love</span>');
                 }
-            }
-        });
 
         
 
+            }
+        });
+    }
+
+
+    function deleteReaction(reference, reference_id){
+        url = '<?php echo base_url(); ?>Profile/deleteReaction';
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                "reference_id": reference_id, "reference": reference
+            },
+            success: function(result) {
+                $('.'+reference+'_total_likes_'+reference_id).html(result);
+                $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-grey.svg" class="likepost" alt="Like"><span>Like</span>');
+
+            }
+        });
     }
 
 
