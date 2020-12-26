@@ -1,7 +1,7 @@
 <section class="home-body">
     <div class="login-container">
         <div class="flex-row align-center">
-            <a href="what-are-studying.html" class="prev-link"><img src="assets/registration-assets/images/prev-icon.svg" alt="Prev Icon" /></a>
+            <a href="<?php echo base_url('home/step-three-page'); ?>" class="prev-link"><img src="assets/registration-assets/images/prev-icon.svg" alt="Prev Icon" /></a>
             <form action="<?php echo base_url('submit-step-one'); ?>" id="submit_step_one_form">
                 <div class="flex-item">
                     <div class="content-right">
@@ -30,15 +30,15 @@
                                 <label>Display Name</label>
                                 <div class="flex-item-sections">
                                     <label class="custom-radio">
-                                        <input type="radio" name="privacy" value="full_name" checked required="">
+                                        <input type="radio" class="dispaly_name_selection" data-name="<?php echo $existinData['first_name'] . ' ' . $existinData['last_name']; ?>" name="privacy" value="full_name" checked required="">
                                         <span class="checkmark"></span>Full Name
                                     </label>
                                     <label class="custom-radio">
-                                        <input type="radio" name="privacy" value="first_initial" required="">
+                                        <input type="radio" class="dispaly_name_selection" data-name="<?php echo $existinData['first_name'] . ' ' . strtoupper(substr($existinData['last_name'], 0, 1)); ?>" name="privacy" value="first_initial" required="">
                                         <span class="checkmark"></span>First Name and Initial
                                     </label>
                                     <label class="custom-radio">
-                                        <input type="radio" name="privacy" value="nick_name" required="">
+                                        <input type="radio" data-name="" class="dispaly_name_selection" name="privacy" value="nick_name" required="">
                                         <span class="checkmark"></span>Nickname
                                     </label>
                                 </div>
@@ -46,7 +46,7 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <div class="form-group">
-                                        <input type="text" name="nickname_text" class="form-control form-control--lg" placeholder="Enter your nickname">
+                                        <input type="text" value="<?php echo $existinData['first_name'] . ' ' . $existinData['last_name']; ?>" id="nick_name_selection_input" readonly name="nickname_text" class="form-control form-control--lg" placeholder="Enter your nickname">
                                     </div>
                                 </div>
                             </div>

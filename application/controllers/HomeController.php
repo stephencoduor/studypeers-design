@@ -59,6 +59,8 @@ class HomeController extends BaseController
     {
         $data = [];
 
+        $data['existinData'] = $this->user_model->getUserById($this->user_id);
+
         $this->includeTemplate('user/registration/register-step-four', $data);
     }
 
@@ -173,8 +175,8 @@ class HomeController extends BaseController
         $updateUserInfo = [];
         $updateUserInfo['degree'] = $data['degree'];
         $updateUserInfo['field_interest'] = $data['field_of_interest'];
-        $updateUserInfo['course'] = empty($data['manual_field']) ? 0 : $data['field'];
-        $updateUserInfo['major'] = empty($data['manual_major']) ? 0 :  $data['major'];
+        $updateUserInfo['course'] = empty($data['manual_field']) ? $data['field'] : 0;
+        $updateUserInfo['major'] = empty($data['manual_major']) ? $data['major'] : 0;
         $updateUserInfo['session'] = $data['session'];
         $updateUserInfo['field_type'] = empty($data['manual_field']) ? 1 : 2; //2 for manual for entry
         $updateUserInfo['major_type'] = empty($data['manual_major'])  ? 1 : 2; // 2 for manual entry
@@ -211,14 +213,14 @@ class HomeController extends BaseController
 
     public function validateWhatAreYouStudy($data)
     {
-        if ($data['manual_field']) {
+        if (empty($data['manual_field'])) {
 
             if (empty($data['field'])) {
                 throw new Exception("Field of study field is required", 422);
             }
         }
 
-        if ($data['manual_major']) {
+        if (empty($data['manual_major'])) {
 
             if (empty($data['major'])) {
                 throw new Exception("Major field is required", 422);
@@ -257,10 +259,10 @@ class HomeController extends BaseController
 
         $updateUniversityInformation = [];
         $updateUniversityInformation['intitutionID'] = empty($UniverData['university_id']) ? 0 : $UniverData['university_id'];
-        $updateUniversityInformation['institute_type'] = 1; // currently existing one.
-        $updateUniversityInformation['intitution_email'] = $data['email'];
+        $updateUniversityInformation['institute_type'] = empty($data['manual_university']) ?  1 : 2;
+        $updateUniversityInformation['intitution_email'] = empty($data['email']) ? '' : $data['email'];
         $updateUniversityInformation['manual_verification'] = empty($data['manual_verification']) ? 0 : 1;
-        $updateUniversityInformation['intitution_idcard'] = $data['file_name'];
+        $updateUniversityInformation['intitution_idcard'] = empty($data['file_name']) ? '' : $data['file_name'];
         $updateUniversityInformation['add_institute'] = empty($data['manual_university']) ? "" : $data['manual_university']; // new university name if added by user
 
         $this->user_model->update_data('user_info', [
@@ -291,13 +293,19 @@ class HomeController extends BaseController
     public function validateWhereYouStudy($data)
     {
 
-        if (empty($data['manual_university'])) {
+        if (empty($data['dont_have_email'])) {
 
             if (empty($data['university'])) {
                 throw new Exception("University is field is required", 422);
             }
         }
 
+        if (!empty($data['manual_university'])) {
+
+            if (empty($data['file_name'])) {
+                throw new Exception("University identity document required for custom added University", 422);
+            }
+        }
 
         if (!isset($data['dont_have_email'])) {
 
@@ -311,7 +319,7 @@ class HomeController extends BaseController
 
             if (!empty($data['email'])) {
 
-                if (!isset($data['manual_verification'])) {
+                if (!empty($data['university'])) {
 
                     #verify if its from same university
                     $explode = explode("@", $data['email']);
@@ -324,7 +332,7 @@ class HomeController extends BaseController
                     }
 
                     if ($UniverData['EmailDomain'] != $domain) {
-                        throw new Exception("University domain not verified. Try submitting form with manual email verification", 422);
+                        throw new Exception("University domain not verified. Try submitting form by uploading your University ID", 422);
                     }
                 }
             }
