@@ -96,12 +96,12 @@ $("body").on("click", "#dont_have_email_address_id", function() {
     $("#manual_verification").prop("checked", true);
   } else {
     $("#institute_email_address").prop("disabled", false);
-    $("#university_selection").prop("disabled", false);
     var input = $("#input_new_university_name").val();
     if ($.trim(input) == "") {
       $("#upload-file").val("");
       $("#upload-file").prop("disabled", true);
       $("#university_uplaod_file_path").val("");
+      $("#university_selection").prop("disabled", false);
     } else {
       return false;
     }
@@ -180,7 +180,6 @@ $("body").on("click", "#submit_new_university_name", function() {
     input +
     ' <a href="javascript:void(0)" class="remove-badge" id="remove_university_data"><i class="fa fa-times" aria-hidden="true"></i></a></span>';
   $("#show_manual_added_university").html(newInput);
-  $("#university_selection").prop("disabled", true);
   $("#manual_verification").prop("checked", true);
   $("#dont_have_email_address_id").prop("checked", true);
   $("#upload-file").prop("disabled", false);
@@ -188,6 +187,7 @@ $("body").on("click", "#submit_new_university_name", function() {
   $("#university_selection")
     .val(null)
     .trigger("change");
+  $("#university_selection").prop("disabled", true);
   $(".close").trigger("click");
 });
 
