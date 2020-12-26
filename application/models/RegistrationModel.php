@@ -26,7 +26,7 @@ class RegistrationModel extends CI_Model
 
         if (!empty($search)) {
             $query->group_start();
-            $query->like('LOWER(SchoolName)', strtolower($search), 'before');
+            $query->like('LOWER(SchoolName)', strtolower($search), 'after');
             $query->group_end();
         }
 
@@ -49,7 +49,7 @@ class RegistrationModel extends CI_Model
 
         if (!empty($search)) {
             $query->group_start();
-            $query->like('LOWER(name)', strtolower($search), 'before');
+            $query->like('LOWER(name)', strtolower($search), 'after');
             $query->group_end();
         }
 
@@ -81,7 +81,7 @@ class RegistrationModel extends CI_Model
 
         if (!empty($search)) {
             $query->group_start();
-            $query->like('LOWER(name)', strtolower($search), 'before');
+            $query->like('LOWER(name)', strtolower($search), 'after');
             $query->group_end();
         }
 
