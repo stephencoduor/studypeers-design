@@ -95,12 +95,12 @@ $("body").on("click", "#dont_have_email_address_id", function() {
     $("#upload-file").prop("disabled", false);
     $("#manual_verification").prop("checked", true);
   } else {
-    $("#institute_email_address").prop("disabled", false);
     var input = $("#input_new_university_name").val();
     if ($.trim(input) == "") {
       $("#upload-file").val("");
       $("#upload-file").prop("disabled", true);
       $("#university_uplaod_file_path").val("");
+      $("#institute_email_address").prop("disabled", false);
       $("#university_selection").prop("disabled", false);
     } else {
       return false;
