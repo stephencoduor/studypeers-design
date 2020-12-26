@@ -8,6 +8,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
         <!-- Modal content-->
         <div class="modal-content">
             <form method="post" id="addPostForm" action="<?php echo base_url(); ?>Profile/savePost" enctype="multipart/form-data">
+                <input type="hiiden" name="shareWithPeersId" id="shareWithPeersId">
                 <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
                 <div class="modal-body">
                     <div class="createHeader">
