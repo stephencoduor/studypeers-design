@@ -1198,6 +1198,31 @@ $config['max_height']  = '768000';
     }
 
 
+    public function deleteReaction(){
+        if($this->input->post()){
+            $reference_id = $this->input->post('reference_id');
+            
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+            $reference = $this->input->post('reference');
+
+            //delete  reaction from like master table 
+            $this->db->where(array('user_id'=>$user_id, 'reference_id' => $reference_id, 'reference' => $reference));
+            $this->db->delete('reaction_master');
+            
+            if($reference == 'Post') {
+                $post_result = $this->db->get_where($this->db->dbprefix('posts'), array('id' => $reference_id))->row_array();
+                $like_count_increment = $post_result['likes_count'] - 1;
+                $this->db->where(array('id' => $reference_id));
+                $this->db->update('posts',array('likes_count' => $like_count_increment));
+            }
+
+            $html = getReactionByReference($reference_id, $reference);
+
+            echo $html;
+        }
+    }
+
+
     public function addCommentByRefrence(){
         if($this->input->post()){
             $comment = $this->input->post('comment');

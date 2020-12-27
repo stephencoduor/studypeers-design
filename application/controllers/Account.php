@@ -2327,6 +2327,8 @@ class Account extends CI_Controller
                 $this->db->insert('schedule_master', $schedule);
                 $schedule_id = $this->db->insert_id();
 
+                
+
                 $this->db->where(array('reference_id' => $event_id, 'reference' => 'event', 'peer_id' => $user_id, 'status' => 2));
                 $this->db->update('share_master', array('schedule_master_id' => $schedule_id));
             }
@@ -2337,6 +2339,10 @@ class Account extends CI_Controller
             $this->session->set_flashdata('flash_message', $message);
             if ($this->input->post('dashboard')) {
                 redirect(site_url('account/dashboard'), 'refresh');
+            } else if ($this->input->post('timeline')) {
+                redirect(site_url('Profile/timeline'), 'refresh');
+            } else if ($this->input->post('profile')) {
+                redirect(site_url('Profile/friends?profile_id='.$this->input->post('profile')), 'refresh');
             } else {
                 redirect(site_url('account/events'), 'refresh');
             }
@@ -2661,7 +2667,11 @@ class Account extends CI_Controller
             $this->session->set_flashdata('flash_message', $message);
             if ($this->input->post('dashboard')) {
                 redirect(site_url('account/dashboard'), 'refresh');
-            } else {
+            } else if ($this->input->post('timeline')) {
+                redirect(site_url('Profile/timeline'), 'refresh');
+            } else if ($this->input->post('profile')) {
+                redirect(site_url('Profile/friends?profile_id='.$this->input->post('profile')), 'refresh');
+            }  else {
                 redirect(site_url('account/events'), 'refresh');
             }
         }

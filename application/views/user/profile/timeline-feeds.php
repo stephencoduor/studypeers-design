@@ -412,12 +412,11 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             <div class="socialAction">
                                 <ul>
                                     <li class="likeMenu">
-                                        <a class="Post_likeMenu_<?php echo $value['reference_id']; ?>">
+                                        <a class="Post_likeMenu_<?php echo $value['reference_id']; ?>" onclick="deleteReaction('Post', '<?php echo $value['reference_id']; ?>')">
                                             <?php if(empty($chk_user_reaction)) { ?>
                                                 <img
                                                     src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
-                                                    class="likepost" alt="Like">
-                                                <span>Like</span>
+                                                    class="likepost" alt="Like"><span>Like</span>
                                             <?php } else if($chk_user_reaction['reaction_id'] == 1) { ?>
                                                 <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> 
                                                 <span style="color: #185aeb;">Like</span>
@@ -859,9 +858,8 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         <?php } else { ?>
                                                 <a href="#" class="removeEvent" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">Remove From Calendar</a>
                                         <?php } } else { 
-                                                    $this->db->order_by('share_master.id', 'desc');
-                                                    $shared = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array();
-                                                if($shared['schedule_master_id'] == 0) { ?>
+                                                $shared = $this->db->get_where('schedule_master', array('event_master_id' => $event_detail['id'], 'status' => 1))->row_array();
+                                                if(empty($shared)) { ?>
                                                     <a href="#" class="addEvents" data-id="<?= $event_detail['id']; ?>" data-toggle="modal" data-target="#addEventModal">Add to Calendar</a>
 
                                                 <?php } else { ?>
@@ -959,12 +957,11 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 <div class="socialAction">
                                     <ul>
                                         <li class="likeMenu">
-                                            <a class="event_likeMenu_<?php echo $value['reference_id']; ?>">
+                                            <a class="event_likeMenu_<?php echo $value['reference_id']; ?>" onclick="deleteReaction('event', '<?php echo $value['reference_id']; ?>')">
                                                 <?php if(empty($chk_user_reaction)) { ?>
                                                     <img
                                                         src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
-                                                        class="likepost" alt="Like">
-                                                    <span>Like</span>
+                                                        class="likepost" alt="Like"><span>Like</span>
                                                 <?php } else if($chk_user_reaction['reaction_id'] == 1) { ?>
                                                     <img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> 
                                                     <span style="color: #185aeb;">Like</span>
@@ -1418,7 +1415,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         <div class="socialAction">
                             <ul>
                                 <li class="likeMenu">
-                                    <a class="studyset_likeMenu_<?php echo $value['reference_id']; ?>">
+                                    <a class="studyset_likeMenu_<?php echo $value['reference_id']; ?>" onclick="deleteReaction('studyset', '<?php echo $value['reference_id']; ?>')">
                                         <?php if(empty($chk_user_reaction)) { ?>
                                             <img
                                                 src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
@@ -1868,7 +1865,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         <div class="socialAction">
                             <ul>
                                 <li class="likeMenu">
-                                    <a class="document_likeMenu_<?php echo $value['reference_id']; ?>">
+                                    <a class="document_likeMenu_<?php echo $value['reference_id']; ?>" onclick="deleteReaction('document', '<?php echo $value['reference_id']; ?>')">
                                         <?php if(empty($chk_user_reaction)) { ?>
                                             <img
                                                 src="<?php echo base_url(); ?>assets_d/images/like-grey.svg"
