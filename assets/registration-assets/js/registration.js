@@ -86,12 +86,7 @@ $("body").on("click", "#dont_have_email_address_id", function() {
   if (isChecked) {
     // disable email field //
     $("#institute_email_address").val("");
-    $("#university_selection")
-      .val(null)
-      .trigger("change");
-
     $("#institute_email_address").prop("disabled", true);
-    $("#university_selection").prop("disabled", true);
     $("#upload-file").prop("disabled", false);
     $("#manual_verification").prop("checked", true);
   } else {
@@ -101,7 +96,6 @@ $("body").on("click", "#dont_have_email_address_id", function() {
       $("#upload-file").prop("disabled", true);
       $("#university_uplaod_file_path").val("");
       $("#institute_email_address").prop("disabled", false);
-      $("#university_selection").prop("disabled", false);
     } else {
       return false;
     }
