@@ -189,9 +189,11 @@ $("body").on("click", "#remove_university_data", function() {
   $("#show_manual_added_university").html("");
   $("#input_new_university_name").val("");
   $("#manual_university").val("");
+  $("#university_uplaod_file_path").val("");
   $("#university_selection").prop("disabled", false);
   $("#manual_verification").prop("checked", false);
   $("#dont_have_email_address_id").prop("checked", false);
+  $("#upload-file").val("");
   $("#upload-file").prop("disabled", true);
 });
 
