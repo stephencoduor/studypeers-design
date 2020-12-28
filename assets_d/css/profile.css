@@ -268,6 +268,9 @@
 #groupMember .modal-dialog {
     width: 380px;
 }
+.selectator_element.loading:before{
+    display: none!important;
+}
 .boxwrap {
     width: 100%;
     background: #fff;
