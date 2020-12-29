@@ -1795,4 +1795,97 @@ $config['max_height']  = '768000';
             ->set_output(json_encode($response['data']));
     }
 
+
+    public function getFollowerList()
+    {
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        
+
+        $peer_list = $this->db->query('SELECT *  from follow_master where peer_id = '.$user_id)->result_array();
+
+        $html = '';
+
+        foreach ($peer_list as $key => $value) {
+            
+            $peer = $this->db->get_where($this->db->dbprefix('user'), array('id' => $value['user_id']))->row_array();
+            
+            $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
+
+            $html .= '<section class="list"><section class="left">
+                        <figure>
+                            <img src="' . userImage($peer['id']) . '" alt="user">
+                        </figure>
+                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['id'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
+                    </section>
+                    <section class="action" id="action_' . $peer['id'] . '">';
+            
+            $html .= '<button type="button" class="like" onclick="removeFollower(' . $peer['id'] . ')">Remove Follower</button>';
+            if (empty($chk_if_peer)) {
+                $html .= '<button type="button" class="like" style="margin-left: 5px;">Add Peer</button>';
+            }
+            $html .= '</section>
+                </section>';
+        }
+        echo $html;
+        die;
+    }
+
+    public function getFollowingList()
+    {
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        
+
+        $peer_list = $this->db->query('SELECT *  from follow_master where user_id = '.$user_id)->result_array();
+
+        $html = '';
+
+        foreach ($peer_list as $key => $value) {
+            
+            $peer = $this->db->get_where($this->db->dbprefix('user'), array('id' => $value['peer_id']))->row_array();
+            
+            $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
+
+            $html .= '<section class="list"><section class="left">
+                        <figure>
+                            <img src="' . userImage($peer['id']) . '" alt="user">
+                        </figure>
+                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['id'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
+                    </section>
+                    <section class="action" id="action_' . $peer['id'] . '">';
+            
+            $html .= '<button type="button" class="like" id="action_following_' . $peer['id'] . '" onclick="followUnfollow(' . $peer['id'] . ')">Unfollow</button>';
+            if (empty($chk_if_peer)) {
+                $html .= '<button type="button" class="like" style="margin-left: 5px;">Add Peer</button>';
+            }
+            $html .= '</section>
+                </section>';
+        }
+        echo $html;
+        die;
+    }
+
+
+    public function followUnfollow(){
+        $peer_id = $this->input->post('peer_id');
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+        $chk_if_follow = $this->db->get_where($this->db->dbprefix('follow_master'), array('peer_id' => $peer_id, 'user_id' => $user_id))->row_array();
+        if(!empty($chk_if_follow)){
+            $check = array(
+                    'user_id'       => $user_id,
+                    'peer_id'       => $peer_id
+            );
+            $this->db->where($check);
+            $this->db->delete('follow_master');
+            echo 'Follow';die;
+        } else {
+            $insert_data = array(
+                'user_id'       => $user_id,
+                'peer_id'       => $peer_id
+            );
+            $this->db->insert('follow_master', $insert_data);
+            echo 'Unfollow';die;
+        }
+    }
+
 }

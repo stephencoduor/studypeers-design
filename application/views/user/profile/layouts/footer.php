@@ -2375,6 +2375,49 @@
         output_string = output_string.substr(0, output_string.length - 2);
         $('#shareWithPeersId').val(output_string);
     }
+
+
+    $(document).on('click','.followerListModal',function(){
+        
+        $.ajax({
+            url : '<?php echo base_url();?>profile/getFollowerList',
+            type : 'post',
+            data : {"id" : '1'},
+            success:function(result) {
+                
+                $('#followerListDiv').html(result);
+            }
+        })
+        
+
+    });
+
+    $(document).on('click','.followingListModal',function(){
+        
+        $.ajax({
+            url : '<?php echo base_url();?>profile/getFollowingList',
+            type : 'post',
+            data : {"id" : '1'},
+            success:function(result) {
+                
+                $('#followingListDiv').html(result);
+            }
+        })
+        
+
+    });
+
+    function followUnfollow(peer_id){
+        $.ajax({
+            url : '<?php echo base_url();?>profile/followUnfollow',
+            type : 'post',
+            data : {"peer_id" : peer_id},
+            success:function(result) {
+                
+                $('#action_following_'+peer_id).html(result);
+            }
+        })
+    }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script>
