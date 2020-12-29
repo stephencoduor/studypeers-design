@@ -59,7 +59,8 @@
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
-                                    <select class="session-field form-control" name="session" placeholder="--Select degree--">
+                                    <select class="session-field form-control" name="session" placeholder="--Select degree--" required>
+                                        <option value="" selected>--Session--</option>
                                         <?php if (!empty($session)) : ?>
                                             <?php foreach ($session as $val) : ?>
                                                 <option value="<?php echo $val['value']; ?>"><?php echo $val['text'] ?></option>
