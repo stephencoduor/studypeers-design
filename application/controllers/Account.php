@@ -3148,6 +3148,65 @@ class Account extends CI_Controller
         }
     }
 
+    public function addCancelPeer(){
+        $peer_id = $this->input->post('peer_id');
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+        $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer_id, 'user_id' => $user_id, 'status' => 1))->row_array();
+
+        if(empty($chk_if_request)){
+            $insertArr2 = array(
+                'user_id'       => $user_id,
+                'peer_id'       => $peer_id,
+                'status'        => 1,
+                'request_date'      => date('Y-m-d H:i:s')
+
+            );
+
+            $this->db->insert('peer_master', $insertArr2);
+
+            $action_id = $this->db->insert_id();
+
+            $userdata = $this->session->userdata('user_data');
+
+            $user_detail    = $this->db->get_where('user', array('id' => $user_id))->row_array();
+            $full_name      = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
+
+            $notification = "<b>" . $full_name . "</b> sent you peer request";
+
+            $insertArr = array(
+                'user_id'       => $peer_id,
+                'notification'       => $notification,
+                'action_type'   => 1,
+                'action_id'     => $action_id,
+                'img_user_id'   => $user_id,
+                'status'        => 1,
+                'created_at'    => date('Y-m-d H:i:s')
+
+            );
+
+            $this->db->insert('notification_master', $insertArr);
+
+            $get_active_token = $this->db->get_where($this->db->dbprefix('user_token'), array('user_id' => $peer_id, 'status' => 1))->result_array();
+
+            foreach ($get_active_token  as $key => $value) {
+                $this->sendTestNotification($value['token'], 'New Peer Request', 'You have received a new Peer Request', $action_id);
+            }
+            echo 'Cancel Request';die;
+        } else {
+            
+            $this->db->where(array('action_id' => $chk_if_request['id']));
+            $this->db->delete('notification_master');
+
+            if ($chk_if_request['status'] == 1) {
+
+                $this->db->where(array('id' => $chk_if_request['id']));
+                $this->db->delete('peer_master');
+            }
+            echo 'Add Peer';die;
+        }
+    }
+
     public function sendTestNotification($token, $title, $body, $info)
     {
         $message['title'] = $title;

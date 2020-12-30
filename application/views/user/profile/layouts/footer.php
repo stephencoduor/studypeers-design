@@ -327,6 +327,32 @@
     </div>
 </div>
 
+<div class="modal fade" id="confirmationRemoveFollower" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Confirmation</h4>
+                <div class="row">
+                    <h6 class="modalText" id="confirmationModalAttendHead">Are you sure to remove this follower !</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group button">
+                            <form method="post" action="<?php echo base_url(); ?>profile/removeFollower">
+                                <input type="hidden" name="remove_follower_id" id="remove_follower_id">
+                                <button data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                <button type="submit" class="filterBtn" >Yes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
@@ -2418,6 +2444,24 @@
             }
         })
     }
+
+    function addCancelPeer(peer_id){
+        $.ajax({
+            url : '<?php echo base_url();?>account/addCancelPeer',
+            type : 'post',
+            data : {"peer_id" : peer_id},
+            success:function(result) {
+                
+                $('#action_addpeer_'+peer_id).html(result);
+            }
+        })
+    }
+
+    $(document).on("click", ".RemoveFollower", function() {
+        var peer_id = $(this).data('id');
+        $(".modal-body #remove_follower_id").val(peer_id);
+
+    });
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script>

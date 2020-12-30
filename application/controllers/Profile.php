@@ -1819,9 +1819,9 @@ $config['max_height']  = '768000';
                     </section>
                     <section class="action" id="action_' . $peer['id'] . '">';
             
-            $html .= '<button type="button" class="like" onclick="removeFollower(' . $peer['id'] . ')">Remove Follower</button>';
+            $html .= '<button type="button" class="like RemoveFollower" id="action_removefollower_' . $peer['id'] . '" data-toggle="modal" data-target="#confirmationRemoveFollower" data-id="' . $peer['id'] . '">Remove Follower</button>';
             if (empty($chk_if_peer)) {
-                $html .= '<button type="button" class="like" style="margin-left: 5px;">Add Peer</button>';
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
             }
             $html .= '</section>
                 </section>';
@@ -1855,7 +1855,7 @@ $config['max_height']  = '768000';
             
             $html .= '<button type="button" class="like" id="action_following_' . $peer['id'] . '" onclick="followUnfollow(' . $peer['id'] . ')">Unfollow</button>';
             if (empty($chk_if_peer)) {
-                $html .= '<button type="button" class="like" style="margin-left: 5px;">Add Peer</button>';
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
             }
             $html .= '</section>
                 </section>';
@@ -1887,5 +1887,28 @@ $config['max_height']  = '768000';
             echo 'Unfollow';die;
         }
     }
+
+
+    function removeFollower(){
+        $peer_id = $this->input->post('remove_follower_id');
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+        $check = array(
+                    'user_id'       => $peer_id,
+                    'peer_id'       => $user_id
+            );
+
+        $this->db->where($check);
+        $this->db->delete('follow_master');
+
+        $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Follower Removed Successfully.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button></div>';
+        $this->session->set_flashdata('flash_message', $message);
+
+        redirect(site_url('Profile/timeline'));
+    }
+
+    
 
 }
