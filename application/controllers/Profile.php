@@ -1811,6 +1811,9 @@ $config['max_height']  = '768000';
             
             $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
 
+            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+
+
             $html .= '<section class="list"><section class="left">
                         <figure>
                             <img src="' . userImage($peer['id']) . '" alt="user">
@@ -1820,8 +1823,12 @@ $config['max_height']  = '768000';
                     <section class="action" id="action_' . $peer['id'] . '">';
             
             $html .= '<button type="button" class="like RemoveFollower" id="action_removefollower_' . $peer['id'] . '" data-toggle="modal" data-target="#confirmationRemoveFollower" data-id="' . $peer['id'] . '">Remove Follower</button>';
-            if (empty($chk_if_peer)) {
+            if (empty($chk_if_peer) && empty($chk_if_request)) {
                 $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
+            }
+
+            if(!empty($chk_if_request) && empty($chk_if_peer)){
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
             }
             $html .= '</section>
                 </section>';
@@ -1845,6 +1852,9 @@ $config['max_height']  = '768000';
             
             $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
 
+            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+
+
             $html .= '<section class="list"><section class="left">
                         <figure>
                             <img src="' . userImage($peer['id']) . '" alt="user">
@@ -1854,8 +1864,12 @@ $config['max_height']  = '768000';
                     <section class="action" id="action_' . $peer['id'] . '">';
             
             $html .= '<button type="button" class="like" id="action_following_' . $peer['id'] . '" onclick="followUnfollow(' . $peer['id'] . ')">Unfollow</button>';
-            if (empty($chk_if_peer)) {
+            if (empty($chk_if_peer) && empty($chk_if_request)) {
                 $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
+            }
+
+            if(!empty($chk_if_request) && empty($chk_if_peer)){
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
             }
             $html .= '</section>
                 </section>';
