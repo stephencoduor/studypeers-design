@@ -249,7 +249,7 @@ $("body").on("click", "#message_icon_id", function() {
   $(".chat-dropdown").toggle();
   var UserInfo = JSON.parse(userData);
   $("#myUL").html("");
-  $(".loader-wrap").show();
+  $("#message_top_loader").show();
   $("#chat_message_count").text(0);
   socket.emit("getmyreadmessage", JSON.stringify({ user: UserInfo }));
 });
@@ -641,8 +641,8 @@ function sendMessageToUser() {
   var currentGroupId = $("#current_group_id").val();
 
   var message = {
-    to_user_id: 0,
-    to_user_name: "",
+    to_user_id: $("#current_receiver_id").val(),
+    to_user_name: $("#current_receiver_name_id").val(),
     from_user_id: UserInfo.user_id,
     from_user_name: UserInfo.first_name,
     send_profile_image: UserInfo.profileImage,

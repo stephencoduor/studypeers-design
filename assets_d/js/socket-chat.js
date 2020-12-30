@@ -540,6 +540,7 @@ socket.on("groupmessages", function(data) {
       }
     });
 
+    $("#message_window_loader").hide();
     chatAppendElementSmall.html(mainContent);
 
     chatWindow = document.getElementById("chat_window_content");
@@ -588,6 +589,7 @@ $("body").on("click", ".message-top-header", function() {
   }
 
   $(".open-chat").trigger("click");
+  $("#message_window_loader").show();
   socket.emit("getgroupmessages", JSON.stringify(findMessages));
 });
 

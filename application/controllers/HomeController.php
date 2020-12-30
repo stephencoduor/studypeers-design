@@ -680,3 +680,6 @@ class HomeController extends BaseController
         redirect('login');
     }
 }
+
+
+// sudo ln -s /usr/share/phpmyadmin /var/www/html/giveats-restaurant/public
