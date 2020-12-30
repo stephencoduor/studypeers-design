@@ -449,7 +449,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         </div>
         <div class="chat-content" id="chat_window_content">
 
-            <div class="loader-wrap" style="display:none;">
+            <div class="loader-wrap" id="message_window_loader" style="display:none;">
                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
                     <g>
                         <path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#ea2e7e" stroke-width="12"></path>
@@ -474,6 +474,9 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="curren_group_name_id">
             <input type="hidden" id="current_image_upload_src">
             <input type="hidden" id="current_group_profile_setting">
+            <input type="hidden" id="current_receiver_id">
+            <input type="hidden" id="current_receiver_name_id">
+
         </div>
         <span id="user_typing_id"></span>
         <div id="progress-wrp" style="display:none;">
@@ -560,7 +563,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         </div>
     </div>
 </div>
-<div class="modal fade" id="groupMember" role="dialog" >
+<div class="modal fade" id="groupMember" role="dialog">
     <form action="<?php echo base_url('account/add-new-group-member'); ?>" method="get" id="add_new_group_member_form">
         <div class="modal-dialog">
             <div class="modal-content">

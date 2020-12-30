@@ -387,7 +387,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 												<ul id="myUL">
 
 												</ul>
-												<div class="loader-wrap">
+												<div class="loader-wrap" id="message_top_loader">
 													<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 														<g>
 															<path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#ea2e7e" stroke-width="12"></path>

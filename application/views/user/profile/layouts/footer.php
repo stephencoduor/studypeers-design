@@ -1,124 +1,124 @@
 <div class="modal fade" id="reations-popup" role="dialog">
     <div class="modal-dialog modal-sm reation-popup">
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Reactions</h4>
-        </div>
-        <div class="modal-body" id="modal-reaction-body">
-            <ul class="custom-tabs">
-                <li><a href="javascript:void(0)" class="all-links active">All</a></li>
-                <li><a href="javascript:void(0)" class="total-likes"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/> 12</a></li>
-                <li><a href="javascript:void(0)" class="total-claps"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/> 15</a></li>
-                <li><a href="javascript:void(0)" class="support-links"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/> 12</a></li>
-                <li><a href="javascript:void(0)" class="curious-links"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/> 15</a></li>
-                <li><a href="javascript:void(0)" class="insight-links"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/> 15</a></li>
-                <li><a href="javascript:void(0)" class="love-links"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/> 15</a></li>
-                
-            </ul>
-            <div class="tab-content">
-                <div class="all-wrap show">
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="likes">
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image"/></span>
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Reactions</h4>
+            </div>
+            <div class="modal-body" id="modal-reaction-body">
+                <ul class="custom-tabs">
+                    <li><a href="javascript:void(0)" class="all-links active">All</a></li>
+                    <li><a href="javascript:void(0)" class="total-likes"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image" /> 12</a></li>
+                    <li><a href="javascript:void(0)" class="total-claps"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image" /> 15</a></li>
+                    <li><a href="javascript:void(0)" class="support-links"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image" /> 12</a></li>
+                    <li><a href="javascript:void(0)" class="curious-links"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image" /> 15</a></li>
+                    <li><a href="javascript:void(0)" class="insight-links"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image" /> 15</a></li>
+                    <li><a href="javascript:void(0)" class="love-links"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image" /> 15</a></li>
+
+                </ul>
+                <div class="tab-content">
+                    <div class="all-wrap show">
+                        <div class="user-info-wrap">
+                            <div class="user-image">
+                                <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image" /></span>
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image" />
+                                </figure>
+                            </div>
+                            <div class="user-info">
+                                <h3>Arijit Mukherjii . <span>1st</span></h3>
+                                <p>Software Engineer || <span>Microsoft</span></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="claps">
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image"/></span>  
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="support-wrap">
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image"/></span>  
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
+                    <div class="likes">
+                        <div class="user-info-wrap">
+                            <div class="user-image">
+                                <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Image" /></span>
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image" />
+                                </figure>
+                            </div>
+                            <div class="user-info">
+                                <h3>Arijit Mukherjii . <span>1st</span></h3>
+                                <p>Software Engineer || <span>Microsoft</span></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="curious-wrap">
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image"/></span>  
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
-                        </div>
-                    </div>
-                </div>
-                <div class="insight-wrap">
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image"/></span>  
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
-                        </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
+                    <div class="claps">
+                        <div class="user-info-wrap">
+                            <div class="user-image">
+                                <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Image" /></span>
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image" />
+                                </figure>
+                            </div>
+                            <div class="user-info">
+                                <h3>Arijit Mukherjii . <span>1st</span></h3>
+                                <p>Software Engineer || <span>Microsoft</span></p>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="love-wrap">
-                    <div class="user-info-wrap">
-                        <div class="user-image">
-                            <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image"/></span>  
-                            <figure>
-                                <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image"/>
-                            </figure>
+                    <div class="support-wrap">
+                        <div class="user-info-wrap">
+                            <div class="user-image">
+                                <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Image" /></span>
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image" />
+                                </figure>
+                            </div>
+                            <div class="user-info">
+                                <h3>Arijit Mukherjii . <span>1st</span></h3>
+                                <p>Software Engineer || <span>Microsoft</span></p>
+                            </div>
                         </div>
-                        <div class="user-info">
-                            <h3>Arijit Mukherjii . <span>1st</span></h3>
-                            <p>Software Engineer || <span>Microsoft</span></p>
+                    </div>
+                    <div class="curious-wrap">
+                        <div class="user-info-wrap">
+                            <div class="user-image">
+                                <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Image" /></span>
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image" />
+                                </figure>
+                            </div>
+                            <div class="user-info">
+                                <h3>Arijit Mukherjii . <span>1st</span></h3>
+                                <p>Software Engineer || <span>Microsoft</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="insight-wrap">
+                        <div class="user-info-wrap">
+                            <div class="user-image">
+                                <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Image" /></span>
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image" />
+                                </figure>
+                            </div>
+                            <div class="user-info">
+                                <h3>Arijit Mukherjii . <span>1st</span></h3>
+                                <p>Software Engineer || <span>Microsoft</span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="love-wrap">
+                        <div class="user-info-wrap">
+                            <div class="user-image">
+                                <span class="small-icon"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Image" /></span>
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/student-img.png" alt="Image" />
+                                </figure>
+                            </div>
+                            <div class="user-info">
+                                <h3>Arijit Mukherjii . <span>1st</span></h3>
+                                <p>Software Engineer || <span>Microsoft</span></p>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
     </div>
 </div>
 
@@ -164,7 +164,7 @@
                         <form method="post" action="<?php echo base_url(); ?>profile/deletePost">
                             <div class="form-group button">
                                 <input type="hidden" name="delete_reference_id" id="delete_reference_id" value="">
-                                
+
                                 <button type="button" class="transparentBtn highlight" data-dismiss="modal">No</button>
                                 <button type="submit" class="filterBtn">Yes</button>
                             </div>
@@ -229,36 +229,36 @@
 
 <div class="modal fade" id="userPollList" role="dialog">
     <div class="modal-dialog">
-      <!-- Modal content-->
-      <div class="modal-content">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <div class="modal-body peers">
-          <h4>Peer List </h4>
-          <div class="searchPeer">
-            <div class="filterSearch">
-                <input type="text" placeholder="Search Peers" name="">
-                <button type="submit" class="searchBtn">
-                    <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-                        <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Peer List </h4>
+                <div class="searchPeer">
+                    <div class="filterSearch">
+                        <input type="text" placeholder="Search Peers" name="">
+                        <button type="submit" class="searchBtn">
+                            <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                                <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
                         s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
                         c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-                    </svg>
-                </button>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="peersList">
+                    <div class="listHeader">
+                        <h6>Peers</h6>
+
+                    </div>
+
+                    <div class="listUserWrap" id="userPollListModal">
+
+
+                    </div>
+                </div>
             </div>
-          </div>
-          <div class="peersList">
-            <div class="listHeader">
-                <h6>Peers</h6>
-                
-            </div>
-            
-            <div class="listUserWrap" id="userPollListModal">
-                
-                
-            </div>
-          </div>
         </div>
-      </div>
     </div>
 </div>
 
@@ -343,7 +343,7 @@
                             <form method="post" action="<?php echo base_url(); ?>profile/removeFollower">
                                 <input type="hidden" name="remove_follower_id" id="remove_follower_id">
                                 <button data-dismiss="modal" class="transparentBtn highlight">No</button>
-                                <button type="submit" class="filterBtn" >Yes</button>
+                                <button type="submit" class="filterBtn">Yes</button>
                             </form>
                         </div>
                     </div>
@@ -378,22 +378,25 @@
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
-
+<script src="<?php echo base_url('assets_d/js/emojionearea-master/dist/emojionearea.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/infinite-scroll.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
 <script>
-    $(document).ready(function(){
+    $(document).ready(function() {
         $("#multiple-select").selectator();
     });
 </script>
 <script>
-    
-
-    function getAllReactionData(reference_id, reference){
+    function getAllReactionData(reference_id, reference) {
         $.ajax({
             url: '<?php echo base_url(); ?>Profile/getAllReactionData',
             type: 'post',
             data: {
                 "count": 0,
-                "reference_id": reference_id, "reference": reference
+                "reference_id": reference_id,
+                "reference": reference
             },
             success: function(result) {
 
@@ -402,7 +405,6 @@
             }
         });
     }
-
 </script>
 
 
@@ -904,7 +906,7 @@
                         counter++;
                     };
                     reader.readAsDataURL(file); // convert to base64 string
-                } else { 
+                } else {
                     reader.onload = function() {
                         var blob = new Blob([reader.result], {
                             type: file.type
@@ -922,14 +924,14 @@
                                 video.removeEventListener('timeupdate', timeupdate);
                             }
                         });
-                        var snapImage = function() { 
+                        var snapImage = function() {
                             var canvas = document.createElement('canvas');
                             canvas.width = video.videoWidth;
                             canvas.height = video.videoHeight;
                             canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
                             var image = canvas.toDataURL();
                             var success = image.length > 100000;
-                            if (success) { 
+                            if (success) {
                                 var html_image = '<div class="col-md-4" id="delete_video_' + video_counter + '"><div class="uloadedImage"><figure><img src="' + image + '" alt="image" id="image' + video_counter + '"></figure>' +
                                     '<div class="close"><img src="' + base_url + 'assets_d/images/close-pink.svg" class="remove_video" id="remove_video_' + video_counter + '" alt="close"></div></div></div>';
                                 $('#image_row').append(html_image);
@@ -1029,7 +1031,7 @@
             document_counter--;
         });
 
-        $(document).on('click', '#shareWithPeer', function() { 
+        $(document).on('click', '#shareWithPeer', function() {
             $('#privacyPost').modal('hide');
         });
 
@@ -1057,7 +1059,7 @@
             if ($("#bell-announcement").hasClass("notification-disabled")) {
                 var announcement = 0;
             } else {
-                var announcement = 1;  
+                var announcement = 1;
             }
             formData.append('html_content', html_content);
             formData.append('privacy', privacy);
@@ -1071,7 +1073,8 @@
                 cache: false,
                 contentType: false,
                 processData: false,
-                success: function(result) { console.log(result);
+                success: function(result) {
+                    console.log(result);
                     if (result == true) {
                         window.location.href = base_url + 'Profile/redirect_page?status=' + result;
                     }
@@ -1194,7 +1197,7 @@
         });
 
 
-        
+
 
 
 
@@ -1226,7 +1229,7 @@
             height: '328px'
         });
 
-        
+
 
         $('.socialAction li.helpful a').on('click', function() {
             let togglesrc = $(this).find('img');
@@ -1778,49 +1781,52 @@
     });
 
 
-    function saveReaction(reaction_id, reference_id, reference){
+    function saveReaction(reaction_id, reference_id, reference) {
 
         url = '<?php echo base_url(); ?>Profile/saveReaction';
         $.ajax({
             url: url,
             type: 'post',
             data: {
-                "reaction_id": reaction_id, "reference_id": reference_id, "reference": reference
+                "reaction_id": reaction_id,
+                "reference_id": reference_id,
+                "reference": reference
             },
             success: function(result) {
-                $('.'+reference+'_total_likes_'+reference_id).html(result);
-                if(reaction_id == 1) {
-                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Like</span>');
-                } else if(reaction_id == 2) {
-                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Support</span>');
-                } else if(reaction_id == 3) {
-                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Celebrate</span>');
-                } else if(reaction_id == 4) {
-                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Insightful</span>');
-                } else if(reaction_id == 5) {
-                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Curious</span>');
-                } else if(reaction_id == 6) {
-                    $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Love</span>');
+                $('.' + reference + '_total_likes_' + reference_id).html(result);
+                if (reaction_id == 1) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Like</span>');
+                } else if (reaction_id == 2) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Support</span>');
+                } else if (reaction_id == 3) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Celebrate</span>');
+                } else if (reaction_id == 4) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Insightful</span>');
+                } else if (reaction_id == 5) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Curious</span>');
+                } else if (reaction_id == 6) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Love</span>');
                 }
 
-        
+
 
             }
         });
     }
 
 
-    function deleteReaction(reference, reference_id){
+    function deleteReaction(reference, reference_id) {
         url = '<?php echo base_url(); ?>Profile/deleteReaction';
         $.ajax({
             url: url,
             type: 'post',
             data: {
-                "reference_id": reference_id, "reference": reference
+                "reference_id": reference_id,
+                "reference": reference
             },
             success: function(result) {
-                $('.'+reference+'_total_likes_'+reference_id).html(result);
-                $('.'+reference+'_likeMenu_'+reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-grey.svg" class="likepost" alt="Like"><span>Like</span>');
+                $('.' + reference + '_total_likes_' + reference_id).html(result);
+                $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-grey.svg" class="likepost" alt="Like"><span>Like</span>');
 
             }
         });
@@ -1892,115 +1898,123 @@
         });
     }
 
-    function showCommentBoxWrap(reference,reference_id){
-        $('#'+reference+'_comment_'+reference_id).show();
+    function showCommentBoxWrap(reference, reference_id) {
+        $('#' + reference + '_comment_' + reference_id).show();
     }
 
-    function hideCommentBoxWrap(reference,reference_id){
-        $('#'+reference+'_comment_'+reference_id).hide();
+    function hideCommentBoxWrap(reference, reference_id) {
+        $('#' + reference + '_comment_' + reference_id).hide();
     }
 
 
-    function postCommentByReference(event, reference, reference_id, comment) { 
+    function postCommentByReference(event, reference, reference_id, comment) {
         if (event.which == 13) {
-            
-            if(comment != ''){
+
+            if (comment != '') {
                 var url = '<?php echo base_url('profile/addCommentByRefrence') ?>';
                 $.ajax({
-                  url: url,
-                  type: 'POST',
-                  data: {'comment': comment, 'reference_id': reference_id, 'reference': reference},
-                  dataType: 'json',
-                  success: function(result) {
-                    $('#'+reference+'_commentappend_'+reference_id).append(result.html);
-                    $('#'+reference+'_comment_count_'+reference_id).html(result.count);
-                    $('#comment_input_'+reference+'_'+reference_id).val('');
-                  }
-              });
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        'comment': comment,
+                        'reference_id': reference_id,
+                        'reference': reference
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#' + reference + '_commentappend_' + reference_id).append(result.html);
+                        $('#' + reference + '_comment_count_' + reference_id).html(result.count);
+                        $('#comment_input_' + reference + '_' + reference_id).val('');
+                    }
+                });
             }
-         }
-    }
-
-    function postCommentReply(event, comment_id, comment){
-        if (event.which == 13) {
-            
-            if(comment != ''){
-            var url = '<?php echo base_url('profile/postCommentReply') ?>';
-            $.ajax({
-              url: url,
-              type: 'POST',
-              data: {'comment': comment, 'comment_id': comment_id},
-              dataType: 'json',
-              success: function(result) {
-                $('#commentreply_box_'+comment_id).append(result.html);
-                $('#comment_reply_count_'+comment_id).show();
-                $('#comment_reply_count_'+comment_id).html(result.count);
-                $("#comment_reply_"+comment_id).val('');
-              }
-            });
-         }
         }
     }
 
-    function postImageComment(reference, reference_id){
-        var file_data = $('#comment_image_'+reference+'_'+reference_id).prop('files')[0];   
-        var form_data = new FormData();     
-                    
+    function postCommentReply(event, comment_id, comment) {
+        if (event.which == 13) {
+
+            if (comment != '') {
+                var url = '<?php echo base_url('profile/postCommentReply') ?>';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        'comment': comment,
+                        'comment_id': comment_id
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#commentreply_box_' + comment_id).append(result.html);
+                        $('#comment_reply_count_' + comment_id).show();
+                        $('#comment_reply_count_' + comment_id).html(result.count);
+                        $("#comment_reply_" + comment_id).val('');
+                    }
+                });
+            }
+        }
+    }
+
+    function postImageComment(reference, reference_id) {
+        var file_data = $('#comment_image_' + reference + '_' + reference_id).prop('files')[0];
+        var form_data = new FormData();
+
         form_data.append('file', file_data);
         form_data.append('reference_id', reference_id);
         form_data.append('reference', reference);
         // alert(form_data);  
-        var url = '<?php echo base_url('profile/postImgComment') ?>';                           
+        var url = '<?php echo base_url('profile/postImgComment') ?>';
         $.ajax({
             url: url, // point to server-side PHP script 
-            dataType: 'text',  // what to expect back from the PHP script, if anything
+            dataType: 'text', // what to expect back from the PHP script, if anything
             cache: false,
             contentType: false,
             processData: false,
-            data: form_data,                         
+            data: form_data,
             type: 'post',
             dataType: 'json',
-            success: function(result){
-                $('#'+reference+'_commentappend_'+reference_id).append(result.html);
-                $('#'+reference+'_comment_count_'+reference_id).html(result.count);
-                $('#comment_image_'+reference+'_'+reference_id).val('');
+            success: function(result) {
+                $('#' + reference + '_commentappend_' + reference_id).append(result.html);
+                $('#' + reference + '_comment_count_' + reference_id).html(result.count);
+                $('#comment_image_' + reference + '_' + reference_id).val('');
             }
         });
     }
 
-    function showReplyBox(id){
-        $('#show_reply_box_'+id).show();
+    function showReplyBox(id) {
+        $('#show_reply_box_' + id).show();
     }
 
-    function likeCommentByReference(comment_id){
+    function likeCommentByReference(comment_id) {
         var url = '<?php echo base_url('profile/likeCommentByReference') ?>';
         $.ajax({
-          url: url,
-          type: 'POST',
-          data: {'comment_id': comment_id},
-          success: function(result) {
-            if(result != 0) {
-                $('#reactcomment_'+comment_id).show();
-                $('#comment_like_count_'+comment_id).html(result); 
-                if($('#like_text_'+comment_id).text() == 'Like') { 
-                    $('#like_text_'+comment_id).text('Liked');
+            url: url,
+            type: 'POST',
+            data: {
+                'comment_id': comment_id
+            },
+            success: function(result) {
+                if (result != 0) {
+                    $('#reactcomment_' + comment_id).show();
+                    $('#comment_like_count_' + comment_id).html(result);
+                    if ($('#like_text_' + comment_id).text() == 'Like') {
+                        $('#like_text_' + comment_id).text('Liked');
+                    } else {
+                        $('#like_text_' + comment_id).text('Like');
+                    }
                 } else {
-                    $('#like_text_'+comment_id).text('Like');
+                    $('#reactcomment_' + comment_id).hide();
+                    $('#comment_like_count_' + comment_id).html(result);
+                    if ($('#like_text_' + comment_id).text() == 'Like') {
+                        $('#like_text_' + comment_id).text('Liked');
+                    } else {
+                        $('#like_text_' + comment_id).text('Like');
+                    }
                 }
-            } else {
-                $('#reactcomment_'+comment_id).hide();
-                $('#comment_like_count_'+comment_id).html(result); 
-                if($('#like_text_'+comment_id).text() == 'Like') { 
-                    $('#like_text_'+comment_id).text('Liked');
-                } else {
-                    $('#like_text_'+comment_id).text('Like');
-                }
+
             }
-            
-          }
         });
     }
-
 </script>
 <script>
     $(document).ready(function() {
@@ -2059,7 +2073,7 @@
     }
 
 
-    function backToPostPrivacy(){
+    function backToPostPrivacy() {
         $('#groupMember').modal('hide');
         $('#privacyPost').modal('show');
     }
@@ -2143,7 +2157,7 @@
 
     });
 
-    function validateReport() { 
+    function validateReport() {
         var report_reason = $('#reportqa_reason').val();
         if (report_reason == '') {
             $('#err_reportqa_reason').html("This field is required").show();
@@ -2255,12 +2269,12 @@
         });
     }
 
-    function activateProfileTab(){
+    function activateProfileTab() {
         $('#main-tab li').removeClass('active');
         $('#profile-tab').addClass('active');
     }
 
-    function savePollOption(post_id, option_id){
+    function savePollOption(post_id, option_id) {
         var url = '<?php echo base_url('profile/savePollOption') ?>';
         $.ajax({
             url: url,
@@ -2276,126 +2290,129 @@
     }
 
 
-    $(document).on('click','.userPollList',function(){
-        var option_id = $(this).data('id'); 
-        
+    $(document).on('click', '.userPollList', function() {
+        var option_id = $(this).data('id');
+
         $.ajax({
-            url : '<?php echo base_url();?>profile/getPeersPollList',
-            type : 'post',
-            data : {"id" : option_id},
-            success:function(result) {
-                
+            url: '<?php echo base_url(); ?>profile/getPeersPollList',
+            type: 'post',
+            data: {
+                "id": option_id
+            },
+            success: function(result) {
+
                 $('#userPollListModal').html(result);
             }
         })
-        
+
 
     });
 
 
-    $("#multiple-select").selectator({ 
-      showAllOptionsOnFocus: true,
-      searchFields: "value text subtitle right",
-      minSearchLength: 1,
-      load: function(search, callback) {
-        if (search.length < this.minSearchLength) return callback();
-        $.ajax({
-          url: "find-my-peers",
-          data: { search: search },
-          type: "GET",
-          dataType: "json",
-          success: function(data) {
-            callback(data);
-          },
-          error: function() {
-            callback();
-          }
-        });
-      },
-      render: {
-        selected_item: function(_item, escape) {
-          var html = "";
-          if (typeof _item.left !== "undefined")
-            html +=
-              '<div class="' +
-              "selectator_" +
-              'selected_item_left"><img src="' +
-              escape(_item.left) +
-              '"></div>';
-          if (typeof _item.right !== "undefined")
-            html +=
-              '<div class="' +
-              "selectator_" +
-              'selected_item_right">' +
-              escape(_item.right) +
-              "</div>";
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'selected_item_title">' +
-            (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
-            "</div>";
-          if (typeof _item.subtitle !== "undefined")
-            html +=
-              '<div class="' +
-              "selectator_" +
-              'selected_item_subtitle">' +
-              escape(_item.subtitle) +
-              "</div>";
-          html +=
-            '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
-
-          // check if the
-          $(".done-link").addClass("show");
-          return html;
+    $("#multiple-select").selectator({
+        showAllOptionsOnFocus: true,
+        searchFields: "value text subtitle right",
+        minSearchLength: 1,
+        load: function(search, callback) {
+            if (search.length < this.minSearchLength) return callback();
+            $.ajax({
+                url: "find-my-peers",
+                data: {
+                    search: search
+                },
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    callback(data);
+                },
+                error: function() {
+                    callback();
+                }
+            });
         },
-        option: function(_item, escape) {
-          console.log("asdad");
-          var html = "";
-          if (typeof _item.left !== "undefined")
-            html +=
-              '<div class="' +
-              "selectator_" +
-              'option_left"><img src="' +
-              escape(_item.left) +
-              '"></div>';
-          if (typeof _item.right !== "undefined")
-            html +=
-              '<div class="' +
-              "selectator_" +
-              'option_right">' +
-              escape(_item.right) +
-              "</div>";
-          html +=
-            '<div class="' +
-            "selectator_" +
-            'option_title">' +
-            (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
-            "</div>";
-          if (typeof _item.subtitle !== "undefined")
-            html +=
-              '<div class="' +
-              "selectator_" +
-              'option_subtitle">' +
-              escape(_item.subtitle) +
-              "</div>";
+        render: {
+            selected_item: function(_item, escape) {
+                var html = "";
+                if (typeof _item.left !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'selected_item_left"><img src="' +
+                    escape(_item.left) +
+                    '"></div>';
+                if (typeof _item.right !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'selected_item_right">' +
+                    escape(_item.right) +
+                    "</div>";
+                html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'selected_item_title">' +
+                    (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+                    "</div>";
+                if (typeof _item.subtitle !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'selected_item_subtitle">' +
+                    escape(_item.subtitle) +
+                    "</div>";
+                html +=
+                    '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
 
-          if ($(".selectator_selected_items").html() == "") {
-            $(".done-link").removeClass("show");
-          }
-          return html;
+                // check if the
+                $(".done-link").addClass("show");
+                return html;
+            },
+            option: function(_item, escape) {
+                console.log("asdad");
+                var html = "";
+                if (typeof _item.left !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'option_left"><img src="' +
+                    escape(_item.left) +
+                    '"></div>';
+                if (typeof _item.right !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'option_right">' +
+                    escape(_item.right) +
+                    "</div>";
+                html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'option_title">' +
+                    (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+                    "</div>";
+                if (typeof _item.subtitle !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'option_subtitle">' +
+                    escape(_item.subtitle) +
+                    "</div>";
+
+                if ($(".selectator_selected_items").html() == "") {
+                    $(".done-link").removeClass("show");
+                }
+                return html;
+            }
         }
-      }
     });
 
-    function saveSelectedPeer(){
+    function saveSelectedPeer() {
         $('#groupMember').modal('hide');
         $('#createPost').modal('show');
         var output_string = "";
-        $("#multiple-select option").each(function()
-        {
+        $("#multiple-select option").each(function() {
             // Add $(this).val() to your list
-            
+
             output_string = output_string + $(this).val() + ", ";
         });
         output_string = output_string.substr(0, output_string.length - 2);
@@ -2403,56 +2420,64 @@
     }
 
 
-    $(document).on('click','.followerListModal',function(){
-        
+    $(document).on('click', '.followerListModal', function() {
+
         $.ajax({
-            url : '<?php echo base_url();?>profile/getFollowerList',
-            type : 'post',
-            data : {"id" : '1'},
-            success:function(result) {
-                
+            url: '<?php echo base_url(); ?>profile/getFollowerList',
+            type: 'post',
+            data: {
+                "id": '1'
+            },
+            success: function(result) {
+
                 $('#followerListDiv').html(result);
             }
         })
-        
+
 
     });
 
-    $(document).on('click','.followingListModal',function(){
-        
+    $(document).on('click', '.followingListModal', function() {
+
         $.ajax({
-            url : '<?php echo base_url();?>profile/getFollowingList',
-            type : 'post',
-            data : {"id" : '1'},
-            success:function(result) {
-                
+            url: '<?php echo base_url(); ?>profile/getFollowingList',
+            type: 'post',
+            data: {
+                "id": '1'
+            },
+            success: function(result) {
+
                 $('#followingListDiv').html(result);
             }
         })
-        
+
 
     });
 
-    function followUnfollow(peer_id){
+    function followUnfollow(peer_id) {
         $.ajax({
-            url : '<?php echo base_url();?>profile/followUnfollow',
-            type : 'post',
-            data : {"peer_id" : peer_id},
-            success:function(result) {
-                
-                $('#action_following_'+peer_id).html(result);
+            url: '<?php echo base_url(); ?>profile/followUnfollow',
+            type: 'post',
+            data: {
+                "peer_id": peer_id
+            },
+            success: function(result) {
+
+                $('#action_following_' + peer_id).html(result);
             }
         })
     }
 
-    function addCancelPeer(peer_id){
+    function addCancelPeer(peer_id) {
         $.ajax({
-            url : '<?php echo base_url();?>account/addCancelPeer',
-            type : 'post',
-            data : {"peer_id" : peer_id},
-            success:function(result) {
-                
-                $('#action_addpeer_'+peer_id).html(result);
+            url: '<?php echo base_url(); ?>account/addCancelPeer',
+            type: 'post',
+            data: {
+                "peer_id": peer_id
+            },
+            success: function(result) {
+
+                $('#action_addpeer_' + peer_id).html(result);
             }
         })
     }
