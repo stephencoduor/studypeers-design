@@ -782,6 +782,9 @@ function userImage($user_id){
         $chk_if_curious = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '5'))->row_array();
         $chk_if_love = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '6'))->row_array();
         $like_count_increment = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference))->num_rows();
+        if($like_count_increment == 0){
+            $like_count_increment = '';
+        }
 
             $html = '';
 

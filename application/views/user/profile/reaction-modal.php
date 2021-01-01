@@ -51,9 +51,10 @@
                 </div>
                 <div class="user-info">
                     <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
+                    <p><?= $value['SchoolName']; ?> || <span><?= $value['field_of_study']; ?></span></p>
                      <!-- . <span>1st</span> -->
                     </h3>
-                    <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
+                    
                 </div>
             </div>
         <?php } ?>
@@ -70,7 +71,7 @@
                 </div>
                 <div class="user-info">
                     <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
-                     <!-- . <span>1st</span> -->
+                     <p><?= $value['SchoolName']; ?> || <span><?= $value['field_of_study']; ?></span></p>
                     </h3>
                     <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
@@ -88,7 +89,7 @@
                 </div>
                 <div class="user-info">
                     <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
-                     <!-- . <span>1st</span> -->
+                     <p><?= $value['SchoolName']; ?> || <span><?= $value['field_of_study']; ?></span></p>
                     </h3>
                     <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
@@ -106,7 +107,7 @@
                 </div>
                 <div class="user-info">
                     <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
-                     <!-- . <span>1st</span> -->
+                     <p><?= $value['SchoolName']; ?> || <span><?= $value['field_of_study']; ?></span></p>
                     </h3>
                     <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
@@ -124,7 +125,7 @@
                 </div>
                 <div class="user-info">
                     <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
-                     <!-- . <span>1st</span> -->
+                     <p><?= $value['SchoolName']; ?> || <span><?= $value['field_of_study']; ?></span></p>
                     </h3>
                     <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
@@ -142,7 +143,7 @@
                 </div>
                 <div class="user-info">
                     <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
-                     <!-- . <span>1st</span> -->
+                     <p><?= $value['SchoolName']; ?> || <span><?= $value['field_of_study']; ?></span></p>
                     </h3>
                     <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>
@@ -160,7 +161,7 @@
                 </div>
                 <div class="user-info">
                     <h3><?php echo $value['first_name'].' '.$value['last_name']; ?>
-                     <!-- . <span>1st</span> -->
+                     <p><?= $value['SchoolName']; ?> || <span><?= $value['field_of_study']; ?></span></p>
                     </h3>
                     <!-- <p>Software Engineer || <span>Microsoft</span></p> -->
                 </div>

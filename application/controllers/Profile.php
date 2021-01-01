@@ -53,50 +53,64 @@ class Profile extends CI_Controller {
         $reference     = $this->input->post('reference'); 
 
 
-        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name,university.SchoolName, field_of_study_master.name as field_of_study');
         $this->db->join('user','user.id=reaction_master.user_id');
-        
+        $this->db->join('user_info','user_info.userID=reaction_master.user_id');
+        $this->db->join('university','university.university_id=user_info.intitutionID');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['all_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference))->result_array(); 
 
-        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name,university.SchoolName, field_of_study_master.name as field_of_study');
         $this->db->join('user','user.id=reaction_master.user_id');
-        
+        $this->db->join('user_info','user_info.userID=reaction_master.user_id');
+        $this->db->join('university','university.university_id=user_info.intitutionID');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['like_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '1'))->result_array(); 
 
 
-        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name,university.SchoolName, field_of_study_master.name as field_of_study');
         $this->db->join('user','user.id=reaction_master.user_id');
-        
+        $this->db->join('user_info','user_info.userID=reaction_master.user_id');
+        $this->db->join('university','university.university_id=user_info.intitutionID');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['support_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '2'))->result_array(); 
 
 
-        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name,university.SchoolName, field_of_study_master.name as field_of_study');
         $this->db->join('user','user.id=reaction_master.user_id');
-        
+        $this->db->join('user_info','user_info.userID=reaction_master.user_id');
+        $this->db->join('university','university.university_id=user_info.intitutionID');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['celebrate_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '3'))->result_array(); 
 
 
-        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name,university.SchoolName, field_of_study_master.name as field_of_study');
         $this->db->join('user','user.id=reaction_master.user_id');
-        
+        $this->db->join('user_info','user_info.userID=reaction_master.user_id');
+        $this->db->join('university','university.university_id=user_info.intitutionID');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['insightful_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '4'))->result_array(); 
 
 
-        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name,university.SchoolName, field_of_study_master.name as field_of_study');
         $this->db->join('user','user.id=reaction_master.user_id');
-        
+        $this->db->join('user_info','user_info.userID=reaction_master.user_id');
+        $this->db->join('university','university.university_id=user_info.intitutionID');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['curious_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '5'))->result_array(); 
 
 
-        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name');
+        $this->db->select('reaction_master.*,user.username,user.first_name, user.last_name,university.SchoolName, field_of_study_master.name as field_of_study');
         $this->db->join('user','user.id=reaction_master.user_id');
-        
+        $this->db->join('user_info','user_info.userID=reaction_master.user_id');
+        $this->db->join('university','university.university_id=user_info.intitutionID');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['love_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '6'))->result_array(); 
 
@@ -864,6 +878,7 @@ $config['max_height']  = '768000';
                 $longitude = 0;
             }
 			$users_array = [
+                'username' => $this->input->post('username'),
 				'first_name' => $this->input->post('first_name'),
 				'last_name' => $this->input->post('last_name')
 				];
@@ -1811,6 +1826,9 @@ $config['max_height']  = '768000';
             
             $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
 
+            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+
+
             $html .= '<section class="list"><section class="left">
                         <figure>
                             <img src="' . userImage($peer['id']) . '" alt="user">
@@ -1820,8 +1838,12 @@ $config['max_height']  = '768000';
                     <section class="action" id="action_' . $peer['id'] . '">';
             
             $html .= '<button type="button" class="like RemoveFollower" id="action_removefollower_' . $peer['id'] . '" data-toggle="modal" data-target="#confirmationRemoveFollower" data-id="' . $peer['id'] . '">Remove Follower</button>';
-            if (empty($chk_if_peer)) {
+            if (empty($chk_if_peer) && empty($chk_if_request)) {
                 $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
+            }
+
+            if(!empty($chk_if_request) && empty($chk_if_peer)){
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
             }
             $html .= '</section>
                 </section>';
@@ -1845,6 +1867,9 @@ $config['max_height']  = '768000';
             
             $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
 
+            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+
+
             $html .= '<section class="list"><section class="left">
                         <figure>
                             <img src="' . userImage($peer['id']) . '" alt="user">
@@ -1854,8 +1879,12 @@ $config['max_height']  = '768000';
                     <section class="action" id="action_' . $peer['id'] . '">';
             
             $html .= '<button type="button" class="like" id="action_following_' . $peer['id'] . '" onclick="followUnfollow(' . $peer['id'] . ')">Unfollow</button>';
-            if (empty($chk_if_peer)) {
+            if (empty($chk_if_peer) && empty($chk_if_request)) {
                 $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
+            }
+
+            if(!empty($chk_if_request) && empty($chk_if_peer)){
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
             }
             $html .= '</section>
                 </section>';
@@ -1907,6 +1936,20 @@ $config['max_height']  = '768000';
         $this->session->set_flashdata('flash_message', $message);
 
         redirect(site_url('Profile/timeline'));
+    }
+
+
+    function validateUserName(){
+        $username = $this->input->post('username');
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+        $chk_if_exist = $this->db->get_where($this->db->dbprefix('user'), array('username' => $username, 'id!=' => $user_id))->row_array();
+
+        if(!empty($chk_if_exist)){
+            echo 1;
+        } else {
+            echo 0;
+        }
     }
 
     

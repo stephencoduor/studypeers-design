@@ -12,6 +12,10 @@
                     <div class="infoWrapper">
                         <div class="profile_general_info">
                             <div class="list">
+                                <div class="heading">User Name</div>
+                                <div class="value"><?php echo $user_detail['username'];?></div>
+                            </div>
+                            <div class="list">
                                 <div class="heading">First Name</div>
                                 <div class="value"><?php echo $user_detail['first_name'];?></div>
                             </div>
@@ -37,7 +41,14 @@
                             </div>
                         </div>
                         <div class="edit_general_info" style="display: none;">
-                            <form method="post" action="<?php echo base_url().'Profile/updateGeneralInfo' ?>">
+                            <form method="post" action="<?php echo base_url().'Profile/updateGeneralInfo' ?>" onsubmit="return validateGeneralForm()">
+                                <div class="list">
+                                    <div class="heading">User Name</div>
+                                    <div class="value">
+                                        <input type="text" class="form-control" name="username" value="<?php echo $user_detail['username'];?>" onblur="validateUserName(this.value)" required/>
+                                        <span id="err_username" style="color:red;font-style: italic;"></span>
+                                    </div>
+                                </div>
                                 <div class="list">
                                     <div class="heading">First Name</div>
                                     <div class="value">

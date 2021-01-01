@@ -77,8 +77,8 @@ die;*/
                                     <span>Joined on <?php echo date("F jS, Y", strtotime($user_detail['added_on'])); ?></span>
                                 </h6>
                                 <ul class="socialstatus">
-                                    <li data-toggle="modal" data-target="#followerList" class="followerListModal"><span><?php echo $followers; ?></span> Followers</li>
-                                    <li data-toggle="modal" data-target="#followingList" class="followingListModal"><span><?php echo $followings; ?></span> Following</li>
+                                    <li data-toggle="modal" data-target="#followerList" style="cursor: pointer;" class="followerListModal"><span><?php echo $followers; ?></span> Followers</li>
+                                    <li data-toggle="modal" data-target="#followingList" style="cursor: pointer;" class="followingListModal"><span><?php echo $followings; ?></span> Following</li>
                                     <li>
                                         <a href="<?php echo @$user_detail['fb_link']; ?>">
                                             <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg"
