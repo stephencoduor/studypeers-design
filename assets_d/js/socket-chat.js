@@ -366,6 +366,8 @@ socket.on("receivemessage", function(msg) {
   var groupId = msg.group_id;
   var groupMemberIds = msg.group_members;
 
+  if (groupMemberIds.indexOf(userId) == -1) return false;
+
   if (!$("#group_id_" + groupId).length) {
     var html = formatTopMessageGroupListName(msg);
     var currentList = $("#userList").html();
