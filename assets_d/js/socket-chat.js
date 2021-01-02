@@ -490,9 +490,17 @@ socket.on("receivemessage", function(msg) {
 
 socket.on("knowstatus", data => {
   if (data.status) {
-    receivingMessage(data.message, data.status.status);
+    if (data.message.new_member_added) {
+      sendMessageAsNewMemberAddedByGroupId(data.message, data.status.status);
+    } else {
+      receivingMessage(data.message, data.status.status);
+    }
   } else {
-    receivingMessage(data.message, "offline");
+    if (data.message.new_member_added) {
+      sendMessageAsNewMemberAddedByGroupId(data.message, "offline");
+    } else {
+      receivingMessage(data.message, "offline");
+    }
   }
 });
 
