@@ -559,7 +559,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <div class="modal-footer text-center">
                 <button type="button" id="submit_button_chat_setting" class="event_action">Submit</button>
             </div>
-            <input type="hidden" id="current_group_profile_image">
+            <input type="hidden" id="current_group_profile_image" value="<?php echo base_url('assets_d/images/default-group.png'); ?>">
         </div>
     </div>
 </div>
