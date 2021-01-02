@@ -188,6 +188,7 @@ $("body").on("click", "#submit_new_group_member", function() {
     success: function(data) {
       if (parseInt(data.code) == 200) {
         var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+        var UserInfo = JSON.parse(userData);
         var groupMembers = [];
         data.data.users.forEach(function(item, index) {
           var readCurrentIndex = otherGroupMembers.indexOf(item.id);
