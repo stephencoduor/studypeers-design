@@ -278,6 +278,13 @@ $("body").on("click", "#submit_button_chat_setting", function() {
     group_image: $("#current_group_profile_image").val()
   };
   if ($("#group_id_" + updateSetting.group_id).length > 0) {
+    var groupName = $("#group_name_setting_id").val();
+
+    if ($.trim(groupName) == "") {
+      alert("Please enter group name");
+      return false;
+    }
+
     $("#group_image_id_" + updateSetting.group_id).attr(
       "src",
       updateSetting.group_image
@@ -313,6 +320,24 @@ $("body").on("click", "#submit_button_chat_setting", function() {
   $(".close").trigger("click");
 
   socket.emit("updategroupsetting", JSON.stringify(updateSetting));
+});
+
+$("body").on("click", "#open_setting_group_name_image", function() {
+  var currentGroupId = $("#current_group_id").val();
+
+  $("#group_name_setting_id").val(
+    $("#group_id_" + currentGroupId).attr("data-groupname")
+  );
+
+  $("#current_group_profile_image").val(
+    $("#group_image_id_" + currentGroupId).attr("src")
+  );
+  $("#imagePreview").css(
+    "background-image",
+    "url('" + $("#group_image_id_" + currentGroupId).attr("src") + "')"
+  );
+
+  $("#chat-setting-popup").modal("show");
 });
 
 socket.on("groupsettingupdated", data => {
