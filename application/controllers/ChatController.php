@@ -145,9 +145,10 @@ class ChatController extends CI_Controller
             #create new user group.
             $userId =  $this->session->get_userdata()['user_data']['user_id'];
 
+            array_push($users, $userId);
+
             $chatMembersList = $this->ChatModel->getChatMembersList($users);
 
-            array_push($users, $userId);
 
             $createGroup = [];
             $createGroup['user_id'] = $userId;

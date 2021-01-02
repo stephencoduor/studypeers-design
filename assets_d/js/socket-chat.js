@@ -297,6 +297,10 @@ $("body").on("click", "#submit_button_chat_setting", function() {
   if (ImageData && newGroupName) {
     $("#common_image_group_preview").attr("src", ImageData);
     $("#group_name_id").text(newGroupName);
+    $("#group_id_" + updateSetting.group_id).attr(
+      "data-groupname",
+      newGroupName
+    );
   }
 
   $("#group_name_setting_id").val("");
