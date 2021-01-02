@@ -381,6 +381,7 @@ socket.on("receivemessage", function(msg) {
     $("#group_name_id").text(msg.group_name);
     $("#group_id_" + groupId)
       .find(".badge")
+      .next()
       .text(msg.message);
 
     const index = msg.unread_members.indexOf(userId);

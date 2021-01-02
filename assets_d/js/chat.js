@@ -667,6 +667,7 @@ function sendMessageToUser() {
   sendMessage(message, "online");
   $("#group_id_" + currentGroupId)
     .find(".badge")
+    .next()
     .text(message.message);
   $(".emojionearea-editor").html("");
   $("#send_message_input").val("");
