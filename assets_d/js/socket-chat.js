@@ -379,6 +379,9 @@ socket.on("receivemessage", function(msg) {
     $("#curren_group_members").val(JSON.stringify(groupMemberIds));
     $("#curren_group_name_id").val(msg.group_name);
     $("#group_name_id").text(msg.group_name);
+    $("#group_id_" + groupId)
+      .find(".badge")
+      .text(msg.message);
 
     const index = msg.unread_members.indexOf(userId);
     var readMembers = msg.read_members;

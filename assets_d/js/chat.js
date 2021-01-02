@@ -665,7 +665,9 @@ function sendMessageToUser() {
   socket.emit("sendmessage", JSON.stringify(message));
 
   sendMessage(message, "online");
-
+  $("#group_id_" + currentGroupId)
+    .find(".badge")
+    .text(message.message);
   $(".emojionearea-editor").html("");
   $("#send_message_input").val("");
   $("#current_image_upload_src").val("");
