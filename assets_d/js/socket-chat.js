@@ -198,7 +198,7 @@ $("body").on("click", "#submit_new_group_member", function() {
         });
 
         if (groupMembers.length > 0) {
-          var msg = "Group member added " + groupMembers.join(", ");
+          var msg = UserInfo.first_name + " added " + groupMembers.join(", ");
           $("#curren_group_members").val(JSON.stringify(otherGroupMembers));
           sendMessageAsGroupMemberAdded(msg);
         }
