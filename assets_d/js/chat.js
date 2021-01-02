@@ -84,10 +84,14 @@ Upload.prototype.progressHandling = function(event) {
 
 function myFunction() {
   var input = $("#myInput").val();
+  var UserInfo = JSON.parse(userData);
   if (input == "") {
     $("#myUL").html("");
   }
-  socket.emit("searchmessage", JSON.stringify({ searchTerm: input }));
+  socket.emit(
+    "searchmessage",
+    JSON.stringify({ searchTerm: input, user: UserInfo })
+  );
 }
 function searchUser() {
   let input, filter, ul, li, a, i, txtValue;
