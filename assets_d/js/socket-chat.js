@@ -382,7 +382,7 @@ socket.on("receivemessage", function(msg) {
     $("#group_id_" + groupId)
       .find(".badge")
       .next()
-      .text(msg.message);
+      .html(msg.message);
 
     const index = msg.unread_members.indexOf(userId);
     var readMembers = msg.read_members;
