@@ -33,7 +33,7 @@ class ChatController extends CI_Controller
                 throw new Exception("Error processing request", 422);
             }
 
-            $getFriends = $this->ChatModel->getFriendsByUserId($userId, $search);
+            $getFriends = $this->ChatModel->getFriendsByUserId($userId, trim($search));
 
             $data = [];
 
@@ -86,7 +86,7 @@ class ChatController extends CI_Controller
                 throw new Exception("Error processing request", 422);
             }
 
-            $getFriends = $this->ChatModel->getFriendsByUserId($userId, $search);
+            $getFriends = $this->ChatModel->getFriendsByUserId($userId, trim($search));
 
             $existingMemebers = $this->ChatModel->getMyGroupMembers($groupId);
 
