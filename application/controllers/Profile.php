@@ -57,7 +57,7 @@ class Profile extends CI_Controller {
         $this->db->join('user','user.id=reaction_master.user_id');
         $this->db->join('user_info','user_info.userID=reaction_master.user_id');
         $this->db->join('university','university.university_id=user_info.intitutionID');
-        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.course');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['all_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference))->result_array(); 
 
@@ -65,7 +65,7 @@ class Profile extends CI_Controller {
         $this->db->join('user','user.id=reaction_master.user_id');
         $this->db->join('user_info','user_info.userID=reaction_master.user_id');
         $this->db->join('university','university.university_id=user_info.intitutionID');
-        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.course');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['like_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '1'))->result_array(); 
 
@@ -74,7 +74,7 @@ class Profile extends CI_Controller {
         $this->db->join('user','user.id=reaction_master.user_id');
         $this->db->join('user_info','user_info.userID=reaction_master.user_id');
         $this->db->join('university','university.university_id=user_info.intitutionID');
-        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.course');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['support_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '2'))->result_array(); 
 
@@ -83,7 +83,7 @@ class Profile extends CI_Controller {
         $this->db->join('user','user.id=reaction_master.user_id');
         $this->db->join('user_info','user_info.userID=reaction_master.user_id');
         $this->db->join('university','university.university_id=user_info.intitutionID');
-        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.course');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['celebrate_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '3'))->result_array(); 
 
@@ -92,7 +92,7 @@ class Profile extends CI_Controller {
         $this->db->join('user','user.id=reaction_master.user_id');
         $this->db->join('user_info','user_info.userID=reaction_master.user_id');
         $this->db->join('university','university.university_id=user_info.intitutionID');
-        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.course');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['insightful_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '4'))->result_array(); 
 
@@ -101,7 +101,7 @@ class Profile extends CI_Controller {
         $this->db->join('user','user.id=reaction_master.user_id');
         $this->db->join('user_info','user_info.userID=reaction_master.user_id');
         $this->db->join('university','university.university_id=user_info.intitutionID');
-        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.course');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['curious_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '5'))->result_array(); 
 
@@ -110,7 +110,7 @@ class Profile extends CI_Controller {
         $this->db->join('user','user.id=reaction_master.user_id');
         $this->db->join('user_info','user_info.userID=reaction_master.user_id');
         $this->db->join('university','university.university_id=user_info.intitutionID');
-        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.major');
+        $this->db->join('field_of_study_master','field_of_study_master.id=user_info.course');
         $this->db->order_by('reaction_master.id', 'desc');
         $data['love_result'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reaction_master.reference_id'=>$reference_id, 'reaction_master.reference' => $reference, 'reaction_master.reaction_id' => '6'))->result_array(); 
 
