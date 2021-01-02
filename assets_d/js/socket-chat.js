@@ -522,6 +522,7 @@ socket.on("groupmessages", function(data) {
   var userInfo = JSON.parse(userData);
   var mainContent = "";
   var otherUserIds = [];
+  $("#message_window_loader").hide();
   if (data.length > 0) {
     data.forEach(function(item, index) {
       if (item.from_user_id == userInfo.user_id) {
@@ -540,7 +541,6 @@ socket.on("groupmessages", function(data) {
       }
     });
 
-    $("#message_window_loader").hide();
     chatAppendElementSmall.html(mainContent);
 
     chatWindow = document.getElementById("chat_window_content");
