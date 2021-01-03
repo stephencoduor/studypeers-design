@@ -307,7 +307,9 @@ class Profile extends CI_Controller {
 
     public function getFriendFeeds(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -349,7 +351,9 @@ class Profile extends CI_Controller {
 
     public function getUserPosts(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -393,7 +397,9 @@ class Profile extends CI_Controller {
 
     public function getUserQuestions(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -437,7 +443,9 @@ class Profile extends CI_Controller {
     public function getUserDocuments(){
 
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -480,7 +488,9 @@ class Profile extends CI_Controller {
 
     public function getUserStudyset(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -523,7 +533,9 @@ class Profile extends CI_Controller {
 
     public function getUserEvents(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
