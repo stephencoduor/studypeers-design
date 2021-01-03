@@ -33,7 +33,7 @@ class ChatController extends CI_Controller
                 throw new Exception("Error processing request", 422);
             }
 
-            $getFriends = $this->ChatModel->getFriendsByUserId($userId, $search);
+            $getFriends = $this->ChatModel->getFriendsByUserId($userId, trim($search));
 
             $data = [];
 
@@ -86,7 +86,7 @@ class ChatController extends CI_Controller
                 throw new Exception("Error processing request", 422);
             }
 
-            $getFriends = $this->ChatModel->getFriendsByUserId($userId, $search);
+            $getFriends = $this->ChatModel->getFriendsByUserId($userId, trim($search));
 
             $existingMemebers = $this->ChatModel->getMyGroupMembers($groupId);
 
@@ -145,9 +145,9 @@ class ChatController extends CI_Controller
             #create new user group.
             $userId =  $this->session->get_userdata()['user_data']['user_id'];
 
-            $chatMembersList = $this->ChatModel->getChatMembersList($users);
-
             array_push($users, $userId);
+
+            $chatMembersList = $this->ChatModel->getChatMembersList($users);
 
             $createGroup = [];
             $createGroup['user_id'] = $userId;

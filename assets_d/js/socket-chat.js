@@ -188,6 +188,7 @@ $("body").on("click", "#submit_new_group_member", function() {
     success: function(data) {
       if (parseInt(data.code) == 200) {
         var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+        var UserInfo = JSON.parse(userData);
         var groupMembers = [];
         data.data.users.forEach(function(item, index) {
           var readCurrentIndex = otherGroupMembers.indexOf(item.id);
@@ -198,7 +199,7 @@ $("body").on("click", "#submit_new_group_member", function() {
         });
 
         if (groupMembers.length > 0) {
-          var msg = "Group member added " + groupMembers.join(", ");
+          var msg = UserInfo.first_name + " added " + groupMembers.join(", ");
           $("#curren_group_members").val(JSON.stringify(otherGroupMembers));
           sendMessageAsGroupMemberAdded(msg);
         }
@@ -278,6 +279,13 @@ $("body").on("click", "#submit_button_chat_setting", function() {
     group_image: $("#current_group_profile_image").val()
   };
   if ($("#group_id_" + updateSetting.group_id).length > 0) {
+    var groupName = $("#group_name_setting_id").val();
+
+    if ($.trim(groupName) == "") {
+      alert("Please enter group name");
+      return false;
+    }
+
     $("#group_image_id_" + updateSetting.group_id).attr(
       "src",
       updateSetting.group_image
@@ -297,6 +305,10 @@ $("body").on("click", "#submit_button_chat_setting", function() {
   if (ImageData && newGroupName) {
     $("#common_image_group_preview").attr("src", ImageData);
     $("#group_name_id").text(newGroupName);
+    $("#group_id_" + updateSetting.group_id).attr(
+      "data-groupname",
+      newGroupName
+    );
   }
 
   $("#group_name_setting_id").val("");
@@ -309,6 +321,24 @@ $("body").on("click", "#submit_button_chat_setting", function() {
   $(".close").trigger("click");
 
   socket.emit("updategroupsetting", JSON.stringify(updateSetting));
+});
+
+$("body").on("click", "#open_setting_group_name_image", function() {
+  var currentGroupId = $("#current_group_id").val();
+
+  $("#group_name_setting_id").val(
+    $("#group_id_" + currentGroupId).attr("data-groupname")
+  );
+
+  $("#current_group_profile_image").val(
+    $("#group_image_id_" + currentGroupId).attr("src")
+  );
+  $("#imagePreview").css(
+    "background-image",
+    "url('" + $("#group_image_id_" + currentGroupId).attr("src") + "')"
+  );
+
+  $("#chat-setting-popup").modal("show");
 });
 
 socket.on("groupsettingupdated", data => {
@@ -362,6 +392,8 @@ socket.on("receivemessage", function(msg) {
   var groupId = msg.group_id;
   var groupMemberIds = msg.group_members;
 
+  if (groupMemberIds.indexOf(userId) == -1) return false;
+
   if (!$("#group_id_" + groupId).length) {
     var html = formatTopMessageGroupListName(msg);
     var currentList = $("#userList").html();
@@ -373,6 +405,10 @@ socket.on("receivemessage", function(msg) {
     $("#curren_group_members").val(JSON.stringify(groupMemberIds));
     $("#curren_group_name_id").val(msg.group_name);
     $("#group_name_id").text(msg.group_name);
+    $("#group_id_" + groupId)
+      .find(".badge")
+      .next()
+      .html(msg.message);
 
     const index = msg.unread_members.indexOf(userId);
     var readMembers = msg.read_members;
@@ -455,9 +491,17 @@ socket.on("receivemessage", function(msg) {
 
 socket.on("knowstatus", data => {
   if (data.status) {
-    receivingMessage(data.message, data.status.status);
+    if (data.message.new_member_added) {
+      sendMessageAsNewMemberAddedByGroupId(data.message, data.status.status);
+    } else {
+      receivingMessage(data.message, data.status.status);
+    }
   } else {
-    receivingMessage(data.message, "offline");
+    if (data.message.new_member_added) {
+      sendMessageAsNewMemberAddedByGroupId(data.message, "offline");
+    } else {
+      receivingMessage(data.message, "offline");
+    }
   }
 });
 

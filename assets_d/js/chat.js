@@ -84,10 +84,14 @@ Upload.prototype.progressHandling = function(event) {
 
 function myFunction() {
   var input = $("#myInput").val();
+  var UserInfo = JSON.parse(userData);
   if (input == "") {
     $("#myUL").html("");
   }
-  socket.emit("searchmessage", JSON.stringify({ searchTerm: input }));
+  socket.emit(
+    "searchmessage",
+    JSON.stringify({ searchTerm: input, user: UserInfo })
+  );
 }
 function searchUser() {
   let input, filter, ul, li, a, i, txtValue;
@@ -665,7 +669,10 @@ function sendMessageToUser() {
   socket.emit("sendmessage", JSON.stringify(message));
 
   sendMessage(message, "online");
-
+  $("#group_id_" + currentGroupId)
+    .find(".badge")
+    .next()
+    .html(message.message);
   $(".emojionearea-editor").html("");
   $("#send_message_input").val("");
   $("#current_image_upload_src").val("");

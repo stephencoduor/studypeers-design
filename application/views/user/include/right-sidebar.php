@@ -435,7 +435,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                     <a href="javascript:void(0)" class="maximize"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/maximize.svg" class="change-icon" alt="Maximize Icon" /></a>
                 </div>
                 <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/video-camera.svg" alt="Video Icon" /></a>
-                <a href="javascript:void(0)" class="hide-on-smallasd" data-toggle="modal" data-target="#chat-setting-popup"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
+                <a href="javascript:void(0)" class="hide-on-smallasd" id="open_setting_group_name_image"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/more.svg" alt="More Icon" /></a>
                 <a href="javascript:void(0)" class="add-user" id="open_add_new_group_memeber"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/Add.svg" alt="Icon" /></a>
                 <!-- <div class="hide-on-big close-icon-wrap">
                     <a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/close.svg" alt="New Message Icon" /></a>
@@ -567,7 +567,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <div class="modal-footer text-center">
                 <button type="button" id="submit_button_chat_setting" class="event_action">Submit</button>
             </div>
-            <input type="hidden" id="current_group_profile_image">
+            <input type="hidden" id="current_group_profile_image" value="<?php echo base_url('assets_d/images/default-group.png'); ?>">
         </div>
     </div>
 </div>
