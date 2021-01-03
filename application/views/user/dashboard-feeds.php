@@ -133,7 +133,7 @@
 											<?php } else { 
 												
 											?>
-												<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a>
+												<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a>
 											<?php } ?>
 											<span><?php echo $txt; ?></span> </figcaption>
 											<div class="badgeList">
@@ -686,7 +686,7 @@
 									$user_info = $this->db->get_where('user_info', array('userID' => $studyset_detail['user_id']))->row_array();
 									$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new studyset</span></figcaption>
+									<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new studyset</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">
@@ -1166,7 +1166,7 @@
 					$user_info = $this->db->get_where('user_info', array('userID' => $document_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new document</span></figcaption>
+									<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new document</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">
@@ -1696,7 +1696,7 @@
 					$user_info = $this->db->get_where('user_info', array('userID' => $question_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 														<div class="right">
-															<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>has posted a question</span></figcaption>
+															<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>has posted a question</span></figcaption>
 															<div class="badgeList">
 																<ul>
 																	<li class="badge badge1">
@@ -2079,7 +2079,7 @@
                                 </figure>
                                 <div class="right">
                                 	<?php if($user_img == 'default') { ?>
-                                    	<a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?></figcaption></a>
+                                    	<a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><figcaption><?php echo $user['first_name'].' '.$user['last_name']; ?></figcaption></a>
                                     <?php } else { ?>
                                     	<figcaption>Anonymous User</figcaption>
                                     <?php } ?>

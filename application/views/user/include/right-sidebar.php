@@ -54,8 +54,12 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <?php foreach ($peer_list as $key => $value) {
                 if ($key <= 2) {
                     if ($value['user_id'] == $user_id) {
+                        $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                        $this->db->join('user','user.id=user_info.userID');
                         $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
                     } else {
+                        $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                        $this->db->join('user','user.id=user_info.userID');
                         $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
                     }
             ?>
@@ -64,7 +68,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             <figure>
                                 <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
                             </figure>
-                            <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['userID']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                            <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['username']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
                         </section>
                         <section class="action">
 
@@ -194,8 +198,12 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
                     <?php foreach ($peer_list as $key => $value) {
                         if ($value['user_id'] == $user_id) {
+                            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                            $this->db->join('user','user.id=user_info.userID');
                             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['peer_id']))->row_array();
                         } else {
+                            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                            $this->db->join('user','user.id=user_info.userID');
                             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['user_id']))->row_array();
                         }
                     ?>
@@ -204,7 +212,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                                 <figure>
                                     <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
                                 </figure>
-                                <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['userID']; ?>" style="font-size: 16px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                                <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['username']; ?>" style="font-size: 16px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
                             </section>
                             <section class="action">
                                 <button type="button" class="like">message</button>
