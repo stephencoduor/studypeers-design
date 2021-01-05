@@ -3,6 +3,7 @@
 <script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?php echo base_url('assets_d/js/fm.selectator.jquery.js'); ?>"></script>
+<script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>-->
 <!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>-->
@@ -151,7 +152,17 @@
 			} else {
 				return
 			}
-		})
+		});
+
+		CKEDITOR.replace('messagepostarea', {
+            on: {
+                instanceReady: function(evt) {
+                    // Hide the editor top bar.
+                    document.getElementById('cke_1_top').style.display = 'none';
+                    document.getElementById('cke_1_bottom').style.display = 'none';
+                }
+            }
+        });
 	});
 	let vid = document.getElementById("myVideo");
 	$('.video-click').click(function() {
