@@ -294,7 +294,7 @@ $("body").on("click", "#submit_button_chat_setting", function() {
       .find(".info-wrap")
       .html(
         '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
-          updateSetting.group_name +
+          '<h3>'+updateSetting.group_name+'</h3>' +
           "<p></p>"
       );
   }
@@ -348,7 +348,7 @@ socket.on("groupsettingupdated", data => {
       .find(".info-wrap")
       .html(
         '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
-          data.group_name +
+          '<h3>'+data.group_name +'</h3>'+
           "<p></p>"
       );
 
@@ -772,10 +772,10 @@ function formatTopMessageHeader(messageJson) {
     "</div>" +
     '<div class="info-wrap">' +
     "</span>" +
-    messageJson.group_name +
+    '<h3>'+messageJson.group_name+'</h3>' +'<span class="msg-count">'+
     "(" +
     total +
-    ")" +
+    ")" +'</span>'+
     "<p>" +
     message +
     "</p>" +
@@ -831,7 +831,7 @@ function formatTopMessageGroupListName(messageJson) {
     '<span class="badge badge-pill badge-primary" data-batch="0">' +
     total +
     "</span>" +
-    messageJson.group_name +
+    '<h3>'+messageJson.group_name+'</h3>'+
     "<p>" +
     message +
     "</p>" +
