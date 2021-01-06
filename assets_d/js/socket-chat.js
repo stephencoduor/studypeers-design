@@ -292,13 +292,8 @@ $("body").on("click", "#submit_button_chat_setting", function() {
     );
     $("#group_id_" + updateSetting.group_id)
       .find(".info-wrap")
-      .html(
-        '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
-          "<h3>" +
-          updateSetting.group_name +
-          "</h3>" +
-          "<p></p>"
-      );
+      .find("h3")
+      .text(updateSetting.group_name);
   }
 
   var ImageData = $("#current_group_profile_image").val();
@@ -319,6 +314,8 @@ $("body").on("click", "#submit_button_chat_setting", function() {
     "background-image",
     "url('../assets_d/images/default-group.png')"
   );
+
+  document.getElementById("imageUpload").value = "";
 
   $(".close").trigger("click");
 
