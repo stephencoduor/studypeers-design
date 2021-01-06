@@ -2,6 +2,7 @@
 $login_user_id = $this->session->get_userdata()['user_data']['user_id'];
 $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = " . $friend_id)->row_array(); 
 $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
+    if(!empty($feeds)){
         foreach ($feeds as $key => $value) {
            if($value['reference'] == 'Post') {        
             $post_query = $this->db->query('SELECT * from posts where id = '.$value['reference_id'])->row();
@@ -54,6 +55,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 $chk_user_reaction = $this->db->get_where('reaction_master', array('user_id'=>$login_user_id, 'reference_id' => $value['reference_id'], 'reference' => 'Post'))->row_array();
 
                 $get_comments = $this->db->get_where('comment_master', array('reference_id' => $value['reference_id'], 'reference' => 'Post', 'comment_parent_id' => 0, 'status' => 1))->result_array();
+    
                       
 ?>
                 <div class="box-card message">
@@ -839,7 +841,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             $user_info = $this->db->get_where('user_info', array('userID' => $event_detail['created_by']))->row_array();
                                             $university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array();
                                             ?>
-                                                <figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a>
+                                                <figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a>
                                             
                                             <span><?php echo $txt; ?></span> </figcaption>
                                             <div class="badgeList">
@@ -1374,7 +1376,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     $user_info = $this->db->get_where('user_info', array('userID' => $studyset_detail['user_id']))->row_array();
                                     $university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
                                 <div class="right">
-                                    <figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new studyset</span></figcaption>
+                                    <figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new studyset</span></figcaption>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -1836,7 +1838,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                     $user_info = $this->db->get_where('user_info', array('userID' => $document_detail['created_by']))->row_array();
                     $university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
                                 <div class="right">
-                                    <figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new document</span></figcaption>
+                                    <figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new document</span></figcaption>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -2344,7 +2346,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                     $user_info = $this->db->get_where('user_info', array('userID' => $question_detail['created_by']))->row_array();
                     $university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
                                                         <div class="right">
-                                                            <figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['id'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>has posted a question</span></figcaption>
+                                                            <figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>has posted a question</span></figcaption>
                                                             <div class="badgeList">
                                                                 <ul>
                                                                     <li class="badge badge1">
@@ -2615,6 +2617,19 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
     <div class="loadMoreWrapper reached">
         <button type="button"> You've reached the end!</button>
     </div>
+<?php } } else { ?>
+    <div class="blankFeed">
+            <div class="noFeedWrapper">
+                <figure>
+                    <img
+                        src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png"
+                        alt="No Feed">
+                </figure>
+                <h4>Nothing to display</h4>
+                <!-- <p>Add [username] as your peer to view her latest updates</p> -->
+                <!-- <a href="<?php echo base_url(); ?>account/events" class="event_action" >Add Event</a> -->
+            </div>
+        </div>
 <?php } ?>
 
 

@@ -4,11 +4,11 @@
 		<div class="tabularLiist">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#myfeed">My Feeds</a></li>
-				<li><a data-toggle="tab" href="#schoolfeed">School Feeds</a></li>
+				<!-- <li><a data-toggle="tab" href="#schoolfeed">School Feeds</a></li> -->
 			</ul>
 			<div class="tab-content">
 				<div id="myfeed" class="tab-pane fade in active">
-					<div class="box-card">
+					<!-- <div class="box-card">
 						<div class="createBox story">
 							<div class="storyWrapper">
 								<h5>Stories</h5>
@@ -115,7 +115,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="box-card">
 						<div class="createBox">
 							<div class="postWrapper">
@@ -154,19 +154,20 @@
 											$user_id = $this->session->get_userdata()['user_data']['user_id'];
 											$chk_if_sent = $this->db->get_where('peer_master', array('peer_id' => $value['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
 											$chk_if_follow = $this->db->get_where($this->db->dbprefix('follow_master'), array('user_id'=>$user_id, 'peer_id' =>  $value['id']))->row_array(); 
+											$profile_user = $this->db->get_where('user', array('id' => $value['id']))->row_array();
 										?>
 											<div class="peerList" id="peerList<?= $value['id']; ?>">
 
 
 												<figure>
-													<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $value['id'] ?>">
+													<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $profile_user['username'] ?>">
 														<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
 													</a>
 													<div class="removePeer">
 														<img src="<?php echo base_url(); ?>assets_d/images/close-peer.svg" alt="Close Peer Suggestions">
 													</div>
 												</figure>
-												<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $value['id'] ?>">
+												<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $profile_user['username']  ?>">
 													<h4><?php echo $value['nickname']; ?></h4>
 												</a>
 
@@ -4830,7 +4831,7 @@
 													<?php } else {
 
 													?>
-														<figcaption><a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $user['id'] ?>"><?php echo $user['first_name'] . ' ' . $user['last_name']; ?> </a>
+														<figcaption><a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $user['username'] ?>"><?php echo $user['first_name'] . ' ' . $user['last_name']; ?> </a>
 														<?php } ?>
 														<span>posted in university</span> <img src="<?php echo base_url(); ?>assets_d/images/university.svg"> <?php echo $university['SchoolName']; ?></figcaption>
 														<div class="badgeList">
@@ -5329,7 +5330,7 @@
 											$user_info = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
 											$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 											<div class="right">
-												<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $user['id'] ?>">
+												<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $user['username'] ?>">
 													<figcaption><?php echo $user['first_name'] . ' ' . $user['last_name']; ?> </figcaption>
 												</a>
 												<div class="badgeList">

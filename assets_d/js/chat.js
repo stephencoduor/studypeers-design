@@ -166,7 +166,7 @@ function formatTopMessageGroupListNameOnAdd(messageJson) {
     "</div>" +
     '<div class="info-wrap">' +
     '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
-    messageJson.group_name +
+    '<h3>'+messageJson.group_name +'</h3>'+
     "<p>" +
     messageJson.message +
     "</p>" +

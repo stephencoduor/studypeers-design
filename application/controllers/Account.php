@@ -101,6 +101,8 @@ class Account extends CI_Controller
 
         $this->load->view('user/include/header', $data);
         $this->load->view('user/dashboard');
+        $this->load->view('user/profile/add-post');
+        $this->load->view('user/profile/post-privacy');
         $this->load->view('user/include/right-sidebar');
         $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer-dashboard');
@@ -480,14 +482,15 @@ class Account extends CI_Controller
                                                     </div>
                                                     </div>
                                                     <div class="feed_card_footer">';
-
+                        $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                        $this->db->join('user','user.id=user_info.userID');
                         $user = $this->db->get_where('user_info', array('userID' => $value['created_by']))->row_array();
                         $html .= '<div class="userWrap eventBox">
                                                             <div class="user-name">
                                                                 <figure>
                                                                     <img src="' . userImage($value['created_by']) . '" alt="user">
                                                                 </figure>
-                                                                <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['userID'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
+                                                                <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
 
                                                             </div>';
                         if ($value['created_by'] == $user_id) {
@@ -711,14 +714,15 @@ class Account extends CI_Controller
                                                             </div>
                                                 </div>
                                                 <div class="feed_card_footer">';
-
+                        $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                        $this->db->join('user','user.id=user_info.userID');
                         $user = $this->db->get_where('user_info', array('userID' => $value['created_by']))->row_array();
                         $html .= '<div class="userWrap eventBox">
                                                         <div class="user-name">
                                                             <figure>
                                                                 <img src="' . userImage($value['created_by']) . '" alt="user">
                                                             </figure>
-                                                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['userID'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
+                                                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
 
                                                         </div>';
                         if ($value['created_by'] == $user_id) {
@@ -1993,6 +1997,9 @@ class Account extends CI_Controller
 
             $value = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id' => $question_id, 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => 0))->row_array();
 
+            $value_user = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$value['answered_by']))->row_array(); 
+            
+
             $html = '<div class="replyAnswerBox" id="replyAnswerBox' . $value['id'] . '">     
 
                             <div class="answerQuote" id="answerQuote' . $value['id'] . '" style="display:none;">
@@ -2053,7 +2060,7 @@ class Account extends CI_Controller
                                                         <figure>
                                                             <img src="' . userImage($value['answered_by']) . '" alt="user">
                                                         </figure>
-                                                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $value['answered_by'] . '"><figcaption>' . $value['nickname'] . '</figcaption></a>
+                                                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $value_user['username'] . '"><figcaption>' . $value['nickname'] . '</figcaption></a>
                                                     </div>
                                                     <p class="date">' . date('d/m/Y', strtotime($value['created_at'])) . '</p>
                                                 </div>
@@ -2342,7 +2349,9 @@ class Account extends CI_Controller
             } else if ($this->input->post('timeline')) {
                 redirect(site_url('Profile/timeline'), 'refresh');
             } else if ($this->input->post('profile')) {
-                redirect(site_url('Profile/friends?profile_id='.$this->input->post('profile')), 'refresh');
+                $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$this->input->post('profile')))->row_array();
+
+                redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
             } else {
                 redirect(site_url('account/events'), 'refresh');
             }
@@ -2364,7 +2373,8 @@ class Account extends CI_Controller
             } else {
                 $edit_url = base_url() . 'account/editSchedule/' . base64_encode($res['id']);
             }
-
+            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+            $this->db->join('user','user.id=user_info.userID');
             $user = $this->db->get_where('user_info', array('userID' => $res['created_by']))->row_array();
             $html = "";
             if ($res['schedule'] == 'event') {
@@ -2532,7 +2542,7 @@ class Account extends CI_Controller
                 <figure>
                     <img src="' . userImage($res['created_by']) . '" alt="user">
                 </figure>
-                <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['userID'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
+                <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
             </div>  
         </div>';
             if (!empty($res['description'])) {
@@ -2670,7 +2680,9 @@ class Account extends CI_Controller
             } else if ($this->input->post('timeline')) {
                 redirect(site_url('Profile/timeline'), 'refresh');
             } else if ($this->input->post('profile')) {
-                redirect(site_url('Profile/friends?profile_id='.$this->input->post('profile')), 'refresh');
+                $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$this->input->post('profile')))->row_array();
+
+                redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
             }  else {
                 redirect(site_url('account/events'), 'refresh');
             }
@@ -2696,7 +2708,8 @@ class Account extends CI_Controller
 
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
-
+            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+            $this->db->join('user','user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $html = '<div class="chatMsg" id="chatMsg_' . $comment_id . '">
@@ -2704,7 +2717,7 @@ class Account extends CI_Controller
                             <img src="' . userImage($user_id) . '" alt="User">
                         </figure>
                         <figcaption>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['userID'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
+                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
                             ' . $comment . '                                                 
                             <div class="actionmsgMenu">
                                 <ul>
@@ -2757,14 +2770,15 @@ class Account extends CI_Controller
 
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
-
+            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+            $this->db->join('user','user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $html = '<div class="userReplyBox"><figure>
                         <img src="' . userImage($user_id) . '" alt="User">
                     </figure>
                     <figcaption>
-                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['userID'] . '"><span class="name">' . $user_info['nickname'] . '</span></a>
+                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['username'] . '"><span class="name">' . $user_info['nickname'] . '</span></a>
                         ' . $comment . '                                            
                         
                     </figcaption></div>';
@@ -2848,7 +2862,8 @@ class Account extends CI_Controller
 
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
-
+            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+            $this->db->join('user','user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $html = '<div class="chatMsg" id="chatMsg_' . $comment_id . '">
@@ -2856,7 +2871,7 @@ class Account extends CI_Controller
                             <img src="' . userImage($user_id) . '" alt="User">
                         </figure>
                         <figcaption>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['userID'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
+                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
                             <img src="' . base_url() . 'uploads/comments/' . $c_image . '" alt="comment" style="height: 70px;">                                                 
                             <div class="actionmsgMenu">
                                 <ul>
@@ -3397,8 +3412,12 @@ class Account extends CI_Controller
 
         foreach ($peer_list as $key => $value) {
             if ($value['user_id'] == $user_id) {
+                $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                $this->db->join('user','user.id=user_info.userID');
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
             } else {
+                $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                $this->db->join('user','user.id=user_info.userID');
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
             }
             $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id' => $peer['userID'], 'reference' => 'document', 'reference_id' => $document_id, 'status' => 1))->row_array();
@@ -3407,7 +3426,7 @@ class Account extends CI_Controller
                         <figure>
                             <img src="' . userImage($peer['userID']) . '" alt="user">
                         </figure>
-                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['userID'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
+                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                     </section>
                     <section class="action" id="action_' . $peer['userID'] . '">';
             if (empty($chk_if_shared)) {
@@ -3525,8 +3544,12 @@ class Account extends CI_Controller
 
         foreach ($peer_list as $key => $value) {
             if ($value['user_id'] == $user_id) {
+                $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                $this->db->join('user','user.id=user_info.userID');
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
             } else {
+                $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                $this->db->join('user','user.id=user_info.userID');
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
             }
             $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id' => $peer['userID'], 'reference' => 'event', 'reference_id' => $id, 'status!=' => 4))->row_array();
@@ -3536,7 +3559,7 @@ class Account extends CI_Controller
                             <figure>
                                 <img src="' . userImage($peer['userID']) . '" alt="user">
                             </figure>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['userID'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
+                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                         </section>
                         <section class="action" id="action_' . $peer['userID'] . '">';
                     if (empty($chk_if_shared)) {
@@ -3552,7 +3575,7 @@ class Account extends CI_Controller
                             <figure>
                                 <img src="' . userImage($peer['userID']) . '" alt="user">
                             </figure>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['userID'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
+                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                         </section>
                         <section class="action" id="action_' . $peer['userID'] . '">';
                 if (empty($chk_if_shared)) {
@@ -3581,7 +3604,8 @@ class Account extends CI_Controller
         $html = '';
 
         foreach ($peer_attending as $key => $value) {
-
+            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+            $this->db->join('user','user.id=user_info.userID');
             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
 
 
@@ -3589,7 +3613,7 @@ class Account extends CI_Controller
                             <figure>
                                 <img src="' . userImage($peer['userID']) . '" alt="user">
                             </figure>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['userID'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
+                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                         </section>';
             if ($event_details['created_by'] == $user_id) {
                 $html .= '<section class="action" >

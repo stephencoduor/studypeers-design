@@ -307,7 +307,9 @@ class Profile extends CI_Controller {
 
     public function getFriendFeeds(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -349,7 +351,9 @@ class Profile extends CI_Controller {
 
     public function getUserPosts(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -393,7 +397,9 @@ class Profile extends CI_Controller {
 
     public function getUserQuestions(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -437,7 +443,9 @@ class Profile extends CI_Controller {
     public function getUserDocuments(){
 
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -480,7 +488,9 @@ class Profile extends CI_Controller {
 
     public function getUserStudyset(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -523,7 +533,9 @@ class Profile extends CI_Controller {
 
     public function getUserEvents(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
-        $friend_id = $this->input->post('friend_id'); 
+        $friend = $this->input->post('friend_id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $friend_id  = $friend_data['id'];
         $offset     = $this->input->post('count'); 
         $count      = $offset*10; 
 
@@ -793,8 +805,11 @@ $config['max_height']  = '768000';
 	public function friends()
 	{
 		is_valid_logged_in();
-		$user_id = $_REQUEST['profile_id'];
+		$user_name = $_REQUEST['profile_id'];
 		$login_user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+        $get_user_id = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$user_name))->row_array(); 
+        $user_id = $get_user_id['id'];
 
 		//check if user is reported by same user
 		$chk_if_reprted = $this->db->get_where($this->db->dbprefix('user_report_master'), array('user_id'=>$login_user_id, 'report_user_id' => $user_id, 'status' => 1))->row_array(); 
@@ -1112,9 +1127,9 @@ $config['max_height']  = '768000';
 
 			$this->db->where($check2);
 			$this->db->delete('follow_master');
+            $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$peer_id))->row_array();
 
-
-			redirect(site_url('Profile/friends?profile_id='.$peer_id), 'refresh');
+			redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
 		}
 	}
 
@@ -1149,8 +1164,10 @@ $config['max_height']  = '768000';
 				'updated_at' => date('Y-m-d H:i:s')
 			);
 			$this->db->insert('user_report_master', $insert_array);
+            $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$report_user_id))->row_array();
 
-			redirect(site_url('Profile/friends?profile_id='.$report_user_id), 'refresh');
+            redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
+			
 		}
 	}
 
@@ -1166,8 +1183,10 @@ $config['max_height']  = '768000';
 			);
 			$this->db->where(array('id' => $report_id));
 			$this->db->update('user_report_master',$update_arr);
+			$redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$report_user_id))->row_array();
+
+            redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
 			
-			redirect(site_url('Profile/friends?profile_id='.$report_user_id), 'refresh');
 		}
 	}
 
@@ -1747,7 +1766,8 @@ $config['max_height']  = '768000';
         $html = '';
 
         foreach ($user_list as $key => $value) {
-            
+            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+            $this->db->join('user','user.id=user_info.userID');
             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID'=>$value['user_id']))->row_array(); 
             
             
@@ -1755,7 +1775,7 @@ $config['max_height']  = '768000';
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
-                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['userID'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
+                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['username'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                         </section></div>';
                         
                         
@@ -1833,7 +1853,7 @@ $config['max_height']  = '768000';
                         <figure>
                             <img src="' . userImage($peer['id']) . '" alt="user">
                         </figure>
-                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['id'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
+                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
                     </section>
                     <section class="action" id="action_' . $peer['id'] . '">';
             
@@ -1874,7 +1894,7 @@ $config['max_height']  = '768000';
                         <figure>
                             <img src="' . userImage($peer['id']) . '" alt="user">
                         </figure>
-                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['id'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
+                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
                     </section>
                     <section class="action" id="action_' . $peer['id'] . '">';
             

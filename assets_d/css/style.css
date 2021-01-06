@@ -1125,3 +1125,18 @@ figcaption a {
 .flex-option-row  .progress::after{
     display: none;
 }
+.chat-user-list li a .info-wrap span.msg-count{
+    font-size: 70%;
+    font-weight: 700;
+    display: flex;
+    line-height: 1;
+    color: #fff;
+    width: 24px;
+    height: 24px;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: 70px;
+    left: auto;
+    top: 30px;
+}

@@ -77,7 +77,7 @@ $full_name      = $user['first_name'] . ' ' . $user['last_name'];
                                 </div>
                             <?php } ?>
                         </div>
-                        <input type="hidden" id="sharelink" value="<?php echo base_url() . 'Profile/friends?profile_id=' . @$user_id; ?>" />
+                        <input type="hidden" id="sharelink" value="<?php echo base_url() . 'Profile/friends?profile_id=' . @$user['username']; ?>" />
                         <div class="tooltip" style="opacity: inherit;">
                             <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
                                 <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
@@ -177,16 +177,7 @@ $full_name      = $user['first_name'] . ' ' . $user['last_name'];
                                         </div>
 
 
-                                        <div class="blankFeed">
-                                            <div class="noFeedWrapper">
-                                                <figure>
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
-                                                </figure>
-                                                <h4>Nothing to display</h4>
-                                                <p>Add [username] as your peer to view her latest updates</p>
-                                                <button type="button" class="event_action">Add Peer</button>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
 
                                 </div>

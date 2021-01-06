@@ -109,7 +109,7 @@ die;*/
                                 <?php } ?>
                             </div>
                             <input type="hidden" id="sharelink"
-                                           value="<?php echo base_url() . 'Profile/friends?profile_id=' . @$log_user_id; ?>"/>
+                                           value="<?php echo base_url() . 'Profile/friends?profile_id=' . @$user_detail['username']; ?>"/>
                             <div class="tooltip" style="opacity: inherit;">
                                 <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
                                     <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
@@ -238,18 +238,7 @@ die;*/
                                             </div>
 
 
-                                            <div class="blankFeed">
-                                                <div class="noFeedWrapper">
-                                                    <figure>
-                                                        <img
-                                                            src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png"
-                                                            alt="No Feed">
-                                                    </figure>
-                                                    <h4>Nothing to display</h4>
-                                                    <p>Add [username] as your peer to view her latest updates</p>
-                                                    <button type="button" class="event_action">Add Peer</button>
-                                                </div>
-                                            </div>
+                                            
                                         </div>
                                         <?php include_once 'right-side-content.php' ?>
                                     </div>
