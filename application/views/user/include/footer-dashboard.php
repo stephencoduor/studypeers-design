@@ -3,6 +3,7 @@
 <script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
 <script src="<?php echo base_url('assets_d/js/fm.selectator.jquery.js'); ?>"></script>
+<script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 <!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>-->
 <!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>-->
@@ -135,6 +136,117 @@
 			}
 		})
 	}
+
+	$("#multiple-select").selectator({
+        showAllOptionsOnFocus: true,
+        searchFields: "value text subtitle right",
+        minSearchLength: 1,
+        load: function(search, callback) {
+            if (search.length < this.minSearchLength) return callback();
+            $.ajax({
+                url: "find-my-peers",
+                data: {
+                    search: search
+                },
+                type: "GET",
+                dataType: "json",
+                success: function(data) {
+                    callback(data);
+                },
+                error: function() {
+                    callback();
+                }
+            });
+        },
+        render: {
+            selected_item: function(_item, escape) {
+                var html = "";
+                if (typeof _item.left !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'selected_item_left"><img src="' +
+                    escape(_item.left) +
+                    '"></div>';
+                if (typeof _item.right !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'selected_item_right">' +
+                    escape(_item.right) +
+                    "</div>";
+                html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'selected_item_title">' +
+                    (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+                    "</div>";
+                if (typeof _item.subtitle !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'selected_item_subtitle">' +
+                    escape(_item.subtitle) +
+                    "</div>";
+                html +=
+                    '<div class="' + "selectator_" + 'selected_item_remove">X</div>';
+
+                // check if the
+                $(".done-link").addClass("show");
+                return html;
+            },
+            option: function(_item, escape) {
+                console.log("asdad");
+                var html = "";
+                if (typeof _item.left !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'option_left"><img src="' +
+                    escape(_item.left) +
+                    '"></div>';
+                if (typeof _item.right !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'option_right">' +
+                    escape(_item.right) +
+                    "</div>";
+                html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'option_title">' +
+                    (typeof _item.text !== "undefined" ? escape(_item.text) : "") +
+                    "</div>";
+                if (typeof _item.subtitle !== "undefined")
+                    html +=
+                    '<div class="' +
+                    "selectator_" +
+                    'option_subtitle">' +
+                    escape(_item.subtitle) +
+                    "</div>";
+
+                if ($(".selectator_selected_items").html() == "") {
+                    $(".done-link").removeClass("show");
+                }
+                return html;
+            }
+        }
+    });
+
+    function saveSelectedPeer() {
+        $('#groupMember').modal('hide');
+        $('#createPost').modal('show');
+        var output_string = "";
+        $("#multiple-select option").each(function() {
+            // Add $(this).val() to your list
+
+            output_string = output_string + $(this).val() + ", ";
+        });
+        output_string = output_string.substr(0, output_string.length - 2);
+        $('#shareWithPeersId').val(output_string);
+    }
+
 	$(document).ready(function() {
 		$('.box-card').each(function() {
 			let feedImage = $(this).children('.createBox ').children('.feeduserwrap').children('.imgWrapper ').find('figure');
@@ -151,7 +263,225 @@
 			} else {
 				return
 			}
-		})
+		});
+
+		var base_url = '<?php echo base_url(); ?>';
+
+		CKEDITOR.replace('messagepostarea', {
+            on: {
+                instanceReady: function(evt) {
+                    // Hide the editor top bar.
+                    document.getElementById('cke_1_top').style.display = 'none';
+                    document.getElementById('cke_1_bottom').style.display = 'none';
+                }
+            }
+        });
+
+        var counter = 1,
+            video_counter = 1;
+        var image_types = ['jpg', 'png', 'jpeg'];
+        var video_types = ['mp4', '3gp', 'mpeg4', 'mkv', 'mov'];
+
+        function readURL(input) {
+            
+            for (var i = 0; i < input.files.length; ++i) {
+                if (input.files[i] && input.files[i]) {
+                    var file = input.files[i];
+                    var extension = file.name.split('.').pop().toLowerCase(); //file extension from input file
+                    var isImage = image_types.indexOf(extension) > -1;
+                    var isVideo = video_types.indexOf(extension) > -1;
+                    var reader = new FileReader();
+                    if (isImage) {
+                        reader.onload = function(e) {
+                            var html_image = '<div class="col-md-4" id="delete_' + counter + '"><div class="uloadedImage"><figure><img src="' + e.target.result + '" alt="image" id="image' + counter + '"></figure>' +
+                                '<div class="close"><img src="' + base_url + 'assets_d/images/close-pink.svg" class="remove_image" id="remove_image_' + counter + '" alt="close"></div></div></div>';
+                            $('#imgInp' + counter).hide();
+                            $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp' + counter + '" name="file[]" multiple="multiple">');
+                            $('#image_row').append(html_image);
+                            counter++;
+                        };
+                        reader.readAsDataURL(file); // convert to base64 string
+                    } else {
+                        reader.onload = function() {
+                            var blob = new Blob([reader.result], {
+                                type: file.type
+                            });
+                            var url = URL.createObjectURL(blob);
+                            var video = document.createElement('video');
+                            var timeupdate = function() {
+                                if (snapImage()) {
+                                    video.removeEventListener('timeupdate', timeupdate);
+                                    video.pause();
+                                }
+                            };
+                            video.addEventListener('loadeddata', function() {
+                                if (snapImage()) {
+                                    video.removeEventListener('timeupdate', timeupdate);
+                                }
+                            });
+                            var snapImage = function() {
+                                var canvas = document.createElement('canvas');
+                                canvas.width = video.videoWidth;
+                                canvas.height = video.videoHeight;
+                                canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                                var image = canvas.toDataURL();
+                                var success = image.length > 100000;
+                                if (success) {
+                                    var html_image = '<div class="col-md-4" id="delete_video_' + video_counter + '"><div class="uloadedImage"><figure><img src="' + image + '" alt="image" id="image' + video_counter + '"></figure>' +
+                                        '<div class="close"><img src="' + base_url + 'assets_d/images/close-pink.svg" class="remove_video" id="remove_video_' + video_counter + '" alt="close"></div></div></div>';
+                                    $('#image_row').append(html_image);
+                                    // URL.revokeObjectURL(url);
+                                    $('#imgInp' + video_counter).hide();
+                                    $('#upload_image_section').append('<input type="file" class="image_upload_button" id="imgInp' + video_counter + '" name="file[]" multiple="multiple">');
+                                    video_counter++;
+                                }
+                                return success;
+                            };
+                            video.addEventListener('timeupdate', timeupdate);
+                            video.preload = 'metadata';
+                            video.src = url;
+                            // Load video in Safari / IE11
+                            video.muted = true;
+                            video.playsInline = true;
+                            video.play();
+                        };
+                        reader.readAsArrayBuffer(file);
+                    }
+
+                }
+            }
+        }
+
+        $(document).on('click', '.remove_image', function() {
+            var img_id = $(this).attr('id').split('_');
+            $('#delete_' + img_id[2]).remove();
+            $('#imgInp' + img_id[2]).val('');
+            counter--;
+        });
+
+        $(document).on('click', '.remove_video', function() {
+            var video_id = $(this).attr('id').split('_');
+            $('#delete_video_' + video_id[2]).remove();
+            $('#imgInp' + video_id[2]).val('');
+            video_counter--;
+        });
+
+        $(document).on("click", ".addEvents", function() {
+            var event_id = $(this).data('id');
+            $(".modal-body #calender_event_id").val(event_id);
+
+        });
+
+        $(document).on("click", ".removeEvent", function() {
+            var event_id = $(this).data('id');
+            $(".modal-body #remove_event_id").val(event_id);
+
+        });
+
+        $(document).on('change', '.image_upload_button', function() {
+
+            readURL(this);
+        });
+
+        var document_counter = 1,
+            close_id;
+        $(document).on('change', '#document', function() {
+            getoutput(this);
+        });
+
+        function getFile(filePath) {
+            return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
+        }
+
+        function getoutput(inputfile) {
+            var file_ext = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "pdf"];
+            var extension = inputfile.value.split('.')[1];
+            var filename = getFile(inputfile.value);
+            // Check if a value exists in the file_ext array
+            if (file_ext.indexOf(extension) == -1) {
+                alert("Invalid file type ! Please choose another file");
+            }
+            var img_icon = '';
+            if (extension == 'docx' || extension == 'doc') {
+                img_icon = '<img src="' + base_url + '/assets_d/images/document.svg' + '" />';
+            } else if (extension == 'pdf') {
+                img_icon = '<img src="' + base_url + '/assets_d/images/pdf.svg' + '" />';
+            } else if (extension == 'ppt' || extension == 'pptx') {
+                img_icon = '<img src="' + base_url + '/assets_d/images/pptx.svg' + '" />';
+            } else if (extension == 'xls' || extension == 'xlsx') {
+                img_icon = '<img src="' + base_url + '/assets_d/images/xlsx.svg' + '" />';
+            } else if (extension == 'txt') {
+                img_icon = '<img src="' + base_url + '/assets_d/images/txt.svg' + '" />';
+            } else {
+                alert('Invalid file format ! Please choose any other file . Supported file formats are doc/docx/pdf/ppt/xls/txt');
+                return false;
+            }
+            $('#all_documents').append('<div class="filename" id="document_file_' + document_counter + '">' + img_icon + '</div><div class="closeBtn" id="remove_document_' + document_counter + '"><img src="' + base_url + '/assets_d/images/close-pink.svg' + '" alt="close"/> ' + filename + '.' + extension + '</div>');
+            document_counter++;
+        }
+
+        $(document).on("click", ".closeBtn", function() {
+            close_id = $(this).attr('id');
+            close_id = close_id.split('_');
+            $('#document_file_' + close_id[2]).remove();
+            $('#remove_document_' + close_id[2]).remove();
+            document_counter--;
+        });
+
+        $(document).on('click', '#shareWithPeer', function() {
+            $('#privacyPost').modal('hide');
+        });
+
+
+
+        $(document).on('click', '#save_post_from_ajax', function() {
+            $('#addPostForm').submit();
+        });
+        $('#addPostForm').on("submit", function(e) {
+            e.preventDefault();
+            $('.ajax-loading').show();
+            $('#createPost').modal('hide');
+
+            var formData = new FormData(this);
+            var url = $(this).attr('action');
+            var html_content = CKEDITOR.instances['messagepostarea'].getData();
+            var privacy = $("input:radio.privacy_val:checked").val();
+
+            if ($('#allow_comment').is(':checked')) {
+                var allow_comment = 1;
+            } else {
+                var allow_comment = 0;
+            }
+
+            if ($("#bell-announcement").hasClass("notification-disabled")) {
+                var announcement = 0;
+            } else {
+                var announcement = 1;
+            }
+            formData.append('html_content', html_content);
+            formData.append('privacy', privacy);
+            formData.append('allow_comment', allow_comment);
+            formData.append('announcement', announcement);
+
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(result) {
+                    console.log(result);
+                    if (result == true) {
+                        window.location.href = base_url + 'account/dashboard';
+                    }
+                    $('.ajax-loading').hide();
+                }
+            });
+
+        });
+
 	});
 	let vid = document.getElementById("myVideo");
 	$('.video-click').click(function() {

@@ -4,11 +4,11 @@
 		<div class="tabularLiist">
 			<ul class="nav nav-tabs">
 				<li class="active"><a data-toggle="tab" href="#myfeed">My Feeds</a></li>
-				<li><a data-toggle="tab" href="#schoolfeed">School Feeds</a></li>
+				<!-- <li><a data-toggle="tab" href="#schoolfeed">School Feeds</a></li> -->
 			</ul>
 			<div class="tab-content">
 				<div id="myfeed" class="tab-pane fade in active">
-					<div class="box-card">
+					<!-- <div class="box-card">
 						<div class="createBox story">
 							<div class="storyWrapper">
 								<h5>Stories</h5>
@@ -115,7 +115,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					</div> -->
 					<div class="box-card">
 						<div class="createBox">
 							<div class="postWrapper">
