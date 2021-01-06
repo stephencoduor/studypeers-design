@@ -833,7 +833,6 @@ $(".emojis-wysiwyg").emojioneArea({
       if (
         event.which == 13 &&
         ($.trim(editor.text()).length > 0 ||
-          $.trim(editor.html()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
         sendMessageToUser();
