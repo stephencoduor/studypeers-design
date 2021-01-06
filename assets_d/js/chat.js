@@ -672,6 +672,7 @@ function sendMessageToUser() {
   $("#group_id_" + currentGroupId)
     .find(".badge")
     .next()
+    .next()
     .html(message.message);
   $(".emojionearea-editor").html("");
   $("#send_message_input").val("");
