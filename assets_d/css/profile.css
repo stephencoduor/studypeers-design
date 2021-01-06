@@ -1104,12 +1104,14 @@
     z-index: 99;
 }
 .box-card .imgWrapper video {
-    width: 100%;
+    width: 50%;
+    flex: 1;
     height: 240px;
-    margin: 0 0 10px;
+    margin-bottom:10px;
     background: rgba(211, 210, 210, 0.21);
     object-fit: cover;
     object-position: center center;
+    padding: 0 5px;
 }
 .eventMessage {
     width: 120px;
