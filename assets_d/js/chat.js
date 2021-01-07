@@ -166,7 +166,7 @@ function formatTopMessageGroupListNameOnAdd(messageJson) {
     "</div>" +
     '<div class="info-wrap">' +
     '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
-    messageJson.group_name +
+    '<h3>'+messageJson.group_name +'</h3>'+
     "<p>" +
     messageJson.message +
     "</p>" +
@@ -672,6 +672,7 @@ function sendMessageToUser() {
   $("#group_id_" + currentGroupId)
     .find(".badge")
     .next()
+    .next()
     .html(message.message);
   $(".emojionearea-editor").html("");
   $("#send_message_input").val("");
@@ -833,7 +834,6 @@ $(".emojis-wysiwyg").emojioneArea({
       if (
         event.which == 13 &&
         ($.trim(editor.text()).length > 0 ||
-          $.trim(editor.html()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
         sendMessageToUser();

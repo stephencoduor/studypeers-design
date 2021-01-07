@@ -68,12 +68,19 @@
   color: #2a234f;
   position: relative;
   word-break: break-word;
-  padding-right: 30px;
+  padding-right: 65px;
 }
+.chat-user-list li a .info-wrap h3{
+  font-size:16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .chat-user-list li a .info-wrap .badge {
   position: absolute;
   right: 0;
-  top: 20px;
+  top: 32px;
 }
 .chat-user-list li {
   width: 100% !important;
@@ -255,7 +262,9 @@ div.time {
   height: 60px;
   margin-right: 10px;
   border-radius: 50%;
+  overflow: hidden;
 }
+
 .chat-header-left img {
   width: 100%;
   height: 100%;

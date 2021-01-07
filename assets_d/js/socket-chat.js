@@ -292,11 +292,8 @@ $("body").on("click", "#submit_button_chat_setting", function() {
     );
     $("#group_id_" + updateSetting.group_id)
       .find(".info-wrap")
-      .html(
-        '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
-          updateSetting.group_name +
-          "<p></p>"
-      );
+      .find("h3")
+      .text(updateSetting.group_name);
   }
 
   var ImageData = $("#current_group_profile_image").val();
@@ -317,6 +314,8 @@ $("body").on("click", "#submit_button_chat_setting", function() {
     "background-image",
     "url('../assets_d/images/default-group.png')"
   );
+
+  document.getElementById("imageUpload").value = "";
 
   $(".close").trigger("click");
 
@@ -348,7 +347,9 @@ socket.on("groupsettingupdated", data => {
       .find(".info-wrap")
       .html(
         '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
+          "<h3>" +
           data.group_name +
+          "</h3>" +
           "<p></p>"
       );
 
@@ -408,6 +409,7 @@ socket.on("receivemessage", function(msg) {
     $("#group_id_" + groupId)
       .find(".badge")
       .next()
+      .next()
       .html(msg.message);
 
     const index = msg.unread_members.indexOf(userId);
@@ -450,6 +452,12 @@ socket.on("receivemessage", function(msg) {
         .find(".badge")
         .text(batchcount);
     }
+
+    $("#group_id_" + groupId)
+      .find(".badge")
+      .next()
+      .next()
+      .html(msg.message);
 
     const index = msg.unread_members.indexOf(userId);
     var readMembers = msg.read_members;
@@ -772,10 +780,14 @@ function formatTopMessageHeader(messageJson) {
     "</div>" +
     '<div class="info-wrap">' +
     "</span>" +
+    "<h3>" +
     messageJson.group_name +
+    "</h3>" +
+    '<span class="msg-count">' +
     "(" +
     total +
     ")" +
+    "</span>" +
     "<p>" +
     message +
     "</p>" +
@@ -831,7 +843,9 @@ function formatTopMessageGroupListName(messageJson) {
     '<span class="badge badge-pill badge-primary" data-batch="0">' +
     total +
     "</span>" +
+    "<h3>" +
     messageJson.group_name +
+    "</h3>" +
     "<p>" +
     message +
     "</p>" +
