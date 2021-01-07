@@ -100,7 +100,7 @@
                             </a>
                         </li>
                         <li>
-                            <a id="shareWithPeer" data-toggle="modal" data-target="#groupMember" >
+                            <a id="shareWithPeer" data-toggle="modal" data-target="#postGroupModal" >
                                 <label class="dashRadioWrap">
                                     <div class="privacyTxtWrap">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.49" viewBox="0 0 20 17.49">

@@ -386,6 +386,7 @@
 <script>
     $(document).ready(function() {
         $("#multiple-select").selectator();
+        $("#multiple-select-post").selectator();
     });
 </script>
 <script>
@@ -2078,7 +2079,7 @@
 
 
     function backToPostPrivacy() {
-        $('#groupMember').modal('hide');
+        $('#postGroupModal').modal('hide');
         $('#privacyPost').modal('show');
     }
 
@@ -2313,7 +2314,7 @@
     });
 
 
-    $("#multiple-select").selectator({
+    $("#multiple-select-post").selectator({
         showAllOptionsOnFocus: true,
         searchFields: "value text subtitle right",
         minSearchLength: 1,
@@ -2411,10 +2412,10 @@
     });
 
     function saveSelectedPeer() {
-        $('#groupMember').modal('hide');
+        $('#postGroupModal').modal('hide');
         $('#createPost').modal('show');
         var output_string = "";
-        $("#multiple-select option").each(function() {
+        $("#multiple-select-post option").each(function() {
             // Add $(this).val() to your list
 
             output_string = output_string + $(this).val() + ", ";

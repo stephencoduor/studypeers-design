@@ -3573,6 +3573,18 @@ figcaption a {
     margin-top:0!important;
 }
 
+#postGroupModal .modal-content .selectator_element.multiple{
+    padding-left:10px!important;
+    padding-top:5px!important;
+}
+#groupMember .modal-content .selectator_input{
+    width:100%;
+    margin-top:5px!important;
+}
+#groupMember .modal-content .multiple .selectator_selected_items .selectator_selected_item{
+    margin-top:0!important;
+}
+
 .reation-popup .innerFeedTabs .nav {
     margin:15px 0;
 }

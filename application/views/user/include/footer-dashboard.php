@@ -23,8 +23,14 @@
 <script src="<?php echo base_url('assets_d/js/infinite-scroll.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
-
 <script>
+    $(document).ready(function() {
+        $("#multiple-select").selectator();
+        $("#multiple-select-post").selectator();
+    });
+</script>
+<script>
+    var base_url = '<?php echo base_url(); ?>';
 	$('.storyRoom').slick({
 		infinite: false,
 		slidesToShow: 5.5,
@@ -137,7 +143,7 @@
 		})
 	}
 
-	$("#multiple-select").selectator({
+	$("#multiple-select-post").selectator({
         showAllOptionsOnFocus: true,
         searchFields: "value text subtitle right",
         minSearchLength: 1,
@@ -235,16 +241,21 @@
     });
 
     function saveSelectedPeer() {
-        $('#groupMember').modal('hide');
+        $('#postGroupModal').modal('hide');
         $('#createPost').modal('show');
         var output_string = "";
-        $("#multiple-select option").each(function() {
+        $("#multiple-select-post option").each(function() {
             // Add $(this).val() to your list
 
             output_string = output_string + $(this).val() + ", ";
         });
         output_string = output_string.substr(0, output_string.length - 2);
         $('#shareWithPeersId').val(output_string);
+    }
+
+    function backToPostPrivacy() {
+        $('#postGroupModal').modal('hide');
+        $('#privacyPost').modal('show');
     }
 
 	$(document).ready(function() {
@@ -265,7 +276,7 @@
 			}
 		});
 
-		var base_url = '<?php echo base_url(); ?>';
+		
 
 		CKEDITOR.replace('messagepostarea', {
             on: {
@@ -393,6 +404,8 @@
             return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
         }
 
+
+
         function getoutput(inputfile) {
             var file_ext = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "pdf"];
             var extension = inputfile.value.split('.')[1];
@@ -445,7 +458,7 @@
             var formData = new FormData(this);
             var url = $(this).attr('action');
             var html_content = CKEDITOR.instances['messagepostarea'].getData();
-            var privacy = $("input:radio.privacy_val:checked").val();
+            var privacy = $("input:radio.privacy_val:checked").val(); 
 
             if ($('#allow_comment').is(':checked')) {
                 var allow_comment = 1;
@@ -532,10 +545,10 @@
 		let imgAttr = $(this).children('img');
 		$(this).children('span').text($(this).children('span').text() == 'More' ? 'Less' : 'More');
 		if (imgAttr.hasClass('more')) {
-			imgAttr.attr('src', 'images/less.svg');
+			imgAttr.attr('src', base_url+'assets_d/images/less.svg');
 			imgAttr.attr('class', 'less');
 		} else {
-			imgAttr.attr('src', 'images/more-popup.svg');
+			imgAttr.attr('src', base_url+'assets_d/images/more-popup.svg');
 			imgAttr.attr('class', 'more');
 		}
 		$('.shareMoreContentWrapper').slideToggle();
@@ -625,10 +638,10 @@
 	$('.notification').on('click', function() {
 		let imgsrc = $(this).children('img');
 		if (imgsrc.hasClass('notification-disabled')) {
-			imgsrc.attr('src', 'images/alert.svg');
+			imgsrc.attr('src', base_url+'assets_d/images/alert.svg');
 			imgsrc.attr('class', 'notification-active')
 		} else {
-			imgsrc.attr('src', 'images/alert-grey.svg');
+			imgsrc.attr('src', base_url+'assets_d/images/alert-grey.svg');
 			imgsrc.attr('class', 'notification-disabled')
 		}
 	})

@@ -577,20 +577,43 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="createHeader">
-                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" onclick="backToPostPrivacy()"> Share with peers</h4>
+                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" > Add new peers</h4>
                         <div class="closePost" data-dismiss="modal">
                             <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
                     <select id="multiple-select" name="users[]" multiple class="form-control"></select>
                     <div class="settingWrapper">
-                        <button type="button" id="submit_new_group_member" class="event_action" onclick="saveSelectedPeer()"> Save</button>
+                        <button type="button" id="submit_new_group_member" class="event_action" > Save</button>
                     </div>
                 </div>
             </div>
         </div>
         <input type="hidden" name="group_id" id="hidde_add_group_id">
     </form>
+</div>
+
+<!-- for post  -->
+<div class="modal fade" id="postGroupModal" role="dialog">
+    
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body">
+                    <div class="createHeader">
+                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" onclick="backToPostPrivacy()"> Share with peers</h4>
+                        <div class="closePost" data-dismiss="modal">
+                            <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
+                        </div>
+                    </div>
+                    <select id="multiple-select-post" multiple class="form-control"></select>
+                    <div class="settingWrapper">
+                        <button type="button" id="" class="event_action" onclick="saveSelectedPeer()"> Save</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    
 </div>
 
 <script type="text/javascript">
