@@ -29,6 +29,187 @@
         $("#multiple-select-post").selectator();
     });
 </script>
+<script type="text/javascript">
+    function saveReaction(reaction_id, reference_id, reference) {
+
+        url = '<?php echo base_url(); ?>Profile/saveReaction';
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                "reaction_id": reaction_id,
+                "reference_id": reference_id,
+                "reference": reference
+            },
+            success: function(result) {
+                $('.' + reference + '_total_likes_' + reference_id).html(result);
+                if (reaction_id == 1) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Like</span>');
+                } else if (reaction_id == 2) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Support</span>');
+                } else if (reaction_id == 3) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Celebrate</span>');
+                } else if (reaction_id == 4) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Insightful</span>');
+                } else if (reaction_id == 5) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Curious</span>');
+                } else if (reaction_id == 6) {
+                    $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" class="likepost" alt="Like"> <span style="color: #185aeb;">Love</span>');
+                }
+
+
+
+            }
+        });
+    }
+    function getAllReactionData(reference_id, reference) {
+        $.ajax({
+            url: '<?php echo base_url(); ?>Profile/getAllReactionData',
+            type: 'post',
+            data: {
+                "count": 0,
+                "reference_id": reference_id,
+                "reference": reference
+            },
+            success: function(result) {
+
+                $('#modal-reaction-body').html(result);
+                $('#reations-popup').modal('show');
+            }
+        });
+    }
+    function deleteReaction(reference, reference_id) {
+        url = '<?php echo base_url(); ?>Profile/deleteReaction';
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                "reference_id": reference_id,
+                "reference": reference
+            },
+            success: function(result) {
+                $('.' + reference + '_total_likes_' + reference_id).html(result);
+                $('.' + reference + '_likeMenu_' + reference_id).html('<img src="<?php echo base_url(); ?>assets_d/images/like-grey.svg" class="likepost" alt="Like"><span>Like</span>');
+
+            }
+        });
+    }
+    function showCommentBoxWrap(reference, reference_id) {
+        $('#' + reference + '_comment_' + reference_id).show();
+    }
+
+    function hideCommentBoxWrap(reference, reference_id) {
+        $('#' + reference + '_comment_' + reference_id).hide();
+    }
+    function postCommentByReference(event, reference, reference_id, comment) {
+        if (event.which == 13) {
+
+            if (comment != '') {
+                var url = '<?php echo base_url('profile/addCommentByRefrence') ?>';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        'comment': comment,
+                        'reference_id': reference_id,
+                        'reference': reference
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#' + reference + '_commentappend_' + reference_id).append(result.html);
+                        $('#' + reference + '_comment_count_' + reference_id).html(result.count);
+                        $('#comment_input_' + reference + '_' + reference_id).val('');
+                    }
+                });
+            }
+        }
+    }
+
+    function postCommentReply(event, comment_id, comment) {
+        if (event.which == 13) {
+
+            if (comment != '') {
+                var url = '<?php echo base_url('profile/postCommentReply') ?>';
+                $.ajax({
+                    url: url,
+                    type: 'POST',
+                    data: {
+                        'comment': comment,
+                        'comment_id': comment_id
+                    },
+                    dataType: 'json',
+                    success: function(result) {
+                        $('#commentreply_box_' + comment_id).append(result.html);
+                        $('#comment_reply_count_' + comment_id).show();
+                        $('#comment_reply_count_' + comment_id).html(result.count);
+                        $("#comment_reply_" + comment_id).val('');
+                    }
+                });
+            }
+        }
+    }
+
+    function postImageComment(reference, reference_id) {
+        var file_data = $('#comment_image_' + reference + '_' + reference_id).prop('files')[0];
+        var form_data = new FormData();
+
+        form_data.append('file', file_data);
+        form_data.append('reference_id', reference_id);
+        form_data.append('reference', reference);
+        // alert(form_data);  
+        var url = '<?php echo base_url('profile/postImgComment') ?>';
+        $.ajax({
+            url: url, // point to server-side PHP script 
+            dataType: 'text', // what to expect back from the PHP script, if anything
+            cache: false,
+            contentType: false,
+            processData: false,
+            data: form_data,
+            type: 'post',
+            dataType: 'json',
+            success: function(result) {
+                $('#' + reference + '_commentappend_' + reference_id).append(result.html);
+                $('#' + reference + '_comment_count_' + reference_id).html(result.count);
+                $('#comment_image_' + reference + '_' + reference_id).val('');
+            }
+        });
+    }
+
+    function showReplyBox(id) {
+        $('#show_reply_box_' + id).show();
+    }
+
+    function likeCommentByReference(comment_id) {
+        var url = '<?php echo base_url('profile/likeCommentByReference') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'comment_id': comment_id
+            },
+            success: function(result) {
+                if (result != 0) {
+                    $('#reactcomment_' + comment_id).show();
+                    $('#comment_like_count_' + comment_id).html(result);
+                    if ($('#like_text_' + comment_id).text() == 'Like') {
+                        $('#like_text_' + comment_id).text('Liked');
+                    } else {
+                        $('#like_text_' + comment_id).text('Like');
+                    }
+                } else {
+                    $('#reactcomment_' + comment_id).hide();
+                    $('#comment_like_count_' + comment_id).html(result);
+                    if ($('#like_text_' + comment_id).text() == 'Like') {
+                        $('#like_text_' + comment_id).text('Liked');
+                    } else {
+                        $('#like_text_' + comment_id).text('Like');
+                    }
+                }
+
+            }
+        });
+    }
+</script>
 <script>
     var base_url = '<?php echo base_url(); ?>';
 	$('.storyRoom').slick({

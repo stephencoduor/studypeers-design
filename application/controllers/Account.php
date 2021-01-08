@@ -104,6 +104,7 @@ class Account extends CI_Controller
         $this->load->view('user/profile/add-post');
         $this->load->view('user/profile/post-privacy');
         $this->load->view('user/include/right-sidebar');
+        
         $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer-dashboard');
     }
