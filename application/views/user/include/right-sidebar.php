@@ -55,11 +55,11 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 if ($key <= 2) {
                     if ($value['user_id'] == $user_id) {
                         $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                        $this->db->join('user','user.id=user_info.userID');
+                        $this->db->join('user', 'user.id=user_info.userID');
                         $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
                     } else {
                         $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                        $this->db->join('user','user.id=user_info.userID');
+                        $this->db->join('user', 'user.id=user_info.userID');
                         $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
                     }
             ?>
@@ -199,11 +199,11 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                     <?php foreach ($peer_list as $key => $value) {
                         if ($value['user_id'] == $user_id) {
                             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                            $this->db->join('user','user.id=user_info.userID');
+                            $this->db->join('user', 'user.id=user_info.userID');
                             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['peer_id']))->row_array();
                         } else {
                             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                            $this->db->join('user','user.id=user_info.userID');
+                            $this->db->join('user', 'user.id=user_info.userID');
                             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['user_id']))->row_array();
                         }
                     ?>
@@ -380,7 +380,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
     </div>
 </div>
 <!-- Small Chat Box Start Here -->
-<div class="chat-wrapper small-chat" style="display:none;">
+<!-- <div class="chat-wrapper small-chat" style="display:none;">
     <div class="chat-right">
         <div class="chat-header">
             <div class="chat-header-left">
@@ -487,7 +487,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <!-- Small Chat Box End Here-->
 
 
@@ -684,14 +684,14 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="createHeader">
-                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" > Add new peers</h4>
+                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Add new peers</h4>
                         <div class="closePost" data-dismiss="modal">
                             <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
                     <select id="multiple-select" name="users[]" multiple class="form-control"></select>
                     <div class="settingWrapper">
-                        <button type="button" id="submit_new_group_member" class="event_action" > Save</button>
+                        <button type="button" id="submit_new_group_member" class="event_action"> Save</button>
                     </div>
                 </div>
             </div>
@@ -702,25 +702,25 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
 <!-- for post  -->
 <div class="modal fade" id="postGroupModal" role="dialog">
-    
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="createHeader">
-                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" onclick="backToPostPrivacy()"> Share with peers</h4>
-                        <div class="closePost" data-dismiss="modal">
-                            <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
-                        </div>
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="createHeader">
+                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" onclick="backToPostPrivacy()"> Share with peers</h4>
+                    <div class="closePost" data-dismiss="modal">
+                        <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                     </div>
-                    <select id="multiple-select-post" multiple class="form-control"></select>
-                    <div class="settingWrapper">
-                        <button type="button" id="" class="event_action" onclick="saveSelectedPeer()"> Save</button>
-                    </div>
+                </div>
+                <select id="multiple-select-post" multiple class="form-control"></select>
+                <div class="settingWrapper">
+                    <button type="button" id="" class="event_action" onclick="saveSelectedPeer()"> Save</button>
                 </div>
             </div>
         </div>
-        
-    
+    </div>
+
+
 </div>
 
 <script type="text/javascript">
