@@ -685,7 +685,7 @@
 											</li>
 											<li class="badge badge3">
 												<a href="">
-													<img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
+													<img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Student
 												</a>
 											</li>
 										</ul>
@@ -1150,7 +1150,7 @@
 											</li>
 											<li class="badge badge3">
 												<a href="">
-													<img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
+													<img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Student
 												</a>
 											</li>
 										</ul>
@@ -1658,7 +1658,7 @@
 																	</li>
 																	<li class="badge badge3">
 																		<a href="">
-																			<img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
+																			<img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Student
 																		</a>
 																	</li>
 																</ul>
@@ -2055,7 +2055,7 @@
                                             </li>
                                             <li class="badge badge3">
                                                 <a href="">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
+                                                    <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Student
                                                 </a>
                                             </li>
                                         </ul>
