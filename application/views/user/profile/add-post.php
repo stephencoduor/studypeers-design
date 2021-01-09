@@ -131,7 +131,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                             <!----Show image preview here--->
                         </div>
                         <div class="hashTagWrap">
-                            <button type="button" class="hashTag">#hashtag</button>
+                            <button type="button" class="hashTag" onclick="applyHashTag()">#hashtag</button>
                             <p>help the right people see your post</p>
                         </div>
                     </div>
@@ -150,10 +150,10 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 <img src="<?php echo base_url(); ?>assets_d/images/file.svg" alt="image/video">
                                 <span>File</span>
                             </div>
-                            <div class="moreSection">
+                            <!-- <div class="moreSection">
                                 <span>More</span>
                                 <img class="more" src="<?php echo base_url(); ?>assets_d/images/more-popup.svg" alt="more">
-                            </div>
+                            </div> -->
                         </div>
                         <div class="studybuttonGroup post ">
                             <button type="button" class="event_action" id="save_post_from_ajax" >

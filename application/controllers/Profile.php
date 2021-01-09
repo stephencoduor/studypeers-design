@@ -1383,8 +1383,11 @@ $config['max_height']  = '768000';
                       <span aria-hidden="true">&times;</span>
                     </button></div>';
             $this->session->set_flashdata('flash_message', $message);
-
-            redirect(site_url('Profile/timeline'));
+            if($this->input->post('page') == 'dashboard'){
+                redirect(site_url('account/dashboard'));
+            } else {
+                redirect(site_url('Profile/timeline'));
+            }
 
         }
     }

@@ -1307,6 +1307,7 @@
                 $('.pollsWrapper').slideToggle();
             }
         });
+        
         $(function() {
             $('#datetimepickerstart').datetimepicker({
                 allowInputToggle: true,

@@ -31,7 +31,7 @@
 						<div class="eventMessage">
 							<img src="<?php echo base_url(); ?>assets_d/images/Event.svg" alt="Ring"> Event
 						</div>
-						<div class="dropdown dropdownToggleMenu">
+						<!-- <div class="dropdown dropdownToggleMenu">
 							<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
 							<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 							    <li role="presentation">
@@ -122,7 +122,7 @@
 								    </a> 
 								</li> 
 						    </ul>
-						</div>
+						</div> -->
 						<div class="createBox">
 							<div class="feeduserwrap">
 								<div class="user-details">
@@ -264,12 +264,12 @@
 													<span id="event_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
 												</a>
 											</li>
-											<li>
+											<!-- <li>
 												<a>
 													<img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
 													<span>01</span>
 												</a>
-											</li>
+											</li> -->
 										</ul>
 									</div>
 								</div>
@@ -352,12 +352,12 @@
                                                 <span>Comment</span>
                                             </a>
                                         </li>
-										<li>
+										<!-- <li>
 											<a>
 												<img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
 												<span>Share</span>
 											</a>
-										</li>
+										</li> -->
 									</ul>
 								</div>
 								<div class="commentBoxWrap" id="event_comment_<?php echo $value['reference_id']; ?>">
@@ -572,7 +572,7 @@
 				<div class="eventMessage">
 					<img src="<?php echo base_url(); ?>assets_d/images/Study Sets.svg" alt="Ring"> Study Set
 				</div>
-				<div class="dropdown dropdownToggleMenu">
+				<!-- <div class="dropdown dropdownToggleMenu">
 					<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
 					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 					    <li role="presentation">
@@ -663,7 +663,7 @@
 						    </a> 
 						</li> 
 				    </ul>
-				</div>
+				</div> -->
 				<div class="createBox">
 					<div class="feeduserwrap">
 						<div class="user-details">
@@ -714,25 +714,25 @@
 							</div>
 							<div class="rightStatus">
 								<ul>
-									<li>
+									<!-- <li>
 										<a>
 											<div class="my-rating-4" data-rating="1.5">
 											</div>																		
 											<span>1200</span>
 										</a>
-									</li>
+									</li> -->
 									<li>
 										<a>
 											<img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
 											<span id="studyset_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
 										</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a>
 											<img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
 											<span>01</span>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>
@@ -816,12 +816,12 @@
                                         <span>Comment</span>
                                     </a>
                                 </li>
-								<li>
+								<!-- <li>
 									<a>
 										<img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
 										<span>Share</span>
 									</a>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 						<div class="commentBoxWrap" id="studyset_comment_<?php echo $value['reference_id']; ?>">
@@ -1037,7 +1037,7 @@
 				<div class="eventMessage">
 					<img src="<?php echo base_url(); ?>assets_d/images/document.svg" alt="document"> Document
 				</div>
-				<div class="dropdown dropdownToggleMenu">
+				<!-- <div class="dropdown dropdownToggleMenu">
 					<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
 					<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 					    <li role="presentation">
@@ -1128,7 +1128,7 @@
 						    </a> 
 						</li> 
 				    </ul>
-				</div>
+				</div> -->
 				<div class="createBox">
 					<div class="feeduserwrap">
 						<div class="user-details">
@@ -1172,25 +1172,25 @@
 							</div>
 							<div class="rightStatus">
 								<ul>
-									<li>
+									<!-- <li>
 										<a>
 											<div class="my-rating-4" data-rating="1.5">
 											</div>																		
 											<span>1200</span>
 										</a>
-									</li>
+									</li> -->
 									<li>
 										<a>
 											<img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
 											<span id="document_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
 										</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a>
 											<img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
 											<span>01</span>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>
@@ -1274,12 +1274,12 @@
                                         <span>Comment</span>
                                     </a>
                                 </li>
-								<li>
+								<!-- <li>
 									<a>
 										<img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
 										<span>Share</span>
 									</a>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 						<div class="commentBoxWrap" id="document_comment_<?php echo $value['reference_id']; ?>">
@@ -1545,7 +1545,7 @@
 							</div>
 								
 						</div>
-										<div class="dropdown dropdownToggleMenu">
+										<!-- <div class="dropdown dropdownToggleMenu">
 											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
 											<ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
 											    <li role="presentation">
@@ -1636,7 +1636,7 @@
 												    </a> 
 												</li> 
 										    </ul>
-										</div>
+										</div> -->
 										<div class="createBox">
 											<div class="feeduserwrap">
 												<div class="user-details">
@@ -1697,12 +1697,12 @@
 											<span><?php echo count($answer_list); ?></span>
 										</a>
 									</li>
-									<li>
+									<!-- <li>
 										<a>
 											<img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
 											<span>01</span>
 										</a>
-									</li>
+									</li> -->
 								</ul>
 							</div>
 						</div>
@@ -1723,12 +1723,12 @@
 										<span>Answer</span>
 									</a>
 								</li>
-								<li>
+								<!-- <li>
 									<a>
 										<img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
 										<span>Share</span>
 									</a>
-								</li>
+								</li> -->
 							</ul>
 						</div>
 						<div class="dashboard-qa-answer" id="dashboard-qa-answer-<?php echo $question_detail['id']; ?>" style="display: none;">
@@ -1936,98 +1936,117 @@
                         <img src="<?php echo base_url(); ?>assets_d/images/alert.svg" alt="Ring"> 
                     </div>
                 <?php } ?>
-                <div class="dropdown dropdownToggleMenu">
-                    <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" >
-                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                <div class="left">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/save.svg" alt="Save">
-                                </div>
-                                <div class="right">
-                                    <span>Save</span>
-                                    <p>Save for later</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                <div class="left">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/copy-link.svg" alt="Link">
-                                </div>
-                                <div class="right">
-                                    <span>Copy link to post</span>
-                                </div>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                <div class="left">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/embed.svg" alt="Embed">
-                                </div>
-                                <div class="right">
-                                    <span>Embed this post</span>
-                                    <p>copy and paste this post to your site</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                <div class="left">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/hide.svg" alt="Hide Post">
-                                </div>
-                                <div class="right">
-                                    <span>Hide this post</span>
-                                    <p>I don't want to see this post in my feed</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                <div class="left">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/unfollow.svg" alt="Unfollow">
-                                </div>
-                                <div class="right">
-                                    <span>Unfollow Loreum Ipsum</span>
-                                    <p>Stop seeing post from Loreum Ipsum</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                <div class="left">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/report.svg" alt="Report">
-                                </div>
-                                <div class="right">
-                                    <span>Report this post</span>
-                                    <p>This post is offensive or account is hacked</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                <div class="left">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/improve-feed.svg" alt="Improve Feed">
-                                </div>
-                                <div class="right">
-                                    <span>Improve my feed</span>
-                                    <p>Get recommended sources to follow</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li role="presentation">
-                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
-                                <div class="left">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/who-can-see.svg" alt="Visible">
-                                </div>
-                                <div class="right">
-                                    <span>Who can see this post?</span>
-                                    <p>Visible to public</p>
-                                </div>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+                <?php if($user_id == $post_query->created_by) { ?>
+                	<div class="dropdown dropdownToggleMenu">
+                    	<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" >
+                    
+	                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+	                    	<li role="presentation" class="deleteReferenceById" data-toggle="modal" data-target="#confirmationModalDeletePost" data-id="<?= $value['reference_id']; ?>">
+	                            <a role="menuitem" tabindex="-1"
+	                               href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img
+	                                        src="<?php echo base_url(); ?>assets_d/images/hide.svg"
+	                                        alt="Hide Post">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Delete this post</span>
+	                                    <p>I don't want to keep this post in my
+	                                        feed</p>
+	                                </div>
+	                            </a>
+	                        </li>
+	                        <!-- <li role="presentation">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/save.svg" alt="Save">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Save</span>
+	                                    <p>Save for later</p>
+	                                </div>
+	                            </a>
+	                        </li>
+	                        <li role="presentation">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/copy-link.svg" alt="Link">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Copy link to post</span>
+	                                </div>
+	                            </a>
+	                        </li>
+	                        <li role="presentation">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/embed.svg" alt="Embed">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Embed this post</span>
+	                                    <p>copy and paste this post to your site</p>
+	                                </div>
+	                            </a>
+	                        </li>
+	                        <li role="presentation">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/hide.svg" alt="Hide Post">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Hide this post</span>
+	                                    <p>I don't want to see this post in my feed</p>
+	                                </div>
+	                            </a>
+	                        </li>
+	                        <li role="presentation">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/unfollow.svg" alt="Unfollow">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Unfollow Loreum Ipsum</span>
+	                                    <p>Stop seeing post from Loreum Ipsum</p>
+	                                </div>
+	                            </a>
+	                        </li>
+	                        <li role="presentation">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/report.svg" alt="Report">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Report this post</span>
+	                                    <p>This post is offensive or account is hacked</p>
+	                                </div>
+	                            </a>
+	                        </li>
+	                        <li role="presentation">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/improve-feed.svg" alt="Improve Feed">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Improve my feed</span>
+	                                    <p>Get recommended sources to follow</p>
+	                                </div>
+	                            </a>
+	                        </li>
+	                        <li role="presentation">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/who-can-see.svg" alt="Visible">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Who can see this post?</span>
+	                                    <p>Visible to public</p>
+	                                </div>
+	                            </a>
+	                        </li> -->
+	                    </ul>
+	                
+                	</div>
+                <?php } ?>
                 <div class="createBox">
                     <div class="feeduserwrap">
                         <div class="user-details">
@@ -2228,12 +2247,12 @@
                                             <span id="Post_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
                                             <span><?php echo $posts['post_details']->share_count; ?></span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -2320,12 +2339,12 @@
                                             <span>Comment</span>
                                         </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a>
                                         <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
                                         <span>Share</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div class="commentBoxWrap" id="Post_comment_<?php echo $value['reference_id']; ?>">
