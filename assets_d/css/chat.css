@@ -519,6 +519,38 @@ div.time {
 .chat-wrapper.small .hide-on-small {
   display: none;
 }
+
+
+.chat-wrapper.small-chat {
+  width: 360px;
+  height: 50%;
+  overflow-y: auto;
+}
+.chat-wrapper.small-chat .chat-msg {
+  max-width: 100%;
+}
+.chat-wrapper.small-chat .message-sent {
+  max-width: 100%;
+}
+.chat-wrapper.small-chat .chat-header {
+  padding: 10px;
+}
+.chat-wrapper.small-chat .chat-body-wrap {
+  padding: 0 0 10px;
+}
+.chat-wrapper.small-chat .chat-header-left figure {
+  width: 50px;
+  height: 50px;
+}
+
+.chat-wrapper.small-chat .hide-on-big {
+  display: block;
+}
+.chat-wrapper.small-chat .hide-on-small {
+  display: none;
+}
+
+
 .chat-wrapper:before {
   width: 275px;
   height: 100%;
