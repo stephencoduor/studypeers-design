@@ -219,7 +219,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                         <img
                                                             src="<?php echo base_url(); ?>assets_d/images/professor.svg"
                                                             alt="Professor">
-                                                        Faculty
+                                                        Student
                                                     </a>
                                                 </li>
                                             </ul>
@@ -834,7 +834,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                     </li>
                                                     <li class="badge badge3">
                                                         <a href="">
-                                                            <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
+                                                            <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Student
                                                         </a>
                                                     </li>
                                                 </ul>
@@ -1363,7 +1363,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </li>
                                             <li class="badge badge3">
                                                 <a href="">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
+                                                    <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Student
                                                 </a>
                                             </li>
                                         </ul>
@@ -1820,7 +1820,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </li>
                                             <li class="badge badge3">
                                                 <a href="">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
+                                                    <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Student
                                                 </a>
                                             </li>
                                         </ul>
@@ -2330,7 +2330,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                                     </li>
                                                                     <li class="badge badge3">
                                                                         <a href="">
-                                                                            <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Faculty
+                                                                            <img src="<?php echo base_url(); ?>assets_d/images/professor.svg" alt="Professor"> Student
                                                                         </a>
                                                                     </li>
                                                                 </ul>
