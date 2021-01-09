@@ -2767,3 +2767,147 @@ figcaption a {
     height: 60vh;
     overflow-y: auto;
 }
+
+
+
+.selectedPollOptions .progress {
+    height: 30px;
+    border-radius: 30px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+.selectedPollOptions .progress {
+    width: 100%;
+    height: 30px;
+    border-radius: 30px;
+    margin-top: 50px;
+    overflow: visible;
+}
+.selectedPollOptions .progress .eventActionWrap ul li:nth-child(2) {
+    right: 45px;
+    left: auto;
+}
+.selectedPollOptions .progress .eventActionWrap ul li:nth-child(3) {
+    right: 30px;
+    left: auto;
+}
+.selectedPollOptions .progress .eventActionWrap ul li:nth-child(4) {
+    right: 20px;
+    left: auto;
+}
+.selectedPollOptions .progress .eventActionWrap ul li:nth-child(5) {
+    right: 10px;
+    left: auto;
+}
+.selectedPollOptions .progressValues {
+    position: absolute;
+    top: -40px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.selectedPollOptions .progressValues .leftValue {
+    font-size: 16px;
+    font-weight: 500;
+}
+.selectedPollOptions .progressValues .rightValues {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 50%;
+    position: relative;
+}
+
+.selectedPollOptions .progressValues .rightValues p {
+    font-size: 16px;
+    font-weight: 500;
+    margin-right: 10px;
+}
+
+.selectedPollOptions .progress .eventActionWrap {
+    width: 50%;
+    position: absolute;
+    right: 0;
+    margin: 0;
+    justify-content: flex-end;
+    display: flex;
+    align-items: center;
+}
+.eventActionWrap ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+.selectedPollOptions .progress .eventActionWrap ul li:first-child {
+    right: 58px;
+    left: auto;
+}
+.selectedPollOptions .progress .eventActionWrap ul li {
+    width: 25px;
+    height: 25px;
+    border: 1px solid #fff;
+}
+
+.selectedPollOptions .progress .eventActionWrap ul li.more {
+    font-size: 12px;
+    font-weight: 400;
+}
+.selectedPollOptions .progress .eventActionWrap ul li:last-child {
+    right: 10px;
+    left: auto;
+}
+.selectedPollOptions .progress .eventActionWrap ul li img {
+    display: block;
+}
+.selectedPollOptions .eventActionWrap ul li img {
+    width: 100%;
+    height: 100%;
+}
+.selectedPollOptions .progress-bar {
+    background: #546de5;
+}
+.selectedPollOptions .progress-bar {
+    float: left;
+    width: 0;
+    height: 100%;
+    font-size: 12px;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    background-color: #546de5;
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    box-shadow: inset 0 -1px 0 rgba(0,0,0,.15);
+    -webkit-transition: width .6s ease;
+    -o-transition: width .6s ease;
+    transition: width .6s ease;
+    border:none;
+    border-top-left-radius: 100px;
+    border-bottom-left-radius: 100px;
+}
+.dashRadioWrap input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+.selectedPollOptions .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 22px;
+    width: 22px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 2px solid #aaaaaa;
+    transition: all 0.3s ease-in;
+    -webkit-transition: all 0.3s ease-in;
+    -moz-transition: all 0.3s ease-in;
+    -ms-transition: all 0.3s ease-in;
+    -o-transition: all 0.3s ease-in;
+}

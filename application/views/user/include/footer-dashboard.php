@@ -209,6 +209,40 @@
             }
         });
     }
+
+    function savePollOption(post_id, option_id) {
+        var url = '<?php echo base_url('profile/savePollOption') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'post_id': post_id,
+                'option_id': option_id
+            },
+            success: function(result) {
+                $('#poll_div_' + post_id).html(result);
+            }
+        });
+    }
+
+
+    $(document).on('click', '.userPollList', function() {
+        var option_id = $(this).data('id');
+
+        $.ajax({
+            url: '<?php echo base_url(); ?>profile/getPeersPollList',
+            type: 'post',
+            data: {
+                "id": option_id
+            },
+            success: function(result) {
+
+                $('#userPollListModal').html(result);
+            }
+        })
+
+
+    });
 </script>
 <script>
     var base_url = '<?php echo base_url(); ?>';

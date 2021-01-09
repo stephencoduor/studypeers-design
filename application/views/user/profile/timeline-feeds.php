@@ -1686,7 +1686,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             </div>
                                         </div>  
                                     </div>
-                                </div>
+                        </div>
                     </div>
                 </div>
             </div>
