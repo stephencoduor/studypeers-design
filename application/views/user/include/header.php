@@ -442,7 +442,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 							</div>
 						</div>
 					</nav>
-					<a class="navbar-brand" href="javascript:void(0);"></a>
+					<!-- <a class="navbar-brand" href="javascript:void(0);"></a> -->
 				</section>
 			</section>
 		</section>

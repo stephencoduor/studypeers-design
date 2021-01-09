@@ -243,6 +243,17 @@
 
 
     });
+
+    $(document).on("click", ".deleteReferenceById", function() {
+        var ref_id = $(this).data('id');
+        $(".modal-body #delete_reference_id").val(ref_id);
+
+    });
+     
+    function applyHashTag(){
+        CKEDITOR.instances['messagepostarea'].setData( '<p>#</p>' );
+    }
+    
 </script>
 <script>
     var base_url = '<?php echo base_url(); ?>';
@@ -793,6 +804,7 @@
 			$('.pollsWrapper').slideToggle();
 		}
 	});
+
 	$(function() {
 		$('#datetimepickerstart').datetimepicker({
 			allowInputToggle: true,

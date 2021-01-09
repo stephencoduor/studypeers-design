@@ -125,18 +125,18 @@
 								</div>
 								<div class="writePostWrapper">
 									<figure>
-										<img src="<?php echo base_url(); ?>assets_d/images/detail1.jpg" alt="Post User Image">
+										<img src="<?php echo userImage($user_id); ?>" alt="Post User Image">
 									</figure>
 									<div class="postMessageWrapper" data-toggle="modal" data-target="#createPost">
 										<div class="defaultMessage">What's on your mind ?</div>
 									</div>
 								</div>
 								<div class="addOnPostMessage">
-									<div class="imageSection">
+									<div class="imageSection" id="pollSectionDefault" data-toggle="modal" data-target="#createPost">
 										<img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="image/video">
 										<span>Image/Video</span>
 									</div>
-									<div class="pollSection">
+									<div class="pollSection" id="pollSectionDefault" data-toggle="modal" data-target="#createPost">
 										<img src="<?php echo base_url(); ?>assets_d/images/poll.svg" alt="image/video">
 										<span>Poll</span>
 									</div>
@@ -10444,6 +10444,33 @@
                     <div class="listUserWrap" id="userPollListModal">
 
 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirmationModalDeletePost" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Confirmation</h4>
+                <div class="row">
+                    <h6 class="modalText">Are you sure to delete this Post !</h6>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <form method="post" action="<?php echo base_url(); ?>profile/deletePost">
+                            <div class="form-group button">
+                                <input type="hidden" name="delete_reference_id" id="delete_reference_id" value="">
+                                <input type="hidden" name="page" id="" value="dashboard">
+                                <button type="button" class="transparentBtn highlight" data-dismiss="modal">No</button>
+                                <button type="submit" class="filterBtn">Yes</button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
