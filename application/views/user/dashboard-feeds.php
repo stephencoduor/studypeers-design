@@ -1912,9 +1912,7 @@
 			if($user_id == $post_query->created_by) {
 				$chk_view = 1;
 			} else {
-				if(($post_query->privacy_id != 3)){
-					$chk_view = 1;
-				}
+				
 
 				if(($post_query->privacy_id == 2)){
 					$user_img = 'anonymous';
