@@ -301,6 +301,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 if(!empty($user_chk_option)){
                                     $option_id = $user_chk_option['poll_option_id'];
                                 }
+
+                                $poll_end = $posts['post_details']->poll_end_date.' '.$posts['post_details']->poll_end_time;
+                                $if_poll_active = 0;
+                                if(date('Y-m-d H:i:s') < $poll_end){
+                                    $if_poll_active = 1;
+                                }
                             ?>
                                 <div id="poll_div_<?= $value['reference_id']; ?>">
                                     <?php foreach ($posts['post_poll_options'] as $options) {
@@ -322,10 +328,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     ?>
                                         <div class="selectedPollOptions">
                                                 <div class="flex-option-row">
-                                                    <label class="dashRadioWrap">
-                                                        <input type="radio" <?= $chk; ?> name="radio" >
-                                                        <span class="checkmark" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')"></span>
-                                                    </label>
+                                                    <?php  if($if_poll_active == 1) { ?>
+                                                        <label class="dashRadioWrap">
+                                                            <input type="radio" <?= $chk; ?> name="radio" >
+                                                            <span class="checkmark" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')"></span>
+                                                        </label>
+                                                    <?php } ?>
                                                     <div class="progressBar">
                                                         <div class="progress">
                                                             <div class="progressValues">

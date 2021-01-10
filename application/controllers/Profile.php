@@ -649,6 +649,9 @@ $config['max_height']  = '768000';
 		$is_comment_on = 0;
         $announcement  = $this->input->post('announcement');
 
+        $poll_end_date = date('Y-m-d', strtotime($this->input->post('poll-end-date')));
+        $poll_end_time = $this->input->post('poll-end-time');
+
 		if($allow_comment == 'on'){
 			$is_comment_on = 1;
 		}
@@ -658,6 +661,8 @@ $config['max_height']  = '768000';
 			'is_comment_on'    		=> $allow_comment,
             'is_announcement'       => $announcement,
 			'created_by'        	=> $user_id,
+            'poll_end_date'         => $poll_end_date,
+            'poll_end_time'         => $poll_end_time,
 			'created_at'    		=> date('Y-m-d H:i:s'),
 			'updated_at'    		=> date('Y-m-d H:i:s')
 		);
