@@ -55,11 +55,11 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 if ($key <= 2) {
                     if ($value['user_id'] == $user_id) {
                         $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                        $this->db->join('user','user.id=user_info.userID');
+                        $this->db->join('user', 'user.id=user_info.userID');
                         $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
                     } else {
                         $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                        $this->db->join('user','user.id=user_info.userID');
+                        $this->db->join('user', 'user.id=user_info.userID');
                         $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
                     }
             ?>
@@ -199,11 +199,11 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                     <?php foreach ($peer_list as $key => $value) {
                         if ($value['user_id'] == $user_id) {
                             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                            $this->db->join('user','user.id=user_info.userID');
+                            $this->db->join('user', 'user.id=user_info.userID');
                             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['peer_id']))->row_array();
                         } else {
                             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                            $this->db->join('user','user.id=user_info.userID');
+                            $this->db->join('user', 'user.id=user_info.userID');
                             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['user_id']))->row_array();
                         }
                     ?>
@@ -379,6 +379,116 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         </div>
     </div>
 </div>
+<!-- Small Chat Box Start Here -->
+<!-- <div class="chat-wrapper small-chat" style="display:none;">
+    <div class="chat-right">
+        <div class="chat-header">
+            <div class="chat-header-left">
+                <div class="basic-user-info">
+                    <figure>
+                        <img id="common_image_group_preview" src="http://localhost/studypeers/uploads/users/cover/1605539206.png">
+                    </figure>
+                    <strong id="group_name_id">user7</strong>
+                </div>
+                <h3>Start Conversation</h3>
+            </div>
+            <div class="chat-header-right">
+                <a href="javascript:void(0)" class="video-icon"><img src="http://localhost/studypeers/assets_d/chat-assets/images/video-camera.svg" alt="Video Icon"></a>
+            </div>
+        </div>
+        <div class="start-conversation">
+            <button type="submit" class="searchBtn">
+                <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                    <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+		s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+		c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+                </svg>
+            </button>
+            <form action="javascript:void(0);" id="chat_submit_group_form">
+                <select id="multiple" name="usergroupschats[]" multiple=""></select>
+                <a href="javascript:void(0)" class="done-link">Done</a>
+            </form>
+        </div>
+        <div class="chat-content" id="chat_window_content">
+
+            <div class="loader-wrap" id="message_window_loader" style="display:none;">
+                <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+                    <g>
+                        <path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#ea2e7e" stroke-width="12"></path>
+                        <path d="M49 3L49 27L61 15L49 3" fill="#ea2e7e"></path>
+                        <animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+                    </g>
+                </svg>
+            </div>
+            <div class="chat-body" id="append_chat_records"></div>
+            <div class="page-load-status" style="display: block;">
+                <div class="loader-ellips infinite-scroll-request" style="display: none;">
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                    <span class="loader-ellips__dot"></span>
+                </div>
+                <p class="infinite-scroll-last" style="display: none;">End of content</p>
+                <p class="infinite-scroll-error" style="display: block;">No more pages to load</p>
+            </div>
+            <input type="hidden" id="current_group_id">
+            <input type="hidden" id="curren_group_members" value="[&quot;7&quot;]">
+            <input type="hidden" id="curren_group_name_id">
+            <input type="hidden" id="current_image_upload_src">
+            <input type="hidden" id="current_group_profile_setting">
+            <input type="hidden" id="current_receiver_id" value="7">
+            <input type="hidden" id="current_receiver_name_id" value="user7">
+        </div>
+        <span id="user_typing_id"></span>
+        <div id="progress-wrp" style="display:none;">
+            <div class="progress-bar"></div>
+            <div class="status"></div>
+        </div>
+        <div class="chat-footer">
+            <div class="input-wrap">
+                <div class="img-preview hide">
+                    <ul class="custom-image clearfix">
+                        <li>
+                            <ul class="custom-upload clearfix">
+                                <li>
+                                    <div class="choose-imagefile-wrap">
+                                        <div class="result">
+                                            <div id="gal">
+                                                <ul class="gallery" id="append_image_after_upload">
+
+                                                </ul>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <div class="chat-input-wrap">
+                    <div class="text-area-wrap">
+                        <textarea placeholder="Type your message here" id="send_message_input" class="form-control emojis-wysiwyg"></textarea>
+                    </div>
+                    <div class="chat-action">
+                        <button type="button" id="send_button_chat" class="send-btn">
+                            <i class="fa fa-paper-plane" aria-hidden="true"></i>
+                        </button>
+
+                        <a href="javascript:void(0)" class="media-icon">
+                            <img src="http://localhost/studypeers/assets_d/images/image.svg" alt="Imozi Icon" id="image_icon_selector">
+                        </a>
+                        <label class="file-upload" id="any_document_upload"></label>
+                        <input type="file" for="file-upload" class="rest_img" id="upload_second_image_chat" style="display:none;" accept="image/*">
+                        <form action="http://localhost/studypeers/account/upload-document-server" enctype="multipart/form-data" method="post" id="submit_upload_document_form">
+                            <input type="file" class="rest_img" id="upload_first_image_document" style="display:none;" accept="">
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div> -->
+<!-- Small Chat Box End Here-->
 
 
 <div class="chat-wrapper hide-chat">
@@ -512,9 +622,6 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         </li>
                     </ul>
                 </div>
-
-
-
                 <div class="chat-input-wrap">
 
                     <div class="text-area-wrap">
@@ -577,14 +684,14 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <div class="modal-content">
                 <div class="modal-body">
                     <div class="createHeader">
-                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" > Add new peers</h4>
+                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg"> Add new peers</h4>
                         <div class="closePost" data-dismiss="modal">
                             <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
                     </div>
                     <select id="multiple-select" name="users[]" multiple class="form-control"></select>
                     <div class="settingWrapper">
-                        <button type="button" id="submit_new_group_member" class="event_action" > Save</button>
+                        <button type="button" id="submit_new_group_member" class="event_action"> Save</button>
                     </div>
                 </div>
             </div>
@@ -595,25 +702,25 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
 <!-- for post  -->
 <div class="modal fade" id="postGroupModal" role="dialog">
-    
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-body">
-                    <div class="createHeader">
-                        <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" onclick="backToPostPrivacy()"> Share with peers</h4>
-                        <div class="closePost" data-dismiss="modal">
-                            <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
-                        </div>
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="createHeader">
+                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" onclick="backToPostPrivacy()"> Share with peers</h4>
+                    <div class="closePost" data-dismiss="modal">
+                        <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                     </div>
-                    <select id="multiple-select-post" multiple class="form-control"></select>
-                    <div class="settingWrapper">
-                        <button type="button" id="" class="event_action" onclick="saveSelectedPeer()"> Save</button>
-                    </div>
+                </div>
+                <select id="multiple-select-post" multiple class="form-control"></select>
+                <div class="settingWrapper">
+                    <button type="button" id="" class="event_action" onclick="saveSelectedPeer()"> Save</button>
                 </div>
             </div>
         </div>
-        
-    
+    </div>
+
+
 </div>
 
 <script type="text/javascript">
