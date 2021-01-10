@@ -2518,6 +2518,10 @@
             return false;
         }
     }
+
+    function applyHashTag(){
+        CKEDITOR.instances['messagepostarea'].setData( '<p>#</p>' );
+    }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script>

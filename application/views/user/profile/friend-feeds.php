@@ -64,7 +64,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             <img src="<?php echo base_url(); ?>assets_d/images/alert.svg" alt="Ring"> 
                         </div>
                     <?php } ?>
-                    <div class="dropdown dropdownToggleMenu">
+                    <!-- <div class="dropdown dropdownToggleMenu">
                         <img
                             src="<?php echo base_url(); ?>assets_d/images/more.svg"
                             alt="toggle" data-toggle="dropdown">
@@ -186,7 +186,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 </a>
                             </li>
                         </ul>
-                    </div>
+                    </div> -->
                     <div class="createBox">
                         <div class="feeduserwrap">
                             <div class="user-details">
@@ -423,14 +423,14 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                 <span id="Post_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a>
                                                 <img
                                                     src="<?php echo base_url(); ?>assets_d/images/share-grey.svg"
                                                     alt="Share">
                                                 <span><?php echo @$posts['post_details']->share_count; ?></span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                             </div>
@@ -519,14 +519,14 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         </a>
                                     </li>
                                     
-                                    <li>
+                                    <!-- <li>
                                         <a>
                                             <img
                                                 src="<?php echo base_url(); ?>assets_d/images/share-grey.svg"
                                                 alt="comment">
                                             <span>Share</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                             <div class="commentBoxWrap" id="Post_comment_<?php echo $value['reference_id']; ?>">
@@ -745,7 +745,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         <div class="eventMessage">
                             <img src="<?php echo base_url(); ?>assets_d/images/Event.svg" alt="Ring"> Event
                         </div>
-                        <div class="dropdown dropdownToggleMenu">
+                        <!-- <div class="dropdown dropdownToggleMenu">
                             <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                 <li role="presentation">
@@ -836,7 +836,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                     </a> 
                                 </li> 
                             </ul>
-                        </div>
+                        </div> -->
                         <div class="createBox">
                             <div class="feeduserwrap">
                                 <div class="user-details">
@@ -975,12 +975,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                     <span id="event_comment_count_<?php echo $value['reference_id']; ?>" ><?php echo count($get_comments); ?></span>
                                                 </a>
                                             </li>
-                                            <li>
+                                            <!-- <li>
                                                 <a>
                                                     <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
                                                     <span>01</span>
                                                 </a>
-                                            </li>
+                                            </li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -1064,12 +1064,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                 <span>Comment</span>
                                             </a>
                                         </li>
-                                        <li>
+                                        <!-- <li>
                                             <a>
                                                 <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
                                                 <span>Share</span>
                                             </a>
-                                        </li>
+                                        </li> -->
                                     </ul>
                                 </div>
                                 <div class="commentBoxWrap" id="event_comment_<?php echo $value['reference_id']; ?>">
@@ -1281,7 +1281,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 <div class="eventMessage">
                     <img src="<?php echo base_url(); ?>assets_d/images/Study Sets.svg" alt="Ring"> Study Set
                 </div>
-                <div class="dropdown dropdownToggleMenu">
+                <!-- <div class="dropdown dropdownToggleMenu">
                     <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                         <li role="presentation">
@@ -1372,7 +1372,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             </a> 
                         </li> 
                     </ul>
-                </div>
+                </div> -->
                 <div class="createBox">
                     <div class="feeduserwrap">
                         <div class="user-details">
@@ -1436,12 +1436,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             <span id="studyset_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
                                             <span>01</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -1525,12 +1525,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         <span>Comment</span>
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a>
                                         <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
                                         <span>Share</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div class="commentBoxWrap" id="studyset_comment_<?php echo $value['reference_id']; ?>">
@@ -1743,7 +1743,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                 <div class="eventMessage">
                     <img src="<?php echo base_url(); ?>assets_d/images/document.svg" alt="document"> Document
                 </div>
-                <div class="dropdown dropdownToggleMenu">
+                <!-- <div class="dropdown dropdownToggleMenu">
                     <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
                     <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                         <li role="presentation">
@@ -1834,7 +1834,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             </a> 
                         </li> 
                     </ul>
-                </div>
+                </div> -->
                 <div class="createBox">
                     <div class="feeduserwrap">
                         <div class="user-details">
@@ -1891,12 +1891,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             <span id="document_comment_count_<?php echo $value['reference_id']; ?>"><?php echo count($get_comments); ?></span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
                                             <span>01</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -1980,12 +1980,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         <span>Comment</span>
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a>
                                         <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
                                         <span>Share</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div class="commentBoxWrap" id="document_comment_<?php echo $value['reference_id']; ?>">
@@ -2251,7 +2251,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             </div>
                                 
                         </div>
-                                        <div class="dropdown dropdownToggleMenu">
+                                        <!-- <div class="dropdown dropdownToggleMenu">
                                             <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" > 
                                             <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
                                                 <li role="presentation">
@@ -2342,7 +2342,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                                     </a> 
                                                 </li> 
                                             </ul>
-                                        </div>
+                                        </div> -->
                                         <div class="createBox">
                                             <div class="feeduserwrap">
                                                 <div class="user-details">
@@ -2403,12 +2403,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                             <span><?php echo count($answer_list); ?></span>
                                         </a>
                                     </li>
-                                    <li>
+                                    <!-- <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Share">
                                             <span>01</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                 </ul>
                             </div>
                         </div>
@@ -2429,12 +2429,12 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         <span>Answer</span>
                                     </a>
                                 </li>
-                                <li>
+                                <!-- <li>
                                     <a>
                                         <img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="comment">
                                         <span>Share</span>
                                     </a>
-                                </li>
+                                </li> -->
                             </ul>
                         </div>
                         <div class="dashboard-qa-answer" id="dashboard-qa-answer-<?php echo $question_detail['id']; ?>" style="display: none;">
