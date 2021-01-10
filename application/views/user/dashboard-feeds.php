@@ -1921,7 +1921,7 @@
 				}
 
 				if($post_query->privacy_id == 5){
-	                $chk_if_shared_with = $this->db->get_where('post_share_with_peers', array('post_id' => $value['reference_id'], 'peer_id' => $login_user_id))->row_array();
+	                $chk_if_shared_with = $this->db->get_where('post_share_with_peers', array('post_id' => $value['reference_id'], 'peer_id' => $user_id))->row_array();
 	                if(!empty($chk_if_shared_with)) {
 	                    $chk_view = 1; 
 	                }
