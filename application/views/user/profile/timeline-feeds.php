@@ -1400,13 +1400,13 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             </div>
                             <div class="rightStatus">
                                 <ul>
-                                    <li>
+                                    <!-- <li>
                                         <a>
                                             <div class="my-rating-4" data-rating="1.5">
                                             </div>                                                                      
                                             <span>1200</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">
@@ -1850,13 +1850,13 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                             </div>
                             <div class="rightStatus">
                                 <ul>
-                                    <li>
+                                    <!-- <li>
                                         <a>
                                             <div class="my-rating-4" data-rating="1.5">
                                             </div>                                                                      
                                             <span>1200</span>
                                         </a>
-                                    </li>
+                                    </li> -->
                                     <li>
                                         <a>
                                             <img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="comment">

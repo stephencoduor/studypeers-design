@@ -2147,7 +2147,7 @@
                             foreach($posts['post_documents'] as $document){
                             ?>
                             <p class="feedPostMessages">
-                                <a href="<?php echo base_url().$document['document_path']; ?>">Click here to download the attachment</a>
+                                <a href="<?php echo base_url().$document['document_path']; ?>" download>Click here to download the attachment</a>
                             </p>
                         <?php
                             }

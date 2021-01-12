@@ -155,6 +155,9 @@
 											$chk_if_sent = $this->db->get_where('peer_master', array('peer_id' => $value['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
 											$chk_if_follow = $this->db->get_where($this->db->dbprefix('follow_master'), array('user_id'=>$user_id, 'peer_id' =>  $value['id']))->row_array(); 
 											$profile_user = $this->db->get_where('user', array('id' => $value['id']))->row_array();
+
+											$mutual_count = $this->db->query("SELECT u.* FROM friends f1 INNER JOIN friends f2 ON (f2.peer_id = f1.peer_id) INNER JOIN user u ON (u.id = f2.peer_id) WHERE f1.user_id = '".$user_id."' AND f2.user_id = '".$value['id']."'")->num_rows();
+
 										?>
 											<div class="peerList" id="peerList<?= $value['id']; ?>">
 
@@ -171,7 +174,7 @@
 													<h4><?php echo $value['nickname']; ?></h4>
 												</a>
 
-												<p>0 mutual peers</p>
+												<p><?= $mutual_count; ?> mutual peers</p>
 												<?php if(!empty($chk_if_follow)) { ?>
 	                                                
 	                                                <button type="button" class="follow_peer follow_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" id="0">Unfollow</button>
