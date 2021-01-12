@@ -1057,3 +1057,244 @@ span.file-icon {
   text-align: center;
   color: #777;
 }
+
+.small-chat-right {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+}
+.small-chat-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px;
+}
+.small-header-left{
+    max-width: 50%;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+.sm-basic-user-info {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+.small-header-left figure {
+  width: 60px;
+  height: 60px;
+  margin-right: 10px;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.small-header-left img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+.small-header-left h3 {
+  width: 100%;
+  white-space: nowrap;
+  font-size: 16px;
+  margin: 0;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  opacity: 0;
+  transition: 0.3s ease-in;
+}
+.sm-chat-header-right {
+  width: 100%;
+}
+.sm-chat-header-right {
+  max-width: 50%;
+  text-align: right;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+.sm-chat-header-right a:hover {
+  background-color: #f0f2f5;
+}
+.sm-chat-header-right a {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: 0.3s ease-in;
+}
+.sm-chat-content {
+  height: calc(100vh - 170px);
+  overflow-y: auto;
+  padding-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.sm-chat-body {
+  padding: 0 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  text-align: center;
+}
+.sm-sent-wrap {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.sm-message-sent {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  justify-content: flex-end;
+}
+.sm-sent-wrap .sm-user-info {
+  justify-content: flex-end;
+}
+
+.sm-user-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.sm-user-name span {
+  color: #7f7b94;
+  font-size: 12px;
+}
+.sm-user-name strong {
+  margin-right: 15px;
+}
+.sm-sent-wrap .sm-user-info figure {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  position: relative;
+}
+.sm-sent-wrap .sm-user-info {
+  justify-content: flex-end;
+  position: relative;
+}
+.sm-user-info:before {
+  width: 100%;
+  height: 1px;
+  background: #c3c3c3;
+  position: absolute;
+  content: "";
+  left: 0;
+  bottom: -8px;
+}
+.sm-user-info figure {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+  border-radius: 50%;
+  position: relative;
+}
+.sm-user-info figure img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center center;
+}
+.sm-sent-wrap .sm-chat-msg {
+  max-width: 100%;
+  display: inline-block;
+  padding: 10px 15px 5px;
+  background-color: #f1f1f1;
+  border-radius: 10px 10px 20px 10px;
+  text-align: left;
+}
+.sm-received-wrap{
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+.sm-message-received {
+  max-width: 50%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 15px;
+  justify-content: flex-start;
+}
+.sm-chat-footer {
+  padding: 15px;
+}
+.sm-chat-footer .input-wrap {
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid #ccc;
+}
+
+.sm-img-preview {
+  width: 100%;
+  padding: 10px 10px 0;
+}
+.sm-chat-input-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.sm-chat-footer .input-wrap {
+  position: relative;
+  border-radius: 24px;
+  border: 1px solid #ccc;
+}
+.sm-text-area-wrap {
+  width: calc(100% - 100px);
+  padding-left: 10px;
+}
+.sm-chat-action {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+.sm-send-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in;
+  background-color: transparent;
+  outline: none;
+  border: none;
+}
+.sm-media-icon {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin-right: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in;
+}
+.sm-file-upload {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.3s ease-in;
+  position: relative;
+  background-image: url(../images/attachment.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+}

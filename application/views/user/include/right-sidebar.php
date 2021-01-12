@@ -381,10 +381,10 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 </div>
 <!-- Small Chat Box Start Here -->
 <div class="small-chat-wrapper">
-    <div class="chat-right">
-        <div class="chat-header">
-            <div class="chat-header-left">
-                <div class="basic-user-info">
+    <div class="small-chat-right">
+        <div class="small-chat-header">
+            <div class="small-header-left">
+                <div class="sm-basic-user-info">
                     <figure>
                         <img src="http://localhost/studypeers/uploads/users/cover/1605539206.png">
                     </figure>
@@ -392,32 +392,32 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 </div>
                 <h3>Start Conversation</h3>
             </div>
-            <div class="chat-header-right">
+            <div class="sm-chat-header-right">
                 <a href="javascript:void(0)" class="video-icon"><img src="http://localhost/studypeers/assets_d/chat-assets/images/video-camera.svg" alt="Video Icon"></a>
             </div>
         </div>
         
-        <div class="chat-content">
-            <div class="chat-body">
-                <div class="sent-wrap">
-                    <div class="message-sent">
-                        <div class="user-info">
-                            <div class="user-name"><strong>manish </strong><span class="msg-tile">7:57</span></div>
+        <div class="sm-chat-content">
+            <div class="sm-chat-body">
+                <div class="sm-sent-wrap">
+                    <div class="sm-message-sent">
+                        <div class="sm-user-info">
+                            <div class="sm-user-name"><strong>manish </strong><span>7:57</span></div>
                             <figure><img src="http://localhost/studypeers/uploads/user-male.png" alt="Image"><span class="user-status online"></span></figure>
                         </div>
-                        <div class="chat-msg"><p>hee</p></div>
+                        <div class="sm-chat-msg"><p>hee</p></div>
                     </div>
                 </div>
-                <div class="received-wrap">
-                    <div class="message-received">
-                        <div class="user-info">
-                            <figure><img src="https://studypeers.dev//uploads/users/user_image_1604418174.jpg" alt="Image"><span class="user-status  user_id_4"></span></figure>
-                            <div class="user-name">
+                <div class="sm-received-wrap">
+                    <div class="sm-message-received">
+                        <div class="sm-user-info">
+                            <figure><img src="https://studypeers.dev//uploads/users/user_image_1604418174.jpg" alt="Image"><span class="user-status"></span></figure>
+                            <div class="sm-user-name">
                                 <strong>Jose</strong>
                                 <span class="msg-tile">11:47</span>
                             </div>
                         </div>
-                        <div class="chat-msg">
+                        <div class="sm-chat-msg">
                             <p>Hello Manish :)</p>
                         </div>
                     </div>
@@ -452,7 +452,6 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         <button type="button" class="send-btn">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                         </button>
-
                         <a href="javascript:void(0)" class="media-icon">
                             <img src="http://localhost/studypeers/assets_d/images/image.svg" alt="Imozi Icon" id="image_icon_selector">
                         </a>
