@@ -149,6 +149,57 @@
         }
     }
 
+    function deleteCommentReply(reply_id, comment_id) { 
+        
+        var url = '<?php echo base_url('profile/deleteCommentReply') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'reply_id': reply_id,
+                'comment_id': comment_id
+            },
+            
+            success: function(result) {
+                $('#comment_reply_id_' + reply_id).remove();
+                if(result != '(0)') {
+                    $('#comment_reply_count_' + comment_id).show();
+                    $('#comment_reply_count_' + comment_id).html(result);
+                } else {
+                    $('#comment_reply_count_' + comment_id).hide();
+                }
+            }
+        });
+            
+        
+    }
+
+    function deleteComment(comment_id, reference_id, reference) { 
+        
+        var url = '<?php echo base_url('profile/deleteComment') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'comment_id': comment_id,
+                'reference_id': reference_id,
+                'reference': reference
+            },
+            
+            success: function(result) {
+                $('#comment_id_' + comment_id).remove();
+                if(result != '0') {
+                    $('#'+reference+'_comment_count_' + reference_id).show();
+                    $('#'+reference+'_comment_count_' + reference_id).html(result);
+                } else {
+                    $('#'+reference+'_comment_count_' + reference_id).hide();
+                }
+            }
+        });
+            
+        
+    }
+
     function postImageComment(reference, reference_id) {
         var file_data = $('#comment_image_' + reference + '_' + reference_id).prop('files')[0];
         var form_data = new FormData();

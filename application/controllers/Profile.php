@@ -1285,7 +1285,7 @@ $config['max_height']  = '768000';
 
             $count = $this->db->get_where('comment_master', array('reference_id' => $reference_id, 'reference' => $reference, 'comment_parent_id' => 0, 'status' => 1))->num_rows();
 
-            $html = '<div class="chatMsgBox">
+            $html = '<div class="chatMsgBox" id="comment_id_'.$comment_id.'">
                                         <figure>
                                             <img src="'.userImage($user_id).'" alt="User">
                                         </figure>
@@ -1327,7 +1327,7 @@ $config['max_height']  = '768000';
                                                         </a>
                                                     </li>
                                                     <li role="presentation">
-                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('.$comment_id.', '.$reference_id.', \''.$reference.'\')">
                                                             <div class="left">
                                                                 <img src="'.base_url().'assets_d/images/trash.svg" alt="Link">
                                                             </div>
@@ -1426,7 +1426,7 @@ $config['max_height']  = '768000';
 
             $comment_replies = $this->db->get_where('comment_master', array('comment_parent_id' => $parent_id, 'status' => 1))->num_rows();
 
-            $html = '<div class="innerReplyBox">
+            $html = '<div class="innerReplyBox" id="comment_reply_id_'.$comment_id.'">
                                                         <figure>
                                                             <img src="'.userImage($user_id).'"
                                                                 alt="User">
@@ -1474,7 +1474,7 @@ $config['max_height']  = '768000';
                                                                     <li role="presentation">
                                                                         <a role="menuitem"
                                                                            tabindex="-1"
-                                                                           href="javascript:void(0);">
+                                                                           href="javascript:void(0);" onclick="deleteCommentReply('.$comment_id.', '.$parent_id.')">
                                                                             <div
                                                                                 class="left">
                                                                                 <img
@@ -1498,6 +1498,64 @@ $config['max_height']  = '768000';
             print_r(json_encode($result));die;
 
         }
+    }
+
+    public function deleteCommentReply(){
+        if($this->input->post()){
+            $reply_id = $this->input->post('reply_id');
+            $comment_id = $this->input->post('comment_id');
+
+            $this->db->where(array('comment_id' => $reply_id));
+            $this->db->delete('comment_like_master');
+
+            $this->db->where(array('id' => $reply_id));
+            $this->db->delete('comment_master');
+
+            $comment_replies = $this->db->get_where('comment_master', array('comment_parent_id' => $comment_id, 'status' => 1))->num_rows();
+
+            $count = '('.$comment_replies.')';
+            echo $count;
+
+        }
+
+
+    }
+
+
+    public function deleteComment(){
+        if($this->input->post()){
+            $comment_id = $this->input->post('comment_id');
+            $reference_id = $this->input->post('reference_id');
+            $reference = $this->input->post('reference');
+
+            $this->db->select('comment_like_master.*');
+            $this->db->join('comment_master', 'comment_master.id=comment_like_master.comment_id');
+            
+
+            $res = $this->db->get_where($this->db->dbprefix('comment_like_master'), array('comment_master.comment_parent_id' => $comment_id))->result_array();
+
+            foreach ($res as $key => $value) {
+                $this->db->where("comment_id", $value['comment_id']);
+                $this->db->delete("comment_like_master");
+            }
+
+            $this->db->where(array('comment_id' => $comment_id));
+            $this->db->delete('comment_like_master');
+
+            $this->db->where(array('comment_parent_id' => $comment_id));
+            $this->db->delete('comment_master');
+
+            $this->db->where(array('id' => $comment_id));
+            $this->db->delete('comment_master');
+
+            $comment_count = $this->db->get_where('comment_master', array('reference_id' => $reference_id, 'reference' => $reference, 'comment_parent_id' => 0, 'status' => 1))->num_rows();
+
+            
+            echo $comment_count;
+
+        }
+
+
     }
 
 
@@ -1584,7 +1642,7 @@ $config['max_height']  = '768000';
 
             $count = $this->db->get_where('comment_master', array('reference_id' => $reference_id, 'reference' => $reference, 'comment_parent_id' => 0, 'status' => 1))->num_rows();
 
-            $html = '<div class="chatMsgBox">
+            $html = '<div class="chatMsgBox" id="comment_id_'.$comment_id.'">
                                         <figure>
                                             <img src="'.userImage($user_id).'" alt="User">
                                         </figure>
@@ -1626,7 +1684,7 @@ $config['max_height']  = '768000';
                                                         </a>
                                                     </li>
                                                     <li role="presentation">
-                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('.$comment_id.', '.$reference_id.', \''.$reference.'\')">
                                                             <div class="left">
                                                                 <img src="'.base_url().'assets_d/images/trash.svg" alt="Link">
                                                             </div>
