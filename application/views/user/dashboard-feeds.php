@@ -2249,7 +2249,7 @@
                                                              aria-valuenow="<?= $per; ?>"
                                                              aria-valuemin="0"
                                                              aria-valuemax="100"
-                                                             style="width:<?= $per; ?>%"></div>
+                                                             style="width:<?= $per.''.$poll_end; ?>%"></div>
                                                     </div>
                                                 </div>
                                                 <?php  if($if_poll_active == 1) { ?>
