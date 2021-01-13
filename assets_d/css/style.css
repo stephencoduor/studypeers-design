@@ -1140,3 +1140,44 @@ figcaption a {
     left: auto;
     top: 30px;
 }
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px #f7f7f7 inset !important;
+    box-shadow: 0 0 0 30px #f7f7f7 inset !important;
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #eee;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #ea2e7e;
+    border-radius:6px;
+}
+.pollsWrapper .pollsform .form-group .cross-icon {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    z-index: 1;
+    transition: 0.3s ease-in;
+}
+.user-info p{
+    margin-top:5px;
+}
+.pollsWrapper .pollsform .form-group {
+    position: relative;
+}
+.mb-15{
+    margin-bottom:15px;
+}
