@@ -1173,7 +1173,7 @@ input:-webkit-autofill:active {
     transition: 0.3s ease-in;
 }
 .user-info p{
-    margin-top:5px;
+    margin-top:10px;
 }
 .pollsWrapper .pollsform .form-group {
     position: relative;
