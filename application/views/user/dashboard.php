@@ -163,14 +163,14 @@
 
 
 												<figure>
-													<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $profile_user['username'] ?>">
+													<a href="<?php echo base_url() . 'sp/' . $profile_user['username'] ?>">
 														<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
 													</a>
 													<div class="removePeer">
 														<img src="<?php echo base_url(); ?>assets_d/images/close-peer.svg" alt="Close Peer Suggestions">
 													</div>
 												</figure>
-												<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $profile_user['username']  ?>">
+												<a href="<?php echo base_url() . 'sp/' . $profile_user['username']  ?>">
 													<h4><?php echo $value['nickname']; ?></h4>
 												</a>
 
@@ -4834,7 +4834,7 @@
 													<?php } else {
 
 													?>
-														<figcaption><a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $user['username'] ?>"><?php echo $user['first_name'] . ' ' . $user['last_name']; ?> </a>
+														<figcaption><a href="<?php echo base_url() . 'sp/' . $user['username'] ?>"><?php echo $user['first_name'] . ' ' . $user['last_name']; ?> </a>
 														<?php } ?>
 														<span>posted in university</span> <img src="<?php echo base_url(); ?>assets_d/images/university.svg"> <?php echo $university['SchoolName']; ?></figcaption>
 														<div class="badgeList">
@@ -5333,7 +5333,7 @@
 											$user_info = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
 											$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 											<div class="right">
-												<a href="<?php echo base_url() . 'Profile/friends?profile_id=' . $user['username'] ?>">
+												<a href="<?php echo base_url() . 'sp/' . $user['username'] ?>">
 													<figcaption><?php echo $user['first_name'] . ' ' . $user['last_name']; ?> </figcaption>
 												</a>
 												<div class="badgeList">

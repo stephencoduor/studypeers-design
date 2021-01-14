@@ -68,7 +68,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             <figure>
                                 <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
                             </figure>
-                            <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['username']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                            <figcaption><a href="<?php echo base_url(); ?>sp/<?= $peer['username']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
                         </section>
                         <section class="action">
 
@@ -212,7 +212,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                                 <figure>
                                     <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
                                 </figure>
-                                <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['username']; ?>" style="font-size: 16px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                                <figcaption><a href="<?php echo base_url(); ?>sp/<?= $peer['username']; ?>" style="font-size: 16px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
                             </section>
                             <section class="action">
                                 <button type="button" class="like">message</button>

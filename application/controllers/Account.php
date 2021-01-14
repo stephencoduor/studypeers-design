@@ -491,7 +491,7 @@ class Account extends CI_Controller
                                                                 <figure>
                                                                     <img src="' . userImage($value['created_by']) . '" alt="user">
                                                                 </figure>
-                                                                <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
+                                                                <a href="' . base_url() . 'sp/' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
 
                                                             </div>';
                         if ($value['created_by'] == $user_id) {
@@ -723,7 +723,7 @@ class Account extends CI_Controller
                                                             <figure>
                                                                 <img src="' . userImage($value['created_by']) . '" alt="user">
                                                             </figure>
-                                                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
+                                                            <a href="' . base_url() . 'sp/' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
 
                                                         </div>';
                         if ($value['created_by'] == $user_id) {
@@ -2061,7 +2061,7 @@ class Account extends CI_Controller
                                                         <figure>
                                                             <img src="' . userImage($value['answered_by']) . '" alt="user">
                                                         </figure>
-                                                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $value_user['username'] . '"><figcaption>' . $value['nickname'] . '</figcaption></a>
+                                                        <a href="' . base_url() . 'sp/' . $value_user['username'] . '"><figcaption>' . $value['nickname'] . '</figcaption></a>
                                                     </div>
                                                     <p class="date">' . date('d/m/Y', strtotime($value['created_at'])) . '</p>
                                                 </div>
@@ -2352,7 +2352,7 @@ class Account extends CI_Controller
             } else if ($this->input->post('profile')) {
                 $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$this->input->post('profile')))->row_array();
 
-                redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
+                redirect(site_url('sp/'.$redirect_username['username']), 'refresh');
             } else {
                 redirect(site_url('account/events'), 'refresh');
             }
@@ -2543,7 +2543,7 @@ class Account extends CI_Controller
                 <figure>
                     <img src="' . userImage($res['created_by']) . '" alt="user">
                 </figure>
-                <a href="' . base_url() . 'Profile/friends?profile_id=' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
+                <a href="' . base_url() . 'sp/' . $user['username'] . '"><figcaption>' . $user['nickname'] . '</figcaption></a>
             </div>  
         </div>';
             if (!empty($res['description'])) {
@@ -2683,7 +2683,7 @@ class Account extends CI_Controller
             } else if ($this->input->post('profile')) {
                 $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$this->input->post('profile')))->row_array();
 
-                redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
+                redirect(site_url('sp/'.$redirect_username['username']), 'refresh');
             }  else {
                 redirect(site_url('account/events'), 'refresh');
             }
@@ -2718,7 +2718,7 @@ class Account extends CI_Controller
                             <img src="' . userImage($user_id) . '" alt="User">
                         </figure>
                         <figcaption>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
+                            <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
                             ' . $comment . '                                                 
                             <div class="actionmsgMenu">
                                 <ul>
@@ -2779,7 +2779,7 @@ class Account extends CI_Controller
                         <img src="' . userImage($user_id) . '" alt="User">
                     </figure>
                     <figcaption>
-                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['username'] . '"><span class="name">' . $user_info['nickname'] . '</span></a>
+                        <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name">' . $user_info['nickname'] . '</span></a>
                         ' . $comment . '                                            
                         
                     </figcaption></div>';
@@ -2872,7 +2872,7 @@ class Account extends CI_Controller
                             <img src="' . userImage($user_id) . '" alt="User">
                         </figure>
                         <figcaption>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
+                            <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
                             <img src="' . base_url() . 'uploads/comments/' . $c_image . '" alt="comment" style="height: 70px;">                                                 
                             <div class="actionmsgMenu">
                                 <ul>
@@ -3427,7 +3427,7 @@ class Account extends CI_Controller
                         <figure>
                             <img src="' . userImage($peer['userID']) . '" alt="user">
                         </figure>
-                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
+                        <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                     </section>
                     <section class="action" id="action_' . $peer['userID'] . '">';
             if (empty($chk_if_shared)) {
@@ -3560,7 +3560,7 @@ class Account extends CI_Controller
                             <figure>
                                 <img src="' . userImage($peer['userID']) . '" alt="user">
                             </figure>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
+                            <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                         </section>
                         <section class="action" id="action_' . $peer['userID'] . '">';
                     if (empty($chk_if_shared)) {
@@ -3576,7 +3576,7 @@ class Account extends CI_Controller
                             <figure>
                                 <img src="' . userImage($peer['userID']) . '" alt="user">
                             </figure>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
+                            <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                         </section>
                         <section class="action" id="action_' . $peer['userID'] . '">';
                 if (empty($chk_if_shared)) {
@@ -3614,7 +3614,7 @@ class Account extends CI_Controller
                             <figure>
                                 <img src="' . userImage($peer['userID']) . '" alt="user">
                             </figure>
-                            <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
+                            <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                         </section>';
             if ($event_details['created_by'] == $user_id) {
                 $html .= '<section class="action" >
