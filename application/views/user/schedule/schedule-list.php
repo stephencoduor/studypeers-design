@@ -101,36 +101,36 @@
 								</div>
 							<?php } ?>
 					        <form method="get" action="<?php echo base_url(); ?>account/schedule">
-								<div class="filterWrapper">
-								
-									<div class="filtercalendar" style="width: 24%;">
-									  	<div class='input-group date' id='datetimepicker1'>
-									  		<span class="input-group-addon" for="start-date">
-						                    	<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
-													<path d="M110.3,247.8h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
-														c-16.8,0-30.5-13.6-30.5-30.5l0,0C79.9,261.4,93.5,247.8,110.3,247.8z"></path>
-													<path d="M227.4,247.8h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
-														c-16.8,0-30.5-13.6-30.5-30.5l0,0C197,261.4,210.6,247.8,227.4,247.8z"></path>
-													<path d="M344.5,247.8h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
-														c-16.8,0-30.5-13.6-30.5-30.5l0,0C314.1,261.4,327.7,247.8,344.5,247.8z"></path>
-													<path d="M110.3,339.6h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
-														c-16.8,0-30.5-13.6-30.5-30.5l0,0C79.9,353.3,93.5,339.6,110.3,339.6z"></path>
-													<path d="M227.4,339.6h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
-														c-16.8,0-30.5-13.6-30.5-30.5l0,0C197,353.3,210.6,339.6,227.4,339.6z"></path>
-													<path d="M344.5,339.6h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
-														c-16.8,0-30.5-13.6-30.5-30.5l0,0C314.1,353.3,327.7,339.6,344.5,339.6z"></path>
-													<path d="M469.2,45.6h-82.1V21.7c0-11.5-9.3-20.8-20.8-20.8c-11.5,0-20.8,9.3-20.8,20.8v24H143.6v-24
-														c0-11.5-9.3-20.8-20.8-20.8s-20.8,9.3-20.8,20.8v24H20.8C9.3,45.7,0,54.9,0,66.4v402.5c0,11.5,9.3,20.7,20.8,20.8h447.4
-														c11.5-0.3,20.9-9.3,21.9-20.8V66.4C490,54.9,480.7,45.6,469.2,45.6z M448.3,449.3H40.5V197.5h407.8V449.3z M448.3,155.9H40.5V87.3
-														h61.4V105c-0.3,11.5,8.8,21,20.3,21.3s21-8.8,21.3-20.3l0,0V87.2h201.9v17.7c0,11.5,9.3,20.7,20.8,20.8c11-0.3,19.9-8.8,20.8-19.8
-														V87.2h61.3v68.6V155.9z"></path>
-												</svg>
-						                        <!-- <span class="glyphicon glyphicon-calendar"></span> -->
-						                    </span>
-						                    <input type='text' class="form-control" name="start-date" id="start-date" value="<?php if($startdate_search != '') { echo date('m/d/Y h:i A', strtotime($startdate_search)); } ?>" style="width: 90%;" />
-						                    
-						                </div>
-									</div>
+								<div class="filterWrapper flex-filter">
+									<div  class="flex-row">
+										<div class="filtercalendar">
+											<div class='input-group date' id='datetimepicker1'>
+												<span class="input-group-addon" for="start-date">
+													<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
+														<path d="M110.3,247.8h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
+															c-16.8,0-30.5-13.6-30.5-30.5l0,0C79.9,261.4,93.5,247.8,110.3,247.8z"></path>
+														<path d="M227.4,247.8h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
+															c-16.8,0-30.5-13.6-30.5-30.5l0,0C197,261.4,210.6,247.8,227.4,247.8z"></path>
+														<path d="M344.5,247.8h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
+															c-16.8,0-30.5-13.6-30.5-30.5l0,0C314.1,261.4,327.7,247.8,344.5,247.8z"></path>
+														<path d="M110.3,339.6h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
+															c-16.8,0-30.5-13.6-30.5-30.5l0,0C79.9,353.3,93.5,339.6,110.3,339.6z"></path>
+														<path d="M227.4,339.6h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
+															c-16.8,0-30.5-13.6-30.5-30.5l0,0C197,353.3,210.6,339.6,227.4,339.6z"></path>
+														<path d="M344.5,339.6h30.3c16.8,0,30.5,13.6,30.5,30.5l0,0c0,16.8-13.6,30.5-30.5,30.5h-30.3
+															c-16.8,0-30.5-13.6-30.5-30.5l0,0C314.1,353.3,327.7,339.6,344.5,339.6z"></path>
+														<path d="M469.2,45.6h-82.1V21.7c0-11.5-9.3-20.8-20.8-20.8c-11.5,0-20.8,9.3-20.8,20.8v24H143.6v-24
+															c0-11.5-9.3-20.8-20.8-20.8s-20.8,9.3-20.8,20.8v24H20.8C9.3,45.7,0,54.9,0,66.4v402.5c0,11.5,9.3,20.7,20.8,20.8h447.4
+															c11.5-0.3,20.9-9.3,21.9-20.8V66.4C490,54.9,480.7,45.6,469.2,45.6z M448.3,449.3H40.5V197.5h407.8V449.3z M448.3,155.9H40.5V87.3
+															h61.4V105c-0.3,11.5,8.8,21,20.3,21.3s21-8.8,21.3-20.3l0,0V87.2h201.9v17.7c0,11.5,9.3,20.7,20.8,20.8c11-0.3,19.9-8.8,20.8-19.8
+															V87.2h61.3v68.6V155.9z"></path>
+													</svg>
+													<!-- <span class="glyphicon glyphicon-calendar"></span> -->
+												</span>
+												<input type='text' class="form-control" name="start-date" id="start-date" value="<?php if($startdate_search != '') { echo date('m/d/Y h:i A', strtotime($startdate_search)); } ?>" style="width: 90%;" />
+												
+											</div>
+										</div>
 									<!-- <div class="filterSelect">
 										<select class="form-control" placeholder="Institution">
 										  <option>Institutions</option>
@@ -138,33 +138,35 @@
 										  <option value="WY">Wyoming</option>
 										</select>
 									</div> -->
-									<div class="filterSelect" style="width: 24%;">
-										<select class="form-control" name="course" id="course" placeholder="InsCoursetitution" onchange="getProfessor(this.value)">
-										  <option>Course</option>
-										  	<?php foreach ($course as $key => $value) { ?>
-												<option value="<?= $value['id'] ?>" <?php if($course_search == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
-											<?php } ?>
-										</select>
+										<div class="filterSelect">
+											<select class="form-control" name="course" id="course" placeholder="InsCoursetitution" onchange="getProfessor(this.value)">
+											<option>Course</option>
+												<?php foreach ($course as $key => $value) { ?>
+													<option value="<?= $value['id'] ?>" <?php if($course_search == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
+												<?php } ?>
+											</select>
+										</div>
 									</div>
-									<div class="filterSelect" style="width: 24%;">
-										<select class="form-control" placeholder="Professor" name="professor" id="professor">
-										  <option>Professor</option>
-										  <?php foreach ($professor as $key => $value) { ?>
-												<option value="<?= $value['id'] ?>" <?php if($professor_search == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
-											<?php } ?>
-										</select>
+									<div class="flex-row">
+										<div class="filterSelect">
+											<select class="form-control" placeholder="Professor" name="professor" id="professor">
+											<option>Professor</option>
+											<?php foreach ($professor as $key => $value) { ?>
+													<option value="<?= $value['id'] ?>" <?php if($professor_search == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
+												<?php } ?>
+											</select>
+										</div>
+										<div class="filterSearch">
+											<input type="text" placeholder="Search Event..." name="keyword" value="<?= $keyword_search; ?>">
+											<button type="submit" class="searchBtn">
+												<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+													<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+													s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+													c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+												</svg>
+											</button>
+										</div>
 									</div>
-									<div class="filterSearch" style="width: 24%;">
-										<input type="text" placeholder="Search Event..." name="keyword" value="<?= $keyword_search; ?>">
-										<button type="submit" class="searchBtn">
-											<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-												<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
-												s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
-												c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-											</svg>
-										</button>
-									</div>
-								
 								</div>
 							</form>
 						</div>

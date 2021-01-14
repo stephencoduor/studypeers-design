@@ -82,13 +82,11 @@
 .filterSearch,
 .filtercalendar,
 .filterSelect {
-    width: 24% !important;
     border: 1px solid #eae9ee;
     border-radius: 4px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-right: 1%;
 }
 .filterSearch input[type="text"] {
     border: none;
@@ -2441,9 +2439,6 @@ div[data-edit] {
     .mainContent.msgActive .filtercalendar .input-group.date input {
         width: 100%;
     }
-    .filterSearch, .filtercalendar, .filterSelect {
-        width: 24% !important;
-    }
 }
 @media(max-width:1300px) {
     .mainContent.active.msgActive button.fc-prev-button.fc-button.fc-button-primary {
@@ -2635,9 +2630,6 @@ div[data-edit] {
     }
 }
 @media(max-width:900px){
-    .filterSearch, .filtercalendar, .filterSelect {
-        width: 31% !important;
-    }
     .mainContent.active.msgActive button.fc-prev-button.fc-button.fc-button-primary {
         left: 60%;
     }
@@ -2798,9 +2790,6 @@ div[data-edit] {
     .monthView {
         width: 100%;
         margin: auto;
-    }
-    .filterSearch, .filtercalendar, .filterSelect {
-        width: 47% !important;
     }
     .scheduleWrapper .header a {
         padding: 13px 15px;
@@ -3068,4 +3057,47 @@ div[data-edit] {
     color: red;
     font-style: italic;
     display: none;
+}
+.mainContent.active .filterWrapper.flex-filter .filtercalendar{
+    max-width:49%;
+    flex:0 49%;
+}
+.mainContent.active .filterWrapper.flex-filter .filterSelect{
+    max-width:49%;
+    flex:0 49%;
+}
+.mainContent.active .filterWrapper.flex-filter .filterSearch{
+    max-width:49%;
+    flex:0 49%;
+}
+.filterWrapper.flex-filter {
+    justify-content: space-between;
+}
+
+.mainContent .filterWrapper.flex-filter .filtercalendar{
+    max-width:49%;
+    flex:0 49%;
+}
+.mainContent .filterWrapper.flex-filter .filterSelect{
+    max-width:49%;
+    flex:0 49%;
+}
+.mainContent .filterWrapper.flex-filter .filterSearch{
+    max-width:49%;
+    flex:0 49%;
+}
+.flex-row {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom:10px;
+}
+.mainContent.active .flex-row {
+    width: 49%;
+}
+.mainContent.active .filterWrapper.flex-filter{
+    flex-direction: row;
+}
+.mainContent .filterWrapper.flex-filter{
+    flex-direction: column;
 }

@@ -179,7 +179,7 @@ aside.active{transform: translateX(-310px);-webkit-transform: translateX(-310px)
     top: 13px;
     left: 14px;
 }
-.mainContent{width: calc(100% - 535px);margin-left: 286px !important;padding: 32px 40px;}
+.mainContent{width: calc(100% - 535px);margin-left: 286px !important;padding: 0 10px;}
 .mainContent.msgActive.active {margin-left: 150px !important;}
 .mainContent.msgActive{width: calc(100% - 315px);}
 aside,.mainContent{transition: margin-left .25s,margin-right .25s,width .25s,flex .25s;
