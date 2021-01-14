@@ -810,7 +810,7 @@ $config['max_height']  = '768000';
 	public function friends()
 	{
 		is_valid_logged_in();
-		$user_name = $_REQUEST['profile_id'];
+		$user_name = $this->uri->segment('2');
 		$login_user_id = $this->session->get_userdata()['user_data']['user_id'];
 
         $get_user_id = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$user_name))->row_array(); 
@@ -1134,7 +1134,7 @@ $config['max_height']  = '768000';
 			$this->db->delete('follow_master');
             $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$peer_id))->row_array();
 
-			redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
+			redirect(site_url('sp/'.$redirect_username['username']), 'refresh');
 		}
 	}
 
@@ -1171,7 +1171,7 @@ $config['max_height']  = '768000';
 			$this->db->insert('user_report_master', $insert_array);
             $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$report_user_id))->row_array();
 
-            redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
+            redirect(site_url('sp/'.$redirect_username['username']), 'refresh');
 			
 		}
 	}
@@ -1190,7 +1190,7 @@ $config['max_height']  = '768000';
 			$this->db->update('user_report_master',$update_arr);
 			$redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$report_user_id))->row_array();
 
-            redirect(site_url('Profile/friends?profile_id='.$redirect_username['username']), 'refresh');
+            redirect(site_url('sp/'.$redirect_username['username']), 'refresh');
 			
 		}
 	}
@@ -1841,7 +1841,7 @@ $config['max_height']  = '768000';
                             <figure>
                                 <img src="'.userImage($peer['userID']).'" alt="user">
                             </figure>
-                            <a href="'.base_url().'Profile/friends?profile_id='.$peer['username'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
+                            <a href="'.base_url().'sp/'.$peer['username'].'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                         </section></div>';
                         
                         
@@ -1919,7 +1919,7 @@ $config['max_height']  = '768000';
                         <figure>
                             <img src="' . userImage($peer['id']) . '" alt="user">
                         </figure>
-                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
+                        <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
                     </section>
                     <section class="action" id="action_' . $peer['id'] . '">';
             
@@ -1960,7 +1960,7 @@ $config['max_height']  = '768000';
                         <figure>
                             <img src="' . userImage($peer['id']) . '" alt="user">
                         </figure>
-                        <a href="' . base_url() . 'Profile/friends?profile_id=' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
+                        <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
                     </section>
                     <section class="action" id="action_' . $peer['id'] . '">';
             

@@ -72,6 +72,7 @@ $route['account/get-user-groups'] = "ChatController/getUserChat";
 $route['account/get-user-group-chat-name'] = "ChatController/getUserGroupNames";
 $route['account/add-new-group-member'] = "ChatController/addNewGroupMember";
 $route['account/upload-document-server'] = "ChatController/uploadDocumentServer";
+$route['submit-single-chat-user'] = "ChatController/createSingleUserGroup";
 
 /**
  * login routes
@@ -107,3 +108,5 @@ $route['home/step-three-page'] = "HomeController/stepThreePage";
 $route['home/step-four-page']  = "HomeController/stepFourPage";
 
 $route['Profile/find-my-peers'] = "Profile/getPeers";
+
+$route['sp/(:any)'] = "Profile/friends/$1";

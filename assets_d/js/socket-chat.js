@@ -3,6 +3,7 @@ var socket = io("https://studypeers.dev:3000/", {
 });
 var userData = $("#hidden_user_info").val();
 var chatAppendElementSmall = $("#append_chat_records");
+var singelChildAppendRecord = $("#append_single_chat_records");
 var clearTimerId;
 var latestMessage = 0;
 
@@ -395,6 +396,14 @@ socket.on("receivemessage", function(msg) {
 
   if (groupMemberIds.indexOf(userId) == -1) return false;
 
+  if (msg.to_user_id == null) {
+    HandleGrouMessage(userInfo, userId, groupId, groupMemberIds, msg);
+  } else {
+    handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg);
+  }
+});
+
+function HandleGrouMessage(userInfo, userId, groupId, groupMemberIds, msg) {
   if (!$("#group_id_" + groupId).length) {
     var html = formatTopMessageGroupListName(msg);
     var currentList = $("#userList").html();
@@ -495,7 +504,7 @@ socket.on("receivemessage", function(msg) {
     socket.emit("getgroupmessages", JSON.stringify({ groupId: groupId }));
     createGroupHTML();
   }
-});
+}
 
 socket.on("knowstatus", data => {
   if (data.status) {
@@ -743,6 +752,48 @@ function sendMessage(messageJson, status) {
   chatAppendElementSmall.append(html);
 
   chatWindow = document.getElementById("chat_window_content");
+  var xH = chatWindow.scrollHeight;
+  chatWindow.scrollTo(0, xH);
+}
+
+function sendMessageToSingleChat(messageJson, status) {
+  var figureHTML = messageJson.media_url
+    ? "<figure>" +
+      '<img src="' +
+      messageJson.media_url +
+      '" alt="Attached Image">' +
+      "</figure>"
+    : "";
+
+  var html =
+    '<div class="sm-sent-wrap"><div class="sm-message-sent"><div class="sm-user-info"><div class="sm-user-name">' +
+    "<strong>" +
+    messageJson.from_user_name +
+    "</strong>" +
+    '<span class="msg-tile">' +
+    messageJson.time +
+    "</span></div>" +
+    "<figure>" +
+    '<img src="' +
+    messageJson.send_profile_image +
+    '" alt="Image" />' +
+    '<span class="user-status ' +
+    status +
+    " user_id_" +
+    messageJson.from_user_id +
+    '"></span>' +
+    "</figure>" +
+    "</div>" +
+    '<div class="sm-chat-msg">' +
+    "<p>" +
+    messageJson.message +
+    "</p>" +
+    figureHTML +
+    "</div></div></div>";
+
+  singelChildAppendRecord.append(html);
+
+  chatWindow = document.getElementById("single_chat_window_append");
   var xH = chatWindow.scrollHeight;
   chatWindow.scrollTo(0, xH);
 }
