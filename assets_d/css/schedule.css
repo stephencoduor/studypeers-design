@@ -1004,7 +1004,7 @@ div[data-edit] {
     padding-bottom: 20px !important;
 }
 .eventWrapper h4 {
-    font-size: 32px;
+    font-size: 24px;
     font-weight: bold;
     color: #2a234f;
     text-transform: capitalize;
@@ -1125,16 +1125,17 @@ div[data-edit] {
     background: #e6e6fe;
     color:#185aeb;
 }
-.badgeList ul li.badge.badge2 {
-    background: #ffd5e9;
-    color:#ea2e7e;
+.badgeList ul li.badge.badge2:hover {
+    background: #5e1232;
+    color:#fff;
 }
-.badgeList ul li.badge.badge3 {
-    background: #d8f5f6;
-    color:#1ae1bd;
+.badgeList ul li.badge.badge3:hover {
+    background: #0a5a4c;
+    color:#fff;
 }
 .badgeList ul li.badge.badge1:hover {
-    background: #185aeb;
+    background: #0c2d76;
+    color: #fff;
 }
 .badgeList ul li.badge.badge1:hover a{
     color: #fff;
