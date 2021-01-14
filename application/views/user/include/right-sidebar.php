@@ -12,166 +12,168 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
     </section>
 
-    <section class="listBar">
-        <section class="listHeader">
-            <h6>Blocked Peers</h6>
-        </section>
-        <section class="listChatBox">
-            <?php
-            foreach (@$blocked_users as $users) {
-            ?>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo userImage($users['id']); ?>" alt="user">
-                        </figure>
-                        <figcaption><?php echo $users['first_name'] . ' ' . $users['last_name']; ?></figcaption>
-                    </section>
-                    <section class="action">
-                        <div class="dropdown">
-                            <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
-                            <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                                <li class="removePeerSugg">
-                                    <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </section>
+    
+    <div class="flex-view">
+        <section class="listBar">
+            <section class="listHeader">
+                <h6>Peers</h6>
+                <a data-toggle="modal" data-target="#peersMessageModal">See More</a>
+            </section>
+            <section class="listChatBox">
+                <?php foreach ($peer_list as $key => $value) {
+                    if ($key <= 2) {
+                        if ($value['user_id'] == $user_id) {
+                            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                            $this->db->join('user', 'user.id=user_info.userID');
+                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
+                        } else {
+                            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                            $this->db->join('user', 'user.id=user_info.userID');
+                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
+                        }
+                ?>
+                        <section class="list">
+                            <section class="left">
+                                <figure>
+                                    <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
+                                </figure>
+                                <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['username']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                            </section>
+                            <section class="action">
+
+                                <div class="dropdown">
+
+                                    <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                                    <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                                        <li class="removePeerSugg" data-id="<?php echo $peer['userID']; ?>"><a href="javascript:void(0)" data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
+
+                                    </ul>
+                                </div>
+                            </section>
+                        </section>
+                <?php }
+                } ?>
+
+
+
+            </section>
+            <!-- <section class="listBar">
+                <section class="listHeader">
+                    <h6>Groups</h6>
+                    <a><i class="fa fa-plus"></i></a>
                 </section>
-            <?php
-            }
-            ?>
-
-        </section>
-    </section>
-
-    <section class="listBar">
-        <section class="listHeader">
-            <h6>Peers</h6>
-            <a data-toggle="modal" data-target="#peersMessageModal">See More</a>
-        </section>
-        <section class="listChatBox">
-            <?php foreach ($peer_list as $key => $value) {
-                if ($key <= 2) {
-                    if ($value['user_id'] == $user_id) {
-                        $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                        $this->db->join('user', 'user.id=user_info.userID');
-                        $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
-                    } else {
-                        $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                        $this->db->join('user', 'user.id=user_info.userID');
-                        $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
-                    }
-            ?>
+                <section class="listChatBox">
                     <section class="list">
                         <section class="left">
                             <figure>
-                                <img src="<?php echo userImage($peer['userID']); ?>" alt="user">
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
                             </figure>
-                            <figcaption><a href="<?php echo base_url(); ?>Profile/friends?profile_id=<?= $peer['username']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
+                            <figcaption>The in group</figcaption>
                         </section>
                         <section class="action">
-
+                            <i class="fa fa-ellipsis-v"></i>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                <span class="messagecount">12</span>
+                            </figure>
+                            <figcaption>The in group</figcaption>
+                        </section>
+                        <section class="action">
+                            <i class="fa fa-ellipsis-v"></i>
+                        </section>
+                    </section>
+                </section>
+            </section> -->
+            <!-- <section class="listBar">
+                <section class="listHeader">
+                    <h6>Contacts</h6>
+                </section>
+                <section class="listChatBox">
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                <span class="circle online"></span>
+                            </figure>
+                            <figcaption>Angelina</figcaption>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                <span class="circle offline"></span>
+                            </figure>
+                            <figcaption>Angelina</figcaption>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                <span class="circle online"></span>
+                            </figure>
+                            <figcaption>Angelina</figcaption>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                <span class="circle offline"></span>
+                            </figure>
+                            <figcaption>Angelina</figcaption>
+                        </section>
+                    </section>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
+                                <span class="circle online"></span>
+                            </figure>
+                            <figcaption>Charles</figcaption>
+                        </section>
+                    </section>
+                </section>
+            </section> -->
+        </section>
+        <section class="listBar">
+            <section class="listHeader">
+                <h6>Blocked Peers</h6>
+            </section>
+            <section class="listChatBox">
+                <?php
+                foreach (@$blocked_users as $users) {
+                ?>
+                    <section class="list">
+                        <section class="left">
+                            <figure>
+                                <img src="<?php echo userImage($users['id']); ?>" alt="user">
+                            </figure>
+                            <figcaption><?php echo $users['first_name'] . ' ' . $users['last_name']; ?></figcaption>
+                        </section>
+                        <section class="action">
                             <div class="dropdown">
-
                                 <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
                                 <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                                    <li class="removePeerSugg" data-id="<?php echo $peer['userID']; ?>"><a href="javascript:void(0)" data-toggle="modal" data-target="#removePeerSugg">Remove Peer</a></li>
-
+                                    <li class="removePeerSugg">
+                                        <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
+                                    </li>
                                 </ul>
                             </div>
                         </section>
                     </section>
-            <?php }
-            } ?>
+                <?php
+                }
+                ?>
 
-
-
-        </section>
-        <section class="listBar">
-            <section class="listHeader">
-                <h6>Groups</h6>
-                <a><i class="fa fa-plus"></i></a>
-            </section>
-            <section class="listChatBox">
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                        </figure>
-                        <figcaption>The in group</figcaption>
-                    </section>
-                    <section class="action">
-                        <i class="fa fa-ellipsis-v"></i>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="messagecount">12</span>
-                        </figure>
-                        <figcaption>The in group</figcaption>
-                    </section>
-                    <section class="action">
-                        <i class="fa fa-ellipsis-v"></i>
-                    </section>
-                </section>
             </section>
         </section>
-        <section class="listBar">
-            <section class="listHeader">
-                <h6>Contacts</h6>
-            </section>
-            <section class="listChatBox">
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle online"></span>
-                        </figure>
-                        <figcaption>Angelina</figcaption>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle offline"></span>
-                        </figure>
-                        <figcaption>Angelina</figcaption>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle online"></span>
-                        </figure>
-                        <figcaption>Angelina</figcaption>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle offline"></span>
-                        </figure>
-                        <figcaption>Angelina</figcaption>
-                    </section>
-                </section>
-                <section class="list">
-                    <section class="left">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
-                            <span class="circle online"></span>
-                        </figure>
-                        <figcaption>Charles</figcaption>
-                    </section>
-                </section>
-            </section>
-        </section>
-    </section>
+    </div>
 </section>
 </section>
 </section>
