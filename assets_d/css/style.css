@@ -1207,3 +1207,10 @@ input:-webkit-autofill:active {
     top: 10px;
     right: 10px;
 }
+.fc-row .fc-content-skeleton td, .fc-row .fc-mirror-skeleton td{
+    padding:4px;
+}
+.bootstrap-datetimepicker-widget table th{
+    white-space: nowrap;
+    line-height:16px;
+}
