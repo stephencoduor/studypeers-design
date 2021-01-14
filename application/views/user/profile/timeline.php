@@ -109,7 +109,7 @@ die;*/
                                 <?php } ?>
                             </div>
                             <input type="hidden" id="sharelink"
-                                           value="<?php echo base_url() . 'Profile/friends?profile_id=' . @$user_detail['username']; ?>"/>
+                                           value="<?php echo base_url() . 'sp/' . @$user_detail['username']; ?>"/>
                             <div class="tooltip" style="opacity: inherit;">
                                 <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
                                     <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>

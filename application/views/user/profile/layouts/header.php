@@ -474,7 +474,8 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
                             View All <i class="fa fa-arrow-right" aria-hidden="true"></i>
                         </section>
                     </section>
-                    <section class="coursepanel">
+
+                    <!-- <section class="coursepanel">
                         <section class="courseheader header">
                             <h6>Study Sessions (3)</h6>
                             <a><i class="fa fa-plus"></i></a>
@@ -496,7 +497,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
                         <section class="view">
                             View All <i class="fa fa-arrow-right" aria-hidden="true"></i>
                         </section>
-                    </section>
+                    </section> -->
                 </section>
             </aside>
             <div class="overlay"></div>
