@@ -72,6 +72,7 @@ $route['account/get-user-groups'] = "ChatController/getUserChat";
 $route['account/get-user-group-chat-name'] = "ChatController/getUserGroupNames";
 $route['account/add-new-group-member'] = "ChatController/addNewGroupMember";
 $route['account/upload-document-server'] = "ChatController/uploadDocumentServer";
+$route['submit-single-chat-user'] = "ChatController/createSingleUserGroup";
 
 /**
  * login routes

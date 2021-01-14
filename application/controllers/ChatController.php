@@ -365,4 +365,79 @@ class ChatController extends CI_Controller
             ->set_status_header($response['code'])
             ->set_output(json_encode($response));
     }
+
+    public function createSingleUserGroup()
+    {
+        try {
+
+            $users = [$this->input->get('sender_id')];
+            $groupName = $this->input->get('name');
+
+            if (!is_array($users)) {
+                throw new Exception("Error processing request", 422);
+            }
+
+            #ALTER TABLE `user_chat_groups` ADD `group_type` TINYINT(3) NOT NULL DEFAULT '1' COMMENT '1--> group name, 2---> single user name' AFTER `group_profile`;
+
+
+            #create new user group.
+            $userId =  $this->session->get_userdata()['user_data']['user_id'];
+
+            #check for existing groupName with same user.
+
+            $existinGroup =  $this->ChatModel->getExistingSingleUser($userId, $groupName);
+
+            array_push($users, $userId);
+
+            if (empty($existinGroup)) {
+
+                $createGroup = [];
+                $createGroup['user_id'] = $userId;
+                $createGroup['group_name'] = $groupName;
+                $createGroup['group_type'] = 2; // group with single user chat.
+
+                $getCreativeGroupId = $this->ChatModel->createGroup($createGroup);
+
+                $createUsersInGroup = [];
+
+                foreach ($users as $key => $val) {
+
+                    $createUsersInGroup[$key]['group_id'] = $getCreativeGroupId;
+                    $createUsersInGroup[$key]['peer_id'] = $val;
+                }
+
+                $this->ChatModel->createUserInGroup($createUsersInGroup);
+            } else {
+
+                $getCreativeGroupId = $existinGroup['id'];
+                $createGroup = $existinGroup;
+            }
+
+
+            #get chat user groups.
+
+            $sendMembersList = $this->ChatModel->getChatMembersList($users);
+
+            $response = [
+                'code' => 200,
+                'message' => 'OK',
+                'data' => [
+                    'groupId' => $getCreativeGroupId,
+                    'groupInfo' => $createGroup,
+                    'users' => $sendMembersList,
+                ]
+            ];
+        } catch (\Exception $e) {
+            $response = [
+                'code' => $e->getCode(),
+                'message' => $e->getMessage(),
+                'data' => []
+            ];
+        }
+
+        return $this->output
+            ->set_content_type('application/json')
+            ->set_status_header($response['code'])
+            ->set_output(json_encode($response));
+    }
 }

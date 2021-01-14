@@ -166,7 +166,9 @@ function formatTopMessageGroupListNameOnAdd(messageJson) {
     "</div>" +
     '<div class="info-wrap">' +
     '<span class="badge badge-pill badge-primary" data-batch="0"></span>' +
-    '<h3>'+messageJson.group_name +'</h3>'+
+    "<h3>" +
+    messageJson.group_name +
+    "</h3>" +
     "<p>" +
     messageJson.message +
     "</p>" +
@@ -680,6 +682,56 @@ function sendMessageToUser() {
   $("#append_image_after_upload").html("");
 }
 
+function sendMessageToSingleUser() {
+  var UserInfo = JSON.parse(userData);
+  var unreadMembers = [];
+  var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+  if (otherGroupMembers) {
+    otherGroupMembers.forEach(function(item, index) {
+      if (item != UserInfo.user_id) {
+        unreadMembers.push(item);
+      }
+    });
+  }
+
+  var currentGroupId = $("#current_group_id").val();
+
+  var message = {
+    to_user_id: $("#current_receiver_id").val(),
+    to_user_name: $("#current_receiver_name_id").val(),
+    from_user_id: UserInfo.user_id,
+    from_user_name: UserInfo.first_name,
+    send_profile_image: UserInfo.profileImage,
+    is_read: "unread",
+    group_id: $("#current_group_id").val(),
+    group_name: $("#curren_group_name_id").val(),
+    group_image: $("#currentCoverPicture").attr("src"),
+    group_members: JSON.parse($("#curren_group_members").val()),
+    unread_members: unreadMembers,
+    read_members: [],
+    message: $(".emojionearea-editor").html(),
+    media_url: $("#current_image_upload_src").val(),
+    new_member_added: 0,
+    document_url: null,
+    emoji: null,
+    time: moment().format("h:mm"),
+    created: new Date().toISOString()
+  };
+
+  socket.emit("sendmessage", JSON.stringify(message));
+
+  sendMessageToSingleChat(message, "online");
+  $("#group_id_" + currentGroupId)
+    .find(".badge")
+    .next()
+    .next()
+    .html(message.message);
+  $(".emojionearea-editor").html("");
+  $("#single_chat_submit_button").val("");
+  //$("#current_image_upload_src").val("");
+  //$("#append_image_after_upload").html("");
+}
+
 function sendMessageAsNewMemberAdded(messageJson, status) {
   console.log(messageJson);
   var html =
@@ -837,6 +889,38 @@ $(".emojis-wysiwyg").emojioneArea({
           $("#current_image_upload_src").val())
       ) {
         sendMessageToUser();
+        event.preventDefault();
+        event.stopPropagation();
+        editor.focus();
+      } else {
+        // Number 13 is the "Enter" key on the keyboard
+        var UserInfo = JSON.parse(userData);
+
+        socket.emit(
+          "usertyping",
+          JSON.stringify({
+            user: UserInfo,
+            currentGroup: $("#current_group_id").val()
+          })
+        );
+      }
+    }
+  }
+});
+
+$("#single_chat_submit_button").emojioneArea({
+  inline: true,
+  hideSource: true,
+  resize: true,
+  events: {
+    // Enter key as submit button --> working
+    keyup: function(editor, event) {
+      if (
+        event.which == 13 &&
+        ($.trim(editor.text()).length > 0 ||
+          $("#current_image_upload_src").val())
+      ) {
+        sendMessageToSingleUser();
         event.preventDefault();
         event.stopPropagation();
         editor.focus();
