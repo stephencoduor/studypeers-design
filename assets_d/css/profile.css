@@ -1915,6 +1915,7 @@ shareOptionList celebrate*/
 .pollsWrapper .pollsform .form-group {
     width: 48%;
     margin-right:2%;
+    position: relative;
 }
 .pollsWrapper .pollsform input {
     border-radius: 30px;

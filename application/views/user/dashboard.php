@@ -2,7 +2,7 @@
 <section class="mainContent">
 	<div class="main-home-wrapper">
 		<div class="tabularLiist">
-			<ul class="nav nav-tabs">
+			<ul class="nav nav-tabs mb-15">
 				<li class="active"><a data-toggle="tab" href="#myfeed">My Feeds</a></li>
 				<!-- <li><a data-toggle="tab" href="#schoolfeed">School Feeds</a></li> -->
 			</ul>
