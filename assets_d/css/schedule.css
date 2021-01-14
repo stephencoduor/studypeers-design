@@ -876,6 +876,7 @@ input:checked + .slider:before {
 }
 .form-group.calendar label {
     margin: 0 10px;
+    white-space: nowrap;
 }
 div[data-edit] {
     display: none;
