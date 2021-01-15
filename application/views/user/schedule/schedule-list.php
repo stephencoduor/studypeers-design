@@ -33,6 +33,13 @@
 	 .gdrive {
 		 background: #d8f5f6;
 		 color:#1ae2bc;
+		 position:relative;
+		 transition:0.3s ease-in;
+		 padding:10px 20px 10px 40px;
+	 }
+	 .gdrive:hover{
+		 background:#0A5A4C;
+		 color:#fff;
 	 }
 	 .import_schedules{
 		 background-color: #fbfbfc !important;
@@ -48,7 +55,8 @@
 								?>
 										<a class="import_schedules" href="<?php echo base_url(); ?>GoogleCalendar/checkGoogleLogin" onclick="return confirm('Are you sure you want to import schedules from google ?')">
 											<button type="button" class="choose_btn gdrive">
-												<img src="<?=base_url('assets_d/images/google-drive.svg')?>"> Import from google
+												<!-- <img src="<?=base_url('assets_d/images/google-drive.svg')?>">  -->
+												Import from google
 											</button>
 										</a>
 								<?php
@@ -57,7 +65,8 @@
 								?>
 										<a class="import_schedules" href="<?php echo base_url(); ?>GoogleCalendar/checkGoogleLogin">
 											<button type="button" class="choose_btn gdrive">
-												<img src="<?=base_url('assets_d/images/google-drive.svg')?>"> Sync up with Google Calendar
+												<!-- <img src="<?=base_url('assets_d/images/google-drive.svg')?>">  -->
+												Sync up with Google Calendar
 											</button>
 										</a>
 								<?php

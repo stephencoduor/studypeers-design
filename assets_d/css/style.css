@@ -1230,3 +1230,25 @@ input:-webkit-autofill:active {
     height: 160px;
     margin-bottom: 20px;
 }
+.fc-toolbar{
+    position: relative;
+}
+.fc-toolbar .fc-center{
+    position: absolute;
+    left:0;
+}
+.gdrive::before{
+    width:18px;
+    height:16px;
+    background-image:url("../images/google-drive.svg");
+    background-repeat: no-repeat;
+    position: absolute;
+    content:"";
+    left:15px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:0.3s ease-in;
+}
+.gdrive:hover::before{
+    background-image:url("../images/google-drive-white.svg");
+}
