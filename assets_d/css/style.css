@@ -1214,3 +1214,19 @@ input:-webkit-autofill:active {
     white-space: nowrap;
     line-height:16px;
 }
+.fc th {
+    height: 30px;
+    vertical-align: middle!important;
+}
+.blankFeedArea{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:25px 0;
+}
+.blankFeedArea figure {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 20px;
+}

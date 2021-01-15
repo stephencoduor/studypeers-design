@@ -292,7 +292,14 @@
 													<h6 class="loadingEvents">
 														Loading Events
 													</h6> -->
-													<p class="text-center">No records to show.</p>
+													<div class="blankFeedArea">
+														<div class="noFeedWrapper">
+															<figure>
+																<img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+															</figure>
+															<h4>No records to show.</h4>
+														</div>
+													</div>
 												</div>
 											</div>
 										</div>

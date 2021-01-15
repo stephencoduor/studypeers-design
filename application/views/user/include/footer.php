@@ -116,7 +116,12 @@
 
 	</script>
 <?php } ?>
-
+<!-- <script src="<?php echo base_url(); ?>assets_d/js/jquery.nice-select.min.js"></script>
+<script>
+	$(function () {
+		$("select").niceSelect();
+	});
+</script> -->
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 
 </body>
