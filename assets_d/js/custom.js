@@ -185,6 +185,7 @@ $('.edit_rating').removeClass('hide');
 })
 $('.flipper').on('click', function(){
     $(this).toggleClass('is-flipped');
+    $('.flashcard-controls').addClass('active');
 })
 $('.showAnwer').on('click',()=>{
     $('.flipper').toggleClass('is-flipped');

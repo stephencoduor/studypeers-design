@@ -2513,6 +2513,7 @@
 
 
     function validateGeneralForm(){
+        validateUserName($('#usernameG').val());
         var chk = $('#err_username').text().length;
         if(chk != 0){
             return false;
