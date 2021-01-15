@@ -266,7 +266,7 @@
     position: relative;
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 .eventList .event.constitition:before {
     background: #1ae1bd;
@@ -547,8 +547,7 @@ select.form-control:focus {
     justify-content: flex-start;
 }
 .form-group.calendar.event {
-    width: auto;
-    margin-right:20px;
+    width: 100%;
 }
 .form-group.calendar .filtercalendar {
     width:100% !important;
@@ -788,6 +787,7 @@ input:checked + .slider:before {
 }
 .input-group--overlap {
     position: relative;
+    padding-left:5px;
 }
 .input-group--overlap svg {
     position: absolute;
@@ -2367,9 +2367,6 @@ div[data-edit] {
     }
     .addScheduleBox .form-row.align-items-center .form-group.calendar label {
         width: 90px;
-    }
-     .addScheduleBox .filtercalendar .input-group.date input {
-        width: 170px;
     }
     .scheduleWrapper .header h4 {
         font-size: 27px;
