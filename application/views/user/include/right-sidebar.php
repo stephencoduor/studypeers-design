@@ -386,15 +386,15 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
     </div>
 </div>
 <!-- Small Chat Box Start Here -->
-<div class="small-chat-wrapper">
+<div class="small-chat-wrapper" style="display: none;" id="single_chat_window_box">
     <div class="small-chat-right">
         <div class="small-chat-header">
             <div class="small-header-left">
                 <div class="sm-basic-user-info">
                     <figure>
-                        <img src="http://localhost/studypeers/uploads/users/cover/1605539206.png">
+                        <img id="single_chat_image_preview" src="http://localhost/studypeers/uploads/users/cover/1605539206.png">
                     </figure>
-                    <strong>user7</strong>
+                    <strong id="current_single_chat_name">user7</strong>
                 </div>
                 <h3>Start Conversation</h3>
             </div>
@@ -402,32 +402,11 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <a href="javascript:void(0)" class="video-icon"><img src="http://localhost/studypeers/assets_d/chat-assets/images/video-camera.svg" alt="Video Icon"></a>
             </div>
         </div>
-        
-        <div class="sm-chat-content">
-            <div class="sm-chat-body">
-                <div class="sm-sent-wrap">
-                    <div class="sm-message-sent">
-                        <div class="sm-user-info">
-                            <div class="sm-user-name"><strong>manish </strong><span>7:57</span></div>
-                            <figure><img src="http://localhost/studypeers/uploads/user-male.png" alt="Image"><span class="user-status online"></span></figure>
-                        </div>
-                        <div class="sm-chat-msg"><p>hee</p></div>
-                    </div>
-                </div>
-                <div class="sm-received-wrap">
-                    <div class="sm-message-received">
-                        <div class="sm-user-info">
-                            <figure><img src="https://studypeers.dev//uploads/users/user_image_1604418174.jpg" alt="Image"><span class="user-status"></span></figure>
-                            <div class="sm-user-name">
-                                <strong>Jose</strong>
-                                <span class="msg-tile">11:47</span>
-                            </div>
-                        </div>
-                        <div class="sm-chat-msg">
-                            <p>Hello Manish :)</p>
-                        </div>
-                    </div>
-                </div>
+
+        <div class="sm-chat-content" id="single_chat_window_append">
+            <div class="sm-chat-body" id="append_single_chat_records">
+
+
             </div>
         </div>
         <div class="chat-footer">
@@ -452,7 +431,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 </div>
                 <div class="chat-input-wrap">
                     <div class="text-area-wrap">
-                        <textarea placeholder="Type your message here" class="form-control emojis-wysiwyg"></textarea>
+                        <textarea placeholder="Type your message here" class="form-control" id="single_chat_submit_button"></textarea>
                     </div>
                     <div class="chat-action">
                         <button type="button" class="send-btn">
@@ -488,7 +467,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         <strong>John Smith</strong>
                     </div>
                     <div class="hide-on-small">
-                        Messages <span class="total-message">(03)</span>
+                        Messages <span class="total-message"></span>
                     </div>
                 </div>
                 <div class="right-area">
@@ -578,6 +557,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="current_group_profile_setting">
             <input type="hidden" id="current_receiver_id">
             <input type="hidden" id="current_receiver_name_id">
+            <input type="hidden" id="submit_single_chat_url" value="<?php echo base_url('submit-single-chat-user'); ?>">
 
         </div>
         <span id="user_typing_id"></span>

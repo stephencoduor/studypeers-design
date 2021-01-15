@@ -56,12 +56,12 @@ if($(window).width() <= 991) {
 }
 });
 $(document).ready(() => {
-    if($(window).width() <= 1400) {
-    $('aside').addClass('active');
-    $('.mainContent').addClass('active');
-}
+//     if($(window).width() <= 1400) {
+//     $('aside').addClass('active');
+//     $('.mainContent').addClass('active');
+// }
 $('.desktopToggleButton').on('click',()=>{
-    // $('.mainContent').toggleClass('active');
+    $('.mainContent').toggleClass('active');
     $('aside').toggleClass('active');
 })
 if($(window).width() <= 991) {
@@ -530,13 +530,13 @@ function showAllCourses(url){
 
 // resize
 $(window).resize(function() {
-    if($(window).width()<=1400) {
-        $('.mainContent').addClass('active');
-        $('aside').addClass('active');
-    } else {
-        $('.mainContent').removeClass('active');
-        $('aside').removeClass('active');
-    }
+    // if($(window).width()<=1400) {
+    //     $('.mainContent').addClass('active');
+    //     $('aside').addClass('active');
+    // } else {
+    //     $('.mainContent').removeClass('active');
+    //     $('aside').removeClass('active');
+    // }
     if($(window).width() <= 991) {
         $('.rightsidemsgbar').css("transform","translateX(800px)");
     } else {
@@ -614,3 +614,10 @@ $(document).on('submit','form.submitQuestionAnswer',function(e){
 
     
 });
+
+    $(function() { 
+        $('#start-date'). keypress(function(event) { event. preventDefault(); return false; }); 
+        $('#end-date'). keypress(function(event) { event. preventDefault(); return false; }); 
+        $('#selectTime1 .form-control'). keypress(function(event) { event. preventDefault(); return false; }); 
+        
+    }); 

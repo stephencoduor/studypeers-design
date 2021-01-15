@@ -47,7 +47,10 @@
 <script src="assets/registration-assets/js/upload-file-progress.js"></script>
 <script src="assets/registration-assets/js/registration.js"></script>
 <script>
-    $(function() { $('#start-date'). keypress(function(event) { event. preventDefault(); return false; }); }); 
+    $(function() { 
+        $('#start-date'). keypress(function(event) { event. preventDefault(); return false; }); 
+        $('#end-date'). keypress(function(event) { event. preventDefault(); return false; }); 
+    }); 
 </script>
 </body>
 

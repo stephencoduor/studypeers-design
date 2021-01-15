@@ -99,4 +99,20 @@ class ChatModel extends CI_Model
 
         return $query->result_array();
     }
+
+    public function getExistingSingleUser($id, $name)
+    {
+
+        $query =   $this->db->where('user_id', $id)
+
+            ->from('user_chat_groups')
+
+            ->where('group_name', $name)
+
+            ->where('group_type', 2)
+
+            ->get();
+
+        return $query->row_array();
+    }
 }
