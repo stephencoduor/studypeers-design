@@ -618,6 +618,7 @@ class Profile extends CI_Controller {
 		$data['followers'] = $followers['total'];
 		$data['followings'] = $followings['total'];
 		$data['index_menu']  = 'timeline';
+        $data['user_profile_page'] = 0;
 		$data['title']  = 'Timeline | Studypeers';
 		$this->load->view('user/include/header', $data);
 		$this->load->view('user/profile/timeline');
@@ -650,7 +651,7 @@ $config['max_height']  = '768000';
         $announcement  = $this->input->post('announcement');
 
         $poll_end_date = date('Y-m-d', strtotime($this->input->post('poll-end-date')));
-        $poll_end_time = $this->input->post('poll-end-time');
+        $poll_end_time = date('H:i:s', strtotime($this->input->post('poll-end-time')));
 
 		if($allow_comment == 'on'){
 			$is_comment_on = 1;
@@ -871,6 +872,7 @@ $config['max_height']  = '768000';
 		$data['chk_if_follow']  = $chk_if_follow;
 		$data['followers'] = $followers['total'];
 		$data['followings'] = $followings['total'];
+        $data['user_profile_page'] = 1;
 		$this->load->view('user/include/header', $data);
 		$this->load->view('user/profile/friends-timeline');
 		$this->load->view('user/profile/layouts/footer');

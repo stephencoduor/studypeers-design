@@ -1,5 +1,6 @@
 <?php
 $full_name      = $user['first_name'] . ' ' . $user['last_name'];
+$user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = " . $user_id)->row_array(); 
 ?>
 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
 
@@ -241,91 +242,89 @@ $full_name      = $user['first_name'] . ' ' . $user['last_name'];
                             <div class="createBox">
                                 <div class="postWrapper">
                                     <h5>General Information</h5>
-                                    <div class="editWrapper" data-dismiss="modal" data-toggle="modal" href="#deleteUser">
-                                        <img src="images/edit.svg" alt="edit"> Edit Profile
-                                    </div>
+                                    
                                 </div>
                                 <div class="infoWrapper">
                                     <div class="list">
+                                        <div class="heading">Profile Link</div>
+                                        <div class="value"><a href="<?php echo base_url().'sp/'.$user_detail['username'];?>"><?php echo base_url().'sp/'.$user_detail['username'];?></a></div>
+                                    </div>
+                                    <div class="list">
                                         <div class="heading">First Name</div>
-                                        <div class="value">Loreum</div>
+                                        <div class="value"><?php echo $user_detail['first_name'];?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Last Name</div>
-                                        <div class="value">Ipsum</div>
+                                        <div class="value"><?php echo $user_detail['last_name'];?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Gender</div>
-                                        <div class="value">Female</div>
+                                        <div class="value"><?php echo $user_detail['gender'];?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Date of Birth</div>
-                                        <div class="value">October 20, 1999</div>
+                                        <div class="value"><?php echo date('d-m-Y', strtotime($user_detail['dob']));?></div>
                                     </div>
                                     <div class="list">
-                                        <div class="heading">Country</div>
-                                        <div class="value">India</div>
+                                        <div class="heading">Location</div>
+                                        <div class="value"><?php echo $user_detail['user_location'];?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Field of interest</div>
-                                        <div class="value">lorem ipsum, lorem ipsum</div>
+                                        <div class="value"><?php echo $user_detail['field_interest'];?></div>
                                     </div>
                                 </div>
                                 <div class="useraboutWrapper">
                                     <h5>About Me</h5>
-                                    <p>Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy
-                                        eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam
-                                        voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita
-                                        kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
-                                        Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy</p>
+                                    <p><?php echo $user_detail['about'];?></p>
                                 </div>
                                 <div class="infoWrapper">
                                     <div class="list">
                                         <div class="heading">High School </div>
                                         <div class="value">
-                                            <span>School name</span>
+                                            <span><?php echo @$user_detail['high_School']; ?></span>
                                             <br>
-                                            Course (yyyy-yyyy)
+                                            <?php echo @$user_detail['high_school_course_name']; ?> <?php echo (@$user_detail['high_school_course_year']); ?>
                                         </div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Graduation</div>
                                         <div class="value">
-                                            <span>College name</span>
+                                            <span><?php echo @$user_detail['SchoolName'] ?></span>
                                             <br>
-                                            Course (yyyy-yyyy)
+                                            <?php echo @$user_detail['name'] ?>  <?php echo @$user_detail['session'] ?>
                                         </div>
                                     </div>
-                                    <div class="list">
+                                    <!-- <div class="list">
                                         <div class="heading">Other</div>
                                         <div class="value">
                                             <span>Institute name</span>
                                             <br>
                                             Course (yyyy-yyyy)
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                                 <div class="useraboutWrapper social">
                                     <h5>Follow</h5>
                                     <ul>
                                         <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="images/facebook.svg" alt="facebook">
+                                            <a href="<?php echo @$user_detail['fb_link']; ?>" target="_blank">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg" alt="facebook">
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="images/twitter.svg" alt="twitter">
+                                            <a href="<?php echo @$user_detail['twitter_link']; ?>" target="_blank">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/twitter.svg" alt="twitter">
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="images/linkedin.svg" alt="linkedin">
+                                            <a href="<?php echo @$user_detail['linkedIn_link']; ?>" target="_blank">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/linkedin.svg" alt="linkedin">
                                             </a>
                                         </li>
                                         <li>
-                                            <a href="javascript:void(0)">
-                                                <img src="images/youtube.svg" alt="youtube">
+                                            <a href="<?php echo @$user_detail['youtube_link']; ?>" target="_blank">
+                                                <img src="<?php echo base_url(); ?>assets_d/images/youtube.svg" alt="youtube">
                                             </a>
                                         </li>
                                     </ul>
@@ -333,7 +332,7 @@ $full_name      = $user['first_name'] . ' ' . $user['last_name'];
                             </div>
                         </div>
                     </div>
-                    <div class="right">
+                    <!-- <div class="right">
                         <div class="boxwrap completeProfile">
                             <h6>Complete your profile</h6>
                             <p>Current status of your profile</p>
@@ -433,7 +432,7 @@ $full_name      = $user['first_name'] . ' ' . $user['last_name'];
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
             </div>
             <div id="peers" class="tab-pane fade in">

@@ -1910,7 +1910,9 @@ l,.share:focus
 .studySetWrapper .left figure img {
     width:100%;
     height: 100%;
-}
+    object-fit: cover;
+    object-position: center center;
+} 
 .badgeList ul {
     display: flex;
     align-items: flex-start;
