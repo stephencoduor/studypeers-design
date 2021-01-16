@@ -179,7 +179,7 @@ aside.active{transform: translateX(-310px);-webkit-transform: translateX(-310px)
     top: 13px;
     left: 14px;
 }
-.mainContent{width: calc(100% - 535px);margin-left: 286px !important;padding: 32px 40px;}
+.mainContent{width: calc(100% - 535px);margin-left: 286px !important;padding: 0 10px;}
 .mainContent.msgActive.active {margin-left: 150px !important;}
 .mainContent.msgActive{width: calc(100% - 315px);}
 aside,.mainContent{transition: margin-left .25s,margin-right .25s,width .25s,flex .25s;
@@ -1173,7 +1173,7 @@ input:-webkit-autofill:active {
     transition: 0.3s ease-in;
 }
 .user-info p{
-    margin-top:5px;
+    margin-top:10px;
 }
 .pollsWrapper .pollsform .form-group {
     position: relative;
@@ -1193,4 +1193,62 @@ input:-webkit-autofill:active {
 }
 .flex-view .listBar:first-child{
     max-height:70%;
+}
+.fc-content-skeleton td {
+    padding: 5px 10px;
+}
+.fc-day-grid-event .fc-content{
+    padding:5px;
+}
+.eventDetail .close{
+    width: 16px;
+    height: 16px;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.fc-row .fc-content-skeleton td, .fc-row .fc-mirror-skeleton td{
+    padding:4px;
+}
+.bootstrap-datetimepicker-widget table th{
+    white-space: nowrap;
+    line-height:16px;
+}
+.fc th {
+    height: 30px;
+    vertical-align: middle!important;
+}
+.blankFeedArea{
+    width:100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding:25px 0;
+}
+.blankFeedArea figure {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 20px;
+}
+.fc-toolbar{
+    position: relative;
+}
+.fc-toolbar .fc-center{
+    position: absolute;
+    left:0;
+}
+.gdrive::before{
+    width:18px;
+    height:16px;
+    background-image:url("../images/google-drive.svg");
+    background-repeat: no-repeat;
+    position: absolute;
+    content:"";
+    left:15px;
+    top: 50%;
+    transform: translateY(-50%);
+    transition:0.3s ease-in;
+}
+.gdrive:hover::before{
+    background-image:url("../images/google-drive-white.svg");
 }

@@ -64,7 +64,7 @@
 												</div>
 												<div class="col-md-12">
 													<div class="row">
-														<div class="col-md-4 col-sm-6 col-xs-12">
+														<div class="col-md-6">
 															<div class="form-group calendar">
 																<label>Start</label>
 																<div class="filtercalendar">
@@ -97,7 +97,7 @@
 															</div>
 															<span class="custom_err" id="err_start-date"></span>
 														</div>
-														<div class="col-md-4 col-sm-6 col-xs-12">
+														<div class="col-md-6">
 															<div class="form-group calendar">
 																<label>End</label>
 																<div class="filtercalendar">

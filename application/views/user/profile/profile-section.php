@@ -12,8 +12,8 @@
                     <div class="infoWrapper">
                         <div class="profile_general_info">
                             <div class="list">
-                                <div class="heading">User Name</div>
-                                <div class="value"><?php echo $user_detail['username'];?></div>
+                                <div class="heading">Profile Link</div>
+                                <div class="value"><a href="<?php echo base_url().'sp/'.$user_detail['username'];?>"><?php echo base_url().'sp/'.$user_detail['username'];?></a></div>
                             </div>
                             <div class="list">
                                 <div class="heading">First Name</div>
@@ -43,9 +43,9 @@
                         <div class="edit_general_info" style="display: none;">
                             <form method="post" action="<?php echo base_url().'Profile/updateGeneralInfo' ?>" onsubmit="return validateGeneralForm()">
                                 <div class="list">
-                                    <div class="heading">User Name</div>
+                                    <div class="heading">Profile Link</div>
                                     <div class="value">
-                                        <input type="text" class="form-control" name="username" value="<?php echo $user_detail['username'];?>" onblur="validateUserName(this.value)" required/>
+                                        <input type="text" class="form-control" name="username" id="usernameG" value="<?php echo $user_detail['username'];?>" onblur="validateUserName(this.value)" required/>
                                         <span id="err_username" style="color:red;font-style: italic;"></span>
                                     </div>
                                 </div>
