@@ -4,7 +4,7 @@ function openChatWindow() {
   $("#single_chat_window_box").show();
 }
 
-var CHAT_GROUP_ADDITIONS = {
+var CHAT_GROUP_ADDITIONS_SINGLE = {
   _AJAX_SUBMIT_SINGLE_CHAT: function(data, receiverId) {
     $.ajax({
       url: $("#submit_single_chat_url").val(),
@@ -123,5 +123,5 @@ $("body").on("click", ".open-single-chat-window", function() {
     name: name
   };
 
-  CHAT_GROUP_ADDITIONS._AJAX_SUBMIT_SINGLE_CHAT(data, receiverId);
+  CHAT_GROUP_ADDITIONS_SINGLE._AJAX_SUBMIT_SINGLE_CHAT(data, receiverId);
 });

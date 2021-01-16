@@ -65,11 +65,82 @@ Upload.prototype.doUpload = function() {
   });
 };
 
+Upload.prototype.singleUpload = function() {
+  var that = this;
+  var formData = new FormData();
+
+  // add assoc key values, this will be posts values
+  formData.append("file", this.file, this.getName());
+  formData.append("upload_file", true);
+
+  $.ajax({
+    type: "POST",
+    url: $("#submit_upload_document_form_single").attr("action"),
+    beforeSend: function() {
+      var progress_bar_id = "#single-progress-wrp";
+      $(progress_bar_id).show();
+    },
+    xhr: function() {
+      var myXhr = $.ajaxSettings.xhr();
+      if (myXhr.upload) {
+        myXhr.upload.addEventListener(
+          "progress",
+          that.progressSingleHandling,
+          false
+        );
+      }
+      return myXhr;
+    },
+    success: function(data) {
+      if (data.status) {
+        var url =
+          "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/pdf.svg' alt='Icon'></span>" +
+          "<a href='" +
+          data.url +
+          "'>" +
+          data.data.orig_name +
+          "</a></span>";
+        sendDocumentMessageSingle(url, data.url);
+      } else {
+        alert(data.data);
+      }
+      var progress_bar_id = "#single-progress-wrp";
+      $(progress_bar_id + " .status").text("");
+    },
+    error: function(error) {
+      // handle error
+    },
+    async: true,
+    data: formData,
+    cache: false,
+    contentType: false,
+    processData: false,
+    timeout: 60000,
+    complete: function() {
+      var progress_bar_id = "#single-progress-wrp";
+      $(progress_bar_id).hide();
+    }
+  });
+};
+
 Upload.prototype.progressHandling = function(event) {
   var percent = 0;
   var position = event.loaded || event.position;
   var total = event.total;
   var progress_bar_id = "#progress-wrp";
+  if (event.lengthComputable) {
+    percent = Math.ceil((position / total) * 100);
+  }
+  // update progressbars classes so it fits your code
+  $(progress_bar_id + " .progress-bar").css("width", +percent + "%");
+  $(progress_bar_id + " .status").text(percent + "%");
+};
+
+Upload.prototype.progressSingleHandling = function(event) {
+  var percent = 0;
+  var position = event.loaded || event.position;
+  var total = event.total;
+  var progress_bar_id = "#single-progress-wrp";
   if (event.lengthComputable) {
     percent = Math.ceil((position / total) * 100);
   }
@@ -606,6 +677,31 @@ function showPreviewChatImage(input) {
   }
 }
 
+function showPreviewChatImageSingle(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    var ele = input;
+    reader.onload = function(e) {
+      ele.previousElementSibling.src = e.target.result;
+      $("#current_image_upload_src").val(e.target.result);
+      $("#append_image_after_upload_single")
+        .closest(".custom-image")
+        .parent()
+        .removeClass("hide");
+      $("#append_image_after_upload_single").html(
+        ' <li class="uploadBtn uploadBtnRestImage add">' +
+          '<img class="img" src="' +
+          e.target.result +
+          '" />' +
+          '<a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>' +
+          "</li>"
+      );
+      $("#upload_second_image_chat_single").val("");
+    };
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
 $("#imageUpload").change(function() {
   readURLImage(this);
 });
@@ -614,12 +710,24 @@ $("body").on("change", "#upload_second_image_chat", function() {
   showPreviewChatImage(this);
 });
 
+$("body").on("change", "#upload_second_image_chat_single", function() {
+  showPreviewChatImageSingle(this);
+});
+
 $("#image_icon_selector").click(function() {
   $("#upload_second_image_chat").trigger("click");
 });
 
+$("#image_icon_selector_single").click(function() {
+  $("#upload_second_image_chat_single").trigger("click");
+});
+
 $("#any_document_upload").click(function() {
   $("#upload_first_image_document").trigger("click");
+});
+
+$("#any_document_upload_single").click(function() {
+  $("#upload_first_image_document_single").trigger("click");
 });
 
 $("body").on("change", "#upload_first_image_document", function() {
@@ -632,7 +740,17 @@ $("body").on("change", "#upload_first_image_document", function() {
   upload.doUpload();
 });
 
-function sendMessageToUser() {
+$("body").on("change", "#upload_first_image_document_single", function() {
+  var file = $(this)[0].files[0];
+  var upload = new Upload(file);
+
+  // maby check size or type here with upload.getSize() and upload.getType()
+
+  // execute upload
+  upload.singleUpload();
+});
+
+function sendMessageToUser(messageText) {
   var UserInfo = JSON.parse(userData);
   var unreadMembers = [];
   var otherGroupMembers = JSON.parse($("#curren_group_members").val());
@@ -659,7 +777,7 @@ function sendMessageToUser() {
     group_members: JSON.parse($("#curren_group_members").val()),
     unread_members: unreadMembers,
     read_members: [],
-    message: $(".emojionearea-editor").html(),
+    message: messageText,
     media_url: $("#current_image_upload_src").val(),
     new_member_added: 0,
     document_url: null,
@@ -682,7 +800,7 @@ function sendMessageToUser() {
   $("#append_image_after_upload").html("");
 }
 
-function sendMessageToSingleUser() {
+function sendMessageToSingleUser(messageText) {
   var UserInfo = JSON.parse(userData);
   var unreadMembers = [];
   var otherGroupMembers = JSON.parse($("#curren_group_members").val());
@@ -709,7 +827,7 @@ function sendMessageToSingleUser() {
     group_members: JSON.parse($("#curren_group_members").val()),
     unread_members: unreadMembers,
     read_members: [],
-    message: $(".emojionearea-editor").html(),
+    message: messageText,
     media_url: $("#current_image_upload_src").val(),
     new_member_added: 0,
     document_url: null,
@@ -728,8 +846,8 @@ function sendMessageToSingleUser() {
     .html(message.message);
   $(".emojionearea-editor").html("");
   $("#single_chat_submit_button").val("");
-  //$("#current_image_upload_src").val("");
-  //$("#append_image_after_upload").html("");
+  $("#current_image_upload_src").val("");
+  $("#append_image_after_upload_single").html("");
 }
 
 function sendMessageAsNewMemberAdded(messageJson, status) {
@@ -802,6 +920,52 @@ function sendDocumentMessage(messageDocument, url) {
 
   $(".emojionearea-editor").html("");
   $("#send_message_input").val("");
+  $("#current_image_upload_src").val("");
+  $("#append_image_after_upload").html("");
+}
+
+function sendDocumentMessageSingle(messageDocument, url) {
+  var UserInfo = JSON.parse(userData);
+  var unreadMembers = [];
+  var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+  if (otherGroupMembers) {
+    otherGroupMembers.forEach(function(item, index) {
+      if (item != UserInfo.user_id) {
+        unreadMembers.push(item);
+      }
+    });
+  }
+
+  var currentGroupId = $("#current_group_id").val();
+
+  var message = {
+    to_user_id: 0,
+    to_user_name: "",
+    from_user_id: UserInfo.user_id,
+    from_user_name: UserInfo.first_name,
+    send_profile_image: UserInfo.profileImage,
+    is_read: "unread",
+    group_id: $("#current_group_id").val(),
+    group_name: $("#curren_group_name_id").val(),
+    group_image: $("#group_image_id_" + currentGroupId).attr("src"),
+    group_members: JSON.parse($("#curren_group_members").val()),
+    unread_members: unreadMembers,
+    read_members: [],
+    message: messageDocument,
+    media_url: $("#current_image_upload_src").val(),
+    new_member_added: 0,
+    document_url: url,
+    emoji: null,
+    time: moment().format("h:mm"),
+    created: new Date().toISOString()
+  };
+
+  socket.emit("sendmessage", JSON.stringify(message));
+
+  sendMessageToSingleChat(message, "online");
+
+  $(".emojionearea-editor").html("");
+  $("#single_chat_submit_button").val("");
   $("#current_image_upload_src").val("");
   $("#append_image_after_upload").html("");
 }
@@ -888,7 +1052,7 @@ $(".emojis-wysiwyg").emojioneArea({
         ($.trim(editor.text()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
-        sendMessageToUser();
+        sendMessageToUser(editor.html());
         event.preventDefault();
         event.stopPropagation();
         editor.focus();
@@ -920,7 +1084,7 @@ $("#single_chat_submit_button").emojioneArea({
         ($.trim(editor.text()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
-        sendMessageToSingleUser();
+        sendMessageToSingleUser(editor.html());
         event.preventDefault();
         event.stopPropagation();
         editor.focus();
