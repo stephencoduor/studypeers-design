@@ -1162,6 +1162,19 @@ input:-webkit-autofill:active {
     background: #ea2e7e;
     border-radius:6px;
 }
+::-moz-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+::-moz-scrollbar-track {
+    background: #eee;
+}
+
+::-moz-scrollbar-thumb {
+    background: #ea2e7e;
+    border-radius:6px;
+}
 .pollsWrapper .pollsform .form-group .cross-icon {
     position: absolute;
     top: 15px;
@@ -1232,11 +1245,15 @@ input:-webkit-autofill:active {
 }
 .fc-toolbar{
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 0 0;
 }
-.fc-toolbar .fc-center{
+/* .fc-toolbar .fc-center{
     position: absolute;
     left:0;
-}
+} */
 .gdrive::before{
     width:18px;
     height:16px;

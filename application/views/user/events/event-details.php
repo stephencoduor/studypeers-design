@@ -10,7 +10,7 @@
 								</svg>
 			Back to events
 		</a>
-		<div class="col-sm-9">
+		<div class="col-md-12">
 			<ul class="eventscheduledWrap">
 				<li>
 					<svg class="sp-icon sp-icon--s sp-icon--op4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
@@ -52,6 +52,16 @@
 					
 				</li>
 			</ul>
+			
+		</div>
+		<div class="col-md-12">
+			<?php if($event['featured_image'] != '') { ?>
+				<div class="imageBoxUpload event" style="border: none;">
+					<img src="<?php echo base_url(); ?>uploads/users/<?php echo $event['featured_image']; ?>">
+				</div>
+			<?php } ?>
+		</div>
+		<div class="col-md-12">
 			<h4 class="eventname"><?php echo $event['event_name']; ?></h4>
 			<div class="badgeList">
 				<ul>
@@ -223,13 +233,6 @@
 				</div>
 			</div>
 			<p class="eventdescription">Sample, I just adding an event to do a test run.</p>
-		</div>
-		<div class="col-sm-3">
-			<?php if($event['featured_image'] != '') { ?>
-				<div class="imageBoxUpload event" style="border: none;">
-					<img src="<?php echo base_url(); ?>uploads/users/<?php echo $event['featured_image']; ?>">
-				</div>
-			<?php } ?>
 		</div>
 		<div class="col-sm-12">
 			<div class="mapWrapper">
