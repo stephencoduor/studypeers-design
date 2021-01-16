@@ -618,6 +618,7 @@ class Profile extends CI_Controller {
 		$data['followers'] = $followers['total'];
 		$data['followings'] = $followings['total'];
 		$data['index_menu']  = 'timeline';
+        $data['user_profile_page'] = 0;
 		$data['title']  = 'Timeline | Studypeers';
 		$this->load->view('user/include/header', $data);
 		$this->load->view('user/profile/timeline');
