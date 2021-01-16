@@ -871,6 +871,7 @@ $config['max_height']  = '768000';
 		$data['chk_if_follow']  = $chk_if_follow;
 		$data['followers'] = $followers['total'];
 		$data['followings'] = $followings['total'];
+        $data['user_profile_page'] = 1;
 		$this->load->view('user/include/header', $data);
 		$this->load->view('user/profile/friends-timeline');
 		$this->load->view('user/profile/layouts/footer');

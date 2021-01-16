@@ -278,8 +278,8 @@
                         <div class="form-group button">
                             <form method="post" action="<?php echo base_url(); ?>account/addEventToCalender">
                                 <input type="hidden" id="calender_event_id" name="calender_event_id" value="">
-                                <?php if (isset($_REQUEST['profile_id'])) { ?>
-                                    <input type="hidden" id="" name="profile" value="<?= $_REQUEST['profile_id']; ?>">
+                                <?php if ($this->uri->segment('2')) { ?>
+                                    <input type="hidden" id="" name="profile" value="<?= $this->uri->segment('2'); ?>">
                                 <?php } else { ?>
                                     <input type="hidden" id="" name="timeline" value="1">
                                 <?php }  ?>
@@ -310,8 +310,8 @@
                         <form method="post" action="<?php echo base_url(); ?>account/removeEvent">
                             <div class="form-group button">
                                 <input type="hidden" id="remove_event_id" name="remove_event_id">
-                                <?php if (isset($_REQUEST['profile_id'])) { ?>
-                                    <input type="hidden" id="" name="profile" value="<?= $_REQUEST['profile_id']; ?>">
+                                <?php if ($this->uri->segment('2')) { ?>
+                                    <input type="hidden" id="" name="profile" value="<?= $this->uri->segment('2'); ?>">
                                 <?php } else { ?>
                                     <input type="hidden" id="" name="timeline" value="1">
                                 <?php }  ?>
@@ -409,10 +409,10 @@
 </script>
 
 
-<?php if (isset($_REQUEST['profile_id'])) { ?>
-    <script>
-        $(document).ready(function() {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+<?php if ($user_profile_page == 1) { ?>
+    <script> 
+        $(document).ready(function() { 
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
                 type: 'post',
@@ -429,7 +429,7 @@
         });
 
         function loadMoreFeeds(count) {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
                 type: 'post',
@@ -447,7 +447,7 @@
         }
 
         $(document).on("click", ".loadPosts", function() {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserPosts',
@@ -465,7 +465,7 @@
         });
 
         function loadMorePosts(count) {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserPosts',
                 type: 'post',
@@ -482,7 +482,7 @@
         }
 
         $(document).on("click", ".loadQuestions", function() {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserQuestions',
@@ -500,7 +500,7 @@
         });
 
         function loadMoreQuestions(count) {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserQuestions',
                 type: 'post',
@@ -517,7 +517,7 @@
         }
 
         $(document).on("click", ".loadDocuments", function() {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserDocuments',
@@ -535,7 +535,7 @@
         });
 
         $(document).on("click", ".loadstudySets", function() {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserStudyset',
@@ -553,7 +553,7 @@
         });
 
         function loadMoreStudyset(count) {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserStudyset',
                 type: 'post',
@@ -570,7 +570,7 @@
         }
 
         $(document).on("click", ".loadEvents", function() {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $('#timeline-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p></div></div>');
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserEvents',
@@ -588,7 +588,7 @@
         });
 
         function loadMoreEvent(count) {
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getUserEvents',
                 type: 'post',
@@ -610,7 +610,7 @@
             $('#timeline-documents-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Documents..</p></div></div>');
             $('#timeline-studyset-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Studysets..</p></div></div>');
             $('#timeline-events-feeds').html('<div class="box-card message"><div class="createBox"><p class="text-center" style="padding-bottom: 20px;">Loading Events..</p></div></div>');
-            var friend_id = '<?php echo $_REQUEST['profile_id']; ?>';
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
                 type: 'post',
