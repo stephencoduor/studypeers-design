@@ -6,6 +6,7 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/bootstrap.min.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/nice-select.css">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 	<?php if ($index_menu == 'dashboard') { ?>
@@ -15,14 +16,14 @@
 	<?php } ?>
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/star-rating-svg.css">
-	<link href='<?php echo base_url(); ?>assets_d/css/fullCalendar.css' rel='stylesheet' />
+	<!-- <link href='<?php echo base_url(); ?>assets_d/css/fullCalendar.css' rel='stylesheet' /> -->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" integrity="sha512-KXkS7cFeWpYwcoXxyfOumLyRGXMp7BTMTjwrgjMg0+hls4thG2JGzRgQtRfnAuKTn2KWTDZX4UdPg+xTs8k80Q==" crossorigin="anonymous" />
 	<?php if ($index_menu != 'questions' && $index_menu != 'dashboard' && $index_menu != 'timeline') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/study-set.css">
 	<?php } ?>
 	<?php if ($index_menu != 'documents' && $index_menu != 'questions' && $index_menu != 'study-sets' && $index_menu != 'dashboard' && $index_menu != 'timeline') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/schedule.css">
 	<?php } ?>
-	<link href='<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.min.css' rel='stylesheet' />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.css">
@@ -44,6 +45,7 @@
 
 	<!-- Emoji Data -->
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.tw.css">
+
 	<script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
 	<?php if ($index_menu == 'questions') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/qa.css">

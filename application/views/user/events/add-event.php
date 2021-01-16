@@ -39,9 +39,9 @@
 										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="form-row align-items-center mb-2 no-gutters">
-											<div class="col  eventAdd">
-												<div class="col-sm-6">
+										<div class="align-items-center mb-2 no-gutters">
+											<div class="row  eventAdd">
+												<div class="col-md-6">
 													<div class="form-group calendar event">
 														<label>Start</label>
 														<div class="filtercalendar">
@@ -84,7 +84,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-sm-6">
+												<div class="col-lg-6">
 													<div class="form-group calendar event">
 														<label>End</label>
 														<div class="filtercalendar">

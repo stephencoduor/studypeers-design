@@ -620,4 +620,36 @@ $(document).on('submit','form.submitQuestionAnswer',function(e){
         $('#end-date'). keypress(function(event) { event. preventDefault(); return false; }); 
         $('#selectTime1 .form-control'). keypress(function(event) { event. preventDefault(); return false; }); 
         
+        $("#start-date,#end-date").on('keydown',  function(event){
+            var key = event.charCode || event.keyCode || event.which;
+            var char = String.fromCharCode(event.key);
+            if( key === 8 || key=== 46 ){
+                event.preventDefault();
+                return false;
+            }	
+            else {		
+                $("#start-date,#end-date").append(char);
+            }
+        });
+        $("#selectTime1 .form-control").on('keydown',  function(event){
+            var key = event.charCode || event.keyCode || event.which;
+            var char = String.fromCharCode(event.key);
+            if( key === 8 || key=== 46 ){
+                event.preventDefault();
+                return false;
+            }	
+            else {		
+                $("#selectTime1 .form-control").append(char);
+            }
+        });
+        $("#start-date, #end-date").on('keydown',  function(event){
+            var key = event.charCode || event.keyCode || event.which;// alert (key);
+            var char = String.fromCharCode(event.key);
+            if( key === 8 || key=== 46  ){
+                event.preventDefault();
+                return false;
+            }	else {		
+                $("#start-date, #end-date").append(char);
+            }
+        });
     }); 
