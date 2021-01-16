@@ -12,7 +12,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
     </section>
 
-    
+
     <div class="flex-view">
         <section class="listBar">
             <section class="listHeader">
@@ -409,6 +409,11 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
             </div>
         </div>
+
+        <div id="single-progress-wrp" style="display:none;">
+            <div class="progress-bar"></div>
+            <div class="status"></div>
+        </div>
         <div class="chat-footer">
             <div class="input-wrap">
                 <div class="img-preview hide">
@@ -419,7 +424,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                                     <div class="choose-imagefile-wrap">
                                         <div class="result">
                                             <div id="gal">
-                                                <ul class="gallery" id="append_image_after_upload">
+                                                <ul class="gallery" id="append_image_after_upload_single">
                                                 </ul>
                                             </div>
                                         </div>
@@ -438,12 +443,12 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                         </button>
                         <a href="javascript:void(0)" class="media-icon">
-                            <img src="http://localhost/studypeers/assets_d/images/image.svg" alt="Imozi Icon" id="image_icon_selector">
+                            <img src="http://localhost/studypeers/assets_d/images/image.svg" alt="Imozi Icon" id="image_icon_selector_single">
                         </a>
-                        <label class="file-upload" id="any_document_upload"></label>
-                        <input type="file" for="file-upload" class="rest_img" id="upload_second_image_chat" style="display:none;" accept="image/*">
-                        <form action="http://localhost/studypeers/account/upload-document-server" enctype="multipart/form-data" method="post" id="submit_upload_document_form">
-                            <input type="file" class="rest_img" id="upload_first_image_document" style="display:none;" accept="">
+                        <label class="file-upload" id="any_document_upload_single"></label>
+                        <input type="file" for="file-upload" class="rest_img" id="upload_second_image_chat_single" style="display:none;" accept="image/*">
+                        <form action="http://localhost/studypeers/account/upload-document-server" enctype="multipart/form-data" method="post" id="submit_upload_document_form_single">
+                            <input type="file" class="rest_img" id="upload_first_image_document_single" style="display:none;" accept="">
                         </form>
                     </div>
                 </div>
