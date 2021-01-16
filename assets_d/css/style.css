@@ -1269,3 +1269,10 @@ input:-webkit-autofill:active {
 .gdrive:hover::before{
     background-image:url("../images/google-drive-white.svg");
 }
+.fc-center h2 {
+    font-size: 24px;
+    font-weight: 700;
+}
+.fc-toolbar .fc-right{
+    display: none;
+}
