@@ -650,7 +650,7 @@ $config['max_height']  = '768000';
         $announcement  = $this->input->post('announcement');
 
         $poll_end_date = date('Y-m-d', strtotime($this->input->post('poll-end-date')));
-        $poll_end_time = $this->input->post('poll-end-time');
+        $poll_end_time = date('H:i:s', strtotime($this->input->post('poll-end-time')));
 
 		if($allow_comment == 'on'){
 			$is_comment_on = 1;

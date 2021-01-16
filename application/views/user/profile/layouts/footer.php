@@ -1320,14 +1320,18 @@
         });
         index = 3;
         $('.addmore').on('click', function() {
-            index++;
-            $('.pollsform').append(
-                `<div class="form-group">
-                        <input type="text" class="form-control" name="option[${index}]" placeholder="Option ${index}">
-                    </div>
-                    `
-            );
+            if(index < 6){
+                index++;
+                $('.pollsform').append(
+                    `<div class="form-group" id="option_div_${index}">
+                            <input type="text" name="option[${index}]" class="form-control" placeholder="Option ${index}">
+                            <a href="javascript:void(0)" onclick="removeOptionDiv('${index}')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                        </div>
+                        `
+                );
+            }
         });
+        
         $('.closeBtn').on('click', function() {
             $(this).parents('.uploadedDocs').hide();
         });
@@ -1785,7 +1789,10 @@
 
 
     });
-
+    function removeOptionDiv(id){
+        index--;
+        $('#option_div_'+id).remove();
+    }
 
     function saveReaction(reaction_id, reference_id, reference) {
 
@@ -2520,8 +2527,8 @@
         }
     }
 
-    function applyHashTag(){
-        CKEDITOR.instances['messagepostarea'].setData( '<p>#</p>' );
+    function applyHashTag() {
+        CKEDITOR.instances['messagepostarea'].insertText('#');
     }
 </script>
 
