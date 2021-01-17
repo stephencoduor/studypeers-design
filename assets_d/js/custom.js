@@ -76,7 +76,7 @@ $('.overlay').toggleClass('active');
 });
 
 
-// $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").niceScroll(
+// $("body,.sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").niceScroll(
 //   {
 //     cursorwidth:"8",
 //     cursorcolor:"#000",
@@ -89,19 +89,19 @@ $('.overlay').toggleClass('active');
 //     zindex:9999999,
 //     background:"#e3e3e3"
 //   });
-// $(document).ready(function(){
-//     $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").mCustomScrollbar({
-//         theme:"dark-thin",
-//         autoExpandScrollbar:true,
-//         advanced:{autoExpandHorizontalScroll:true}
-//     });
-// });
 $(document).ready(function(){
-    // $("body").mCustomScrollbar({
+    // $("body,.sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").mCustomScrollbar({
     //     theme:"dark-thin",
     //     autoExpandScrollbar:true,
     //     advanced:{autoExpandHorizontalScroll:true}
     // });
+});
+$(document).ready(function(){
+    $("body").mCustomScrollbar({
+        theme:"dark-thin",
+        autoExpandScrollbar:true,
+        advanced:{autoExpandHorizontalScroll:true}
+    });
 });
 // (function($){
 //   $(window).on("load",function(){

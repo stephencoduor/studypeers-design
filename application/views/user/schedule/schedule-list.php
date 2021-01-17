@@ -31,14 +31,14 @@
 		 margin-right:10px;
 	 }
 	 .gdrive {
-		 background: #d8f5f6;
-		 color:#1ae2bc;
+		 background: #e8effd;
+		 color:#0c2d76;
 		 position:relative;
 		 transition:0.3s ease-in;
 		 padding:10px 20px 10px 40px;
 	 }
 	 .gdrive:hover{
-		 background:#0A5A4C;
+		 background:#0C2D76;
 		 color:#fff;
 	 }
 	 .import_schedules{

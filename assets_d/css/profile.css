@@ -3761,7 +3761,7 @@ input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px #f7f7f7 inset !important;
     box-shadow: 0 0 0 30px #f7f7f7 inset !important;
 }
-
+/* 
 ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -3774,4 +3774,4 @@ input:-webkit-autofill:active {
 ::-webkit-scrollbar-thumb {
     background: #ea2e7e;
     border-radius:6px;
-}
+} */
