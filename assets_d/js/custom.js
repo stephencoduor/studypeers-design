@@ -89,13 +89,13 @@ $('.overlay').toggleClass('active');
 //     zindex:9999999,
 //     background:"#e3e3e3"
 //   });
-// $(document).ready(function(){
-//     $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").mCustomScrollbar({
-//         theme:"dark-thin",
-//         autoExpandScrollbar:true,
-//         advanced:{autoExpandHorizontalScroll:true}
-//     });
-// });
+$(document).ready(function(){
+    $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").mCustomScrollbar({
+        theme:"dark-thin",
+        autoExpandScrollbar:true,
+        advanced:{autoExpandHorizontalScroll:true}
+    });
+});
 $(document).ready(function(){
     // $("body").mCustomScrollbar({
     //     theme:"dark-thin",

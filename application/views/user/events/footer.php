@@ -217,7 +217,7 @@
     <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
-    <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.js"></script>
 	<script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>-->
