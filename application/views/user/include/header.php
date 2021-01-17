@@ -47,6 +47,10 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.emojipicker.tw.css">
 
 	<script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
+
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/bootstrap-select.css'); ?>">
+
 	<?php if ($index_menu == 'questions') { ?>
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/qa.css">
 		<script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
@@ -409,11 +413,11 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 
 
 								<li class="user" title="<?php
-									$userdata = $this->session->userdata('user_data');
-									$user_detail    = $this->db->get_where('user', array('id' => $userdata['user_id']))->row_array();
-									$full_name      = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
-									echo $full_name;
-									?>">
+														$userdata = $this->session->userdata('user_data');
+														$user_detail    = $this->db->get_where('user', array('id' => $userdata['user_id']))->row_array();
+														$full_name      = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
+														echo $full_name;
+														?>">
 									<?php
 									$userdata = $this->session->userdata('user_data');
 									$user_detail    = $this->db->get_where('user', array('id' => $userdata['user_id']))->row_array();

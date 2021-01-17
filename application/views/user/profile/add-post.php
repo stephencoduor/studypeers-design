@@ -60,15 +60,15 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                             <div class="pollsform">
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="option[1]" placeholder="Option 1">
-                                    <a href="javascript:void(0)" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                                    
                                 </div>
                                 <div class="form-group">
                                     <input type="text" class="form-control" name="option[2]" placeholder="Option 2">
-                                    <a href="javascript:void(0)" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                                    
                                 </div>
-                                <div class="form-group">
+                                <div class="form-group" id="option_div_3">
                                     <input type="text" class="form-control" name="option[3]" placeholder="Option 3">
-                                    <a href="javascript:void(0)" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                                    <a href="javascript:void(0)" onclick="removeOptionDiv('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
                                 </div>
                             </div>
                             <div class="addmore">

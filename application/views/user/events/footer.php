@@ -217,11 +217,12 @@
     <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
-    <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.js"></script>
 	<script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 	<!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>-->
 	<!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>-->
+	<script src="<?php echo base_url('assets_d/js/bootstrap-select.js'); ?>"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>

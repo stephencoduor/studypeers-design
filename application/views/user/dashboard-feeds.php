@@ -467,22 +467,24 @@
 		                                                                                </div>
 		                                                                            </a>
 		                                                                        </li>
-		                                                                        <li role="presentation">
-		                                                                            <a role="menuitem"
-		                                                                               tabindex="-1"
-		                                                                               href="javascript:void(0);" onclick="deleteCommentReply('<?= $value2['id']; ?>', '<?php echo $value['id']; ?>')">
-		                                                                                <div
-		                                                                                    class="left">
-		                                                                                    <img
-		                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-		                                                                                        alt="Link">
-		                                                                                </div>
-		                                                                                <div
-		                                                                                    class="right">
-		                                                                                    <span>Delete</span>
-		                                                                                </div>
-		                                                                            </a>
-		                                                                        </li>
+		                                                                        <?php if(($user_id == $event_detail['created_by']) || $user_id == $value2['user_id']) { ?>
+			                                                                        <li role="presentation">
+			                                                                            <a role="menuitem"
+			                                                                               tabindex="-1"
+			                                                                               href="javascript:void(0);" onclick="deleteCommentReply('<?= $value2['id']; ?>', '<?php echo $value['id']; ?>')">
+			                                                                                <div
+			                                                                                    class="left">
+			                                                                                    <img
+			                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+			                                                                                        alt="Link">
+			                                                                                </div>
+			                                                                                <div
+			                                                                                    class="right">
+			                                                                                    <span>Delete</span>
+			                                                                                </div>
+			                                                                            </a>
+			                                                                        </li>
+			                                                                    <?php } ?>
 		                                                                    </ul>
 		                                                                </div>
 		                                                            </div>
@@ -514,16 +516,18 @@
 		                                                            </div>
 		                                                        </a>
 		                                                    </li>
-		                                                    <li role="presentation">
-		                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $value['reference_id']; ?>', 'event')">
-		                                                            <div class="left">
-		                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-		                                                            </div>
-		                                                            <div class="right">
-		                                                                <span>Delete</span>
-		                                                            </div>
-		                                                        </a> 
-		                                                    </li>
+		                                                    <?php if(($user_id == $event_detail['created_by']) || $user_id == $value['user_id']) { ?>
+			                                                    <li role="presentation">
+			                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $value['reference_id']; ?>', 'event')">
+			                                                            <div class="left">
+			                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+			                                                            </div>
+			                                                            <div class="right">
+			                                                                <span>Delete</span>
+			                                                            </div>
+			                                                        </a> 
+			                                                    </li>
+			                                                <?php } ?>
 		                                                </ul>
 		                                            </div>
 		                                        </div>
@@ -931,22 +935,24 @@
                                                                                 </div>
                                                                             </a>
                                                                         </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem"
-                                                                               tabindex="-1"
-                                                                               href="javascript:void(0);" onclick="deleteCommentReply('<?= $value2['id']; ?>', '<?php echo $value['id']; ?>')">
-                                                                                <div
-                                                                                    class="left">
-                                                                                    <img
-                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                        alt="Link">
-                                                                                </div>
-                                                                                <div
-                                                                                    class="right">
-                                                                                    <span>Delete</span>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
+                                                                        <?php if(($user_id == $studyset_detail['user_id']) || $user_id == $value2['user_id']) { ?>
+	                                                                        <li role="presentation">
+	                                                                            <a role="menuitem"
+	                                                                               tabindex="-1"
+	                                                                               href="javascript:void(0);" onclick="deleteCommentReply('<?= $value2['id']; ?>', '<?php echo $value['id']; ?>')">
+	                                                                                <div
+	                                                                                    class="left">
+	                                                                                    <img
+	                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+	                                                                                        alt="Link">
+	                                                                                </div>
+	                                                                                <div
+	                                                                                    class="right">
+	                                                                                    <span>Delete</span>
+	                                                                                </div>
+	                                                                            </a>
+	                                                                        </li>
+	                                                                    <?php } ?>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -978,16 +984,18 @@
                                                             </div>
                                                         </a>
                                                     </li>
-                                                    <li role="presentation">
-                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $value['reference_id']; ?>', 'studyset')">
-                                                            <div class="left">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                            </div>
-                                                            <div class="right">
-                                                                <span>Delete</span>
-                                                            </div>
-                                                        </a> 
-                                                    </li>
+                                                    <?php if(($user_id == $studyset_detail['user_id']) || $user_id == $value['user_id']) { ?>
+	                                                    <li role="presentation">
+	                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $value['reference_id']; ?>', 'studyset')">
+	                                                            <div class="left">
+	                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+	                                                            </div>
+	                                                            <div class="right">
+	                                                                <span>Delete</span>
+	                                                            </div>
+	                                                        </a> 
+	                                                    </li>
+	                                                <?php } ?>
                                                 </ul>
                                             </div>
                                         </div>
@@ -1389,22 +1397,24 @@
                                                                                 </div>
                                                                             </a>
                                                                         </li>
-                                                                        <li role="presentation">
-                                                                            <a role="menuitem"
-                                                                               tabindex="-1"
-                                                                               href="javascript:void(0);" onclick="deleteCommentReply('<?= $value2['id']; ?>', '<?php echo $value['id']; ?>')">
-                                                                                <div
-                                                                                    class="left">
-                                                                                    <img
-                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                        alt="Link">
-                                                                                </div>
-                                                                                <div
-                                                                                    class="right">
-                                                                                    <span>Delete</span>
-                                                                                </div>
-                                                                            </a>
-                                                                        </li>
+                                                                        <?php if(($user_id == $document_detail['created_by']) || $user_id == $value2['user_id']) { ?>
+	                                                                        <li role="presentation">
+	                                                                            <a role="menuitem"
+	                                                                               tabindex="-1"
+	                                                                               href="javascript:void(0);" onclick="deleteCommentReply('<?= $value2['id']; ?>', '<?php echo $value['id']; ?>')">
+	                                                                                <div
+	                                                                                    class="left">
+	                                                                                    <img
+	                                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+	                                                                                        alt="Link">
+	                                                                                </div>
+	                                                                                <div
+	                                                                                    class="right">
+	                                                                                    <span>Delete</span>
+	                                                                                </div>
+	                                                                            </a>
+	                                                                        </li>
+	                                                                    <?php } ?>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -1436,16 +1446,18 @@
                                                             </div>
                                                         </a>
                                                     </li>
-                                                    <li role="presentation">
-                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $value['reference_id']; ?>', 'document')">
-                                                            <div class="left">
-                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                            </div>
-                                                            <div class="right">
-                                                                <span>Delete</span>
-                                                            </div>
-                                                        </a> 
-                                                    </li>
+                                                    <?php if(($user_id == $document_detail['created_by']) || $user_id == $value['user_id']) { ?>
+	                                                    <li role="presentation">
+	                                                        <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $value['reference_id']; ?>', 'document')">
+	                                                            <div class="left">
+	                                                                <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+	                                                            </div>
+	                                                            <div class="right">
+	                                                                <span>Delete</span>
+	                                                            </div>
+	                                                        </a> 
+	                                                    </li>
+	                                                <?php } ?>
                                                 </ul>
                                             </div>
                                         </div>
@@ -2485,22 +2497,24 @@
                                                                         </div>
                                                                     </a>
                                                                 </li>
-                                                                <li role="presentation">
-                                                                    <a role="menuitem"
-                                                                       tabindex="-1"
-                                                                       href="javascript:void(0);" onclick="deleteCommentReply('<?= $value2['id']; ?>', '<?php echo $value['id']; ?>')">
-                                                                        <div
-                                                                            class="left">
-                                                                            <img
-                                                                                src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-                                                                                alt="Link">
-                                                                        </div>
-                                                                        <div
-                                                                            class="right">
-                                                                            <span>Delete</span>
-                                                                        </div>
-                                                                    </a>
-                                                                </li>
+                                                                <?php if(($user_id == $post_query->created_by) || $user_id == $value2['user_id']) { ?>
+	                                                                <li role="presentation">
+	                                                                    <a role="menuitem"
+	                                                                       tabindex="-1"
+	                                                                       href="javascript:void(0);" onclick="deleteCommentReply('<?= $value2['id']; ?>', '<?php echo $value['id']; ?>')">
+	                                                                        <div
+	                                                                            class="left">
+	                                                                            <img
+	                                                                                src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+	                                                                                alt="Link">
+	                                                                        </div>
+	                                                                        <div
+	                                                                            class="right">
+	                                                                            <span>Delete</span>
+	                                                                        </div>
+	                                                                    </a>
+	                                                                </li>
+	                                                            <?php } ?>
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -2532,16 +2546,18 @@
                                                     </div>
                                                 </a>
                                             </li>
-                                            <li role="presentation">
-                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $value['reference_id']; ?>', 'Post')">
-                                                    <div class="left">
-                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
-                                                    </div>
-                                                    <div class="right">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </a> 
-                                            </li>
+                                            <?php if(($user_id == $post_query->created_by) || $user_id == $value['user_id']) { ?>
+	                                            <li role="presentation">
+	                                                <a role="menuitem" tabindex="-1" href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $value['reference_id']; ?>', 'Post')">
+	                                                    <div class="left">
+	                                                        <img src="<?php echo base_url(); ?>assets_d/images/trash.svg" alt="Link">
+	                                                    </div>
+	                                                    <div class="right">
+	                                                        <span>Delete</span>
+	                                                    </div>
+	                                                </a> 
+	                                            </li>
+	                                         <?php } ?>
                                         </ul>
                                     </div>
                                 </div>

@@ -892,7 +892,7 @@ a.filterBtn,a.sortMenu{
     width: 16px;
     height: 16px;
     display: block;
-    background: url(../images/arrow.svg) no-repeat center center #fff;
+    background: url(../images/arrow.svg) no-repeat center center;
     position: absolute;
     right: 12px;
     top: 50%;
@@ -1275,4 +1275,43 @@ input:-webkit-autofill:active {
 }
 .fc-toolbar .fc-right{
     display: none;
+}
+.filterSelect .btn{
+    border:none;
+    padding:12px;
+    border:none;
+}
+.select .btn{
+    padding:12px;   
+}
+.scheduleWrapper:focus {
+    outline: none!important;
+}
+.filterSelect .btn-default{
+    background-color: transparent;
+    border-color: transparent;
+    color:rgb(85, 85, 85);
+}
+.filterSelect .btn-default .bs-caret{
+    display: none;
+}
+.filterSelect .form-control{
+    box-shadow: none;
+}
+.bs-caret{
+    display: none;
+}
+.btn-default.active, .btn-default:active, .open>.dropdown-toggle.btn-default{
+    background-color: transparent!important;
+    border-color: transparent!important;
+    color:rgb(85, 85, 85)!important;
+}
+.btn.active.focus, .btn.active:focus, .btn.focus, .btn:active.focus, .btn:active:focus, .btn:focus{
+    outline: none;
+    outline-offset: unset;
+}
+.add-course {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
 }

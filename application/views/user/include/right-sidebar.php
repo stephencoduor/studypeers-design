@@ -68,11 +68,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
                             </figure>
-<<<<<<< HEAD
-                            <figcaption><a href="<?php echo base_url(); ?>sp/<?= $peer['username']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
-=======
                             <figcaption>The in group</figcaption>
->>>>>>> eb545b8bf268f01b4b505ba267be38c672482efe
                         </section>
                         <section class="action">
                             <i class="fa fa-ellipsis-v"></i>
@@ -392,14 +388,14 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <div class="small-header-left">
                 <div class="sm-basic-user-info">
                     <figure>
-                        <img id="single_chat_image_preview" src="http://localhost/studypeers/uploads/users/cover/1605539206.png">
+                        <img id="single_chat_image_preview" src="">
                     </figure>
                     <strong id="current_single_chat_name">user7</strong>
                 </div>
                 <h3>Start Conversation</h3>
             </div>
             <div class="sm-chat-header-right">
-                <a href="javascript:void(0)" class="video-icon"><img src="http://localhost/studypeers/assets_d/chat-assets/images/video-camera.svg" alt="Video Icon"></a>
+                <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url('assets_d/chat-assets/images/video-camera.svg'); ?>" alt="Video Icon"></a>
             </div>
         </div>
 
@@ -443,11 +439,11 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                         </button>
                         <a href="javascript:void(0)" class="media-icon">
-                            <img src="http://localhost/studypeers/assets_d/images/image.svg" alt="Imozi Icon" id="image_icon_selector_single">
+                            <img src="<?php echo base_url('assets_d/images/image.svg'); ?>" alt="Imozi Icon" id="image_icon_selector_single">
                         </a>
                         <label class="file-upload" id="any_document_upload_single"></label>
                         <input type="file" for="file-upload" class="rest_img" id="upload_second_image_chat_single" style="display:none;" accept="image/*">
-                        <form action="http://localhost/studypeers/account/upload-document-server" enctype="multipart/form-data" method="post" id="submit_upload_document_form_single">
+                        <form action="<?php echo base_url('account/upload-document-server'); ?>" enctype="multipart/form-data" method="post" id="submit_upload_document_form_single">
                             <input type="file" class="rest_img" id="upload_first_image_document_single" style="display:none;" accept="">
                         </form>
                     </div>
