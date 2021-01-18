@@ -1049,7 +1049,7 @@ $(".emojis-wysiwyg").emojioneArea({
     keyup: function(editor, event) {
       if (
         event.which == 13 &&
-        ($.trim(editor.text()).length > 0 ||
+        ($.trim(editor.html()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
         sendMessageToUser(editor.html());
@@ -1081,9 +1081,10 @@ $("#single_chat_submit_button").emojioneArea({
     keyup: function(editor, event) {
       if (
         event.which == 13 &&
-        ($.trim(editor.text()).length > 0 ||
+        ($.trim(editor.html()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
+        console.log("single....");
         sendMessageToSingleUser(editor.html());
         event.preventDefault();
         event.stopPropagation();
