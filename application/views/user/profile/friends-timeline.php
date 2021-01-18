@@ -1,8 +1,10 @@
 <?php
 $full_name      = $user['first_name'] . ' ' . $user['last_name'];
-$user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = " . $user_id)->row_array(); 
+$user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = " . $user_id)->row_array();
 ?>
 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
+
+<input type="hidden" id="user_full_name" value="<?php echo $full_name; ?>">
 
 <section class="mainContent profile">
     <div class="mainProfileWrapper">
@@ -109,7 +111,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                 <?php } ?>
 
                                 <li>
-                                    <img data-name="<?php echo $user['username']; ?>" data-id="<?php echo $user_id; ?>" src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" class="open-single-chat-window" alt="Message">
+                                    <img data-name="<?php echo $user['first_name'] . ' ' . $user['last_name']; ?>" data-id="<?php echo $user_id; ?>" src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" class="open-single-chat-window" alt="Message">
                                 </li>
                                 <li class="dropdown">
                                     <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="More Option">
@@ -178,7 +180,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                         </div>
 
 
-                                        
+
                                     </div>
 
                                 </div>
@@ -242,41 +244,41 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                             <div class="createBox">
                                 <div class="postWrapper">
                                     <h5>General Information</h5>
-                                    
+
                                 </div>
                                 <div class="infoWrapper">
                                     <div class="list">
                                         <div class="heading">Profile Link</div>
-                                        <div class="value"><a href="<?php echo base_url().'sp/'.$user_detail['username'];?>"><?php echo base_url().'sp/'.$user_detail['username'];?></a></div>
+                                        <div class="value"><a href="<?php echo base_url() . 'sp/' . $user_detail['username']; ?>"><?php echo base_url() . 'sp/' . $user_detail['username']; ?></a></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">First Name</div>
-                                        <div class="value"><?php echo $user_detail['first_name'];?></div>
+                                        <div class="value"><?php echo $user_detail['first_name']; ?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Last Name</div>
-                                        <div class="value"><?php echo $user_detail['last_name'];?></div>
+                                        <div class="value"><?php echo $user_detail['last_name']; ?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Gender</div>
-                                        <div class="value"><?php echo $user_detail['gender'];?></div>
+                                        <div class="value"><?php echo $user_detail['gender']; ?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Date of Birth</div>
-                                        <div class="value"><?php echo date('d-m-Y', strtotime($user_detail['dob']));?></div>
+                                        <div class="value"><?php echo date('d-m-Y', strtotime($user_detail['dob'])); ?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Location</div>
-                                        <div class="value"><?php echo $user_detail['user_location'];?></div>
+                                        <div class="value"><?php echo $user_detail['user_location']; ?></div>
                                     </div>
                                     <div class="list">
                                         <div class="heading">Field of interest</div>
-                                        <div class="value"><?php echo $user_detail['field_interest'];?></div>
+                                        <div class="value"><?php echo $user_detail['field_interest']; ?></div>
                                     </div>
                                 </div>
                                 <div class="useraboutWrapper">
                                     <h5>About Me</h5>
-                                    <p><?php echo $user_detail['about'];?></p>
+                                    <p><?php echo $user_detail['about']; ?></p>
                                 </div>
                                 <div class="infoWrapper">
                                     <div class="list">
@@ -292,7 +294,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                         <div class="value">
                                             <span><?php echo @$user_detail['SchoolName'] ?></span>
                                             <br>
-                                            <?php echo @$user_detail['name'] ?>  <?php echo @$user_detail['session'] ?>
+                                            <?php echo @$user_detail['name'] ?> <?php echo @$user_detail['session'] ?>
                                         </div>
                                     </div>
                                     <!-- <div class="list">
