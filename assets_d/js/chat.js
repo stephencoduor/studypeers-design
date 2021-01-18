@@ -1102,6 +1102,10 @@ $("#single_chat_submit_button").emojioneArea({
           })
         );
       }
+    },
+    change: function(editor, event) {
+      console.log("change");
+      $("#hidden_text_message").val(editor.html());
     }
   }
 });
