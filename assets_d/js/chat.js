@@ -1092,6 +1092,7 @@ $("#single_chat_submit_button").emojioneArea({
       } else {
         // Number 13 is the "Enter" key on the keyboard
         var UserInfo = JSON.parse(userData);
+        $("#hidden_text_message").val(editor.html());
 
         socket.emit(
           "usertyping",
