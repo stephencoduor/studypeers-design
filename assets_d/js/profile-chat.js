@@ -138,7 +138,7 @@ function receivingMessageSingle(messageJson, status) {
 
 $("body").on("click", "#send_button_chat_single", function(event) {
   if (
-    $.trim($(".emojionearea-editor").html()) == "" &&
+    $.trim($("#hidden_text_message").val()) == "" &&
     $.trim($("#current_image_upload_src").val()) == ""
   )
     return false;

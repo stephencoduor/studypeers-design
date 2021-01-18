@@ -438,7 +438,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         <button type="button" id="send_button_chat_single" class="send-btn">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                         </button>
-                        <input type="hidden" name="hidden_text_message">
+                        <input type="hidden" id="hidden_text_message">
                         <a href="javascript:void(0)" class="media-icon">
                             <img src="<?php echo base_url('assets_d/images/image.svg'); ?>" alt="Imozi Icon" id="image_icon_selector_single">
                         </a>
