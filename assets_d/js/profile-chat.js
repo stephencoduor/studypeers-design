@@ -26,6 +26,7 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
           var Image = $("#currentProfilePicture").attr("src");
 
           $("#single_chat_image_preview").attr("src", Image);
+          $("#current_active_user_group_image_single").val(Image);
           $("#current_receiver_id").val(receiverId);
           $("#current_receiver_name_id").val(data.data.groupInfo.group_name);
 
@@ -41,16 +42,38 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
 };
 
 function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
-  $("#current_receiver_id").val(msg.to_user_id);
-  $("#current_receiver_name_id").val(msg.to_user_name);
+  var getCurrentReciverId = $("#current_receiver_id").val();
 
-  $("#current_group_id").val(groupId);
-  $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-  $("#current_single_chat_name").html(msg.group_name);
+  if (getCurrentReciverId == "") {
+    // open new window
 
-  $("#curren_group_name_id").val(msg.group_name);
-  $("#single_chat_image_preview").attr("src", msg.group_image);
-  receivingMessageSingle(msg, "offline");
+    $("#current_receiver_id").val(msg.to_user_id);
+    $("#current_receiver_name_id").val(msg.to_user_name);
+
+    $("#current_group_id").val(groupId);
+    $("#curren_group_members").val(JSON.stringify(groupMemberIds));
+    $("#current_single_chat_name").html(msg.group_name);
+
+    $("#curren_group_name_id").val(msg.group_name);
+    $("#single_chat_image_preview").attr("src", msg.group_image);
+    $("#current_active_user_group_image_single").val(msg.group_image);
+
+    receivingMessageSingle(msg, "offline");
+  } else {
+    // check if the messge is for me or not.
+    if (getCurrentReciverId == msg.to_user_id) {
+      $("#current_receiver_id").val(msg.to_user_id);
+      $("#current_receiver_name_id").val(msg.to_user_name);
+
+      $("#current_group_id").val(groupId);
+      $("#curren_group_members").val(JSON.stringify(groupMemberIds));
+      $("#current_single_chat_name").html(msg.group_name);
+      $("#curren_group_name_id").val(msg.group_name);
+      $("#current_active_user_group_image_single").val(msg.group_image);
+
+      receivingMessageSingle(msg, "offline");
+    }
+  }
 }
 
 function receivingMessageSingle(messageJson, status) {

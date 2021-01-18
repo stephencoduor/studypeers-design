@@ -559,6 +559,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="current_receiver_id">
             <input type="hidden" id="current_receiver_name_id">
             <input type="hidden" id="submit_single_chat_url" value="<?php echo base_url('submit-single-chat-user'); ?>">
+            <input type="hidden" id="current_active_user_group_image_single">
 
         </div>
         <span id="user_typing_id"></span>

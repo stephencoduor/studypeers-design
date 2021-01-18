@@ -823,7 +823,7 @@ function sendMessageToSingleUser(messageText) {
     is_read: "unread",
     group_id: $("#current_group_id").val(),
     group_name: $("#curren_group_name_id").val(),
-    group_image: $("#currentProfilePicture").attr("src"),
+    group_image: $("#current_active_user_group_image_single").val(),
     group_members: JSON.parse($("#curren_group_members").val()),
     unread_members: unreadMembers,
     read_members: [],
