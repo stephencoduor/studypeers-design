@@ -23,7 +23,7 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
           $("#current_single_chat_name").html(data.data.groupInfo.group_name);
           $("#curren_group_name_id").val(data.data.groupInfo.group_name);
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-          var Image = $("#currentCoverPicture").attr("src");
+          var Image = $("#currentProfilePicture").attr("src");
 
           $("#single_chat_image_preview").attr("src", Image);
           $("#current_receiver_id").val(receiverId);
