@@ -54,6 +54,7 @@
 	<div class="scheduleWrapper">
 		<div class="header">
 			<h4>Calendar</h4>
+			<div class="btn-wrp-right">
 			<?php
 			if ($user_detail['is_imported_schedules'] == 0) {
 			?>
@@ -99,6 +100,7 @@
 					</g>
 				</svg> Create new
 			</a>
+			</div>
 		</div>
 		<?php if ($this->session->flashdata('flash_message')) {
 			echo $this->session->flashdata('flash_message');
