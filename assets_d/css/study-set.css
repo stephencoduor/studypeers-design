@@ -668,6 +668,9 @@ l,.share:focus
 .socialActionWrapper a{
     margin-right: 10px;
 }
+.socialActionWrapper a.like:hover{
+    color:#fff;
+}
 .toolBox ul{
     display: flex;
     align-items: center;
@@ -2753,6 +2756,59 @@ l,.share:focus
 .correct {
     /*background: #d8f5f6;*/
     color: #1ce2bc;
+}
+.choose_btn{
+    transition:0.3s ease-in;
+}
+.choose_btn.correct:hover{
+    color:#fff;
+    background-color:#0a5a4c;
+}
+.choose_btn.correct:hover span{
+    background: url("../images/correct-white.svg") no-repeat;
+}
+.choose_btn.not-sure:hover{
+    color:#fff;
+    background-color:#66492d;
+}
+.choose_btn.incorrect:hover{
+    color:#fff;
+    background-color:#5e1232;
+}
+.choose_btn.hidecard:hover{
+    color:#fff;
+    background-color:#aaabbb;
+}
+.choose_btn.hidecard:hover span{
+    background: url("../images/hidden-white.svg") no-repeat;
+}
+.choose_btn.incorrect:hover span{
+    background: url("../images/incorrect-white.svg") no-repeat;
+}
+.choose_btn.not-sure:hover span{
+    background: url("../images/not-sure-white.svg") no-repeat;
+}
+.shareOptionBox .choose_btn span{
+    width:18px;
+    height:18px;
+    display:inline-block;
+    margin-right:3px;
+    vertical-align: middle;
+    background-size: contain;
+    background-position: center center;
+    transition: 0.3s ease-in;
+}
+.choose_btn.correct span{
+    background: url("../images/correct.svg") no-repeat;
+}
+.choose_btn.not-sure span{
+    background: url("../images/not-sure.svg") no-repeat;
+}
+.choose_btn.incorrect span{
+    background: url("../images/incorrect.svg") no-repeat;
+}
+.choose_btn.hidecard span{
+    background: url("../images/hidden.svg") no-repeat;
 }
 .selected {
     border-color: currentColor!important;

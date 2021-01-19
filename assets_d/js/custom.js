@@ -126,7 +126,7 @@ $(document).ready(function() {
     $('.institutions,.course,.professor').select2();
     $('.filterForm').addClass('collapse');
     $('.filterBtn').on('click',()=>{
-        $('.filterForm').toggleClass('collapse');
+    $('.filterForm').toggleClass('collapse');
     $(this).toggleClass('show');
 })
     $('.viewList').on('click',()=>{

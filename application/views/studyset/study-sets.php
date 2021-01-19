@@ -92,7 +92,7 @@ foreach ($getdata as $key => $value) {
 					</a>
 				</div>
 			</div>
-			<div class="filterForm">
+			<div class="filterForm collapse">
 				<div class="row">
 					<div class="col-md-12">
 						<label>Institution</label>
