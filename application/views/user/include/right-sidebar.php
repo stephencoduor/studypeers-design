@@ -435,9 +435,10 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         <textarea placeholder="Type your message here" class="form-control" id="single_chat_submit_button"></textarea>
                     </div>
                     <div class="chat-action">
-                        <button type="button" class="send-btn">
+                        <button type="button" id="send_button_chat_single" class="send-btn">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                         </button>
+                        <input type="hidden" id="hidden_text_message">
                         <a href="javascript:void(0)" class="media-icon">
                             <img src="<?php echo base_url('assets_d/images/image.svg'); ?>" alt="Imozi Icon" id="image_icon_selector_single">
                         </a>
@@ -559,6 +560,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="current_receiver_id">
             <input type="hidden" id="current_receiver_name_id">
             <input type="hidden" id="submit_single_chat_url" value="<?php echo base_url('submit-single-chat-user'); ?>">
+            <input type="hidden" id="current_active_user_group_image_single">
 
         </div>
         <span id="user_typing_id"></span>

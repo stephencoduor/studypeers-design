@@ -823,7 +823,7 @@ function sendMessageToSingleUser(messageText) {
     is_read: "unread",
     group_id: $("#current_group_id").val(),
     group_name: $("#curren_group_name_id").val(),
-    group_image: $("#currentCoverPicture").attr("src"),
+    group_image: $("#current_active_user_group_image_single").val(),
     group_members: JSON.parse($("#curren_group_members").val()),
     unread_members: unreadMembers,
     read_members: [],
@@ -1049,7 +1049,7 @@ $(".emojis-wysiwyg").emojioneArea({
     keyup: function(editor, event) {
       if (
         event.which == 13 &&
-        ($.trim(editor.text()).length > 0 ||
+        ($.trim(editor.html()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
         sendMessageToUser(editor.html());
@@ -1081,9 +1081,10 @@ $("#single_chat_submit_button").emojioneArea({
     keyup: function(editor, event) {
       if (
         event.which == 13 &&
-        ($.trim(editor.text()).length > 0 ||
+        ($.trim(editor.html()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
+        console.log("single....");
         sendMessageToSingleUser(editor.html());
         event.preventDefault();
         event.stopPropagation();
@@ -1091,6 +1092,7 @@ $("#single_chat_submit_button").emojioneArea({
       } else {
         // Number 13 is the "Enter" key on the keyboard
         var UserInfo = JSON.parse(userData);
+        $("#hidden_text_message").val(editor.html());
 
         socket.emit(
           "usertyping",
@@ -1100,6 +1102,10 @@ $("#single_chat_submit_button").emojioneArea({
           })
         );
       }
+    },
+    change: function(editor, event) {
+      console.log("change");
+      $("#hidden_text_message").val(editor.html());
     }
   }
 });

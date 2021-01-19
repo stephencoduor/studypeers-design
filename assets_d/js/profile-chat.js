@@ -23,9 +23,10 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
           $("#current_single_chat_name").html(data.data.groupInfo.group_name);
           $("#curren_group_name_id").val(data.data.groupInfo.group_name);
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-          var Image = $("#currentCoverPicture").attr("src");
+          var Image = $("#currentProfilePicture").attr("src");
 
           $("#single_chat_image_preview").attr("src", Image);
+          $("#current_active_user_group_image_single").val(Image);
           $("#current_receiver_id").val(receiverId);
           $("#current_receiver_name_id").val(data.data.groupInfo.group_name);
 
@@ -41,15 +42,38 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
 };
 
 function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
-  $("#current_receiver_id").val(msg.to_user_id);
-  $("#current_receiver_name_id").val(msg.to_user_name);
+  var getCurrentReciverId = $("#current_receiver_id").val();
 
-  $("#current_group_id").val(groupId);
-  $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-  $("#current_single_chat_name").html(msg.group_name);
-  $("#curren_group_name_id").text(msg.group_name);
-  $("#single_chat_image_preview").attr("src", msg.group_image);
-  receivingMessageSingle(msg, "offline");
+  if (getCurrentReciverId == "") {
+    // open new window
+
+    $("#current_receiver_id").val(msg.to_user_id);
+    $("#current_receiver_name_id").val(msg.to_user_name);
+
+    $("#current_group_id").val(groupId);
+    $("#curren_group_members").val(JSON.stringify(groupMemberIds));
+    $("#current_single_chat_name").html(msg.group_name);
+
+    $("#curren_group_name_id").val(msg.group_name);
+    $("#single_chat_image_preview").attr("src", msg.group_image);
+    $("#current_active_user_group_image_single").val(msg.group_image);
+
+    receivingMessageSingle(msg, "offline");
+  } else {
+    // check if the messge is for me or not.
+    if (getCurrentReciverId == msg.to_user_id) {
+      $("#current_receiver_id").val(msg.to_user_id);
+      $("#current_receiver_name_id").val(msg.to_user_name);
+
+      $("#current_group_id").val(groupId);
+      $("#curren_group_members").val(JSON.stringify(groupMemberIds));
+      $("#current_single_chat_name").html(msg.group_name);
+      $("#curren_group_name_id").val(msg.group_name);
+      $("#current_active_user_group_image_single").val(msg.group_image);
+
+      receivingMessageSingle(msg, "offline");
+    }
+  }
 }
 
 function receivingMessageSingle(messageJson, status) {
@@ -111,6 +135,55 @@ function receivingMessageSingle(messageJson, status) {
 
   openChatWindow();
 }
+
+$("body").on("click", "#send_button_chat_single", function(event) {
+  if (
+    $.trim($("#hidden_text_message").val()) == "" &&
+    $.trim($("#current_image_upload_src").val()) == ""
+  )
+    return false;
+
+  var UserInfo = JSON.parse(userData);
+  var unreadMembers = [];
+  var otherGroupMembers = JSON.parse($("#curren_group_members").val());
+  if (otherGroupMembers) {
+    otherGroupMembers.forEach(function(item, index) {
+      if (item != UserInfo.user_id) {
+        unreadMembers.push(item);
+      }
+    });
+  }
+
+  var message = {
+    to_user_id: $("#current_receiver_id").val(),
+    to_user_name: $("#current_receiver_name_id").val(),
+    from_user_id: UserInfo.user_id,
+    from_user_name: UserInfo.first_name,
+    send_profile_image: UserInfo.profileImage,
+    is_read: "unread",
+    group_id: $("#current_group_id").val(),
+    group_name: $("#curren_group_name_id").val(),
+    group_image: $("#current_active_user_group_image_single").val(),
+    group_members: JSON.parse($("#curren_group_members").val()),
+    unread_members: unreadMembers,
+    read_members: [],
+    message: $("#hidden_text_message").val(),
+    media_url: $("#current_image_upload_src").val(),
+    new_member_added: 0,
+    document_url: null,
+    emoji: null,
+    time: moment().format("h:mm"),
+    created: new Date().toISOString()
+  };
+
+  socket.emit("sendmessage", JSON.stringify(message));
+  sendMessageToSingleChat(message, "online");
+
+  $(".emojionearea-editor").html("");
+  $("#send_message_input").val("");
+  $("#current_image_upload_src").val("");
+  $("#append_image_after_upload").html("");
+});
 
 $("body").on("click", ".open-single-chat-window", function() {
   var receiverId = $(this).attr("data-id");
