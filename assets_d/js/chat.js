@@ -95,7 +95,7 @@ Upload.prototype.singleUpload = function() {
       if (data.status) {
         var url =
           "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/pdf.svg' alt='Icon'></span>" +
-          "<a href='" +
+          "<a target='blank' href='" +
           data.url +
           "'>" +
           data.data.orig_name +

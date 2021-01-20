@@ -552,7 +552,11 @@ socket.on("showinitmessage", data => {
   if (data.length > 0) {
     messageContent = "";
     data.forEach(function(item, index) {
-      messageContent += formatTopMessageHeader(item);
+      if (item.to_user_id == "") {
+        messageContent += formatTopMessageHeader(item);
+      } else {
+        messageContent += formatTopMessageHeaderSingleChat(item);
+      }
     });
   }
   $(".loader-wrap").hide();
@@ -563,7 +567,11 @@ socket.on("receivesearchmessage", data => {
   var messageContent = "";
   if (data.length > 0) {
     data.forEach(function(item, index) {
-      messageContent += formatTopMessageHeader(item);
+      if (item.to_user_id == "") {
+        messageContent += formatTopMessageHeader(item);
+      } else {
+        messageContent += formatTopMessageHeaderSingleChat(item);
+      }
     });
   }
   $("#myUL").html(messageContent);
@@ -833,6 +841,55 @@ function formatTopMessageHeader(messageJson) {
     "</span>" +
     "<h3>" +
     messageJson.group_name +
+    "</h3>" +
+    '<span class="msg-count">' +
+    "(" +
+    total +
+    ")" +
+    "</span>" +
+    "<p>" +
+    message +
+    "</p>" +
+    "</div></a></li>";
+
+  return html;
+}
+
+function formatTopMessageHeaderSingleChat(messageJson) {
+  var total = 0;
+  var message = messageJson.message;
+
+  if (messageJson.total) {
+    total = messageJson.total;
+  }
+
+  if (messageJson.document_url) {
+    message = "Document";
+  }
+
+  console.log(messageJson);
+
+  var html =
+    "<li class='open-single-chat-window' data-name='" +
+    messageJson.group_name +
+    "' data-groupmembers='" +
+    JSON.stringify(messageJson.group_members) +
+    "' data-id='" +
+    messageJson.to_user_id +
+    "' '>" +
+    '<a href="javascript:void(0)">' +
+    "<figure>" +
+    '<img src="' +
+    messageJson.group_image +
+    '" alt="">' +
+    "</figure>" +
+    '<div class="time">' +
+    moment(messageJson.created).fromNow() +
+    "</div>" +
+    '<div class="info-wrap">' +
+    "</span>" +
+    "<h3>" +
+    messageJson.from_user_name +
     "</h3>" +
     '<span class="msg-count">' +
     "(" +
