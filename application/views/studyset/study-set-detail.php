@@ -267,7 +267,7 @@
 					?>
 				</div>
 			</div>
-			<div id="testResult" class="tab-pane fade" style="margin-top: -50px;">
+			<div id="testResult" class="tab-pane fade">
 				<div class="testWrapper">
 					<div class="tabularLiist">
 						<ul class="nav nav-tabs">

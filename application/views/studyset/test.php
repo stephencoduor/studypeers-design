@@ -363,79 +363,60 @@
 
 
 <div class="modal fade" id="TestModalAll" role="dialog">
-        <div class="modal-dialog">
-          <!-- Modal content-->
-          <div class="modal-content">
-              <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
-            <div class="modal-body" >
-                <div class="courseHeader">
-                    <h4>Choose Test</h4>
-                    
-                </div>
-                <div id="TestModalAllBody">
-                	<div class="courseBox" style="padding-top: 10px;">
-                        
-                        <div class="row">
-                            <div class="col-md-1 col-sm-1 col-xs-12">
-                                <div class="form-group" style="margin-bottom: 0px;">
-                                    <input type="checkbox" class="form-control form-control--lg option" style="margin: 0;" id="written">
-                                </div>
-                            </div>
-                            <div class="col-md-10 col-sm-10 col-xs-12" style="padding: 0;">
-                                <h4 style="margin-top: 12px;">Written Questions</h4>
-                            </div>
-                        </div>
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+        	<!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+        	<div class="modal-body" >
+				<div class="courseHeader">
+					<h4>Choose Test</h4>
+				</div>
+				<div id="TestModalAllBody">
+					<div class="courseBox" style="padding-top: 10px;">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="checkbox" class="option" id="written">
+									<label for="written">Written Questions</label>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="checkbox" class="option" id="match">
+									<label for="match">Matching Questions</label>
+								</div>
+							</div>
+						</div>
 
-                        <div class="row">
-                            <div class="col-md-1 col-sm-1 col-xs-12">
-                                <div class="form-group" style="margin-bottom: 0px;">
-                                    <input type="checkbox" class="form-control form-control--lg option" style="margin: 0;" id="match">
-                                </div>
-                            </div>
-                            <div class="col-md-10 col-sm-10 col-xs-12" style="padding: 0;">
-                                <h4 style="margin-top: 12px;">Matching Questions</h4>
-                            </div>
-                        </div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="checkbox" class="option" id="multiple">
+									<label for="multiple">Multiple Choice Questions</label>
+								</div>
+							</div>
+						</div>
 
-                        <div class="row">
-                            <div class="col-md-1 col-sm-1 col-xs-12">
-                                <div class="form-group" style="margin-bottom: 0px;">
-                                    <input type="checkbox" class="form-control form-control--lg option" style="margin: 0;" id="multiple">
-                                </div>
-                            </div>
-                            <div class="col-md-10 col-sm-10 col-xs-12" style="padding: 0;">
-                                <h4 style="margin-top: 12px;">Multiple Choice Questions</h4>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-1 col-sm-1 col-xs-12">
-                                <div class="form-group" style="margin-bottom: 0px;">
-                                    <input type="checkbox" class="form-control form-control--lg option" style="margin: 0;" id="truefalse">
-                                </div>
-                            </div>
-                            <div class="col-md-10 col-sm-10 col-xs-12" style="padding: 0;">
-                                <h4 style="margin-top: 12px;">True/False Questions</h4>
-                            </div>
-                            <div class="col-md-12" style="margin-bottom: 10px;">
-                            	<span class="custom_err" id="option_err"></span>
-                            </div>
-                        </div>
-
-                        
-                        
-                    </div>
-                </div>
-                
-                <div class="studybuttonGroup">
-                    <button type="button" class="transparentBtn" onclick="applyTest()">Apply</button>
-                </div>
-                
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<input type="checkbox" class="option" id="truefalse">
+									<label for="truefalse">True/False Questions</label>
+									<span class="custom_err" id="option_err"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="studybuttonGroup">
+					<button type="button" class="transparentBtn" onclick="applyTest()">Apply</button>
+				</div>
             </div>
-          </div>
         </div>
+    </div>
 </div>
-
 <script>
 
 function startTimer(){

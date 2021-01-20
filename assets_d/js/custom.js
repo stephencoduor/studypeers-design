@@ -103,13 +103,6 @@ $(document).ready(function(){
     //     advanced:{autoExpandHorizontalScroll:true}
     // });
 });
-$(document).ready(function(){
-    $("body").mCustomScrollbar({
-        theme:"dark-thin",
-        autoExpandScrollbar:true,
-        advanced:{autoExpandHorizontalScroll:true}
-    });
-});
 // (function($){
 //   $(window).on("load",function(){
 
@@ -126,7 +119,7 @@ $(document).ready(function() {
     $('.institutions,.course,.professor').select2();
     $('.filterForm').addClass('collapse');
     $('.filterBtn').on('click',()=>{
-        $('.filterForm').toggleClass('collapse');
+    $('.filterForm').toggleClass('collapse');
     $(this).toggleClass('show');
 })
     $('.viewList').on('click',()=>{
