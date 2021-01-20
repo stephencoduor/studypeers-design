@@ -870,7 +870,9 @@ function formatTopMessageHeaderSingleChat(messageJson) {
   console.log(messageJson);
 
   var html =
-    "<li class='open-single-chat-window' data-name='" +
+    "<li class='open-single-chat-window' data-groupId='" +
+    messageJson.group_id +
+    "' data-name='" +
     messageJson.group_name +
     "' data-groupmembers='" +
     JSON.stringify(messageJson.group_members) +

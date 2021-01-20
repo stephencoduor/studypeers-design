@@ -111,7 +111,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                 <?php } ?>
 
                                 <li>
-                                    <img data-name="<?php echo $user['first_name'] . ' ' . $user['last_name']; ?>" data-id="<?php echo $user_id; ?>" src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" class="open-single-chat-window" alt="Message">
+                                    <img data-name="<?php echo $user['first_name'] . ' ' . $user['last_name']; ?>" data-groupId="0" data-id="<?php echo $user_id; ?>" src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" class="open-single-chat-window" alt="Message">
                                 </li>
                                 <li class="dropdown">
                                     <img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="More Option">

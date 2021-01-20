@@ -373,6 +373,8 @@ class ChatController extends CI_Controller
             $users = [$this->input->get('sender_id')];
             $groupName = $this->input->get('name');
 
+            $currentGroupId = $this->input->get('group_id');
+
             if (!is_array($users)) {
                 throw new Exception("Error processing request", 422);
             }
@@ -385,7 +387,16 @@ class ChatController extends CI_Controller
 
             #check for existing groupName with same user.
 
-            $existinGroup =  $this->ChatModel->getExistingSingleUser($userId, $groupName);
+            $existinGroup  = [];
+
+            if (!empty($currentGroupId)) {
+                $existinGroup  = $this->ChatModel->getExistingGroupByID($currentGroupId);
+            }
+
+            if (empty($existinGroup)) {
+
+                $existinGroup =  $this->ChatModel->getExistingSingleUser($userId, $groupName);
+            }
 
             array_push($users, $userId);
 

@@ -187,13 +187,15 @@ $("body").on("click", "#send_button_chat_single", function(event) {
 
 $("body").on("click", ".open-single-chat-window", function() {
   var receiverId = $(this).attr("data-id");
+  var currentGroupId = $(this).attr("data-groupId");
   var groupMembers = [];
   groupMembers.push(receiverId);
   var name = $(this).attr("data-name");
 
   var data = {
     sender_id: receiverId,
-    name: name
+    name: name,
+    group_id: currentGroupId
   };
 
   CHAT_GROUP_ADDITIONS_SINGLE._AJAX_SUBMIT_SINGLE_CHAT(data, receiverId);
