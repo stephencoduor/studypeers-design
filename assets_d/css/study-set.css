@@ -1931,6 +1931,7 @@ l,.share:focus
     font-size: 12px;
     font-weight:500;
     padding: 7px 10px;
+    cursor: pointer;
 }
 .badgeList ul li.badge.badge1 {
     background: #e6e6fe;

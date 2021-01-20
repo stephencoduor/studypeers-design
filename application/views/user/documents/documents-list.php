@@ -98,7 +98,7 @@
         									</button>
         							</div>
         						</div>
-        						<div class="filterForm">
+        						<div class="filterForm collapse">
         							<div class="row">
         								<form method="get" action="<?php echo base_url(); ?>account/documents">
         									<div class="col-md-12">
@@ -227,8 +227,8 @@
 												</div>
 												<div class="socialAction">
 													<ul>
-														<li class="likecountDoc">
-															asdjkfhasjkdfasdf
+														<!-- <li class="likecountDoc">
+															
 															<a href="javascript:void(0)" data-id="<?php echo $value['id']; ?>">
 																<?php if($chk_if_liked == 0) { ?>
 																	<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
@@ -237,7 +237,7 @@
 																<?php } ?>
 																<span id="likeCount_<?php echo $value['id']; ?>"><?php echo $value['likeCount']; ?></span>
 															</a>
-														</li>
+														</li> -->
 														<li>
 															<a href="javascript:void(0)"  data-toggle="modal" data-target="#peersModal">
 																<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
