@@ -68,7 +68,7 @@
   color: #2a234f;
   position: relative;
   word-break: break-word;
-  padding-right: 65px;
+  padding-right: 85px;
 }
 .chat-user-list li a .info-wrap h3{
   font-size:16px;
@@ -622,6 +622,9 @@ div.time {
   display: flex;
   align-items: center;
 }
+.basic-user-info strong{
+  width:calc(100% - 70px)
+}
 .chat-header-left h3 {
   width: 100%;
   white-space: nowrap;
@@ -1023,6 +1026,7 @@ div#progress-wrp .progress-bar {
   flex-direction: column;
   border: solid 1px #c3c3c3;
   background-color: #fff;
+  border-radius:3px;
 }
 span.file-icon {
   height: 40%;
@@ -1083,6 +1087,9 @@ span.file-icon {
   width: 100%;
   display: flex;
   align-items: center;
+}
+.sm-basic-user-info strong{
+  width: calc(100% - 70px);
 }
 .small-header-left figure {
   width: 60px;
@@ -1253,6 +1260,13 @@ span.file-icon {
 .sm-text-area-wrap {
   width: calc(100% - 100px);
   padding-left: 10px;
+}
+.sm-chat-msg .attachment-view{
+  width:100%;
+  height:auto;
+}
+.sm-chat-msg .attachment-view span.file-icon{
+  margin-bottom:5px;
 }
 .sm-chat-action {
   display: flex;
