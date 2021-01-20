@@ -2853,7 +2853,7 @@ textarea.textarea-gray {
     }
 }
 @media(max-width:479px){
-    .studySetWrapper .header h4, {
+    .studySetWrapper .header h4{
         font-size: 20px;
     }
     .buttonGroup {

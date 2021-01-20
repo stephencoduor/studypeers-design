@@ -103,13 +103,6 @@ $(document).ready(function(){
     //     advanced:{autoExpandHorizontalScroll:true}
     // });
 });
-$(document).ready(function(){
-    $("body").mCustomScrollbar({
-        theme:"dark-thin",
-        autoExpandScrollbar:true,
-        advanced:{autoExpandHorizontalScroll:true}
-    });
-});
 // (function($){
 //   $(window).on("load",function(){
 

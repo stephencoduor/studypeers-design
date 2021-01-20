@@ -46,6 +46,9 @@
 .box-card.message .createBox {
     border-top-left-radius:0;
 }
+.box-card.message{
+    margin-top:60px;
+}
 .createBox.story {
     padding: 28px 20px;
 }
@@ -705,8 +708,8 @@
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
     position: absolute;
-    left: -121px;
-    top: 0px;
+    left: 0;
+    top: -45px;
     display: flex;
     align-items: center;
     justify-content: center;
