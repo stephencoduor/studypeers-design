@@ -1265,6 +1265,9 @@ span.file-icon {
   width:100%;
   height:auto;
 }
+.sm-chat-msg .attachment-view .file-icon img{
+  width:40px;
+}
 .sm-chat-msg .attachment-view span.file-icon{
   margin-bottom:5px;
 }
