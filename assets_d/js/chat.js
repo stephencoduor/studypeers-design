@@ -388,6 +388,7 @@ $(document).ready(function() {
 
   $("body").on("click", ".main-close", function() {
     removeElementAfterAddingNewGroup();
+    $("body").removeClass("hide-scroll");
   });
 
   $(".open-start-conversation").click(function() {

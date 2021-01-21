@@ -240,13 +240,21 @@
 										}
 									}
 								} else {
-									echo '<p class="text-center">' . $text_msg . '</p>';
+									echo '<div class="blankFeedArea">
+									<div class="noFeedWrapper">
+										<figure>
+											<img src="http://localhost/studypeers/assets_d/images/blank-feeds.png" alt="No Feed">
+										</figure>
+										<h4>Search result not found.</h4>
+									</div>
+								</div>';
 								} ?>
 								<?php if (!empty($schedule_list)) { ?>
 									<!-- <h6 class="loadingEvents">
 															Loading Events
 														</h6> -->
 								<?php } ?>
+								
 							</div>
 						</div>
 					</div>
