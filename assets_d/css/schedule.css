@@ -222,11 +222,14 @@
     font-weight:500;
     color: #cac8d3;
     margin-right:15px;
+    top:50%;
+    transform: translateY(-50%);
 }
 .eventList .event .time span {
     display: block;
 }
 .eventList .event .name {
+    width: calc(100% - 150px);
     font-size: 16px;
     font-weight:700;
     color: #2a234f;
