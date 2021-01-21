@@ -37,7 +37,7 @@ Upload.prototype.doUpload = function() {
       if (data.status) {
         var url =
           "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/" +
-          data.data.image_type +
+          data.data.file_type.replace("/", "_") +
           ".svg' alt='Icon'></span>" +
           "<a href='" +
           data.url +
@@ -97,7 +97,7 @@ Upload.prototype.singleUpload = function() {
       if (data.status) {
         var url =
           "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/" +
-          data.data.image_type +
+          data.data.file_type.replace("/", "_") +
           ".svg' alt='Icon'></span>" +
           "<a target='blank' href='" +
           data.url +
