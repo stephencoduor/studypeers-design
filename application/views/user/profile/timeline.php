@@ -270,7 +270,11 @@ die;*/
                                         </div>
                                     </div>
                                 </div>
-                                <div id="articles" class="tab-pane fade in">Articles</div>
+                                <div id="articles" class="tab-pane fade in">
+                                    <div class="coming-soon">
+                                        <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                                    </div>
+                                </div>
                                 <div id="studySets" class="tab-pane fade in">
                                     <div id="timeline-studyset-feeds">
                                         <div class="box-card message">
@@ -290,7 +294,11 @@ die;*/
                                         </div>
                                     </div>
                                 </div>
-                                <div id="studySessions" class="tab-pane fade in">Study Sessions</div>
+                                <div id="studySessions" class="tab-pane fade in">
+                                    <div class="coming-soon">
+                                        <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
