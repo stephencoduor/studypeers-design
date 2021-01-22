@@ -393,6 +393,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 <div class="small-chat-wrapper" style="display: none;" id="single_chat_window_box">
     <div class="small-chat-right">
         <div class="small-chat-header">
+            <a href="javascript:void(0)" class="chat-close"><img src="<?php echo base_url('assets_d/chat-assets/images/close.svg'); ?>" alt="New Message Icon"></a>
             <div class="small-header-left">
                 <div class="sm-basic-user-info">
                     <figure>
@@ -409,7 +410,6 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
         <div class="sm-chat-content" id="single_chat_window_append">
             <div class="sm-chat-body" id="append_single_chat_records">
-
 
             </div>
         </div>

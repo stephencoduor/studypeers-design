@@ -219,7 +219,7 @@ div.time {
   transition: 0.3s ease-in;
 }
 .small-chat-wrapper {
-  width: 420px;
+  width: 360px;
   height: 65%;
   overflow-y: auto;
   position: fixed;
@@ -1076,6 +1076,13 @@ span.file-icon {
   align-items: center;
   justify-content: space-between;
   padding: 15px;
+  position: relative;
+}
+a.chat-close {
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  z-index:9;
 }
 .small-header-left{
     max-width: 50%;
