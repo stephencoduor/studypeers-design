@@ -1356,6 +1356,11 @@ input:-webkit-autofill:active {
     text-align: center;
     white-space: nowrap;
     vertical-align: middle;
-    background-color: green;
+    background-color: #ea2e7e;
     border-radius: 10px;
+}
+@media (max-width: 991px) {
+    body .login-container .flex-row {
+        flex-direction: column-reverse!important;
+    }
 }
