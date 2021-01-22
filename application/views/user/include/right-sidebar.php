@@ -146,6 +146,14 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <h6>Blocked Peers</h6>
             </section>
             <section class="listChatBox">
+                <div class="blankFeedArea SmallFeed">
+                    <div class="noFeedWrapper">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+                        </figure>
+                        <h4>Nothing to display</h4>
+                    </div>
+                </div>
                 <?php
                 foreach (@$blocked_users as $users) {
                 ?>

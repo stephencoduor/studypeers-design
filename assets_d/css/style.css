@@ -1359,6 +1359,15 @@ input:-webkit-autofill:active {
     background-color: #ea2e7e;
     border-radius: 10px;
 }
+.blankFeedArea.SmallFeed  figure{
+    height:auto;
+}
+.blankFeedArea.SmallFeed  figure img{
+    max-width:100px;
+    height:auto;
+    margin:0 auto;
+    display: block;
+}
 @media (max-width: 991px) {
     body .login-container .flex-row {
         flex-direction: column-reverse!important;
