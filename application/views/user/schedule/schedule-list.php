@@ -343,7 +343,7 @@
 										<figure>
 											<img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
 										</figure>
-										<h4>No records to show.</h4>
+										<h4>Nothing to display</h4>
 									</div>
 								</div>
 							</div>
