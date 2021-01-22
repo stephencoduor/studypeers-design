@@ -172,9 +172,9 @@ die;*/
                                 <li><a class="loadPosts" data-toggle="tab" href="#posts">Posts</a></li>
                                 <li><a class="loadQuestions" data-toggle="tab" href="#questions">Questions</a></li>
                                 <li><a class="loadDocuments" data-toggle="tab" href="#documents">Documents</a></li>
-                                <li><a data-toggle="tab" href="#articles">Articles</a></li>
                                 <li><a class="loadstudySets" data-toggle="tab" href="#studySets">Study Sets</a></li>
                                 <li><a class="loadEvents" data-toggle="tab" href="#events">Events</a></li>
+                                <li><a data-toggle="tab" href="#articles">Articles</a></li>
                                 <li><a data-toggle="tab" href="#studySessions">Study Sessions</a></li>
                             </ul>
                             <div class="tab-content">
