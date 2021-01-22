@@ -126,6 +126,9 @@
     outline:none;
     box-shadow: 0 0 0 3px #e8effd;
 }
+.sortMenu:hover svg{
+    fill:#fff;
+}
 .filterBtn:hover,
 .sortMenu:hover {
     text-decoration: none;
@@ -435,7 +438,7 @@ select.form-control:focus {
 }
 .feedWrapper.listView {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -564,6 +567,16 @@ label{
     font-size:12px;
     font-weight:700;
     margin-left: 15px;
+    white-space: nowrap;
+    transition:0.3s ease-in;
+}
+.transparentBtn:hover{
+    background-color: #185aeb;
+    color:#fff;
+
+}
+.termsWrapper:hover svg{
+    fill:#fff;
 }
 .flex-form-row {
     display: flex;
