@@ -1,5 +1,5 @@
 <div id="courses" class="tab-pane fade in">
-    <div class="TabsAndSortWrapper courses">
+    <!-- <div class="TabsAndSortWrapper courses">
         <div class="sortWrapper">
             <ul>
                 <li>
@@ -274,5 +274,8 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <div class="coming-soon">
+        <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
     </div>
 </div>

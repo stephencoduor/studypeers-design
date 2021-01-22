@@ -1,5 +1,5 @@
 <div id="market" class="tab-pane fade in">
-    <div class="innerFeedTabs">
+    <!-- <div class="innerFeedTabs">
         <div class="tabularLiist">
             <div class="TabsAndSortWrapper">
                 <ul class="nav nav-tabs">
@@ -335,5 +335,8 @@
                 </div>
             </div>
         </div>
+    </div> -->
+    <div class="coming-soon">
+        <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
     </div>
 </div>

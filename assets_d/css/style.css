@@ -878,7 +878,18 @@ a.filterBtn,a.sortMenu{
 #courseModalAll .courseBox {
     padding: 14px 12px 0px 12px;
 }
-
+.coming-soon{
+    padding:50px 0;
+}
+.coming-soon figure{
+    width:50%;
+    margin:0 auto;
+}
+.coming-soon img{
+    max-width:100%;
+    height:auto;
+    display: block;
+}
 #courseModalAll .courseBox .form-control{
     background:#fff;
 }
