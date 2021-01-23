@@ -552,7 +552,7 @@ socket.on("showinitmessage", data => {
   if (data.length > 0) {
     messageContent = "";
     data.forEach(function(item, index) {
-      if (item.to_user_id == "") {
+      if (item.to_user_id == null) {
         messageContent += formatTopMessageHeader(item);
       } else {
         messageContent += formatTopMessageHeaderSingleChat(item);
@@ -567,7 +567,7 @@ socket.on("receivesearchmessage", data => {
   var messageContent = "";
   if (data.length > 0) {
     data.forEach(function(item, index) {
-      if (item.to_user_id == "") {
+      if (item.to_user_id == null) {
         messageContent += formatTopMessageHeader(item);
       } else {
         messageContent += formatTopMessageHeaderSingleChat(item);

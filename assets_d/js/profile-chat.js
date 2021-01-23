@@ -4,6 +4,34 @@ function openChatWindow() {
   $("#single_chat_window_box").show();
 }
 
+function closeChatWindow() {
+  $("#single_chat_window_box").hide();
+}
+
+socket.on("singlemessages", data => {
+  var userInfo = JSON.parse(userData);
+  var mainContent = "";
+  var otherUserIds = [];
+  if (data.length > 0) {
+    data.forEach(function(item, index) {
+      if (item.from_user_id == userInfo.user_id) {
+        mainContent += sendMessageToSingleChat(item, "");
+      } else {
+        mainContent += receivingMessageSingle(item, "");
+        otherUserIds.push(item);
+      }
+    });
+
+    chatAppendElementSmall.html(mainContent);
+    chatWindow = document.getElementById("single_chat_window_append");
+    var xH = chatWindow.scrollHeight;
+    chatWindow.scrollTo(0, xH);
+    $(".say-hi-wrapper").hide();
+  }
+
+  openChatWindow();
+});
+
 var CHAT_GROUP_ADDITIONS_SINGLE = {
   _AJAX_SUBMIT_SINGLE_CHAT: function(data, receiverId) {
     $.ajax({
@@ -29,8 +57,10 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
           $("#current_active_user_group_image_single").val(Image);
           $("#current_receiver_id").val(receiverId);
           $("#current_receiver_name_id").val(data.data.groupInfo.group_name);
-
-          openChatWindow();
+          socket.emit(
+            "getsinglemessages",
+            JSON.stringify({ groupId: data.data.groupId })
+          );
         }
       },
       error: function() {
@@ -186,6 +216,7 @@ $("body").on("click", "#send_button_chat_single", function(event) {
 });
 
 $("body").on("click", ".open-single-chat-window", function() {
+  $(".chat-dropdown").is(":visible") ? $(".chat-dropdown").hide() : "";
   var receiverId = $(this).attr("data-id");
   var currentGroupId = $(this).attr("data-groupId");
   var groupMembers = [];
@@ -199,4 +230,8 @@ $("body").on("click", ".open-single-chat-window", function() {
   };
 
   CHAT_GROUP_ADDITIONS_SINGLE._AJAX_SUBMIT_SINGLE_CHAT(data, receiverId);
+});
+
+$("body").on("click", "#close_window_single", function() {
+  closeChatWindow();
 });
