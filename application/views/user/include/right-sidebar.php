@@ -407,7 +407,10 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url('assets_d/chat-assets/images/video-camera.svg'); ?>" alt="Video Icon"></a>
             </div>
         </div>
-
+        <div class="say-hi-wrapper">
+            <figure><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/say_hi.svg" class="change-icon" alt="Maximize Icon" /></figure>
+            <h3>Say Hi!</h3>
+        </div>
         <div class="sm-chat-content" id="single_chat_window_append">
             <div class="sm-chat-body" id="append_single_chat_records">
 
@@ -537,6 +540,10 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <select id="multiple" name="usergroupschats[]" multiple></select>
                 <a href="javascript:void(0)" class="done-link">Done</a>
             </form>
+        </div>
+        <div class="say-hi-wrapper">
+            <figure><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/say_hi.svg" class="change-icon" alt="Maximize Icon" /></figure>
+            <h3>Say Hi!</h3>
         </div>
         <div class="chat-content" id="chat_window_content">
 

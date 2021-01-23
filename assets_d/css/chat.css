@@ -1084,6 +1084,19 @@ a.chat-close {
   top: 5px;
   z-index:9;
 }
+.say-hi-wrapper{
+  height: 100%;
+  padding:50px 0 0;
+  display: flex;
+  align-items:center;
+  flex-direction: column;
+  justify-content: center;
+}
+.say-hi-wrapper h3{
+  font-size:20px;
+  font-weight:bold;
+  color:#e9e9e9;
+}
 .small-header-left{
     max-width: 50%;
     display: flex;
