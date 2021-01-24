@@ -881,12 +881,12 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     "' data-groupmembers='" +
     JSON.stringify(messageJson.group_members) +
     "' data-id='" +
-    messageJson.to_user_id +
+    messageJson.from_user_id +
     "' '>" +
     '<a href="javascript:void(0)">' +
     "<figure>" +
     '<img src="' +
-    messageJson.group_image +
+    messageJson.from_user_name +
     '" alt="">' +
     "</figure>" +
     '<div class="time">' +
