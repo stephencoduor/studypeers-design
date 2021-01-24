@@ -13,7 +13,6 @@ socket.on("singlemessages", data => {
   var mainContent = "";
   var otherUserIds = [];
   if (data.length > 0) {
-    chatAppendElementSmall.html("");
     data.forEach(function(item, index) {
       if (item.from_user_id == userInfo.user_id) {
         mainContent += sendMessageToSingleChat(item, "");
@@ -23,7 +22,7 @@ socket.on("singlemessages", data => {
       }
     });
 
-    chatAppendElementSmall.html(mainContent);
+    singelChildAppendRecord.html(mainContent);
     chatWindow = document.getElementById("single_chat_window_append");
     var xH = chatWindow.scrollHeight;
     chatWindow.scrollTo(0, xH);
