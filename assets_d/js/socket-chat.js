@@ -396,6 +396,8 @@ socket.on("receivemessage", function(msg) {
 
   if (groupMemberIds.indexOf(userId) == -1) return false;
 
+  $("#group_message_chat_window_hi_wrapper").hide();
+
   if (msg.to_user_id == null) {
     HandleGrouMessage(userInfo, userId, groupId, groupMemberIds, msg);
   } else {

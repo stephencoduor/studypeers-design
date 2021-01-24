@@ -162,6 +162,7 @@ function receivingMessageSingle(messageJson, status) {
   chatWindow = document.getElementById("single_chat_window_append");
   var xH = chatWindow.scrollHeight;
   chatWindow.scrollTo(0, xH);
+  $(".say-hi-wrapper").hide();
 
   openChatWindow();
 }
