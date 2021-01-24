@@ -50,8 +50,11 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
               groupMemberIds.push(item.id);
             });
           }
+
+          console.log(additionaInfo.group_id);
           $("#current_single_chat_name").html(additionaInfo.receiverName);
-          if (additionaInfo.group_id) {
+          if (parseInt(additionaInfo.group_id) != 0) {
+            console.log("teting group--->");
             $("#curren_group_name_id").val(additionaInfo.receiverName);
           } else {
             $("#curren_group_name_id").val(additionaInfo.name);
