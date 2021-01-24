@@ -15,12 +15,14 @@ socket.on("singlemessages", data => {
   if (data.length > 0) {
     data.forEach(function(item, index) {
       if (item.from_user_id == userInfo.user_id) {
-        mainContent += sendMessageToSingleChat(item, "");
+        mainContent += sendSingleChatHtml(item, "");
       } else {
-        mainContent += receivingMessageSingle(item, "");
+        mainContent += receivingMessageSingleHtml(item, "");
         otherUserIds.push(item);
       }
     });
+
+    console.log(mainContent);
 
     singelChildAppendRecord.html(mainContent);
     chatWindow = document.getElementById("single_chat_window_append");
@@ -236,3 +238,97 @@ $("body").on("click", ".open-single-chat-window", function() {
 $("body").on("click", "#close_window_single", function() {
   closeChatWindow();
 });
+
+function sendSingleChatHtml(messageJson, status) {
+  var figureHTML = messageJson.media_url
+    ? "<figure>" +
+      '<img src="' +
+      messageJson.media_url +
+      '" alt="Attached Image">' +
+      "</figure>"
+    : "";
+
+  var html =
+    '<div class="sm-sent-wrap"><div class="sm-message-sent"><div class="sm-user-info"><div class="sm-user-name">' +
+    "<strong>" +
+    messageJson.from_user_name +
+    "</strong>" +
+    '<span class="msg-tile">' +
+    messageJson.time +
+    "</span></div>" +
+    "<figure>" +
+    '<img src="' +
+    messageJson.send_profile_image +
+    '" alt="Image" />' +
+    '<span class="user-status ' +
+    status +
+    " user_id_" +
+    messageJson.from_user_id +
+    '"></span>' +
+    "</figure>" +
+    "</div>" +
+    '<div class="sm-chat-msg">' +
+    "<p>" +
+    messageJson.message +
+    "</p>" +
+    figureHTML +
+    "</div></div></div>";
+
+  return html;
+}
+
+function receivingMessageSingleHtml(messageJson, status) {
+  var figureHTML = messageJson.media_url
+    ? "<figure>" +
+      '<img src="' +
+      messageJson.media_url +
+      '" alt="Attached Image">' +
+      "</figure>"
+    : "";
+
+  var html =
+    '<div class="sm-received-wrap"><div class="sm-message-received"><div class="sm-user-info">' +
+    '<figure><img src="' +
+    messageJson.send_profile_image +
+    '" alt="Image" /><span class="user-status ' +
+    status +
+    " user_id_" +
+    messageJson.from_user_id +
+    '"></span></figure>' +
+    '<div class="sm-user-name"><strong>' +
+    messageJson.from_user_name +
+    '</strong><span class="msg-tile">' +
+    messageJson.time +
+    "</span></div></div>" +
+    '<div class="sm-chat-msg"><p>' +
+    messageJson.message +
+    "</p>" +
+    figureHTML +
+    "</div></div></div>";
+
+  singelChildAppendRecord.append(html);
+  var userInfo = JSON.parse(userData);
+  var userId = userInfo.user_id;
+  const index = messageJson.unread_members.indexOf(userId);
+  var readMembers = messageJson.read_members;
+  readMembers.push(userId);
+  if (index > -1) {
+    messageJson.unread_members.splice(index, 1);
+  }
+
+  const readIndex = readMembers.indexOf(userId);
+  if (readIndex == -1) {
+    readMembers.splice(readIndex, 1);
+  }
+
+  socket.emit(
+    "updatereceived",
+    JSON.stringify({
+      id: messageJson._id,
+      unread_members: messageJson.unread_members,
+      read_members: readMembers
+    })
+  );
+
+  return html;
+}
