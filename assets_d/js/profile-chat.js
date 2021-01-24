@@ -80,13 +80,13 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
     // open new window
 
     $("#current_receiver_id").val(msg.to_user_id);
-    $("#current_receiver_name_id").val(msg.to_user_name);
+    $("#current_receiver_name_id").val(msg.from_user_name);
 
     $("#current_group_id").val(groupId);
     $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-    $("#current_single_chat_name").html(msg.to_user_name);
+    $("#current_single_chat_name").html(msg.from_user_name);
 
-    $("#curren_group_name_id").val(msg.to_user_name);
+    $("#curren_group_name_id").val(msg.from_user_name);
     $("#single_chat_image_preview").attr("src", msg.group_image);
     $("#current_active_user_group_image_single").val(msg.group_image);
 
@@ -95,12 +95,12 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
     // check if the messge is for me or not.
     if (getCurrentReciverId == msg.to_user_id) {
       $("#current_receiver_id").val(msg.to_user_id);
-      $("#current_receiver_name_id").val(msg.to_user_name);
+      $("#current_receiver_name_id").val(msg.from_user_name);
 
       $("#current_group_id").val(groupId);
       $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-      $("#current_single_chat_name").html(msg.to_user_name);
-      $("#curren_group_name_id").val(msg.to_user_name);
+      $("#current_single_chat_name").html(msg.from_user_name);
+      $("#curren_group_name_id").val(msg.from_user_name);
       $("#current_active_user_group_image_single").val(msg.group_image);
 
       receivingMessageSingle(msg, "offline");
