@@ -51,7 +51,12 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
             });
           }
           $("#current_single_chat_name").html(additionaInfo.receiverName);
-          $("#curren_group_name_id").val(additionaInfo.name);
+          if (additionaInfo.group_id) {
+            $("#curren_group_name_id").val(additionaInfo.receiverName);
+          } else {
+            $("#curren_group_name_id").val(additionaInfo.name);
+          }
+
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
           var Image = $("#currentProfilePicture").attr("src");
 
