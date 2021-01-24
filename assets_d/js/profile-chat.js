@@ -50,7 +50,7 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
               groupMemberIds.push(item.id);
             });
           }
-          $("#current_single_chat_name").html(additionaInfo.name);
+          $("#current_single_chat_name").html(additionaInfo.receiverName);
           $("#curren_group_name_id").val(additionaInfo.name);
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
           var Image = $("#currentProfilePicture").attr("src");
@@ -58,7 +58,7 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
           $("#single_chat_image_preview").attr("src", Image);
           $("#current_active_user_group_image_single").val(Image);
           $("#current_receiver_id").val(receiverId);
-          $("#current_receiver_name_id").val(additionaInfo.name);
+          $("#current_receiver_name_id").val(additionaInfo.receiverName);
           socket.emit(
             "getsinglemessages",
             JSON.stringify({ groupId: data.data.groupId })
@@ -225,10 +225,12 @@ $("body").on("click", ".open-single-chat-window", function() {
   var groupMembers = [];
   groupMembers.push(receiverId);
   var name = $(this).attr("data-name");
+  var UserInfo = JSON.parse(userData);
 
   var data = {
     sender_id: receiverId,
-    name: name,
+    name: UserInfo.first_name,
+    receiverName: name,
     group_id: currentGroupId
   };
 

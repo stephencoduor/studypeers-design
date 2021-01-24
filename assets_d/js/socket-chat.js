@@ -877,7 +877,7 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     "<li class='open-single-chat-window' data-groupId='" +
     messageJson.group_id +
     "' data-name='" +
-    messageJson.from_user_name +
+    messageJson.group_name +
     "' data-groupmembers='" +
     JSON.stringify(messageJson.group_members) +
     "' data-id='" +
@@ -895,7 +895,7 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     '<div class="info-wrap">' +
     "</span>" +
     "<h3>" +
-    messageJson.from_user_name +
+    messageJson.group_name +
     "</h3>" +
     '<span class="msg-count">' +
     "(" +
