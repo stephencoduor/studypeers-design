@@ -13,6 +13,7 @@ socket.on("singlemessages", data => {
   var mainContent = "";
   var otherUserIds = [];
   if (data.length > 0) {
+    chatAppendElementSmall.html("");
     data.forEach(function(item, index) {
       if (item.from_user_id == userInfo.user_id) {
         mainContent += sendMessageToSingleChat(item, "");
