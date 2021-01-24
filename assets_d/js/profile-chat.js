@@ -83,6 +83,7 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
 
 function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
   var getCurrentReciverId = $("#current_receiver_id").val();
+  var UserInfo = JSON.parse(userData);
 
   if (getCurrentReciverId == "") {
     // open new window
@@ -101,7 +102,7 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
     receivingMessageSingle(msg, "offline");
   } else {
     // check if the messge is for me or not.
-    if (getCurrentReciverId == msg.to_user_id) {
+    if (UserInfo.user_id == msg.to_user_id) {
       $("#current_receiver_id").val(msg.from_user_id);
       $("#current_receiver_name_id").val(msg.from_user_name);
       $("#current_group_id").val(groupId);
