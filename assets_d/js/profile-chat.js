@@ -57,11 +57,13 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
             console.log("teting group--->");
             $("#curren_group_name_id").val(additionaInfo.receiverName);
           } else {
+            $("#current_active_user_group_image_single").val(
+              additionaInfo.image
+            );
             $("#curren_group_name_id").val(additionaInfo.name);
           }
 
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-          $("#current_active_user_group_image_single").val(additionaInfo.image);
           $("#current_receiver_id").val(receiverId);
           $("#current_receiver_name_id").val(additionaInfo.receiverName);
           socket.emit(
