@@ -880,7 +880,9 @@ function formatTopMessageHeaderSingleChat(messageJson) {
   }
 
   var html =
-    "<li class='open-single-chat-window' data-groupId='" +
+    "<li class='open-single-chat-window' data-image='" +
+    messageJson.group_image +
+    "' data-groupId='" +
     messageJson.group_id +
     "' data-name='" +
     messageJson.group_name +

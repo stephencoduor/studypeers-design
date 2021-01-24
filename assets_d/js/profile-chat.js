@@ -56,6 +56,7 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
           if (parseInt(additionaInfo.group_id) != 0) {
             console.log("teting group--->");
             $("#curren_group_name_id").val(additionaInfo.receiverName);
+            $("#single_chat_image_preview").attr(additionaInfo.group_image);
           } else {
             $("#current_active_user_group_image_single").val(
               additionaInfo.image
@@ -112,6 +113,7 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
       $("#curren_group_members").val(JSON.stringify(groupMemberIds));
       $("#current_single_chat_name").html(msg.from_user_name);
       $("#curren_group_name_id").val(msg.group_name);
+      $("#single_chat_image_preview").attr("src", msg.group_image);
       $("#current_active_user_group_image_single").val(msg.group_image);
 
       receivingMessageSingle(msg, "offline");
@@ -234,6 +236,7 @@ $("body").on("click", ".open-single-chat-window", function() {
   var previewImage = $("#currentProfilePicture").attr("src");
   var receiverId = $(this).attr("data-id");
   var currentGroupId = $(this).attr("data-groupId");
+  var groupImage = $(this).attr("data-image");
   var groupMembers = [];
   groupMembers.push(receiverId);
   var name = $(this).attr("data-name");
@@ -245,7 +248,8 @@ $("body").on("click", ".open-single-chat-window", function() {
     receiverName: name,
     group_id: currentGroupId,
     image: UserInfo.profileImage,
-    receiverImage: previewImage
+    receiverImage: previewImage,
+    group_image: groupImage
   };
 
   additionaInfo = data;
