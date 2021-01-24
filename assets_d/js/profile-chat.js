@@ -35,7 +35,7 @@ socket.on("singlemessages", data => {
 });
 
 var CHAT_GROUP_ADDITIONS_SINGLE = {
-  _AJAX_SUBMIT_SINGLE_CHAT: function(data, receiverId) {
+  _AJAX_SUBMIT_SINGLE_CHAT: function(data, receiverId, additionaInfo) {
     $.ajax({
       url: $("#submit_single_chat_url").val(),
       data: data,
@@ -50,15 +50,15 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
               groupMemberIds.push(item.id);
             });
           }
-          $("#current_single_chat_name").html(data.data.groupInfo.group_name);
-          $("#curren_group_name_id").val(data.data.groupInfo.group_name);
+          $("#current_single_chat_name").html(additionaInfo.name);
+          $("#curren_group_name_id").val(additionaInfo.name);
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
           var Image = $("#currentProfilePicture").attr("src");
 
           $("#single_chat_image_preview").attr("src", Image);
           $("#current_active_user_group_image_single").val(Image);
           $("#current_receiver_id").val(receiverId);
-          $("#current_receiver_name_id").val(data.data.groupInfo.group_name);
+          $("#current_receiver_name_id").val(additionaInfo.name);
           socket.emit(
             "getsinglemessages",
             JSON.stringify({ groupId: data.data.groupId })
@@ -232,7 +232,13 @@ $("body").on("click", ".open-single-chat-window", function() {
     group_id: currentGroupId
   };
 
-  CHAT_GROUP_ADDITIONS_SINGLE._AJAX_SUBMIT_SINGLE_CHAT(data, receiverId);
+  additionaInfo = data;
+
+  CHAT_GROUP_ADDITIONS_SINGLE._AJAX_SUBMIT_SINGLE_CHAT(
+    data,
+    receiverId,
+    additionaInfo
+  );
 });
 
 $("body").on("click", "#close_window_single", function() {
