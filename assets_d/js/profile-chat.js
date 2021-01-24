@@ -101,10 +101,9 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
     receivingMessageSingle(msg, "offline");
   } else {
     // check if the messge is for me or not.
-    if (getCurrentReciverId == msg.from_user_id) {
+    if (getCurrentReciverId == msg.to_user_id) {
       $("#current_receiver_id").val(msg.from_user_id);
       $("#current_receiver_name_id").val(msg.from_user_name);
-
       $("#current_group_id").val(groupId);
       $("#curren_group_members").val(JSON.stringify(groupMemberIds));
       $("#current_single_chat_name").html(msg.from_user_name);
