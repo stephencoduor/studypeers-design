@@ -94,7 +94,7 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
     $("#curren_group_members").val(JSON.stringify(groupMemberIds));
     $("#current_single_chat_name").html(msg.from_user_name);
 
-    $("#curren_group_name_id").val(msg.from_user_name);
+    $("#curren_group_name_id").val(msg.group_name);
     $("#single_chat_image_preview").attr("src", msg.group_image);
     $("#current_active_user_group_image_single").val(msg.group_image);
 
@@ -108,7 +108,7 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
       $("#current_group_id").val(groupId);
       $("#curren_group_members").val(JSON.stringify(groupMemberIds));
       $("#current_single_chat_name").html(msg.from_user_name);
-      $("#curren_group_name_id").val(msg.from_user_name);
+      $("#curren_group_name_id").val(msg.group_name);
       $("#current_active_user_group_image_single").val(msg.group_image);
 
       receivingMessageSingle(msg, "offline");
