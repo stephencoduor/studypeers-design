@@ -828,7 +828,7 @@ function sendMessageToSingleUser(messageText) {
     send_profile_image: UserInfo.profileImage,
     is_read: "unread",
     group_id: $("#current_group_id").val(),
-    group_name: $("#curren_group_name_id").val(),
+    group_name: UserInfo.first_name,
     group_image: $("#current_active_user_group_image_single").val(),
     group_members: JSON.parse($("#curren_group_members").val()),
     unread_members: unreadMembers,

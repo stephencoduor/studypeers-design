@@ -895,7 +895,7 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     '<div class="info-wrap">' +
     "</span>" +
     "<h3>" +
-    messageJson.from_user_name +
+    messageJson.group_name +
     "</h3>" +
     '<span class="msg-count">' +
     "(" +
