@@ -79,7 +79,7 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
   if (getCurrentReciverId == "") {
     // open new window
 
-    $("#current_receiver_id").val(msg.to_user_id);
+    $("#current_receiver_id").val(msg.from_user_id);
     $("#current_receiver_name_id").val(msg.from_user_name);
 
     $("#current_group_id").val(groupId);
@@ -93,8 +93,8 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
     receivingMessageSingle(msg, "offline");
   } else {
     // check if the messge is for me or not.
-    if (getCurrentReciverId == msg.to_user_id) {
-      $("#current_receiver_id").val(msg.to_user_id);
+    if (getCurrentReciverId == msg.from_user_id) {
+      $("#current_receiver_id").val(msg.from_user_id);
       $("#current_receiver_name_id").val(msg.from_user_name);
 
       $("#current_group_id").val(groupId);
