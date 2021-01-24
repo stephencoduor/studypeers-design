@@ -541,7 +541,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <a href="javascript:void(0)" class="done-link">Done</a>
             </form>
         </div>
-        <div class="say-hi-wrapper">
+        <div class="say-hi-wrapper" id="group_message_chat_window_hi_wrapper">
             <figure><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/say_hi.svg" class="change-icon" alt="Maximize Icon" /></figure>
             <h3>Say Hi!</h3>
         </div>

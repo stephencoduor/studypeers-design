@@ -615,6 +615,7 @@ socket.on("groupmessages", function(data) {
     chatWindow = document.getElementById("chat_window_content");
     var xH = chatWindow.scrollHeight;
     chatWindow.scrollTo(0, xH);
+    $("#group_message_chat_window_hi_wrapper").hide();
 
     // if (otherUserIds.length > 0) {
     //   otherUserIds.forEach(function(item, index) {
@@ -626,8 +627,9 @@ socket.on("groupmessages", function(data) {
     // }
 
     // createGroupHTML();
-    showBigGroupChatWindow();
   }
+
+  showBigGroupChatWindow();
 });
 
 $("body").on("click", ".message-top-header", function() {
