@@ -871,7 +871,13 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     message = "Document";
   }
 
-  console.log(messageJson);
+  var userInfo = JSON.parse(userData);
+  var userId = userInfo.user_id;
+  var name = messageJson.group_name;
+
+  if (userId == messageJson.from_user_id) {
+    name = messageJson.to_user_name;
+  }
 
   var html =
     "<li class='open-single-chat-window' data-groupId='" +
@@ -895,7 +901,7 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     '<div class="info-wrap">' +
     "</span>" +
     "<h3>" +
-    messageJson.group_name +
+    name +
     "</h3>" +
     '<span class="msg-count">' +
     "(" +
