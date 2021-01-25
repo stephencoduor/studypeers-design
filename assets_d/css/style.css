@@ -1363,10 +1363,38 @@ input:-webkit-autofill:active {
     height:auto;
 }
 .blankFeedArea.SmallFeed  figure img{
-    max-width:100px;
+    max-width:75px;
     height:auto;
     margin:0 auto;
     display: block;
+}
+.ml10 {
+    position: relative;
+    font-weight: 900;
+    font-size: 12px;
+    
+}
+.sidebar-menu span.badge-success{
+    animation: mymove 5s infinite;
+}
+@keyframes mymove {
+  from {transform: scale(0);}
+  to {transform: scale(1)}
+}
+  
+.ml10 .text-wrapper {
+position: relative;
+display: inline-block;
+padding-top: 0.2em;
+padding-right: 0.05em;
+padding-bottom: 0.1em;
+overflow: hidden;
+}
+  
+.ml10 .letter {
+display: inline-block;
+line-height: 1em;
+transform-origin: 0 0;
 }
 @media (max-width: 991px) {
     body .login-container .flex-row {

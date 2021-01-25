@@ -568,7 +568,13 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Textbooks
-										<span class="badge badge-success">Coming Soon</span>
+										<span class="badge badge-success">
+											<div class="ml10">
+												<span class="text-wrapper">
+													<span class="letters">Coming Soon</span>
+												</span>
+											</div>
+										</span>
 									</a></li>
 								<li><a href="javascript:void(0);">
 										<div class="activeBg">
@@ -577,7 +583,13 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Articles
-										<span class="badge badge-success">Coming Soon</span>
+										<span class="badge badge-success">
+											<div class="ml10">
+												<span class="text-wrapper">
+													<span class="letters">Coming Soon</span>
+												</span>
+											</div>
+										</span>
 									</a></li>
 								
 								<li><a href="javascript:void(0);">
@@ -587,7 +599,13 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Study Notes
-										<span class="badge-success">Coming Soon</span>
+										<span class="badge badge-success">
+											<div class="ml10">
+												<span class="text-wrapper">
+													<span class="letters">Coming Soon</span>
+												</span>
+											</div>
+										</span>
 									</a></li>
 							</ul>
 						</section>
