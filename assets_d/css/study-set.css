@@ -366,11 +366,37 @@ select.form-control:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 .user-name {
     display: flex;
     align-items: center;
     justify-content: space-between;
+}
+.feedWrapper.listView .basic-action{
+    width:100%;
+    justify-content: space-between;
+}
+.feedWrapper.listView .action .action_button{
+    position: absolute;
+    right:0;
+    top:12px;
+}
+.feedWrapper.listView .user-name figcaption{
+    white-space: nowrap;
+    width:100%;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.feedWrapper.listView  .userWrap .user-name{
+    width:100%;
+    margin-right:0;
+    margin-bottom:10px;
+
+}
+.feedWrapper.listView .userWrap{
+    flex-direction: column;
+    overflow: hidden;
 }
 .user-name figure {
     width:28px;
