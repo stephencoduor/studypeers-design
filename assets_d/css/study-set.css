@@ -126,6 +126,9 @@
     outline:none;
     box-shadow: 0 0 0 3px #e8effd;
 }
+.sortMenu:hover svg{
+    fill:#fff;
+}
 .filterBtn:hover,
 .sortMenu:hover {
     text-decoration: none;
@@ -435,7 +438,7 @@ select.form-control:focus {
 }
 .feedWrapper.listView {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
 }
@@ -564,7 +567,18 @@ label{
     font-size:12px;
     font-weight:700;
     margin-left: 15px;
+    white-space: nowrap;
+    transition:0.3s ease-in;
 }
+.transparentBtn:hover{
+    background-color: #185aeb;
+    color:#fff;
+
+}
+.termsWrapper:hover svg{
+    fill:#fff;
+}
+
 .flex-form-row {
     display: flex;
     width: 100%;
@@ -581,6 +595,9 @@ textarea{
     align-items: center;
     justify-content: flex-end;
     margin: 20px 0 0 0;
+}
+.scheduleWrapper .studybuttonGroup{
+    margin:20px 0;
 }
 .studybuttonGroup button{
     margin:0 0 0 10px ;
@@ -664,6 +681,9 @@ l,.share:focus
 }
 .socialActionWrapper a{
     margin-right: 10px;
+}
+.socialActionWrapper a.like:hover{
+    color:#fff;
 }
 .toolBox ul{
     display: flex;
@@ -924,7 +944,7 @@ l,.share:focus
 }
 .main_subheaderLeft a{
     font-size: 12px;
-    margin: 0 30px;
+    margin: 0 15px;
     font-weight: bold;
     text-align: left;
     color: #185aeb;
@@ -937,6 +957,7 @@ l,.share:focus
     vertical-align: middle;
 }
 .main_subheaderLeft h4 {
+    font-size:16px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -1039,8 +1060,8 @@ l,.share:focus
     margin: 0 15px 0 10px;
 }
 #matchtime {
-    font-size: 28px;
-    font-weight: 300;
+    font-size: 14px;
+    font-weight: 500;
     line-height: 1.43;
     text-align: center;
     color: #5d8cf1;
@@ -1924,18 +1945,31 @@ l,.share:focus
     font-size: 12px;
     font-weight:500;
     padding: 7px 10px;
+    cursor: pointer;
 }
 .badgeList ul li.badge.badge1 {
     background: #e6e6fe;
     color:#185aeb;
 }
+.badgeList ul li.badge.badge1:hover {
+    background: #0c2d76;
+    color: #fff;
+}
 .badgeList ul li.badge.badge2 {
     background: #ffd5e9;
     color:#ea2e7e;
 }
+.badgeList ul li.badge.badge2:hover {
+    background: #5e1232;
+    color: #fff;
+}
 .badgeList ul li.badge.badge3 {
     background: #d8f5f6;
     color:#1ae1bd;
+}
+.badgeList ul li.badge.badge3:hover {
+    background: #0a5a4c;
+    color: #fff;
 }
 .my-rating-4 span {
     color: #9592a7;
@@ -2668,10 +2702,10 @@ l,.share:focus
     justify-content: flex-start;
 }
 .main_subheaderCenter ul li {
-    margin-right:15px;
+    margin-right:10px;
 }
 .main_subheaderCenter ul li a {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500;
     color:#333;
 }
@@ -2683,7 +2717,7 @@ l,.share:focus
     align-items: center;
     justify-content: space-between;
     width: 50%;
-    padding-left: 20px;
+    padding-left: 15px;
 }
 .mainCardWrapper.newflash .flashcards {
     width: 100%;
@@ -2737,6 +2771,59 @@ l,.share:focus
 .correct {
     /*background: #d8f5f6;*/
     color: #1ce2bc;
+}
+.choose_btn{
+    transition:0.3s ease-in;
+}
+.choose_btn.correct:hover{
+    color:#fff;
+    background-color:#0a5a4c;
+}
+.choose_btn.correct:hover span{
+    background: url("../images/correct-white.svg") no-repeat;
+}
+.choose_btn.not-sure:hover{
+    color:#fff;
+    background-color:#66492d;
+}
+.choose_btn.incorrect:hover{
+    color:#fff;
+    background-color:#5e1232;
+}
+.choose_btn.hidecard:hover{
+    color:#fff;
+    background-color:#aaabbb;
+}
+.choose_btn.hidecard:hover span{
+    background: url("../images/hidden-white.svg") no-repeat;
+}
+.choose_btn.incorrect:hover span{
+    background: url("../images/incorrect-white.svg") no-repeat;
+}
+.choose_btn.not-sure:hover span{
+    background: url("../images/not-sure-white.svg") no-repeat;
+}
+.shareOptionBox .choose_btn span{
+    width:18px;
+    height:18px;
+    display:inline-block;
+    margin-right:3px;
+    vertical-align: middle;
+    background-size: contain;
+    background-position: center center;
+    transition: 0.3s ease-in;
+}
+.choose_btn.correct span{
+    background: url("../images/correct.svg") no-repeat;
+}
+.choose_btn.not-sure span{
+    background: url("../images/not-sure.svg") no-repeat;
+}
+.choose_btn.incorrect span{
+    background: url("../images/incorrect.svg") no-repeat;
+}
+.choose_btn.hidecard span{
+    background: url("../images/hidden.svg") no-repeat;
 }
 .selected {
     border-color: currentColor!important;

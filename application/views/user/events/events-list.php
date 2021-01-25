@@ -89,7 +89,7 @@
                                         </div>
                                     </div>
                                     <div class="filterSelect">
-                                        <select class="form-control" name="course" id="course" placeholder="InsCoursetitution" onchange="getProfessor(this.value)">
+                                        <select class="form-control selectpicker" name="course" id="course" placeholder="InsCoursetitution" onchange="getProfessor(this.value)">
                                           <option value="">Course</option>
                                             <?php foreach ($course as $key => $value) { ?>
                                                 <option value="<?= $value['id'] ?>" <?php if($course_search == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="flex-row">
                                     <div class="filterSelect">
-                                        <select class="form-control" placeholder="Professor" name="professor" id="professor">
+                                        <select class="form-control selectpicker" placeholder="Professor" name="professor" id="professor">
                                           <option>Professor</option>
                                           <?php foreach ($professor as $key => $value) { ?>
                                                 <option value="<?= $value['id'] ?>" <?php if($professor_search == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>

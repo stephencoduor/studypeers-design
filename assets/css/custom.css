@@ -361,9 +361,11 @@ body {
   .login-logo .logo {
     position: relative;
   }
-
+  .header-area .navbar-toggler{
+    padding:8px!important;
+  }
   .login-container .flex-row {
-    flex-direction: column-reverse;
+    flex-direction: column-reverse!important;
   }
   .login-container .flex-item {
     max-width: 100%;

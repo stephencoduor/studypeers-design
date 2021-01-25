@@ -1,7 +1,7 @@
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
-<script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.concat.min.js"></script>
+<script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.js"></script>
 <script src="<?php echo base_url('assets_d/js/fm.selectator.jquery.js'); ?>"></script>
 <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
@@ -874,7 +874,7 @@
     });
     index = 3;
     $('.addmore').on('click', function() {
-        if(index < 6){
+        if (index < 6) {
             index++;
             $('.pollsform').append(
                 `<div class="form-group" id="option_div_${index}">
@@ -885,9 +885,10 @@
             );
         }
     });
-    function removeOptionDiv(id){
+
+    function removeOptionDiv(id) {
         index--;
-        $('#option_div_'+id).remove();
+        $('#option_div_' + id).remove();
     }
     $('.closeBtn').on('click', function() {
         $(this).parents('.uploadedDocs').hide();

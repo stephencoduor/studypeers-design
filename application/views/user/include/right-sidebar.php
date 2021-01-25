@@ -68,11 +68,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             <figure>
                                 <img src="<?php echo base_url(); ?>assets_d/images/user2.jpg" alt="user">
                             </figure>
-<<<<<<< HEAD
-                            <figcaption><a href="<?php echo base_url(); ?>sp/<?= $peer['username']; ?>" style="font-size: 12px; font-weight: 400;"><?php echo $peer['nickname']; ?></a></figcaption>
-=======
                             <figcaption>The in group</figcaption>
->>>>>>> eb545b8bf268f01b4b505ba267be38c672482efe
                         </section>
                         <section class="action">
                             <i class="fa fa-ellipsis-v"></i>
@@ -150,6 +146,14 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <h6>Blocked Peers</h6>
             </section>
             <section class="listChatBox">
+                <div class="blankFeedArea SmallFeed">
+                    <div class="noFeedWrapper">
+                        <figure>
+                            <img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+                        </figure>
+                        <h4>Nothing to display</h4>
+                    </div>
+                </div>
                 <?php
                 foreach (@$blocked_users as $users) {
                 ?>
@@ -389,23 +393,26 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 <div class="small-chat-wrapper" style="display: none;" id="single_chat_window_box">
     <div class="small-chat-right">
         <div class="small-chat-header">
+            <a href="javascript:void(0)" id="close_window_single" class="chat-close"><img src="<?php echo base_url('assets_d/chat-assets/images/close.svg'); ?>" alt="New Message Icon"></a>
             <div class="small-header-left">
                 <div class="sm-basic-user-info">
                     <figure>
-                        <img id="single_chat_image_preview" src="http://localhost/studypeers/uploads/users/cover/1605539206.png">
+                        <img id="single_chat_image_preview" src="">
                     </figure>
                     <strong id="current_single_chat_name">user7</strong>
                 </div>
                 <h3>Start Conversation</h3>
             </div>
             <div class="sm-chat-header-right">
-                <a href="javascript:void(0)" class="video-icon"><img src="http://localhost/studypeers/assets_d/chat-assets/images/video-camera.svg" alt="Video Icon"></a>
+                <a href="javascript:void(0)" class="video-icon"><img src="<?php echo base_url('assets_d/chat-assets/images/video-camera.svg'); ?>" alt="Video Icon"></a>
             </div>
         </div>
-
+        <div class="say-hi-wrapper">
+            <figure><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/say_hi.svg" class="change-icon" alt="Maximize Icon" /></figure>
+            <h3>Say Hi!</h3>
+        </div>
         <div class="sm-chat-content" id="single_chat_window_append">
             <div class="sm-chat-body" id="append_single_chat_records">
-
 
             </div>
         </div>
@@ -439,15 +446,16 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         <textarea placeholder="Type your message here" class="form-control" id="single_chat_submit_button"></textarea>
                     </div>
                     <div class="chat-action">
-                        <button type="button" class="send-btn">
+                        <button type="button" id="send_button_chat_single" class="send-btn">
                             <i class="fa fa-paper-plane" aria-hidden="true"></i>
                         </button>
+                        <input type="hidden" id="hidden_text_message">
                         <a href="javascript:void(0)" class="media-icon">
-                            <img src="http://localhost/studypeers/assets_d/images/image.svg" alt="Imozi Icon" id="image_icon_selector_single">
+                            <img src="<?php echo base_url('assets_d/images/image.svg'); ?>" alt="Imozi Icon" id="image_icon_selector_single">
                         </a>
                         <label class="file-upload" id="any_document_upload_single"></label>
                         <input type="file" for="file-upload" class="rest_img" id="upload_second_image_chat_single" style="display:none;" accept="image/*">
-                        <form action="http://localhost/studypeers/account/upload-document-server" enctype="multipart/form-data" method="post" id="submit_upload_document_form_single">
+                        <form action="<?php echo base_url('account/upload-document-server'); ?>" enctype="multipart/form-data" method="post" id="submit_upload_document_form_single">
                             <input type="file" class="rest_img" id="upload_first_image_document_single" style="display:none;" accept="">
                         </form>
                     </div>
@@ -533,6 +541,10 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <a href="javascript:void(0)" class="done-link">Done</a>
             </form>
         </div>
+        <div class="say-hi-wrapper" id="group_message_chat_window_hi_wrapper">
+            <figure><img src="<?php echo base_url(); ?>assets_d/chat-assets/images/say_hi.svg" class="change-icon" alt="Maximize Icon" /></figure>
+            <h3>Say Hi!</h3>
+        </div>
         <div class="chat-content" id="chat_window_content">
 
             <div class="loader-wrap" id="message_window_loader" style="display:none;">
@@ -563,6 +575,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="current_receiver_id">
             <input type="hidden" id="current_receiver_name_id">
             <input type="hidden" id="submit_single_chat_url" value="<?php echo base_url('submit-single-chat-user'); ?>">
+            <input type="hidden" id="current_active_user_group_image_single">
 
         </div>
         <span id="user_typing_id"></span>

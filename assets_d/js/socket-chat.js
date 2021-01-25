@@ -396,6 +396,8 @@ socket.on("receivemessage", function(msg) {
 
   if (groupMemberIds.indexOf(userId) == -1) return false;
 
+  $("#group_message_chat_window_hi_wrapper").hide();
+
   if (msg.to_user_id == null) {
     HandleGrouMessage(userInfo, userId, groupId, groupMemberIds, msg);
   } else {
@@ -552,7 +554,11 @@ socket.on("showinitmessage", data => {
   if (data.length > 0) {
     messageContent = "";
     data.forEach(function(item, index) {
-      messageContent += formatTopMessageHeader(item);
+      if (item.to_user_id == null) {
+        messageContent += formatTopMessageHeader(item);
+      } else {
+        messageContent += formatTopMessageHeaderSingleChat(item);
+      }
     });
   }
   $(".loader-wrap").hide();
@@ -563,7 +569,11 @@ socket.on("receivesearchmessage", data => {
   var messageContent = "";
   if (data.length > 0) {
     data.forEach(function(item, index) {
-      messageContent += formatTopMessageHeader(item);
+      if (item.to_user_id == null) {
+        messageContent += formatTopMessageHeader(item);
+      } else {
+        messageContent += formatTopMessageHeaderSingleChat(item);
+      }
     });
   }
   $("#myUL").html(messageContent);
@@ -607,6 +617,7 @@ socket.on("groupmessages", function(data) {
     chatWindow = document.getElementById("chat_window_content");
     var xH = chatWindow.scrollHeight;
     chatWindow.scrollTo(0, xH);
+    $("#group_message_chat_window_hi_wrapper").hide();
 
     // if (otherUserIds.length > 0) {
     //   otherUserIds.forEach(function(item, index) {
@@ -618,8 +629,9 @@ socket.on("groupmessages", function(data) {
     // }
 
     // createGroupHTML();
-    showBigGroupChatWindow();
   }
+
+  showBigGroupChatWindow();
 });
 
 $("body").on("click", ".message-top-header", function() {
@@ -833,6 +845,65 @@ function formatTopMessageHeader(messageJson) {
     "</span>" +
     "<h3>" +
     messageJson.group_name +
+    "</h3>" +
+    '<span class="msg-count">' +
+    "(" +
+    total +
+    ")" +
+    "</span>" +
+    "<p>" +
+    message +
+    "</p>" +
+    "</div></a></li>";
+
+  return html;
+}
+
+function formatTopMessageHeaderSingleChat(messageJson) {
+  var total = 0;
+  var message = messageJson.message;
+
+  if (messageJson.total) {
+    total = messageJson.total;
+  }
+
+  if (messageJson.document_url) {
+    message = "Document";
+  }
+
+  var userInfo = JSON.parse(userData);
+  var userId = userInfo.user_id;
+  var name = messageJson.group_name;
+
+  if (userId == messageJson.from_user_id) {
+    name = messageJson.to_user_name;
+  }
+
+  var html =
+    "<li class='open-single-chat-window' data-image='" +
+    messageJson.group_image +
+    "' data-groupId='" +
+    messageJson.group_id +
+    "' data-name='" +
+    messageJson.group_name +
+    "' data-groupmembers='" +
+    JSON.stringify(messageJson.group_members) +
+    "' data-id='" +
+    messageJson.from_user_id +
+    "' '>" +
+    '<a href="javascript:void(0)">' +
+    "<figure>" +
+    '<img src="' +
+    messageJson.group_image +
+    '" alt="">' +
+    "</figure>" +
+    '<div class="time">' +
+    moment(messageJson.created).fromNow() +
+    "</div>" +
+    '<div class="info-wrap">' +
+    "</span>" +
+    "<h3>" +
+    name +
     "</h3>" +
     '<span class="msg-count">' +
     "(" +

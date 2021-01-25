@@ -117,28 +117,28 @@
 			      					<li>
 			      						<a href="javascript:void(0)" onclick="incrementCount('correct')">
 			      							<button type="button" class="choose_btn correct">
-			      								<img src="<?php echo base_url(); ?>assets_d/images/correct.svg" alt="correct"> Correct
+			      								<span></span> Correct
 			      							</button>
 			      						</a>
 			      					</li>
 			      					<li>
 			      						<a href="javascript:void(0)">
-			      							<button type="button" class="choose_btn not-sure" onclick="incrementCount('not-sure')">
-			      								<img src="<?php echo base_url(); ?>assets_d/images/not-sure.svg" alt="not-sure"> Not Sure
+											  <button type="button" class="choose_btn not-sure" onclick="incrementCount('not-sure')">
+											  	<span></span> Not Sure
 			      							</button>
 			      						</a>
 			      					</li>
 			      					<li>
 			      						<a href="javascript:void(0)">
 			      							<button type="button" class="choose_btn incorrect" onclick="incrementCount('incorrect')">
-			      								<img src="<?php echo base_url(); ?>assets_d/images/incorrect.svg" alt="incorrect"> Incorrect
+			      								<span></span> Incorrect
 			      							</button>
 			      						</a>
 			      					</li>
 			      					<li>
 			      						<a href="javascript:void(0)">
 			      							<button type="button" class="choose_btn hidecard" onclick="incrementCount('hidecard')">
-			      								<img src="<?php echo base_url(); ?>assets_d/images/hidden.svg" alt="hidden"> Hide Card
+			      								<span></span>Hide Card
 			      							</button>
 			      						</a>
 			      					</li>

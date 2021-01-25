@@ -21,7 +21,7 @@
     emptyColor: 'lightgray',
     hoverColor: 'orange',
     activeColor: 'gold',
-    ratedColor: 'crimson',
+    ratedColor: '#ffd700',
     useGradient: true,
     readOnly: false,
     disableAfterRate: true,

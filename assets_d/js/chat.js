@@ -36,7 +36,9 @@ Upload.prototype.doUpload = function() {
     success: function(data) {
       if (data.status) {
         var url =
-          "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/pdf.svg' alt='Icon'></span>" +
+          "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/" +
+          data.data.file_type.replace("/", "_") +
+          ".svg' alt='Icon'></span>" +
           "<a href='" +
           data.url +
           "'>" +
@@ -94,8 +96,10 @@ Upload.prototype.singleUpload = function() {
     success: function(data) {
       if (data.status) {
         var url =
-          "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/pdf.svg' alt='Icon'></span>" +
-          "<a href='" +
+          "<span class='attachment-view'><span class='file-icon'><img src='../assets_d/images/" +
+          data.data.file_type.replace("/", "_") +
+          ".svg' alt='Icon'></span>" +
+          "<a target='blank' href='" +
           data.url +
           "'>" +
           data.data.orig_name +
@@ -384,6 +388,7 @@ $(document).ready(function() {
 
   $("body").on("click", ".main-close", function() {
     removeElementAfterAddingNewGroup();
+    $("body").removeClass("hide-scroll");
   });
 
   $(".open-start-conversation").click(function() {
@@ -798,6 +803,7 @@ function sendMessageToUser(messageText) {
   $("#send_message_input").val("");
   $("#current_image_upload_src").val("");
   $("#append_image_after_upload").html("");
+  $("#group_message_chat_window_hi_wrapper").hide();
 }
 
 function sendMessageToSingleUser(messageText) {
@@ -823,7 +829,7 @@ function sendMessageToSingleUser(messageText) {
     is_read: "unread",
     group_id: $("#current_group_id").val(),
     group_name: $("#curren_group_name_id").val(),
-    group_image: $("#currentCoverPicture").attr("src"),
+    group_image: $("#current_active_user_group_image_single").val(),
     group_members: JSON.parse($("#curren_group_members").val()),
     unread_members: unreadMembers,
     read_members: [],
@@ -848,6 +854,7 @@ function sendMessageToSingleUser(messageText) {
   $("#single_chat_submit_button").val("");
   $("#current_image_upload_src").val("");
   $("#append_image_after_upload_single").html("");
+  $(".say-hi-wrapper").hide();
 }
 
 function sendMessageAsNewMemberAdded(messageJson, status) {
@@ -1049,7 +1056,7 @@ $(".emojis-wysiwyg").emojioneArea({
     keyup: function(editor, event) {
       if (
         event.which == 13 &&
-        ($.trim(editor.text()).length > 0 ||
+        ($.trim(editor.html()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
         sendMessageToUser(editor.html());
@@ -1081,9 +1088,10 @@ $("#single_chat_submit_button").emojioneArea({
     keyup: function(editor, event) {
       if (
         event.which == 13 &&
-        ($.trim(editor.text()).length > 0 ||
+        ($.trim(editor.html()).length > 0 ||
           $("#current_image_upload_src").val())
       ) {
+        console.log("single....");
         sendMessageToSingleUser(editor.html());
         event.preventDefault();
         event.stopPropagation();
@@ -1091,6 +1099,7 @@ $("#single_chat_submit_button").emojioneArea({
       } else {
         // Number 13 is the "Enter" key on the keyboard
         var UserInfo = JSON.parse(userData);
+        $("#hidden_text_message").val(editor.html());
 
         socket.emit(
           "usertyping",
@@ -1100,6 +1109,10 @@ $("#single_chat_submit_button").emojioneArea({
           })
         );
       }
+    },
+    change: function(editor, event) {
+      console.log("change");
+      $("#hidden_text_message").val(editor.html());
     }
   }
 });

@@ -46,6 +46,9 @@
 .box-card.message .createBox {
     border-top-left-radius:0;
 }
+.box-card.message{
+    margin-top:60px;
+}
 .createBox.story {
     padding: 28px 20px;
 }
@@ -703,17 +706,17 @@
     width: 120px;
     background: #fff;
     border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
     position: absolute;
-    left: -121px;
-    top: 0px;
+    left: 0;
+    top: -43px;
     display: flex;
     align-items: center;
     justify-content: center;
     padding: 10px;
     white-space: nowrap;
     font-weight:600;
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 -1px 2px rgba(0,0,0,0.2);
 }
 .eventMessage img {
     margin-right: 10px;

@@ -115,4 +115,18 @@ class ChatModel extends CI_Model
 
         return $query->row_array();
     }
+
+    public function getExistingGroupByID($id)
+    {
+
+        $query =   $this->db->where('id', $id)
+
+            ->from('user_chat_groups')
+
+            ->where('group_type', 2)
+
+            ->get();
+
+        return $query->row_array();
+    }
 }
