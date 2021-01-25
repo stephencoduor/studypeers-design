@@ -368,10 +368,10 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 										<span class="label label-success" id="chat_message_count"></span>
 									</a>
 
-									<div class="chat-dropdown">
+									<div class="chat-dropdown" id="show_top_header">
 										<div class="chat-dropdown-header">
 											<div class="left-area">
-												Messages <span class="total-message">(03)</span>
+												Messages <span class="total-message">(00)</span>
 											</div>
 											<div class="right-area">
 												<a href="javascript:void(0)" class="open-chat"><img src="<?php echo base_url(); ?>assets_d/images/maximize.svg" alt="Maximize Icon" /></a>
@@ -547,7 +547,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 										</div>
 										Documents
 									</a></li>
-									<li class="<?php if ($index_menu == 'questions') {
+								<li class="<?php if ($index_menu == 'questions') {
 												echo 'active';
 											} ?>"><a href="<?php echo base_url(); ?>account/questions">
 										<div class="activeBg">
@@ -591,7 +591,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</div>
 										</span>
 									</a></li>
-								
+
 								<li><a href="javascript:void(0);">
 										<div class="activeBg">
 											<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">

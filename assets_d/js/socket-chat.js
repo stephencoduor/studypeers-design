@@ -396,6 +396,8 @@ socket.on("receivemessage", function(msg) {
 
   if (groupMemberIds.indexOf(userId) == -1) return false;
 
+  $("#group_message_chat_window_hi_wrapper").hide();
+
   if (msg.to_user_id == null) {
     HandleGrouMessage(userInfo, userId, groupId, groupMemberIds, msg);
   } else {
@@ -552,7 +554,7 @@ socket.on("showinitmessage", data => {
   if (data.length > 0) {
     messageContent = "";
     data.forEach(function(item, index) {
-      if (item.to_user_id == "") {
+      if (item.to_user_id == null) {
         messageContent += formatTopMessageHeader(item);
       } else {
         messageContent += formatTopMessageHeaderSingleChat(item);
@@ -567,7 +569,7 @@ socket.on("receivesearchmessage", data => {
   var messageContent = "";
   if (data.length > 0) {
     data.forEach(function(item, index) {
-      if (item.to_user_id == "") {
+      if (item.to_user_id == null) {
         messageContent += formatTopMessageHeader(item);
       } else {
         messageContent += formatTopMessageHeaderSingleChat(item);
@@ -615,6 +617,7 @@ socket.on("groupmessages", function(data) {
     chatWindow = document.getElementById("chat_window_content");
     var xH = chatWindow.scrollHeight;
     chatWindow.scrollTo(0, xH);
+    $("#group_message_chat_window_hi_wrapper").hide();
 
     // if (otherUserIds.length > 0) {
     //   otherUserIds.forEach(function(item, index) {
@@ -626,8 +629,9 @@ socket.on("groupmessages", function(data) {
     // }
 
     // createGroupHTML();
-    showBigGroupChatWindow();
   }
+
+  showBigGroupChatWindow();
 });
 
 $("body").on("click", ".message-top-header", function() {
@@ -867,17 +871,25 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     message = "Document";
   }
 
-  console.log(messageJson);
+  var userInfo = JSON.parse(userData);
+  var userId = userInfo.user_id;
+  var name = messageJson.group_name;
+
+  if (userId == messageJson.from_user_id) {
+    name = messageJson.to_user_name;
+  }
 
   var html =
-    "<li class='open-single-chat-window' data-groupId='" +
+    "<li class='open-single-chat-window' data-image='" +
+    messageJson.group_image +
+    "' data-groupId='" +
     messageJson.group_id +
     "' data-name='" +
     messageJson.group_name +
     "' data-groupmembers='" +
     JSON.stringify(messageJson.group_members) +
     "' data-id='" +
-    messageJson.to_user_id +
+    messageJson.from_user_id +
     "' '>" +
     '<a href="javascript:void(0)">' +
     "<figure>" +
@@ -891,7 +903,7 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     '<div class="info-wrap">' +
     "</span>" +
     "<h3>" +
-    messageJson.from_user_name +
+    name +
     "</h3>" +
     '<span class="msg-count">' +
     "(" +

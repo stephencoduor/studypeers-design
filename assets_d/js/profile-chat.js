@@ -4,8 +4,38 @@ function openChatWindow() {
   $("#single_chat_window_box").show();
 }
 
+function closeChatWindow() {
+  $("#single_chat_window_box").hide();
+}
+
+socket.on("singlemessages", data => {
+  var userInfo = JSON.parse(userData);
+  var mainContent = "";
+  var otherUserIds = [];
+  if (data.length > 0) {
+    data.forEach(function(item, index) {
+      if (item.from_user_id == userInfo.user_id) {
+        mainContent += sendSingleChatHtml(item, "");
+      } else {
+        mainContent += receivingMessageSingleHtml(item, "");
+        otherUserIds.push(item);
+      }
+    });
+
+    console.log(mainContent);
+
+    singelChildAppendRecord.html(mainContent);
+    chatWindow = document.getElementById("single_chat_window_append");
+    var xH = chatWindow.scrollHeight;
+    chatWindow.scrollTo(0, xH);
+    $(".say-hi-wrapper").hide();
+  }
+
+  openChatWindow();
+});
+
 var CHAT_GROUP_ADDITIONS_SINGLE = {
-  _AJAX_SUBMIT_SINGLE_CHAT: function(data, receiverId) {
+  _AJAX_SUBMIT_SINGLE_CHAT: function(data, receiverId, additionaInfo) {
     $.ajax({
       url: $("#submit_single_chat_url").val(),
       data: data,
@@ -20,17 +50,31 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
               groupMemberIds.push(item.id);
             });
           }
-          $("#current_single_chat_name").html(data.data.groupInfo.group_name);
-          $("#curren_group_name_id").val(data.data.groupInfo.group_name);
+
+          console.log(additionaInfo.group_id);
+          $("#current_single_chat_name").html(additionaInfo.receiverName);
+          if (parseInt(additionaInfo.group_id) != 0) {
+            console.log("teting group--->");
+            $("#curren_group_name_id").val(additionaInfo.receiverName);
+            $("#single_chat_image_preview").attr(additionaInfo.group_image);
+          } else {
+            $("#current_active_user_group_image_single").val(
+              additionaInfo.image
+            );
+            $("#curren_group_name_id").val(additionaInfo.name);
+            $("#single_chat_image_preview").attr(
+              "src",
+              additionaInfo.receiverImage
+            );
+          }
+
           $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-          var Image = $("#currentProfilePicture").attr("src");
-
-          $("#single_chat_image_preview").attr("src", Image);
-          $("#current_active_user_group_image_single").val(Image);
           $("#current_receiver_id").val(receiverId);
-          $("#current_receiver_name_id").val(data.data.groupInfo.group_name);
-
-          openChatWindow();
+          $("#current_receiver_name_id").val(additionaInfo.receiverName);
+          socket.emit(
+            "getsinglemessages",
+            JSON.stringify({ groupId: data.data.groupId })
+          );
         }
       },
       error: function() {
@@ -43,16 +87,17 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
 
 function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
   var getCurrentReciverId = $("#current_receiver_id").val();
+  var UserInfo = JSON.parse(userData);
 
   if (getCurrentReciverId == "") {
     // open new window
 
-    $("#current_receiver_id").val(msg.to_user_id);
-    $("#current_receiver_name_id").val(msg.to_user_name);
+    $("#current_receiver_id").val(msg.from_user_id);
+    $("#current_receiver_name_id").val(msg.from_user_name);
 
     $("#current_group_id").val(groupId);
     $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-    $("#current_single_chat_name").html(msg.group_name);
+    $("#current_single_chat_name").html(msg.from_user_name);
 
     $("#curren_group_name_id").val(msg.group_name);
     $("#single_chat_image_preview").attr("src", msg.group_image);
@@ -61,14 +106,14 @@ function handleSingleMessage(userInfo, userId, groupId, groupMemberIds, msg) {
     receivingMessageSingle(msg, "offline");
   } else {
     // check if the messge is for me or not.
-    if (getCurrentReciverId == msg.to_user_id) {
-      $("#current_receiver_id").val(msg.to_user_id);
-      $("#current_receiver_name_id").val(msg.to_user_name);
-
+    if (UserInfo.user_id == msg.to_user_id) {
+      $("#current_receiver_id").val(msg.from_user_id);
+      $("#current_receiver_name_id").val(msg.from_user_name);
       $("#current_group_id").val(groupId);
       $("#curren_group_members").val(JSON.stringify(groupMemberIds));
-      $("#current_single_chat_name").html(msg.group_name);
+      $("#current_single_chat_name").html(msg.from_user_name);
       $("#curren_group_name_id").val(msg.group_name);
+      $("#single_chat_image_preview").attr("src", msg.group_image);
       $("#current_active_user_group_image_single").val(msg.group_image);
 
       receivingMessageSingle(msg, "offline");
@@ -132,6 +177,7 @@ function receivingMessageSingle(messageJson, status) {
   chatWindow = document.getElementById("single_chat_window_append");
   var xH = chatWindow.scrollHeight;
   chatWindow.scrollTo(0, xH);
+  $(".say-hi-wrapper").hide();
 
   openChatWindow();
 }
@@ -186,17 +232,129 @@ $("body").on("click", "#send_button_chat_single", function(event) {
 });
 
 $("body").on("click", ".open-single-chat-window", function() {
+  $(".chat-dropdown").is(":visible") ? $(".chat-dropdown").hide() : "";
+  var previewImage = $("#currentProfilePicture").attr("src");
   var receiverId = $(this).attr("data-id");
   var currentGroupId = $(this).attr("data-groupId");
+  var groupImage = $(this).attr("data-image");
   var groupMembers = [];
   groupMembers.push(receiverId);
   var name = $(this).attr("data-name");
+  var UserInfo = JSON.parse(userData);
 
   var data = {
     sender_id: receiverId,
-    name: name,
-    group_id: currentGroupId
+    name: UserInfo.first_name,
+    receiverName: name,
+    group_id: currentGroupId,
+    image: UserInfo.profileImage,
+    receiverImage: previewImage,
+    group_image: groupImage
   };
 
-  CHAT_GROUP_ADDITIONS_SINGLE._AJAX_SUBMIT_SINGLE_CHAT(data, receiverId);
+  additionaInfo = data;
+
+  CHAT_GROUP_ADDITIONS_SINGLE._AJAX_SUBMIT_SINGLE_CHAT(
+    data,
+    receiverId,
+    additionaInfo
+  );
 });
+
+$("body").on("click", "#close_window_single", function() {
+  closeChatWindow();
+});
+
+function sendSingleChatHtml(messageJson, status) {
+  var figureHTML = messageJson.media_url
+    ? "<figure>" +
+      '<img src="' +
+      messageJson.media_url +
+      '" alt="Attached Image">' +
+      "</figure>"
+    : "";
+
+  var html =
+    '<div class="sm-sent-wrap"><div class="sm-message-sent"><div class="sm-user-info"><div class="sm-user-name">' +
+    "<strong>" +
+    messageJson.from_user_name +
+    "</strong>" +
+    '<span class="msg-tile">' +
+    messageJson.time +
+    "</span></div>" +
+    "<figure>" +
+    '<img src="' +
+    messageJson.send_profile_image +
+    '" alt="Image" />' +
+    '<span class="user-status ' +
+    status +
+    " user_id_" +
+    messageJson.from_user_id +
+    '"></span>' +
+    "</figure>" +
+    "</div>" +
+    '<div class="sm-chat-msg">' +
+    "<p>" +
+    messageJson.message +
+    "</p>" +
+    figureHTML +
+    "</div></div></div>";
+
+  return html;
+}
+
+function receivingMessageSingleHtml(messageJson, status) {
+  var figureHTML = messageJson.media_url
+    ? "<figure>" +
+      '<img src="' +
+      messageJson.media_url +
+      '" alt="Attached Image">' +
+      "</figure>"
+    : "";
+
+  var html =
+    '<div class="sm-received-wrap"><div class="sm-message-received"><div class="sm-user-info">' +
+    '<figure><img src="' +
+    messageJson.send_profile_image +
+    '" alt="Image" /><span class="user-status ' +
+    status +
+    " user_id_" +
+    messageJson.from_user_id +
+    '"></span></figure>' +
+    '<div class="sm-user-name"><strong>' +
+    messageJson.from_user_name +
+    '</strong><span class="msg-tile">' +
+    messageJson.time +
+    "</span></div></div>" +
+    '<div class="sm-chat-msg"><p>' +
+    messageJson.message +
+    "</p>" +
+    figureHTML +
+    "</div></div></div>";
+
+  singelChildAppendRecord.append(html);
+  var userInfo = JSON.parse(userData);
+  var userId = userInfo.user_id;
+  const index = messageJson.unread_members.indexOf(userId);
+  var readMembers = messageJson.read_members;
+  readMembers.push(userId);
+  if (index > -1) {
+    messageJson.unread_members.splice(index, 1);
+  }
+
+  const readIndex = readMembers.indexOf(userId);
+  if (readIndex == -1) {
+    readMembers.splice(readIndex, 1);
+  }
+
+  socket.emit(
+    "updatereceived",
+    JSON.stringify({
+      id: messageJson._id,
+      unread_members: messageJson.unread_members,
+      read_members: readMembers
+    })
+  );
+
+  return html;
+}

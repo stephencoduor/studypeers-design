@@ -803,6 +803,7 @@ function sendMessageToUser(messageText) {
   $("#send_message_input").val("");
   $("#current_image_upload_src").val("");
   $("#append_image_after_upload").html("");
+  $("#group_message_chat_window_hi_wrapper").hide();
 }
 
 function sendMessageToSingleUser(messageText) {
@@ -853,6 +854,7 @@ function sendMessageToSingleUser(messageText) {
   $("#single_chat_submit_button").val("");
   $("#current_image_upload_src").val("");
   $("#append_image_after_upload_single").html("");
+  $(".say-hi-wrapper").hide();
 }
 
 function sendMessageAsNewMemberAdded(messageJson, status) {
