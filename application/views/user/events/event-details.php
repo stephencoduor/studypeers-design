@@ -86,23 +86,16 @@
 			</div>
 			<div class="socialEventsDisplayWrapper">
 				<div class="socialActionWrapper">
-					<?php if($event['created_by'] != $user_id) { 
-						$this->db->order_by('share_master.id', 'desc');
-                        $shared = $this->db->get_where('share_master', array('reference_id' => $event['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array(); 
-                    ?>
-						<a href="#" class="transAction attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?= $event['id']; ?>">
+					<?php if($event['created_by'] != $user_id) { ?>
+						<a href="#" class="transAction event">
 							<svg height="512pt" viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg">
 								<path d="m452 512h-392c-33.085938 0-60-26.914062-60-60v-392c0-33.085938 26.914062-60 60-60h392c33.085938 0 60 26.914062 60 60v392c0 33.085938-26.914062 60-60 60zm-392-472c-11.027344 0-20 8.972656-20 20v392c0 11.027344 8.972656 20 20 20h392c11.027344 0 20-8.972656 20-20v-392c0-11.027344-8.972656-20-20-20zm370.898438 111.34375-29.800782-26.6875-184.964844 206.566406-107.351562-102.046875-27.558594 28.988281 137.21875 130.445313zm0 0"/>
-							</svg><span id="attend_text_<?= $event['id']; ?>"><?php if($shared['status'] == 2){
-                                       echo 'Unattend';
-                                    } else {
-                                        echo 'Attend';
-                                    }
-                            ?></span>
+							</svg>
+							Attend
 						</a>
 					<?php } ?>
 					<?php if($event['created_by'] == $user_id) { ?>
-						<a href="#" class="transAction event" data-toggle="modal" data-target="#sharedriveModal">
+						<a href="#" class="transAction event invitePeer" data-toggle="modal" data-target="#peersModalShare" data-id="<?= $event['id']; ?>">
 							<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
 								<path d="M319.4,85.8c0,2.9,0.1,5.7,0.4,8.6l-140.7,76.7c-19-19.8-45.6-32.2-75.1-32.2c-57.2,0-104,46.8-104,104s46.8,104,104,104
 															c30.7,0,58.5-13.5,77.6-34.9l139.2,76.8c-0.9,5-1.4,10.1-1.4,15.4c0,46.8,38.5,85.3,85.3,85.3c46.8,0,85.3-38.5,85.3-85.3
@@ -374,6 +367,40 @@
 	</div>
 </div>
 
+<div class="modal fade" id="peersModalShare" role="dialog">
+                    <div class="modal-dialog">
+                      <!-- Modal content-->
+                      <div class="modal-content">
+                          <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <div class="modal-body peers">
+                          <h4>Peers List</h4>
+                          <div class="searchPeer">
+                            <div class="filterSearch">
+                                <input type="text" placeholder="Search Peers" name="">
+                                <button type="submit" class="searchBtn">
+                                    <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                                        <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+                                        s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+                                        c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+                                    </svg>
+                                </button>
+                            </div>
+                          </div>
+                          <div class="peersList">
+                            <div class="listHeader">
+                                <h6>Peers</h6>
+                                <!-- <a class="transAction">Share All</a> -->
+                            </div>
+                            <input type="hidden" id="invite_event" value="<?= $event['id']; ?>">
+                            <div class="listUserWrap" id="shareList">
+                                
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                </div>
+
 
 <div class="modal fade" id="confirmationModalAttend" role="dialog">
     <div class="modal-dialog">
@@ -446,6 +473,21 @@
 
     });
 
+    $(document).on('click','.invitePeer',function(){
+            var id = $(this).data('id');
+            
+            $.ajax({
+                url : '<?php echo base_url();?>account/getPeerToInvite',
+                type : 'post',
+                data : {"id" : id},
+                success:function(result) {
+                    
+                    $('#shareList').html(result);
+                }
+            })
+
+        });
+
     $(document).on('click','.peersModalAttending',function(){
         var event_id = $(this).data('id'); 
         
@@ -478,4 +520,34 @@
             })
         }
     }
+
+    function inviteToPeer(peer_id){
+            var invite_event = $('#invite_event').val();
+
+            $.ajax({
+                url : '<?php echo base_url();?>account/invitePeerEvent',
+                type : 'post',
+                data : {"id" : invite_event, 'peer_id': peer_id},
+                success:function(result) {
+                    // $('#share_count_'+share_document).html(result);
+                    $("#action_"+peer_id).html('<button type="button" class="like" onclick="uninviteToPeer('+peer_id+')">invited</button>');
+                    // $("#share_studyset").val('');
+                }   
+            })
+        }
+
+        function uninviteToPeer(peer_id){
+            var invite_event = $('#invite_event').val();
+
+            $.ajax({
+                url : '<?php echo base_url();?>account/uninvitePeerEvent',
+                type : 'post',
+                data : {"id" : invite_event, 'peer_id': peer_id},
+                success:function(result) {
+                    // $('#share_count_'+share_document).html(result);
+                    $("#action_"+peer_id).html('<button type="button" onclick="inviteToPeer('+peer_id+')" class="like">invite</button>');
+                    // $("#share_studyset").val('');
+                }   
+            })
+        }
 </script>

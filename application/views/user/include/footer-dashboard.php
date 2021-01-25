@@ -821,6 +821,8 @@
             $('.studybuttonGroup.post').removeClass('active');
         }
     });
+    
+
     $('.shareMoreContentWrapper').hide();
     $('.moreSection').on('click', function() {
         let imgAttr = $(this).children('img');
@@ -844,7 +846,7 @@
     $('.shareDocs').hide();
     $('.pollsWrapper').hide();
     $('.fileSection').on('click', function() {
-        if ($('.pollsWrapper').is(":Visible")) {
+        if ($('.pollsWrapper').is(":Visible")) { 
             $('.pollsWrapper').hide();
             $('.shareDocs').slideToggle();
         } else {
@@ -859,7 +861,7 @@
             $('.pollsWrapper').slideToggle();
         }
     });
-
+    
     $(function() {
         $('#datetimepickerstart').datetimepicker({
             allowInputToggle: true,

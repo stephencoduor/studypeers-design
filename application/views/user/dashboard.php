@@ -132,7 +132,7 @@
 									</div>
 								</div>
 								<div class="addOnPostMessage">
-									<div class="imageSection" id="pollSectionDefault" data-toggle="modal" data-target="#createPost">
+									<div class="imageSection imageSectionOut" id="pollSectionDefault" data-toggle="modal" data-target="#createPost">
 										<img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="image/video">
 										<span>Image/Video</span>
 									</div>
