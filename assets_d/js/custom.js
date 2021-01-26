@@ -530,17 +530,13 @@ function showAllCourses(url){
 
 // resize
 $(window).resize(function() {
-    // if($(window).width()<=1400) {
-    //     $('.mainContent').addClass('active');
-    //     $('aside').addClass('active');
-    // } else {
-    //     $('.mainContent').removeClass('active');
-    //     $('aside').removeClass('active');
-    // }
+    
     if($(window).width() <= 991) {
         $('.rightsidemsgbar').css("transform","translateX(800px)");
+        $('.mainContent').addClass('msgActive');
     } else {
         $('.rightsidemsgbar').css("transform","translateX(0px)");
+        $('.mainContent').removeClass('msgActive');
     }
 })
 
