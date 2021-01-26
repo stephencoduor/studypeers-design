@@ -507,7 +507,7 @@ select.form-control:focus {
 /*.feedWrapper.listView */
 .feedWrapper.listView {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
