@@ -9,311 +9,312 @@ print_r($user_detail);
 die;*/
 
 ?>
-    <input type="hidden" id="base" value="<?php echo base_url(); ?>">
-
-    <section class="mainContent profile">
-        <div class="mainProfileWrapper">
-            <div class="profileHeaderWrapper">
-                <div class="profileBanner">
-                    <figure>
-                        <?php if (empty($user_detail['cover_image'])) {
-                            ?>
-                            <img id="currentCoverPicture" src="<?php echo base_url(); ?>assets_d/images/detail1.jpg"
-                                 alt="Profile Banner">
-                        <?php } else {
-                            ?>
-                            <img id="currentCoverPicture"
-                                 src="<?php echo base_url() . "uploads/users/cover/" . @$user_detail['cover_image']; ?>"
-                                 alt="Profile Banner">
-                            <?php
-                        } ?>
-                    </figure>
-                    <div class="changeProfileBanner">
-                        <img id="currentCoverPicture" src="<?php echo base_url(); ?>assets_d/images/camera_profile.svg"
-                             alt="change Profile Banner">
-                        <input type="file" name="upload_cover_image" id="upload_cover_image">
-                    </div>
+<input type="hidden" id="base" value="<?php echo base_url(); ?>">
+<section class="mainContent profile">
+    <div class="mainProfileWrapper">
+        <div class="profileHeaderWrapper">
+            <div class="profileBanner">
+                <figure>
+                    <?php if (empty($user_detail['cover_image'])) {
+                        ?>
+                        <img id="currentCoverPicture" src="<?php echo base_url(); ?>assets_d/images/detail1.jpg"
+                                alt="Profile Banner">
+                    <?php } else {
+                        ?>
+                        <img id="currentCoverPicture"
+                                src="<?php echo base_url() . "uploads/users/cover/" . @$user_detail['cover_image']; ?>"
+                                alt="Profile Banner">
+                        <?php
+                    } ?>
+                </figure>
+                <div class="changeProfileBanner">
+                    <img id="currentCoverPicture" src="<?php echo base_url(); ?>assets_d/images/camera_profile.svg"
+                            alt="change Profile Banner">
+                    <input type="file" name="upload_cover_image" id="upload_cover_image">
                 </div>
-                <div class="profileInfoWrapper">
-                    <div class="infoWrapper">
-                        <div class="profileLogo">
-                            <figure>
-                                <?php if (empty($user_detail['image'])) {
+            </div>
+            <div class="profileInfoWrapper">
+                <div class="infoWrapper">
+                    <div class="profileLogo">
+                        <figure>
+                            <?php if (empty($user_detail['image'])) {
 
-                                    if (strcasecmp($user_detail['gender'], 'male') == 0) {
-                                        ?>
-                                        <img id="currentProfilePicture"
-                                             src="<?php echo base_url(); ?>uploads/user-male.png" alt="User">
-                                    <?php } else {
-                                        ?>
-                                        <img id="currentProfilePicture"
-                                             src="<?php echo base_url(); ?>uploads/user-female.png" alt="User">
-                                        <?php
-                                    }
-
-                                } else {
+                                if (strcasecmp($user_detail['gender'], 'male') == 0) {
                                     ?>
                                     <img id="currentProfilePicture"
-                                         src="<?php echo base_url(); ?>uploads/users/<?php echo $user_detail['image']; ?>"
-                                         alt="change profile banner"/>
+                                            src="<?php echo base_url(); ?>uploads/user-male.png" alt="User">
+                                <?php } else {
+                                    ?>
+                                    <img id="currentProfilePicture"
+                                            src="<?php echo base_url(); ?>uploads/user-female.png" alt="User">
                                     <?php
                                 }
+
+                            } else {
                                 ?>
-                                <!---->
-                            </figure>
-                            <form id="profile_picture_form">
-                                <div class="changeProfile">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/camera-circle.svg"
-                                         alt="change Profile Banner">
-                                    <input type="file" name="upload_image" id="upload_image"/>
-                                </div>
-                            </form>
+                                <img id="currentProfilePicture"
+                                        src="<?php echo base_url(); ?>uploads/users/<?php echo $user_detail['image']; ?>"
+                                        alt="change profile banner"/>
+                                <?php
+                            }
+                            ?>
+                            <!---->
+                        </figure>
+                        <form id="profile_picture_form">
+                            <div class="changeProfile">
+                                <img src="<?php echo base_url(); ?>assets_d/images/camera-circle.svg"
+                                        alt="change Profile Banner">
+                                <input type="file" name="upload_image" id="upload_image"/>
+                            </div>
+                        </form>
 
-                        </div>
-                        <div class="profileDtl">
-                            <div class="profileInformation">
+                    </div>
+                    <div class="profileDtl">
+                        <div class="profileInformation">
+                            <div class="info-profile">
                                 <h4 class="name"><?php echo @$full_name; ?></h4>
-                                <h6 class="username"><?php echo @$user_detail['username']; ?>
-                                    <span>Joined on <?php echo date("F jS, Y", strtotime($user_detail['added_on'])); ?></span>
-                                </h6>
-                                <ul class="socialstatus">
-                                    <li data-toggle="modal" data-target="#followerList" style="cursor: pointer;" class="followerListModal"><span><?php echo $followers; ?></span> Followers</li>
-                                    <li data-toggle="modal" data-target="#followingList" style="cursor: pointer;" class="followingListModal"><span><?php echo $followings; ?></span> Following</li>
-                                    <li>
-                                        <a href="<?php echo @$user_detail['fb_link']; ?>">
-                                            <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg"
-                                                 alt="facebook">
-                                        </a>
-
-                                        <a href="<?php echo @$user_detail['twitter_link']; ?>">
-                                            <img src="<?php echo base_url(); ?>assets_d/images/twitter.svg"
-                                                 alt="twitter">
-                                        </a>
-
-                                        <a href="<?php echo @$user_detail['linkedIn_link']; ?>">
-                                            <img src="<?php echo base_url(); ?>assets_d/images/linkedin.svg"
-                                                 alt="linkedin">
-                                        </a>
-
-                                        <a href="<?php echo $user_detail['youtube_link']; ?>">
-                                            <img src="<?php echo base_url(); ?>assets_d/images/youtube.svg"
-                                                 alt="youtube">
-                                        </a>
-                                    </li>
-                                </ul>
-                                <?php if(!empty($user_detail['user_location'])) { ?>
-                                    <div class="location">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/pin.svg" alt="location"> <?php echo $user_detail['user_location']; ?>
+                                <input type="hidden" id="sharelink"
+                                        value="<?php echo base_url() . 'sp/' . @$user_detail['username']; ?>"/>
+                                <div class="tooltip" style="opacity: inherit;">
+                                    <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
+                                        <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
                                         
+                                        <img src="<?php echo base_url(); ?>assets_d/images/share-profile1.svg"
+                                                alt="share profile"> Copy Profile Link
                                     </div>
-                                <?php } ?>
-                            </div>
-                            <input type="hidden" id="sharelink"
-                                           value="<?php echo base_url() . 'sp/' . @$user_detail['username']; ?>"/>
-                            <div class="tooltip" style="opacity: inherit;">
-                                <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
-                                    <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-                                    
-                                    <img src="<?php echo base_url(); ?>assets_d/images/share-profile1.svg"
-                                         alt="share profile"> Copy Profile Link
                                 </div>
                             </div>
-                            <!--    <div class="shareMenu shareOption">
-                                        <ul>
-                                            <li><a>Add Peer</a></li>
-                                            <li><a>Follow</a></li>
-                                            <li>
-                                                <img src="<?php /*echo base_url(); */ ?>assets_d/images/messagebox.svg" alt="Message">
-                                            </li>
-                                            <li class="dropdown">
-                                                <img src="<?php /*echo base_url(); */ ?>assets_d/images/more.svg" alt="More Option">
-                                                <ul>
-                                                    <li>
-                                                        <a role="menuitem" href="javascript:void(0);">
-                                                            <img src="<?php /*echo base_url(); */ ?>assets_d/images/report1.svg" > Report
-                                                        </a>
-                                                    </li>
-                                                    <li>
-                                                        <a role="menuitem" href="javascript:void(0);">
-                                                            <img src="<?php /*echo base_url(); */ ?>assets_d/images/block.svg" > Block
-                                                        </a>
-                                                    </li>
-                                                </ul>
-                                            </li>
-                                        </ul>
-                                    </div>-->
-                        </div>
-                    </div>
-                    <div class="tabularLiist">
-                        <ul class="nav nav-tabs" id="main-tab">
-                            <li class="<?php if (!isset($_GET['tab'])) {
-                                echo "active";
-                            } ?>"><a data-toggle="tab" href="#feed">Feeds</a></li>
-                            <li id="profile-tab"><a data-toggle="tab" href="#profile">Profile</a></li>
-                            <li class="<?php if (isset($_GET['tab']) && ($_GET['tab'] == 'peers')) {
-                                echo "active";
-                            } ?>"><a data-toggle="tab" href="#peers">Peers</a></li>
-                            <li><a data-toggle="tab" href="#institution">Institutions</a></li>
-                            <li><a data-toggle="tab" href="#courses">Courses</a></li>
-                            <li><a data-toggle="tab" href="#professor">Professor</a></li>
-                            <li><a data-toggle="tab" href="#market">Market</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-            <div class="tab-content">
-                <div id="feed" class="tab-pane fade in <?php if (!isset($_GET['tab'])) {
-                    echo "active";
-                } ?>">
-                    <div class="innerFeedTabs">
-                        <div class="tabularLiist">
-                            <ul class="nav nav-tabs">
-                                <li class="active loadAll"><a data-toggle="tab" href="#all">All</a></li>
-                                <li><a class="loadPosts" data-toggle="tab" href="#posts">Posts</a></li>
-                                <li><a class="loadQuestions" data-toggle="tab" href="#questions">Questions</a></li>
-                                <li><a class="loadDocuments" data-toggle="tab" href="#documents">Documents</a></li>
-                                <li><a class="loadstudySets" data-toggle="tab" href="#studySets">Study Sets</a></li>
-                                <li><a class="loadEvents" data-toggle="tab" href="#events">Events</a></li>
-                                <li><a data-toggle="tab" href="#articles">Articles</a></li>
-                                <li><a data-toggle="tab" href="#studySessions">Study Sessions</a></li>
+                            
+                            <h6 class="username"><?php echo @$user_detail['username']; ?>
+                                <span>Joined on <?php echo date("F jS, Y", strtotime($user_detail['added_on'])); ?></span>
+                            </h6>
+                            <ul class="socialstatus">
+                                <li data-toggle="modal" data-target="#followerList" style="cursor: pointer;" class="followerListModal"><span><?php echo $followers; ?></span> Followers</li>
+                                <li data-toggle="modal" data-target="#followingList" style="cursor: pointer;" class="followingListModal"><span><?php echo $followings; ?></span> Following</li>
+                                <li>
+                                    <a href="<?php echo @$user_detail['fb_link']; ?>">
+                                        <img src="<?php echo base_url(); ?>assets_d/images/facebook.svg"
+                                                alt="facebook">
+                                    </a>
+
+                                    <a href="<?php echo @$user_detail['twitter_link']; ?>">
+                                        <img src="<?php echo base_url(); ?>assets_d/images/twitter.svg"
+                                                alt="twitter">
+                                    </a>
+
+                                    <a href="<?php echo @$user_detail['linkedIn_link']; ?>">
+                                        <img src="<?php echo base_url(); ?>assets_d/images/linkedin.svg"
+                                                alt="linkedin">
+                                    </a>
+
+                                    <a href="<?php echo $user_detail['youtube_link']; ?>">
+                                        <img src="<?php echo base_url(); ?>assets_d/images/youtube.svg"
+                                                alt="youtube">
+                                    </a>
+                                </li>
                             </ul>
-                            <div class="tab-content">
-                                <div id="all" class="tab-pane fade in active">
-                                    <div class="tabPaneWrapper">
-                                        <div class="left">
-                                            <div class="box-card">
-                                                <div class="createBox">
-                                                    <div class="postWrapper">
-                                                        <h5>New Post</h5>
-                                                        <div class="post-notification">
-                                                            <img
-                                                                src="<?php echo base_url(); ?>assets_d/images/alert.svg"
-                                                                alt="Ring">
-                                                        </div>
-                                                        <div class="writePostWrapper">
-                                                            <figure>
-                                                                <?php if (empty($user_detail['image'])) {
-                                                                    if ($user_detail['gender'] == 'male') {
-                                                                        echo '<img src="' . base_url() . 'uploads/user-male.png" alt="user">';
-                                                                    } else {
-                                                                        echo '<img src="' . base_url() . 'uploads/user-female.png" alt="user">';
-                                                                    }
-
-                                                                } else {
-                                                                    ?>
-                                                                    <img
-                                                                        src="<?php echo base_url() . "uploads/users/" . $user_detail['image']; ?>"
-                                                                        alt="user">
-                                                                    <?php
-                                                                } ?>
-                                                            </figure>
-                                                            <div class="postMessageWrapper" data-toggle="modal"
-                                                                 data-target="#createPost">
-                                                                <div class="defaultMessage">What's on your mind ?</div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="addOnPostMessage">
-                                                            <div class="imageSection image_upload_button">
-                                                                <img
-                                                                    src="<?php echo base_url(); ?>assets_d/images/image.svg"
-                                                                    alt="image/video">
-                                                                <span>Image/Video</span>
-                                                            </div>
-                                                            <div class="pollSection">
-                                                                <img
-                                                                    src="<?php echo base_url(); ?>assets_d/images/poll.svg"
-                                                                    alt="image/video">
-                                                                <span>Poll</span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div id="timeline-feeds">
-                                                <div class="box-card message">
-                                                    <div class="createBox">
-                                                        <p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-
-                                            
-                                        </div>
-                                        <?php include_once 'right-side-content.php' ?>
-                                    </div>
-                                </div>
-                                <div id="posts" class="tab-pane fade in">
-                                    <div id="timeline-post-feeds">
-                                        <div class="box-card message">
-                                            <div class="createBox">
-                                                <p class="text-center" style="padding-bottom: 20px;">Loading Posts..</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="questions" class="tab-pane fade in">
-                                    <div id="timeline-questions-feeds">
-                                        <div class="box-card message">
-                                            <div class="createBox">
-                                                <p class="text-center" style="padding-bottom: 20px;">Loading Questions..</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="documents" class="tab-pane fade in">
-                                    <div id="timeline-documents-feeds">
-                                        <div class="box-card message">
-                                            <div class="createBox">
-                                                <p class="text-center" style="padding-bottom: 20px;">Loading Documents..</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="articles" class="tab-pane fade in">
-                                    <div class="coming-soon">
-                                        <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
-                                    </div>
-                                </div>
-                                <div id="studySets" class="tab-pane fade in">
-                                    <div id="timeline-studyset-feeds">
-                                        <div class="box-card message">
-                                            <div class="createBox">
-                                                <p class="text-center" style="padding-bottom: 20px;">Loading Study Sets..</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="events" class="tab-pane fade in">
+                            <?php if(!empty($user_detail['user_location'])) { ?>
+                                <div class="location">
+                                    <img src="<?php echo base_url(); ?>assets_d/images/pin.svg" alt="location"> <?php echo $user_detail['user_location']; ?>
                                     
-                                    <div id="timeline-events-feeds">
-                                        <div class="box-card message">
-                                            <div class="createBox">
-                                                <p class="text-center" style="padding-bottom: 20px;">Loading Events..</p>
-                                            </div>
-                                        </div>
-                                    </div>
                                 </div>
-                                <div id="studySessions" class="tab-pane fade in">
-                                    <div class="coming-soon">
-                                        <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
-                                    </div>
-                                </div>
-                            </div>
+                            <?php } ?>
                         </div>
+                        
+                        <!--    <div class="shareMenu shareOption">
+                                    <ul>
+                                        <li><a>Add Peer</a></li>
+                                        <li><a>Follow</a></li>
+                                        <li>
+                                            <img src="<?php /*echo base_url(); */ ?>assets_d/images/messagebox.svg" alt="Message">
+                                        </li>
+                                        <li class="dropdown">
+                                            <img src="<?php /*echo base_url(); */ ?>assets_d/images/more.svg" alt="More Option">
+                                            <ul>
+                                                <li>
+                                                    <a role="menuitem" href="javascript:void(0);">
+                                                        <img src="<?php /*echo base_url(); */ ?>assets_d/images/report1.svg" > Report
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a role="menuitem" href="javascript:void(0);">
+                                                        <img src="<?php /*echo base_url(); */ ?>assets_d/images/block.svg" > Block
+                                                    </a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </div>-->
                     </div>
                 </div>
-                <?php include_once 'profile-section.php' ?>
-                <?php include_once 'peer-section.php' ?>
-                <?php include_once 'institution-section.php' ?>
-                <?php include_once 'course-section.php' ?>
-                <?php include_once 'professor-section.php' ?>
-                <?php include_once 'master-section.php' ?>
-
-
+                <div class="tabularLiist">
+                    <ul class="nav nav-tabs" id="main-tab">
+                        <li class="<?php if (!isset($_GET['tab'])) {
+                            echo "active";
+                        } ?>"><a data-toggle="tab" href="#feed">Feeds</a></li>
+                        <li id="profile-tab"><a data-toggle="tab" href="#profile">Profile</a></li>
+                        <li class="<?php if (isset($_GET['tab']) && ($_GET['tab'] == 'peers')) {
+                            echo "active";
+                        } ?>"><a data-toggle="tab" href="#peers">Peers</a></li>
+                        <li><a data-toggle="tab" href="#institution">Institutions</a></li>
+                        <li><a data-toggle="tab" href="#courses">Courses</a></li>
+                        <li><a data-toggle="tab" href="#professor">Professor</a></li>
+                        <li><a data-toggle="tab" href="#market">Market</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
-    </section>
+        <div class="tab-content">
+            <div id="feed" class="tab-pane fade in <?php if (!isset($_GET['tab'])) {
+                    echo "active";
+                } ?>">
+                <div class="innerFeedTabs">
+                    <div class="tabularLiist">
+                        <ul class="nav nav-tabs">
+                            <li class="active loadAll"><a data-toggle="tab" href="#all">All</a></li>
+                            <li><a class="loadPosts" data-toggle="tab" href="#posts">Posts</a></li>
+                            <li><a class="loadQuestions" data-toggle="tab" href="#questions">Questions</a></li>
+                            <li><a class="loadDocuments" data-toggle="tab" href="#documents">Documents</a></li>
+                            <li><a class="loadstudySets" data-toggle="tab" href="#studySets">Study Sets</a></li>
+                            <li><a class="loadEvents" data-toggle="tab" href="#events">Events</a></li>
+                            <li><a data-toggle="tab" href="#articles">Articles</a></li>
+                            <li><a data-toggle="tab" href="#studySessions">Study Sessions</a></li>
+                        </ul>
+                        <div class="tab-content">
+                            <div id="all" class="tab-pane fade in active">
+                                <div class="tabPaneWrapper">
+                                    <div class="left">
+                                        <div class="box-card">
+                                            <div class="createBox">
+                                                <div class="postWrapper">
+                                                    <h5>New Post</h5>
+                                                    <div class="post-notification">
+                                                        <img
+                                                            src="<?php echo base_url(); ?>assets_d/images/alert.svg"
+                                                            alt="Ring">
+                                                    </div>
+                                                    <div class="writePostWrapper">
+                                                        <figure>
+                                                            <?php if (empty($user_detail['image'])) {
+                                                                if ($user_detail['gender'] == 'male') {
+                                                                    echo '<img src="' . base_url() . 'uploads/user-male.png" alt="user">';
+                                                                } else {
+                                                                    echo '<img src="' . base_url() . 'uploads/user-female.png" alt="user">';
+                                                                }
+
+                                                            } else {
+                                                                ?>
+                                                                <img
+                                                                    src="<?php echo base_url() . "uploads/users/" . $user_detail['image']; ?>"
+                                                                    alt="user">
+                                                                <?php
+                                                            } ?>
+                                                        </figure>
+                                                        <div class="postMessageWrapper" data-toggle="modal"
+                                                                data-target="#createPost">
+                                                            <div class="defaultMessage">What's on your mind ?</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="addOnPostMessage">
+                                                        <div class="imageSection image_upload_button">
+                                                            <img
+                                                                src="<?php echo base_url(); ?>assets_d/images/image.svg"
+                                                                alt="image/video">
+                                                            <span>Image/Video</span>
+                                                        </div>
+                                                        <div class="pollSection">
+                                                            <img
+                                                                src="<?php echo base_url(); ?>assets_d/images/poll.svg"
+                                                                alt="image/video">
+                                                            <span>Poll</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="timeline-feeds">
+                                            <div class="box-card message">
+                                                <div class="createBox">
+                                                    <p class="text-center" style="padding-bottom: 20px;">Loading Feeds..</p>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        
+                                    </div>
+                                    <?php include_once 'right-side-content.php' ?>
+                                </div>
+                            </div>
+                            <div id="posts" class="tab-pane fade in">
+                                <div id="timeline-post-feeds">
+                                    <div class="box-card message">
+                                        <div class="createBox">
+                                            <p class="text-center" style="padding-bottom: 20px;">Loading Posts..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="questions" class="tab-pane fade in">
+                                <div id="timeline-questions-feeds">
+                                    <div class="box-card message">
+                                        <div class="createBox">
+                                            <p class="text-center" style="padding-bottom: 20px;">Loading Questions..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="documents" class="tab-pane fade in">
+                                <div id="timeline-documents-feeds">
+                                    <div class="box-card message">
+                                        <div class="createBox">
+                                            <p class="text-center" style="padding-bottom: 20px;">Loading Documents..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="articles" class="tab-pane fade in">
+                                <div class="coming-soon">
+                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                                </div>
+                            </div>
+                            <div id="studySets" class="tab-pane fade in">
+                                <div id="timeline-studyset-feeds">
+                                    <div class="box-card message">
+                                        <div class="createBox">
+                                            <p class="text-center" style="padding-bottom: 20px;">Loading Study Sets..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="events" class="tab-pane fade in">
+                                
+                                <div id="timeline-events-feeds">
+                                    <div class="box-card message">
+                                        <div class="createBox">
+                                            <p class="text-center" style="padding-bottom: 20px;">Loading Events..</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="studySessions" class="tab-pane fade in">
+                                <div class="coming-soon">
+                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <?php include_once 'profile-section.php' ?>
+            <?php include_once 'peer-section.php' ?>
+            <?php include_once 'institution-section.php' ?>
+            <?php include_once 'course-section.php' ?>
+            <?php include_once 'professor-section.php' ?>
+            <?php include_once 'master-section.php' ?>
+        </div>
+    </div>
+</section>
     <?php $this->load->view('user/include/right-sidebar'); ?>
     </section>
     </section>

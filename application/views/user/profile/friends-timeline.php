@@ -50,7 +50,17 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                     </div>
                     <div class="profileDtl">
                         <div class="profileInformation">
-                            <h4 class="name"><?php echo $full_name; ?></h4>
+                            <div class="info-profile">
+                                <h4 class="name"><?php echo $full_name; ?></h4>
+                                <input type="hidden" id="sharelink" value="<?php echo base_url() . 'sp/' . @$user['username']; ?>" />
+                                <div class="tooltip" style="opacity: inherit;">
+                                    <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
+                                        <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
+
+                                        <img src="<?php echo base_url(); ?>assets_d/images/share-profile1.svg" alt="share profile"> Copy Profile Link
+                                    </div>
+                                </div>
+                            </div>
                             <h6 class="username"><?php echo $user['username']; ?> <span>Joined on <?php echo date("F jS, Y", strtotime($user['added_on'])); ?></span></h6>
                             <ul class="socialstatus">
                                 <li> <span><?php echo $followers; ?></span> Followers</li>
@@ -80,14 +90,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                 </div>
                             <?php } ?>
                         </div>
-                        <input type="hidden" id="sharelink" value="<?php echo base_url() . 'sp/' . @$user['username']; ?>" />
-                        <div class="tooltip" style="opacity: inherit;">
-                            <div class="shareProfile" id="copyShareLink" onmouseout="outFunc()">
-                                <span class="tooltiptext" id="myTooltip">Copy to clipboard</span>
-
-                                <img src="<?php echo base_url(); ?>assets_d/images/share-profile1.svg" alt="share profile"> Copy Profile Link
-                            </div>
-                        </div>
+                        
                         <div class="shareMenu shareOption">
                             <ul>
                                 <?php if ($is_request_sent == 1) {
