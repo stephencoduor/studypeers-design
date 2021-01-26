@@ -1381,7 +1381,13 @@ input:-webkit-autofill:active {
   from {transform: scale(0);}
   to {transform: scale(1)}
 }
-  
+.basic-action{
+    display: flex;
+    align-items:center;
+}
+.user-name.user-img-name a{
+    width:calc(100% - 36px);
+}
 .ml10 .text-wrapper {
 position: relative;
 display: inline-block;

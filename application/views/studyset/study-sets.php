@@ -258,17 +258,14 @@ foreach ($getdata as $key => $value) {
 						</div>
 						<div class="feed_card_footer">
 							<div class="userWrap study-sets">
-								<div class="user-name">
+								<div class="user-name user-img-name">
 									<figure>
-										
-											<img src="<?php echo userImage($studyset['user_id']); ?>" alt="user">
-											
-										
-
+										<img src="<?php echo userImage($studyset['user_id']); ?>" alt="user">
 									</figure>
 									<a href="<?php echo base_url().'Profile/friends?profile_id='.$studyset['user_id'] ?>"><figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption></a>
 								</div>
-								<?php if($studyset['user_id'] == $user_id) { ?>
+								<div class="basic-action">
+									<?php if($studyset['user_id'] == $user_id) { ?>
 									<div class="edit">
 										<a href="<?php echo base_url();?>studyset/manage/<?php echo $studyset['study_set_id'];?>">
 											<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -354,6 +351,7 @@ foreach ($getdata as $key => $value) {
 										</a>
 									</div>
 								<?php } ?>
+							</div>
 							</div>
 							<div class="action">
 								<a>
