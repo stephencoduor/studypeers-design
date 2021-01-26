@@ -143,7 +143,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                     <ul class="nav nav-tabs">
                         <li class="active"><a data-toggle="tab" href="#feed">Feeds</a></li>
                         <li><a data-toggle="tab" href="#profile">Profile</a></li>
-                        <li><a data-toggle="tab" href="#peers">Peers <div>(10)</div></a></li>
+                        <li><a data-toggle="tab" href="#peers">Peers </a></li>
                         <li><a data-toggle="tab" href="#institution">Institutions</a></li>
                         <li><a data-toggle="tab" href="#courses">Courses</a></li>
                         <li><a data-toggle="tab" href="#professor">Professor</a></li>
@@ -450,14 +450,15 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                     <div class="tabularLiist">
                         <div class="TabsAndSortWrapper">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a data-toggle="tab" href="#myconnections">My Connections</a></li>
-                                <li><a data-toggle="tab" href="#requests">Requests</a></li>
+                                <li class="active selection_type" data-id="1"><a data-toggle="tab" href="#myconnections">My Connections (<?php echo $connections; ?>)</a></li>
+                                <li class="selection_type" data-id="0"><a data-toggle="tab" href="#requests">Requests (<?php echo $requests; ?>)</a></li>
                             </ul>
                             <div class="search">
                                 <div class="searchIcon">
-                                    <img src="images/search.png" alt="search">
+                                    <img src="<?php echo base_url() ?>/assets_d/images/search.png" alt="search">
                                 </div>
-                                <input type="text" name="">
+                                <input type="text" name="search_friend" id="user_search_friend">
+                                <input type="hidden" name="profile_user_id" id="profile_user_id" value="<?= $user_id; ?>">
                             </div>
                             <div class="sortWrapper">
                                 <ul>
@@ -469,10 +470,10 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                         </div>
                                     </li>
                                     <li class="grid active">
-                                        <img src="images/grid-box-blue.svg" alt="Grid">
+                                        <img src="<?php echo base_url() ?>/assets_d/images/grid-box-blue.svg" alt="Grid">
                                     </li>
                                     <li class="list">
-                                        <img src="images/list-box-grey.svg" alt="List">
+                                        <img src="<?php echo base_url() ?>/assets_d/images/list-box-grey.svg" alt="List">
                                     </li>
                                 </ul>
                             </div>
@@ -481,567 +482,87 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                             <div id="myconnections" class="tab-pane fade in active">
                                 <div class="tabPaneWrapper">
                                     <div class="left">
-                                        <div class="userBoxWrapper gridview">
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                        <div class="userBoxWrapper gridview" id="friend_container">
+                                <?php if(isset($all_connections)){ foreach($all_connections as $peer){ ?>
+                                <div class="card" id="remove_friend_<?php echo $peer['friends_id']; ?>">
+                                    <div class="profileSection">
+                                        <div class="profileViewToggleWrapper">
+                                            <figure>
+                                                <img src="<?php echo userImage($peer['id']); ?>">
+                                            </figure>
+                                            <div class="changeView">
+                                                <h5><?php echo $peer['first_name'].' '.$peer['last_name']; ?></h5>
+                                                <p>location name</p>
+                                                <div class="followers">
+                                                    <span>25 </span> Followers
                                                 </div>
                                             </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d/images/messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li data-dismiss="modal" data-toggle="modal" href="#blockUser">
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                        </div>
+                                        <div class="followOptionsWrapper">
+                                            <ul>
+                                                <li>
+                                                    <?php $follow_status = checkFollowStatus($this->session->get_userdata()['user_data']['user_id'] , $peer['id']);
+                                                        if($follow_status){
+                                                            ?>
+                                                            <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="0">UnFollow</a>
+                                                            <?php
+                                                        }else{
+                                                            ?>
+                                                            <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="1">Follow</a>
+                                                            <?php
+                                                        }
+                                                    ?>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript:void(0)" class="unfriend_peer" data-toggle="modal" data-target="#unfriend_peer" id="<?php echo $peer['friends_id']; ?>">Unfriend</a>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
-                                    <div class="right">
-                                        <div class="boxwrap completeProfile">
-                                            <h6>Complete your profile</h6>
-                                            <p>Current status of your profile</p>
-                                            <div class="profileProgressBar">
-                                                <div class="progress mx-auto" data-value="40">
-                                                    <span class="progress-left">
-                                                        <span class="progress-bar border-primary"></span>
-                                                    </span>
-                                                    <span class="progress-right">
-                                                        <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-                                                    </span>
-                                                    <div class="profileUser">
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </div>
-                                                </div>
-                                                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                    <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                    <div class="complete">Complete</div>
-                                                </div>
-                                            </div>
-                                            <div class="completeNow">
-                                                <button type="button" class="event_action">Complete Now</button>
-                                            </div>
-                                        </div>
-                                        <div class="boxwrap">
-                                            <h6>Latest Updates</h6>
-                                            <p>Peers</p>
-                                            <div class="listBox">
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="images/user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="images/user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="images/user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p>Institutions</p>
-                                            <div class="listBox last">
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="images/user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="images/user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="images/user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                </div>
+                                <?php  } }?>
+                            </div>
                                     </div>
+                                    
                                 </div>
                             </div>
                             <div id="requests" class="tab-pane fade in">
                                 <div class="tabPaneWrapper">
                                     <div class="left">
-                                        <div class="userBoxWrapper gridview">
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d/<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li class="follower">
-                                                                <a href="javascript:void(0)">Follow</a>
-                                                            </li>
-                                                            <li class="follower">
-                                                                <a href="javascript:void(0)">Accept</a>
-                                                            </li>
-                                                        </ul>
+                            <div class="userBoxWrapper gridview" id="request_container">
+                                <?php if(isset($all_requests)){ foreach($all_requests as $peer){ ?>
+                                    <div class="card" id="action_<?php echo $peer['action_id']; ?>">
+                                        <div class="profileSection">
+                                            <div class="profileViewToggleWrapper">
+                                                <figure>
+                                                    <img src="<?php echo userImage($peer['id']); ?>">
+                                                </figure>
+                                                <div class="changeView">
+                                                    <h5><?php echo $peer['first_name'].' '.$peer['last_name']; ?></h5>
+                                                    <p>location name</p>
+                                                    <div class="followers">
+                                                        <span>25 </span> Followers
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="card">
-                                                <div class="messagePeerBox" data-dismiss="modal" data-toggle="modal" href="#userConnections">
-                                                    <img src="<?php echo base_url(); ?>assets_d//messagebox.svg" alt="Message">
-                                                </div>
-                                                <div class="profileSection">
-                                                    <div class="profileViewToggleWrapper">
-                                                        <figure>
-                                                            <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                        </figure>
-                                                        <div class="changeView">
-                                                            <h5>Full Name</h5>
-                                                            <p>location name</p>
-                                                            <div class="followers">
-                                                                <span>25 </span> Followers
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="followOptionsWrapper">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Following</a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="javascript:void(0)">Peer</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
+                                            <div class="followOptionsWrapper">
+                                                <ul>
+                                                    <li class="follower">
+                                                        <a href="javascript:void(0)">
+                                                            Accept
+                                                        </a>
+                                                    </li>
+                                                    <li class="follower">
+                                                        <a href="javascript:void(0)">Reject</a>
+                                                    </li>
+                                                </ul>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="right">
-                                        <div class="boxwrap completeProfile">
-                                            <h6>Complete your profile</h6>
-                                            <p>Current status of your profile</p>
-                                            <div class="profileProgressBar">
-                                                <div class="progress mx-auto" data-value="40">
-                                                    <span class="progress-left">
-                                                        <span class="progress-bar border-primary"></span>
-                                                    </span>
-                                                    <span class="progress-right">
-                                                        <span class="progress-bar border-primary" style="transform: rotate(144deg);"></span>
-                                                    </span>
-                                                    <div class="profileUser">
-                                                        <img src="https://likewise-stage.azureedge.net/uploads/3eb6cf23-895b-45e9-b92c-5fb1b457dd04/bill-gates-profile-pic.jpg">
-                                                    </div>
-                                                </div>
-                                                <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                                                    <div class="h2 font-weight-bold">40<sup class="small">%</sup></div>
-                                                    <div class="complete">Complete</div>
-                                                </div>
-                                            </div>
-                                            <div class="completeNow">
-                                                <button type="button" class="event_action">Complete Now</button>
-                                            </div>
-                                        </div>
-                                        <div class="boxwrap">
-                                            <h6>Latest Updates</h6>
-                                            <p>Peers</p>
-                                            <div class="listBox">
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <p>Institutions</p>
-                                            <div class="listBox last">
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                                <div class="listWrap">
-                                                    <div class="left">
-                                                        <figure>
-                                                            <img src="<?php echo base_url(); ?>assets_d//user.jpg" alt="user">
-                                                        </figure>
-                                                    </div>
-                                                    <div class="right">
-                                                        <h6>Jane Doe</h6>
-                                                        <p>Lorem ipsum dolor sit amet, coelitr, sed diam nonumy eirmod</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                <?php } } ?>
+                            </div>
+                        </div>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -2280,7 +1801,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
             <div class="modal-body">
                 <div class="createHeader">
                     <div class="closePost" data-dismiss="modal">
-                        <img src="images/close-grey.svg" alt="close">
+                        <img src="<?php echo base_url() ?>/assets_d/images/close-grey.svg" alt="close">
                     </div>
                 </div>
                 <h4>Are you sure you want to unfollow Username?</h4>
@@ -2420,7 +1941,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
             <div class="modal-body">
                 <div class="createHeader">
                     <div class="closePost" data-dismiss="modal">
-                        <img src="images/close-grey.svg" alt="close">
+                        <img src="<?php echo base_url() ?>/assets_d/images/close-grey.svg" alt="close">
                     </div>
                 </div>
                 <h4>Remove Username from your peers list?</h4>

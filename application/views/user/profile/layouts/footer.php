@@ -1655,6 +1655,56 @@
 
         });
 
+        $('#user_search_friend').on("keyup", function(e) {
+            var search_value = $(this).val();
+            var html = '';
+            var friend = selection_type; // 0 => requests , 1 => friend
+            var profile_user_id = $('#profile_user_id').val();
+
+            $.ajax({
+                url: '<?php echo base_url(); ?>Profile/searchFriendsUser?keyword=' + search_value + "&is_friend=" + friend + "&profile_user_id=" + profile_user_id,
+                type: 'get',
+                success: function(result) {
+                    var result_json = JSON.parse(result);
+                    console.log(result_json);
+                    if (friend == 0) {
+                        $('#request_container').html('');
+                    } else {
+                        $('#friend_container').html('');
+                    }
+                    for (var i = 0; i < result_json.length; i++) {
+                        getUsersImage(result_json[i].friend_id);
+                        if (friend == 0) {
+                            html += '<div class="card">';
+                            html += '<div class="profileSection">';
+                            html += '<div class="profileViewToggleWrapper"><figure>';
+                            html += '<img id="img_' + result_json[i].friend_id + '" src="">';
+                            html += '</figure><div class="changeView"><h5>' + result_json[i].first_name + ' ' + result_json[i].last_name + '</h5><p>location name</p>';
+                            html += '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul><li class="follower">';
+                            html += '<a href="javascript:void(0)">Accept</a></li><li class="follower"><a href="javascript:void(0)">Reject</a></li></ul>';
+                            html += '</div></div></div>';
+                        } else {
+                            html += '<div class="card">';
+                            html += '<div class="profileSection"><div class="profileViewToggleWrapper"><figure>';
+                            html += '<img id="img_' + result_json[i].friend_id + '" src="">';
+                            html += '</figure><div class="changeView"><h5>' + result_json[i].first_name + ' ' + result_json[i].last_name + '</h5><p>location name</p>';
+                            html += '<div class="followers"><span>25 </span> Followers</div></div></div><div class="followOptionsWrapper"><ul>';
+                            html += '<li data-dismiss="modal" data-toggle="modal" href="#blockUser"><a href="javascript:void(0)">Follow</a>';
+                            html += '</li><li><a href="javascript:void(0)">Unfriend</a></li></ul></div></div></div>';
+                        }
+                    }
+
+                    if (friend == 0) {
+                        $('#request_container').append(html);
+                    } else {
+                        $('#friend_container').append(html);
+                    }
+
+                }
+            });
+
+        });
+
 
         function acceptRequest(action_id, id) {
             console.log(action_id);
