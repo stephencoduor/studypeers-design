@@ -264,8 +264,6 @@
             </div>
         </div>
         <?php include 'right-side-content.php' ?>
-
     </div>
-    
 </div>
 
