@@ -441,10 +441,10 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                 <div class="innerFeedTabs">
                     <div class="tabularLiist">
                         <div class="TabsAndSortWrapper">
-                            <ul class="nav nav-tabs">
+                            <!-- <ul class="nav nav-tabs">
                                 <li class="active selection_type" data-id="1"><a data-toggle="tab" href="#myconnections">My Connections (<?php echo $connections; ?>)</a></li>
                                 <li class="selection_type" data-id="0"><a data-toggle="tab" href="#requests">Requests (<?php echo $requests; ?>)</a></li>
-                            </ul>
+                            </ul> -->
                             <div class="search">
                                 <div class="searchIcon">
                                     <img src="<?php echo base_url() ?>/assets_d/images/search.png" alt="search">

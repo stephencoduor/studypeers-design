@@ -1658,7 +1658,7 @@
         $('#user_search_friend').on("keyup", function(e) {
             var search_value = $(this).val();
             var html = '';
-            var friend = selection_type; // 0 => requests , 1 => friend
+            var friend = '1'; // 0 => requests , 1 => friend
             var profile_user_id = $('#profile_user_id').val();
 
             $.ajax({
