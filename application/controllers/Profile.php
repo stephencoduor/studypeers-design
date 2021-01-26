@@ -639,8 +639,8 @@ class Profile extends CI_Controller {
 		$config['upload_path'] = './uploads/posts/';
 		$config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|mov|pdf|xlsx|xls|doc|docx|txt|ppt|pptx';
         $config['max_size'] = '1000000';
-$config['max_width']  = '1024000';
-$config['max_height']  = '768000';
+        $config['max_width']  = '1024000';
+        $config['max_height']  = '768000';
 		$config['encrypt_name'] = TRUE;
 		$config['remove_spaces']=TRUE;  //it will remove all spaces
 		$user_id = $this->session->get_userdata()['user_data']['user_id'];
@@ -839,6 +839,9 @@ $config['max_height']  = '768000';
 		//all followings
 		$followings = $this->db->query('SELECT COUNT(*) As total from follow_master where user_id = '.$user_id)->row_array();
 
+        $peer_to = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id ='.$user_id)->result_array();
+        $peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
+
 		$query = $this->db->query('SELECT * from reference_master WHERE user_id = '.$user_id.' ORDER BY id DESC');
 		$user_details = $this->db->query('SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID WHERE a.id = '.$user_id.'');
 		$result = $query->result_array();
@@ -870,6 +873,11 @@ $config['max_height']  = '768000';
 		$data['chk_if_reported']  = $chk_if_reprted;
 		$data['chk_if_friend']  = $chk_if_friend;
 		$data['chk_if_follow']  = $chk_if_follow;
+        $data['all_connections'] = $peer_to;
+        $data['all_requests'] = $peer_from;
+        
+        $data['connections'] = count($peer_to);
+        $data['requests'] = count($peer_from);
 		$data['followers'] = $followers['total'];
 		$data['followings'] = $followings['total'];
         $data['user_profile_page'] = 1;
@@ -967,6 +975,26 @@ $config['max_height']  = '768000';
 
 		echo json_encode($result);
 	}
+
+    public function searchFriendsUser()
+    {
+        $profile_user_id = $this->input->get('profile_user_id');
+        $search_term = $this->input->get('keyword');
+        $is_friend = $this->input->get('is_friend');
+        $status = 2;
+        if($is_friend){
+            $status = 2;
+            $query = $this->db->query('SELECT *, b.id As friend_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$profile_user_id.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+            $result = $query->result_array();
+        }else{
+            $status = 1;
+            $query = $this->db->query('SELECT *, b.id As friend_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$profile_user_id.' AND a.status = '.$status.' AND (b.first_name like "%'.$search_term.'%" OR b.username like "%'.$search_term.'%" ) ORDER BY a.id DESC');
+            $result = $query->result_array();
+        }
+        //
+
+        echo json_encode($result);
+    }
 
 	public function follow()
 	{
