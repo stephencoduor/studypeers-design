@@ -150,14 +150,22 @@
     width:calc(100% - 110px);
 }
 .feedWrapper.listView .userWrap .user-name{
-    margin-right:10px;
-    width:50%;
+    margin-right:0;
+    width:100%;
 }
 .feedWrapper.listView .userWrap .user-name a{
     width:calc(100% - 28px);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+}
+.feedWrapper.listView  .action {
+    position: relative;
+    top: -15px;
+}
+.feedWrapper.listView .basic-action {
+    width: 100%;
+    justify-content: flex-start;
 }
 .feedWrapper.listView .filterBtn{
     font-size:10px;
@@ -407,6 +415,7 @@ select.form-control:focus {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
 }
 .user-name {
     display: flex;
@@ -498,7 +507,7 @@ select.form-control:focus {
 /*.feedWrapper.listView */
 .feedWrapper.listView {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: flex-start;
     flex-wrap: wrap;
 }
