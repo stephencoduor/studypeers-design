@@ -757,6 +757,9 @@ a.filterBtn,a.sortMenu{
     .search{max-width: 250px;}
 }
 @media(max-width:767px){
+    .tabularLiist > .nav-tabs li a{
+        padding: 10px 15px !important;
+    }
     #sidenav{display: block;}
     .navbar-header {display: none;}
     .navbar-toggle {
@@ -781,7 +784,7 @@ a.filterBtn,a.sortMenu{
     /*#sidenav.open{z-index: 99;left: auto;right: 20px;}*/
     .logoDesktop{display: none;}
     .logoMobile{display: block;}
-    .logo{width: 60px;margin-top: 13px;}
+    .logo{width: 46px;margin-top: 14px;}
     .navbar-nav .open .dropdown-menu {
         position: absolute;
         background: #fff;
@@ -813,7 +816,7 @@ a.filterBtn,a.sortMenu{
         padding: 6px 6px !important;
     }
     .rightsidemsgbar,aside{top:60px;}
-    .logo{margin-top:9px;left: 17%;}
+    .logo{margin-top:14px;left: 17%;}
     #sidenav {top: -45px;}
 }
 @media(max-width:479px){

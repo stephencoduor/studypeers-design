@@ -3098,3 +3098,12 @@ div[data-edit] {
 .mainContent .filterWrapper.flex-filter{
     flex-direction: column;
 }
+
+@media (max-width: 767px) {
+    .mainContent.active .flex-row{
+        width:100%;
+    }
+    .tabularLiist > .nav-tabs li a{
+        padding: 10px 15px !important;
+    }
+}

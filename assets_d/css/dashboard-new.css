@@ -197,7 +197,8 @@
 .writePostWrapper figure {
 	margin:0;
 	width:60px;
-	height:60px;
+    height:60px;
+    margin-right:25px;
 	border-radius: 50%;
 	overflow: hidden;
 }
@@ -212,7 +213,6 @@
     padding: 0 12px;
     border:1px solid #e4e6eb;
     position: relative;
-    margin-left: 25px;
     cursor: pointer;
     outline: none;
     transition: background 0.3s ease;
@@ -309,7 +309,7 @@
 }
 .peerList {
     width: 100%;
-    max-width: 140px;
+    width: 140px!important;
     border-radius: 10px;
     margin: 0 24px 10px 0px;
     display: inline-block;
@@ -408,6 +408,7 @@
 .box-card figure img {
     width: 100%;
     height: 100%;
+    object-fit: contain;
 }
 .user-name figcaption {
     font-weight: 500;
@@ -2929,4 +2930,92 @@ figcaption a {
     -moz-transition: all 0.3s ease-in;
     -ms-transition: all 0.3s ease-in;
     -o-transition: all 0.3s ease-in;
+}
+@media (max-width: 767px) {
+    .infoWrapper{
+        flex-direction: column;
+    }
+    .profileDtl {
+        width: 100%;
+        margin: 0;
+    }
+    .profileInfoWrapper .tabularLiist > .nav-tabs li a {
+        padding: 10px 10px !important;
+        display: flex;
+        font-size: 14px;
+    }
+    .profileInformation .name {
+        font-size: 14px;
+        width: 50%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .shareProfile {
+        font-size: 13px;
+    }
+    .socialstatus li{
+        margin-right:15px;
+    }
+    .writePostWrapper figure{
+        margin-right:10px;
+    }
+    .postMessageWrapper{
+        width: calc(100% - 70px);
+    }
+    .user-details figcaption a{
+       display: block;
+    }
+    .box-card .user-name figure{
+        margin-right:10px;
+    }
+    .createBox {
+        padding: 15px 15px 0px 15px;
+    }
+    .user-details .timeline {
+        margin-top: 0;
+        margin-right: 0;
+        position: absolute;
+        right: 15px;
+        top: 5px;
+    }
+    .shareBoxWrapper .shareBox{
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+    .modal-body .shareBoxWrapper .shareBox .imageSection{
+        margin-right:0;
+        margin-bottom:5px;
+    }
+    .modal-body .shareBoxWrapper .shareBox .pollSection{
+        margin-right:0;
+        margin-bottom:5px;
+    }
+    .modal-body .shareBoxWrapper .shareBox .fileSection{
+        margin-right:0;
+    }
+    .modal-body .studybuttonGroup button {
+        margin: 0 0 0 10px !important;
+    }
+    .box-card .imgWrapper figure{
+        height:200px;
+    }
+    .modal-dialog{
+        width:auto;
+    }
+    .pollEndTimmings{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .pollEndTimmings h6{
+        margin-bottom:10px;
+    }
+    .polltimeform .filtercalendar{
+        justify-content: space-between;
+    }
+    .polltimeform .filtercalendar .input-group.date, .polltimeform .filtercalendar .input-group--overlap{
+        width: 48%;
+        margin-right: 0%;
+    }
 }
