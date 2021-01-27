@@ -605,9 +605,9 @@ class Profile extends CI_Controller {
 		/*$friends_to = $this->db->query('SELECT *, a.id As peer_master_id from peer_master As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
 		$friends_from = $this->db->query('SELECT *, a.id As peer_master_id  from peer_master As a INNER JOIN user As b ON a.user_id = b.id WHERE a.peer_id = '.$user_id.' AND (a.status = 2) ORDER BY a.id DESC')->result_array();
 		$peer_to = array_merge($friends_to, $friends_from);*/
-		$peer_to = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id ='.$user_id)->result_array();
+		$peer_to = $this->db->query('SELECT *, a.id As friends_id, user_info.user_location from friends As a INNER JOIN user As b ON a.peer_id = b.id INNER JOIN user_info ON user_info.userID = a.peer_id WHERE a.user_id ='.$user_id)->result_array();
 		$peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
-
+        // print_r($peer_to);die;
 		$blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id = '.$user_id)->result_array();
 		$data['blocked_users'] = $blocked_users;
 		$data['all_connections'] = $peer_to;
@@ -839,7 +839,7 @@ class Profile extends CI_Controller {
 		//all followings
 		$followings = $this->db->query('SELECT COUNT(*) As total from follow_master where user_id = '.$user_id)->row_array();
 
-        $peer_to = $this->db->query('SELECT *, a.id As friends_id from friends As a INNER JOIN user As b ON a.peer_id = b.id WHERE a.user_id ='.$user_id)->result_array();
+        $peer_to = $this->db->query('SELECT *, a.id As friends_id, user_info.user_location from friends As a INNER JOIN user As b ON a.peer_id = b.id INNER JOIN user_info ON user_info.userID = a.peer_id WHERE a.user_id ='.$user_id)->result_array();
         $peer_from = $this->db->query('SELECT *, c.id As notify_id, a.id As action_id from peer_master As a INNER JOIN user As b ON a.user_id = b.id INNER JOIN notification_master As c ON a.id = c.action_id WHERE a.peer_id = '.$user_id.' AND (a.status = 1) ORDER BY a.id DESC')->result_array();
 
 		$query = $this->db->query('SELECT * from reference_master WHERE user_id = '.$user_id.' ORDER BY id DESC');
