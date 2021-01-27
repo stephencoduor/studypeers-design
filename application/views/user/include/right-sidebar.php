@@ -146,37 +146,40 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <h6>Blocked Peers</h6>
             </section>
             <section class="listChatBox">
-                <div class="blankFeedArea SmallFeed">
-                    <div class="noFeedWrapper">
-                        <figure>
-                            <img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
-                        </figure>
-                        <h4>Nothing to display</h4>
-                    </div>
-                </div>
-                <?php
-                foreach (@$blocked_users as $users) {
-                ?>
-                    <section class="list">
-                        <section class="left">
-                            <figure>
-                                <img src="<?php echo userImage($users['id']); ?>" alt="user">
-                            </figure>
-                            <figcaption><?php echo $users['first_name'] . ' ' . $users['last_name']; ?></figcaption>
-                        </section>
-                        <section class="action">
-                            <div class="dropdown">
-                                <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
-                                <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                                    <li class="removePeerSugg">
-                                        <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
-                                    </li>
-                                </ul>
+                
+                <?php if(!empty($blocked_users)) {
+                        foreach (@$blocked_users as $users) {
+                        ?>
+                            <section class="list">
+                                <section class="left">
+                                    <figure>
+                                        <img src="<?php echo userImage($users['id']); ?>" alt="user">
+                                    </figure>
+                                    <figcaption><?php echo $users['first_name'] . ' ' . $users['last_name']; ?></figcaption>
+                                </section>
+                                <section class="action">
+                                    <div class="dropdown">
+                                        <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                                        <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                                            <li class="removePeerSugg">
+                                                <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </section>
+                            </section>
+                        <?php
+                        }
+                    } else { ?>
+                        <div class="blankFeedArea SmallFeed">
+                            <div class="noFeedWrapper">
+                                <figure>
+                                    <img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+                                </figure>
+                                <h4>Nothing to display</h4>
                             </div>
-                        </section>
-                    </section>
-                <?php
-                }
+                        </div>
+                <?php    }
                 ?>
 
             </section>

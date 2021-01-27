@@ -486,41 +486,45 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                 <div class="tabPaneWrapper">
                                     <div class="left">
                                         <div class="userBoxWrapper gridview" id="friend_container">
-                                <?php if(isset($all_connections)){ foreach($all_connections as $peer){ ?>
-                                <div class="card" id="remove_friend_<?php echo $peer['friends_id']; ?>">
+                                <?php if(isset($all_connections)){ foreach($all_connections as $peer){ 
+                                    $followersC = $this->db->query('SELECT COUNT(*) As total from follow_master where peer_id = '.$peer['userID'])->row_array();
+                                ?>
+                                <div class="card" id="remove_friend_<?php echo $peer['userID']; ?>">
                                     <div class="profileSection">
                                         <div class="profileViewToggleWrapper">
                                             <figure>
-                                                <img src="<?php echo userImage($peer['id']); ?>">
+                                                <img src="<?php echo userImage($peer['userID']); ?>">
                                             </figure>
                                             <div class="changeView">
-                                                <h5><?php echo $peer['first_name'].' '.$peer['last_name']; ?></h5>
-                                                <p>location name</p>
+                                                <h5><a href="<?php echo base_url(); ?>sp/<?php echo $peer['username'] ?>"><?php echo $peer['first_name'].' '.$peer['last_name']; ?></a></h5>
+                                                <p><?php echo $peer['user_location']; ?></p>
                                                 <div class="followers">
-                                                    <span>25 </span> Followers
+                                                    <span><?php echo $followersC['total']; ?> </span> Followers
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="followOptionsWrapper">
-                                            <ul>
-                                                <li>
-                                                    <?php $follow_status = checkFollowStatus($this->session->get_userdata()['user_data']['user_id'] , $peer['id']);
-                                                        if($follow_status){
-                                                            ?>
-                                                            <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="0">UnFollow</a>
-                                                            <?php
-                                                        }else{
-                                                            ?>
-                                                            <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['id']; ?>" data-id="<?php echo $peer['id']; ?>" id="1">Follow</a>
-                                                            <?php
-                                                        }
-                                                    ?>
-                                                </li>
-                                                <li>
-                                                    <a href="javascript:void(0)" class="unfriend_peer" data-toggle="modal" data-target="#unfriend_peer" id="<?php echo $peer['friends_id']; ?>">Unfriend</a>
-                                                </li>
-                                            </ul>
-                                        </div>
+                                        <?php if($peer['userID'] != $this->session->get_userdata()['user_data']['user_id']) { ?>
+                                            <div class="followOptionsWrapper">
+                                                <ul>
+                                                    <li>
+                                                        <?php $follow_status = checkFollowStatus($this->session->get_userdata()['user_data']['user_id'] , $peer['userID']);
+                                                            if($follow_status){
+                                                                ?>
+                                                                <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['userID']; ?>" data-id="<?php echo $peer['userID']; ?>" id="0">UnFollow</a>
+                                                                <?php
+                                                            }else{
+                                                                ?>
+                                                                <a href="javascript:void(0)" class="follow_now follow_<?php echo $peer['userID']; ?>" data-id="<?php echo $peer['userID']; ?>" id="1">Follow</a>
+                                                                <?php
+                                                            }
+                                                        ?>
+                                                    </li>
+                                                    <li>
+                                                        <a href="javascript:void(0)" class="unfriend_peer" data-toggle="modal" data-target="#unfriend_peer" id="<?php echo $peer['userID']; ?>">Unfriend</a>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        <?php } ?>
                                     </div>
                                 </div>
                                 <?php  } }?>
