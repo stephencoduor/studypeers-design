@@ -757,6 +757,13 @@ a.filterBtn,a.sortMenu{
     .search{max-width: 250px;}
 }
 @media(max-width:767px){
+    .nav li.user{
+        width:50px;
+    }
+    .header-user-img figure {
+        width: 44px;
+        height: 44px;
+    }
     .tabularLiist > .nav-tabs li a{
         padding: 10px 15px !important;
     }

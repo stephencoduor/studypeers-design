@@ -3018,4 +3018,19 @@ figcaption a {
         width: 48%;
         margin-right: 0%;
     }
+    .imageSection{
+        margin-right:15px;
+    }
+    .pollSection{
+        margin-right:0;
+    }
+    .socialAction li{
+        width:50%;
+        margin-left:0;
+        text-align: left!important;
+        margin-bottom:5px;
+    }
+    .socialAction li a span{
+        top:0;
+    }
 }

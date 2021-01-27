@@ -3807,6 +3807,42 @@ input:-webkit-autofill:active {
     }
 }
 @media (max-width: 767px) {
+    .imageSection span{
+        white-space: nowrap;
+    }
+    .pollSection{
+        margin-right:0;
+    }
+    .socialAction li a{
+        display: flex;
+        align-items: flex-start;
+    }
+    .socialAction li{
+        width: 50%;
+    }
+    .socialAction li a span{
+        top:0;
+    }
+    .profileInformation .username{
+        flex-direction: column;
+        
+    }
+    .profileInformation .username span{
+        margin-left:0;
+    }
+    .socialstatus{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .postMessageWrapper .defaultMessage{
+        white-space: nowrap;
+    }
+    .pollSection span{
+        white-space: nowrap;
+    }
+    .imageSection{
+        margin-right:15px;
+    }
     .infoWrapper{
         flex-direction: column;
     }
@@ -3875,5 +3911,19 @@ input:-webkit-autofill:active {
     }
     .box-card .imgWrapper figure{
         height:200px;
+    }
+    .pollEndTimmings{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .pollEndTimmings h6{
+        margin-bottom:10px;
+    }
+    .polltimeform .filtercalendar{
+        justify-content: space-between;
+    }
+    .polltimeform .filtercalendar .input-group.date, .polltimeform .filtercalendar .input-group--overlap{
+        width: 48%;
+        margin-right: 0%;
     }
 }
