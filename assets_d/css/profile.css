@@ -542,14 +542,16 @@
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 
 .badgeList ul li.badge {
-    margin-right: 10px;
+    margin:0 10px 10px 0;
     border-radius:14px;
     font-size: 12px;
     font-weight:500;
     padding: 7px 16px;
+
 }
 .badgeList ul li.badge img{
     margin-right: 5px;
@@ -1312,6 +1314,7 @@
     margin:0;
     width:60px;
     height:60px;
+    margin-right:25px;
     border-radius: 50%;
     overflow: hidden;
 }
@@ -1321,12 +1324,12 @@
 }
 .postMessageWrapper {
     height: 56px;
-    width: 90%;
+    width: calc(100% - 85px);
     border-radius: 30px;
     padding: 0 12px;
     border:1px solid #e4e6eb;
     position: relative;
-    margin-left: 25px;
+    padding-left: 25px;
     cursor: pointer;
     outline: none;
     transition: background 0.3s ease;
@@ -1491,6 +1494,7 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    position: relative;
 }
 /*Modal Css Starts */
 .modal-dialog {
@@ -3803,6 +3807,42 @@ input:-webkit-autofill:active {
     }
 }
 @media (max-width: 767px) {
+    .imageSection span{
+        white-space: nowrap;
+    }
+    .pollSection{
+        margin-right:0;
+    }
+    .socialAction li a{
+        display: flex;
+        align-items: flex-start;
+    }
+    .socialAction li{
+        width: 50%;
+    }
+    .socialAction li a span{
+        top:0;
+    }
+    .profileInformation .username{
+        flex-direction: column;
+        
+    }
+    .profileInformation .username span{
+        margin-left:0;
+    }
+    .socialstatus{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .postMessageWrapper .defaultMessage{
+        white-space: nowrap;
+    }
+    .pollSection span{
+        white-space: nowrap;
+    }
+    .imageSection{
+        margin-right:15px;
+    }
     .infoWrapper{
         flex-direction: column;
     }
@@ -3814,5 +3854,76 @@ input:-webkit-autofill:active {
         padding: 10px 10px !important;
         display: flex;
         font-size: 14px;
+    }
+    .profileInformation .name {
+        font-size: 14px;
+        width: 50%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+    .shareProfile {
+        font-size: 13px;
+    }
+    .socialstatus li{
+        margin-right:15px;
+    }
+    .writePostWrapper figure{
+        margin-right:10px;
+    }
+    .postMessageWrapper{
+        width: calc(100% - 70px);
+    }
+    .user-details figcaption a{
+       display: block;
+    }
+    .box-card .user-name figure{
+        margin-right:10px;
+    }
+    .createBox {
+        padding: 15px 15px 0px 15px;
+    }
+    .user-details .timeline {
+        margin-top: 0;
+        margin-right: 0;
+        position: absolute;
+        right:5px;
+        top: -10px;
+    }
+    .shareBoxWrapper .shareBox{
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+    .modal-body .shareBoxWrapper .shareBox .imageSection{
+        margin-right:0;
+        margin-bottom:5px;
+    }
+    .modal-body .shareBoxWrapper .shareBox .pollSection{
+        margin-right:0;
+        margin-bottom:5px;
+    }
+    .modal-body .shareBoxWrapper .shareBox .fileSection{
+        margin-right:0;
+    }
+    .modal-body .studybuttonGroup button {
+        margin: 0 0 0 10px !important;
+    }
+    .box-card .imgWrapper figure{
+        height:200px;
+    }
+    .pollEndTimmings{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .pollEndTimmings h6{
+        margin-bottom:10px;
+    }
+    .polltimeform .filtercalendar{
+        justify-content: space-between;
+    }
+    .polltimeform .filtercalendar .input-group.date, .polltimeform .filtercalendar .input-group--overlap{
+        width: 48%;
+        margin-right: 0%;
     }
 }

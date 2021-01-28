@@ -3098,3 +3098,28 @@ div[data-edit] {
 .mainContent .filterWrapper.flex-filter{
     flex-direction: column;
 }
+
+@media (max-width: 767px) {
+    .mainContent.active .flex-row{
+        width:100%;
+        flex-direction: column;
+    }
+    .tabularLiist > .nav-tabs li a{
+        padding: 10px 15px !important;
+    }
+    .mainContent.active .filterWrapper.flex-filter .filtercalendar {
+        max-width: 100%;
+        flex: 0 100%;
+    }
+    .mainContent.active .filterWrapper.flex-filter .filterSelect{
+        max-width: 100%;
+        flex: 0 100%;
+    }
+    .mainContent.active .filterWrapper.flex-filter .filterSearch{
+        max-width: 100%;
+        flex: 0 100%;
+    }
+    .filtercalendar .input-group.date input{
+        padding: 13px 10px 13px 40px;
+    }
+}

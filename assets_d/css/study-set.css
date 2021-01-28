@@ -2201,7 +2201,7 @@ l,.share:focus
     .buttonGroup button {margin:0 15px 0 0;}
     .studySetWrapper .header h4{font-size: 18px;}
     .studySetWrapper {
-        margin-top: 20px;
+        margin-top: 0;
     }
     .flashCard_txt {
         margin-bottom: 30px;
