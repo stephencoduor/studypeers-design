@@ -3868,4 +3868,35 @@ class Account extends CI_Controller
         print_r(json_encode($result));
         die;
     }
+
+
+    public function reportEvent()
+    {
+        if ($this->input->post()) {
+            $report_event_id              = $this->input->post('report_event_id');
+            $report_reason          = $this->input->post('report_reason');
+            $report_description     = $this->input->post('report_description');
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+            
+            $insertArr = array(
+                'event_id'             => $report_event_id,
+                'report_reason'         => $report_reason,
+                'user_id'               => $user_id,
+                'report_description'    => $report_description,
+                'status'        => 1,
+                'created_at'    => date('Y-m-d H:i:s'),
+                'updated_at'    => date('Y-m-d H:i:s')
+            );
+
+            $this->db->insert('report_event', $insertArr);
+
+
+            $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Event Reported Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button></div>';
+            $this->session->set_flashdata('flash_message', $message);
+            redirect(site_url('account/eventDetails/' . base64_encode($report_event_id)), 'refresh');
+        }
+    }
 }

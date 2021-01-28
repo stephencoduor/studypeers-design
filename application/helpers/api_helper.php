@@ -761,7 +761,7 @@ function userImage($user_id){
     if(!empty($user_detail['image']) && ($user_detail['image'] != 'user.png')) {
         return base_url().'uploads/users/'.$user_detail['image'];
     } else {
-        if($user_info['gender'] == 'male'){
+        if(!empty($user_info['gender']) && $user_info['gender'] == 'male'){
             return base_url().'uploads/user-male.png';
         } else {
             return base_url().'uploads/user-female.png';
