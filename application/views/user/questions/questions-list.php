@@ -284,7 +284,8 @@
 														<figure>
 															<img src="<?php echo userImage($value['created_by']); ?>" alt="user">
 														</figure>
-														<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['created_by'] ?>"><figcaption><?php echo $value['nickname']; ?></figcaption></a>
+														<?php  $user_name = $this->db->get_where('user', array('id' => $value['created_by']))->row_array(); ?>
+														<a href="<?php echo base_url().'sp/'.$user_name['username'] ?>"><figcaption><?php echo $value['nickname']; ?></figcaption></a>
 													</div>
 													<div class="edit">
 														<a href="<?php echo base_url(); ?>account/editQuestion/<?php echo base64_encode($value['id']); ?>">
