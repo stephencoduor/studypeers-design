@@ -1361,3 +1361,12 @@ a.chat-close {
   padding:0 10px;
   background:#fff;
 }
+
+@media (max-width: 767px) {
+  .chat-dropdown {
+    width: 320px;
+    right: auto;
+    top: 60px;
+    left: -155px;
+  }
+}

@@ -3122,4 +3122,16 @@ div[data-edit] {
     .filtercalendar .input-group.date input{
         padding: 13px 10px 13px 40px;
     }
+    .form-group.calendar.event{
+        padding:0 15px;
+    }
+    .input-group--overlap{
+        padding-left:0;
+    }
+    .scheduleWrapper .header a.import_schedules{
+        padding-left:0;
+    }
+    .form-group.calendar label{
+        margin-left:0;
+    }
 }
