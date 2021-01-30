@@ -985,6 +985,8 @@ function formatTopMessageGroupListName(messageJson) {
 function formatTopMessageGroupListNameSingle(messageJson) {
   var message = messageJson.message;
   var total = "";
+  var UserInfo = JSON.parse(userData);
+  var userId = UserInfo.user_id;
 
   if (messageJson.total) {
     total = messageJson.total;
