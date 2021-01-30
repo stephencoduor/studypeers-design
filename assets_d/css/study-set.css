@@ -838,7 +838,7 @@ l,.share:focus
     box-shadow: 0 3px 8px 0 rgba(42, 35, 79, 0.08);
     background: #fff;
     border-radius: 8px;
-    margin: 40px 5px;
+    margin: 20px 0;
     width: calc(100% - 10px);
 }
 .sp-table thead {
@@ -975,6 +975,7 @@ l,.share:focus
     text-align: left;
     color: #185aeb;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 .main_subheaderLeft a svg {
     width:20px;
@@ -987,6 +988,7 @@ l,.share:focus
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    white-space: nowrap;
 }
 .main_subheaderLeft h4 .studySets {
     padding: 12px;
@@ -1088,6 +1090,7 @@ l,.share:focus
     text-align: left;
     color: #2a234f;
     margin: 0 15px 0 10px;
+    white-space: nowrap;
 }
 #matchtime {
     font-size: 14px;
@@ -1095,6 +1098,7 @@ l,.share:focus
     line-height: 1.43;
     text-align: center;
     color: #5d8cf1;
+    white-space: nowrap;
 }
 .mainCardWrapper {
     padding: 107px 35px 35px;
@@ -2048,6 +2052,7 @@ l,.share:focus
     margin-right:10px;
     cursor: pointer;
     text-decoration: none;
+    white-space: nowrap;
 }
 .edit svg {
     fill:#5a5aec;;
@@ -2059,6 +2064,7 @@ l,.share:focus
     margin-right:10px;
     cursor: pointer;
     text-decoration: none;
+    white-space: nowrap;
 }
 .delete svg {
     fill:#ed2e7e;
