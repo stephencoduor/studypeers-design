@@ -146,39 +146,39 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <h6>Blocked Peers</h6>
             </section>
             <section class="listChatBox">
-                
-                <?php if(!empty($blocked_users)) {
-                        foreach (@$blocked_users as $users) {
-                        ?>
-                            <section class="list">
-                                <section class="left">
-                                    <figure>
-                                        <img src="<?php echo userImage($users['id']); ?>" alt="user">
-                                    </figure>
-                                    <figcaption><?php echo $users['first_name'] . ' ' . $users['last_name']; ?></figcaption>
-                                </section>
-                                <section class="action">
-                                    <div class="dropdown">
-                                        <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
-                                        <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
-                                            <li class="removePeerSugg">
-                                                <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </section>
-                            </section>
-                        <?php
-                        }
-                    } else { ?>
-                        <div class="blankFeedArea SmallFeed">
-                            <div class="noFeedWrapper">
+
+                <?php if (!empty($blocked_users)) {
+                    foreach (@$blocked_users as $users) {
+                ?>
+                        <section class="list">
+                            <section class="left">
                                 <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+                                    <img src="<?php echo userImage($users['id']); ?>" alt="user">
                                 </figure>
-                                <h4>Nothing to display</h4>
-                            </div>
+                                <figcaption><?php echo $users['first_name'] . ' ' . $users['last_name']; ?></figcaption>
+                            </section>
+                            <section class="action">
+                                <div class="dropdown">
+                                    <i class="fa fa-ellipsis-v dropdown-toggle" data-toggle="dropdown"></i>
+                                    <ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+                                        <li class="removePeerSugg">
+                                            <a href="javascript:void(0)" class="unblock_peer" id="<?php echo $users['id']; ?>">Unblock Peer</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </section>
+                        </section>
+                    <?php
+                    }
+                } else { ?>
+                    <div class="blankFeedArea SmallFeed">
+                        <div class="noFeedWrapper">
+                            <figure>
+                                <img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+                            </figure>
+                            <h4>Nothing to display</h4>
                         </div>
+                    </div>
                 <?php    }
                 ?>
 
@@ -579,6 +579,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             <input type="hidden" id="current_receiver_name_id">
             <input type="hidden" id="submit_single_chat_url" value="<?php echo base_url('submit-single-chat-user'); ?>">
             <input type="hidden" id="current_active_user_group_image_single">
+            <input type="hidden" id="current_profile_to_user_image">
 
         </div>
         <span id="user_typing_id"></span>

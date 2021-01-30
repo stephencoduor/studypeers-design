@@ -874,14 +874,16 @@ function formatTopMessageHeaderSingleChat(messageJson) {
   var userInfo = JSON.parse(userData);
   var userId = userInfo.user_id;
   var name = messageJson.group_name;
+  var image = messageJson.group_image;
 
   if (userId == messageJson.from_user_id) {
     name = messageJson.to_user_name;
+    image = messageJson.to_user_image;
   }
 
   var html =
     "<li class='open-single-chat-window' data-image='" +
-    messageJson.group_image +
+    image +
     "' data-groupId='" +
     messageJson.group_id +
     "' data-name='" +
@@ -894,7 +896,7 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     '<a href="javascript:void(0)">' +
     "<figure>" +
     '<img src="' +
-    messageJson.group_image +
+    image +
     '" alt="">' +
     "</figure>" +
     '<div class="time">' +
