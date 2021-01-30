@@ -675,32 +675,36 @@
 							</div>
 							<div class="right">
 
-								<div class="col-sm-offset-1 col-sm-10">
+								<div class="col-md-12">
 									<h5>Select a Description</h5>
-									<div class="rating-div" onclick="selectRateDesc('comprehensive', 'Comprehensive')" id="comprehensive" onmouseover="hoverRateDesc('comprehensive', 'Comprehensive')" onmouseout="hoverOutRateDesc('comprehensive', 'Comprehensive')">
-										<img class="initial" src="<?php echo base_url(); ?>assets_d/images/comprehensive.svg">
-										<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/comprehensive-blue.svg">
-										<h6>Comprehensive</h6>
-									</div>
-									<div class="rating-div" onclick="selectRateDesc('engaging', 'Engaging Format')" id="engaging" onmouseover="hoverRateDesc('engaging', 'Engaging Format')" onmouseout="hoverOutRateDesc('engaging', 'Engaging Format')">
-										<img class="initial" src="<?php echo base_url(); ?>assets_d/images/engagin-format.svg" style="height: 30px;">
-										<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/engagin-format-blue.svg" style="height: 30px;">
-										<h6>Engaging Format</h6>
-									</div>
+									<div class="rating-wrap-div">
+										<div class="rating-div" onclick="selectRateDesc('comprehensive', 'Comprehensive')" id="comprehensive" onmouseover="hoverRateDesc('comprehensive', 'Comprehensive')" onmouseout="hoverOutRateDesc('comprehensive', 'Comprehensive')">
+											<img class="initial" src="<?php echo base_url(); ?>assets_d/images/comprehensive.svg">
+											<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/comprehensive-blue.svg">
+											<h6>Comprehensive</h6>
+										</div>
+										<div class="rating-div" onclick="selectRateDesc('engaging', 'Engaging Format')" id="engaging" onmouseover="hoverRateDesc('engaging', 'Engaging Format')" onmouseout="hoverOutRateDesc('engaging', 'Engaging Format')">
+											<img class="initial" src="<?php echo base_url(); ?>assets_d/images/engagin-format.svg" style="height: 30px;">
+											<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/engagin-format-blue.svg" style="height: 30px;">
+											<h6>Engaging Format</h6>
+										</div>
 								</div>
-								<div class="col-sm-offset-1 col-sm-10">
-									<div class="rating-div" onclick="selectRateDesc('refresher', 'Good Refresher')" id="refresher" onmouseover="hoverRateDesc('refresher', 'Good Refresher')" onmouseout="hoverOutRateDesc('refresher', 'Good Refresher')">
-										<img class="initial" src="<?php echo base_url(); ?>assets_d/images/good-refresher.svg">
-										<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/good-refresher-blue.svg">
-										<h6>Good Refresher</h6>
-									</div>
-									<div class="rating-div" onclick="selectRateDesc('great_test', 'Great Test Result')" id="great_test" onmouseover="hoverRateDesc('great_test', 'Great Test Result')" onmouseout="hoverOutRateDesc('great_test', 'Great Test Result')">
-										<img class="initial" src="<?php echo base_url(); ?>assets_d/images/great-test-result.svg">
-										<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/great-test-result-blue.svg">
-										<h6>Great Test Result</h6>
-									</div>
 								</div>
-								<div class="col-sm-offset-1 col-sm-10">
+								<div class="col-md-12">
+									<div class="rating-wrap-div">
+										<div class="rating-div" onclick="selectRateDesc('refresher', 'Good Refresher')" id="refresher" onmouseover="hoverRateDesc('refresher', 'Good Refresher')" onmouseout="hoverOutRateDesc('refresher', 'Good Refresher')">
+											<img class="initial" src="<?php echo base_url(); ?>assets_d/images/good-refresher.svg">
+											<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/good-refresher-blue.svg">
+											<h6>Good Refresher</h6>
+										</div>
+										<div class="rating-div" onclick="selectRateDesc('great_test', 'Great Test Result')" id="great_test" onmouseover="hoverRateDesc('great_test', 'Great Test Result')" onmouseout="hoverOutRateDesc('great_test', 'Great Test Result')">
+											<img class="initial" src="<?php echo base_url(); ?>assets_d/images/great-test-result.svg">
+											<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/great-test-result-blue.svg">
+											<h6>Great Test Result</h6>
+										</div>
+								</div>
+								</div>
+								<div class="col-sm-12">
 									<span class="error" id="err_rate_description" style="color: red;"></span><br>
 									<button type="submit" class="filterBtn">Submit rating</button>
 								</div>
@@ -720,7 +724,7 @@
 								<p><?php echo $user_rating['description']; ?></p>
 							</div>
 						<?php } else { ?>
-							<div class="col-sm-12">
+							<div class="no-study-set">
 								<div class="text-center">
 									<p>You haven't rated this studyset yet. </p>
 									<a href="javascript:void(0)" class="filterBtn edit_rating" style="display: inline-table;">Rate It</a>
