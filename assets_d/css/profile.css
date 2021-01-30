@@ -3807,6 +3807,10 @@ input:-webkit-autofill:active {
     }
 }
 @media (max-width: 767px) {
+    .tabPaneWrapper .right{
+        min-width: auto;
+        width:calc(100% - 60px)!important;
+    }
     .imageSection span{
         white-space: nowrap;
     }

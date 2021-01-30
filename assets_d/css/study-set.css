@@ -838,7 +838,7 @@ l,.share:focus
     box-shadow: 0 3px 8px 0 rgba(42, 35, 79, 0.08);
     background: #fff;
     border-radius: 8px;
-    margin: 40px 5px;
+    margin: 20px 0;
     width: calc(100% - 10px);
 }
 .sp-table thead {
@@ -975,6 +975,7 @@ l,.share:focus
     text-align: left;
     color: #185aeb;
     text-transform: uppercase;
+    white-space: nowrap;
 }
 .main_subheaderLeft a svg {
     width:20px;
@@ -987,6 +988,7 @@ l,.share:focus
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    white-space: nowrap;
 }
 .main_subheaderLeft h4 .studySets {
     padding: 12px;
@@ -1076,7 +1078,11 @@ l,.share:focus
     width: 20px;
     height: 20px;
     fill: #cac8d3;
-    margin-left: auto;
+}
+.spent-row{
+    display:flex;
+    align-items:center;
+    justify-content: center;
 }
 .main_subheaderRight .tracker__label{
     font-size: 12px;
@@ -1084,6 +1090,7 @@ l,.share:focus
     text-align: left;
     color: #2a234f;
     margin: 0 15px 0 10px;
+    white-space: nowrap;
 }
 #matchtime {
     font-size: 14px;
@@ -1091,6 +1098,7 @@ l,.share:focus
     line-height: 1.43;
     text-align: center;
     color: #5d8cf1;
+    white-space: nowrap;
 }
 .mainCardWrapper {
     padding: 107px 35px 35px;
@@ -1964,6 +1972,7 @@ l,.share:focus
     display: flex;
     align-items: flex-start;
     justify-content: flex-start;
+    flex-wrap: wrap;
 }
 .badgeList ul li.badge {
     margin-right: 10px;
@@ -2043,6 +2052,7 @@ l,.share:focus
     margin-right:10px;
     cursor: pointer;
     text-decoration: none;
+    white-space: nowrap;
 }
 .edit svg {
     fill:#5a5aec;;
@@ -2054,6 +2064,7 @@ l,.share:focus
     margin-right:10px;
     cursor: pointer;
     text-decoration: none;
+    white-space: nowrap;
 }
 .delete svg {
     fill:#ed2e7e;
@@ -2063,6 +2074,7 @@ l,.share:focus
     font-size: 20px;
     font-weight: 500;
     color: #333;
+    word-break: break-word;
 }
 .form-group.button {
     display: flex;
@@ -2166,6 +2178,22 @@ l,.share:focus
         display: inline-block;
         height: auto;
     }
+    .current_user_rating h5 {
+        font-size: 18px;
+    }
+    .current_user_rating .left{
+        width:100%;
+    }
+    .current_user_rating .right{
+        width:100%;
+        margin-left:0;
+    }
+    .current_user_rating{
+        flex-direction: column;
+    }
+    .current_user_rating .right .col-md-12{
+        padding:0;
+    }
 }
 @media(max-width: 1100px){
     .filterWrapper.active .filterSearch{width:37%;}
@@ -2245,6 +2273,7 @@ l,.share:focus
         align-items: center;
         justify-content: space-evenly;
     }
+    
 }
 @media(max-width:850px) {
     .studySetWrapper.list .feedWrapper .feed-card.list .feed_card_inner  h5,
@@ -2253,7 +2282,27 @@ l,.share:focus
     }
 }
 @media(max-width:767px){
-
+    
+    .sp-table{
+        margin:10px 0;
+    }
+    .flashcards{
+        margin-bottom:0;
+    }
+    .main_subheaderLeft{
+        padding: 10px 15px 10px 0;
+    }
+    .main_subheaderCenter{
+        flex-direction: column;
+    }
+    .main_subheaderCenter ul:first-child{
+        margin-bottom:15px;
+    }
+    .main_subheaderRight{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     .filterForm {
         display: none;
     }
@@ -2454,7 +2503,7 @@ l,.share:focus
         margin-top: 10px;
     }
     .mainCardWrapper {
-        padding: 127px 10px 10px;
+        padding: 190px 10px 10px;
     }
     .flashcards {
         height: 100%;
@@ -2499,6 +2548,12 @@ l,.share:focus
     }
 }
 @media(max-width:479px){
+    .rating-wrap-div{
+        flex-direction: column;
+    }
+    .rating-div{
+        width:100%;
+    }
     .studySetWrapper .header h4 {
         font-size: 20px;
     }
@@ -2546,7 +2601,6 @@ l,.share:focus
     .main_subheaderCenter.newflash {
         display: flex;
         align-items: center;
-        justify-content: center !important;
         width: 100% !important;
         padding: 0 15px;
     }
@@ -2556,11 +2610,8 @@ l,.share:focus
         width: 100%;
         padding: 0;
         text-align: center;
-        display: block;
     }
-    .mainCardWrapper {
-        padding: 60% 10px 10px;
-    }
+    
     .mainCardWrapper.newflash .flashcards .front, .mainCardWrapper.newflash .flashcards .back {
         padding: 50px 10px !important;
     }
@@ -2690,18 +2741,23 @@ l,.share:focus
     overflow: hidden;
     margin: 20px 0 0 0;
 }
-
+.rating-wrap-div{
+    display: flex;
+    align-items:flex-start;
+    justify-content: space-between;
+}
+.no-study-set {
+    margin: 0 auto;
+}
 .rating-div {
     text-align: center;
     background-color: #fff;
-    margin: 8px;
-    flex: 1;
+    margin: 10px 0;
     box-shadow: 0 3px 15px 0 rgba(0, 0, 0, 0.1);
     border-radius: 8px;
     overflow: hidden;
-    width: 45%;
+    width: 48%;
     padding: 15px;
-    float: left;
     cursor: pointer;
 }
 

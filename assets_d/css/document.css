@@ -1981,6 +1981,7 @@ textarea{
     font-size: 20px;
     font-weight: 500;
     color: #333;
+    word-break: break-word;
 }
 .form-group.button {
     display: flex;
@@ -2538,7 +2539,9 @@ textarea.textarea-gray {
     }
 }
 @media(max-width:767px){
-    
+    #confirmationModal .transparentBtn {
+        margin-right: 15px!important;
+    }
     .filterForm {
         display: none;
     }

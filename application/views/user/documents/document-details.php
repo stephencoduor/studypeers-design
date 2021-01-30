@@ -69,7 +69,7 @@
 									<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>' width='100%' height='830px' frameborder='0'> </iframe>
 									
 								<?php } else {  ?>
-									<img src="<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>" width="100%" height="830" alt="image" style="margin: 20px 0;">
+									<img src="<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>" alt="image" style="margin: 20px 0;">
 									
 								<?php }
 							?>

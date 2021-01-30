@@ -528,7 +528,11 @@ socket.on("loadinitgroupmessage", data => {
   var groupListMessage = "";
   if (data.length > 0) {
     data.forEach(function(item, index) {
-      groupListMessage += formatTopMessageGroupListName(item);
+      if (item.to_user_id) {
+        groupListMessage += formatTopMessageGroupListNameSingle(item);
+      } else {
+        groupListMessage += formatTopMessageGroupListName(item);
+      }
     });
   }
   $("#userList").html(groupListMessage);
@@ -874,18 +878,20 @@ function formatTopMessageHeaderSingleChat(messageJson) {
   var userInfo = JSON.parse(userData);
   var userId = userInfo.user_id;
   var name = messageJson.group_name;
+  var image = messageJson.group_image;
 
   if (userId == messageJson.from_user_id) {
     name = messageJson.to_user_name;
+    image = messageJson.to_user_image;
   }
 
   var html =
     "<li class='open-single-chat-window' data-image='" +
-    messageJson.group_image +
+    image +
     "' data-groupId='" +
     messageJson.group_id +
     "' data-name='" +
-    messageJson.group_name +
+    name +
     "' data-groupmembers='" +
     JSON.stringify(messageJson.group_members) +
     "' data-id='" +
@@ -894,7 +900,7 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     '<a href="javascript:void(0)">' +
     "<figure>" +
     '<img src="' +
-    messageJson.group_image +
+    image +
     '" alt="">' +
     "</figure>" +
     '<div class="time">' +
@@ -967,6 +973,71 @@ function formatTopMessageGroupListName(messageJson) {
     "</span>" +
     "<h3>" +
     messageJson.group_name +
+    "</h3>" +
+    "<p>" +
+    message +
+    "</p>" +
+    "</div></a></li>";
+
+  return html;
+}
+
+function formatTopMessageGroupListNameSingle(messageJson) {
+  var message = messageJson.message;
+  var total = "";
+  var UserInfo = JSON.parse(userData);
+  var userId = UserInfo.user_id;
+
+  if (messageJson.total) {
+    total = messageJson.total;
+  }
+
+  var currentProfile =
+    '<img id="group_image_id_' +
+    messageJson.group_id +
+    '" src="' +
+    messageJson.group_image +
+    '">';
+
+  if (messageJson.document_url) {
+    message = "Document";
+  }
+
+  var name = messageJson.group_name;
+
+  if (userId == messageJson.from_user_id) {
+    name = messageJson.to_user_name;
+    currentProfile =
+      '<img id="group_image_id_' +
+      messageJson.group_id +
+      '" src="' +
+      messageJson.to_user_image +
+      '">';
+  }
+
+  var html =
+    "<li class='message-top-header' id='group_id_" +
+    messageJson.group_id +
+    "' data-groupId='" +
+    messageJson.group_id +
+    "' data-groupmembers='" +
+    JSON.stringify(messageJson.group_members) +
+    "' data-groupname='" +
+    name +
+    "' '>" +
+    '<a href="javascript:void(0)">' +
+    "<figure>" +
+    currentProfile +
+    "</figure>" +
+    '<div class="time">' +
+    messageJson.time +
+    "</div>" +
+    '<div class="info-wrap">' +
+    '<span class="badge badge-pill badge-primary" data-batch="0">' +
+    total +
+    "</span>" +
+    "<h3>" +
+    name +
     "</h3>" +
     "<p>" +
     message +

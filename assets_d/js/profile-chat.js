@@ -53,6 +53,7 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
 
           console.log(additionaInfo.group_id);
           $("#current_single_chat_name").html(additionaInfo.receiverName);
+          $("#current_profile_to_user_image").val(additionaInfo.receiverImage);
           if (parseInt(additionaInfo.group_id) != 0) {
             console.log("teting group--->");
             $("#curren_group_name_id").val(additionaInfo.receiverName);
@@ -203,6 +204,7 @@ $("body").on("click", "#send_button_chat_single", function(event) {
   var message = {
     to_user_id: $("#current_receiver_id").val(),
     to_user_name: $("#current_receiver_name_id").val(),
+    to_user_image: $("#current_profile_to_user_image").val(),
     from_user_id: UserInfo.user_id,
     from_user_name: UserInfo.first_name,
     send_profile_image: UserInfo.profileImage,
@@ -228,7 +230,8 @@ $("body").on("click", "#send_button_chat_single", function(event) {
   $(".emojionearea-editor").html("");
   $("#send_message_input").val("");
   $("#current_image_upload_src").val("");
-  $("#append_image_after_upload").html("");
+  $("#append_image_after_upload_single").html("");
+  $(".say-hi-wrapper").hide();
 });
 
 $("body").on("click", ".open-single-chat-window", function() {

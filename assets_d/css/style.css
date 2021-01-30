@@ -757,6 +757,29 @@ a.filterBtn,a.sortMenu{
     .search{max-width: 250px;}
 }
 @media(max-width:767px){
+    .tabularLiist .nav.nav-tabs{
+        margin-top:15px!important;
+    }
+    .CheckpointView{
+        width:100%!important;
+
+    }
+    .mainContent.row-direction .commoncard h3{
+        font-size:18px;
+    }
+    .commoncard.current.first.last{
+        padding:15px;
+    }
+    .mainContent.row-direction .main_subheaderCenter{
+        flex-direction: row;
+    }
+    .mainContent.row-direction  .mainCardWrapper {
+        padding: 140px 10px 10px;
+    }
+    .testWrapper h3{
+        margin:15px 0 10px;
+        font-size:18px!important;
+    }
     .nav li.user{
         width:50px;
     }
@@ -765,7 +788,7 @@ a.filterBtn,a.sortMenu{
         height: 44px;
     }
     .tabularLiist > .nav-tabs li a{
-        padding: 10px 15px !important;
+        padding: 10px !important;
     }
     #sidenav{display: block;}
     .navbar-header {display: none;}

@@ -1,5 +1,5 @@
 
-				<section class="mainContent noPadding">
+				<section class="mainContent row-direction noPadding">
 					<div class="main_subheader">
 						<div class="main_subheaderLeft">
 							<a href="<?php echo base_url();?>studyset/details/<?php echo $studyset['study_set_id'];?>">
