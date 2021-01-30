@@ -241,7 +241,7 @@
                 
                 // sideBySide: true
             });
-            1
+            
 			$('#datetimepickerstart,#datetimepickerend').datetimepicker({
                 allowInputToggle: true,
                 format: 'L',

@@ -1260,7 +1260,11 @@ class Account extends CI_Controller
 
 
         $this->db->select('document_master.*,professor_master.name as professor,course_master.name as course, university.SchoolName, user_info.nickname');
-        $this->db->from('document_master');
+        if ($this->input->get()) {
+        } else {
+            $this->db->from('document_master');
+        }
+        
         $this->db->join('professor_master', 'professor_master.id=document_master.professor');
         $this->db->join('course_master', 'course_master.id=document_master.course');
         $this->db->join('university', 'university.university_id=document_master.university');

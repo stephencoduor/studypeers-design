@@ -43,12 +43,15 @@
 					</svg> <?php echo date('h:i A', strtotime($event['start_time'])); ?> - <?php echo date('h:i A', strtotime($event['end_time'])); ?>
 				</li>
 				<li>
-					<?php $user = $this->db->get_where('user_info', array('userID' => $event['created_by']))->row_array();  ?>
+					<?php $user = $this->db->get_where('user_info', array('userID' => $event['created_by']))->row_array(); 
+						  $user_name = $this->db->get_where('user', array('id' => $event['created_by']))->row_array(); 
+
+					?>
 					
 						<figure>
 							<img src="<?php echo userImage($event['created_by']); ?>" alt="user">
 						</figure>
-						<figcaption><a href="<?php echo base_url().'Profile/friends?profile_id='.$event['created_by'] ?>"><?= $user['nickname']; ?></a></figcaption>
+						<figcaption><a href="<?php echo base_url().'sp/'.$user_name['username'] ?>"><?= $user['nickname']; ?></a></figcaption>
 					
 				</li>
 			</ul>
@@ -263,13 +266,14 @@
 							$user_info = $this->db->get_where('user_info', array('userID' => $value['user_id']))->row_array();
 							$reply = $this->db->get_where('comment_master', array('comment_parent_id' => $value['id']))->result_array();
 							$count_like = $this->db->get_where('comment_like_master', array('comment_id' => $value['id'], 'status' => 1))->num_rows();
+							$user_name = $this->db->get_where('user', array('id' => $value['user_id']))->row_array();
 							?>
 							<div class="chatMsg">
 								<figure>
 									<img src="<?php echo userImage($value['user_id']); ?>" alt="User">
 								</figure>
 								<figcaption>
-									<a href="<?php echo base_url().'Profile/friends?profile_id='.$value['user_id'] ?>"><span class="name"> <?php echo $user_info['nickname'] ?></span></a>
+									<a href="<?php echo base_url().'sp/'.$user_name['username'] ?>"><span class="name"> <?php echo $user_info['nickname'] ?></span></a>
 									<?php if($value['type'] == 1) { ?>
 										<img src="<?php echo base_url(); ?>uploads/comments/<?= $value['comment']; ?>" alt="comment" style="height: 70px;">
 									<?php } else { echo $value['comment']; } ?>
@@ -296,13 +300,14 @@
 								<div class="reply" id="reply_<?php echo $value['id'] ?>">
 									<?php foreach ($reply as $key2 => $value2) {
 										$user_info2 = $this->db->get_where('user_info', array('userID' => $value2['user_id']))->row_array();
+										$user_name2 = $this->db->get_where('user', array('id' => $value2['user_id']))->row_array();
 										?>
 										<div class="userReplyBox">
 											<figure>
 												<img src="<?php echo userImage($value2['user_id']); ?>" alt="User">
 											</figure>
 											<figcaption>
-												<a href="<?php echo base_url().'Profile/friends?profile_id='.$value2['user_id'] ?>"><span class="name"><?= $user_info2['nickname'] ?></span></a>
+												<a href="<?php echo base_url().'sp/'.$user_name2['username'] ?>"><span class="name"><?= $user_info2['nickname'] ?></span></a>
 												<?php echo $value2['comment'] ?>
 
 											</figcaption>

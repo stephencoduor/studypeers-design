@@ -22,7 +22,7 @@
     });
     $("#datetimepickermonth").datetimepicker().on('changeMonth', function(e) {
       var currMonth = new Date(e.date).getMonth() + 1;
-      alert(currMonth);
+      // alert(currMonth);
     });
     $('#datetimepicker1').datetimepicker({
       allowInputToggle: true,
