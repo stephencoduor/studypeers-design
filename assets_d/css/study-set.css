@@ -1076,7 +1076,11 @@ l,.share:focus
     width: 20px;
     height: 20px;
     fill: #cac8d3;
-    margin-left: auto;
+}
+.spent-row{
+    display:flex;
+    align-items:center;
+    justify-content: center;
 }
 .main_subheaderRight .tracker__label{
     font-size: 12px;
@@ -2063,6 +2067,7 @@ l,.share:focus
     font-size: 20px;
     font-weight: 500;
     color: #333;
+    word-break: break-word;
 }
 .form-group.button {
     display: flex;
@@ -2253,7 +2258,23 @@ l,.share:focus
     }
 }
 @media(max-width:767px){
-
+    .flashcards{
+        margin-bottom:0;
+    }
+    .main_subheaderLeft{
+        padding: 10px 15px 10px 0;
+    }
+    .main_subheaderCenter{
+        flex-direction: column;
+    }
+    .main_subheaderCenter ul:first-child{
+        margin-bottom:15px;
+    }
+    .main_subheaderRight{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
     .filterForm {
         display: none;
     }
@@ -2454,7 +2475,7 @@ l,.share:focus
         margin-top: 10px;
     }
     .mainCardWrapper {
-        padding: 127px 10px 10px;
+        padding: 190px 10px 10px;
     }
     .flashcards {
         height: 100%;
@@ -2546,7 +2567,6 @@ l,.share:focus
     .main_subheaderCenter.newflash {
         display: flex;
         align-items: center;
-        justify-content: center !important;
         width: 100% !important;
         padding: 0 15px;
     }
@@ -2556,11 +2576,8 @@ l,.share:focus
         width: 100%;
         padding: 0;
         text-align: center;
-        display: block;
     }
-    .mainCardWrapper {
-        padding: 60% 10px 10px;
-    }
+    
     .mainCardWrapper.newflash .flashcards .front, .mainCardWrapper.newflash .flashcards .back {
         padding: 50px 10px !important;
     }
