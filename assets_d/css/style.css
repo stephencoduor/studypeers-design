@@ -760,6 +760,22 @@ a.filterBtn,a.sortMenu{
     .tabularLiist .nav.nav-tabs{
         margin-top:15px!important;
     }
+    .CheckpointView{
+        width:100%!important;
+
+    }
+    .mainContent.row-direction .commoncard h3{
+        font-size:18px;
+    }
+    .commoncard.current.first.last{
+        padding:15px;
+    }
+    .mainContent.row-direction .main_subheaderCenter{
+        flex-direction: row;
+    }
+    .mainContent.row-direction  .mainCardWrapper {
+        padding: 140px 10px 10px;
+    }
     .testWrapper h3{
         margin:15px 0 10px;
         font-size:18px!important;
