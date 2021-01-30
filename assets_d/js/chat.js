@@ -823,6 +823,7 @@ function sendMessageToSingleUser(messageText) {
   var message = {
     to_user_id: $("#current_receiver_id").val(),
     to_user_name: $("#current_receiver_name_id").val(),
+    to_user_image: $("#current_profile_to_user_image").val(),
     from_user_id: UserInfo.user_id,
     from_user_name: UserInfo.first_name,
     send_profile_image: UserInfo.profileImage,
@@ -946,8 +947,9 @@ function sendDocumentMessageSingle(messageDocument, url) {
   var currentGroupId = $("#current_group_id").val();
 
   var message = {
-    to_user_id: 0,
-    to_user_name: "",
+    to_user_id: $("#current_receiver_id").val(),
+    to_user_name: $("#current_receiver_name_id").val(),
+    to_user_image: $("#current_profile_to_user_image").val(),
     from_user_id: UserInfo.user_id,
     from_user_name: UserInfo.first_name,
     send_profile_image: UserInfo.profileImage,
