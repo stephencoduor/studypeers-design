@@ -2717,7 +2717,11 @@ class Account extends CI_Controller
             $this->db->join('user','user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
-            $html = '<div class="chatMsg" id="chatMsg_' . $comment_id . '">
+            $count = $this->db->get_where('comment_master', array('reference_id' => $event_id, 'reference' => 'event', 'comment_parent_id' => 0, 'status' => 1))->num_rows();
+
+            $text = 'event';
+
+            $html = '<div class="chatMsg" id="comment_id_' . $comment_id . '">
                         <figure>
                             <img src="' . userImage($user_id) . '" alt="User">
                         </figure>
@@ -2726,8 +2730,8 @@ class Account extends CI_Controller
                             ' . $comment . '                                                 
                             <div class="actionmsgMenu">
                                 <ul>
-                                    <li class="likeuser" onclick="likeComment(' . $comment_id . ')">Like</li>
-                                    <li class="replyuser" onclick="showReplyUser(' . $comment_id . ')">Reply</li>
+                                    <li class="likeuser" id="likeComment' . $comment_id . '" onclick="likeComment(' . $comment_id . ')">Like</li>
+                                    <li class="replyuser" onclick="showReplyBox(' . $comment_id . ')">Reply</li>
                                 </ul>
                             </div>
                             <div class="reactmessage" id="reactmessage_' . $comment_id . '" style="display:none;">
@@ -2737,10 +2741,55 @@ class Account extends CI_Controller
                                 <p id="like_count_' . $comment_id . '"></p>
                             </div>
                         </figcaption>
+                        <div class="dotsBullet dropdown">
+                                                    <img
+                                                        src="'.base_url().'assets_d/images/more.svg"
+                                                        alt="more"
+                                                        data-toggle="dropdown">
+                                                    <ul class="dropdown-menu"
+                                                        role="menu"
+                                                        aria-labelledby="menu1">
+                                                        <li role="presentation">
+                                                            <a role="menuitem"
+                                                               tabindex="-1"
+                                                               href="javascript:void(0);">
+                                                                <div
+                                                                    class="left">
+                                                                    <img
+                                                                        src="'.base_url().'assets_d/images/restricted.svg"
+                                                                        alt="Save">
+                                                                </div>
+                                                                <div
+                                                                    class="right">
+                                                                    <span>Hide/block</span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        
+                                                            <li role="presentation">
+                                                                <a role="menuitem"
+                                                                   tabindex="-1"
+                                                                   href="javascript:void(0);" onclick="deleteComment(' . $comment_id . ', '.$event_id.', \''.$text.'\')">
+                                                                    <div
+                                                                        class="left">
+                                                                        <img
+                                                                            src="'.base_url().'assets_d/images/trash.svg"
+                                                                            alt="Link">
+                                                                    </div>
+                                                                    <div
+                                                                        class="right">
+                                                                        <span>Delete</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        
+                                                    </ul>
+                                            </div>
+
                         <div class="reply" id="reply_' . $comment_id . '">
                                                 
                         </div>
-                        <div class="replyBox" id="replyBox_' . $comment_id . '">
+                        <div class="replyBox" id="replyBox' . $comment_id . '">
                             <figure>
                                 <img src="' . userImage($user_id) . '" alt="User">
                             </figure>
@@ -2749,8 +2798,13 @@ class Account extends CI_Controller
                             </div>
                         </div>                                                  
                     </div>';
-            echo $html;
-            die;
+            $result['html'] = $html;
+            if($count != 0){
+                $result['count'] = '('.$count.')';
+            } else {
+                $result['count'] = '';
+            }
+            print_r(json_encode($result));die;
         }
     }
 
@@ -2773,20 +2827,78 @@ class Account extends CI_Controller
 
             );
 
+            $comment_parent_id = $comment_id;
+
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
             $this->db->join('user','user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
-            $html = '<div class="userReplyBox"><figure>
+            $html = '<div class="userReplyBox" id="comment_reply_id_'.$comment_id.'"><figure>
                         <img src="' . userImage($user_id) . '" alt="User">
                     </figure>
                     <figcaption>
                         <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name">' . $user_info['nickname'] . '</span></a>
                         ' . $comment . '                                            
-                        
-                    </figcaption></div>';
+                        <div class="actionmsgMenu">
+                            <ul>
+                                <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
+                                
+                            </ul>
+                        </div>
+                        <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display:none;">
+                            <div class="react">
+                                <img src="'.base_url().'assets_d/images/like.png" alt="Like">
+                            </div>
+                            <p id="like_count_'.$comment_id.'">0</p>
+                        </div>
+                    </figcaption>
+                    <div class="dotsBullet dropdown">
+                                                    <img
+                                                        src="'.base_url().'assets_d/images/more.svg"
+                                                        alt="more"
+                                                        data-toggle="dropdown">
+                                                    <ul class="dropdown-menu"
+                                                        role="menu"
+                                                        aria-labelledby="menu1">
+                                                        <li role="presentation">
+                                                            <a role="menuitem"
+                                                               tabindex="-1"
+                                                               href="javascript:void(0);">
+                                                                <div
+                                                                    class="left">
+                                                                    <img
+                                                                        src="'.base_url().'assets_d/images/restricted.svg"
+                                                                        alt="Save">
+                                                                </div>
+                                                                <div
+                                                                    class="right">
+                                                                    <span>Hide/block</span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        
+                                                            <li role="presentation">
+                                                                <a role="menuitem"
+                                                                   tabindex="-1"
+                                                                   href="javascript:void(0);" onclick="deleteCommentReply('.$comment_id.', '.$comment_parent_id.')">
+                                                                    <div
+                                                                        class="left">
+                                                                        <img
+                                                                            src="'.base_url().'assets_d/images/trash.svg"
+                                                                            alt="Link">
+                                                                    </div>
+                                                                    <div
+                                                                        class="right">
+                                                                        <span>Delete</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        
+                                                    </ul>
+                                            </div>
+                    </div>';
             echo $html;
             die;
         }
@@ -2800,17 +2912,24 @@ class Account extends CI_Controller
             $comment_id = $this->input->post('comment_id');
             $user_id = $this->session->get_userdata()['user_data']['user_id'];
 
-            $insertArr = array(
-                'comment_id' => $comment_id,
+            $if_user_liked = $this->db->get_where('comment_like_master', array('comment_id' => $comment_id, 'status' => 1, 'user_id' => $user_id))->row_array();
 
-                'user_id' => $user_id,
+            if(!empty($if_user_liked)) {
+                $this->db->where(array('comment_id' => $comment_id, 'user_id' => $user_id));
+                $this->db->delete('comment_like_master');
+            } else {
 
-                'status' => '1',
-                'created_at' => date('Y-m-d H:i:s')
+                $insertArr = array( 'comment_id' => $comment_id,
+                                    
+                                    'user_id' => $user_id,
+                                    
+                                    'status' => '1',
+                                    'created_at' => date('Y-m-d H:i:s')
 
-            );
+                                );
 
-            $this->db->insert('comment_like_master', $insertArr);
+                $this->db->insert('comment_like_master', $insertArr);
+            }
             $count = $this->db->get_where('comment_like_master', array('comment_id' => $comment_id, 'status' => 1))->num_rows();
             echo $count;
         }

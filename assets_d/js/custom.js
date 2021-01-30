@@ -129,10 +129,10 @@ $(document).ready(function() {
     if($(window).width() <= 767) {
         $('.filterForm').removeClass('collapse');
     }
-    $('.replyuser').on('click',()=>{
-        // $(this).parent('ul').parent('.actionmsgMenu').parent('figcaption').parent('.chatMsg').addClass('reply');
-        $('.chatMsg').addClass('reply');
-})
+    // $('.replyuser').on('click',()=>{
+        
+    //     $('.chatMsg').addClass('reply');
+    // })
 });
 $(".my-rating-4").starRating({
     totalStars: 5,
