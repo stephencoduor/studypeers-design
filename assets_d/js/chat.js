@@ -818,6 +818,8 @@ function sendMessageToSingleUser(messageText) {
     });
   }
 
+  console.log("testing");
+
   var currentGroupId = $("#current_group_id").val();
 
   var message = {
