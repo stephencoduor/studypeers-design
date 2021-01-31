@@ -298,49 +298,49 @@
 									</div>
 								</figcaption>
 								<div class="dotsBullet dropdown">
-                                                    <img
-                                                        src="<?php echo base_url(); ?>assets_d/images/more.svg"
-                                                        alt="more"
-                                                        data-toggle="dropdown">
-                                                    <ul class="dropdown-menu"
-                                                        role="menu"
-                                                        aria-labelledby="menu1">
-                                                        <li role="presentation">
-                                                            <a role="menuitem"
-                                                               tabindex="-1"
-                                                               href="javascript:void(0);">
-                                                                <div
-                                                                    class="left">
-                                                                    <img
-                                                                        src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
-                                                                        alt="Save">
-                                                                </div>
-                                                                <div
-                                                                    class="right">
-                                                                    <span>Hide/block</span>
-                                                                </div>
-                                                            </a>
-                                                        </li>
-                                                        <?php if(($user_id == $event['created_by']) || $user_id == $value['user_id']) { ?>
-	                                                        <li role="presentation">
-	                                                            <a role="menuitem"
-	                                                               tabindex="-1"
-	                                                               href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $event['id']; ?>', 'event')">
-	                                                                <div
-	                                                                    class="left">
-	                                                                    <img
-	                                                                        src="<?php echo base_url(); ?>assets_d/images/trash.svg"
-	                                                                        alt="Link">
-	                                                                </div>
-	                                                                <div
-	                                                                    class="right">
-	                                                                    <span>Delete</span>
-	                                                                </div>
-	                                                            </a>
-	                                                        </li>
-	                                                    <?php } ?>
-                                                    </ul>
-                                            </div>
+                                        <img
+                                            src="<?php echo base_url(); ?>assets_d/images/more.svg"
+                                            alt="more"
+                                            data-toggle="dropdown">
+                                        <ul class="dropdown-menu"
+                                            role="menu"
+                                            aria-labelledby="menu1">
+                                            <li role="presentation">
+                                                <a role="menuitem"
+                                                   tabindex="-1"
+                                                   href="javascript:void(0);">
+                                                    <div
+                                                        class="left">
+                                                        <img
+                                                            src="<?php echo base_url(); ?>assets_d/images/restricted.svg"
+                                                            alt="Save">
+                                                    </div>
+                                                    <div
+                                                        class="right">
+                                                        <span>Hide/block</span>
+                                                    </div>
+                                                </a>
+                                            </li>
+                                            <?php if(($user_id == $event['created_by']) || $user_id == $value['user_id']) { ?>
+                                                <li role="presentation">
+                                                    <a role="menuitem"
+                                                       tabindex="-1"
+                                                       href="javascript:void(0);" onclick="deleteComment('<?= $value['id']; ?>', '<?php echo $event['id']; ?>', 'event')">
+                                                        <div
+                                                            class="left">
+                                                            <img
+                                                                src="<?php echo base_url(); ?>assets_d/images/trash.svg"
+                                                                alt="Link">
+                                                        </div>
+                                                        <div
+                                                            class="right">
+                                                            <span>Delete</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                            <?php } ?>
+                                        </ul>
+                                </div>
 
 								<div class="reply" id="reply_<?php echo $value['id'] ?>">
 									<?php foreach ($reply as $key2 => $value2) {
