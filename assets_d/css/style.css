@@ -1459,8 +1459,20 @@ transform-origin: 0 0;
 .navbar-brand-icon svg {
     fill: #185aeb;
 }
+.left-btn-wrap ,.right-btn-wrap {
+    display: flex;
+    align-items: center;
+}
+.pdfobject-container { height: 830px;}
 @media (max-width: 767px) {
     .navbar-brand-icon svg {
         fill: #d3531a;
+    }
+    .left-btn-wrap, .right-btn-wrap{
+        align-items: flex-start;
+    }
+    .right-btn-wrap .filterBtn {
+        padding: 6px 25px;
+        height: 36px;
     }
 }

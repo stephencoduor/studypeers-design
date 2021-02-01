@@ -38,6 +38,7 @@ foreach ($getdata as $key => $value) {
 				<span class="error" id="study_search_err"></span>
 
 				<div class="buttonGroup">
+					<div class="left-btn-wrap">
 					<button type="button" class="filterBtn">
 						<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.9 489.9">
 							<path d="M20.8,96.2h23.7c9,31.4,37.8,54.1,73,54.1s64.8-22.7,73.4-54.1h277.2c11.4,0,21.8-9.4,21.8-20.8s-9.4-20.8-20.8-20.8
@@ -54,6 +55,7 @@ foreach ($getdata as $key => $value) {
 						</svg>
 						Filter
 					</button>
+				
 					<div class="sortwrapper">
 						<button type="button" class="sortMenu dropdown-toggle" data-toggle = "dropdown">
 							<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.389 489.389">
@@ -73,6 +75,8 @@ foreach ($getdata as $key => $value) {
 							<li><a href = "<?php echo base_url();?>studyset?<?php echo $getStr;?>order_by=rating_count">Rating</a></li>
 						</ul>
 					</div>
+					</div>
+					<div class="right-btn-wrap">
 					<button type="button" class="sortMenu viewList">
 						<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489 489">
 							<path d="M209.1,259.1H20.8C9.4,259.1,0,268.5,0,279.9v188.3C0,479.6,9.4,489,20.8,489h188.3c11.4,0,19.8-9.4,20.8-20.8V279.9
@@ -90,6 +94,7 @@ foreach ($getdata as $key => $value) {
 
 						Clear
 					</a>
+					</div>
 				</div>
 			</div>
 			<div class="filterForm collapse">

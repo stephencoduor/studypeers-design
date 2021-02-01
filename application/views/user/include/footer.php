@@ -6,6 +6,7 @@
 <script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>
 <script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
 <?php if ($index_menu == 'study-sets') { ?>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>
@@ -116,6 +117,8 @@
 	</script>
 <?php } ?>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.nice-select.min.js"></script>
+<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/pdfobject.min.js"></script>
+<script>PDFObject.embed("<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>", "#example1");</script>
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 </body>
 

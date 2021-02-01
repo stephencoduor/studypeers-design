@@ -61,8 +61,8 @@
 									<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>' width='100%' height='830px' frameborder='0'> </iframe>
 									
 								<?php } else if($extn == 'pdf') {  ?>
-									<embed src="<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>" width="100%" height="830" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html">
-									
+									<!-- <embed src="<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>" width="100%" height="830" alt="pdf" pluginspage="http://www.adobe.com/products/acrobat/readstep2.html"> -->
+									<div id="example1" width="100%" height="830"></div>
 								<?php } else if($extn == 'ppt' || $extn == 'pptx') { ?>
 									<iframe src='https://view.officeapps.live.com/op/embed.aspx?src=<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>' width='100%' height='830px' frameborder='0'> </iframe>
 								<?php } else if($extn == 'xls' || $extn == 'xlsx') { ?>
