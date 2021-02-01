@@ -2932,6 +2932,10 @@ figcaption a {
     -o-transition: all 0.3s ease-in;
 }
 @media (max-width: 767px) {
+    #peer_suggestion_box .createBox {
+        padding: 15px;
+        margin-bottom:15px;
+    }
     .infoWrapper{
         flex-direction: column;
     }

@@ -757,6 +757,9 @@ a.filterBtn,a.sortMenu{
     .search{max-width: 250px;}
 }
 @media(max-width:767px){
+    .logo{
+        left:75px;
+    }
     .tabularLiist .nav.nav-tabs{
         margin-top:15px!important;
     }
@@ -846,7 +849,7 @@ a.filterBtn,a.sortMenu{
         padding: 6px 6px !important;
     }
     .rightsidemsgbar,aside{top:60px;}
-    .logo{margin-top:14px;left: 17%;}
+    .logo{margin-top:14px;}
     #sidenav {top: -45px;}
 }
 @media(max-width:479px){
@@ -895,11 +898,6 @@ a.filterBtn,a.sortMenu{
         width: calc(100% - 20px);
         padding: 0;
         margin-right: 10px !important;
-    }
-}
-@media(max-width:400px) {
-    .logo {
-        left: 21%;
     }
 }
 
