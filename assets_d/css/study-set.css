@@ -2285,6 +2285,14 @@ l,.share:focus
     .mainCardWrapper.newflash .flashcards{
         height: 460px!important;
     }
+    .buttonGroup button {
+        padding: 7px 10px;
+        height:auto;
+    }
+    a.filterBtn{
+        padding: 7px 10px;
+        height:auto;
+    }
     .sp-table{
         margin:10px 0;
     }
@@ -2466,9 +2474,6 @@ l,.share:focus
     }
 }
 @media(max-width:576px) {
-    .buttonGroup button {
-        padding: 10px 15px;
-    }
     .feed_card_inner .header h5 {
         font-size: 14px;
     }
@@ -2574,10 +2579,6 @@ l,.share:focus
     }
     .socialAction,.timeDetail {
         margin-top: 15px;
-    }
-    .buttonGroup button {
-        padding: 7px 10px;
-        height:auto;
     }
     .studySetWrapper .header {
         flex-wrap: wrap;

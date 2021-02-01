@@ -77,7 +77,7 @@ foreach ($getdata as $key => $value) {
 					</div>
 					</div>
 					<div class="right-btn-wrap">
-					<button type="button" class="sortMenu viewList">
+					<button type="button" class="sortMenu viewList hide-in-mobile">
 						<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489 489">
 							<path d="M209.1,259.1H20.8C9.4,259.1,0,268.5,0,279.9v188.3C0,479.6,9.4,489,20.8,489h188.3c11.4,0,19.8-9.4,20.8-20.8V279.9
 											C229.9,268.4,220.6,259.1,209.1,259.1z M188.3,448.4H40.6V300.7h147.7L188.3,448.4L188.3,448.4z"></path>
