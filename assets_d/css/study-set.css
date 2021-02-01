@@ -2282,7 +2282,9 @@ l,.share:focus
     }
 }
 @media(max-width:767px){
-    
+    .mainCardWrapper.newflash .flashcards{
+        height: 460px!important;
+    }
     .sp-table{
         margin:10px 0;
     }
