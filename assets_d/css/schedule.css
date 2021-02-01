@@ -2646,6 +2646,9 @@ div[data-edit] {
     }
 }
 @media(max-width:767px){
+    .events{
+        padding-left:0;
+    }
     .scheduleWrapper .header h4 {
         font-size: 25px;
     }
@@ -2812,7 +2815,7 @@ div[data-edit] {
         padding-top:0 !important;
     }
     .events .feed-card.list {
-        margin:0;
+        margin:0 0 15px;
         flex-flow: wrap column;
     }
     .events .feed_card_inner .header h5, .events .feed-card.list h5 {
@@ -3103,6 +3106,12 @@ div[data-edit] {
     .mainContent.active .flex-row{
         width:100%;
         flex-direction: column;
+    }
+    .events .feed-card.list{
+        margin:0 0 15px;
+    }
+    .studySetWrapper .left{
+        width:100%;
     }
     .tabularLiist > .nav-tabs li a{
         padding: 10px 15px !important;
