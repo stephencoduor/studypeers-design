@@ -247,6 +247,8 @@
     display: flex;
     align-items: center;
     flex-wrap: wrap;
+    flex-wrap: inherit;
+    overflow: auto;
 }
 .innerFeedTabs .nav li {
     background: #e9e9e9;
@@ -254,7 +256,8 @@
     margin: 0 8px 8px 0;
 }
 .innerFeedTabs .nav li a {
-    padding: 12px 22px !important;
+    padding: 12px 15px !important;
+    white-space: nowrap;
 }
 .innerFeedTabs .nav-tabs li.active  {
     background: #ea2e7e;
@@ -1057,6 +1060,8 @@
 .box-card .imgWrapper figure img {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    object-position: center center;
 }
 .more,.less {
     font-size: 14px;
@@ -1187,12 +1192,14 @@
     font-size: 14px;
     font-weight: 400;
     margin-right:10px;
+    white-space: nowrap;
 }
 .event-description .right a {
     font-weight:500;
     cursor: pointer;
     font-size: 15px;
     color: #546de5;
+    white-space: nowrap;
 }
 .event-description .right a:hover {
     text-decoration: underline;
@@ -3807,6 +3814,20 @@ input:-webkit-autofill:active {
     }
 }
 @media (max-width: 767px) {
+    .event-description{
+        flex-direction: column;
+    }
+    .event-description .left{
+        width:100%;
+        margin-bottom:15px;
+    }
+    .tabPaneWrapper  .event-description  .right{
+        width:100%!important;
+        padding-left:0;
+    }
+    #timeline-feeds .imgWrapper figure{
+        width:100%;
+    }
     .tabPaneWrapper .right{
         min-width: auto;
         width:calc(100% - 60px)!important;

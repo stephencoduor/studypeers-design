@@ -2580,9 +2580,6 @@ l,.share:focus
     .studySetWrapper .header {
         flex-wrap: wrap;
     }
-    .filterBtn, .sortMenu, .createBtn {
-        margin-bottom: 20px !important;
-    }
     #confirmationModal .transparentBtn {
         margin-bottom: 20px !important;
     }

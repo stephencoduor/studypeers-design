@@ -2891,9 +2891,6 @@ textarea.textarea-gray {
     .studySetWrapper .header {
         flex-wrap: wrap;
     }
-    .filterBtn, .sortMenu, .createBtn {
-        margin-bottom: 20px !important;
-    }
     .filterBtn.download {
         margin-bottom:0 !important;
     }
