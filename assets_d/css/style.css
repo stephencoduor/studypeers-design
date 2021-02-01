@@ -740,10 +740,6 @@ a.filterBtn,a.sortMenu{
         width: 50%;
         left: 10px;
     }
-    #sidenav.open {
-        /*left: 290px;
-        background: rgb(232, 239, 253);*/
-    }
     .mainContent.msgActive.active {
         padding: 0px 40px;
     }
@@ -1445,4 +1441,26 @@ transform-origin: 0 0;
 .blankFeedArea.SmallFeed .noFeedWrapper h4{
     font-size:18px;
     margin:0;
+}
+.navbar-brand-icon {
+    width: 36px;
+    height: 36px;
+    position: absolute;
+    right: 10px;
+    top: 20px;
+    background: #e5ecff;
+    color: #185aeb;
+    border: 0px;
+    border-radius: 8px;
+    padding: 8px;
+    transition: all 300ms ease-in-out;
+    z-index: 11;
+}
+.navbar-brand-icon svg {
+    fill: #185aeb;
+}
+@media (max-width: 767px) {
+    .navbar-brand-icon svg {
+        fill: #d3531a;
+    }
 }

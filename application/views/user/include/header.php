@@ -453,7 +453,13 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 							</div>
 						</div>
 					</nav>
-					<a class="navbar-brand" href="javascript:void(0);"></a>
+					<button type="button" class="navbar-brand-icon">
+						<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490">
+							<path d="M465.5,343h-441C11,343,0,354,0,367.5S11,392,24.5,392h441c13.5,0,24.5-11,24.5-24.5S479,343,465.5,343z"></path>
+							<path d="M465.5,220.5h-441C11,220.5,0,231.5,0,245s11,24.5,24.5,24.5h441c13.5,0,24.5-11,24.5-24.5S479,220.5,465.5,220.5z"></path>
+							<path d="M24.5,147h441c13.5,0,24.5-11,24.5-24.5S479,98,465.5,98h-441C11,98,0,109,0,122.5S11,147,24.5,147z"></path>
+						</svg>
+					</button>
 				</section>
 			</section>
 		</section>
