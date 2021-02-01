@@ -306,24 +306,24 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="course_id[]" class="form-control form-control--lg" placeholder="Course ID">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="course_name[]" class="form-control form-control--lg course_name" placeholder="Course Name">
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="professor_first_name[]" class="form-control form-control--lg professor_first_name" placeholder="Professor First Name">
                                 </div>
                             </div>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="professor_last_name[]" class="form-control form-control--lg professor_last_name" placeholder="Professor Last Name">
                                 </div>
