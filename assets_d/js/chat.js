@@ -978,7 +978,8 @@ function sendDocumentMessageSingle(messageDocument, url) {
   $(".emojionearea-editor").html("");
   $("#single_chat_submit_button").val("");
   $("#current_image_upload_src").val("");
-  $("#append_image_after_upload").html("");
+  $("#append_image_after_upload_single").html("");
+  $(".say-hi-wrapper").hide();
 }
 
 function showBigGroupChatWindow() {

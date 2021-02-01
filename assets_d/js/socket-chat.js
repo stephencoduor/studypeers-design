@@ -891,7 +891,7 @@ function formatTopMessageHeaderSingleChat(messageJson) {
     "' data-groupId='" +
     messageJson.group_id +
     "' data-name='" +
-    messageJson.group_name +
+    name +
     "' data-groupmembers='" +
     JSON.stringify(messageJson.group_members) +
     "' data-id='" +

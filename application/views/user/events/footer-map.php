@@ -283,8 +283,10 @@
 						'comment': comment,
 						'event_id': event_id
 					},
+					dataType: 'json',
 					success: function(result) {
-						$('#event_comment').append(result);
+						$('#event_comment').append(result.html);
+						$('#commentCount').html(result.count);
 						$("#input-emoji").val('');
 					}
 				});
@@ -292,7 +294,9 @@
 		}
 	});
 
-
+	function showReplyBox(comment_id){
+		$('#replyBox'+comment_id).css('display','flex');
+	}
 
 	function postReply(event, comment_id, comment) {
 		if (event.which == 13) {
@@ -352,8 +356,23 @@
 				'comment_id': comment_id
 			},
 			success: function(result) {
-				$('#reactmessage_' + comment_id).show();
-				$('#like_count_' + comment_id).html(result);
+				if (result != 0) {
+					$('#reactmessage_' + comment_id).show();
+					$('#like_count_' + comment_id).html(result);
+					if ($('#likeComment' + comment_id).text() == 'Like') {
+                        $('#likeComment' + comment_id).text('Liked');
+                    } else {
+                        $('#likeComment' + comment_id).text('Like');
+                    }
+				} else {
+					$('#reactmessage_' + comment_id).hide();
+					$('#like_count_' + comment_id).html(result);
+					if ($('#likeComment' + comment_id).text() == 'Like') {
+                        $('#likeComment' + comment_id).text('Liked');
+                    } else {
+                        $('#likeComment' + comment_id).text('Like');
+                    }
+				}
 			}
 		});
 	}
@@ -416,7 +435,57 @@
 
 
 
+	function deleteCommentReply(reply_id, comment_id) {
 
+        var url = '<?php echo base_url('profile/deleteCommentReply') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'reply_id': reply_id,
+                'comment_id': comment_id
+            },
+
+            success: function(result) {
+                $('#comment_reply_id_' + reply_id).remove();
+                // if (result != '(0)') {
+                //     $('#comment_reply_count_' + comment_id).show();
+                //     $('#comment_reply_count_' + comment_id).html(result);
+                // } else {
+                //     $('#comment_reply_count_' + comment_id).hide();
+                // }
+            }
+        });
+
+
+    }
+
+
+    function deleteComment(comment_id, reference_id, reference) {
+
+        var url = '<?php echo base_url('profile/deleteComment') ?>';
+        $.ajax({
+            url: url,
+            type: 'POST',
+            data: {
+                'comment_id': comment_id,
+                'reference_id': reference_id,
+                'reference': reference
+            },
+
+            success: function(result) {
+                $('#comment_id_' + comment_id).remove();
+                if (result != '0') {
+                    $('#commentCount').show();
+                    $('#commentCount').html(result);
+                } else {
+                    $('#commentCount').hide();
+                }
+            }
+        });
+
+
+    }
 
 
 

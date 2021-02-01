@@ -230,7 +230,8 @@ $("body").on("click", "#send_button_chat_single", function(event) {
   $(".emojionearea-editor").html("");
   $("#send_message_input").val("");
   $("#current_image_upload_src").val("");
-  $("#append_image_after_upload").html("");
+  $("#append_image_after_upload_single").html("");
+  $(".say-hi-wrapper").hide();
 });
 
 $("body").on("click", ".open-single-chat-window", function() {
