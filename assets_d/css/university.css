@@ -169,8 +169,8 @@ header .navbar-default ul li .notification-header a:hover {
 	height:100%;
 }
 .nav .dropdown.open .notification li a .right {
-    margin-left: 10px;
-    width: 89%;
+    padding-left: 10px;
+    width:calc(100% - 50px);
     position: relative;
 }
 .nav .dropdown.open .notification li a .right  h6 {
@@ -252,9 +252,12 @@ header .navbar-default ul li .notification-header a:hover {
 }
 @media (max-width: 767px) {
     .nav .dropdown-menu.notification{
-        top: 53px;
-        left: -115px;
+        top: 64px;
+        left: 10px;
         right: auto;
-        min-width: 320px;
+        min-width: initial;
+        width: 300px;
+        position: fixed;
+        z-index:9;
     }
 }
