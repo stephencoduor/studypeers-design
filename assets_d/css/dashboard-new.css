@@ -2833,6 +2833,21 @@ figcaption a {
     align-items: center;
     justify-content: space-between;
 }
+.progressbar-wrap {
+    display: flex;
+    align-items: center;
+}
+.progressBar.pd-left{
+    display: flex;
+    align-items:center;
+    justify-content: flex-end;
+}
+.progressBar.pd-left .progress{
+    width:calc(100% - 35px);
+}
+.progressBar.pd-left  .dashRadioWrap{
+    left:-35px;
+}
 .selectedPollOptions .progressValues .leftValue {
     font-size: 16px;
     font-weight: 500;

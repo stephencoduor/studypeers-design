@@ -2198,8 +2198,8 @@
                                         $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$value['reference_id'], 'poll_option_id' => @$options['id']))->result_array(); 
                                     ?>
                                         <div class="selectedPollOptions">
-                                            <label class="dashRadioWrap">
-                                                <div class="progressBar">
+                                            
+											<div class="progressBar pd-left">
                                                     <div class="progress">
                                                         <div class="progressValues">
                                                             <div class="leftValue">
@@ -2256,19 +2256,23 @@
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
-                                                        <div class="progress-bar"
+														<div class="progressbar-wrap">
+															<label class="dashRadioWrap">
+																<?php  if($if_poll_active == 1) { ?>
+																	<input type="radio" <?= $chk; ?> name="radio" >
+																	<span class="checkmark" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')"></span>
+																<?php } ?>
+															</label>
+															<div class="progress-bar"
                                                              role="progressbar"
                                                              aria-valuenow="<?= $per; ?>"
                                                              aria-valuemin="0"
                                                              aria-valuemax="100"
                                                              style="width:<?= $per ?>%"></div>
+														</div>
+                                                        
                                                     </div>
                                                 </div>
-                                                <?php  if($if_poll_active == 1) { ?>
-	                                                <input type="radio" <?= $chk; ?> name="radio" >
-	                                                <span class="checkmark" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')"></span>
-	                                            <?php } ?>
-                                            </label>
                                         </div>
                                         <?php
                                     } ?>
