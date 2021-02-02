@@ -1431,6 +1431,8 @@ class Account extends CI_Controller
         $this->db->order_by('document_master.id', 'desc');
         $data['result'] = $this->db->get_where($this->db->dbprefix('document_master'), array('document_master.id' => $document_id, 'document_master.status' => 1))->row_array();
 
+        $data['comment'] = $this->db->get_where('comment_master', array('reference' => 'document', 'reference_id' => $document_id, 'comment_parent_id' => 0))->result_array();
+
         $this->load->view('user/include/header', $data);
         $this->load->view('user/documents/document-details');
         $this->load->view('user/include/right-sidebar');
@@ -3024,6 +3026,120 @@ class Account extends CI_Controller
                     </div>';
             echo $html;
             die;
+        }
+    }
+
+    public function addCommentDocument()
+    {
+        if ($this->input->post()) {
+            $comment = $this->input->post('comment');
+            $doc_id = $this->input->post('doc_id');
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+            $insertArr = array(
+                'reference' => 'document',
+                'reference_id' => $doc_id,
+                'user_id' => $user_id,
+                'comment' => $comment,
+                'status' => '1',
+                'created_at' => date('Y-m-d H:i:s')
+
+            );
+
+            $this->db->insert('comment_master', $insertArr);
+            $comment_id = $this->db->insert_id();
+            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+            $this->db->join('user','user.id=user_info.userID');
+            $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
+
+            $count = $this->db->get_where('comment_master', array('reference_id' => $doc_id, 'reference' => 'document', 'comment_parent_id' => 0, 'status' => 1))->num_rows();
+
+            $text = 'document';
+
+            $html = '<div class="chatMsg" id="comment_id_' . $comment_id . '">
+                        <figure>
+                            <img src="' . userImage($user_id) . '" alt="User">
+                        </figure>
+                        <figcaption>
+                            <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
+                            ' . $comment . '                                                 
+                            <div class="actionmsgMenu">
+                                <ul>
+                                    <li class="likeuser" id="likeComment' . $comment_id . '" onclick="likeComment(' . $comment_id . ')">Like</li>
+                                    <li class="replyuser" onclick="showReplyBox(' . $comment_id . ')">Reply</li>
+                                </ul>
+                            </div>
+                            <div class="reactmessage" id="reactmessage_' . $comment_id . '" style="display:none;">
+                                <div class="react">
+                                    <img src="' . base_url() . 'assets_d/images/like.png" alt="Like">
+                                </div>
+                                <p id="like_count_' . $comment_id . '"></p>
+                            </div>
+                        </figcaption>
+                        <div class="dotsBullet dropdown">
+                                                    <img
+                                                        src="'.base_url().'assets_d/images/more.svg"
+                                                        alt="more"
+                                                        data-toggle="dropdown">
+                                                    <ul class="dropdown-menu"
+                                                        role="menu"
+                                                        aria-labelledby="menu1">
+                                                        <li role="presentation">
+                                                            <a role="menuitem"
+                                                               tabindex="-1"
+                                                               href="javascript:void(0);">
+                                                                <div
+                                                                    class="left">
+                                                                    <img
+                                                                        src="'.base_url().'assets_d/images/restricted.svg"
+                                                                        alt="Save">
+                                                                </div>
+                                                                <div
+                                                                    class="right">
+                                                                    <span>Hide/block</span>
+                                                                </div>
+                                                            </a>
+                                                        </li>
+                                                        
+                                                            <li role="presentation">
+                                                                <a role="menuitem"
+                                                                   tabindex="-1"
+                                                                   href="javascript:void(0);" onclick="deleteComment(' . $comment_id . ', '.$doc_id.', \''.$text.'\')">
+                                                                    <div
+                                                                        class="left">
+                                                                        <img
+                                                                            src="'.base_url().'assets_d/images/trash.svg"
+                                                                            alt="Link">
+                                                                    </div>
+                                                                    <div
+                                                                        class="right">
+                                                                        <span>Delete</span>
+                                                                    </div>
+                                                                </a>
+                                                            </li>
+                                                        
+                                                    </ul>
+                                            </div>
+
+                        <div class="reply" id="reply_' . $comment_id . '">
+                                                
+                        </div>
+                        <div class="replyBox" id="replyBox' . $comment_id . '">
+                            <figure>
+                                <img src="' . userImage($user_id) . '" alt="User">
+                            </figure>
+                            <div class="replyuser">
+                                <input type="text" id="input_reply_' . $comment_id . '" placeholder="Write a Reply..." onkeypress="postReply(event,' . $comment_id . ', this.value)">
+                            </div>
+                        </div>                                                  
+                    </div>';
+            $result['html'] = $html;
+            if($count != 0){
+                $result['count'] = '('.$count.')';
+            } else {
+                $result['count'] = '';
+            }
+            print_r(json_encode($result));die;
         }
     }
 

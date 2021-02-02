@@ -2932,3 +2932,42 @@ textarea.textarea-gray {
         flex-wrap: wrap;
     }
 }
+
+
+.comment-title {
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 1.2;
+    text-align: left;
+    color: #9592a7;
+    margin-top:20px;
+    margin-bottom:20px;
+}
+.comment-title svg {
+    width: 20px;
+    height:20px;
+    fill: #9592a7;
+    vertical-align: middle;
+}
+.form-group.comment {
+    margin-bottom:35px;
+}
+.feed_card_inner .comment {
+    margin: 30px 0 10px 0;
+}
+.feed-card.list.comment {
+    margin: 30px 0 0 0;
+}
+.commentDate {
+    margin-left: 20px;
+    font-size: 12px;
+    transition: color 300ms ease-in-out;
+    color: #2a234f;
+}
+.action_button.comment svg {
+    transform: rotate(0deg);
+}
+.action_button.comment a {
+    display: flex;
+    margin-right:10px;
+}

@@ -8,7 +8,7 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
-<?php if ($index_menu == 'study-sets') { ?>
+<?php if ($index_menu == 'study-sets' || $index_menu == 'documents') { ?>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script>
 
@@ -21,6 +21,42 @@
 <?php if ($index_menu == 'study-sets') { ?>
 
 	<script src='<?php echo base_url(); ?>assets_d/js/main.js'></script>
+<?php } ?>
+
+<?php if ($index_menu == 'documents') { ?>
+<script>
+	$(document).ready(function(e) {
+		$('#input-emoji').emojiPicker({
+			width: '320px',
+			height: '328px'
+		});
+	});
+
+	$("#input-emoji").keypress(function(event) {
+		if (event.which == 13) {
+			comment = $("#input-emoji").val();
+			doc_id = $("#comment_document_id").val();
+			if (comment != '') {
+				var url = '<?php echo base_url('account/addCommentDocument') ?>';
+				$.ajax({
+					url: url,
+					type: 'POST',
+					data: {
+						'comment': comment,
+						'doc_id': doc_id
+					},
+					dataType: 'json',
+					success: function(result) {
+						$('#document_comment').append(result.html);
+						$('#commentCount').html(result.count);
+						$("#input-emoji").val('');
+					}
+				});
+			}
+		}
+	});
+
+</script>
 <?php } ?>
 
 
