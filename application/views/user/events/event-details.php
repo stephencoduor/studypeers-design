@@ -332,7 +332,7 @@
 															} ?>
 															<div class="reactmessage" id="reactmessage_<?php echo $value2['id'] ?>" style="<?= $css2; ?>">
 																<div class="react">
-																	<img src="<?php echo base_url(); ?>assets_d/images/like.png" alt="Like">
+																	<img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like">
 																</div>
 																<p id="like_count_<?php echo $value2['id'] ?>"><?= $count_like2; ?></p>
 															</div>
