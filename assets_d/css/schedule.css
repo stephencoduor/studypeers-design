@@ -1999,6 +1999,7 @@ div[data-edit] {
     justify-content: flex-start;
     margin: 0 0px 10px 0px;
     flex-wrap:wrap;
+    overflow: hidden;
 }
 .chatMsg.reply {
     margin: 0 0px 30px 0px;
@@ -2042,7 +2043,7 @@ div[data-edit] {
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    right: 0;
+    right: -5px;
     background: #fff;
     border-radius: 5px;
     bottom: -15px;
@@ -3121,6 +3122,9 @@ div[data-edit] {
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+}
+.chatMsgBox .right .right{
+    width:calc(100% - 70px);
 }
 .userWrapText {
     width: 100%;
