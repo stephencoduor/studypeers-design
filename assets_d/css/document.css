@@ -2351,7 +2351,14 @@ textarea.textarea-gray {
     padding:20px;
 }
 
-
+@media (max-width: 767px) {
+    .documentDetail{
+        background-color:#fff;
+    }
+    .documentDetail #example1 a{
+        color:#ea2e7e;
+    }
+}
 
 
 

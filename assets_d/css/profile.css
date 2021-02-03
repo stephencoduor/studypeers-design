@@ -2965,8 +2965,7 @@ shareOptionList celebrate*/
     -o-transition: width .6s ease;
     transition: width .6s ease;
     border:none;
-    border-top-left-radius: 100px;
-    border-bottom-left-radius: 100px;
+    border-radius: 100px;
 }
 .dashRadioWrap input {
     position: absolute;

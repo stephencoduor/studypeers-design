@@ -1152,6 +1152,7 @@ figcaption a {
 .flex-option-row{
     display: flex;
     align-items:center;
+    justify-content: flex-end;
 }
 .flex-option-row .dashRadioWrap{
     width: 35px;
