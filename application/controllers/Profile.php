@@ -349,6 +349,8 @@ class Profile extends CI_Controller {
     }
 
 
+
+
     public function getUserPosts(){
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $friend = $this->input->post('friend_id'); 
@@ -1972,6 +1974,92 @@ class Profile extends CI_Controller {
     {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         
+
+        $peer_list = $this->db->query('SELECT *  from follow_master where user_id = '.$user_id)->result_array();
+
+        $html = '';
+
+        foreach ($peer_list as $key => $value) {
+            
+            $peer = $this->db->get_where($this->db->dbprefix('user'), array('id' => $value['peer_id']))->row_array();
+            
+            $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
+
+            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+
+
+            $html .= '<section class="list"><section class="left">
+                        <figure>
+                            <img src="' . userImage($peer['id']) . '" alt="user">
+                        </figure>
+                        <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
+                    </section>
+                    <section class="action" id="action_' . $peer['id'] . '">';
+            
+            $html .= '<button type="button" class="like" id="action_following_' . $peer['id'] . '" onclick="followUnfollow(' . $peer['id'] . ')">Unfollow</button>';
+            if (empty($chk_if_peer) && empty($chk_if_request)) {
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
+            }
+
+            if(!empty($chk_if_request) && empty($chk_if_peer)){
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
+            }
+            $html .= '</section>
+                </section>';
+        }
+        echo $html;
+        die;
+    }
+
+
+    public function getFriendFollowerList()
+    {
+        $friend = $this->input->post('id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $user_id  = $friend_data['id'];
+
+        $peer_list = $this->db->query('SELECT *  from follow_master where peer_id = '.$user_id)->result_array();
+
+        $html = '';
+
+        foreach ($peer_list as $key => $value) {
+            
+            $peer = $this->db->get_where($this->db->dbprefix('user'), array('id' => $value['user_id']))->row_array();
+            
+            $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
+
+            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+
+
+            $html .= '<section class="list"><section class="left">
+                        <figure>
+                            <img src="' . userImage($peer['id']) . '" alt="user">
+                        </figure>
+                        <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
+                    </section>
+                    <section class="action" id="action_' . $peer['id'] . '">';
+            
+            $html .= '<button type="button" class="like RemoveFollower" id="action_removefollower_' . $peer['id'] . '" data-toggle="modal" data-target="#confirmationRemoveFollower" data-id="' . $peer['id'] . '">Remove Follower</button>';
+            if (empty($chk_if_peer) && empty($chk_if_request)) {
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
+            }
+
+            if(!empty($chk_if_request) && empty($chk_if_peer)){
+                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
+            }
+            $html .= '</section>
+                </section>';
+        }
+        echo $html;
+        die;
+    }
+
+    public function getFriendFollowingList()
+    {
+        
+        $friend = $this->input->post('id'); 
+        $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
+        $user_id  = $friend_data['id'];
 
         $peer_list = $this->db->query('SELECT *  from follow_master where user_id = '.$user_id)->result_array();
 

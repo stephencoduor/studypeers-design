@@ -411,6 +411,39 @@
 
 <?php if ($user_profile_page == 1) { ?>
     <script> 
+        $(document).on('click', '.followerListModal', function() {
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
+            $.ajax({
+                url: '<?php echo base_url(); ?>profile/getFriendFollowerList',
+                type: 'post',
+                data: {
+                    "id": friend_id
+                },
+                success: function(result) {
+
+                    $('#followerListDiv').html(result);
+                }
+            })
+
+
+        });
+
+        $(document).on('click', '.followingListModal', function() {
+            var friend_id = '<?php echo $this->uri->segment('2'); ?>';
+            $.ajax({
+                url: '<?php echo base_url(); ?>profile/getFriendFollowingList',
+                type: 'post',
+                data: {
+                    "id": friend_id
+                },
+                success: function(result) {
+
+                    $('#followingListDiv').html(result);
+                }
+            })
+
+
+        });
         $(document).ready(function() { 
             var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
@@ -628,6 +661,40 @@
     </script>
 <?php } else { ?>
     <script>
+        $(document).on('click', '.followerListModal', function() {
+
+            $.ajax({
+                url: '<?php echo base_url(); ?>profile/getFollowerList',
+                type: 'post',
+                data: {
+                    "id": '1'
+                },
+                success: function(result) {
+
+                    $('#followerListDiv').html(result);
+                }
+            })
+
+
+        });
+
+        $(document).on('click', '.followingListModal', function() {
+
+            $.ajax({
+                url: '<?php echo base_url(); ?>profile/getFollowingList',
+                type: 'post',
+                data: {
+                    "id": '1'
+                },
+                success: function(result) {
+
+                    $('#followingListDiv').html(result);
+                }
+            })
+
+
+        });
+
         $(document).ready(function() {
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getMyFeeds',
@@ -876,15 +943,15 @@
     $(document).ready(function() {
         $('.loading').hide();
         var base_url = $('#base').val();
-        CKEDITOR.replace('messagepostarea', {
-            on: {
-                instanceReady: function(evt) {
-                    // Hide the editor top bar.
-                    document.getElementById('cke_1_top').style.display = 'none';
-                    document.getElementById('cke_1_bottom').style.display = 'none';
-                }
-            }
-        });
+        // CKEDITOR.replace('messagepostarea', {
+        //     on: {
+        //         instanceReady: function(evt) {
+        //             // Hide the editor top bar.
+        //             document.getElementById('cke_1_top').style.display = 'none';
+        //             document.getElementById('cke_1_bottom').style.display = 'none';
+        //         }
+        //     }
+        // });
         var counter = 1,
             video_counter = 1;
         var image_types = ['jpg', 'png', 'jpeg'];
@@ -1043,7 +1110,18 @@
 
 
         $(document).on('click', '#save_post_from_ajax', function() {
-            $('#addPostForm').submit();
+            var html_content = $('#messagepostarea').val();
+            if(html_content != ''){
+                if($('.pollsWrapper').is(":visible")){
+                    if($("input[name=option]").val() != '' && $('#start-date').val() != '' && $('input[name=poll-end-time]').val() != ''){
+                        $('#addPostForm').submit();
+                    } else {
+                        alert("Please fill poll data");
+                    }
+                } else {
+                    $('#addPostForm').submit();
+                }
+            }
         });
         $('#addPostForm').on("submit", function(e) {
             e.preventDefault();
@@ -1052,7 +1130,7 @@
 
             var formData = new FormData(this);
             var url = $(this).attr('action');
-            var html_content = CKEDITOR.instances['messagepostarea'].getData();
+            var html_content = $('#messagepostarea').val();
             var privacy = $("input:radio.privacy_val:checked").val();
 
             if ($('#allow_comment').is(':checked')) {
@@ -2483,39 +2561,7 @@
     }
 
 
-    $(document).on('click', '.followerListModal', function() {
-
-        $.ajax({
-            url: '<?php echo base_url(); ?>profile/getFollowerList',
-            type: 'post',
-            data: {
-                "id": '1'
-            },
-            success: function(result) {
-
-                $('#followerListDiv').html(result);
-            }
-        })
-
-
-    });
-
-    $(document).on('click', '.followingListModal', function() {
-
-        $.ajax({
-            url: '<?php echo base_url(); ?>profile/getFollowingList',
-            type: 'post',
-            data: {
-                "id": '1'
-            },
-            success: function(result) {
-
-                $('#followingListDiv').html(result);
-            }
-        })
-
-
-    });
+    
 
     function followUnfollow(peer_id) {
         $.ajax({
@@ -2577,9 +2623,9 @@
         }
     }
 
-    function applyHashTag() {
-        CKEDITOR.instances['messagepostarea'].insertText('#');
-    }
+    // function applyHashTag() {
+    //     CKEDITOR.instances['messagepostarea'].insertText('#');
+    // }
 </script>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script>
