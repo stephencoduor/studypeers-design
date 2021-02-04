@@ -302,7 +302,7 @@
 									</figcaption>
 									
 
-									<div class="reply" id="reply_<?php echo $value['id'] ?>">
+									<div class="reply ss" id="reply_<?php echo $value['id'] ?>">
 										<?php foreach ($reply as $key2 => $value2) {
 											$user_info2 = $this->db->get_where('user_info', array('userID' => $value2['user_id']))->row_array();
 											$user_name2 = $this->db->get_where('user', array('id' => $value2['user_id']))->row_array();

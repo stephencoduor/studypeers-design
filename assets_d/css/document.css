@@ -1759,16 +1759,17 @@ textarea{
     position: absolute;
     right: -10px;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     bottom: -15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
     color: #626262;
-    padding: 2px;
+    padding: 5px;
     cursor: pointer;
 }
 .reactmessage .react img{
-    width:12px;
-    height:12px;
+    width:20px;
+    height:auto;
+    display: block;
 }
 .reactmessage p {
     margin: 0;
@@ -2349,6 +2350,29 @@ textarea.textarea-gray {
     text-align: center;
     display: block;
     padding:20px;
+}
+.chatMsgBox {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+.chatMsgBox .right {
+    width: calc(100% - 51px);
+    padding-left: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.userWrapText {
+    width: 100%;
+}
+.chatMsgBox .right .right {
+    width: calc(100% - 70px);
 }
 
 @media (max-width: 767px) {
