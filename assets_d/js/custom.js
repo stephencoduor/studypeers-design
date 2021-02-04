@@ -1,19 +1,18 @@
-$(document).ready(() => {
+$(document).ready(function() {
     wrapupToggle();
-if($(window).width() <= 479) {
-    $('.search').click(() =>{
-        $('.search').addClass('active');
-    $('.removeSearch').css('display','block');
-})
-    $('.removeSearch').click(()=>{
-        $(this).parent('.search').removeClass('active');
-    alert();
-    $('.removeSearch').css('display','none');
-})
-}
-$("#featured_image-document").change(function() {
-    readURLDocument(this);
-});
+    if($(window).width() <= 479) {
+        $('.search').click(function(){
+            $('.search').addClass('active');
+            $('.removeSearch').css('display','block');
+        });
+        $('.removeSearch').click(function(){
+            $(this).parent('.search').removeClass('active');
+            $('.removeSearch').css('display','none');
+        });
+    }
+    $("#featured_image-document").change(function() {
+        readURLDocument(this);
+    });
 });
 
 function wrapupToggle(){
@@ -34,15 +33,14 @@ function wrapupToggle(){
     // })
 }
 $('.rightsidemsgbar').css("transform","translateX(0px)");
-// $('.mainContent').addClass('msgActive');
 
 $('.navbar-brand').on('click',()=>{
     $('.rightsidemsgbar').css("transform","translateX(0px)");
-$('.mainContent').removeClass('msgActive');
-$('.filterWrapper').addClass('active');
-if($(window).width() <= 991) {
-    $('.overlay').addClass('active');
-}
+    $('.mainContent').removeClass('msgActive');
+    $('.filterWrapper').addClass('active');
+    if($(window).width() <= 991) {
+        $('.overlay').addClass('active');
+    }
 });
 if($(window).width() <= 991) {
     $('.rightsidemsgbar').css("transform","translateX(800px)");
@@ -56,53 +54,21 @@ if($(window).width() <= 991) {
 }
 });
 $(document).ready(() => {
-//     if($(window).width() <= 1400) {
-//     $('aside').addClass('active');
-//     $('.mainContent').addClass('active');
-// }
-$('.desktopToggleButton').on('click',()=>{
-    $('.mainContent').toggleClass('active');
-    $('aside').toggleClass('active');
-})
-if($(window).width() <= 991) {
-    $('aside').addClass('active');
-    $('.mainContent').addClass('active');
-}
-$('#sidenav').on('click',()=>{
-    $('#sidenav').toggleClass('open');
-$('aside').toggleClass('active');
-$('.overlay').toggleClass('active');
-})
+    $('.desktopToggleButton').on('click',function(){
+        $('.mainContent').toggleClass('active');
+        $('aside').toggleClass('active');
+    })
+    if($(window).width() <= 991) {
+        $('aside').addClass('active');
+        $('.mainContent').addClass('active');
+    }
+    $('#sidenav').on('click',function(){
+        $('#sidenav').toggleClass('open');
+        $('aside').toggleClass('active');
+        $('.overlay').toggleClass('active');
+    })
 });
 
-
-// $("body,.sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").niceScroll(
-//   {
-//     cursorwidth:"8",
-//     cursorcolor:"#000",
-//     scrollspeed:"100",
-//     touchbehavior:false,
-//     boxzoom: true,
-//     cursor:false,
-//     smoothscroll:true,
-//     autohidemode:false,
-//     zindex:9999999,
-//     background:"#e3e3e3"
-//   });
-$(document).ready(function(){
-    // $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").mCustomScrollbar({
-    //     theme:"dark-thin",
-    //     autoExpandScrollbar:true,
-    //     advanced:{autoExpandHorizontalScroll:true}
-    // });
-});
-$(document).ready(function(){
-    // $("body,.sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").mCustomScrollbar({
-    //     theme:"dark-thin",
-    //     autoExpandScrollbar:true,
-    //     advanced:{autoExpandHorizontalScroll:true}
-    // });
-});
 // (function($){
 //   $(window).on("load",function(){
 
@@ -125,14 +91,9 @@ $(document).ready(function() {
     $('.viewList').on('click',()=>{
         $('.feedWrapper').toggleClass('listView');
 });
-
     if($(window).width() <= 767) {
         $('.filterForm').removeClass('collapse');
     }
-    // $('.replyuser').on('click',()=>{
-        
-    //     $('.chatMsg').addClass('reply');
-    // })
 });
 $(".my-rating-4").starRating({
     totalStars: 5,
@@ -312,13 +273,8 @@ $(".match-item").droppable({
                 500);
 
         }
-
-
-
     }
 });
-
-
 
 $('#nextFilp').click(function() {
     if (!$('.choose_btn').hasClass('selected') && !$('.current').hasClass('last')) {
@@ -434,7 +390,6 @@ $(document).ready(function(){
     })
 })
 
-
 //Add Course
 $('.add_course').on('click', function(){
     var coursebox = $('#courseModal .courseBox'),
@@ -467,13 +422,8 @@ $(document).on('click','.courseBox > .removeCourseBox', function(){
     }
 });
 
-
-
-
 function validateCourse(){
-
     var flag1 = 1; var flag2 = 1; var flag3 = 1;
-
     $('#course_form').find('.course_name').each(function(){
         if($(this).val() == ''){
             $(this).css('border-color', 'red');
@@ -500,14 +450,10 @@ function validateCourse(){
             $(this).css('border-color', '#ccc');
         }
     });
-
-
     if(flag1 == 0 || flag2 == 0 || flag3 == 0){
         return false;
     }
-
 }
-
 
 function showAllCourses(url){
     $.ajax({
@@ -525,9 +471,6 @@ function showAllCourses(url){
     });
 }
 
-
-
-
 // resize
 $(window).resize(function() {
     
@@ -538,42 +481,34 @@ $(window).resize(function() {
         $('.rightsidemsgbar').css("transform","translateX(0px)");
         $('.mainContent').removeClass('msgActive');
     }
-})
-
-
+});
 
 $("#course_form").submit(function(e) {
     var pathname = window.location.pathname;
-    
     e.preventDefault(); // avoid to execute the actual submit of the form.
-
     var chk = validateCourse(); 
     if(chk !== false) {
         var form = $(this);
         var url = form.attr('action');
-    
+
         $.ajax({
            type: "POST",
            url: url,
            data: form.serialize() + '&page=' + pathname, // serializes the form's elements.
-           success: function(data)
-           {    if(pathname == '/account/dashboard') {
-                    $('#courseModal').modal('hide');
-                    $('#course_count_dashboard').html(data);
-                    $("#course_form")[0].reset();
-               } else {
+           success: function(data) {    
+                if(pathname == '/account/dashboard') {
+                        $('#courseModal').modal('hide');
+                        $('#course_count_dashboard').html(data);
+                        $("#course_form")[0].reset();
+                } else {
                     $('#courseModal').modal('hide');
                     $('#course').html(data);
                     $("#course_form")[0].reset();
-               }
-               
-           }
-         });
+                }
+            }
+        });
     }
-
-    
 });
-
 
 function validateQuestionAnswer(id){
     var answer = $('#definition_'+id).val();
@@ -590,66 +525,59 @@ $(document).on('submit','form.submitQuestionAnswer',function(e){
     var form = $(this);
     var id = form.attr('id'); 
     e.preventDefault(); // avoid to execute the actual submit of the form.
-
     var chk = validateQuestionAnswer(id); 
     if(chk !== false) {
-        
         var url = form.attr('action');
-    
         $.ajax({
-           type: "POST",
-           url: url,
-           data: form.serialize() + '&page=' + pathname, // serializes the form's elements.
-           success: function(data)
-           {    
+            type: "POST",
+            url: url,
+            data: form.serialize() + '&page=' + pathname, // serializes the form's elements.
+            success: function(data) {    
                $('#replyAnswerBox'+id).append(data);
                $('#dashboard-qa-answer-'+id).hide();
-           }
-         });
-    }
-
-    
+            }
+        });
+    }    
 });
 
-    $(function() { 
-        $('#start-date'). keypress(function(event) { event. preventDefault(); return false; }); 
-        $('#end-date'). keypress(function(event) { event. preventDefault(); return false; }); 
-        $('#selectTime1 .form-control'). keypress(function(event) { event. preventDefault(); return false; }); 
+$(function() { 
+    $('#start-date'). keypress(function(event) { event. preventDefault(); return false; }); 
+    $('#end-date'). keypress(function(event) { event. preventDefault(); return false; }); 
+    $('#selectTime1 .form-control'). keypress(function(event) { event. preventDefault(); return false; }); 
         
-        $("#start-date,#end-date").on('keydown',  function(event){
-            var key = event.charCode || event.keyCode || event.which;
-            var char = String.fromCharCode(event.key);
-            if( key === 8 || key=== 46 ){
-                event.preventDefault();
-                return false;
-            }	
-            else {		
-                $("#start-date,#end-date").append(char);
-            }
-        });
-        $("#selectTime1 .form-control").on('keydown',  function(event){
-            var key = event.charCode || event.keyCode || event.which;
-            var char = String.fromCharCode(event.key);
-            if( key === 8 || key=== 46 ){
-                event.preventDefault();
-                return false;
-            }	
-            else {		
-                $("#selectTime1 .form-control").append(char);
-            }
-        });
-        $("#start-date, #end-date").on('keydown',  function(event){
-            var key = event.charCode || event.keyCode || event.which;// alert (key);
-            var char = String.fromCharCode(event.key);
-            if( key === 8 || key=== 46  ){
-                event.preventDefault();
-                return false;
-            }	else {		
-                $("#start-date, #end-date").append(char);
-            }
-        });
-    }); 
-
+    $("#start-date,#end-date").on('keydown',  function(event){
+        var key = event.charCode || event.keyCode || event.which;
+        var char = String.fromCharCode(event.key);
+        if( key === 8 || key=== 46 ){
+            event.preventDefault();
+            return false;
+        }	
+        else {		
+            $("#start-date,#end-date").append(char);
+        }
+    });
+    $("#selectTime1 .form-control").on('keydown',  function(event){
+        var key = event.charCode || event.keyCode || event.which;
+        var char = String.fromCharCode(event.key);
+        if( key === 8 || key=== 46 ){
+            event.preventDefault();
+            return false;
+        }	
+        else {		
+            $("#selectTime1 .form-control").append(char);
+        }
+    });
+    $("#start-date, #end-date").on('keydown',  function(event){
+        var key = event.charCode || event.keyCode || event.which;// alert (key);
+        var char = String.fromCharCode(event.key);
+        if( key === 8 || key=== 46  ){
+            event.preventDefault();
+            return false;
+        }	else {		
+            $("#start-date, #end-date").append(char);
+        }
+    });
+}); 
 $(".navbar-brand-icon").click(function(){
     $('.rightsidemsgbar').css("transform","translateX(0px)");;
     $(".mainContent").removeClass("msgActive")
