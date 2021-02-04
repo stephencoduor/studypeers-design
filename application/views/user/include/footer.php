@@ -287,6 +287,7 @@
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.nice-select.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/pdfobject.min.js"></script>
 <script>PDFObject.embed("<?php echo base_url(); ?>uploads/users/<?php echo $result['featured_image']; ?>", "#example1");</script>
+<script src="<?php echo base_url('assets_d/js/bootstrap-select.js'); ?>"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 </body>
 </html>

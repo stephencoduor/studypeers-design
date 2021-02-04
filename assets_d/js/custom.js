@@ -649,3 +649,8 @@ $(document).on('submit','form.submitQuestionAnswer',function(e){
             }
         });
     }); 
+
+$(".navbar-brand-icon").click(function(){
+    $('.rightsidemsgbar').css("transform","translateX(0px)");;
+    $(".mainContent").removeClass("msgActive")
+});

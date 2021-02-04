@@ -1999,6 +1999,7 @@ div[data-edit] {
     justify-content: flex-start;
     margin: 0 0px 10px 0px;
     flex-wrap:wrap;
+    overflow: hidden;
 }
 .chatMsg.reply {
     margin: 0 0px 30px 0px;
@@ -2007,7 +2008,7 @@ div[data-edit] {
     width: max-content;
     margin:0;
     padding: 10px;
-    border-radius: 20px;
+    border-radius: 10px;
     position: relative;
     background: #f1f0f0;
     color: rgba(0, 0, 0, 1);
@@ -2035,25 +2036,26 @@ div[data-edit] {
     width: 100%;
     align-items: flex-start;
     justify-content: flex-start;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 .reactmessage {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    right: -10px;
+    right: -5px;
     background: #fff;
-    border-radius: 10px;
+    border-radius: 5px;
     bottom: -15px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
     color: #626262;
-    padding: 2px;
+    padding: 5px;
     cursor: pointer;
 }
 .reactmessage .react img{
-    width:12px;
-    height:12px;
+    width: 20px;
+    height: auto;
+    display: block;
 }
 .reactmessage p {
     margin: 0;
@@ -2141,11 +2143,12 @@ div[data-edit] {
     margin-right: 5px;
 }
 .replyBox {
+    width:calc(100% - 50px);
     display: flex;
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    bottom: 0;
+    bottom: -10px;
     left: 50px;
     display: none;
 }
@@ -2161,6 +2164,9 @@ div[data-edit] {
  }
  .chatMsg.reply .replyBox {
      margin-top:70px;
+ }
+ .replyBox .replyuser{
+     width:100%;
  }
  .replyuser {
     /*padding: 10px;
@@ -3101,7 +3107,28 @@ div[data-edit] {
 .mainContent .filterWrapper.flex-filter{
     flex-direction: column;
 }
-
+.chatMsgBox {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    justify-content: flex-start;
+    margin: 0;
+    padding: 0 10px 0px 10px;
+}
+.chatMsgBox .right {
+    width: calc(100% - 51px);
+    padding-left: 20px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.chatMsgBox .right .right{
+    width:calc(100% - 70px);
+}
+.userWrapText {
+    width: 100%;
+}
 @media (max-width: 767px) {
     .mainContent.active .flex-row{
         width:100%;

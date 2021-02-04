@@ -105,7 +105,7 @@
         										<div class="form-group select select_label">
         											<label>Institution</label>
         											<input type="hidden" name="keyword" value="<?= $keyword_filter; ?>">
-        											<select class="form-control" name="university" id="university">
+        											<select class="form-control selectpicker" name="university" id="university">
         											  <option value="<?= $university['university_id']; ?>"><?= $university['SchoolName']; ?></option>
         											</select>
         											<span class="custom_err" id="err_university"></span>
@@ -114,7 +114,7 @@
         									<div class="col-md-12 courseSelect">
         										<div class="form-group select select_label">
         											<label>Course</label>
-        											<select class="form-control" name="course" id="course" onchange="getProfessor(this.value, '<?php echo base_url('account/getProfessor') ?>')">
+        											<select class="form-control selectpicker" name="course" id="course" onchange="getProfessor(this.value, '<?php echo base_url('account/getProfessor') ?>')">
         												<option value="">Select Course</option>
         												<?php foreach ($course as $key => $value) { ?>
         													<option value="<?= $value['id'] ?>" <?php if($course_filter == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
@@ -127,7 +127,7 @@
         									<div class="col-md-12 professorSelect">
         										<div class="form-group select select_label">
         											<label>Professor</label>
-        											<select class="form-control" name="professor" id="professor">
+        											<select class="form-control selectpicker" name="professor" id="professor">
         												<?php foreach ($professor as $key => $value) { ?>
         													<option value="<?= $value['id'] ?>" <?php if($professor_filter == $value['id']) { echo "selected"; } ?>><?= $value['name'] ?></option>
         												<?php } ?>
