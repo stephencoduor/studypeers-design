@@ -306,9 +306,9 @@
 
     });
 
-    function applyHashTag() {
-        CKEDITOR.instances['messagepostarea'].insertText('#');
-    }
+    // function applyHashTag() {
+    //     $('#messagepostarea').val($('#messagepostarea').val() + '#').focus();
+    // }
 </script>
 <script>
     var base_url = '<?php echo base_url(); ?>';
@@ -559,15 +559,15 @@
 
 
 
-        CKEDITOR.replace('messagepostarea', {
-            on: {
-                instanceReady: function(evt) {
-                    // Hide the editor top bar.
-                    document.getElementById('cke_1_top').style.display = 'none';
-                    document.getElementById('cke_1_bottom').style.display = 'none';
-                }
-            }
-        });
+        // CKEDITOR.replace('messagepostarea', {
+        //     on: {
+        //         instanceReady: function(evt) {
+        //             // Hide the editor top bar.
+        //             document.getElementById('cke_1_top').style.display = 'none';
+        //             document.getElementById('cke_1_bottom').style.display = 'none';
+        //         }
+        //     }
+        // });
 
         var counter = 1,
             video_counter = 1;
@@ -729,16 +729,28 @@
 
 
         $(document).on('click', '#save_post_from_ajax', function() {
-            $('#addPostForm').submit();
+            var html_content = $('#messagepostarea').val();
+            if(html_content != ''){
+                if($('.pollsWrapper').is(":visible")){
+                    if($("input[name=option]").val() != '' && $('#start-date').val() != '' && $('input[name=poll-end-time]').val() != ''){
+                        $('#addPostForm').submit();
+                    } else {
+                        alert("Please fill poll data");
+                    }
+                } else {
+                    $('#addPostForm').submit();
+                }
+            }
+            
         });
-        $('#addPostForm').on("submit", function(e) {
+        $('#addPostForm').on("submit", function(e) { 
             e.preventDefault();
             $('.ajax-loading').show();
             $('#createPost').modal('hide');
 
             var formData = new FormData(this);
             var url = $(this).attr('action');
-            var html_content = CKEDITOR.instances['messagepostarea'].getData();
+            var html_content = $('#messagepostarea').val();
             var privacy = $("input:radio.privacy_val:checked").val();
 
             if ($('#allow_comment').is(':checked')) {
