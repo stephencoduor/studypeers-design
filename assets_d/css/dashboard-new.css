@@ -4,7 +4,7 @@
     margin: auto;
 }
 .mainContent.msgActive .main-home-wrapper {
-    max-width: 840px;
+    max-width: 100%;
 }
 .mainContent.active .main-home-wrapper {
     max-width: 840px;
