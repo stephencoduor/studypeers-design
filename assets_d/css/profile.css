@@ -2836,14 +2836,6 @@ shareOptionList celebrate*/
         flex-wrap: inherit;
         overflow: auto;
     }
-    .profileInformation{
-        padding-top:60px;
-    }
-    .shareMenu.shareOption{
-        top:0;
-        right: -15px;
-        padding: 10px;
-    }
 }
 
 .dashRadioWrap {
