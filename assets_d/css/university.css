@@ -265,4 +265,7 @@ header .navbar-default ul li .notification-header a:hover {
         position: fixed;
         z-index:9;
     }
+    .notification-header{
+        padding: 10px;
+    }
 }
