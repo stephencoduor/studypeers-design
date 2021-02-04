@@ -178,14 +178,13 @@ header .navbar-default ul li .notification-header a:hover {
     width: 100%;
     color: #000;
     font-size: 13px;
-    white-space: nowrap;
-    text-overflow: ellipsis;
-    overflow: hidden;
+    line-height:1.2;
 }
 .sortNotifyMessage .info {
+    width:100%;
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: space-between;
     font-size: 12px;
     font-weight: 400;
     margin-top: 7px;
@@ -201,14 +200,19 @@ header .navbar-default ul li .notification-header a:hover {
     font-size: 12px;
     font-weight: 400;
     text-decoration: none;
-    margin-top: 7px;
     position: relative;
-    top:10px;
+    white-space: nowrap;
+}
+.sortNotifyMessage div.time {
+    position: relative;
+    right: 0;
+    top: 0;
 }
 .sortNotifyMessage {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-direction: column;
 }
 .sortNotifyMessage .viewprofile:hover {
     text-decoration: none;
@@ -229,7 +233,8 @@ header .navbar-default ul li .notification-header a:hover {
 .sortNotifyMessage .optPreview {    
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
+    width: 100%;
 }
 .nav .dropdown-menu li.read a {
     border-left: 5px solid #fff;
