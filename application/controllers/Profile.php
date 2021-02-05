@@ -2018,6 +2018,8 @@ class Profile extends CI_Controller {
         $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
         $user_id  = $friend_data['id'];
 
+        $login_user_id = $this->session->get_userdata()['user_data']['user_id'];
+
         $peer_list = $this->db->query('SELECT *  from follow_master where peer_id = '.$user_id)->result_array();
 
         $html = '';
@@ -2026,9 +2028,9 @@ class Profile extends CI_Controller {
             
             $peer = $this->db->get_where($this->db->dbprefix('user'), array('id' => $value['user_id']))->row_array();
             
-            $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
+            $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $login_user_id))->row_array();
 
-            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $login_user_id, 'status' => 1))->row_array();
 
 
             $html .= '<section class="list"><section class="left">
@@ -2038,14 +2040,17 @@ class Profile extends CI_Controller {
                         <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
                     </section>
                     <section class="action" id="action_' . $peer['id'] . '">';
-            
-            $html .= '<button type="button" class="like RemoveFollower" id="action_removefollower_' . $peer['id'] . '" data-toggle="modal" data-target="#confirmationRemoveFollower" data-id="' . $peer['id'] . '">Remove Follower</button>';
-            if (empty($chk_if_peer) && empty($chk_if_request)) {
-                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
-            }
 
-            if(!empty($chk_if_request) && empty($chk_if_peer)){
-                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
+            if($peer['id'] != $login_user_id){
+            
+                $html .= '<button type="button" class="like RemoveFollower" id="action_removefollower_' . $peer['id'] . '" data-toggle="modal" data-target="#confirmationRemoveFollower" data-id="' . $peer['id'] . '">Remove Follower</button>';
+                if (empty($chk_if_peer) && empty($chk_if_request)) {
+                    $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
+                }
+
+                if(!empty($chk_if_request) && empty($chk_if_peer)){
+                    $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
+                }
             }
             $html .= '</section>
                 </section>';
@@ -2061,6 +2066,8 @@ class Profile extends CI_Controller {
         $friend_data = $this->db->get_where($this->db->dbprefix('user'), array('username'=>$friend))->row_array();
         $user_id  = $friend_data['id'];
 
+        $login_user_id = $this->session->get_userdata()['user_data']['user_id'];
+
         $peer_list = $this->db->query('SELECT *  from follow_master where user_id = '.$user_id)->result_array();
 
         $html = '';
@@ -2069,9 +2076,9 @@ class Profile extends CI_Controller {
             
             $peer = $this->db->get_where($this->db->dbprefix('user'), array('id' => $value['peer_id']))->row_array();
             
-            $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $user_id))->row_array();
+            $chk_if_peer = $this->db->get_where($this->db->dbprefix('friends'), array('peer_id' => $peer['id'], 'user_id' => $login_user_id))->row_array();
 
-            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+            $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer['id'], 'user_id' => $login_user_id, 'status' => 1))->row_array();
 
 
             $html .= '<section class="list"><section class="left">
@@ -2081,14 +2088,16 @@ class Profile extends CI_Controller {
                         <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['first_name'] .' '. $peer['last_name'] .'</figcaption></a>
                     </section>
                     <section class="action" id="action_' . $peer['id'] . '">';
+            if($peer['id'] != $login_user_id){
             
-            $html .= '<button type="button" class="like" id="action_following_' . $peer['id'] . '" onclick="followUnfollow(' . $peer['id'] . ')">Unfollow</button>';
-            if (empty($chk_if_peer) && empty($chk_if_request)) {
-                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
-            }
+                $html .= '<button type="button" class="like" id="action_following_' . $peer['id'] . '" onclick="followUnfollow(' . $peer['id'] . ')">Unfollow</button>';
+                if (empty($chk_if_peer) && empty($chk_if_request)) {
+                    $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Add Peer</button>';
+                }
 
-            if(!empty($chk_if_request) && empty($chk_if_peer)){
-                $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
+                if(!empty($chk_if_request) && empty($chk_if_peer)){
+                    $html .= '<button type="button" class="like" id="action_addpeer_' . $peer['id'] . '" style="margin-left: 5px;" onclick="addCancelPeer(' . $peer['id'] . ')">Cancel Request</button>';
+                }
             }
             $html .= '</section>
                 </section>';
