@@ -3857,10 +3857,6 @@ input:-webkit-autofill:active {
     .profileInformation .username span{
         margin-left:0;
     }
-    .socialstatus{
-        flex-direction: column;
-        align-items: flex-start;
-    }
     .postMessageWrapper .defaultMessage{
         white-space: nowrap;
     }
@@ -3889,11 +3885,17 @@ input:-webkit-autofill:active {
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+    .socialstatus{
+        justify-content: space-between;
+    }
     .shareProfile {
         font-size: 13px;
     }
     .socialstatus li{
-        margin-right:15px;
+        margin-right:10px;
+    }
+    .socialstatus li a{
+        margin-right:5px;
     }
     .writePostWrapper figure{
         margin-right:10px;

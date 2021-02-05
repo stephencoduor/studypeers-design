@@ -279,7 +279,8 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 																	<h6><?php echo $value['notification']; ?></h6>
 																	<div class="sortNotifyMessage">
 																		<div class="info">
-																			Follower • <div class="time"><?php echo $time_ago; ?></div>
+																			<div>Follower •</div> 
+																			<div class="time"><?php echo $time_ago; ?></div>
 																		</div>
 																		<div class="optPreview">
 																			<?php if ($value['status'] == 1) { ?>
@@ -302,7 +303,8 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 																	<h6><?php echo $value['notification']; ?></h6>
 																	<div class="sortNotifyMessage">
 																		<div class="info">
-																			Follower • <div class="time"><?php echo $time_ago; ?></div>
+																			<div>Follower • </div>
+																			<div class="time"><?php echo $time_ago; ?></div>
 																		</div>
 																		<div class="optPreview">
 
@@ -323,7 +325,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 																	<h6><?php echo $value['notification']; ?></h6>
 																	<div class="sortNotifyMessage">
 																		<div class="info">
-																			Studyset • <div class="time"><?php echo $time_ago; ?></div>
+																			<div>Studyset • </div><div class="time"><?php echo $time_ago; ?></div>
 																		</div>
 																		<div class="viewprofile" onclick="redirectAction('<?= $value['id']; ?>')">View Studyset</div>
 																	</div>
@@ -340,7 +342,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 																	<h6><?php echo $value['notification']; ?></h6>
 																	<div class="sortNotifyMessage">
 																		<div class="info">
-																			Event • <div class="time"><?php echo $time_ago; ?></div>
+																			<div>Event •</div> <div class="time"><?php echo $time_ago; ?></div>
 																		</div>
 																		<div class="viewprofile" onclick="redirectAction('<?= $value['id']; ?>')">View Event</div>
 																	</div>

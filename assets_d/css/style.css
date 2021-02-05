@@ -438,7 +438,7 @@ textarea {
     border-radius: 8px;
     padding: 8px;
     transition: all 300ms ease-in-out;
-    display: none;
+    display: block;
     z-index: 11;
 }
 .desktopToggleButton svg {
@@ -657,7 +657,7 @@ a.filterBtn,a.sortMenu{
     aside{top:70px;}
     .rightsidemsgbar{top: 70px !important;z-index: 11;}
     .search{margin-top:2px;margin-left: 40px;}
-    .desktopToggleButton {display: block;}
+    
     .aside.active{
         transform: translateX(-300px);
     }
@@ -667,6 +667,7 @@ a.filterBtn,a.sortMenu{
     }
 
 }
+
 @media(max-width: 1300px){
     .navbar-brand {
         right:0;
@@ -753,6 +754,7 @@ a.filterBtn,a.sortMenu{
     .search{max-width: 250px;}
 }
 @media(max-width:767px){
+    .desktopToggleButton {display: none;}
     .logo{
         left:75px;
     }
