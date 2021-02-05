@@ -441,6 +441,9 @@ textarea {
     display: block;
     z-index: 11;
 }
+.commoncard .sp-table{
+    margin-top:30px;
+}
 .desktopToggleButton svg {
     fill: #185aeb;
 }
@@ -767,6 +770,11 @@ a.filterBtn,a.sortMenu{
     }
     .mainContent.row-direction .commoncard h3{
         font-size:18px;
+        position: relative;
+        top:10px;
+    }
+    .result.col-sm-12{
+        padding-left:0;
     }
     .commoncard.current.first.last{
         padding:15px;

@@ -2343,13 +2343,17 @@ l,.share:focus
         margin-bottom:0;
     }
     .main_subheaderLeft{
-        padding: 10px 15px 10px 0;
+        padding: 10px 15px 5px 0;
     }
     .main_subheaderCenter{
         flex-direction: column;
+        width:100%;
+        justify-content: space-between;
     }
     .main_subheaderCenter ul:first-child{
         margin-bottom:15px;
+        justify-content: space-between;
+        width: 100%;
     }
     .main_subheaderRight{
         display: flex;
