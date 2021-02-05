@@ -1010,7 +1010,7 @@ class Studyset extends CI_Controller {
 
             if(!empty($missed_terms)) {
                 $str_arr = explode (",", $missed_terms);
-                $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
+                $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><div class="tbl-wrap"><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
                                                 <thead>
                                                         <tr>
                                                             <th><b>S.No.</b></th>
@@ -1041,7 +1041,7 @@ class Studyset extends CI_Controller {
                             </tr>';
                 }
 
-                $html.= '<tbody></table></div>';
+                $html.= '<tbody></table></div></div>';
             }
             echo $html;die;
         }
@@ -1077,7 +1077,7 @@ class Studyset extends CI_Controller {
 
             if(!empty($missed_terms)){
                 $str_arr = explode (",", $missed_terms);
-                $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
+                $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><div class="tbl-wrap"><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
                                                 <thead>
                                                         <tr>
                                                             <th><b>S.No.</b></th>
@@ -1108,7 +1108,7 @@ class Studyset extends CI_Controller {
                             </tr>';
                 }
 
-                $html.= '<tbody></table></div>';
+                $html.= '<tbody></table></div></div>';
             }
 
             echo $html;die;
@@ -1146,7 +1146,7 @@ class Studyset extends CI_Controller {
 
             if(!empty($missed_terms)) {
                 $str_arr = explode (",", $missed_terms);
-                $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
+                $html .= '<div class="col-sm-12" style="margin-top:10px;"><h3 class="mb-2 text-center">You need to study these terms..</h3><div class="tbl-wrap"><table class="table table-borderless sp-table" style="border-top: 3px solid #185aeb;">
                                                 <thead>
                                                         <tr>
                                                             <th><b>S.No.</b></th>
@@ -1177,7 +1177,7 @@ class Studyset extends CI_Controller {
                             </tr>';
                 }
 
-                $html.= '<tbody></table></div>';
+                $html.= '<tbody></table></div></div>';
             }
             echo $html;die;
         }

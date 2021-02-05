@@ -2310,6 +2310,13 @@ l,.share:focus
     }
 }
 @media(max-width:767px){
+    .tbl-wrap {
+        width: 100%;
+        overflow: auto;
+    }
+    .sp-table{
+        width:100%;
+    }
     .mainCardWrapper.newflash .flashcards{
         height: 460px!important;
     }
