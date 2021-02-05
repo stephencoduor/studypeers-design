@@ -51,7 +51,7 @@
 											<div class="flex-fill">
 												<p class="text-item-desc mb-20 text-capitalise">  <?php echo $value['term_description']; ?></p>
 												<?php if(!empty($value['term_image'])) { ?>
-													<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 90px;margin-right: 5px; border-radius: 5px;">
+													<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set">
 												<?php } ?>
 												<div class="test-input form-group mt-20">
 													<input type="text" class="form-control form-control--lg" name="written_answer[]" placeholder="Type your answer." required>
@@ -78,7 +78,7 @@
 													<p class="text-capitalise"><?php echo $value['term_description']; ?></p>
 														<?php if(!empty($value['term_image'])) { ?>
 															<div class="text-item-desc" style="margin-left: 15px;">
-															<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 90px;margin-right: 5px; border-radius: 5px;"></div>
+															<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set"></div>
 														<?php } ?>  	
 												</div>
 											</div>
@@ -105,7 +105,7 @@
 												<div class="flex-fill">
 													<p class="text-item-desc mb-20 text-capitalise"> <?php echo $value['term_description']; ?></p>
 													<?php if(!empty($value['term_image'])) { ?>
-														<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 90px;margin-right: 5px; border-radius: 5px;">
+														<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set">
 													<?php } ?>
 													<input type="hidden" name="multiple_term_id[]" value="<?php echo $value['study_set_term_id']; ?>">
 													<div class="result"></div>
@@ -171,7 +171,7 @@
 												<div class="flex-fill">
 													<p class="text-capitalise"><strong><?php echo $value['term_description']; ?></strong>
 													</p><?php if(!empty($value['term_image'])) { ?>
-														<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set" style="height: 90px;margin-right: 5px; border-radius: 5px;">
+														<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>" alt="Study Set">
 													<?php } ?><br>
 													<p class="text-capitalise">
 													<?php if(array_search($value['study_set_term_id'], array_column($true_arr, 'study_set_term_id')) !== false) {

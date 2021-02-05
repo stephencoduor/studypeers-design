@@ -2303,6 +2303,14 @@ l,.share:focus
 .chatMsgBox .right .right {
     width: calc(100% - 70px);
 }
+.text-item-desc img {
+    width: 80px;
+    border-radius: 50%;
+}
+.flex-fill img{
+    width: 80px;
+    border-radius: 50%;
+}
 @media(max-width:850px) {
     .studySetWrapper.list .feedWrapper .feed-card.list .feed_card_inner  h5,
     .studySetWrapper.list .feedWrapper .feed-card.list .feed_card_inner  h5 a {
@@ -2310,9 +2318,20 @@ l,.share:focus
     }
 }
 @media(max-width:767px){
+    .text-item-desc img {
+        width: 60px;
+        border-radius: 50%;
+    }
+    .flex-fill img{
+        width: 60px;
+        border-radius: 50%;
+    }
     .tbl-wrap {
         width: 100%;
         overflow: auto;
+    }
+    .text-item-desc{
+        justify-content: space-between;
     }
     .sp-table{
         width:100%;
