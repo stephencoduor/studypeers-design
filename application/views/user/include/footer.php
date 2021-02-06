@@ -188,6 +188,60 @@
 
     }
 
+    function selectRateDesc(id, val){
+		$('#rate_description').val(val);
+		$('.onhover').hide(); $('.initial').show();
+		$('#'+id+' .initial').hide();
+		$('#'+id+' .onhover').show();
+		$("#err_rate_description").html('').hide();
+	}
+
+
+	function hoverRateDesc(id, val){
+		var rate_description = $('#rate_description').val();
+		if(rate_description != val) {
+			$('#'+id+' .initial').hide();
+			$('#'+id+' .onhover').show();
+		}
+	}
+
+	function hoverOutRateDesc(id, val){
+		var rate_description = $('#rate_description').val();
+		if(rate_description != val) {
+			$('#'+id+' .initial').show();
+			$('#'+id+' .onhover').hide();
+		}
+	}
+
+
+	function anonymousCheck(){
+		if ($('#customCheck').is(':checked')) {
+			$('#if_anonymous').val(1);
+		} else {
+			$('#if_anonymous').val(0);
+		}
+	}
+
+
+	function validateRating(){
+		var user_rating = $('#user_rating').val(); 
+		if(user_rating == ''){
+			$("#err_user_rating").html('Please select rating.').show();
+			return false;
+		} else {
+			$("#err_user_rating").html('').hide();
+		}
+
+		var rate_description = $('#rate_description').val();
+		if(rate_description == ''){
+			$("#err_rate_description").html('Please select a description.').show();
+			return false;
+		} else {
+			$("#err_rate_description").html('').hide();
+		}
+
+	}
+
 </script>
 <?php } ?>
 

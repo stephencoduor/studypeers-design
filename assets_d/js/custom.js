@@ -136,6 +136,8 @@ $(".my-rating-6").starRating({
     useGradient: false,
     callback: function(currentRating, $el){
         console.log('The user rated: ' +  currentRating);
+        $('#user_rating').val(currentRating);
+        $("#err_user_rating").html('').hide();
     }
 });
 $(document).ready(()=>{

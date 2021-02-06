@@ -1,4 +1,8 @@
 <?php $user_id = $this->session->get_userdata()['user_data']['user_id']; ?>
+<style type="text/css">
+	.error{ color: red; }
+</style>
+
 <section class="mainContent noPadding">
 					<div class="main_subheader">
 						<div class="subheader_top">
@@ -279,6 +283,118 @@
 							</div>
 
 						</div>
+
+						<div class="comment-title">
+							
+							Ratings 
+						</div>
+						<div class="ratingWrapper" style="width: 100%">
+					<form method="post" action="<?php echo base_url(); ?>account/rateDocument" onsubmit="return validateRating()">
+						<div class="ratingCard current_user_rating edit_rating hide">
+
+							<div class="left">
+								<h5>Rate this Document</h5>
+								<div class="my-rating-6" data-rating="0"></div>
+								<span class="error" id="err_user_rating"></span>
+								<input type="hidden" name="user_rating" id="user_rating">
+								<input type="hidden" name="rate_description" id="rate_description">
+								<input type="hidden" name="if_anonymous" id="if_anonymous">
+								<input type="hidden" name="rate_document" value="<?php echo $result['id'];?>">
+								<div class="custom-control custom-checkbox mb-3">
+									<input type="checkbox" class="custom-control-input" id="customCheck" onclick="anonymousCheck()">
+									<label class="custom-control-label" for="customCheck">Anonymous</label>
+								</div>
+
+							</div>
+							<div class="right">
+
+								<div class="col-md-12">
+									<h5>Select a Description</h5>
+									<div class="rating-wrap-div">
+										<div class="rating-div" onclick="selectRateDesc('comprehensive', 'Comprehensive')" id="comprehensive" onmouseover="hoverRateDesc('comprehensive', 'Comprehensive')" onmouseout="hoverOutRateDesc('comprehensive', 'Comprehensive')">
+											<img class="initial" src="<?php echo base_url(); ?>assets_d/images/comprehensive.svg">
+											<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/comprehensive-blue.svg">
+											<h6>Comprehensive</h6>
+										</div>
+										<div class="rating-div" onclick="selectRateDesc('engaging', 'Engaging Format')" id="engaging" onmouseover="hoverRateDesc('engaging', 'Engaging Format')" onmouseout="hoverOutRateDesc('engaging', 'Engaging Format')">
+											<img class="initial" src="<?php echo base_url(); ?>assets_d/images/engagin-format.svg" style="height: 30px;">
+											<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/engagin-format-blue.svg" style="height: 30px;">
+											<h6>Engaging Format</h6>
+										</div>
+								</div>
+								</div>
+								<div class="col-md-12">
+									<div class="rating-wrap-div">
+										<div class="rating-div" onclick="selectRateDesc('refresher', 'Good Refresher')" id="refresher" onmouseover="hoverRateDesc('refresher', 'Good Refresher')" onmouseout="hoverOutRateDesc('refresher', 'Good Refresher')">
+											<img class="initial" src="<?php echo base_url(); ?>assets_d/images/good-refresher.svg">
+											<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/good-refresher-blue.svg">
+											<h6>Good Refresher</h6>
+										</div>
+										<div class="rating-div" onclick="selectRateDesc('great_test', 'Great Test Result')" id="great_test" onmouseover="hoverRateDesc('great_test', 'Great Test Result')" onmouseout="hoverOutRateDesc('great_test', 'Great Test Result')">
+											<img class="initial" src="<?php echo base_url(); ?>assets_d/images/great-test-result.svg">
+											<img class="onhover" src="<?php echo base_url(); ?>assets_d/images/great-test-result-blue.svg">
+											<h6>Great Test Result</h6>
+										</div>
+								</div>
+								</div>
+								<div class="col-sm-12">
+									<span class="error" id="err_rate_description" style="color: red;"></span><br>
+									<button type="submit" class="filterBtn">Submit rating</button>
+								</div>
+							</div>
+
+						</div>
+					</form>
+					<div class="ratingCard current_user_rating rating_view">
+						<?php if(!empty($user_rating)) { ?>
+							<div class="left">
+								<h5>Your Rating</h5>
+								<div class="my-rating-5" data-rating="<?php echo $user_rating['rating']; ?>"></div>
+								<a href="javascript:void(0)" class="filterBtn edit_rating">Edit rating</a>
+							</div>
+							<div class="right">
+								<span><?php echo date('d M, Y h:i A', strtotime($user_rating['created_at'])); ?></span>
+								<p><?php echo $user_rating['description']; ?></p>
+							</div>
+						<?php } else { ?>
+							<div class="no-study-set">
+								<div class="text-center">
+									<p>You haven't rated this document yet. </p>
+									<a href="javascript:void(0)" class="filterBtn edit_rating" style="display: inline-table;">Rate It</a>
+								</div>
+							</div>
+
+						<?php } ?>
+					</div>
+					<div class="ratingCard">
+						<?php if(!empty($rating_list)) { 
+								foreach ($rating_list as $key => $value) {
+									
+						?>
+							<div class="my-rating-4" data-rating="<?= $value['rating']; ?>"></div>
+							<p><?= $value['description']; ?></p>
+							<div class="sp-avatar sp-avatar--small">
+								<a href="#" class="user_avatar">
+									<div class="sp-avatar__image">
+										<?php if($value['if_anonymous'] == 1) { ?>
+											<img alt="" src="<?php echo base_url();?>assets_d/images/default-avatar.svg" class="avatar avatar-96 photo avatar-default" height="96" width="96">
+										<?php } else { 
+											$user = $this->db->get_where('user', array('id' => $value['user_id']))->row_array();
+										?>
+											<img alt="" src="<?php echo userImage($value['user_id']); ?>" class="avatar avatar-96 photo avatar-default" height="96" width="96">
+										<?php } ?>
+										
+									</div>
+									<div class="sp-avatar__content"><span class="sp-avatar__name"> 
+										<?php if($value['if_anonymous'] == 1) { echo 'Anonymous'; } else { echo $user['first_name'].' '.$user['last_name']; } ?>
+									</span><time><?php echo date('d/m/Y', strtotime($value['created_at'])); ?></time></div>
+								</a>
+							</div>
+						<?php } } else {
+							echo "No ratings yet.";
+						} ?>
+					</div>
+				</div>
 					</div>
 				</section>
 
