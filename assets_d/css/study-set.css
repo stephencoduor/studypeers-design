@@ -2303,15 +2303,38 @@ l,.share:focus
 .chatMsgBox .right .right {
     width: calc(100% - 70px);
 }
-@media(max-width:850px) {
+.text-item-desc img {
+    width: 80px;
+    border-radius: 50%;
+}
+.flex-fill img{
+    width: 80px;
+    border-radius: 50%;
+}
+@media (max-width:850px) {
     .studySetWrapper.list .feedWrapper .feed-card.list .feed_card_inner  h5,
     .studySetWrapper.list .feedWrapper .feed-card.list .feed_card_inner  h5 a {
         font-size: 15px;
     }
 }
-@media(max-width:767px){
-    .mainCardWrapper.newflash .flashcards{
-        height: 460px!important;
+@media (max-width:767px) {
+    .text-item-desc img {
+        width: 60px;
+        border-radius: 50%;
+    }
+    .flex-fill img{
+        width: 60px;
+        border-radius: 50%;
+    }
+    .tbl-wrap {
+        width: 100%;
+        overflow: auto;
+    }
+    .text-item-desc{
+        justify-content: space-between;
+    }
+    .sp-table{
+        width:100%;
     }
     .rating-div{
         width:100%!important;
@@ -2343,13 +2366,17 @@ l,.share:focus
         margin-bottom:0;
     }
     .main_subheaderLeft{
-        padding: 10px 15px 10px 0;
+        padding: 10px 15px 5px 0;
     }
     .main_subheaderCenter{
         flex-direction: column;
+        width:100%;
+        justify-content: space-between;
     }
     .main_subheaderCenter ul:first-child{
         margin-bottom:15px;
+        justify-content: space-between;
+        width: 100%;
     }
     .main_subheaderRight{
         display: flex;
@@ -2846,7 +2873,12 @@ l,.share:focus
 }
 .mainCardWrapper.newflash .flashcards {
     width: 100%;
-    min-height: 200px;
+}
+.mainCardWrapper.newflash .flashcards.active{
+    height: auto!important;
+}
+.mainCardWrapper.newflash .flashcards.active.show{
+    height: 400px!important;
 }
 .mainCardWrapper.newflash .flashcards .front, .mainCardWrapper.newflash .flashcards .back {
     padding: 50px;
@@ -2998,7 +3030,6 @@ l,.share:focus
     align-items: center;
     justify-content: center;
     box-shadow: 0px 3px 8px 0px rgba(42, 35, 79, 0.08);
-    margin-bottom: 40px;
     border-radius: 14px;
     transition: all 0.5s ease-out 0s;
     flex-flow: wrap column;
@@ -3051,23 +3082,23 @@ l,.share:focus
 .report_card h5{
     font-size: 25px;
     font-weight: 500;
-    margin: 40px 0 40px 0;
+    margin: 25px 0;
 }
 .report_card_count {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
 }
 .report_card_count .card {
     background: #fff;
     padding: 10px 20px;
     border-radius: 10px;
     border: 1px solid #fff;
-    min-width: 170px;
-    width: 100%;
+    width: 170px;
     text-align: center;
     box-shadow: 0px 3px 8px 0px rgba(42, 35, 79, 0.08);
-    margin: 0 30px;
+    margin: 0 15px 15px 0;
 }
 .report_card_count .card h6 {
     font-size: 20px;
@@ -3139,6 +3170,13 @@ l,.share:focus
     width: 250px;
     height: 170px;
     margin-bottom: 20px;
+    overflow: hidden;
+}
+.descp_card .right .flashImg img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    object-position: center center;
 }
 /*End*/
 
@@ -3297,4 +3335,19 @@ l,.share:focus
     text-decoration: none;
     outline: none;
     background-color: transparent;
+}
+@media (max-width:767px) {
+    .mainCardWrapper.newflash .flashcards.active.show {
+        height: 455px!important;
+    }
+    .descp_card .right .flashImg {
+        width: 120px;
+        height: 100px;
+    }
+}
+.flipper.last.is-flipped.current {
+    height: 390px;
+}
+.flipper.first.is-flipped.current {
+    height: 390px;
 }

@@ -12,7 +12,7 @@
 	<script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
 	<script src="https://momentjs.com/downloads/moment.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
-	
+	<script src="<?php echo base_url(); ?>assets_d/js/jquery.ui.touch-punch.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 
     <script>

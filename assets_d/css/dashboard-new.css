@@ -45,6 +45,7 @@
 }
 .box-card.message .createBox {
     border-top-left-radius:0;
+    margin-bottom:60px;
 }
 .box-card.message{
     margin-top:60px;

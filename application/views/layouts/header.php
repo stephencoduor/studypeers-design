@@ -11,6 +11,7 @@
     <link rel="icon" href="<?= base_url('assets/images/home/favicon.jpg') ?>" type="image/x-icon">
 
     <title>Study Peers</title>
+    
 
     <!-- Bootstrap -->
     <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
