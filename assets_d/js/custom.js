@@ -582,3 +582,11 @@ $(".navbar-brand-icon").click(function(){
     $('.rightsidemsgbar').css("transform","translateX(0px)");;
     $(".mainContent").removeClass("msgActive")
 });
+$(document).ready(function(){
+    $(".flashcards").click(function(){
+        $(this).toggleClass("show");
+    });
+    $("#nextFilp").click(function(){
+        $(".flashcards").removeClass("show");
+    });
+});
