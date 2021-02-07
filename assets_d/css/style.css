@@ -755,6 +755,13 @@ a.filterBtn,a.sortMenu{
     .search{max-width: 250px;}
 }
 @media(max-width:767px){
+    aside{
+        transform: translateX(-810px);
+        -webkit-transform: translateX(-810px);
+        -moz-transform: translateX(-810px);
+        -ms-transform: translateX(-810px);
+        -o-transform: translateX(-810px);
+    }
     .desktopToggleButton {display: none;}
     .logo{
         left:75px;
@@ -836,7 +843,16 @@ a.filterBtn,a.sortMenu{
     .rightsidemsgbar {
         z-index:111;
     }
+    .mainContent{
+        width:100%;
+        margin: 0px !important;
+        padding: 0 15px;
+    }
+    .rightsidemsgbar{
+        transform: translateX(800px);
+    }
     .mainContent.active {
+        width:100%;
         margin: 0px !important;
         padding: 0 15px;
     }
