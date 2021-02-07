@@ -764,7 +764,7 @@ a.filterBtn,a.sortMenu{
     }
     .desktopToggleButton {display: none;}
     .logo{
-        left:75px;
+        left:90px;
     }
     .tabularLiist .nav.nav-tabs{
         margin-top:15px!important;
@@ -828,7 +828,7 @@ a.filterBtn,a.sortMenu{
     /*#sidenav.open{z-index: 99;left: auto;right: 20px;}*/
     .logoDesktop{display: none;}
     .logoMobile{display: block;}
-    .logo{width: 46px;margin-top: 14px;}
+    .logo{width: 90px;margin-top: 14px;}
     .navbar-nav .open .dropdown-menu {
         position: absolute;
         background: #fff;
@@ -869,7 +869,7 @@ a.filterBtn,a.sortMenu{
         padding: 6px 6px !important;
     }
     .rightsidemsgbar,aside{top:60px;}
-    .logo{margin-top:14px;}
+    .logo{margin-top:4px;}
     #sidenav {top: -45px;}
 }
 @media(max-width:479px){
