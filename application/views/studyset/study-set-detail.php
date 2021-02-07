@@ -734,18 +734,30 @@
 						<?php } ?>
 					</div>
 					<div class="ratingCard">
-						<?php if(!empty($rating_list)) { ?>
-							<div class="my-rating-4" data-rating="2"></div>
-							<p>Loreum Ipsum</p>
+						<?php if(!empty($rating_list)) { 
+								foreach ($rating_list as $key => $value) {
+									
+						?>
+							<div class="my-rating-4" data-rating="<?= $value['rating']; ?>"></div>
+							<p><?= $value['description']; ?></p>
 							<div class="sp-avatar sp-avatar--small">
 								<a href="#" class="user_avatar">
 									<div class="sp-avatar__image">
-										<img alt="" src="<?php echo base_url();?>assets_d/images/default-avatar.svg" class="avatar avatar-96 photo avatar-default" height="96" width="96">
+										<?php if($value['if_anonymous'] == 1) { ?>
+											<img alt="" src="<?php echo base_url();?>assets_d/images/default-avatar.svg" class="avatar avatar-96 photo avatar-default" height="96" width="96">
+										<?php } else { 
+											$user = $this->db->get_where('user', array('id' => $value['user_id']))->row_array();
+										?>
+											<img alt="" src="<?php echo userImage($value['user_id']); ?>" class="avatar avatar-96 photo avatar-default" height="96" width="96">
+										<?php } ?>
+										
 									</div>
-									<div class="sp-avatar__content"><span class="sp-avatar__name"> </span><time>06/14/2020</time></div>
+									<div class="sp-avatar__content"><span class="sp-avatar__name"> 
+										<?php if($value['if_anonymous'] == 1) { echo 'Anonymous'; } else { echo $user['first_name'].' '.$user['last_name']; } ?>
+									</span><time><?php echo date('d/m/Y', strtotime($value['created_at'])); ?></time></div>
 								</a>
 							</div>
-						<?php } else {
+						<?php } } else {
 							echo "No ratings yet.";
 						} ?>
 					</div>
@@ -1423,7 +1435,7 @@
 
 
 	function validateRating(){
-		var user_rating = $('#user_rating').val();
+		var user_rating = $('#user_rating').val(); 
 		if(user_rating == ''){
 			$("#err_user_rating").html('Please select rating.').show();
 			return false;

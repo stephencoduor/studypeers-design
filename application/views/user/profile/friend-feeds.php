@@ -1867,8 +1867,14 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                         </div>
                         <h4><?php echo $document_detail['document_name']; ?></h4>
                         <p><?php echo $document_detail['description']; ?> </p>
+                        <?php $userfile_name = $document_detail['featured_image'];
+                                $extn = substr($userfile_name, strrpos($userfile_name, '.')+1);  ?>
                         <div class="documentName">
-                            <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a href="<?php echo base_url(); ?>account/documentDetail/<?php echo base64_encode($document_detail['id']); ?>"><?php echo $document_detail['featured_image']; ?></a>
+                            <?php if($extn == 'pdf') { ?>
+                                <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a target="_blank" href="<?php echo base_url(); ?>uploads/users/<?php echo $document_detail['featured_image']; ?>"><?php echo $document_detail['featured_image']; ?></a>
+                            <?php } else { ?>
+                                <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a href="<?php echo base_url(); ?>account/documentDetail/<?php echo base64_encode($document_detail['id']); ?>" target="_blank" ><?php echo $document_detail['featured_image']; ?>
+                            <?php } ?>
                         </div>
                         <div class="socialStatus">
                             <div class="leftStatus">

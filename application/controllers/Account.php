@@ -1433,11 +1433,51 @@ class Account extends CI_Controller
 
         $data['comment'] = $this->db->get_where('comment_master', array('reference' => 'document', 'reference_id' => $document_id, 'comment_parent_id' => 0))->result_array();
 
+        $this->db->select('document_rating_master.*, user_info.nickname');
+        $this->db->join('user_info','user_info.userID=document_rating_master.user_id');
+        $this->db->order_by('document_rating_master.created_at', 'desc');
+        $this->db->limit(5);
+        $data['rating_list'] = $this->db->get_where('document_rating_master', array('document_rating_master.document_id' => $document_id, 'document_rating_master.user_id !=' => $user_id))->result_array();
+
+
+        $data['user_rating'] = $this->db->get_where('document_rating_master', array('document_rating_master.document_id' => $document_id, 'user_id' => $user_id))->row_array();
+
         $this->load->view('user/include/header', $data);
         $this->load->view('user/documents/document-details');
         $this->load->view('user/include/right-sidebar');
         $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer');
+    }
+
+    function rateDocument(){
+        if($this->input->post()){
+            // print_r($this->input->post());die;
+            $user_rating        = $this->input->post('user_rating');
+            $rate_description   = $this->input->post('rate_description');
+            $if_anonymous       = $this->input->post('if_anonymous');
+            $rate_document      = $this->input->post('rate_document');
+
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+            $chk_if_rated = $this->db->get_where('document_rating_master', array('document_id' => $rate_document, 'user_id' => $user_id))->row_array();
+
+            if(!empty($chk_if_rated)) {
+                $this->db->where(array('id' => $chk_if_rated['id']));
+                $this->db->update('document_rating_master', array('rating' => $user_rating, 'description' => $rate_description, 'created_at' => date('Y-m-d H:i:s')));
+            } else {
+
+                $insertArr = array( 'document_id'      => $rate_document,
+                    'user_id'           => $user_id,
+                    'rating'            => $user_rating,
+                    'description'       => $rate_description,
+                    'if_anonymous'      => $if_anonymous,
+                    'created_at'        => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('document_rating_master', $insertArr);
+            }
+
+            redirect(site_url('account/documentDetail/'.base64_encode($rate_document)), 'refresh');
+        }
     }
 
 
