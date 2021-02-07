@@ -643,6 +643,7 @@ a.filterBtn,a.sortMenu{
     width:calc(100% - 40px);
     display:inline-block;
 }
+
 @media(min-width:1600px){
     .mainContent{margin-left:25%;}
     .pieDataList{margin-left: 60px;}
