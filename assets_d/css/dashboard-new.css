@@ -1,13 +1,16 @@
 .main-home-wrapper {
     max-width: 800px;
     width: 100%;
-    margin: auto;
+    margin: 0 auto;
 }
 .mainContent.msgActive .main-home-wrapper {
-    max-width: 100%;
+    max-width: 95%;
 }
 .mainContent.active .main-home-wrapper {
-    max-width: 840px;
+    max-width: 95%;
+}
+.mainContent.profile.active .mainProfileWrapper{
+    width: 95%;
 }
 .nav-tabs {
     border-bottom: 0px;
@@ -2964,7 +2967,7 @@ figcaption a {
         width:100%!important;
     }
     .slick-prev, .slick-next{
-        display: none;
+        display: none!important;
     }
     #peer_suggestion_box .createBox {
         padding: 15px;

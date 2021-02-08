@@ -666,7 +666,7 @@ a.filterBtn,a.sortMenu{
         transform: translateX(-300px);
     }
     .mainContent.msgActive.active {
-        width: calc(100% - 10px);
+        width: 100%;
         margin-left: 0 !important;
     }
 
