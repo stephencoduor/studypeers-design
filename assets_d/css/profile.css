@@ -3,10 +3,13 @@
     padding: 0px 10px !important;
     margin: 0 auto;
 }
+.mainContent.profile.active .mainProfileWrapper{
+    max-width:95%;
+}
 .mainProfileWrapper {
     max-width: 823px;
     width: 100%;
-    margin: auto;
+    margin: 0 auto;
     /*margin: 0 auto 0 80px;*/
     transition: width 0.10s ease-in;
     -webkit-transition: width 0.10s ease-in;
@@ -15,7 +18,10 @@
     -o-transition: width 0.10s ease-in;
 }
 .mainContent.profile.msgActive .mainProfileWrapper {
-    max-width: 1023px;
+    max-width: 95%;
+}
+.mainContent.profile.active{
+    max-width: 95%;
 }
 .profileHeaderWrapper {
     width: 100%;
@@ -2828,6 +2834,19 @@ shareOptionList celebrate*/
 }
 
 @media(max-width: 767px) {
+    .infoWrapper .list{
+        flex-direction: column;
+        margin:10px 0 0 0;
+    }
+    .infoWrapper .list .heading{
+        font-size: 14px;
+        font-weight: 400;
+        width: 100%;
+    }
+    .infoWrapper .list .value{
+        font-size:14px;
+        margin-left:0;
+    }
     .modal-dialog {
         width: 90%;
     }

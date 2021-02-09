@@ -643,6 +643,7 @@ a.filterBtn,a.sortMenu{
     width:calc(100% - 40px);
     display:inline-block;
 }
+
 @media(min-width:1600px){
     .mainContent{margin-left:25%;}
     .pieDataList{margin-left: 60px;}
@@ -665,7 +666,7 @@ a.filterBtn,a.sortMenu{
         transform: translateX(-300px);
     }
     .mainContent.msgActive.active {
-        width: calc(100% - 10px);
+        width: 100%;
         margin-left: 0 !important;
     }
 
@@ -754,9 +755,16 @@ a.filterBtn,a.sortMenu{
     .search{max-width: 250px;}
 }
 @media(max-width:767px){
+    aside{
+        transform: translateX(0);
+        -webkit-transform: translateX(0);
+        -moz-transform: translateX(0);
+        -ms-transform: translateX(0);
+        -o-transform: translateX(0);
+    }
     .desktopToggleButton {display: none;}
     .logo{
-        left:75px;
+        left:90px;
     }
     .tabularLiist .nav.nav-tabs{
         margin-top:15px!important;
@@ -820,7 +828,7 @@ a.filterBtn,a.sortMenu{
     /*#sidenav.open{z-index: 99;left: auto;right: 20px;}*/
     .logoDesktop{display: none;}
     .logoMobile{display: block;}
-    .logo{width: 46px;margin-top: 14px;}
+    .logo{width: 90px;margin-top: 14px;}
     .navbar-nav .open .dropdown-menu {
         position: absolute;
         background: #fff;
@@ -835,7 +843,16 @@ a.filterBtn,a.sortMenu{
     .rightsidemsgbar {
         z-index:111;
     }
+    .mainContent{
+        width:100%;
+        margin: 0px !important;
+        padding: 0 15px;
+    }
+    .rightsidemsgbar{
+        transform: translateX(800px);
+    }
     .mainContent.active {
+        width:100%;
         margin: 0px !important;
         padding: 0 15px;
     }
@@ -852,7 +869,7 @@ a.filterBtn,a.sortMenu{
         padding: 6px 6px !important;
     }
     .rightsidemsgbar,aside{top:60px;}
-    .logo{margin-top:14px;}
+    .logo{margin-top:4px;}
     #sidenav {top: -45px;}
 }
 @media(max-width:479px){

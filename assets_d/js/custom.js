@@ -483,8 +483,15 @@ $(window).resize(function() {
         $('.rightsidemsgbar').css("transform","translateX(0px)");
         $('.mainContent').removeClass('msgActive');
     }
+    if($(window).width() >= 767) {
+        $('aside').removeClass('active');
+        $('.mainContent').removeClass('active');
+    }
 });
-
+if($(window).width() >= 767) {
+    $('aside').removeClass('active');
+    $('.mainContent').removeClass('active');
+}
 $("#course_form").submit(function(e) {
     var pathname = window.location.pathname;
     e.preventDefault(); // avoid to execute the actual submit of the form.
