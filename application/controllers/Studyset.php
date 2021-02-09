@@ -185,80 +185,87 @@ class Studyset extends CI_Controller {
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $html = '<div class="chatMsg" id="comment_id_'.$comment_id.'">
-                        <figure>
-                            <img src="'.base_url().'assets_d/images/ct_user.jpg" alt="User">
-                        </figure>
-                        <figcaption>
-                            <span class="name"> '.$user_info['nickname'].'</span>
-                            '.$comment.'
-                            <div class="actionmsgMenu">
-                                <ul>
-                                    <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
-                                    <li class="replyuser" onclick="showReplyUser('.$comment_id.')">Reply</li>
-                                </ul>
-                            </div>
-                            <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display:none;">
-                                <div class="react">
-                                    <img src="'.base_url().'assets_d/images/like.png" alt="Like">
-                                </div>
-                                <p id="like_count_'.$comment_id.'"></p>
-                            </div>
-                        </figcaption>
-                        <div class="dotsBullet dropdown">
-                                        <img
-                                            src="'.base_url().'assets_d/images/more.svg"
-                                            alt="more"
-                                            data-toggle="dropdown">
-                                        <ul class="dropdown-menu"
-                                            role="menu"
-                                            aria-labelledby="menu1">
-                                            <li role="presentation">
-                                                <a role="menuitem"
-                                                   tabindex="-1"
-                                                   href="javascript:void(0);">
-                                                    <div
-                                                        class="left">
-                                                        <img
-                                                            src="'.base_url().'assets_d/images/restricted.svg"
-                                                            alt="Save">
-                                                    </div>
-                                                    <div
-                                                        class="right">
-                                                        <span>Hide/block</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                            
-                                            <li role="presentation">
-                                                <a role="menuitem"
-                                                   tabindex="-1"
-                                                   href="javascript:void(0);" onclick="deleteComment('.$comment_id.', '.$studyset_id.', \'studyset\')">
-                                                    <div
-                                                        class="left">
-                                                        <img
-                                                            src="'.base_url().'assets_d/images/trash.svg"
-                                                            alt="Link">
-                                                    </div>
-                                                    <div
-                                                        class="right">
-                                                        <span>Delete</span>
-                                                    </div>
-                                                </a>
-                                            </li>
-                                           
-                                        </ul>
-                        </div>
-                        <div class="reply" id="reply_'.$comment_id.'">
-
-                        </div>
-                        <div class="replyBox" id="replyBox_'.$comment_id.'">
+                        <div class="chatMsgBox">
                             <figure>
-                                <img src="'.base_url().'assets_d/images/ct_user.jpg" alt="User">
+                                <img src="'.userImage($user_id).'" alt="User">
                             </figure>
-                            <div class="replyuser">
-                                <input type="text" id="input_reply_'.$comment_id.'" placeholder="Write a Reply..." onkeypress="postReply(event,'.$comment_id.', this.value)">
+                            <div class="right">
+                                <div class="userWrapText">
+                                    <figcaption>
+                                        <span class="name"> <a>'.$user_info['nickname'].'</a></span>
+                                        '.$comment.'
+                                        <div class="actionmsgMenu">
+                                            <ul>
+                                                <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
+                                                <li class="replyuser" onclick="showReplyUser('.$comment_id.')">Reply</li>
+                                            </ul>
+                                        </div>
+                                        <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display:none;">
+                                            <div class="react">
+                                                <img src="'.base_url().'assets_d/images/like-dashboard.svg" alt="Like">
+                                            </div>
+                                            <p id="like_count_'.$comment_id.'"></p>
+                                        </div>
+                                    </figcaption>
+                                    <div class="reply" id="reply_'.$comment_id.'">
+
+                                    </div>
+                                    <div class="replyBox" id="replyBox_'.$comment_id.'">
+                                        <figure>
+                                            <img src="'.userImage($user_id).'" alt="User">
+                                        </figure>
+                                        <div class="replyuser">
+                                            <input type="text" id="input_reply_'.$comment_id.'" placeholder="Write a Reply..." onkeypress="postReply(event,'.$comment_id.', this.value)">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="dotsBullet dropdown">
+                                                <img
+                                                    src="'.base_url().'assets_d/images/more.svg"
+                                                    alt="more"
+                                                    data-toggle="dropdown">
+                                                <ul class="dropdown-menu"
+                                                    role="menu"
+                                                    aria-labelledby="menu1">
+                                                    <li role="presentation">
+                                                        <a role="menuitem"
+                                                           tabindex="-1"
+                                                           href="javascript:void(0);">
+                                                            <div
+                                                                class="left">
+                                                                <img
+                                                                    src="'.base_url().'assets_d/images/restricted.svg"
+                                                                    alt="Save">
+                                                            </div>
+                                                            <div
+                                                                class="right">
+                                                                <span>Hide/block</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                    
+                                                    <li role="presentation">
+                                                        <a role="menuitem"
+                                                           tabindex="-1"
+                                                           href="javascript:void(0);" onclick="deleteComment('.$comment_id.', '.$studyset_id.', \'studyset\')">
+                                                            <div
+                                                                class="left">
+                                                                <img
+                                                                    src="'.base_url().'assets_d/images/trash.svg"
+                                                                    alt="Link">
+                                                            </div>
+                                                            <div
+                                                                class="right">
+                                                                <span>Delete</span>
+                                                            </div>
+                                                        </a>
+                                                    </li>
+                                                   
+                                                </ul>
+                                </div>
                             </div>
-                        </div>
+                        
+                        <div>
                     </div>';
             echo $html;die;
         }
@@ -288,69 +295,74 @@ class Studyset extends CI_Controller {
 
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
-            $html = '<div class="userReplyBox" id="comment_reply_id_'.$comment_id.'"><figure>
-                        <img src="'.base_url().'assets_d/images/ct_user.jpg" alt="User">
+            $html = '<div class="userReplyBox" id="comment_reply_id_'.$comment_id.'">
+                    <figure>
+                        <img src="'.userImage($user_id).'" alt="User">
                     </figure>
-                    <figcaption>
-                        <span class="name">'.$user_info['nickname'].'</span>
-                        '.$comment.'
-                        <div class="actionmsgMenu">
-                            <ul>
-                                <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
+                    <div class="right">
+                        <div class="userWrapText">
+                            <figcaption>
+                                <span class="name"><a>'.$user_info['nickname'].'</a></span>
+                                <p>'.$comment.'</p>
+                                <div class="actionmsgMenu">
+                                    <ul>
+                                        <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
+                                        
+                                    </ul>
+                                </div>
                                 
-                            </ul>
-                        </div>
-                        
-                        <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display: none;">
-                            <div class="react">
-                                <img src="'.base_url().'assets_d/images/like.png" alt="Like">
-                            </div>
-                            <p id="like_count_'.$comment_id.'">0</p>
-                        </div>
-                    </figcaption>
-                    <div class="dotsBullet dropdown">
-                        <img
-                            src="'.base_url().'assets_d/images/more.svg"
-                            alt="more"
-                            data-toggle="dropdown">
-                        <ul class="dropdown-menu"
-                            role="menu"
-                            aria-labelledby="menu1">
-                            <li role="presentation">
-                                <a role="menuitem"
-                                   tabindex="-1"
-                                   href="javascript:void(0);">
-                                    <div
-                                        class="left">
-                                        <img
-                                            src="'.base_url().'assets_d/images/restricted.svg"
-                                            alt="Save">
+                                <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display: none;">
+                                    <div class="react">
+                                        <img src="'.base_url().'assets_d/images/like-dashboard.svg" alt="Like">
                                     </div>
-                                    <div
-                                        class="right">
-                                        <span>Hide/block</span>
-                                    </div>
-                                </a>
-                            </li>
-                            
+                                    <p id="like_count_'.$comment_id.'">0</p>
+                                </div>
+                            </figcaption>
+                        </div>
+                        <div class="dotsBullet dropdown">
+                            <img
+                                src="'.base_url().'assets_d/images/more.svg"
+                                alt="more"
+                                data-toggle="dropdown">
+                            <ul class="dropdown-menu"
+                                role="menu"
+                                aria-labelledby="menu1">
                                 <li role="presentation">
                                     <a role="menuitem"
                                        tabindex="-1"
-                                       href="javascript:void(0);" onclick="deleteCommentReply('.$comment_id.', '.$comment_parent_id.')">
+                                       href="javascript:void(0);">
                                         <div
                                             class="left">
                                             <img
-                                                src="'.base_url().'assets_d/images/trash.svg"
-                                                alt="Link">
+                                                src="'.base_url().'assets_d/images/restricted.svg"
+                                                alt="Save">
                                         </div>
                                         <div
                                             class="right">
-                                            <span>Delete</span>
+                                            <span>Hide/block</span>
                                         </div>
                                     </a>
                                 </li>
-                            
-                        </ul>
+                                
+                                    <li role="presentation">
+                                        <a role="menuitem"
+                                           tabindex="-1"
+                                           href="javascript:void(0);" onclick="deleteCommentReply('.$comment_id.', '.$comment_parent_id.')">
+                                            <div
+                                                class="left">
+                                                <img
+                                                    src="'.base_url().'assets_d/images/trash.svg"
+                                                    alt="Link">
+                                            </div>
+                                            <div
+                                                class="right">
+                                                <span>Delete</span>
+                                            </div>
+                                        </a>
+                                    </li>
+                                
+                            </ul>
+                        </div>
                     </div>
                 </div>';
             echo $html;die;
@@ -1647,6 +1659,10 @@ class Studyset extends CI_Controller {
                     'created_at'        => date('Y-m-d H:i:s')
                 );
                 $this->db->insert('studyset_rating_master', $insertArr);
+
+                $this->db->where('study_set_id',$rate_studyset);
+                $this->db->set('rating_count', 'rating_count+1', FALSE);
+                $this->db->update('study_sets');
             }
 
             redirect(site_url('studyset/details/'.$rate_studyset), 'refresh');

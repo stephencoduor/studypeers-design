@@ -2976,23 +2976,26 @@ class Account extends CI_Controller
             $html = '<div class="userReplyBox" id="comment_reply_id_'.$comment_id.'"><figure>
                         <img src="' . userImage($user_id) . '" alt="User">
                     </figure>
-                    <figcaption>
-                        <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name">' . $user_info['nickname'] . '</span></a>
-                        ' . $comment . '                                            
-                        <div class="actionmsgMenu">
-                            <ul>
-                                <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
-                                
-                            </ul>
+                    <div class="right">
+                        <div class="userWrapText">
+                            <figcaption>
+                                <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name">' . $user_info['nickname'] . '</span></a>
+                                ' . $comment . '                                            
+                                <div class="actionmsgMenu">
+                                    <ul>
+                                        <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
+                                        
+                                    </ul>
+                                </div>
+                                <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display:none;">
+                                    <div class="react">
+                                        <img src="'.base_url().'assets_d/images/like-dashboard.svg" alt="Like">
+                                    </div>
+                                    <p id="like_count_'.$comment_id.'">0</p>
+                                </div>
+                            </figcaption>
                         </div>
-                        <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display:none;">
-                            <div class="react">
-                                <img src="'.base_url().'assets_d/images/like.png" alt="Like">
-                            </div>
-                            <p id="like_count_'.$comment_id.'">0</p>
-                        </div>
-                    </figcaption>
-                    <div class="dotsBullet dropdown">
+                        <div class="dotsBullet dropdown">
                                                     <img
                                                         src="'.base_url().'assets_d/images/more.svg"
                                                         alt="more"
@@ -3036,6 +3039,7 @@ class Account extends CI_Controller
                                                         
                                                     </ul>
                                             </div>
+                    </div>
                     </div>';
             echo $html;
             die;
@@ -3256,26 +3260,42 @@ class Account extends CI_Controller
             $text = 'document';
 
             $html = '<div class="chatMsg" id="comment_id_' . $comment_id . '">
-                        <figure>
-                            <img src="' . userImage($user_id) . '" alt="User">
-                        </figure>
-                        <figcaption>
-                            <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
-                            ' . $comment . '                                                 
-                            <div class="actionmsgMenu">
-                                <ul>
-                                    <li class="likeuser" id="likeComment' . $comment_id . '" onclick="likeComment(' . $comment_id . ')">Like</li>
-                                    <li class="replyuser" onclick="showReplyBox(' . $comment_id . ')">Reply</li>
-                                </ul>
-                            </div>
-                            <div class="reactmessage" id="reactmessage_' . $comment_id . '" style="display:none;">
-                                <div class="react">
-                                    <img src="' . base_url() . 'assets_d/images/like.png" alt="Like">
+                        <div class="chatMsgBox">
+                            <figure>
+                                <img src="' . userImage($user_id) . '" alt="User">
+                            </figure>
+                            <div class="right">
+                                <div class="userWrapText">
+                                    <figcaption>
+                                        <a href="' . base_url() . 'sp/' . $user_info['username'] . '"><span class="name"> ' . $user_info['nickname'] . '</span></a>
+                                        ' . $comment . '                                                 
+                                        <div class="actionmsgMenu">
+                                            <ul>
+                                                <li class="likeuser" id="likeComment' . $comment_id . '" onclick="likeComment(' . $comment_id . ')">Like</li>
+                                                <li class="replyuser" onclick="showReplyBox(' . $comment_id . ')">Reply</li>
+                                            </ul>
+                                        </div>
+                                        <div class="reactmessage" id="reactmessage_' . $comment_id . '" style="display:none;">
+                                            <div class="react">
+                                                <img src="' . base_url() . 'assets_d/images/like-dashboard.svg" alt="Like">
+                                            </div>
+                                            <p id="like_count_' . $comment_id . '"></p>
+                                        </div>
+                                    </figcaption>
+                                    <div class="reply" id="reply_' . $comment_id . '">
+                                                
+                                    </div>
+                                    <div class="replyBox" id="replyBox' . $comment_id . '">
+                                        <figure>
+                                            <img src="' . userImage($user_id) . '" alt="User">
+                                        </figure>
+                                        <div class="replyuser">
+                                            <input type="text" id="input_reply_' . $comment_id . '" placeholder="Write a Reply..." onkeypress="postReply(event,' . $comment_id . ', this.value)">
+                                        </div>
+                                    </div> 
                                 </div>
-                                <p id="like_count_' . $comment_id . '"></p>
                             </div>
-                        </figcaption>
-                        <div class="dotsBullet dropdown">
+                            <div class="dotsBullet dropdown">
                                                     <img
                                                         src="'.base_url().'assets_d/images/more.svg"
                                                         alt="more"
@@ -3320,17 +3340,8 @@ class Account extends CI_Controller
                                                     </ul>
                                             </div>
 
-                        <div class="reply" id="reply_' . $comment_id . '">
-                                                
-                        </div>
-                        <div class="replyBox" id="replyBox' . $comment_id . '">
-                            <figure>
-                                <img src="' . userImage($user_id) . '" alt="User">
-                            </figure>
-                            <div class="replyuser">
-                                <input type="text" id="input_reply_' . $comment_id . '" placeholder="Write a Reply..." onkeypress="postReply(event,' . $comment_id . ', this.value)">
-                            </div>
-                        </div>                                                  
+                        
+                            </div>                                             
                     </div>';
             $result['html'] = $html;
             if($count != 0){
@@ -3845,7 +3856,7 @@ class Account extends CI_Controller
         $document_id = $this->input->post('id');
         $peer_id = $this->input->post('peer_id');
 
-        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '" . $user_id . "' OR `peer_id` = '" . $user_id . "') AND `status` = 2")->result_array();
+        $peer_list = $this->db->query("SELECT * FROM `friends` WHERE (`user_id` = '".$user_id ."')")->result_array();
 
         $html = '';
 

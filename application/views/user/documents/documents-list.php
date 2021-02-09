@@ -172,6 +172,12 @@
 								}
 								$user_id = $this->session->get_userdata()['user_data']['user_id'];
 								$chk_if_liked = $this->db->get_where('document_like_master', array('doc_id' => $value['id'], 'user_id' => $user_id))->num_rows();
+								$this->db->select('AVG(rating) as average');
+							    $this->db->where('document_id', $value['id']);
+							    $this->db->from('document_rating_master');
+							    $rating = $this->db->get()->row_array();
+
+							    $rating_count = $this->db->get_where('document_rating_master', array('document_id' => $value['id']))->num_rows();
 							?>
 								
 								<div class="feedVoteWrap">
@@ -185,8 +191,8 @@
 										<div class="feed_card_inner">
 											<div class="header listHeader">
 												<p><?php  echo $type;  ?></p>
-												<div class="my-rating-4" data-rating="0">
-													<span>0</span>
+												<div class="my-rating-4" data-rating="<?= round($rating['average'], 1) ?>">
+													<span><?= $rating_count; ?></span>
 												</div>
 											</div>
 											<h5><a href="<?php echo base_url(); ?>account/documentDetail/<?php echo base64_encode($value['id']) ?>"><?php echo $value['document_name']; ?></a></h5>
