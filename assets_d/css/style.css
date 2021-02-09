@@ -649,7 +649,7 @@ a.filterBtn,a.sortMenu{
     .pieDataList{margin-left: 60px;}
 }
 @media(max-width:1599px) {
-    .logo {padding:16px 0 16px 30px;}
+    .logo {padding:16px 0 16px 15px;}
 }
 @media(max-width:1450px){
     .top{padding: 47px 25px;}
@@ -681,7 +681,7 @@ a.filterBtn,a.sortMenu{
     }
 }
 @media(max-width:1200px){
-    .logo {padding:16px 0 16px 20px;}
+    .logo {padding:16px 0 16px 15px;}
     .user-pic{display:block;}
     .user-pic img{margin:auto;}
     .user-info{display:block;margin-left: 0;}
