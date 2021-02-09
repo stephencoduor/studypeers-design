@@ -640,7 +640,7 @@ a.filterBtn,a.sortMenu{
     justify-content: space-between;
 }
 .logo a{
-    width:calc(100% - 40px);
+    width:calc(100% - 45px);
     display:inline-block;
 }
 

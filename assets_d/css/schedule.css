@@ -2005,7 +2005,7 @@ div[data-edit] {
     margin: 0 0px 30px 0px;
 }
 .chatMsg figcaption{
-    width: max-content;
+    display:inline-block;
     margin:0;
     padding: 10px;
     border-radius: 10px;
@@ -2043,10 +2043,11 @@ div[data-edit] {
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    right: -5px;
+    right: auto;
+    left: 88px;
     background: #fff;
     border-radius: 5px;
-    bottom: -15px;
+    bottom: -25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
     color: #626262;
     padding: 5px;
@@ -2066,7 +2067,7 @@ div[data-edit] {
 }
 .actionmsgMenu {
     position: absolute;
-    bottom: -17px;
+    bottom: -22px;
     right: -15px;
     cursor: pointer;
     width: 100%;
@@ -2148,7 +2149,7 @@ div[data-edit] {
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    bottom: -10px;
+    bottom: 0;
     left: 50px;
     display: none;
 }
@@ -3127,7 +3128,7 @@ div[data-edit] {
     width:calc(100% - 70px);
 }
 .userWrapText {
-    width: 100%;
+    width: calc(100% - 15px);
 }
 @media (max-width: 767px) {
     .mainContent.active .flex-row{
