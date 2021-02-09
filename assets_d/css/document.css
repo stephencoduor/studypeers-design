@@ -1757,7 +1757,8 @@ textarea{
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    right: -10px;
+    right: auto;
+    left:88px;
     background: #fff;
     border-radius: 5px;
     bottom: -15px;

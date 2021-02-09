@@ -50,7 +50,11 @@
 #dashboard-feeds .box-card{
     margin-bottom:55px;
 }
-
+.reactmessage .react img {
+    width: 20px;
+    height: auto;
+    display: block;
+}
 #dashboard-feeds .createBox{
     margin-bottom:55px;
 }
