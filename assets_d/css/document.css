@@ -1780,7 +1780,7 @@ textarea{
 }
 .actionmsgMenu {
     position: absolute;
-    bottom: -17px;
+    bottom: -22px;
     right: -15px;
     cursor: pointer;
     width: 100%;
@@ -2344,6 +2344,13 @@ textarea.textarea-gray {
 .documentDetail {
     width: 100%;
     background: #707070;
+    overflow: hidden;
+}
+.documentDetail img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    object-position: center center;
 }
 .documentDetail embed {
     margin: auto;
