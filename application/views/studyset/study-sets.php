@@ -137,7 +137,11 @@ foreach ($getdata as $key => $value) {
 		<div class="feedWrapper">
 			<?php
 			foreach ($studysets as $key => $studyset) {
-				?>
+				$this->db->select('AVG(rating) as average');
+			    $this->db->where('study_set_id', $studyset['study_set_id']);
+			    $this->db->from('studyset_rating_master');
+			    $rating = $this->db->get()->row_array();
+			?>
 				<div class="feed-card list" id="study_set_id_div_<?php echo $studyset['study_set_id'];?>">
 					<div class="left">
 						<figure>
@@ -158,7 +162,7 @@ foreach ($getdata as $key => $value) {
 						<div class="feed_card_inner">
 							<div class="header listHeader">
 								<p>Study Sets</p>
-								<div class="my-rating-4" data-rating="1.5">
+								<div class="my-rating-4" data-rating="<?= round($rating['average'], 1) ?>">
 									<span><?php echo $studyset['rating_count'];?></span>
 								</div>
 							</div>
