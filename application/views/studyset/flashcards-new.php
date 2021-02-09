@@ -84,33 +84,33 @@
 					<input type="hidden" id="hideTerms">
 					<input type="hidden" id="studyset_id" value="<?php echo $studyset['study_set_id']; ?>">
 					<div class="mainCardWrapper newflash">
-						<div class="flashcards active">
-							<?php $count = count($term_data)-1; foreach ($term_data as $key => $value) { ?>
-								<div class="flipper <?php if($key == 0) { echo "current first"; } else if($key == $count) { echo "last"; } ?>" style="<?php if($key != 0) { echo "display: none"; } ?>" data-id="<?php echo $value['study_set_term_id']; ?>">
+						<div class="flash-card-wrap">
+							<div class="flashcards active">
+								<?php $count = count($term_data)-1; foreach ($term_data as $key => $value) { ?>
+									<div class="flipper <?php if($key == 0) { echo "current first"; } else if($key == $count) { echo "last"; } ?>" style="<?php if($key != 0) { echo "display: none"; } ?>" data-id="<?php echo $value['study_set_term_id']; ?>">
 
-									<div class="front card">
-										<div class="flashCard_txt">
-											<?php echo $value['term_name']; ?>	
-										</div>
-										<div class="click-to-flip">
-											<img src="<?php echo base_url(); ?>assets_d/images/click-to-flip.svg" alt="flip"> Click to flip
-										</div>
-									</div>
-									<div class="back card">
-										<?php if(!empty($value['term_image'])) { ?>
-											<div class="flashImg">
-												<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>">
+										<div class="front card">
+											<div class="flashCard_txt">
+												<?php echo $value['term_name']; ?>	
 											</div>
-										<?php } ?>
-										<div class="flashCard_txt">
-											<?php echo $value['term_description']; ?>											
+											<div class="click-to-flip">
+												<img src="<?php echo base_url(); ?>assets_d/images/click-to-flip.svg" alt="flip"> Click to flip
+											</div>
+										</div>
+										<div class="back card">
+											<?php if(!empty($value['term_image'])) { ?>
+												<div class="flashImg">
+													<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $value['term_image']; ?>">
+												</div>
+											<?php } ?>
+											<div class="flashCard_txt">
+												<?php echo $value['term_description']; ?>											
+											</div>
 										</div>
 									</div>
-								</div>
-							<?php } ?>
-						</div>
-						
-						<div class="flashcard-controls" style="position: relative;">
+								<?php } ?>
+							</div>
+							<div class="flashcard-controls" style="position: relative;">
 							<div class="shareOptionBox">
 								<div class="prev" id="prevFlip" style="pointer-events: none;cursor: pointer;">
 									<img src="<?php echo base_url(); ?>assets_d/images/prev.svg">
@@ -151,6 +151,8 @@
 			      			</div>
 							
 						</div>
+						</div>
+						
 						<div class="flashcard_result">
 							<h4>This flashcard session lasted  <span>8 Hours6 Minutes56 Seconds</span></h4>
 							<h4>Your recent attempts</h4>

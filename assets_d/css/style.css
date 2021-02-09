@@ -1493,6 +1493,9 @@ transform-origin: 0 0;
     display: block;
 }
 @media (max-width: 767px) {
+    .coming-soon figure{
+        width: 90%;
+    }
     .sortMenu.viewList.hide-in-mobile{
         display: none;
     }
