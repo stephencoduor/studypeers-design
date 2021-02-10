@@ -271,7 +271,7 @@ foreach ($getdata as $key => $value) {
 									<figure>
 										<img src="<?php echo userImage($studyset['user_id']); ?>" alt="user">
 									</figure>
-									<a href="<?php echo base_url().'Profile/friends?profile_id='.$studyset['user_id'] ?>"><figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption></a>
+									<a href="<?php echo userProfileLink($studyset['user_id']) ?>"><figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption></a>
 								</div>
 								<div class="basic-action">
 									<?php if($studyset['user_id'] == $user_id) { ?>

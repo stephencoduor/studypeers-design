@@ -50,7 +50,7 @@
 							<img src="<?php echo userImage($studyset['user_id']); ?>" alt="user">
 							
 					</figure>
-					<a href="<?php echo base_url().'Profile/friends?profile_id='.$studyset['user_id'] ?>"><figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption></a>
+					<a href="<?php echo userProfileLink($studyset['user_id']); ?>"><figcaption><?php echo $studyset['first_name'].' '.$studyset['last_name'];?></figcaption></a>
 				</div>
 				<?php if($studyset['user_id'] == $user_id) { ?>
 					<div class="edit">
@@ -410,7 +410,7 @@
 																					<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">
 																				</a>
 																				<div class="sp-avatar__content">
-																					<span class="sp-avatar__name"><a href="<?php echo base_url().'Profile/friends?profile_id='.$value['userId'] ?>"><?= $value['nickname']; ?></a></span>
+																					<span class="sp-avatar__name"><a href="<?php echo userProfileLink($value['userId']); ?>"><?= $value['nickname']; ?></a></span>
 																				</div>
 																			</div>
 																		</span></td>
@@ -447,7 +447,7 @@
 																					<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">
 																				</a>
 																				<div class="sp-avatar__content">
-																					<span class="sp-avatar__name"><a href="<?php echo base_url().'Profile/friends?profile_id='.$value['userId'] ?>"><?= $value['nickname']; ?></a></span>
+																					<span class="sp-avatar__name"><a href="<?php echo userProfileLink($value['userId']) ?>"><?= $value['nickname']; ?></a></span>
 																				</div>
 																			</div>
 																		</span></td>
@@ -484,7 +484,7 @@
 																					<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">
 																				</a>
 																				<div class="sp-avatar__content">
-																					<span class="sp-avatar__name"><a href="<?php echo base_url().'Profile/friends?profile_id='.$value['userId'] ?>"><?= $value['nickname']; ?></a></span>
+																					<span class="sp-avatar__name"><a href="<?php echo userProfileLink($value['userId']) ?>"><?= $value['nickname']; ?></a></span>
 																				</div>
 																			</div>
 																		</span></td>
@@ -520,7 +520,7 @@
 																					<img alt="" src="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg" srcset="https://studypeers.com/wp-content/themes/studypeers/assets/images/default-avatar.svg 2x" class="avatar avatar-30 photo avatar-default" height="30" width="30">
 																				</a>
 																				<div class="sp-avatar__content">
-																					<span class="sp-avatar__name"><a href="<?php echo base_url().'Profile/friends?profile_id='.$value['userId'] ?>"><?= $value['nickname']; ?></a></span>
+																					<span class="sp-avatar__name"><a href="<?php echo userProfileLink($value['userId']) ?>"><?= $value['nickname']; ?></a></span>
 																				</div>
 																			</div>
 																		</span></td>
@@ -781,7 +781,7 @@
 									<div class="right">
 										<div class="userWrapText">
 										<figcaption>
-											<span class="name"> <a href="<?php echo base_url().'Profile/friends?profile_id='.$value['user_id'] ?>"><?php echo $user_info['nickname'] ?></a></span>
+											<span class="name"> <a href="<?php echo userProfileLink($value['user_id']) ?>"><?php echo $user_info['nickname'] ?></a></span>
 											<?php if($value['type'] == 1) { ?>
 												<img src="<?php echo base_url(); ?>uploads/comments/<?= $value['comment']; ?>" alt="comment" style="height: 70px;">
 											<?php } else { echo $value['comment']; } ?>
@@ -820,7 +820,7 @@
 													<div class="right">
 														<div class="userWrapText">
 														<figcaption>
-															<span class="name"><a href="<?php echo base_url().'Profile/friends?profile_id='.$value2['user_id'] ?>"><?= $user_info2['nickname'] ?></a></span>
+															<span class="name"><a href="<?php echo userProfileLink($value2['user_id']) ?>"><?= $user_info2['nickname'] ?></a></span>
 															<p><?php echo $value2['comment'] ?></p>
 															<div class="actionmsgMenu">
 																<ul>
@@ -950,7 +950,7 @@
 						</div>
 						<div class="chatreplyBox">
 							<figure>
-								<img src="<?php echo userImage($studyset['user_id']); ?>" alt="User">
+								<img src="<?php echo userImage($user_id); ?>" alt="User">
 							</figure>
 							<input type="hidden" id="comment_studyset_id" value="<?php echo $studyset['study_set_id'];?>
 							    			">
