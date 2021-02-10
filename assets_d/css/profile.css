@@ -2835,10 +2835,15 @@ shareOptionList celebrate*/
     padding-left: 15px;
 }
 @media(max-width: 767px) {
+    .shareMenu.shareOption {
+        top: -200px;
+        right: 0;
+        width: 100%;
+    }
     .TabsAndSortWrapper {
         align-items: flex-start;
         flex-direction: column;
-        margin-bottom: 15px;
+        margin: 15px 0;
     }
     .userBoxWrapper.gridview .card{
         width:100%;
