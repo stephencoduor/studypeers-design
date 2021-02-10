@@ -640,7 +640,7 @@ a.filterBtn,a.sortMenu{
     justify-content: space-between;
 }
 .logo a{
-    width:calc(100% - 40px);
+    width:calc(100% - 45px);
     display:inline-block;
 }
 
@@ -649,7 +649,7 @@ a.filterBtn,a.sortMenu{
     .pieDataList{margin-left: 60px;}
 }
 @media(max-width:1599px) {
-    .logo {padding:16px 0 16px 30px;}
+    .logo {padding:16px 0 16px 15px;}
 }
 @media(max-width:1450px){
     .top{padding: 47px 25px;}
@@ -681,7 +681,7 @@ a.filterBtn,a.sortMenu{
     }
 }
 @media(max-width:1200px){
-    .logo {padding:16px 0 16px 20px;}
+    .logo {padding:16px 0 16px 15px;}
     .user-pic{display:block;}
     .user-pic img{margin:auto;}
     .user-info{display:block;margin-left: 0;}
@@ -1493,6 +1493,9 @@ transform-origin: 0 0;
     display: block;
 }
 @media (max-width: 767px) {
+    .coming-soon figure{
+        width: 90%;
+    }
     .sortMenu.viewList.hide-in-mobile{
         display: none;
     }

@@ -1717,7 +1717,7 @@ l,.share:focus
     margin: 0 0px 30px 0px;
 }
 .chatMsg figcaption{
-    width: max-content;
+    display:inline-block;
     margin:0;
     padding: 10px;
     border-radius: 20px;
@@ -1748,7 +1748,7 @@ l,.share:focus
     width: 100%;
     align-items: flex-start;
     justify-content: flex-start;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
 }
 .userReplyBox .userImage {
     width: 100px;
@@ -1772,10 +1772,11 @@ l,.share:focus
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    right: -10px;
+    right: auto;
+    left: 82px;
     background: #fff;
     border-radius: 5px;
-    bottom: -15px;
+    bottom: -25px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
     color: #626262;
     padding: 5px;
@@ -1795,7 +1796,7 @@ l,.share:focus
 }
 .actionmsgMenu {
     position: absolute;
-    bottom: -17px;
+    bottom: -22px;
     right: -15px;
     cursor: pointer;
     width: 100%;
@@ -1898,7 +1899,7 @@ l,.share:focus
     align-items: center;
     justify-content: flex-start;
     position: absolute;
-    bottom: -10px;
+    bottom: 0;
     left: 50px;
     display: none;
 }
@@ -2298,7 +2299,7 @@ l,.share:focus
     justify-content: space-between;
 }
 .userWrapText {
-    width: 100%;
+    width: calc(100% - 15px);
 }
 .chatMsgBox .right .right {
     width: calc(100% - 70px);

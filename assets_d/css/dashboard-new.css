@@ -45,6 +45,18 @@
     border-radius: 8px;
     padding: 20px 17px 10px 17px; 
     box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    
+}  
+#dashboard-feeds .box-card{
+    margin-bottom:55px;
+}
+.reactmessage .react img {
+    width: 20px;
+    height: auto;
+    display: block;
+}
+#dashboard-feeds .createBox{
+    margin-bottom:55px;
 }
 #dashboard-feeds .eventMessage{
     top:-36px;  
