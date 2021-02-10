@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                                 <div class="list">
-                                    <div>
+                                    <div class="btn-wrap-area">
                                         <button class="btn btn-primary" type="submit" id="update_general_information">Update</button>
                                         <button class="btn btn-default" type="button" id="show_general_info">Cancel</button>
                                     </div>
@@ -189,8 +189,10 @@
                                     </div>
                                 </div>
                                 <div class="list">
-                                    <button class="btn btn-primary" type="submit" id="update_about_info">Update</button>
-                                    <button class="btn btn-default" type="button" id="show_about_info">Cancel</button>
+                                    <div class="btn-wrap-area">
+                                        <button class="btn btn-primary" type="submit" id="update_about_info">Update</button>
+                                        <button class="btn btn-default" type="button" id="show_about_info">Cancel</button>
+                                    </div>
                                 </div>
                             </div>
                         </form>

@@ -2255,8 +2255,6 @@ shareOptionList celebrate*/
 }
 .userBoxWrapper {
     display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
     flex-wrap:wrap;
 }
 .userBoxWrapper .card {
@@ -2292,8 +2290,9 @@ shareOptionList celebrate*/
 .profileSection {
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-flow: wrap column;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
 }
 .profileSection figure {
     width: 100px;
@@ -2832,10 +2831,27 @@ shareOptionList celebrate*/
 #cover_image_demo .cr-slider-wrap {
     width:95% !important;
 }
-
+.sortWrapper {
+    padding-left: 15px;
+}
 @media(max-width: 767px) {
+    .TabsAndSortWrapper {
+        align-items: flex-start;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+    .userBoxWrapper.gridview .card{
+        width:100%;
+        max-width:100%;
+    }
+    .userBoxWrapper .card:nth-child(odd){
+        margin-right:0;
+    }
+    .sortWrapper li.list{
+        display:none;
+    }
     #profile .postWrapper{
-        padding-top:0;
+        padding-top:10px;
         padding-bottom:10px;
     }
     .infoWrapper .list{
@@ -2848,8 +2864,17 @@ shareOptionList celebrate*/
         width: 100%;
     }
     .infoWrapper .list .value{
+        width:100%;
         font-size:14px;
         margin-left:0;
+    }
+    #edit_about_info .list .value{
+        width:100%;
+    }
+    #edit_about_info .list {
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: flex-start;
     }
     .modal-dialog {
         width: 90%;
@@ -3855,8 +3880,10 @@ input:-webkit-autofill:active {
     }
     .tabPaneWrapper .right{
         min-width: auto;
-        width:calc(100% - 60px)!important;
+        width:100%!important;
+        padding-left:0;
     }
+    
     .imageSection span{
         white-space: nowrap;
     }
@@ -3897,7 +3924,7 @@ input:-webkit-autofill:active {
         margin: 0;
     }
     .profileInfoWrapper .tabularLiist > .nav-tabs li a {
-        padding: 10px 10px !important;
+        padding: 5px !important;
         display: flex;
         font-size: 14px;
     }
