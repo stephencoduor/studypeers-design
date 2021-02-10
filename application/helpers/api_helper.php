@@ -769,6 +769,17 @@ function userImage($user_id){
     }
 }
 
+function userProfileLink($user_id){
+    $tableRecord = & get_instance();
+    $tableRecord
+        ->load
+        ->database();
+        
+    $user_detail = $tableRecord->db->get_where('user', array('id' => $user_id))->row_array();
+    
+    return base_url().'sp/'.$user_detail['username'];
+}
+
  function getReactionByReference($reference_id, $reference){
     $tableRecord = & get_instance();
     $tableRecord

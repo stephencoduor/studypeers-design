@@ -151,6 +151,7 @@
         },
         success: function(result) {
           $('#professor').html(result);
+          
         }
       });
     } else {
