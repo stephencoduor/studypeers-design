@@ -15,11 +15,9 @@
                 <div class="sortWrapper">
                     <ul>
                         <li>
-                            <div class="selectOrder">
-                                <select name="sort" id="sort">
+                            <select class="selectpicker form-control" name="sort" id="sort">
                                     <option value="volvo">Alphabetical</option>
-                                </select>
-                            </div>
+                            </select>
                         </li>
                         <li class="grid active">
                             <img src="<?php echo base_url()."/assets_d/images/grid-box-blue.svg" ?>" alt="Grid">

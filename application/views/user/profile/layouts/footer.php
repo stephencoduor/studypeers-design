@@ -356,6 +356,7 @@
 
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
+<script src="<?php echo base_url(); ?>assets_d/js/bootstrap-select.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/fm.selectator.jquery.js"></script>

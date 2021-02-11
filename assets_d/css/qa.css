@@ -2235,6 +2235,7 @@ textarea{
     margin: 0 0 0 10px;
     font-size: 12px;
     color: #7f7b94;
+    white-space: nowrap;
 }
 .replyAnswerBox.reply {
     width: 80%;
@@ -2760,7 +2761,7 @@ textarea{
     }
 }
 @media(max-width:479px){
-    .studySetWrapper .header h4, {
+    .studySetWrapper .header h4{
         font-size: 20px;
     }
     .buttonGroup {

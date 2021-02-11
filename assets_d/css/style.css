@@ -1493,6 +1493,14 @@ transform-origin: 0 0;
     display: block;
 }
 @media (max-width: 767px) {
+    .useraboutWrapper.social .list{
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: flex-start;
+    }
+    .useraboutWrapper.social .list .value {
+        width:100%;
+    }
     .coming-soon figure{
         width: 90%;
     }
