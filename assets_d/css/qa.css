@@ -2146,7 +2146,7 @@ textarea{
     height: 48px;
 }
 .studySetWrapper.qa-detail .commentfilterWrapper .filterSelect {
-    width: 12%;
+    width: 120px;
     border: 1px solid #eae9ee;
     border-radius: 4px;
     display: flex;
@@ -2452,7 +2452,37 @@ textarea{
     }
 }
 @media(max-width:767px){
-    
+    .timeperiod ul{
+        flex-direction: column;
+    }
+    .header .timeperiod ul{
+        flex-direction: row;
+    }
+    .timeperiod ul li{
+        white-space: nowrap;
+    }
+    .sortMenu.viewList{
+        display: none;
+    }
+    .userWrap{
+        flex-direction: column;
+    }
+    .feed-card .timeperiod ul li{
+        width:100%;
+    }
+    .studySetWrapper.list .feedWrapper .feed-card.list{
+        width:calc(100% - 70px);
+    }
+    .edit a{
+        white-space: nowrap;
+    }
+    .delete a{
+        white-space: nowrap;
+    }
+    .action-btn{
+        display: flex;
+        align-items: center;
+    }
     .filterForm {
         display: none;
     }
@@ -2635,11 +2665,6 @@ textarea{
     }
     .badgeList ul li.badge {
         margin-bottom:10px;
-    }
-    .studySetWrapper .feedVoteWrap,
-    .timeperiod ul,
-    .userWrap {
-        flex-wrap:wrap;
     }
     .timeperiod ul li {
         width: 45%;

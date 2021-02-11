@@ -287,6 +287,7 @@
 														<?php  $user_name = $this->db->get_where('user', array('id' => $value['created_by']))->row_array(); ?>
 														<a href="<?php echo base_url().'sp/'.$user_name['username'] ?>"><figcaption><?php echo $value['nickname']; ?></figcaption></a>
 													</div>
+													<div class="action-btn">
 													<div class="edit">
 														<a href="<?php echo base_url(); ?>account/editQuestion/<?php echo base64_encode($value['id']); ?>">
 															<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
@@ -360,6 +361,7 @@
 															</svg> Share
 														</a>
 													</div>	
+													</div>
 												</div>
 												<div class="action">
 														<div class="action_button">
