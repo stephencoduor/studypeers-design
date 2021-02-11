@@ -148,7 +148,12 @@ $('.edit_rating').removeClass('hide');
 })
 $('.flipper').on('click', function(){
     $(this).toggleClass('is-flipped');
-    $('.flashcard-controls').addClass('active');
+    $('.flashcard-controls').addClass('active'); 
+    if($('.current .back .flashImg').find('img').length > 0) {
+        $('.flashcards').addClass('flash-has-img'); 
+    } else {
+        $('.flashcards').removeClass('flash-has-img'); 
+    }
 })
 $('.showAnwer').on('click',()=>{
     $('.flipper').toggleClass('is-flipped');

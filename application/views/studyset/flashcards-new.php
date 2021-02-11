@@ -85,7 +85,7 @@
 					<input type="hidden" id="studyset_id" value="<?php echo $studyset['study_set_id']; ?>">
 					<div class="mainCardWrapper newflash">
 						<div class="flash-card-wrap">
-							<div class="flashcards active">
+							<div class="flashcards active ">
 								<?php $count = count($term_data)-1; foreach ($term_data as $key => $value) { ?>
 									<div class="flipper <?php if($key == 0) { echo "current first"; } else if($key == $count) { echo "last"; } ?>" style="<?php if($key != 0) { echo "display: none"; } ?>" data-id="<?php echo $value['study_set_term_id']; ?>">
 
