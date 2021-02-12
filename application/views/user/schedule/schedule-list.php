@@ -243,7 +243,7 @@
 									echo '<div class="blankFeedArea">
 									<div class="noFeedWrapper">
 										<figure>
-											<img src="http://localhost/studypeers/assets_d/images/blank-feeds.png" alt="No Feed">
+											<img src="'.base_url().'assets_d/images/blank-feeds.png" alt="No Feed">
 										</figure>
 										<h4>Search result not found.</h4>
 									</div>
@@ -357,7 +357,7 @@
 </section>
 
 <div class="eventDetail">
-	<div class="close">
+	<div class="close" style="cursor: pointer;">
 		<img src="<?php echo base_url(); ?>assets_d/images/close1.svg">
 	</div>
 	<div class="eventWrapper" id="eventDetailDiv">
