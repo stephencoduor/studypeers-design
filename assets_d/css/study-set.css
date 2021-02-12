@@ -2878,7 +2878,7 @@ l,.share:focus
 .mainCardWrapper.newflash .flashcards.active{
     height: auto!important;
 }
-.mainCardWrapper.newflash .flashcards.active.show{
+.mainCardWrapper.newflash .flashcards.flash-has-img.active.show{
     height: 400px!important;
 }
 .mainCardWrapper.newflash .flashcards .front, .mainCardWrapper.newflash .flashcards .back {
@@ -3338,7 +3338,7 @@ l,.share:focus
     background-color: transparent;
 }
 @media (max-width:767px) {
-    .mainCardWrapper.newflash .flashcards.active.show {
+    .mainCardWrapper.newflash .flashcards.flash-has-img.active.show {
         height: 455px!important;
     }
     .descp_card .right .flashImg {
@@ -3350,5 +3350,11 @@ l,.share:focus
     height: 390px;
 }
 .flipper.first.is-flipped.current {
+    height: 390px;
+}
+.flashcards.active .flipper.first.is-flipped.current {
+    height: 120px;
+}
+.flashcards.active .flipper.last.is-flipped.current {
     height: 390px;
 }
