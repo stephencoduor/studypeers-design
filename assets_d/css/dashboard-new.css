@@ -2877,7 +2877,7 @@ figcaption a {
 .selectedPollOptions .progressValues .rightValues {
     display: flex;
     align-items: center;
-    justify-content: flex-start;
+    justify-content: flex-end;
     width: 50%;
     position: relative;
 }
@@ -2885,12 +2885,13 @@ figcaption a {
 .selectedPollOptions .progressValues .rightValues p {
     font-size: 16px;
     font-weight: 500;
-    margin-right: 10px;
+    margin-right: 5px;
+    margin-bottom:0;
 }
 
 .selectedPollOptions .progress .eventActionWrap {
-    width: 50%;
-    position: absolute;
+    width: 25px;
+    position: relative;
     right: -10px;
     margin: 0;
     justify-content: flex-end;
