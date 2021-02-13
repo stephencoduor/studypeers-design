@@ -496,10 +496,14 @@
     var fields = formatedValue.split('T');
     var url = '<?php echo base_url('account/getEventsDayWise') ?>';
     $('.events').html('<h6 class="loadingEvents">Loading Events</h6>');
+    var course = $('#course').val();
+    var start_date = $('#start-date').val();
+    var professor = $('#professor').val();
+    var keyword = $('#keyword').val();
      $.ajax({
           url: url,
           type: 'POST',
-          data: {'date': fields[0]},
+          data: {'date': fields[0], 'course': course, 'start_date': start_date, 'professor': professor, 'keyword': keyword},
           success: function(result) {
               $('.events').html(result);
           }
