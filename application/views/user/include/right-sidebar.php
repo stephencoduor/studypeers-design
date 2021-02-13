@@ -207,7 +207,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         </button>
                     </div>
                 </div>
-                <div class="listUserWrap">
+                <div class="listUserWrap" id="vertScroll">
 
                     <?php foreach ($peer_list as $key => $value) {
                         if ($value['user_id'] == $user_id) {

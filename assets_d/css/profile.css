@@ -3869,6 +3869,40 @@ input:-webkit-autofill:active {
         flex-direction: column;
     }
 }
+@media (min-width: 768px) and (max-width: 1024px) { 
+    .socialAction li a span {
+        top: 0;
+        white-space: nowrap;
+    }
+    .socialAction li a{
+        display: flex;
+        align-items: center;
+    }
+    .search{
+        margin-left:40px;
+    }
+    .profileInfoWrapper .tabularLiist > .nav-tabs li a {
+        padding: 10px !important;
+    }
+    .tabPaneWrapper .right {
+        min-width: 100%;
+        padding-left: 0;
+    }
+    #edit_about_info .list .value {
+        width: 100%;
+        margin-right: 0;
+    }
+    #edit_social_info .list .value{
+        width:calc(100% - 100px);
+        margin-right:0;
+    }
+    #edit_social_info .list .heading{
+        width:100px;
+    }
+    .innerFeedTabs .nav li a {
+        padding: 8px 15px !important;
+    }
+}
 @media (max-width: 767px) {
     .event-description{
         flex-direction: column;
