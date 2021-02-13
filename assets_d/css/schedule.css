@@ -260,7 +260,7 @@
 .filtercalendar .input-group.date input {
     border: 0;
     display: inline-block;
-    padding: 13px 10px;
+    padding: 13px 10px 13px 45px;
     height: auto;
     border-radius: 8px;
     outline: none;
@@ -3129,6 +3129,40 @@ div[data-edit] {
 }
 .userWrapText {
     width: calc(100% - 15px);
+}
+@media (min-width: 768px) and (max-width: 1024px) { 
+    .mainContent.active .filterWrapper.flex-filter .filtercalendar {
+        max-width: 100%;
+        flex: 0 100%;
+        width: 100%!important;
+    }
+    .mainContent.active .filterWrapper.flex-filter .filterSelect {
+        max-width: 100%;
+        flex: 0 100%;
+        width: 100%!important;
+    }
+    .mainContent.active .filterWrapper.flex-filter .filterSearch{
+        max-width: 100%;
+        flex: 0 100%;
+        width: 100%!important;
+    }
+    .mainContent.active .flex-row{
+        flex-direction: column;
+    }
+    .monthEvents{
+        flex-direction: column;
+    }
+    .monthView{
+        width:100%;
+        margin-bottom:20px;
+    }
+    .events {
+        width: 100%;
+        padding-left: 0;
+    }
+    .feed-card.list{
+        margin-left:0;
+    }
 }
 @media (max-width: 767px) {
     .mainContent.active .flex-row{
