@@ -2319,6 +2319,9 @@ l,.share:focus
     }
 }
 @media (max-width:767px) {
+    .flashcard-controls{
+        padding:0 50px;
+    }
     .text-item-desc img {
         width: 60px;
         border-radius: 50%;
