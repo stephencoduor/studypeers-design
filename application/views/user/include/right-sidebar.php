@@ -21,7 +21,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             </section>
             <section class="listChatBox">
                 <?php foreach ($peer_list as $key => $value) {
-                    if ($key <= 2) {
+                    if ($key <= 4) {
                         if ($value['user_id'] == $user_id) {
                             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
                             $this->db->join('user', 'user.id=user_info.userID');
@@ -144,11 +144,13 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         <section class="listBar">
             <section class="listHeader">
                 <h6>Blocked Peers</h6>
+                <a data-toggle="modal" data-target="#blockUserModal">See More</a>
             </section>
             <section class="listChatBox">
 
                 <?php if (!empty($blocked_users)) {
-                    foreach (@$blocked_users as $users) {
+                    $count = 0; foreach (@$blocked_users as $users) {
+                        if($count < 5) {
                 ?>
                         <section class="list">
                             <section class="left">
@@ -168,7 +170,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                                 </div>
                             </section>
                         </section>
-                    <?php
+                    <?php $count++; }
                     }
                 } else { ?>
                     <div class="blankFeedArea SmallFeed">
@@ -210,15 +212,16 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                 <div class="listUserWrap" id="vertScroll">
 
                     <?php foreach ($peer_list as $key => $value) {
-                        if ($value['user_id'] == $user_id) {
-                            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                            $this->db->join('user', 'user.id=user_info.userID');
-                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['peer_id']))->row_array();
-                        } else {
-                            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                            $this->db->join('user', 'user.id=user_info.userID');
-                            $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['user_id']))->row_array();
-                        }
+                        
+                            if ($value['user_id'] == $user_id) {
+                                $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                                $this->db->join('user', 'user.id=user_info.userID');
+                                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['peer_id']))->row_array();
+                            } else {
+                                $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+                                $this->db->join('user', 'user.id=user_info.userID');
+                                $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userId' => $value['user_id']))->row_array();
+                            }
                     ?>
                         <section class="list">
                             <section class="left">
@@ -232,7 +235,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             </section>
                         </section>
 
-                    <?php } ?>
+                    <?php  } ?>
 
 
 
@@ -342,7 +345,52 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
     </div>
 </div>
 
+<div class="modal fade" id="blockUserModal" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <div class="modal-body peers">
+                <h4>Block Users List</h4>
+                <div class="searchPeer" style="margin-bottom: 10px;">
+                    <div class="filterSearch">
+                        <input type="text" placeholder="Search Peers" name="">
+                        <button type="submit" class="searchBtn">
+                            <svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
+                                <path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+                            s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+                            c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="listUserWrap">
 
+                    <?php foreach ($blocked_users as $key => $value) {
+                        
+                           
+                    ?>
+                        <section class="list">
+                            <section class="left">
+                                <figure>
+                                    <img src="<?php echo userImage($users['id']); ?>" alt="user">
+                                </figure>
+                                <figcaption><?php echo $users['first_name'] . ' ' . $users['last_name']; ?></figcaption>
+                            </section>
+                            <!-- <section class="action">
+                                <button type="button" class="like">message</button>
+                            </section> -->
+                        </section>
+
+                    <?php  } ?>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="modal fade" id="courseModalAll" role="dialog">
     <div class="modal-dialog">

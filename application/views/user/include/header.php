@@ -623,7 +623,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 								<a class="userIcoList" data-toggle="modal" data-target="#courseModal"><i class="fa fa-plus"></i></a>
 							</section>
 							<?php foreach ($get_course as $key => $value) {
-								if ($key < 2) { ?>
+								if ($key < 5) { ?>
 									<section class="courseheader">
 										<h6><?= $value['name']; ?></h6>
 										<!-- <a class="bullet">1</a> -->

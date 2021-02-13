@@ -259,7 +259,14 @@ class Account extends CI_Controller
                     }
                 }
             } else {
-                $html = '<p class="text-center">No records found..</p>';
+                $html = '<div class="blankFeedArea">
+                                    <div class="noFeedWrapper">
+                                        <figure>
+                                            <img src="'.base_url().'assets_d/images/blank-feeds.png" alt="No Feed">
+                                        </figure>
+                                        <h4>Search result not found.</h4>
+                                    </div>
+                                </div>';
             }
             echo $html;
             die;
@@ -408,8 +415,23 @@ class Account extends CI_Controller
         if ($this->input->post()) {
             $user_id = $this->session->get_userdata()['user_data']['user_id'];
             $date       = $this->input->post('date');
+            $startdate  = $this->input->post('start_date');
+            $course     = $this->input->post('course');
+            $professor  = $this->input->post('professor');
+            $keyword    = $this->input->post('keyword');
 
-            $event_list = $this->db->query("select * from event_master where (status = 1 and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
+            if (!empty($course) && !empty($keyword)) {
+                
+                $event_list = $this->db->query("select * from event_master where (status = 1 and course = " . $course . " and event_name like '%{$keyword}%' and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and event_master.course = " . $course . " and event_master.event_name like '%{$keyword}%' and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
+            } else if (!empty($course) && empty($keyword)) {
+                $event_list = $this->db->query("select * from event_master where (status = 1 and course = " . $course . " and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and event_master.course = " . $course . " and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
+            } else if (empty($course) && !empty($keyword)) {
+                 $event_list = $this->db->query("select * from event_master where (status = 1 and event_name like '%{$keyword}%' and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and event_master.event_name like '%{$keyword}%' and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
+            } else {
+                $event_list = $this->db->query("select * from event_master where (status = 1 and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
+            }
+
+            
 
             $html = "";
 
@@ -902,7 +924,14 @@ class Account extends CI_Controller
                     $html .= '</div>';
                 }
             } else {
-                $html = '<p class="text-center">No records found..</p>';
+                $html = '<div class="blankFeedArea">
+                                    <div class="noFeedWrapper">
+                                        <figure>
+                                            <img src="'.base_url().'assets_d/images/blank-feeds.png" alt="No Feed">
+                                        </figure>
+                                        <h4>Search result not found.</h4>
+                                    </div>
+                                </div>';
             }
             echo $html;
             die;
