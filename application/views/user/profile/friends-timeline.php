@@ -1996,7 +1996,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                 <label>Reason for Report</label>
                                 <div class="reason">
                                     <input type="hidden" name="report_user_id" value="<?= $user_id; ?>">
-                                    <select class="form-control" id="report_reason" name="report_reason">
+                                    <select class="form-control selectpicker" id="report_reason" name="report_reason">
                                         <option value="">Select Reason</option>
                                         <option value="Inappropriate Content">Inappropriate Content</option>
                                         <option value="Spam">Spam</option>

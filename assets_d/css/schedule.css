@@ -3165,6 +3165,10 @@ div[data-edit] {
     }
 }
 @media (max-width: 767px) {
+    .events .feed_card_footer .action{
+        justify-content: space-between;
+        width: 100%;
+    }
     .mainContent.active .flex-row{
         width:100%;
         flex-direction: column;

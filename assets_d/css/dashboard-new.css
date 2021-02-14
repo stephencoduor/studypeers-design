@@ -2975,6 +2975,33 @@ figcaption a {
     }
 }
 @media (max-width: 767px) {
+    .userWrap.study-sets{
+        width:100%;
+        position: relative;
+        padding-top:10px;
+    }
+    .dashboard-qa .userWrap.study-sets .date{
+        position: absolute;
+        top:-5px;
+        right:0;
+        margin:0;
+    }
+    .socialAction li a{
+        white-space: nowrap;
+    }
+    .dashboard-qa .feed_card_inner{
+        padding:15px;
+    }
+    .dashboard-qa .action ul li {
+        margin-right: 0;
+        border-right: none;
+        margin-bottom: 10px;
+    }
+    .dashboard-qa .action ul{
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
     .box-card.message .createBox{
         margin-bottom: 55px;
     }
