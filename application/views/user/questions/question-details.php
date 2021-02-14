@@ -268,7 +268,7 @@
 						<div class="commentfilterWrapper">
 							Sort by: 
 							<div class="filterSelect">
-								<select class="form-control" placeholder="Votes" onchange="applySort(this.value)">
+								<select class="form-control selectpicker" placeholder="Votes" onchange="applySort(this.value)">
 									<option value="" >Sort By</option>
 								  	<option value="vote" <?php if($sort_by == 'vote') { echo 'selected'; } ?>>Votes</option>
 								  	<option value="date" <?php if($sort_by == 'date') { echo 'selected'; } ?>>Date</option>
@@ -478,7 +478,7 @@
 												<div class="reason">
 													<input type="hidden" name="answer_id" id="answer_id">
 													<input type="hidden" name="report_question_id" value="<?= $result['id']; ?>">
-													<select class="form-control" id="report_reason" name="report_reason">
+													<select class="form-control selectpicker" id="report_reason" name="report_reason">
 														<option value="">Select Reason</option>
 														<option value="Inappropriate Content">Inappropriate Content</option>
 														<option value="Spam">Spam</option>

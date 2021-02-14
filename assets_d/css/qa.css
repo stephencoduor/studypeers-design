@@ -2451,7 +2451,57 @@ textarea{
         font-size: 15px;
     }
 }
-@media(max-width:767px){
+@media (max-width: 1024px) and (min-width: 768px) {
+    .action-btn{
+        display: flex;
+        align-items: center;
+    }
+}
+@media(max-width: 767px) {
+    .feed_card_footer{
+        padding: 12px 25px 12px 15px;
+        position: relative;
+    }
+    .modalText{
+        font-size:16px;
+        line-height: 1.2;
+        word-break: break-word;
+    }
+    .form-group.button{
+        margin:15px 0 0;
+    }
+    .modal-body .form-group.button .filterBtn{
+        margin-bottom:0!important;
+    }
+    .transparentBtn.highlight{
+        margin-right:15px;
+    }
+    .studySetWrapper.qa-detail .userWrap.study-sets{
+        position: relative;
+    }
+    .user-name a{
+        width:calc(100% - 28px);
+    }
+    .user-name figcaption{
+        width:100%;
+    }
+    .studySetWrapper.qa-detail .userWrap.study-sets .date{
+        position: absolute;
+        right: 15px;
+        top:-8px;
+    }
+    .studySetWrapper.qa-detail .userWrap.study-sets {
+        margin: 10px 0 15px;
+    }
+    .voteCount{
+        margin:0 10px;
+    }
+    .studySetWrapper.qa-detail .feed_card_inner {
+        padding: 15px;
+    }
+    .studySetWrapper.qa-detail .feed_card_footer{
+        padding: 12px 15px;
+    }
     .timeperiod ul{
         flex-direction: column;
     }
@@ -2626,7 +2676,8 @@ textarea{
     .modal-dialog {
         width: 60%;
         margin: auto;
-        top: 35%;
+        top: 50%;
+        transform: translate(0,-50%)!important;
     }
     .box-upload {
         top: auto;
@@ -2671,7 +2722,7 @@ textarea{
     }
     .userWrap .user-name {
         width:100%;
-        margin-bottom:15px;
+        margin-bottom:10px;
     }
     .feedWrapper.listView .feedVoteWrap {
         max-width: 100%;
