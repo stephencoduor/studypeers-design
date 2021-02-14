@@ -8,7 +8,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group select">
-													<select class="form-control" onchange="showFormDetails(this.value)" name="schedule" id="schedule">
+													<select class="form-control selectpicker" onchange="showFormDetails(this.value)" name="schedule" id="schedule">
 														<option value="">Choose</option>
 														<option value="course" <?php if($schedule['schedule'] == 'course') { echo 'selected'; } ?>>Course schedule</option>
 														<option value="assignment" <?php if($schedule['schedule'] == 'assignment') { echo 'selected'; } ?>>Assignment</option>
@@ -34,7 +34,7 @@
 												<div class="col-md-12">
 													<div class="form-group select select_label">
 														<label>Institution</label>
-														<select class="form-control" name="university" id="university">
+														<select class="form-control selectpicker" name="university" id="university">
 														  <option value="<?= $university['university_id']; ?>" ><?= $university['SchoolName']; ?></option>
 														</select>
 														<span class="custom_err" id="err_university"></span>
@@ -44,7 +44,7 @@
 												<div class="col-md-12">
 													<div class="form-group select select_label">
 														<label>Course</label>
-														<select class="form-control" name="course" id="course" onchange="getProfessor(this.value)">
+														<select class="form-control selectpicker" name="course" id="course" onchange="getProfessor(this.value)">
 															<option value="">Select Course</option>
 															<?php foreach ($course as $key => $value) { ?>
 																<option value="<?= $value['id'] ?>" <?php if($schedule['course'] == $value['id']) { echo 'selected'; } ?>><?= $value['name'] ?></option>
@@ -57,7 +57,7 @@
 												<div class="col-md-12">
 													<div class="form-group select select_label">
 														<label>Professor</label>
-														<select class="form-control" name="professor" id="professor">
+														<select class="form-control selectpicker" name="professor" id="professor">
 														  <?php foreach ($professor as $key => $value) { ?>
 															<option value="<?= $value['id'] ?>" <?php if($schedule['professor'] == $value['id']) { echo 'selected'; } ?>><?= $value['name'] ?></option>
 														<?php } ?>

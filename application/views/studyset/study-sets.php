@@ -101,14 +101,14 @@ foreach ($getdata as $key => $value) {
 				<div class="row">
 					<div class="col-md-12">
 						<label>Institution</label>
-						<select class="form-control" name="institution">
+						<select class="form-control selectpicker" name="institution">
 							<option value="">Select Institution</option>
 							<option value="<?php echo $userdata['intitutionID'];?>" <?php echo (isset($_GET['institution']) && $_GET['institution'] == $userdata['intitutionID']) ? 'selected' : '';?>><?php echo $userdata['SchoolName'];?></option>
 						</select>
 					</div>
 					<div class="col-md-12 courseSelect">
 						<label>Course</label>
-						<select class=" form-control" id="course" name="course" onchange="getProfessor();">
+						<select class="form-control selectpicker" id="course" name="course" onchange="getProfessor();">
 							<option value="">Select Course</option>
 							<?php
 							foreach ($courses as $key => $course) {
@@ -121,7 +121,7 @@ foreach ($getdata as $key => $value) {
 					</div>
 					<div class="col-md-12 professorSelect">
 						<label>Professor</label>
-						<select class="form-control" name="professor" id="professor">
+						<select class="form-control selectpicker" name="professor" id="professor">
 
 						</select>
 					</div>
