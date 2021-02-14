@@ -328,10 +328,10 @@ ul.social-store li {
     -ms-transition: background 550ms ease;
     -o-transition: background 550ms ease;
 }
-ul.social-store li:hover,
+/* ul.social-store li:hover,
 ul.social-store li:focus {
     background: #394a71;
-}
+} */
 ul.social-store li:last-child {
 	margin:60px 0 0 0;
 }
