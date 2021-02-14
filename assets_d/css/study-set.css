@@ -2704,7 +2704,7 @@ l,.share:focus
         padding: 0 10px 0 10px;
     }
     .flashcards {
-        min-height: 250px;
+        min-height: 200px;
     }
     .userWrap.study-sets {
         margin: 0;
