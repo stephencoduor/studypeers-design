@@ -1340,7 +1340,8 @@ input:-webkit-autofill:active {
 .blankFeedArea figure {
     width: 160px;
     height: 160px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
+
 }
 .fc-toolbar{
     position: relative;

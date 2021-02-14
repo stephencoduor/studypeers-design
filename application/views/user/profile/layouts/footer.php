@@ -191,7 +191,7 @@
                                 <div class="reason">
                                     <input type="hidden" name="answer_id" id="answer_id">
                                     <input type="hidden" name="report_question_id" value="">
-                                    <select class="form-control" id="reportqa_reason" name="report_reason">
+                                    <select class="form-control selectpicker" id="reportqa_reason" name="report_reason">
                                         <option value="">Select Reason</option>
                                         <option value="Inappropriate Content">Inappropriate Content</option>
                                         <option value="Spam">Spam</option>

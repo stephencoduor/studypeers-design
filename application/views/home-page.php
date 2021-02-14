@@ -1011,7 +1011,7 @@
 								</li>
 							</ul>
 						</div>
-						<p>Copyright © 2020 Studypeers</p>
+						<p>Copyright © 2021 Studypeers</p>
 					</div>
 				</div>
 			</div>

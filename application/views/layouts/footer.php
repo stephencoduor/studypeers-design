@@ -1,18 +1,19 @@
 <footer class="home-footer">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-md-10">
+            <div class="col-md-8">
                 <ul>
+                    <li><a href="">Home</a></li>
+                    <li><a href="">Study Tools</a></li>
+                    <li><a href="">Connect with Peers</a></li>
+                    <li><a href="">For Professor</a></li>
                     <li><a href="">About Us</a></li>
-                    <li><a href="">Cookie Policy</a></li>
-                    <li><a href="">Terms & Conditions</a></li>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Institutions</a></li>
-                    <li><a href="">Courses</a></li>
+                    <li><a href="">Terms and Conditions</a></li>
+                    <li><a href="">Privacy Policy</a></li>
                 </ul>
             </div>
-            <div class="col-md-2 text-right">
-                <p>Copyright</p>
+            <div class="col-md-4 text-right">
+                <p>Copyright © 2021 Studypeers</p>
             </div>
         </div>
     </div>
