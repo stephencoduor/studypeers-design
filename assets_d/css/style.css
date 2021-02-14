@@ -1516,6 +1516,16 @@ transform-origin: 0 0;
     display: block;
 }
 @media (max-width: 767px) {
+    .modal .listUserWrap .list{
+        flex-direction: column;
+        
+    }
+    .modal .listUserWrap .list .left{
+        margin-bottom:10px;
+    }
+    .modal .listUserWrap .list .action{
+        width:100%;
+    }
     .useraboutWrapper.social .list{
         flex-direction: column;
         justify-content: flex-start;
