@@ -348,8 +348,9 @@ class Studyset_model extends CI_Model {
 
         if($isLike) {
             $this->db->where('user_id',$user_id);
-            $this->db->where('study_set_id',$study_set_id);
-            $result = $this->db->delete('likes');
+            $this->db->where('reference','studyset');
+            $this->db->where('reference_id',$study_set_id);
+            $result = $this->db->delete('reaction_master');
 
             $this->db->where('study_set_id',$study_set_id);
             $this->db->set('likes_count', 'likes_count-1', FALSE);
@@ -357,12 +358,13 @@ class Studyset_model extends CI_Model {
             return 2;
         } else {
             $like_array = array(
-                                    "study_set_id" => $study_set_id,
+                                    "reference_id" => $study_set_id,
+                                    "reaction_id" => 1,
+                                    "reference" => 'studyset',
                                     "user_id" => $user_id,
-                                    "liked_on" => date("Y-m-d H:i:s"),
-                                    "status" => 1
+                                    "created_at" => date("Y-m-d H:i:s")
                                 );
-            $result = $this->db->insert('likes',$like_array);
+            $result = $this->db->insert('reaction_master',$like_array);
 
             $this->db->where('study_set_id',$study_set_id);
             $this->db->set('likes_count', 'likes_count+1', FALSE);
@@ -388,10 +390,11 @@ class Studyset_model extends CI_Model {
 
      function isLikedByUser($user_id,$study_set_id) {
 
-        $this->db->select('like_id');
-        $this->db->from('likes');
+        $this->db->select('id');
+        $this->db->from('reaction_master');
         $this->db->where('user_id',$user_id);
-        $this->db->where('study_set_id',$study_set_id);
+        $this->db->where('reference','studyset');
+        $this->db->where('reference_id',$study_set_id);
         $isLike = $this->db->get()->num_rows();
         return $isLike;
     }

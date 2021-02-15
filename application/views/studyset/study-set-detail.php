@@ -4,7 +4,17 @@
 
 <?php  $user_id = $this->session->get_userdata()['user_data']['user_id']; ?>
 <section class="mainContent">
+	<a class="backBtn" href="<?php echo base_url(); ?>studyset">
+			<svg class="sp-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
+				 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
+									<path d="M245.9,436.3c14.8-16.4,13.9-41.5-2-56.8l-101.5-94.4l308.4-0.7c22.2-0.6,39.7-19,39.2-41.1c-0.5-21.4-17.7-38.6-39.1-39.1
+										l-308.6,0.7l101.5-94.4c16.2-15.1,17.1-40.6,2-56.8c-15.1-16.2-40.6-17.1-56.8-2l-176.2,164C4.7,223.3,0.1,233.9,0,245
+										c0,11.1,4.6,21.7,12.8,29.3L189,438.2c16.2,15.2,41.6,14.4,56.8-1.7c0.1-0.1,0.2-0.2,0.2-0.2H245.9z"></path>
+								</svg>
+			Back to sudysets
+		</a>
 	<div class="studySetWrapper">
+
 		<div class="left">
 			<figure>
 				<?php
@@ -23,8 +33,8 @@
 		<div class="right">
 			<div class="studyDetailHeaderWrapper">
 				<a href="javascript:;" class="link">Study Set</a>
-				<div class="my-rating-4" data-rating="2.5">
-					<span>1233 votes</span>
+				<div class="my-rating-4" data-rating="<?= round($rating['average'], 1) ?>">
+					<span><?php echo $studyset['rating_count'];?> votes</span>
 				</div>
 			</div>
 			<div class="header">
@@ -119,9 +129,9 @@
 				<?php } ?>
 			</div>
 			<div class="socialActionWrapper">
-				<a href="javascript:void(0)" class="like likecount" data-id="<?php echo $studyset['study_set_id'];?>">
+				<a href="javascript:void(0)" class="like likecount" data-id="<?php echo $studyset['study_set_id'];?>" onclick="likeStudyset('<?php echo $studyset['study_set_id'];?>')">
 					<i class="fa fa-thumbs-o-up <?php echo ($studyset['isLikedByUser']) ? 'fa-thumbs-up' : ''; ?>" aria-hidden="true"></i>
-					Like
+					<?php echo ($studyset['isLikedByUser']) ? 'Liked' : 'Like'; ?>
 				</a>
 				<a class="like" data-toggle="tab" href="#comment" onclick="setTab()">
 					<svg id="collapsea_1"
@@ -1472,6 +1482,26 @@
 			}
 		}
 	});
+
+
+	function likeStudyset(id){
+		var url = '<?php echo base_url('studyset/likeStudyset') ?>';
+		$.ajax({
+			url: url,
+			type: 'POST',
+			data: {'study_set_id': id},
+			success: function(result) {
+				$('.likecount').html(result);
+				if(result == 1){
+					$('.likecount').html('<i class="fa fa-thumbs-up" >Liked</i>');
+            
+        		} else {
+        			$('.likecount').html('<i class="fa fa-thumbs-o-up" >Like</i>');
+        		}
+            
+			}
+		});
+	}
 
 
 	function likeComment(comment_id){

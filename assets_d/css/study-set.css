@@ -3358,3 +3358,39 @@ l,.share:focus
 .flashcards.active .flipper.last.is-flipped.current {
     height: 390px;
 }
+
+ a.backBtn {
+    font-size: 12px;
+    margin: 0 10px 0 0;
+    font-weight: bold;
+    text-align: left;
+    color: #185aeb;
+    text-transform: uppercase;
+    background: transparent;
+    padding: 6px 15px;
+    border: 1px solid #185aeb;
+    vertical-align: top;
+}
+.backBtn {
+    font-size: 12px;
+    margin: 0 10px 0 0;
+    font-weight: bold;
+    text-align: left;
+    color: #185aeb;
+    text-transform: uppercase;
+    background: transparent;
+    padding: 9px 0 3px 0 !important;
+    vertical-align: top;
+    border: 0!important;
+}
+ a.backBtn svg, .backBtn svg {
+    fill: #185aeb;
+}
+ a svg {
+    fill: #fff;
+    transition: all 300ms ease-in-out;
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    margin-right: 10px;
+}

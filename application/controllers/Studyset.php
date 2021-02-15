@@ -127,6 +127,11 @@ class Studyset extends CI_Controller {
 
         $data['comment'] = $this->db->get_where('comment_master', array('reference' => 'studyset', 'reference_id' => $study_set_id, 'comment_parent_id' => 0))->result_array();
 
+        $this->db->select('AVG(rating) as average');
+        $this->db->where('study_set_id', $study_set_id);
+        $this->db->from('studyset_rating_master');
+        $data['rating'] = $this->db->get()->row_array();
+
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/study-set-detail',$data);
         $this->load->view('user/include/right-sidebar');
@@ -807,6 +812,13 @@ class Studyset extends CI_Controller {
         }
 
         return $images;
+    }
+
+    public function likeStudyset(){
+        $user_id = $this->session->get_userdata()['user_data']['user_id'];
+        $result = $this->studyset_model->manageLikes($user_id);
+        echo $result;die;
+        
     }
 
     public function manageLikes(){
