@@ -3367,3 +3367,6 @@ l,.share:focus
 .flashcards.active .flipper.last.is-flipped.current {
     height: 120px;
 }
+a svg{
+    height: auto;
+}
