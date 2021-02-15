@@ -3362,10 +3362,13 @@ l,.share:focus
     height: auto;
 }
 .flashcards.active .flipper.first.is-flipped.current {
-    height: 120px;
+    height: auto;
+}
+.flashcards.flash-has-img.active .flipper.first.is-flipped.current {
+    height: 390px;
 }
 .flashcards.active .flipper.last.is-flipped.current {
-    height: 390px;
+    height: auto;
 }
 a.backBtn {
     font-size: 12px;
