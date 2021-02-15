@@ -2934,7 +2934,7 @@ textarea.textarea-gray {
         margin-bottom:0 !important;
     }
     #confirmationModal .transparentBtn {
-        margin-bottom: 20px !important;
+        margin-bottom: 0 !important;
     }
     .flashcards .front, .flashcards .back {
         padding: 25px 10px 0px;

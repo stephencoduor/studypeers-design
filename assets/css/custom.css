@@ -70,8 +70,13 @@ a.pink-btn {
   display: flex;
   align-items: center;
 }
+.sticky-footer-wrap {
+  min-height: 100%;
+  padding-bottom:15px;
+  position: relative;
+}
 .home-footer li {
-  margin-right: 30px;
+  margin-right: 20px;
 }
 .home-footer a {
   font-size: 16px;

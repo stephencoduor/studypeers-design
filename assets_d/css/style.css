@@ -754,6 +754,29 @@ a.filterBtn,a.sortMenu{
 @media(max-width:900px){
     .search{max-width: 250px;}
 }
+@media (min-width: 768px) and (max-width: 1024px) {
+    aside{
+        width:260px;
+    }
+    .event-description{
+        flex-direction: column;
+    }
+    .event-description .left{
+        margin-bottom:10px;
+    }
+    .tabPaneWrapper .right{
+        min-width: 100%;
+        padding-left: 0;
+    }
+    .tabPaneWrapper .right .boxwrap{
+        padding:20px;
+    }
+    .mainContent.profile.active .mainProfileWrapper {
+        max-width: 100%;
+        padding: 0 50px;
+    }
+    
+}
 @media(max-width:767px){
     aside{
         transform: translateX(0);
@@ -1317,7 +1340,8 @@ input:-webkit-autofill:active {
 .blankFeedArea figure {
     width: 160px;
     height: 160px;
-    margin-bottom: 20px;
+    margin: 0 auto 20px;
+
 }
 .fc-toolbar{
     position: relative;
@@ -1493,6 +1517,16 @@ transform-origin: 0 0;
     display: block;
 }
 @media (max-width: 767px) {
+    .modal .listUserWrap .list{
+        flex-direction: column;
+        
+    }
+    .modal .listUserWrap .list .left{
+        margin-bottom:10px;
+    }
+    .modal .listUserWrap .list .action{
+        width:100%;
+    }
     .useraboutWrapper.social .list{
         flex-direction: column;
         justify-content: flex-start;

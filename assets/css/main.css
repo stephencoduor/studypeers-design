@@ -1317,7 +1317,7 @@ a#scrollUp {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 3;
+    z-index: 99;
     transition: 0.2s;
 }
 

@@ -2319,6 +2319,9 @@ l,.share:focus
     }
 }
 @media (max-width:767px) {
+    .flashcard-controls{
+        padding:0 50px;
+    }
     .text-item-desc img {
         width: 60px;
         border-radius: 50%;
@@ -2701,7 +2704,7 @@ l,.share:focus
         padding: 0 10px 0 10px;
     }
     .flashcards {
-        min-height: 250px;
+        min-height: 200px;
     }
     .userWrap.study-sets {
         margin: 0;
@@ -3338,6 +3341,12 @@ l,.share:focus
     background-color: transparent;
 }
 @media (max-width:767px) {
+    .studySetWrapper .feedVoteWrap{
+        flex-direction: column;
+    }
+    .userWrap{
+        flex-direction: column;
+    }
     .mainCardWrapper.newflash .flashcards.flash-has-img.active.show {
         height: 455px!important;
     }
@@ -3347,10 +3356,10 @@ l,.share:focus
     }
 }
 .flipper.last.is-flipped.current {
-    height: 390px;
+    height: auto;
 }
 .flipper.first.is-flipped.current {
-    height: 390px;
+    height: auto;
 }
 .flashcards.active .flipper.first.is-flipped.current {
     height: 120px;
@@ -3393,4 +3402,7 @@ l,.share:focus
     height: 20px;
     vertical-align: middle;
     margin-right: 10px;
+
+    height: 120px;
+
 }

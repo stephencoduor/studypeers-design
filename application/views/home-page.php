@@ -63,7 +63,7 @@
 					<div class="left">
 						<h4>Apps are meant to make life simple!</h4>
 						<p>As students, we know that university life is hard enough.<br> We saw the need to bring all of the tools needed for college success into one easy app.</p>
-						<h6>Download the app now!</h6>
+						<h6>Coming Soon</h6>
 						<ul class="social-store">
 							<li>
 								<figure>
@@ -1011,7 +1011,7 @@
 								</li>
 							</ul>
 						</div>
-						<p>Copyright © 2020 Studypeers</p>
+						<p>Copyright © 2021 Studypeers</p>
 					</div>
 				</div>
 			</div>

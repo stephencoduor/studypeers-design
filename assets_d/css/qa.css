@@ -2254,7 +2254,9 @@ textarea{
 
 
 
-
+.action-btn{
+    display: flex;
+}
 
 
 
@@ -2451,7 +2453,67 @@ textarea{
         font-size: 15px;
     }
 }
-@media(max-width:767px){
+@media (max-width: 1024px) and (min-width: 768px) {
+    .action-btn{
+        display: flex;
+        align-items: center;
+    }
+}
+@media (max-width: 767px) {
+    .feed_card_footer{
+        padding: 12px 25px 12px 15px;
+        position: relative;
+    }
+    .modalText{
+        font-size:16px;
+        line-height: 1.2;
+        word-break: break-word;
+    }
+    .form-group.button{
+        margin:15px 0 0;
+    }
+    .modal-body .form-group.button .filterBtn{
+        margin-bottom:0!important;
+    }
+    .transparentBtn.highlight{
+        margin-right:15px;
+    }
+    .studySetWrapper.qa-detail .userWrap.study-sets{
+        position: relative;
+    }
+    .user-name a{
+        width:calc(100% - 28px);
+    }
+    .user-name figcaption{
+        width:100%;
+    }
+    .studySetWrapper.qa-detail .userWrap.study-sets .date{
+        position: absolute;
+        right: 15px;
+        top:-8px;
+    }
+    .studySetWrapper.qa-detail .userWrap.study-sets {
+        margin: 10px 0 15px;
+    }
+    .voteCount{
+        margin:0 10px;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100px;
+        justify-content: space-between;
+    }
+    .feed_card_footer .sp-icon{
+        width:16px;
+    }
+    .studySetWrapper .feedVoteWrap{
+        flex-direction: column;
+    }
+    .studySetWrapper.qa-detail .feed_card_inner {
+        padding: 15px;
+    }
+    .studySetWrapper.qa-detail .feed_card_footer{
+        padding: 12px 15px;
+    }
     .timeperiod ul{
         flex-direction: column;
     }
@@ -2471,7 +2533,7 @@ textarea{
         width:100%;
     }
     .studySetWrapper.list .feedWrapper .feed-card.list{
-        width:calc(100% - 70px);
+        width:100%;
     }
     .edit a{
         white-space: nowrap;
@@ -2626,7 +2688,8 @@ textarea{
     .modal-dialog {
         width: 60%;
         margin: auto;
-        top: 35%;
+        top: 50%;
+        transform: translate(0,-50%)!important;
     }
     .box-upload {
         top: auto;
@@ -2671,7 +2734,7 @@ textarea{
     }
     .userWrap .user-name {
         width:100%;
-        margin-bottom:15px;
+        margin-bottom:10px;
     }
     .feedWrapper.listView .feedVoteWrap {
         max-width: 100%;
@@ -2778,11 +2841,6 @@ textarea{
     }
     .replyAnswerBox {
         position: relative;
-    }
-    .replyAnswerBox .answerQuote {
-        position: absolute;
-        top: 40px;
-        left: 30px;
     }
 }
 @media(max-width:479px){
