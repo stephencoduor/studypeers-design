@@ -1343,6 +1343,29 @@ input:-webkit-autofill:active {
     margin: 0 auto 20px;
 
 }
+.poll-closed {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+.poll-closed:before{
+    width:100%;
+    height:1px;
+    background:#c3c3c3;
+    position: absolute;
+    content:"";
+    top:50%;
+    left:0;
+    transform: translateY(-50%);
+}   
+.poll-closed p{
+    padding: 5px;
+    background: #fff;
+    margin-bottom: 0;
+    position: relative;
+    z-index: 9;
+}
 .fc-toolbar{
     position: relative;
     display: flex;

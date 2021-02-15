@@ -2186,6 +2186,7 @@
                                 }
                             ?>
                                 <div id="poll_div_<?= $value['reference_id']; ?>">
+									<div class="poll-closed"><p>This poll is closed</p></div>
                                     <?php foreach ($posts['post_poll_options'] as $options) {
                                         $chk = '';
                                         if(@$options['id'] == $option_id) {

@@ -296,6 +296,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                 }
                             ?>
                                 <div id="poll_div_<?= $value['reference_id']; ?>">
+                                    <div class="poll-closed"><p>This poll is closed</p></div>
                                     <?php foreach ($posts['post_poll_options'] as $options) {
                                         $chk = '';
                                         if(@$options['id'] == $option_id) {
@@ -313,6 +314,7 @@ $full_name = $user_detail['first_name'] . ' ' . $user_detail['last_name'];
                                         
                                         $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$value['reference_id'], 'poll_option_id' => @$options['id']))->result_array(); 
                                     ?>
+                                        
                                         <div class="selectedPollOptions">
                                             <label class="dashRadioWrap">
                                                 <div class="progressBar">
