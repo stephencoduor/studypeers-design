@@ -3355,6 +3355,15 @@ l,.share:focus
         height: 100px;
     }
 }
+.socialAction ul li.likecount a{
+    color:#cac8d3;
+}
+.socialAction ul li.likecount a:hover{
+    color:#cac8d3;
+}
+.vote-wrap .likecount a{
+    color:#9592a7;
+}
 .flipper.last.is-flipped.current {
     height: auto;
 }

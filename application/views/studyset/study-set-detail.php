@@ -33,8 +33,16 @@
 		<div class="right">
 			<div class="studyDetailHeaderWrapper">
 				<a href="javascript:;" class="link">Study Set</a>
+				<div class="vote-wrap">
 				<div class="my-rating-4" data-rating="<?= round($rating['average'], 1) ?>">
 					<span><?php echo $studyset['rating_count'];?> votes</span>
+				</div>
+				<div class="likecount">
+					<a href="javascript:void(0)">
+						<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
+						<span class="likeclass">4 People Liked</span>
+					</a>
+				</div>
 				</div>
 			</div>
 			<div class="header">

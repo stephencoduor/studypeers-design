@@ -204,12 +204,12 @@ foreach ($getdata as $key => $value) {
 								</div>
 								<div class="socialAction">
 									<ul>
-										<!-- <li class="likecount" data-id="<?php echo $studyset['study_set_id'];?>">
+										<li class="likecount">
 											<a href="javascript:void(0)">
 												<i class="fa fa-thumbs-o-up <?php echo ($studyset['isLikedByUser']) ? 'fa-thumbs-up' : ''; ?>" aria-hidden="true"></i>
 												<span class="likeclass_<?php echo $studyset['study_set_id'];?>"><?php echo $studyset['likes_count'];?></span>
 											</a>
-										</li> -->
+										</li>
 										<li>
 											<a href="javascript:void(0)"  data-toggle="modal" data-target="#peersModal">
 												<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
