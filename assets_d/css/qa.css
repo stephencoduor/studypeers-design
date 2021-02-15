@@ -2254,7 +2254,9 @@ textarea{
 
 
 
-
+.action-btn{
+    display: flex;
+}
 
 
 
@@ -2457,7 +2459,7 @@ textarea{
         align-items: center;
     }
 }
-@media(max-width: 767px) {
+@media (max-width: 767px) {
     .feed_card_footer{
         padding: 12px 25px 12px 15px;
         position: relative;
@@ -2495,6 +2497,16 @@ textarea{
     }
     .voteCount{
         margin:0 10px;
+        flex-direction: row;
+        align-items: flex-start;
+        width: 100px;
+        justify-content: space-between;
+    }
+    .feed_card_footer .sp-icon{
+        width:16px;
+    }
+    .studySetWrapper .feedVoteWrap{
+        flex-direction: column;
     }
     .studySetWrapper.qa-detail .feed_card_inner {
         padding: 15px;
@@ -2521,7 +2533,7 @@ textarea{
         width:100%;
     }
     .studySetWrapper.list .feedWrapper .feed-card.list{
-        width:calc(100% - 70px);
+        width:100%;
     }
     .edit a{
         white-space: nowrap;
@@ -2829,11 +2841,6 @@ textarea{
     }
     .replyAnswerBox {
         position: relative;
-    }
-    .replyAnswerBox .answerQuote {
-        position: absolute;
-        top: 40px;
-        left: 30px;
     }
 }
 @media(max-width:479px){
