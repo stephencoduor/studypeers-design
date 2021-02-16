@@ -3355,6 +3355,15 @@ l,.share:focus
         height: 100px;
     }
 }
+.socialAction ul li.likecount a{
+    color:#cac8d3;
+}
+.socialAction ul li.likecount a:hover{
+    color:#cac8d3;
+}
+.vote-wrap .likecount a{
+    color:#9592a7;
+}
 .flipper.last.is-flipped.current {
     height: auto;
 }
@@ -3362,13 +3371,15 @@ l,.share:focus
     height: auto;
 }
 .flashcards.active .flipper.first.is-flipped.current {
-    height: 120px;
+    height: auto;
 }
-.flashcards.active .flipper.last.is-flipped.current {
+.flashcards.flash-has-img.active .flipper.first.is-flipped.current {
     height: 390px;
 }
-
- a.backBtn {
+.flashcards.active .flipper.last.is-flipped.current {
+    height: auto;
+}
+a.backBtn {
     font-size: 12px;
     margin: 0 10px 0 0;
     font-weight: bold;
@@ -3392,17 +3403,15 @@ l,.share:focus
     vertical-align: top;
     border: 0!important;
 }
- a.backBtn svg, .backBtn svg {
+a.backBtn svg, .backBtn svg {
     fill: #185aeb;
 }
- a svg {
+.backBtn svg {
     fill: #fff;
     transition: all 300ms ease-in-out;
     width: 20px;
     height: 20px;
     vertical-align: middle;
     margin-right: 10px;
-
-    height: 120px;
-
+    height: 50px;
 }

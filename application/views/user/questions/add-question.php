@@ -29,7 +29,7 @@
 									<div class="col-md-4 col-sm-6 col-xs-12">
 										<div class="form-group select select_label">
 											<label>Institution</label>
-											<select class="form-control " name="university" id="university">
+											<select class="form-control selectpicker" name="university" id="university">
 											  <option value="<?= $university['university_id']; ?>"><?= $university['SchoolName']; ?></option>
 											</select>
 											<span class="custom_err" id="err_university"></span>
@@ -38,7 +38,7 @@
 									<div class="col-md-4 col-sm-6 col-xs-12">
 										<div class="form-group select select_label">
 											<label>Course</label>
-											<select class="form-control " name="course" id="course" onchange="getProfessor(this.value, '<?php echo base_url('account/getProfessor') ?>')">
+											<select class="form-control selectpicker" name="course" id="course" onchange="getProfessor(this.value, '<?php echo base_url('account/getProfessor') ?>')">
 												<option value="">Select Course</option>
 												<?php foreach ($course as $key => $value) { ?>
 													<option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
@@ -50,7 +50,7 @@
 									<div class="col-md-4 col-sm-6 col-xs-12">
 										<div class="form-group select select_label">
 											<label>Professor</label>
-											<select class="form-control " name="professor" id="professor">
+											<select class="form-control selectpicker" name="professor" id="professor">
 											  
 											</select>
 											<span class="custom_err" id="err_professor"></span>
