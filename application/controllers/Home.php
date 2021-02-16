@@ -45,6 +45,14 @@ class Home extends CI_Controller
         $this->load->view('layouts/home-footer');
     }
 
+
+    public function connectWithPeers()
+    {
+        $this->load->view('layouts/home-header');
+        $this->load->view('connect-peers');
+        $this->load->view('layouts/home-footer');
+    }
+
     public function login()
     {
         $obj = &get_instance();
