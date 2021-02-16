@@ -30,8 +30,21 @@ class Home extends CI_Controller
     {
 
         // $this->data['page_name'] = 'main';
+        $this->load->view('layouts/home-header');
         $this->load->view('home-page');
+        $this->load->view('layouts/home-footer');
     }
+
+
+    public function studyTools()
+    {
+
+        // $this->data['page_name'] = 'main';
+        $this->load->view('layouts/home-header');
+        $this->load->view('study-tools');
+        $this->load->view('layouts/home-footer');
+    }
+
     public function login()
     {
         $obj = &get_instance();
