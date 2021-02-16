@@ -590,7 +590,7 @@ ul.social-store li span b {
     width: 40px;
 }
 .slick-dots li.slick-active {
-    top: 4px;
+    top: 0;
     margin-right: 10px;
 }
 .slick-dots li button:before{
@@ -599,6 +599,14 @@ ul.social-store li span b {
 .slick-dots li.slick-active button:before {
     opacity: 1;
     background: #546de5;
+    border-radius: 10px;
+    content: '';
+    width: 25px;
+    height: 10px;
+}
+.slick-dots li button:before {
+    opacity: 1;
+    background: #c3c3c3;
     border-radius: 10px;
     content: '';
     width: 25px;
