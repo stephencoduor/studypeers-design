@@ -16,7 +16,17 @@ header .navbar-default ul li a,.navbar-brand{color:#b8bee3 !important;}
 .nav li a i{font-size:20px;color:#9592a7;}
 .nav li a span{position: absolute;top: 50%;left: 50%;margin-top:-30px;margin-left: 4px;background:#ea2e7e;border-radius: 50%;padding: 0.4em .7em .6em;}
 .nav li a:hover i{color:#185aeb !important;}
-.nav ul.dropdown-menu{padding: 10px 0;position: absolute;top: 63px;border-radius: 5px;border-top-left-radius: 3px !important;border-top-right-radius: 3px !important;left: auto;right: 0px;min-width:220px;}
+.nav ul.dropdown-menu{
+    padding: 10px 0;
+    position: absolute;
+    top: 63px;
+    border-radius: 5px;
+    border-top-left-radius: 3px !important;
+    border-top-right-radius: 3px !important;
+    left: auto;
+    right: 0px;
+    min-width:220px;
+}
 .nav ul.dropdown-menu li {width:100%;}
 .nav .dropdown.open > a{background:transparent !important;}
 .nav .dropdown.open > a i{color:#b0b6dc;}

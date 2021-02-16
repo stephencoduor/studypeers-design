@@ -80,9 +80,15 @@
         }
 
         .header-area .main-menu ul li a {
-            color: grey;
-            font-weight: 700;
-            font-family: "Sen", sans-serif;
+            font-size: 17px;
+            color: #333333;
+            font-weight: 400;
+            position: relative;
+            transition: all 350ms ease;
+            -webkit-transition: all 350ms ease;
+            -moz-transition: all 350ms ease;
+            -ms-transition: all 350ms ease;
+            -o-transition: all 350ms ease;
         }
 
         .btn-emt {
@@ -154,35 +160,37 @@
 
     <!--Header Area-->
     <header class="header-area">
-        <nav class="navbar navbar-expand-lg main-menu">
-            <div class="container-fluid">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg main-menu">
+                <div class="container-fluid">
 
-                <a class="navbar-brand" href="<?= base_url() ?>"><img src="<?= base_url('assets/images/home/logo.jpg') ?>" class="d-inline-block align-top" alt=""></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="menu-toggle"></span>
-                </button>
+                    <a class="navbar-brand" href="<?= base_url() ?>"><img src="<?= base_url('assets/images/home/logo.jpg') ?>" class="d-inline-block align-top" alt=""></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="menu-toggle"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <ul class="navbar-nav m-auto">
-                        <li class="nav-item">
-                            <a class="nav-link dropdown-toggle" href="<?= base_url('home/about') ?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aboutus</a>
-                        </li>
-                        <li class="nav-item"><a class="nav-link" href="<?= base_url('home/privacy') ?>">Privacy Policy</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<?= base_url('home/term') ?>">Terms & Conditions</a></li>
-                        <!-- <li class="nav-item"><a class="nav-link" href="services.html">Directory</a></li>
-                        <li class="nav-item"><a class="nav-link" href="javascript:void(0)" class="astro_btn" data-toggle="modal" data-target="#qna_modal">Work Flow</a></li> -->
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav m-auto">
+                            <li class="nav-item">
+                                <a class="nav-link dropdown-toggle" href="<?= base_url('home/about') ?>" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Aboutus</a>
+                            </li>
+                            <li class="nav-item"><a class="nav-link" href="<?= base_url('home/privacy') ?>">Privacy Policy</a></li>
+                            <li class="nav-item"><a class="nav-link" href="<?= base_url('home/term') ?>">Terms & Conditions</a></li>
+                            <!-- <li class="nav-item"><a class="nav-link" href="services.html">Directory</a></li>
+                            <li class="nav-item"><a class="nav-link" href="javascript:void(0)" class="astro_btn" data-toggle="modal" data-target="#qna_modal">Work Flow</a></li> -->
 
-                    </ul>
+                        </ul>
 
-                    <div class="header-btn justify-content-end">
-                        <a href="<?= base_url('login') ?>" class="bttn-small btn-emt1 ">SIGN IN</a>
-                    </div>
+                        <div class="header-btn justify-content-end">
+                            <a href="<?= base_url('login') ?>" class="bttn-small btn-emt1 ">SIGN IN</a>
+                        </div>
 
-                    <div class="header-btn justify-content-end">
-                        <a href="<?= base_url('signup') ?>" class="bttn-small btn-emt"><i class="ti-crown"></i>CREATE AN ACCOUNT</a>
+                        <div class="header-btn justify-content-end">
+                            <a href="<?= base_url('signup') ?>" class="bttn-small btn-emt"><i class="ti-crown"></i>CREATE AN ACCOUNT</a>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </nav>
+            </nav>
+        </div>
     </header>
     <!--/Header Area-->

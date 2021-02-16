@@ -1313,14 +1313,44 @@ a#scrollUp {
 
 */
 .header-area {
-    padding: 15px 0;
+    width: 100%;
+    height:83px;
+    background: #fff;
+    transition: transform 600ms ease,opacity 600ms ease;
     position: fixed;
     top: 0;
-    width: 100%;
-    z-index: 99;
-    transition: 0.2s;
+    left: 0;
+    right: 0;
+    z-index: 100;
 }
-
+header .navbar-nav li a:after {
+    content: '';
+    position: absolute;
+    border-bottom: 2px solid #fff;
+    width: 0%;
+    bottom: -20px;
+    left: 0;
+    transition: all 0.7s ease;
+    -webkit-transition: all 0.7s ease;
+    -moz-transition: all 0.7s ease;
+    margin: auto;
+    display: block;
+    right: 0;
+    border-top:none;
+    border-right:none;
+}
+header .navbar-nav  li a:hover{
+    color: #EA2E7E!important;
+    background: transparent;
+}
+header .navbar-nav li a:focus {
+    color: #EA2E7E!important;
+    background: transparent;
+}
+header .navbar-nav  li a:hover:after, header .nav li a:focus:after {
+    width: 100%;
+    border-bottom: 1px solid #EA2E7E;
+}
 @media (max-width: 575px) {
     .header-area {
         padding: 15px;

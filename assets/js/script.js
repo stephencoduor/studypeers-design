@@ -13,12 +13,10 @@
 
     // Menu sticky
     $(window).on('scroll',function() {    
-        var scroll = $(window).scrollTop();
-        if (scroll < 20) {
-         $(".header-area").removeClass("sticky-header");
-        }else{
-         $(".header-area").addClass("sticky-header");
-        }
+        $('header').css('transform', 'translate(0,-100%)');
+            window.setTimeout(function() {
+                $('header').css('transform', 'translate(0,0%)');
+            }, 500);
      });
 
      
