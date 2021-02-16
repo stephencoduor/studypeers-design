@@ -110,3 +110,7 @@ $route['home/step-four-page']  = "HomeController/stepFourPage";
 $route['Profile/find-my-peers'] = "Profile/getPeers";
 
 $route['sp/(:any)'] = "Profile/friends/$1";
+
+$route['study-tools'] = "Home/studyTools";
+$route['connect-with-peers'] = "Home/connectWithPeers";
+$route['for-professor'] = "Home/forProfessor";
