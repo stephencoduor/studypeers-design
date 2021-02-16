@@ -232,7 +232,7 @@ img {
 }
 
 @media screen and (-webkit-min-device-pixel-ratio: 0) {
-  @    font-face {
+    @font-face {
         font-family: "Flaticon";
         src: url("../fonts/Flaticon.svg#Flaticon") format("svg");
     }
@@ -1328,7 +1328,7 @@ header .navbar-nav li a:after {
     position: absolute;
     border-bottom: 2px solid #fff;
     width: 0%;
-    bottom: -20px;
+    bottom: 0;
     left: 0;
     transition: all 0.7s ease;
     -webkit-transition: all 0.7s ease;
@@ -1544,10 +1544,6 @@ header .navbar-nav  li a:hover:after, header .nav li a:focus:after {
     background: #00EFD1;
 }
 
-.navbar-brand img {
-    height: 32px;
-    width: auto;
-}
 
 ul.dropdown-menu li a {
     text-transform: capitalize;
@@ -6224,4 +6220,88 @@ Sidebar
 
 .site-sidebar .single-sidebar .single-sidebar-news .sidebar-news-content p a:hover {
     color: #546de5;
+}
+.navbar {
+    border: 0;
+    margin: 0;
+    border-radius: 0;
+    display: inline-block;
+    width: 80%;
+    position: relative;
+    min-height: 50px;
+}
+.social-action {
+    display: inline-block;
+    vertical-align: top;
+}
+.navbar-brand .logoMobile {
+    display: none;
+}
+.logo {
+    min-width: 200px;
+    height: auto;
+    float: left;
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+.navbar-collapse.collapse {
+    display: block!important;
+    height: auto!important;
+    padding-bottom: 0;
+    overflow: visible!important;
+}
+.social-action ul li {
+    display: inline-block;
+    vertical-align: middle;
+}
+.social-action ul {
+    margin-top:15px;
+}
+.social-action ul li a {
+    color: #333333;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    position: relative;
+    transition: background 350ms ease;
+    -webkit-transition: background 350ms ease;
+    -moz-transition: background 350ms ease;
+    -ms-transition: background 350ms ease;
+    -o-transition: background 350ms ease;
+}
+.social-action ul li.button a {
+    height:46px;
+    padding: 8px 36px;
+    background: #EA2E7E;
+    border-radius: 5px;
+    cursor: pointer;
+    outline: none;
+    color: #fff;
+}
+.nav>li {
+    margin: 0 15px;
+}
+.nav>li>a {
+    padding: 30px 0;
+    font-size: 17px;
+    color: #333333;
+    font-weight: 400;
+    position: relative;
+    transition: all 350ms ease;
+    -webkit-transition: all 350ms ease;
+    -moz-transition: all 350ms ease;
+    -ms-transition: all 350ms ease;
+    -o-transition: all 350ms ease;
+}
+.social-action ul li.button {
+    margin: 0 15px 0px 15px;
+}
+.social-action ul li.button:hover a, .social-action ul li.button:focus a {
+    background: #3733b5;
+}
+.social-action ul li:hover a, .social-action ul li:focus a {
+    color: #EA2E7E;
 }
