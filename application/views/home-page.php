@@ -426,7 +426,7 @@
 				</h4>
 				<p>Connect with students at your university or in a similar class</p>
 				<h6>Create your profile</h6>
-				<button type="button" class="create-btn">Create Now</button>
+				<button onclick="location.href='<?php echo base_url('signup'); ?>'"  type="button" class="create-btn">Create Now</button>
 			</div>
 		</div>
 		<div class="social-tools">
@@ -907,9 +907,11 @@
 					</p>
 					<h6>Register as Professor</h6>
 					<form>
-						<input type="text" name="" class="banner-search" placeholder="Email">
-						<button type="button" class="banner-search-btn">Register</button>
+						<input type="text" name="" class="banner-search" id="professor-email" placeholder="Email">
+						<button type="button" class="banner-search-btn" onclick="validateRegisterProfessor()">Register</button>
+
 					</form>
+					<span id="err_email" style="color: red; font-style: italic;"></span>
 				</div>
 			</div>
 		</div>

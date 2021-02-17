@@ -5,10 +5,10 @@
 						<div class="list">
 							<h6>Studypeers</h6>
 							<ul>
-								<li><a href="javascript:void(0)">Home</a></li>
-								<li><a href="javascript:void(0)">Study Tools</a></li>
-								<li><a href="javascript:void(0)">Connect with Peers</a></li>
-								<li><a href="javascript:void(0)">For Professor</a></li>
+								<li><a href="<?php echo base_url(); ?>">Home</a></li>
+								<li><a href="<?php echo base_url(); ?>study-tools">Study Tools</a></li>
+								<li><a href="<?php echo base_url(); ?>connect-with-peers">Connect with Peers</a></li>
+								<li><a href="<?php echo base_url(); ?>for-professor">For Professor</a></li>
 							</ul>
 						</div>
 						<div class="list">
@@ -137,6 +137,40 @@
 			css.innerHTML = ".typewrite > .wrap { border-right: 0.08em solid #fff}";
 			document.body.appendChild(css);
 		};
+
+		function isValidEmailAddress(email01) {
+		    var pattern = /^([a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+(\.[a-z\d!#$%&'*+\-\/=?^_`{|}~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]+)*|"((([ \t]*\r\n)?[ \t]+)?([\x01-\x08\x0b\x0c\x0e-\x1f\x7f\x21\x23-\x5b\x5d-\x7e\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|\\[\x01-\x09\x0b\x0c\x0d-\x7f\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))*(([ \t]*\r\n)?[ \t]+)?")@(([a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\d\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.)+([a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]|[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF][a-z\d\-._~\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]*[a-z\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])\.?$/i;
+		    return pattern.test(email01);
+		}
+
+		function validateRegisterProfessor(){
+			var url = '<?php echo base_url('home/verifyUniEmail') ?>';
+			var email = $('#professor-email').val();
+			if(email != ''){
+				var email2 = isValidEmailAddress(email);
+	            if(!email2) {
+	                $('#err_email').css('color', 'red').text('Email Id is not valid').show();
+	                $('#email').focus();
+	                return false;
+	            } else {
+	            	$.ajax({
+                        url: url,
+                        type: 'post',
+                        data: {'email': email},
+                        success: function(res) { 
+                            
+                            if (res != 0) {
+                                $('#err_email').html(res).show();
+                                return false;
+                            } else {
+                               window.location.href = '<?php echo base_url('signup') ?>';
+                            }
+                            
+                        }
+                    });
+	            }
+			}
+		}
 	</script>
 </body>
 
