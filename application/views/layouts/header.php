@@ -157,6 +157,5 @@
     <!--Header Area-->
     <header class="header-area">
        <?php include 'header-nav.php'; ?>
-        
     </header>
     <!--/Header Area-->

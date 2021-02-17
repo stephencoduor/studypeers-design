@@ -427,8 +427,8 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 									echo $full_name;
 									?>
 								</li>
-								<li class="dropdown">
-									<a href="#" class="dropdown-toggle header-user-img" data-toggle="dropdown">
+								<li class="dropdown show-dropdown">
+									<a href="#" class="header-user-img">
 										<figure>
 											<img src="<?php echo userImage($userdata['user_id']); ?>" alt="User">
 										</figure>
@@ -436,7 +436,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											<i class="fa fa-angle-down" aria-hidden="true"></i>
 										</div>
 									</a>
-									<ul class="dropdown-menu">
+									<ul class="dropdown-area">
 										<li><a href="<?php echo base_url(); ?>Profile/timeline"><i class="fa fa-user"></i>My profile</a></li>
 										<li><a href="javascript:void(0);"><i class="fa fa-globe"></i>Connections <span class="totalBadge pull-right">29</span></a></li>
 										<li><a href="javascript:void(0);"><i class="fa fa-male"></i>Peers</a></li>

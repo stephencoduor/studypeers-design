@@ -603,4 +603,7 @@ $(document).ready(function(){
     $("#nextFilp").click(function(){
         $(".flashcards").removeClass("show");
     });
+    $(".show-dropdown").click(function(){
+        $(".dropdown-area").toggleClass("open");
+    });
 });
