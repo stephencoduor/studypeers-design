@@ -14,7 +14,7 @@
     
 
     <!-- Bootstrap -->
-    <link href="<?= base_url('assets/css/bootstrap.min.css') ?>" rel="stylesheet">
+    <link href="<?= base_url('assets_home/css/bootstrap.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/font-awesome.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/owl.carousel.min.css') ?>" rel="stylesheet">
     <link href="<?= base_url('assets/css/nice-select.css') ?>" rel="stylesheet">
@@ -128,10 +128,6 @@
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
             background: #ea2e7e;
-        }
-
-        .navbar-brand img {
-            height: 50px;
         }
 
         .navbar-toggler {
