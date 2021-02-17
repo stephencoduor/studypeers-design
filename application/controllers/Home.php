@@ -53,6 +53,13 @@ class Home extends CI_Controller
         $this->load->view('layouts/home-footer');
     }
 
+    public function forProfessor()
+    {
+        $this->load->view('layouts/home-header');
+        $this->load->view('for-professor');
+        $this->load->view('layouts/home-footer');
+    }
+
     public function login()
     {
         $obj = &get_instance();
@@ -206,6 +213,22 @@ class Home extends CI_Controller
             $get_domain = $this->db->get_where('university', array('university_id' => $institute_id))->row_array();
             if ($domain != $get_domain['EmailDomain']) {
                 echo 'Invalid email domain provided. Email must be of one of this domains: ' . $get_domain['EmailDomain'];
+            } else {
+                echo '0';
+            }
+        }
+    }
+
+
+    public function verifyUniEmail(){
+        if ($this->input->post()) {
+            $email = $this->input->post('email');
+           
+            $explode = explode("@", $email);
+            $domain = $explode[1];
+            $get_domain = $this->db->get_where('university', array('EmailDomain' => $domain))->row_array();
+            if (empty($get_domain)) {
+                echo 'Invalid email domain provided.';
             } else {
                 echo '0';
             }

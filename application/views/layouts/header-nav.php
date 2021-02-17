@@ -7,7 +7,7 @@
 								<span class="icon-bar"></span>
 								<span class="icon-bar"></span>
 							</button>
-							<a class="navbar-brand logo" href="javascripr:void(0)">
+							<a class="navbar-brand logo" href="<?php echo base_url(); ?>">
 								<img src="<?php echo base_url(); ?>assets_home/images/logo-desktop.svg" class="logoDesktop" alt="Logo">
 								<img src="<?php echo base_url(); ?>assets_home/images/logo-mobile.svg" class="logoMobile" alt="Logo">
 							</a>
