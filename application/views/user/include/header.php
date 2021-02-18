@@ -63,14 +63,20 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/js/emojionearea-master/dist/emojionearea.min.css'); ?>">
 
-
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
+
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" />
+
+
+	<script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
 
 	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/moment.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/socket.io.js'); ?>"></script>
+
+
 
 
 
@@ -279,7 +285,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 																	<h6><?php echo $value['notification']; ?></h6>
 																	<div class="sortNotifyMessage">
 																		<div class="info">
-																			<div>Follower •</div> 
+																			<div>Follower •</div>
 																			<div class="time"><?php echo $time_ago; ?></div>
 																		</div>
 																		<div class="optPreview">
@@ -325,7 +331,8 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 																	<h6><?php echo $value['notification']; ?></h6>
 																	<div class="sortNotifyMessage">
 																		<div class="info">
-																			<div>Studyset • </div><div class="time"><?php echo $time_ago; ?></div>
+																			<div>Studyset • </div>
+																			<div class="time"><?php echo $time_ago; ?></div>
 																		</div>
 																		<div class="viewprofile" onclick="redirectAction('<?= $value['id']; ?>')">View Studyset</div>
 																	</div>
@@ -342,7 +349,8 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 																	<h6><?php echo $value['notification']; ?></h6>
 																	<div class="sortNotifyMessage">
 																		<div class="info">
-																			<div>Event •</div> <div class="time"><?php echo $time_ago; ?></div>
+																			<div>Event •</div>
+																			<div class="time"><?php echo $time_ago; ?></div>
 																		</div>
 																		<div class="viewprofile" onclick="redirectAction('<?= $value['id']; ?>')">View Event</div>
 																	</div>
@@ -467,7 +475,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 		</section>
 	</header>
 	<section class="dashbody">
-		<section class="container-fluid">
+		<section class="container-fluid" data-simplebar>
 			<section class="row">
 				<aside>
 					<section class="sidebar-content">
