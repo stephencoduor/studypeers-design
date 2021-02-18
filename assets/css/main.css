@@ -6305,3 +6305,30 @@ Sidebar
 .social-action ul li:hover a, .social-action ul li:focus a {
     color: #EA2E7E;
 }
+
+@media (max-width: 767px) {
+    .navbar-brand .logoDesktop {
+        display: none;
+    }
+    .navbar-brand .logoMobile {
+        display: block;
+    }
+    .logo {
+        min-width: 90px;
+    }
+    .navbar-toggle {
+        position: absolute;
+        right: 0;
+        top: 17px;
+        margin: 0;
+    }
+    .navbar-toggle .icon-bar {
+        background: #333;
+    }
+    .header-area .navbar{
+        width:100%;
+    }
+    .header-area {
+        padding: 15px;
+    }
+}

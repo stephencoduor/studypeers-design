@@ -449,6 +449,19 @@ select.form-control:focus {
     align-items: center;
     justify-content: space-between;
 }
+.feed-card.list .right{
+    width:100%;
+}
+.feed_card_inner p{
+    margin-bottom:0;
+}
+.action a .sp-icon {
+    width: 14px;
+    margin-right:5px;
+}
+.userWrap.study-sets p{
+    margin-bottom:0;
+}
 .user-name {
     display: flex;
     align-items: center;
@@ -460,6 +473,10 @@ select.form-control:focus {
     border-radius:50%;
     overflow: hidden;
     margin-right:8px;
+}
+.feed-card.list .action ul{
+    display: flex;
+    align-items: center;
 }
 .user-name figcaption {
     font-weight: 700;
@@ -485,7 +502,8 @@ select.form-control:focus {
 .action a{
     padding:5px;
     cursor: pointer;
-    display: block;
+    display: flex;
+    align-items:center;
 }
 .action a:focus,
 .action a:hover {
