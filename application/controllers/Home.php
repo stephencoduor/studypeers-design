@@ -60,6 +60,20 @@ class Home extends CI_Controller
         $this->load->view('layouts/home-footer');
     }
 
+    public function aboutUs()
+    {
+        $this->load->view('layouts/home-header');
+        $this->load->view('about-us');
+        $this->load->view('layouts/home-footer');
+    }
+
+    public function privacyPolicy()
+    {
+        $this->load->view('layouts/home-header');
+        $this->load->view('privacy-policy');
+        $this->load->view('layouts/home-footer');
+    }
+
     public function login()
     {
         $obj = &get_instance();

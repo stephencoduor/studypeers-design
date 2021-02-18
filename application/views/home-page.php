@@ -1,12 +1,37 @@
-
+<style type="text/css">
+	.autocomplete-items {
+	    position: absolute;
+	    border: 1px solid #d4d4d4;
+	    border-bottom: none;
+	    border-top: none;
+	    z-index: 99;
+	    top: 100%;
+	    left: 0;
+	    right: 0;
+	    max-height: 250px;
+	    overflow-y: auto;
+	    margin: 0 15px 0 15px;
+	    width: 710px;
+	    margin: 0 auto;
+	}
+	.autocomplete-items div {
+	    padding: 10px;
+	    cursor: pointer;
+	    background-color: #fff;
+	    border-bottom: 1px solid #d4d4d4;
+	}
+</style>
 		<div class="banner">
 			<div class="banner-text">
 				<h4>Learning is better Together</h4>
 				<h6>Find your University</h6>
 				<form>
-					<input type="text" name="" class="banner-search" placeholder="University">
-					<button type="button" class="banner-search-btn">Join now for FREE</button>
+					<input type="text" name="" class="banner-search" id="university" placeholder="University" onkeyup="searchUniversity(this.value)">
+					
+					<button type="button" class="banner-search-btn" onclick="redirectSignup()">Join now for FREE</button>
+					<div id="myInputautocomplete-list" class="autocomplete-items"></div>
 				</form>
+				
 			</div>
 		</div>
 		<div class="apps">
