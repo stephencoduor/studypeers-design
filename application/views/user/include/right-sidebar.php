@@ -17,7 +17,9 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         <section class="listBar">
             <section class="listHeader">
                 <h6>Peers</h6>
-                <a data-toggle="modal" data-target="#peersMessageModal">See More</a>
+                <?php if(!empty($peer_list)) { ?>
+                    <a data-toggle="modal" data-target="#peersMessageModal">See More</a>
+                <?php } ?>
             </section>
             <section class="listChatBox">
                 <?php foreach ($peer_list as $key => $value) {
@@ -144,7 +146,9 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         <section class="listBar">
             <section class="listHeader">
                 <h6>Blocked Peers</h6>
-                <a data-toggle="modal" data-target="#blockUserModal">See More</a>
+                <?php if (!empty($blocked_users)) { ?>
+                    <a data-toggle="modal" data-target="#blockUserModal">See More</a>
+                <?php } ?>
             </section>
             <section class="listChatBox">
 

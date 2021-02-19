@@ -14,9 +14,9 @@
 						<div class="list">
 							<h6>Resources</h6>
 							<ul>
-								<li><a href="javascript:void(0)">About Us</a></li>
-								<li><a href="javascript:void(0)">Terms and Conditions</a></li>
-								<li><a href="javascript:void(0)">Privacy Policy</a></li>
+								<li><a href="<?php echo base_url(); ?>about-us">About Us</a></li>
+								<li><a href="<?php echo base_url(); ?>terms-conditions">Terms and Conditions</a></li>
+								<li><a href="<?php echo base_url(); ?>privacy-policy">Privacy Policy</a></li>
 							</ul>
 						</div>
 					</div>
@@ -79,6 +79,32 @@
 		});
 	</script>
 	<script>
+		function searchUniversity(keyword){
+		    var url = '<?php echo base_url('home/searchUniversity') ?>';
+		    if((keyword != '') && (keyword.length > 2)) {
+
+		      $.ajax({
+		          url: url,
+		          type: 'POST',
+		          data: {'keyword': keyword},
+		          success: function(result) {
+		              $('#myInputautocomplete-list').html(result);
+		          }
+		      });
+		    } else {
+		      $('#myInputautocomplete-list').html('');
+		      $('#valid_div').css('display','none');
+		    }
+		}
+
+		function selectUniversity(university){
+		    
+		      var text = $('#suggestion_'+university).text();
+		      $('#university').val(text);
+		      $('#myInputautocomplete-list').html('');
+		      
+		}
+
 		var TxtType = function(el, toRotate, period) {
 			this.toRotate = toRotate;
 			this.el = el;
@@ -169,6 +195,13 @@
                         }
                     });
 	            }
+			}
+		}
+
+		function redirectSignup(){
+			var university = $('#university').val();
+			if(university != ''){
+				window.location.href = '<?php echo base_url('signup') ?>';
 			}
 		}
 	</script>
