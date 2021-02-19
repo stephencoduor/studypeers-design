@@ -66,11 +66,6 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" />
-
-
-	<script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
-
 	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/moment.js'); ?>"></script>
@@ -585,10 +580,10 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Textbooks
-										<span class="badge badge-success">
+										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<span class="letters">Coming Soon</span>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image"/>
 												</span>
 											</div>
 										</span>
@@ -600,10 +595,10 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Articles
-										<span class="badge badge-success">
+										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<span class="letters">Coming Soon</span>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image"/>
 												</span>
 											</div>
 										</span>
@@ -616,10 +611,10 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Study Notes
-										<span class="badge badge-success">
+										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<span class="letters">Coming Soon</span>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image"/>
 												</span>
 											</div>
 										</span>
