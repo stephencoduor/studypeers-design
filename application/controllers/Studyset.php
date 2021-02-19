@@ -608,7 +608,7 @@ class Studyset extends CI_Controller {
                         <figure>
                             <img src="'.userImage($peer['userID']).'" alt="user">
                         </figure>
-                        <figcaption>'.$peer['nickname'].'</figcaption>
+                        <a href="'.userProfileLink($peer['userID']).'"><figcaption>'.$peer['nickname'].'</figcaption></a>
                     </section>
                     <section class="action" id="action_'.$peer['userID'].'">';
                     if(empty($chk_if_shared)){
