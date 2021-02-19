@@ -275,7 +275,7 @@ die;*/
                             </div>
                             <div id="articles" class="tab-pane fade in">
                                 <div class="coming-soon">
-                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
                                 </div>
                             </div>
                             <div id="studySets" class="tab-pane fade in">
@@ -299,7 +299,7 @@ die;*/
                             </div>
                             <div id="studySessions" class="tab-pane fade in">
                                 <div class="coming-soon">
-                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
                                 </div>
                             </div>
                         </div>

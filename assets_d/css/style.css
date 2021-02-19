@@ -68,6 +68,17 @@ header .navbar-default ul li a,.navbar-brand{color:#b8bee3 !important;}
     color: #185aeb !important;
     background: #e8effd;
 }
+.comming-soon-icon {
+    position: absolute;
+    right: -32px;
+    top: -30px;
+    width: 150px;
+}
+.comming-soon-icon img{
+    max-width:100%;
+    height: auto;
+    display: block;
+}
 .dropdown-area li a .totalBadge.pull-right{
     left: auto;
     margin-top: 0;
@@ -98,7 +109,7 @@ aside{top: 80px;height: 100%;z-index:99;position:fixed;width:276px;left:0;max-he
 .sidebar-menu {border-bottom: 1px solid #eae9ee;padding: 25px 0;}
 
 .sidebar-menu ul li{border-left: 5px solid #fff;transition:all 0.7s ease;-webkit-transition:all 0.7s ease;-moz-transition:all 0.7s ease;-ms-transition:all 0.7s ease;-o-transition:all 0.7s ease;}
-.sidebar-menu li a{font-size:16px;font-weight:500;color:#9592a7;display: block;padding: 6px 15px 6px 15px;}
+.sidebar-menu li a{font-size:16px;font-weight:500;color:#9592a7;display: block;padding: 6px 15px 6px 15px;position: relative;}
 .sidebar-menu li a i{margin:5px 7px;}
 #sidenavBadge{width: 20px;height: 20px;font-size: 13px;text-align: center;font-weight: 500;}
 
