@@ -6225,14 +6225,19 @@ Sidebar
     border: 0;
     margin: 0;
     border-radius: 0;
-    display: inline-block;
-    width: 80%;
     position: relative;
     min-height: 50px;
 }
 .social-action {
-    display: inline-block;
     vertical-align: top;
+}
+.flex-top-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex-top-header .container-fluid{
+    display: flex;
 }
 .navbar-brand .logoMobile {
     display: none;
@@ -6271,6 +6276,23 @@ Sidebar
     -moz-transition: background 350ms ease;
     -ms-transition: background 350ms ease;
     -o-transition: background 350ms ease;
+}
+.social-action ul li a.outline-join{
+    background: #fff;
+    border: solid 1px #185aeb;
+    color: #185aeb;
+    padding: 14px 25px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.social-action ul li a.outline-join:hover{
+    color: #fff;
+    background-color: #5d8cf1;
 }
 .social-action ul li.button a {
     height:46px;
