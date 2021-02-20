@@ -137,6 +137,11 @@ class Email_model extends CI_Model {
 	}
 
 
+	public function send_contact_email($to, $subject, $message){
+		$this->send_smtp_mail($message, $subject, $to);
+	}
+
+
 	public function send_new_university_email($to = "", $university = "", $requested_by = "", $url = ""){
 		$subject 		= "A new university has been added which requires approval";
 		$email_msg	=	"Hello Admin,";

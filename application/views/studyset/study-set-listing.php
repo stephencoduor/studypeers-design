@@ -4,7 +4,8 @@
 						    $this->db->where('study_set_id', $studyset['study_set_id']);
 						    $this->db->from('studyset_rating_master');
 						    $rating = $this->db->get()->row_array();
-						?>
+						    $like_count = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reference_id' => $studyset['study_set_id'], 'reference' => 'studyset'))->num_rows();
+	?>
 							<div class="feed-card list" id="study_set_id_div_<?php echo $studyset['study_set_id'];?>">
 								<div class="left">
 									<figure>
@@ -70,7 +71,7 @@
 													<li class="likecount">
 														<a href="javascript:void(0)">
 															<i class="fa fa-thumbs-o-up <?php echo ($studyset['isLikedByUser']) ? 'fa-thumbs-up' : ''; ?>" aria-hidden="true"></i>
-															<?php echo $studyset['likes_count'];?>
+															<?php echo $like_count;?>
 														</a>
 													</li>
 													<li>

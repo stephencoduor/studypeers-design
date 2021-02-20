@@ -37,6 +37,7 @@ class Studyset extends CI_Controller {
         $data['courses'] = $this->studyset_model->getCourseData($user_id);
         $data['studysets'] = $this->studyset_model->getStudySets($user_id);
         $data['total_study_sets'] = $this->studyset_model->getTotalStudySets($user_id);
+
         // print_r($data['studysets']);die;
         $this->load->view('user/include/header', $this->data);
         $this->load->view('studyset/study-sets',$data);
@@ -126,6 +127,8 @@ class Studyset extends CI_Controller {
         $data['user_rating'] = $this->db->get_where('studyset_rating_master', array('studyset_rating_master.study_set_id' => $study_set_id, 'user_id' => $user_id))->row_array();
 
         $data['comment'] = $this->db->get_where('comment_master', array('reference' => 'studyset', 'reference_id' => $study_set_id, 'comment_parent_id' => 0))->result_array();
+
+        $data['like_count'] = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reference_id' => $study_set_id, 'reference' => 'studyset'))->num_rows();
 
         $this->db->select('AVG(rating) as average');
         $this->db->where('study_set_id', $study_set_id);

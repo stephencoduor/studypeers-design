@@ -3415,3 +3415,41 @@ a.backBtn svg, .backBtn svg {
     margin-right: 10px;
     height: 50px;
 }
+
+
+.vertical-menu {
+  width: 200px;
+  text: bold; /* Set a width if you like */
+}
+
+.vertical-menu a {
+ 
+  color: blue; /* Black text color */
+  display: block; /* Make the links appear below each other */
+  padding: 12px; /* Add some padding */
+  text-decoration: none; /* Remove underline from links */
+}
+
+.vertical-menu a:hover {
+  
+  color: black;
+}
+
+
+.sp {
+  word-spacing: 10px;
+  margin-bottom:10px;
+}
+.centered { margin: 0 auto; width: 88%; }
+.centered p {text-align:justify;}
+
+
+.faq_menu a:hover {
+background-color: #FFFFFF !important;
+  
+  color: #FF0066;
+}
+.faq_menu a:active {
+  
+  color: #FF0066 !important;
+}

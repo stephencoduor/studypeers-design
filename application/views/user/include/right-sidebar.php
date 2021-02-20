@@ -23,7 +23,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             </section>
             <section class="listChatBox">
                 <?php foreach ($peer_list as $key => $value) {
-                    if ($key <= 4) {
+                    if ($key <= 3) {
                         if ($value['user_id'] == $user_id) {
                             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
                             $this->db->join('user', 'user.id=user_info.userID');
@@ -154,7 +154,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
                 <?php if (!empty($blocked_users)) {
                     $count = 0; foreach (@$blocked_users as $users) {
-                        if($count < 5) {
+                        if($count < 4) {
                 ?>
                         <section class="list">
                             <section class="left">
