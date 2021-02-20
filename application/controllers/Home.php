@@ -67,6 +67,50 @@ class Home extends CI_Controller
         $this->load->view('layouts/home-footer');
     }
 
+    public function contactUs()
+    {   
+        if ($this->input->post()) { 
+            $firstname  = $this->input->post('firstname');
+            $lastname   = $this->input->post('lastname');
+            $email      = $this->input->post('email');
+            $phoneNo    = $this->input->post('phoneNo');
+            $message    = $this->input->post('message');
+
+            $subject = 'New User has contacted via Contact Us';
+            $email_message  =   "Hello Admin,";
+            $email_message .= '<p>New user has contacted via contact us form.Below are the details : <br>
+                        Name : '.$firstname.' '.$lastname.'<br>
+                        Email : '.$email.'<br>
+                        Phone Number : '.$phoneNo.'<br>
+                        Message : '.$message.'<br>
+                        </p>';
+
+            $this->email_model->send_contact_email('studypeers.dev@gmail.com', $subject, $email_message);
+
+            $insertArr = array(
+                'firstname'         => $firstname,
+                'lastname'          => $lastname,
+                'email'             => $email,
+                'phoneNo'           => $phoneNo,
+                'message'           => $message,
+                
+                'status'            => 1,
+                
+                'created_at'        => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('contact_us', $insertArr);
+
+            $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Your details submitted Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button></div>';
+            $this->session->set_flashdata('flash_message', $message);
+            redirect(site_url('contact-us'), 'refresh');
+        }
+        $this->load->view('layouts/home-header');
+        $this->load->view('contact-us');
+        $this->load->view('layouts/home-footer');
+    }
+
     public function privacyPolicy()
     {
         $this->load->view('layouts/home-header');

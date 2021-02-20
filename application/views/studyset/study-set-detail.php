@@ -40,7 +40,7 @@
 				<div class="likecount">
 					<a href="javascript:void(0)">
 						<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-						<span class="likeclass">4 People Liked</span>
+						<span class="likeclass"><?php echo $like_count; ?> People Liked</span>
 					</a>
 				</div>
 				</div>

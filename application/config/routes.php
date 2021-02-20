@@ -119,3 +119,4 @@ $route['for-professor'] = "Home/forProfessor";
 $route['about-us'] = "Home/aboutUs";
 $route['terms-conditions'] = "Home/termsCondition";
 $route['privacy-policy'] = "Home/privacyPolicy";
+$route['contact-us'] = "Home/contactUs";

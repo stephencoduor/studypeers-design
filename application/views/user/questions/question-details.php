@@ -365,7 +365,7 @@
 														<figure>
 															<img src="<?php echo userImage($value['answered_by']); ?>" alt="user">
 														</figure>
-														<figcaption><?php echo $value['nickname']; ?></figcaption>
+														<a href="<?php echo userProfileLink($value['answered_by']); ?>"><figcaption><?php echo $value['nickname']; ?></figcaption></a>
 													</div>
 													<p class="date"><?php echo date('d/m/Y', strtotime($value['created_at'])); ?></p>
 												</div>
@@ -432,7 +432,7 @@
 																<figure>
 																	<img src="<?php echo userImage($value2['created_by']); ?>" alt="user">
 																</figure>
-																<figcaption><?php echo $value2['nickname']; ?></figcaption>
+																<a href="<?php echo userProfileLink($value2['created_by']); ?>"><figcaption><?php echo $value2['nickname']; ?></figcaption></a>
 															</div>
 															<p class="date"><?php echo date('d/m/Y', strtotime($value2['created_at'])); ?></p>
 														</div>

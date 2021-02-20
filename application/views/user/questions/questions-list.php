@@ -241,7 +241,7 @@
 										<div class="right">
 											<div class="feed_card_inner">
 												
-												<h5><a href=""><?php echo $value['question_title']; ?></a></h5>
+												<h5><a href="<?php echo base_url(); ?>account/questionDetail/<?php echo base64_encode($value['id']) ?>"><?php echo $value['question_title']; ?></a></h5>
 												<div class="badgeList">
 													<ul>
 														<li class="badge badge1">

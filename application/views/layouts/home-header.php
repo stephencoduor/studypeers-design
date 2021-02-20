@@ -13,6 +13,8 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_home/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_home/css/style.css">
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_home/css/animate.css">
+
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/study-set.css">
 </head>
 
 <body>

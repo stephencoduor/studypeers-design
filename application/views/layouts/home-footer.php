@@ -17,6 +17,7 @@
 								<li><a href="<?php echo base_url(); ?>about-us">About Us</a></li>
 								<li><a href="<?php echo base_url(); ?>terms-conditions">Terms and Conditions</a></li>
 								<li><a href="<?php echo base_url(); ?>privacy-policy">Privacy Policy</a></li>
+								<li><a href="<?php echo base_url(); ?>contact-us">Contact Us</a></li>
 							</ul>
 						</div>
 					</div>
@@ -79,6 +80,15 @@
 		});
 	</script>
 	<script>
+		$(document).ready(function() { 
+    
+		    $(".num_only").keypress(function (e) {
+		        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		            
+		            return false;
+		        }
+		    });
+		});
 		function searchUniversity(keyword){
 		    var url = '<?php echo base_url('home/searchUniversity') ?>';
 		    if((keyword != '') && (keyword.length > 2)) {
@@ -202,6 +212,54 @@
 			var university = $('#university').val();
 			if(university != ''){
 				window.location.href = '<?php echo base_url('signup') ?>';
+			}
+		}
+
+		function validateContact(){
+			var firstname = $('#firstname').val();
+			if(firstname == ''){
+				$('#err_firstname').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				$('#err_firstname').text('').hide();
+			}
+
+			var lastname = $('#lastname').val();
+			if(lastname == ''){
+				$('#err_lastname').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				$('#err_lastname').text('').hide();
+			}
+
+			var email = $('#email').val();
+			if(email == ''){
+				$('#err_email').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				var email2 = isValidEmailAddress(email);
+	            if(!email2) {
+	            	$('#err_email').css('color', 'red').text('Invalid email.').show();
+				return false;
+	            } else {
+					$('#err_email').text('').hide();
+	            }
+			}
+
+			var phoneNo = $('#phoneNo').val();
+			if(phoneNo == ''){
+				$('#err_phoneNo').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				$('#err_phoneNo').text('').hide();
+			}
+
+			var message = $('#message').val();
+			if(message == ''){
+				$('#err_message').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				$('#err_message').text('').hide();
 			}
 		}
 	</script>
