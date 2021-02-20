@@ -449,6 +449,9 @@ select.form-control:focus {
     align-items: center;
     justify-content: space-between;
 }
+.feedVoteWrap {
+    display: flex;
+}
 .feed-card.list .right{
     width:100%;
 }
@@ -457,6 +460,9 @@ select.form-control:focus {
 }
 .action a .sp-icon {
     width: 14px;
+    margin-right:5px;
+}
+.action a svg{
     margin-right:5px;
 }
 .userWrap.study-sets p{
