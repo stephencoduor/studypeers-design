@@ -6281,6 +6281,9 @@ Sidebar
     outline: none;
     color: #fff;
 }
+.social-action ul li.button a:hover{
+    color:#fff;
+}
 .nav>li {
     margin: 0 15px;
 }

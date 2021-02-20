@@ -271,7 +271,7 @@ header .nav li a:focus:after {
     margin:0 auto;
 }
 .banner-text form input {
-    width: 70%;
+    width: calc(100% - 165px);
     padding: 10px 30px;
     min-height: 60px;
     border-radius: 5px;
@@ -289,6 +289,7 @@ header .nav li a:focus:after {
     font-weight: 400;
 }
 .banner-text form button {
+    width:165px;
     background: #ea2e7e;
     border: 0;
     padding: 22px 20px;
@@ -301,6 +302,7 @@ header .nav li a:focus:after {
     -moz-transition: background 550ms ease;
     -ms-transition: background 550ms ease;
     -o-transition: background 550ms ease;
+    white-space: nowrap;
 }
 .banner-text form button:hover, 
 .banner-text form button:focus {
