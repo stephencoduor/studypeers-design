@@ -6261,9 +6261,6 @@ Sidebar
     display: inline-block;
     vertical-align: middle;
 }
-.social-action ul {
-    margin-top:15px;
-}
 .social-action ul li a {
     color: #333333;
     text-decoration: none;

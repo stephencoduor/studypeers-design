@@ -141,20 +141,21 @@ header .nav li a:focus:after {
     border:0;
     margin:0;
     border-radius: 0;
-    display: inline-block;
-    width: 80%;
 }
-.social-action {
-    display: inline-block;
-    vertical-align: top;
+.flex-top-header .container-fluid {
+    display: flex;
+}
+.flex-top-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 .social-action ul li {
     display: inline-block;
-    margin: 30px 15px;
-    vertical-align: top;
+    vertical-align: middle;
 }
 .social-action ul li.button {
-    margin: 20px 15px 0px 15px;
+    margin: 0 0 0 15px;
 }
 .social-action ul li a {
     font-size: 17px;
@@ -2162,6 +2163,7 @@ footer .right-footer p {
 .social-tools p.text-left{
     text-align:left;
 }
+
 .what-is-studypeers{
     padding-top:100px;
 }
@@ -2214,4 +2216,21 @@ img{
 }
 .info-section{
     padding-top:100px;
+}
+.social-action ul li a.outline-join {
+    background: #fff;
+    border: solid 1px #185aeb;
+    color: #185aeb;
+    padding: 14px 25px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.social-action ul li a.outline-join:hover {
+    color: #fff;
+    background-color: #5d8cf1;
 }
