@@ -4,7 +4,7 @@
             <div class="col-sm-4">
                 <div class="vertical-menu">
                     <ul class="faq_menu">
-                        <li class="nav-item"><a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"> <span class="d-none d-sm-inline" style="color:blue;">FAQs</span></a>
+                        <li class="nav-item"><a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"> <span class="d-none d-sm-inline" style="color:blue;font-weight:500;">Privacy Policy</span></a>
                     <div class="collapse" id="submenu1" aria-expanded="false">
                         <ul class="flex-column  nav faq_menu">
                             <li class="nav-item">
@@ -33,7 +33,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link text-truncate" href="contact-us.html"><span class="d-none d-sm-inline" style="color:blue;">Contact Us</span></a></li>
+                <li class="nav-item"><a class="nav-link text-truncate" href="contact-us.html"><span class="d-none d-sm-inline" style="color:blue;font-weight:500;">Term & Conditions</span></a></li>
 				
                </ul>
 			</div>
