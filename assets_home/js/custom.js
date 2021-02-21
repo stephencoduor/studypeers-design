@@ -91,4 +91,3 @@ $('.studyTool-slide').slick({
       }
     ]
 });
-

@@ -79,6 +79,10 @@ header .navbar-default ul li a,.navbar-brand{color:#b8bee3 !important;}
     height: auto;
     display: block;
 }
+img:focus{
+    outline: none;
+    border:none;
+}
 .dropdown-area li a .totalBadge.pull-right{
     left: auto;
     margin-top: 0;

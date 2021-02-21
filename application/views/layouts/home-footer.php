@@ -57,6 +57,7 @@
 	</div>
 	<script src="<?php echo base_url(); ?>assets_home/js/jquery.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets_home/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.js"></script>
 	<script type="text/javascript" src="https://kenwheeler.github.io/slick/slick/slick.js"></script>
 	<script src="<?php echo base_url(); ?>assets_home/js/custom.js"></script>
 	<script type="text/javascript">

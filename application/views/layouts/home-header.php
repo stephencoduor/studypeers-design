@@ -15,6 +15,7 @@
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_home/css/animate.css">
 
 	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/study-set.css">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.css">
 </head>
 
 <body>

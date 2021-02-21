@@ -346,31 +346,31 @@
     });
     $('.peerSuggestionList').slick({
         infinite: false,
-        slidesToShow: 4.5,
+        slidesToShow: 4,
         autoplay: false,
-        slidesToScroll: 1,
+        slidesToScroll: 4,
         responsive: [{
                 breakpoint: 1200,
                 settings: {
-                    slidesToShow: 4.5
+                    slidesToShow: 4
                 }
             },
             {
                 breakpoint: 767,
                 settings: {
-                    slidesToShow: 3.5
+                    slidesToShow: 3
                 }
             },
             {
                 breakpoint: 567,
                 settings: {
-                    slidesToShow: 2.5
+                    slidesToShow: 2
                 }
             },
             {
                 breakpoint: 400,
                 settings: {
-                    slidesToShow: 1.5
+                    slidesToShow: 1
                 }
             }
         ]

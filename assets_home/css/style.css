@@ -270,6 +270,7 @@ header .nav li a:focus:after {
     align-items: center;
     justify-content: center;
     margin:0 auto;
+    position: relative;
 }
 .banner-text form input {
     width: calc(100% - 165px);

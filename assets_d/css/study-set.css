@@ -3361,6 +3361,10 @@ l,.share:focus
 .socialAction ul li.likecount a:hover{
     color:#cac8d3;
 }
+.like-status{
+    display: inline-block;
+    margin-left:5px;
+}
 .vote-wrap .likecount a{
     color:#9592a7;
 }
