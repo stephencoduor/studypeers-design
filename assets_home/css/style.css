@@ -466,9 +466,9 @@ ul.social-store li span b {
     font-weight: 500;
 }
 .social-tools p {
-    font-size: 22px;
-    line-height: 1.6;
-    text-align: center;
+    font-size: 16px;
+    line-height: 1.4;
+    text-align: left;
     padding: 20px 0;
 }
 .image-card figure {
@@ -994,7 +994,7 @@ footer .right-footer p {
         font-size: 50px;
     }
     .social-tools p {
-        font-size: 22px;    
+        font-size: 16px;    
     }
     .study-and-learn .study-text h4 ,
     .study-and-learn .study-text h4 a{
@@ -1575,7 +1575,7 @@ footer .right-footer p {
         font-size: 30px;
     }
     .social-tools p {
-        font-size: 20px;
+        font-size: 16px;
     }
     .study-and-learn {
         padding: 100px 0;
@@ -1640,7 +1640,7 @@ footer .right-footer p {
         font-size: 22px;
     }
     .social-tools p {
-        font-size: 18px;
+        font-size: 16px;
         padding: 10px 15px;
     }
     .social-tools {
@@ -2197,7 +2197,22 @@ img{
     display: block;
 }
 .social-tools h4 {
-    font-size: 32px;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom:30px;
+}
+.sub-page-title{
+    font-size:28px;
+    font-weight:600;
+}
+.small-title{
+    font-size:20px;
+    font-weight:600;
+}
+.social-tools .title-page {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 30px;
 }
 .info-section h3 {
     font-size: 38px;
