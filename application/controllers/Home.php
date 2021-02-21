@@ -67,6 +67,14 @@ class Home extends CI_Controller
         $this->load->view('layouts/home-footer');
     }
 
+    public function termsCondition()
+    {
+        $this->load->view('layouts/home-header');
+        $this->load->view('terms-conditions');
+        $this->load->view('layouts/home-footer');
+    }
+
+    
     public function contactUs()
     {   
         if ($this->input->post()) { 
