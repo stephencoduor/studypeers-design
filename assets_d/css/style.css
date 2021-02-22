@@ -92,7 +92,7 @@ aside{top: 80px;height: 100%;z-index:99;position:fixed;width:276px;left:0;max-he
     -o-transition: all 0.3s ease;transition: all 0.3s ease;background:#fff;}
 .sidebar-content{max-height: calc(100% - 30px);
     height: calc(100% - 30px);
-    overflow-y: auto;
+    /* overflow-y: auto; */
     position: relative !important;
     width: 100% !important;}
 .sidebar-menu {border-bottom: 1px solid #eae9ee;padding: 25px 0;}

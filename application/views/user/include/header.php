@@ -96,6 +96,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 ?>
 
 <body>
+	<div>
 	<div class="ajax-loading">
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 			<g>
@@ -475,7 +476,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 		</section>
 	</header>
 	<section class="dashbody">
-		<section class="container-fluid" data-simplebar>
+		<section class="container-fluid">
 			<section class="row">
 				<aside>
 					<section class="sidebar-content">
