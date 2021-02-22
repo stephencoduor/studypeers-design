@@ -132,6 +132,14 @@ header .nav li a:focus{
     color: #EA2E7E;
     background: transparent;
 }
+header .nav li.active a{
+    color: #EA2E7E;
+    background: transparent;
+}
+header .nav li.active a:after{
+    width: 100%;
+    border-bottom: 1px solid #EA2E7E;
+}
 header .nav li a:hover:after,
 header .nav li a:focus:after {
     width: 100%;
@@ -270,6 +278,7 @@ header .nav li a:focus:after {
     align-items: center;
     justify-content: center;
     margin:0 auto;
+    position: relative;
 }
 .banner-text form input {
     width: calc(100% - 165px);
@@ -465,10 +474,13 @@ ul.social-store li span b {
     font-weight: 500;
 }
 .social-tools p {
-    font-size: 22px;
-    line-height: 1.6;
+    font-size: 16px;
+    line-height: 1.4;
     text-align: center;
     padding: 20px 0;
+}
+.social-tools .cms-content p{
+    text-align: left;
 }
 .image-card figure {
     width: 110px;
@@ -993,7 +1005,7 @@ footer .right-footer p {
         font-size: 50px;
     }
     .social-tools p {
-        font-size: 22px;    
+        font-size: 16px;    
     }
     .study-and-learn .study-text h4 ,
     .study-and-learn .study-text h4 a{
@@ -1574,7 +1586,7 @@ footer .right-footer p {
         font-size: 30px;
     }
     .social-tools p {
-        font-size: 20px;
+        font-size: 16px;
     }
     .study-and-learn {
         padding: 100px 0;
@@ -1639,7 +1651,7 @@ footer .right-footer p {
         font-size: 22px;
     }
     .social-tools p {
-        font-size: 18px;
+        font-size: 16px;
         padding: 10px 15px;
     }
     .social-tools {
@@ -2196,7 +2208,22 @@ img{
     display: block;
 }
 .social-tools h4 {
-    font-size: 32px;
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom:30px;
+}
+.sub-page-title{
+    font-size:28px;
+    font-weight:600;
+}
+.small-title{
+    font-size:20px;
+    font-weight:600;
+}
+.social-tools .title-page {
+    font-size: 34px;
+    font-weight: 700;
+    margin-bottom: 30px;
 }
 .info-section h3 {
     font-size: 38px;

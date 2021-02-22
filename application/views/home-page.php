@@ -2,19 +2,21 @@
 	.autocomplete-items {
 	    position: absolute;
 	    border: 1px solid #d4d4d4;
-	    border-bottom: none;
 	    border-top: none;
+		border-bottom: none;
 	    z-index: 99;
 	    top: 100%;
 	    left: 0;
-	    right: 0;
 	    max-height: 250px;
 	    overflow-y: auto;
 	    margin: 0 15px 0 15px;
-	    width: 710px;
+	    width: calc(100% - 165px);
 	    margin: 0 auto;
+		text-align:left;
 	}
 	.autocomplete-items div {
+		font-size: 14px;
+    	font-weight: 500;
 	    padding: 10px;
 	    cursor: pointer;
 	    background-color: #fff;
