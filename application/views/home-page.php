@@ -905,8 +905,8 @@
 				<h4>Q&A</h4>
 				<p>Join Studypeers for free to get fast answers to your questions.</p>
 				<form>
-					<input type="text" name="" class="banner-search" placeholder="What's your question ?">
-					<button type="button" class="banner-search-btn">Ask</button>
+					<input type="text" name="" id="ask_question" class="banner-search" placeholder="What's your question ?">
+					<button type="button" class="banner-search-btn" onclick="redirectRegisterAsk()">Ask</button>
 				</form>
 			</div>
 		</div>
