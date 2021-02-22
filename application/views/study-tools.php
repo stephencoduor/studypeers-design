@@ -7,7 +7,7 @@
 					</div>
 					<h6>Create your profile</h6>
 					<form>
-					<button type="button" class="pink-btn">Create Now</button>
+					<button type="button" onclick="location.href='<?php echo base_url('signup'); ?>'" class="pink-btn">Create Now</button>
 					</form>
 				</div>
 			</div>

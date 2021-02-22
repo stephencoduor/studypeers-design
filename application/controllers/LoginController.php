@@ -32,6 +32,7 @@ class LoginController extends CI_Controller
     public function signUp()
     {
         $this->data['page_name'] = 'register';
+        $this->data['active'] = 'register';
         $this->load->view('index', $this->data);
     }
 

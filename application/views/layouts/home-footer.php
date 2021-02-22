@@ -28,28 +28,28 @@
 						<div class="social-media">
 							<ul>
 								<li>
-									<a href="javascript:void(0)">
+									<a href="https://www.facebook.com/studypeers">
 										<img src="<?php echo base_url(); ?>assets_home/images/facebook.svg" alt="facebook">
 									</a>
 								</li>
 								<li>
-									<a href="javascript:void(0)">
+									<a href="https://twitter.com/study_peers">
 										<img src="<?php echo base_url(); ?>assets_home/images/twitter.svg" alt="twitter">
 									</a>
 								</li>
 								<li>
-									<a href="javascript:void(0)">
+									<a href="https://www.instagram.com/studypeers/">
 										<img src="<?php echo base_url(); ?>assets_home/images/instagram.svg" alt="instagram">
 									</a>
 								</li>
 								<li>
-									<a href="javascript:void(0)">
+									<a href="https://www.linkedin.com/company/studypeers/">
 										<img src="<?php echo base_url(); ?>assets_home/images/linkedin.svg" alt="linkedin">
 									</a>
 								</li>
 							</ul>
 						</div>
-						<p>Copyright © 2021 Studypeers</p>
+						<p>Copyright © 2021 Studypeers Inc.</p>
 					</div>
 				</div>
 			</div>
@@ -211,6 +211,13 @@
 		function redirectSignup(){
 			var university = $('#university').val();
 			if(university != ''){
+				window.location.href = '<?php echo base_url('signup') ?>';
+			}
+		}
+
+		function redirectRegisterAsk(){
+			var ask_question = $('#ask_question').val();
+			if(ask_question != ''){
 				window.location.href = '<?php echo base_url('signup') ?>';
 			}
 		}

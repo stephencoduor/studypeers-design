@@ -3,8 +3,8 @@
 			 <div class="row centered">
 				<div class="col-sm-4">
 				 <div class="vertical-menu">
-					<a href="FAQs.html">FAQs</a>
-					<a href="#">Contact Us</a>
+					<a href="<?php echo base_url(); ?>FAQ">FAQs</a>
+					<a href="javascript:void(0)">Contact Us</a>
   
 				</div>
 				</div>
@@ -20,11 +20,11 @@
 					<div class="form-group">
 						<div class="col-sm-12" style="padding: 0; margin-bottom: 10px;">
 							<div class="col-sm-6">
-								<input  class="form-control form-control--lg p-3 sp" type="text" id="firstname" name="firstname" placeholder="First Name*" >
+								<input  class="form-control form-control--lg p-3 sp" type="text" id="firstname" name="firstname" placeholder="Firstname*" >
 								<span id="err_firstname" style="font-style: italic;"></span>
 							</div>       
 							<div class="col-sm-6">
-								<input class="form-control form-control--lg p-3 sp" type="text" name="lastname" id="lastname"  placeholder="Last Name*" >
+								<input class="form-control form-control--lg p-3 sp" type="text" name="lastname" id="lastname"  placeholder="Lastname*" >
 								<span id="err_lastname" style="font-style: italic;"></span>
 							</div>
 						</div>

@@ -28,9 +28,9 @@ class Home extends CI_Controller
     }
     public function index()
     {
-
+        $data['active'] = 'index';
         // $this->data['page_name'] = 'main';
-        $this->load->view('layouts/home-header');
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('home-page');
         $this->load->view('layouts/home-footer');
     }
@@ -38,9 +38,9 @@ class Home extends CI_Controller
 
     public function studyTools()
     {
-
+        $data['active'] = 'studyTools';
         // $this->data['page_name'] = 'main';
-        $this->load->view('layouts/home-header');
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('study-tools');
         $this->load->view('layouts/home-footer');
     }
@@ -48,28 +48,32 @@ class Home extends CI_Controller
 
     public function connectWithPeers()
     {
-        $this->load->view('layouts/home-header');
+        $data['active'] = 'connectWithPeers';
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('connect-peers');
         $this->load->view('layouts/home-footer');
     }
 
     public function forProfessor()
     {
-        $this->load->view('layouts/home-header');
+        $data['active'] = 'forProfessor';
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('for-professor');
         $this->load->view('layouts/home-footer');
     }
 
     public function aboutUs()
     {
-        $this->load->view('layouts/home-header');
+        $data['active'] = 'aboutUs';
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('about-us');
         $this->load->view('layouts/home-footer');
     }
 
     public function termsCondition()
     {
-        $this->load->view('layouts/home-header');
+        $data['active'] = 'termsCondition';
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('terms-conditions');
         $this->load->view('layouts/home-footer');
     }
@@ -114,15 +118,25 @@ class Home extends CI_Controller
             $this->session->set_flashdata('flash_message', $message);
             redirect(site_url('contact-us'), 'refresh');
         }
-        $this->load->view('layouts/home-header');
+        $data['active'] = 'contactUs';
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('contact-us');
         $this->load->view('layouts/home-footer');
     }
 
     public function privacyPolicy()
     {
-        $this->load->view('layouts/home-header');
+        $data['active'] = 'privacyPolicy';
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('privacy-policy');
+        $this->load->view('layouts/home-footer');
+    }
+
+    public function faq()
+    {
+        $data['active'] = 'faq';
+        $this->load->view('layouts/home-header', $data);
+        $this->load->view('faq');
         $this->load->view('layouts/home-footer');
     }
 
@@ -139,12 +153,14 @@ class Home extends CI_Controller
             }
         }
         $this->data['page_name'] = 'login';
+        $this->data['active'] = 'login';
         $this->load->view('index', $this->data);
     }
     public function register()
     {
         $this->data['message'] = '';
         $this->data['page_name'] = 'register';
+        $this->data['active'] = 'register';
         $this->load->view('index', $this->data);
     }
 
