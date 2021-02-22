@@ -16,14 +16,14 @@
 		<div class="social-tools">
 			<div class="container">
 				<h4>Stay Connected</h4>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure fugit quaerat tempore</p>	
+				<p>Looking for an easier way to manage and interact with your students? Study Peers connects your students with you on a platform that makes it easier for them  <a href="">(Find out more here)</a></p>	
 				<div class="stay-connected">
 					<div class="add-section">
 						<figure class="add-icon">
 							<img src="<?php echo base_url(); ?>assets_home/images/Add.svg" alt="Image"/>
 						</figure>
 						<h3>Add</h3>
-						<p>Lorem ipsum dolor sit amet consectetur</p>
+						<p>Link up with your classmates</p>
 					</div>
 					<div class="top-border">
 						<figure>
@@ -36,7 +36,7 @@
 								<img src="<?php echo base_url(); ?>assets_home/images/Follow.svg" alt="Image"/>
 							</figure>
 							<h3>Follow</h3>
-							<p>Lorem ipsum dolor sit amet consectetur</p>
+							<p>Get the latest news from your classes and peers</p>
 						</div>
 						<div class="bottom-border"></div>
 						<div class="chat-section">
@@ -44,7 +44,7 @@
 								<img src="<?php echo base_url(); ?>assets_home/images/Chat.svg" alt="Image"/>
 							</figure>
 							<h3>Chat</h3>
-							<p>Lorem ipsum dolor sit amet consectetur</p>
+							<p>Interact with your professors and peers</p>
 						</div>
 					</div>
 					<div class="share-section">
@@ -52,7 +52,7 @@
 							<img src="<?php echo base_url(); ?>assets_home/images/Share.svg" alt="Image"/>
 						</figure>
 						<h3>Share</h3>
-						<p>Lorem ipsum dolor sit amet consectetur</p>
+						<p>Exchange information with other peers</p>
 					</div>
 				</div>
 			</div>

@@ -33,8 +33,6 @@
                         </ul>
                     </div>
                 </li>
-                <li class="nav-item"><a class="nav-link text-truncate" href="contact-us.html"><span class="d-none d-sm-inline" style="color:blue;font-weight:500;">Term & Conditions</span></a></li>
-				
                </ul>
 			</div>
 		</div>
