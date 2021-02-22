@@ -26,6 +26,7 @@ class LoginController extends CI_Controller
     public function index()
     {
         $this->data['page_name'] = 'login';
+        $this->data['active'] = 'login';
         $this->load->view('index', $this->data);
     }
 
