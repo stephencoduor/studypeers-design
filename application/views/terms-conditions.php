@@ -38,7 +38,7 @@
                </ul>
 			</div>
 		</div>
-		<div class="col-sm-8 divS">	  
+		<div class="col-sm-8 divS cms-content">	  
             <h4><center>Term & Conditions</center></h4>
                 
             <h5 class="sub-page-title"><font size="5px">Lorem Ipsum</font></h5><font size="5px">

@@ -476,8 +476,11 @@ ul.social-store li span b {
 .social-tools p {
     font-size: 16px;
     line-height: 1.4;
-    text-align: left;
+    text-align: center;
     padding: 20px 0;
+}
+.social-tools .cms-content p{
+    text-align: left;
 }
 .image-card figure {
     width: 110px;
