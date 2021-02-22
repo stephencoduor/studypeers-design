@@ -1,12 +1,39 @@
-
+<style type="text/css">
+	.autocomplete-items {
+	    position: absolute;
+	    border: 1px solid #d4d4d4;
+	    border-top: none;
+		border-bottom: none;
+	    z-index: 99;
+	    top: 100%;
+	    left: 0;
+	    max-height: 250px;
+	    overflow-y: auto;
+	    margin: 0 15px 0 15px;
+	    width: calc(100% - 165px);
+	    margin: 0 auto;
+		text-align:left;
+	}
+	.autocomplete-items div {
+		font-size: 14px;
+    	font-weight: 500;
+	    padding: 10px;
+	    cursor: pointer;
+	    background-color: #fff;
+	    border-bottom: 1px solid #d4d4d4;
+	}
+</style>
 		<div class="banner">
 			<div class="banner-text">
 				<h4>Learning is better Together</h4>
 				<h6>Find your University</h6>
 				<form>
-					<input type="text" name="" class="banner-search" placeholder="University">
-					<button type="button" class="banner-search-btn">Join now for FREE</button>
+					<input type="text" name="" class="banner-search" id="university" placeholder="University" onkeyup="searchUniversity(this.value)">
+					
+					<button type="button" class="banner-search-btn" onclick="redirectSignup()">Join now for FREE</button>
+					<div id="myInputautocomplete-list" class="autocomplete-items"></div>
 				</form>
+				
 			</div>
 		</div>
 		<div class="apps">
@@ -57,7 +84,7 @@
 		<div class="social-tools">
 			<div class="container">
 				<h4>Social Tools</h4>
-				<p>Tough class? Get resources you need</p>
+				<p>Want to stay connected? Join now and start socializing</p>
 				<div class="tool-slide slider">
 					<div class="slide-list events">
 						<figure>
@@ -116,7 +143,7 @@
 
 						</figure>
 						<h6>Events</h6>
-						<p>Find out what is happening around campus.</p>
+						<p>Find out what is happening around campus</p>
 					</div>
 					<div class="slide-list calendar">
 						<figure>
@@ -243,7 +270,7 @@
 							</svg>
 						</figure>
 						<h6>Calendar</h6>
-						<p>Keep track of study groups and events</p>
+						<p>Keep track of study groups and events.</p>
 					</div>
 					<div class="slide-list peer">
 						<figure>
@@ -385,34 +412,28 @@
 
 						</figure>
 						<h6>Rate Professor</h6>
-						<p>Loreum ipsum dolor sit amet, consetetur</p>
+						<p>Help your peers by sharing your experience</p>
 					</div>
 					<div class="slide-list more">
 						<figure>
-							<!-- <img src="images/social-media.svg" alt="Events"> -->
-							<figure>
-								<!-- <img src="images/events.svg" alt="Events"> -->
-
-								<svg id="more-blue" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
-									<rect id="Rectangle_728" data-name="Rectangle 728" width="100" height="100" rx="50" />
-									<g id="_27" data-name="27" transform="translate(30 30)">
-										<path id="Path_2778" data-name="Path 2778" d="M1.5,1.5H15.786V15.786H1.5Z" transform="translate(-0.071 -0.071)" fill="#185aeb" />
-										<path id="Path_2779" data-name="Path 2779" d="M9.5,1.5H23.786V15.786H9.5Z" transform="translate(14.786 -0.071)" fill="#185aeb" />
-										<path id="Path_2780" data-name="Path 2780" d="M1.5,9.5H15.786V23.786H1.5Z" transform="translate(-0.071 14.786)" fill="#185aeb" />
-										<path id="Path_2781" data-name="Path 2781" d="M9.5,9.5H23.786V23.786H9.5Z" transform="translate(14.786 14.786)" fill="#185aeb" />
-										<g id="Group_287" data-name="Group 287">
-											<path id="Path_2782" data-name="Path 2782" d="M16.714,18.143H2.429A1.429,1.429,0,0,1,1,16.714V2.429A1.429,1.429,0,0,1,2.429,1H16.714a1.429,1.429,0,0,1,1.429,1.429V16.714A1.429,1.429,0,0,1,16.714,18.143ZM3.857,15.286H15.286V3.857H3.857Z" transform="translate(-1 -1)" fill="#185aeb" />
-											<path id="Path_2783" data-name="Path 2783" d="M24.714,18.143H10.429A1.429,1.429,0,0,1,9,16.714V2.429A1.429,1.429,0,0,1,10.429,1H24.714a1.429,1.429,0,0,1,1.429,1.429V16.714A1.429,1.429,0,0,1,24.714,18.143ZM11.857,15.286H23.286V3.857H11.857Z" transform="translate(13.857 -1)" fill="#185aeb" />
-											<path id="Path_2784" data-name="Path 2784" d="M16.714,26.143H2.429A1.429,1.429,0,0,1,1,24.714V10.429A1.429,1.429,0,0,1,2.429,9H16.714a1.429,1.429,0,0,1,1.429,1.429V24.714A1.429,1.429,0,0,1,16.714,26.143ZM3.857,23.286H15.286V11.857H3.857Z" transform="translate(-1 13.857)" fill="#185aeb" />
-											<path id="Path_2785" data-name="Path 2785" d="M24.714,26.143H10.429A1.429,1.429,0,0,1,9,24.714V10.429A1.429,1.429,0,0,1,10.429,9H24.714a1.429,1.429,0,0,1,1.429,1.429V24.714A1.429,1.429,0,0,1,24.714,26.143ZM11.857,23.286H23.286V11.857H11.857Z" transform="translate(13.857 13.857)" fill="#185aeb" />
-										</g>
+							<svg id="more-blue" xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100">
+								<rect id="Rectangle_728" data-name="Rectangle 728" width="100" height="100" rx="50" />
+								<g id="_27" data-name="27" transform="translate(30 30)">
+									<path id="Path_2778" data-name="Path 2778" d="M1.5,1.5H15.786V15.786H1.5Z" transform="translate(-0.071 -0.071)" fill="#185aeb" />
+									<path id="Path_2779" data-name="Path 2779" d="M9.5,1.5H23.786V15.786H9.5Z" transform="translate(14.786 -0.071)" fill="#185aeb" />
+									<path id="Path_2780" data-name="Path 2780" d="M1.5,9.5H15.786V23.786H1.5Z" transform="translate(-0.071 14.786)" fill="#185aeb" />
+									<path id="Path_2781" data-name="Path 2781" d="M9.5,9.5H23.786V23.786H9.5Z" transform="translate(14.786 14.786)" fill="#185aeb" />
+									<g id="Group_287" data-name="Group 287">
+										<path id="Path_2782" data-name="Path 2782" d="M16.714,18.143H2.429A1.429,1.429,0,0,1,1,16.714V2.429A1.429,1.429,0,0,1,2.429,1H16.714a1.429,1.429,0,0,1,1.429,1.429V16.714A1.429,1.429,0,0,1,16.714,18.143ZM3.857,15.286H15.286V3.857H3.857Z" transform="translate(-1 -1)" fill="#185aeb" />
+										<path id="Path_2783" data-name="Path 2783" d="M24.714,18.143H10.429A1.429,1.429,0,0,1,9,16.714V2.429A1.429,1.429,0,0,1,10.429,1H24.714a1.429,1.429,0,0,1,1.429,1.429V16.714A1.429,1.429,0,0,1,24.714,18.143ZM11.857,15.286H23.286V3.857H11.857Z" transform="translate(13.857 -1)" fill="#185aeb" />
+										<path id="Path_2784" data-name="Path 2784" d="M16.714,26.143H2.429A1.429,1.429,0,0,1,1,24.714V10.429A1.429,1.429,0,0,1,2.429,9H16.714a1.429,1.429,0,0,1,1.429,1.429V24.714A1.429,1.429,0,0,1,16.714,26.143ZM3.857,23.286H15.286V11.857H3.857Z" transform="translate(-1 13.857)" fill="#185aeb" />
+										<path id="Path_2785" data-name="Path 2785" d="M24.714,26.143H10.429A1.429,1.429,0,0,1,9,24.714V10.429A1.429,1.429,0,0,1,10.429,9H24.714a1.429,1.429,0,0,1,1.429,1.429V24.714A1.429,1.429,0,0,1,24.714,26.143ZM11.857,23.286H23.286V11.857H11.857Z" transform="translate(13.857 13.857)" fill="#185aeb" />
 									</g>
-								</svg>
-
-
-							</figure>
-							<h6>More</h6>
-							<p>Loreum ipsum dolor sit amet, consetetur</p>
+								</g>
+							</svg>
+						</figure>
+						<h6>More</h6>
+						<p>Additional tools to help you socialize with your peers</p>
 					</div>
 				</div>
 			</div>
@@ -449,7 +470,7 @@
 
 						</figure>
 						<h6>Flashcards</h6>
-						<p>Create, share and find quick study tools</p>
+						<p>Memorize the terms by flipping the cards</p>
 					</div>
 					<div class="slide-list test">
 						<figure>
@@ -488,8 +509,8 @@
 								</g>
 							</svg>
 						</figure>
-						<h6>Study Group</h6>
-						<p>Loreum ipsum dolor sit amet, consetetur</p>
+						<h6>Study Groups</h6>
+						<p>Learning is always better with your peers</p>
 					</div>
 					<div class="slide-list social-media">
 						<figure>
@@ -680,7 +701,7 @@
 
 						</figure>
 						<h6>Document sharing</h6>
-						<p>Loreum ipsum dolor sit amet, consetetur</p>
+						<p>Upload unlimited documents and share with your peers</p>
 					</div>
 					<div class="slide-list peer">
 						<figure>
@@ -851,7 +872,7 @@
 
 						</figure>
 						<h6>Collaboration</h6>
-						<p>Loreum ipsum dolor sit amet, consetetur</p>
+						<p>Together Everyone Achieves More #teamwork</p>
 					</div>
 					<div class="slide-list more-green">
 						<figure>
@@ -874,7 +895,7 @@
 
 						</figure>
 						<h6>More</h6>
-						<p>Loreum ipsum dolor sit amet, consetetur</p>
+						<p>Explore more to learn more</p>
 					</div>
 				</div>
 			</div>
@@ -884,8 +905,8 @@
 				<h4>Q&A</h4>
 				<p>Join Studypeers for free to get fast answers to your questions.</p>
 				<form>
-					<input type="text" name="" class="banner-search" placeholder="What's your question ?">
-					<button type="button" class="banner-search-btn">Ask</button>
+					<input type="text" name="" id="ask_question" class="banner-search" placeholder="What's your question ?">
+					<button type="button" class="banner-search-btn" onclick="redirectRegisterAsk()">Ask</button>
 				</form>
 			</div>
 		</div>

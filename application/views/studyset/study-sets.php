@@ -141,6 +141,7 @@ foreach ($getdata as $key => $value) {
 			    $this->db->where('study_set_id', $studyset['study_set_id']);
 			    $this->db->from('studyset_rating_master');
 			    $rating = $this->db->get()->row_array();
+			    $like_count = $this->db->get_where($this->db->dbprefix('reaction_master'), array('reference_id' => $studyset['study_set_id'], 'reference' => 'studyset'))->num_rows();
 			?>
 				<div class="feed-card list" id="study_set_id_div_<?php echo $studyset['study_set_id'];?>">
 					<div class="left">
@@ -207,7 +208,7 @@ foreach ($getdata as $key => $value) {
 										<li class="likecount">
 											<a href="javascript:void(0)">
 												<i class="fa fa-thumbs-o-up <?php echo ($studyset['isLikedByUser']) ? 'fa-thumbs-up' : ''; ?>" aria-hidden="true"></i>
-												<span class="likeclass_<?php echo $studyset['study_set_id'];?>"><?php echo $studyset['likes_count'];?></span>
+												<span class="likeclass_<?php echo $studyset['study_set_id'];?>"><?php echo $like_count;?></span>
 											</a>
 										</li>
 										<li>

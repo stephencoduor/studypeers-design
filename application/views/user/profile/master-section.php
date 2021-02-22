@@ -337,6 +337,6 @@
         </div>
     </div> -->
     <div class="coming-soon">
-        <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+        <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
     </div>
 </div>

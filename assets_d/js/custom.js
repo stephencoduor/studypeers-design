@@ -607,3 +607,11 @@ $(document).ready(function(){
         $(".dropdown-area").toggleClass("open");
     });
 });
+$(window).on("load", function () {
+    $('.sidebar-content').mCustomScrollbar({ 
+        theme:"dark-3"        
+    });
+    $('.listUserWrap').mCustomScrollbar({ 
+            theme:"dark-3"        
+    });
+});

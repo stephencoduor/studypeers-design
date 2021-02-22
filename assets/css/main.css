@@ -6225,14 +6225,19 @@ Sidebar
     border: 0;
     margin: 0;
     border-radius: 0;
-    display: inline-block;
-    width: 80%;
     position: relative;
     min-height: 50px;
 }
 .social-action {
-    display: inline-block;
     vertical-align: top;
+}
+.flex-top-header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.flex-top-header .container-fluid{
+    display: flex;
 }
 .navbar-brand .logoMobile {
     display: none;
@@ -6256,9 +6261,6 @@ Sidebar
     display: inline-block;
     vertical-align: middle;
 }
-.social-action ul {
-    margin-top:15px;
-}
 .social-action ul li a {
     color: #333333;
     text-decoration: none;
@@ -6272,6 +6274,23 @@ Sidebar
     -ms-transition: background 350ms ease;
     -o-transition: background 350ms ease;
 }
+.social-action ul li a.outline-join{
+    background: #fff;
+    border: solid 1px #185aeb;
+    color: #185aeb;
+    padding: 14px 25px;
+    border-radius: 4px;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+.social-action ul li a.outline-join:hover{
+    color: #fff;
+    background-color: #5d8cf1;
+}
 .social-action ul li.button a {
     height:46px;
     padding: 8px 36px;
@@ -6280,6 +6299,9 @@ Sidebar
     cursor: pointer;
     outline: none;
     color: #fff;
+}
+.social-action ul li.button a:hover{
+    color:#fff;
 }
 .nav>li {
     margin: 0 15px;
@@ -6304,4 +6326,31 @@ Sidebar
 }
 .social-action ul li:hover a, .social-action ul li:focus a {
     color: #EA2E7E;
+}
+
+@media (max-width: 767px) {
+    .navbar-brand .logoDesktop {
+        display: none;
+    }
+    .navbar-brand .logoMobile {
+        display: block;
+    }
+    .logo {
+        min-width: 90px;
+    }
+    .navbar-toggle {
+        position: absolute;
+        right: 0;
+        top: 17px;
+        margin: 0;
+    }
+    .navbar-toggle .icon-bar {
+        background: #333;
+    }
+    .header-area .navbar{
+        width:100%;
+    }
+    .header-area {
+        padding: 15px;
+    }
 }

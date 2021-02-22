@@ -217,7 +217,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                             </div>
                             <div id="articles" class="tab-pane fade in">
                                 <div class="coming-soon">
-                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
                                 </div>
                             </div>
                             <div id="studySets" class="tab-pane fade in">
@@ -240,7 +240,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                             </div>
                             <div id="studySessions" class="tab-pane fade in">
                                 <div class="coming-soon">
-                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                                    <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
                                 </div>
                             </div>
                         </div>
@@ -878,7 +878,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                     </div>
                 </div> -->
                 <div class="coming-soon">
-                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                    <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
                 </div>
             </div>
             <div id="courses" class="tab-pane fade in">
@@ -1159,7 +1159,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                     </div>
                 </div> -->
                 <div class="coming-soon">
-                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                    <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
                 </div>
             </div>
             <div id="professor" class="tab-pane fade in">
@@ -1446,7 +1446,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                     </div>
                 </div> -->
                 <div class="coming-soon">
-                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                    <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
                 </div>
             </div>
             <div id="market" class="tab-pane fade in">
@@ -1788,7 +1788,7 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                     </div>
                 </div> -->
                 <div class="coming-soon">
-                    <figure><img src="<?php echo base_url(); ?>assets_d/images/coming-soon.png" alt="Image"/>
+                    <figure><img src="<?php echo base_url(); ?>assets_d/images/Final_file_First_GIF.gif" alt="Image"/>
                 </div>
             </div>
         </div>

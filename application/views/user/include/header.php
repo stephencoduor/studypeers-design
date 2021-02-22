@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/nice-select.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.css">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 	<?php if ($index_menu == 'dashboard') { ?>
@@ -65,11 +66,6 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.css" />
-
-
-	<script src="https://cdn.jsdelivr.net/npm/simplebar@latest/dist/simplebar.min.js"></script>
-
 	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/moment.js'); ?>"></script>
@@ -95,8 +91,7 @@ $this->db->limit('10');
 $last_notification = $this->db->get_where('notification_master', array('user_id' => $user_id, 'status!=' => 3))->result_array();
 ?>
 
-<body>
-	<div>
+<body class="fancy-scrollbar">
 	<div class="ajax-loading">
 		<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
 			<g>
@@ -447,8 +442,8 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 									</a>
 									<ul class="dropdown-area">
 										<li><a href="<?php echo base_url(); ?>Profile/timeline"><i class="fa fa-user"></i>My profile</a></li>
-										<li><a href="javascript:void(0);"><i class="fa fa-globe"></i>Connections <span class="totalBadge pull-right">29</span></a></li>
-										<li><a href="javascript:void(0);"><i class="fa fa-male"></i>Peers</a></li>
+										<!-- <li><a href="javascript:void(0);"><i class="fa fa-globe"></i>Connections <span class="totalBadge pull-right">29</span></a></li>
+										<li><a href="javascript:void(0);"><i class="fa fa-male"></i>Peers</a></li> -->
 										<li><a href="<?php echo base_url(); ?>Account/logout"><i class="fa fa-sign-out"></i>Logout</a></li>
 									</ul>
 								</li>
@@ -585,10 +580,10 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Textbooks
-										<span class="badge badge-success">
+										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<span class="letters">Coming Soon</span>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image" />
 												</span>
 											</div>
 										</span>
@@ -600,10 +595,10 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Articles
-										<span class="badge badge-success">
+										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<span class="letters">Coming Soon</span>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image" />
 												</span>
 											</div>
 										</span>
@@ -616,10 +611,10 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 											</svg>
 										</div>
 										Study Notes
-										<span class="badge badge-success">
+										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<span class="letters">Coming Soon</span>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image" />
 												</span>
 											</div>
 										</span>

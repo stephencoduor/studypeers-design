@@ -17,11 +17,13 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         <section class="listBar">
             <section class="listHeader">
                 <h6>Peers</h6>
-                <a data-toggle="modal" data-target="#peersMessageModal">See More</a>
+                <?php if(!empty($peer_list)) { ?>
+                    <a data-toggle="modal" data-target="#peersMessageModal">See More</a>
+                <?php } ?>
             </section>
             <section class="listChatBox">
                 <?php foreach ($peer_list as $key => $value) {
-                    if ($key <= 4) {
+                    if ($key <= 3) {
                         if ($value['user_id'] == $user_id) {
                             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
                             $this->db->join('user', 'user.id=user_info.userID');
@@ -144,13 +146,15 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         <section class="listBar">
             <section class="listHeader">
                 <h6>Blocked Peers</h6>
-                <a data-toggle="modal" data-target="#blockUserModal">See More</a>
+                <?php if (!empty($blocked_users)) { ?>
+                    <a data-toggle="modal" data-target="#blockUserModal">See More</a>
+                <?php } ?>
             </section>
             <section class="listChatBox">
 
                 <?php if (!empty($blocked_users)) {
                     $count = 0; foreach (@$blocked_users as $users) {
-                        if($count < 5) {
+                        if($count < 4) {
                 ?>
                         <section class="list">
                             <section class="left">

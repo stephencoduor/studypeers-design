@@ -14,9 +14,10 @@
 						<div class="list">
 							<h6>Resources</h6>
 							<ul>
-								<li><a href="javascript:void(0)">About Us</a></li>
-								<li><a href="javascript:void(0)">Terms and Conditions</a></li>
-								<li><a href="javascript:void(0)">Privacy Policy</a></li>
+								<li><a href="<?php echo base_url(); ?>about-us">About Us</a></li>
+								<li><a href="<?php echo base_url(); ?>terms-conditions">Terms and Conditions</a></li>
+								<li><a href="<?php echo base_url(); ?>privacy-policy">Privacy Policy</a></li>
+								<li><a href="<?php echo base_url(); ?>contact-us">Contact Us</a></li>
 							</ul>
 						</div>
 					</div>
@@ -27,28 +28,28 @@
 						<div class="social-media">
 							<ul>
 								<li>
-									<a href="javascript:void(0)">
+									<a href="https://www.facebook.com/studypeers">
 										<img src="<?php echo base_url(); ?>assets_home/images/facebook.svg" alt="facebook">
 									</a>
 								</li>
 								<li>
-									<a href="javascript:void(0)">
+									<a href="https://twitter.com/study_peers">
 										<img src="<?php echo base_url(); ?>assets_home/images/twitter.svg" alt="twitter">
 									</a>
 								</li>
 								<li>
-									<a href="javascript:void(0)">
+									<a href="https://www.instagram.com/studypeers/">
 										<img src="<?php echo base_url(); ?>assets_home/images/instagram.svg" alt="instagram">
 									</a>
 								</li>
 								<li>
-									<a href="javascript:void(0)">
+									<a href="https://www.linkedin.com/company/studypeers/">
 										<img src="<?php echo base_url(); ?>assets_home/images/linkedin.svg" alt="linkedin">
 									</a>
 								</li>
 							</ul>
 						</div>
-						<p>Copyright © 2021 Studypeers</p>
+						<p>Copyright © 2021 Studypeers Inc.</p>
 					</div>
 				</div>
 			</div>
@@ -56,6 +57,7 @@
 	</div>
 	<script src="<?php echo base_url(); ?>assets_home/js/jquery.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets_home/js/bootstrap.min.js"></script>
+	<script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.js"></script>
 	<script type="text/javascript" src="https://kenwheeler.github.io/slick/slick/slick.js"></script>
 	<script src="<?php echo base_url(); ?>assets_home/js/custom.js"></script>
 	<script type="text/javascript">
@@ -79,6 +81,41 @@
 		});
 	</script>
 	<script>
+		$(document).ready(function() { 
+    
+		    $(".num_only").keypress(function (e) {
+		        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+		            
+		            return false;
+		        }
+		    });
+		});
+		function searchUniversity(keyword){
+		    var url = '<?php echo base_url('home/searchUniversity') ?>';
+		    if((keyword != '') && (keyword.length > 2)) {
+
+		      $.ajax({
+		          url: url,
+		          type: 'POST',
+		          data: {'keyword': keyword},
+		          success: function(result) {
+		              $('#myInputautocomplete-list').html(result);
+		          }
+		      });
+		    } else {
+		      $('#myInputautocomplete-list').html('');
+		      $('#valid_div').css('display','none');
+		    }
+		}
+
+		function selectUniversity(university){
+		    
+		      var text = $('#suggestion_'+university).text();
+		      $('#university').val(text);
+		      $('#myInputautocomplete-list').html('');
+		      
+		}
+
 		var TxtType = function(el, toRotate, period) {
 			this.toRotate = toRotate;
 			this.el = el;
@@ -169,6 +206,68 @@
                         }
                     });
 	            }
+			}
+		}
+
+		function redirectSignup(){
+			var university = $('#university').val();
+			if(university != ''){
+				window.location.href = '<?php echo base_url('signup') ?>';
+			}
+		}
+
+		function redirectRegisterAsk(){
+			var ask_question = $('#ask_question').val();
+			if(ask_question != ''){
+				window.location.href = '<?php echo base_url('signup') ?>';
+			}
+		}
+
+		function validateContact(){
+			var firstname = $('#firstname').val();
+			if(firstname == ''){
+				$('#err_firstname').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				$('#err_firstname').text('').hide();
+			}
+
+			var lastname = $('#lastname').val();
+			if(lastname == ''){
+				$('#err_lastname').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				$('#err_lastname').text('').hide();
+			}
+
+			var email = $('#email').val();
+			if(email == ''){
+				$('#err_email').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				var email2 = isValidEmailAddress(email);
+	            if(!email2) {
+	            	$('#err_email').css('color', 'red').text('Invalid email.').show();
+				return false;
+	            } else {
+					$('#err_email').text('').hide();
+	            }
+			}
+
+			var phoneNo = $('#phoneNo').val();
+			if(phoneNo == ''){
+				$('#err_phoneNo').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				$('#err_phoneNo').text('').hide();
+			}
+
+			var message = $('#message').val();
+			if(message == ''){
+				$('#err_message').css('color', 'red').text('This field is required').show();
+				return false;
+			} else {
+				$('#err_message').text('').hide();
 			}
 		}
 	</script>

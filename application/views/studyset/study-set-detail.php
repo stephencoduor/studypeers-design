@@ -40,7 +40,7 @@
 				<div class="likecount">
 					<a href="javascript:void(0)">
 						<i class="fa fa-thumbs-o-up" aria-hidden="true"></i>
-						<span class="likeclass">4 People Liked</span>
+						<span class="likeclass"><?php echo $like_count; ?> People Liked</span>
 					</a>
 				</div>
 				</div>
@@ -139,7 +139,7 @@
 			<div class="socialActionWrapper">
 				<a href="javascript:void(0)" class="like likecount" data-id="<?php echo $studyset['study_set_id'];?>" onclick="likeStudyset('<?php echo $studyset['study_set_id'];?>')">
 					<i class="fa fa-thumbs-o-up <?php echo ($studyset['isLikedByUser']) ? 'fa-thumbs-up' : ''; ?>" aria-hidden="true"></i>
-					<?php echo ($studyset['isLikedByUser']) ? 'Liked' : 'Like'; ?>
+					<span class="like-status"><?php echo ($studyset['isLikedByUser']) ? ' Liked' : ' Like'; ?></span>
 				</a>
 				<a class="like" data-toggle="tab" href="#comment" onclick="setTab()">
 					<svg id="collapsea_1"
@@ -1501,10 +1501,10 @@
 			success: function(result) {
 				$('.likecount').html(result);
 				if(result == 1){
-					$('.likecount').html('<i class="fa fa-thumbs-up" >Liked</i>');
+					$('.likecount').html('<i class="fa fa-thumbs-up"></i><span class="like-status">Liked</span>');
             
         		} else {
-        			$('.likecount').html('<i class="fa fa-thumbs-o-up" >Like</i>');
+        			$('.likecount').html('<i class="fa fa-thumbs-o-up" ></i><span class="like-status">Like</span>');
         		}
             
 			}

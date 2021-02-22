@@ -28,9 +28,9 @@ class Home extends CI_Controller
     }
     public function index()
     {
-
+        $data['active'] = 'index';
         // $this->data['page_name'] = 'main';
-        $this->load->view('layouts/home-header');
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('home-page');
         $this->load->view('layouts/home-footer');
     }
@@ -38,9 +38,9 @@ class Home extends CI_Controller
 
     public function studyTools()
     {
-
+        $data['active'] = 'studyTools';
         // $this->data['page_name'] = 'main';
-        $this->load->view('layouts/home-header');
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('study-tools');
         $this->load->view('layouts/home-footer');
     }
@@ -48,15 +48,95 @@ class Home extends CI_Controller
 
     public function connectWithPeers()
     {
-        $this->load->view('layouts/home-header');
+        $data['active'] = 'connectWithPeers';
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('connect-peers');
         $this->load->view('layouts/home-footer');
     }
 
     public function forProfessor()
     {
-        $this->load->view('layouts/home-header');
+        $data['active'] = 'forProfessor';
+        $this->load->view('layouts/home-header', $data);
         $this->load->view('for-professor');
+        $this->load->view('layouts/home-footer');
+    }
+
+    public function aboutUs()
+    {
+        $data['active'] = 'aboutUs';
+        $this->load->view('layouts/home-header', $data);
+        $this->load->view('about-us');
+        $this->load->view('layouts/home-footer');
+    }
+
+    public function termsCondition()
+    {
+        $data['active'] = 'termsCondition';
+        $this->load->view('layouts/home-header', $data);
+        $this->load->view('terms-conditions');
+        $this->load->view('layouts/home-footer');
+    }
+
+    
+    public function contactUs()
+    {   
+        if ($this->input->post()) { 
+            $firstname  = $this->input->post('firstname');
+            $lastname   = $this->input->post('lastname');
+            $email      = $this->input->post('email');
+            $phoneNo    = $this->input->post('phoneNo');
+            $message    = $this->input->post('message');
+
+            $subject = 'New User has contacted via Contact Us';
+            $email_message  =   "Hello Admin,";
+            $email_message .= '<p>New user has contacted via contact us form.Below are the details : <br>
+                        Name : '.$firstname.' '.$lastname.'<br>
+                        Email : '.$email.'<br>
+                        Phone Number : '.$phoneNo.'<br>
+                        Message : '.$message.'<br>
+                        </p>';
+
+            $this->email_model->send_contact_email('studypeers.dev@gmail.com', $subject, $email_message);
+
+            $insertArr = array(
+                'firstname'         => $firstname,
+                'lastname'          => $lastname,
+                'email'             => $email,
+                'phoneNo'           => $phoneNo,
+                'message'           => $message,
+                
+                'status'            => 1,
+                
+                'created_at'        => date('Y-m-d H:i:s')
+            );
+            $this->db->insert('contact_us', $insertArr);
+
+            $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Your details submitted Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button></div>';
+            $this->session->set_flashdata('flash_message', $message);
+            redirect(site_url('contact-us'), 'refresh');
+        }
+        $data['active'] = 'contactUs';
+        $this->load->view('layouts/home-header', $data);
+        $this->load->view('contact-us');
+        $this->load->view('layouts/home-footer');
+    }
+
+    public function privacyPolicy()
+    {
+        $data['active'] = 'privacyPolicy';
+        $this->load->view('layouts/home-header', $data);
+        $this->load->view('privacy-policy');
+        $this->load->view('layouts/home-footer');
+    }
+
+    public function faq()
+    {
+        $data['active'] = 'faq';
+        $this->load->view('layouts/home-header', $data);
+        $this->load->view('faq');
         $this->load->view('layouts/home-footer');
     }
 
@@ -73,12 +153,14 @@ class Home extends CI_Controller
             }
         }
         $this->data['page_name'] = 'login';
+        $this->data['active'] = 'login';
         $this->load->view('index', $this->data);
     }
     public function register()
     {
         $this->data['message'] = '';
         $this->data['page_name'] = 'register';
+        $this->data['active'] = 'register';
         $this->load->view('index', $this->data);
     }
 

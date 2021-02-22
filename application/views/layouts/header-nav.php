@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container">	
+		<div class="flex-top-header">
 				<nav class="navbar">
 					<div class="container-fluid">
 						<div class="navbar-header">
@@ -14,17 +15,18 @@
 						</div>
 						<div class="collapse navbar-collapse" id="myNavbar">
 							<ul class="nav navbar-nav pull-right">
-								<li class="active"><a href="<?php echo base_url(); ?>study-tools">Study Tools</a></li>
-								<li><a href="<?php echo base_url(); ?>connect-with-peers">Connect with Peers</a></li>
-								<li><a href="<?php echo base_url(); ?>for-professor">For Professor</a></li>
+								<li class="<?php if($active == 'studyTools') { echo "active"; } ?>"><a href="<?php echo base_url(); ?>study-tools">Study Tools</a></li>
+								<li class="<?php if($active == 'connectWithPeers') { echo "active"; } ?>"><a href="<?php echo base_url(); ?>connect-with-peers">Connect with Peers</a></li>
+								<li class="<?php if($active == 'forProfessor') { echo "active"; } ?>"><a href="<?php echo base_url(); ?>for-professor">For Professor</a></li>
 							</ul>
 						</div>
 					</div>
 				</nav>
 				<div class="social-action">
 					<ul>
-						<li><a href="<?php echo base_url('signup'); ?>">Join</a></li>
+						<li><a href="<?php echo base_url('signup'); ?>" class="outline-join">Join</a></li>
 						<li class="button"><a href="<?php echo base_url('login'); ?>">Login</a></li>
 					</ul>
 				</div>
 			</div>
+		</div>

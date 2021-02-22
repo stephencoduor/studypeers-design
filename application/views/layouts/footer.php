@@ -3,13 +3,10 @@
         <div class="row">
             <div class="col-md-8">
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Study Tools</a></li>
-                    <li><a href="">Connect with Peers</a></li>
-                    <li><a href="">For Professor</a></li>
-                    <li><a href="">About Us</a></li>
-                    <li><a href="">Terms and Conditions</a></li>
-                    <li><a href="">Privacy Policy</a></li>
+                    <li><a href="<?php echo base_url(); ?>about-us">About Us</a></li>
+                    <li><a href="<?php echo base_url(); ?>terms-conditions">Terms and Conditions</a></li>
+                    <li><a href="<?php echo base_url(); ?>privacy-policy">Privacy Policy</a></li>
+                    <li><a href="<?php echo base_url(); ?>contact-us">Contact Us</a></li>
                 </ul>
             </div>
             <div class="col-md-4 text-right">

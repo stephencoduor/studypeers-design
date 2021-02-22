@@ -87,7 +87,7 @@
 						<div class="flash-card-wrap">
 							<div class="flashcards active ">
 								<?php $count = count($term_data)-1; foreach ($term_data as $key => $value) { ?>
-									<div class="flipper <?php if($key == 0) { echo "current first"; } else if($key == $count) { echo "last"; } ?>" style="<?php if($key != 0) { echo "display: none"; } ?>" data-id="<?php echo $value['study_set_term_id']; ?>">
+									<div class="flipper <?php if($key == 0) { echo "current first "; } if($key == $count) { echo "last"; } ?>" style="<?php if($key != 0) { echo "display: none"; } ?>" data-id="<?php echo $value['study_set_term_id']; ?>">
 
 										<div class="front card">
 											<div class="flashCard_txt">
