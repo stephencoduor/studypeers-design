@@ -79,7 +79,7 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 } else {
 	$username = 'studypeersadmin';
 	$pwd = 'admin123';
-        $host = 'studypeers-db-1.cdr236ac1xs8.us-east-2.rds.amazonaws.com'
+        $host = 'studypeers-db-1.cdr236ac1xs8.us-east-2.rds.amazonaws.com';
 }
 
 $db['default'] = array(
