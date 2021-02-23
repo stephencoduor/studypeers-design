@@ -481,6 +481,11 @@ ul.social-store li span b {
 }
 .social-tools .cms-content p{
     text-align: left;
+    padding:0;
+    margin-bottom:15px;
+}
+.social-tools .cms-content p strong{
+    font-weight:600;
 }
 .image-card figure {
     width: 110px;
@@ -2219,9 +2224,26 @@ img{
     font-size:28px;
     font-weight:600;
 }
+.social-tools.bottom-space{
+    padding-bottom:0;
+}
+.unordered-list li{
+    margin-bottom:5px;
+}
 .small-title{
     font-size:20px;
     font-weight:600;
+    margin-bottom:15px;
+}
+ol.order-list{
+    margin-bottom:10px;
+}
+ul.unordered-list{
+    margin-bottom:10px;
+}
+ol.order-list>li{
+    font-size:16px;
+    font-weight:700;
 }
 .social-tools .title-page {
     font-size: 34px;
