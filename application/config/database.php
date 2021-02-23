@@ -75,14 +75,16 @@ $query_builder = TRUE;
 if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$username = 'root';
 	$pwd = '';
+        $host = 'localhost';
 } else {
-	$username = 'studypee_studypeers';
-	$pwd = ')Fm]m${zpiO_';
+	$username = 'studypeersadmin';
+	$pwd = 'admin123';
+        $host = 'studypeers-db-1.cdr236ac1xs8.us-east-2.rds.amazonaws.com'
 }
 
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
+	'hostname' => $host,
 	'username' => $username,
 	'password' => $pwd,
 	'database' => 'studypee_studypee',
