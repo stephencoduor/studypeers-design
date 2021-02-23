@@ -64,7 +64,7 @@
 		</div>
 		<div class="social-tools">
 			<div class="container">
-				<h4>Out Team</h4>
+				<h4>Our Team</h4>
 				<div class="out-team slider">
 					<div class="slide-list">
 						<figure>

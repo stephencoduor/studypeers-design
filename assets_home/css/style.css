@@ -522,12 +522,15 @@ ul.social-store li span b {
 .slide-list figure {
     width: 95px;
     height:95px;
+    border-radius:50%;
+    overflow:hidden;
     margin: auto;
 }
 .slide-list figure img,
 .slide-list figure svg {
     width:100%;
     height:100%;
+    border-radius:50%;
     transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
