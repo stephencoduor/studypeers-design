@@ -24,8 +24,12 @@
 				</nav>
 				<div class="social-action">
 					<ul>
-						<li><a href="<?php echo base_url('signup'); ?>" class="outline-join">Join</a></li>
-						<li class="button"><a href="<?php echo base_url('login'); ?>">Login</a></li>
+						<?php if($active != 'register') { ?>
+							<li><a href="<?php echo base_url('signup'); ?>" class="outline-join">Join</a></li>
+						<?php } ?>
+						<?php if($active != 'login') { ?>
+							<li class="button"><a href="<?php echo base_url('login'); ?>">Login</a></li>
+						<?php } ?>
 					</ul>
 				</div>
 			</div>

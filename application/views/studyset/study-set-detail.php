@@ -137,7 +137,7 @@
 				<?php } ?>
 			</div>
 			<div class="socialActionWrapper">
-				<a href="javascript:void(0)" class="like likecount" data-id="<?php echo $studyset['study_set_id'];?>" onclick="likeStudyset('<?php echo $studyset['study_set_id'];?>')">
+				<a href="javascript:void(0)" class="like likecount" id="likecount" data-id="<?php echo $studyset['study_set_id'];?>" onclick="likeStudyset('<?php echo $studyset['study_set_id'];?>')">
 					<i class="fa fa-thumbs-o-up <?php echo ($studyset['isLikedByUser']) ? 'fa-thumbs-up' : ''; ?>" aria-hidden="true"></i>
 					<span class="like-status"><?php echo ($studyset['isLikedByUser']) ? ' Liked' : ' Like'; ?></span>
 				</a>
@@ -192,7 +192,7 @@
 						</svg>
 					</div>
 					<span>Flashcards</span>
-					<small>some description </small>
+					<small>Familiarise yourself with the terms </small>
 				</a>
 			</li>
 			<li>
@@ -204,7 +204,7 @@
 						</svg>
 					</div>
 					<span>Learn</span>
-					<small>some description </small>
+					<small>Answer multiple choice questions </small>
 				</a>
 			</li>
 			<li>
@@ -215,7 +215,7 @@
 						</svg>
 					</div>
 					<span>Match</span>
-					<small>some description </small>
+					<small>Drag and Drop terms to their definitions </small>
 				</a>
 			</li>
 			<li>
@@ -226,7 +226,7 @@
 						</svg>
 					</div>
 					<span>Write</span>
-					<small>some description </small>
+					<small>Correctly type the terms </small>
 				</a>
 			</li>
 			<li>
@@ -241,7 +241,7 @@
 						</svg>
 					</div>
 					<span>Test</span>
-					<small>some description </small>
+					<small>Challenege your knowledge against the clock </small>
 				</a>
 			</li>
 		</ul>
@@ -1499,12 +1499,12 @@
 			type: 'POST',
 			data: {'study_set_id': id},
 			success: function(result) {
-				$('.likecount').html(result);
+				$('#likecount').html(result);
 				if(result == 1){
-					$('.likecount').html('<i class="fa fa-thumbs-up"></i><span class="like-status">Liked</span>');
+					$('#likecount').html('<i class="fa fa-thumbs-up"></i><span class="like-status">Liked</span>');
             
         		} else {
-        			$('.likecount').html('<i class="fa fa-thumbs-o-up" ></i><span class="like-status">Like</span>');
+        			$('#likecount').html('<i class="fa fa-thumbs-o-up" ></i><span class="like-status">Like</span>');
         		}
             
 			}
