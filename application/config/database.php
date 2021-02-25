@@ -76,10 +76,12 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$username = 'root';
 	$pwd = '';
         $host = 'localhost';
+        $DB_NAME = 'studypee_studypee';
 } else {
 	$username = 'studypeersadmin';
 	$pwd = 'admin123';
         $host = 'studypeers-db-1.cdr236ac1xs8.us-east-2.rds.amazonaws.com';
+        $DB_NAME = 'studypee_studypeers';
 }
 
 $db['default'] = array(
@@ -87,7 +89,7 @@ $db['default'] = array(
 	'hostname' => $host,
 	'username' => $username,
 	'password' => $pwd,
-	'database' => 'studypee_studypee',
+	'database' => $DB_NAME,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
