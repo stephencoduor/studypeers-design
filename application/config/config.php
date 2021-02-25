@@ -1,9 +1,9 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 date_default_timezone_set('Asia/Kolkata');
 ini_set('memory_limit', '256M');
-error_reporting(E_ALL); 
-ini_set('display_errors', 1); 
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -27,12 +27,12 @@ ini_set('display_errors', 1);
 |
 */
 
-if($_SERVER['SERVER_NAME'] == 'localhost'){
+if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$config['base_url'] = 'http://localhost/studypeers/';
 } else {
-//	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-	$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
-	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+	//	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+	$config['base_url'] = "https://" . $_SERVER['HTTP_HOST'];
+	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']), "", $_SERVER['SCRIPT_NAME']);
 }
 
 /*
@@ -539,15 +539,15 @@ $config['facebook_app_secret']          = '4372c08cf77b9adb7e1a87ede8374ab8';
 $config['facebook_login_type']          = 'web';
 $config['facebook_login_redirect_url']  = 'https://studypeers.dev/socialLogin/facebookCallback';
 $config['facebook_logout_redirect_url'] = 'https://studypeers.dev';
-$config['facebook_permissions']         = array('public_profile','email');
+$config['facebook_permissions']         = array('public_profile', 'email');
 $config['facebook_graph_version']       = 'v2.6';
 $config['facebook_auth_on_load']        = TRUE;
 
 $config['linkedin_app_id']				= '78beuic6jn92q4'; //live
 $config['linkedin_app_secret']			= 'HyXpuvnahIeT4xDo'; //live
-$config['linkedin_redirect_uri'] 		= 'https://studypeers.dev/socialLogin/linkedinCallback';
+$config['linkedin_redirect_uri'] 		= 'https://studypeers.com/socialLogin/linkedinCallback';
 $config['linkedin_scope'] 				= 'r_liteprofile r_emailaddress';
 
 $config['ms_client_id']					= '00000000445A8D80'; //live
 $config['ms_client_secret']				= 'efnWXM({otjfDGPM71088]#'; //live
-$config['ms_redirect_url'] 				= 'https://studypeers.dev/socialLogin/microsoftCallback';
+$config['ms_redirect_url'] 				= 'https://studypeers.com/socialLogin/microsoftCallback';
