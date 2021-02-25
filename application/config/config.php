@@ -548,6 +548,6 @@ $config['linkedin_app_secret']			= 'HyXpuvnahIeT4xDo'; //live
 $config['linkedin_redirect_uri'] 		= 'https://studypeers.com/socialLogin/linkedinCallback';
 $config['linkedin_scope'] 				= 'r_liteprofile r_emailaddress';
 
-$config['ms_client_id']					= '62c6cc3c-de27-4622-b527-4a6c171a9a94'; //live
-$config['ms_client_secret']				= 'PItS2RjNy62.P_NDCz42kvMGK5~c9u~.HF'; //live
+$config['ms_client_id']					= 'fe9f9607-f338-4377-a111-86e271de0c83'; //live
+$config['ms_client_secret']				= '.0eNt_~kE1cSHcCE6QuQEUG2B1N1.IL-KX'; //live
 $config['ms_redirect_url'] 				= 'https://studypeers.com/socialLogin/microsoftCallback';
