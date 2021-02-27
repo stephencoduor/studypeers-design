@@ -18,6 +18,8 @@
 						$txt = "has invited you to an event";
 					}
 				}
+
+				
 				if($chk_view == 1) {
 
 					$reaction_html = getReactionByReference($value['reference_id'], 'event');
