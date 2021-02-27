@@ -33,7 +33,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<label>Privacy & Permission  <span style="font-size: 14px;font-weight: 400;color: gray;display: none;" id="privcy_span"></span></label>
-											<select class="form-control selectpicker" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
+											<select class="form-control" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
 												<option value="">Select Privacy</option>
 												<option value="1" <?php if($result['privacy'] == 1) { echo 'selected'; } ?>>Public</option>
 												<option value="2" <?php if($result['privacy'] == 2) { echo 'selected'; } ?>>Private</option>
@@ -48,14 +48,14 @@
 											<div class="col-sm-6">		
 												<div class="form-group select select_label">
 													<label>Institution</label>
-													<select class="form-control selectpicker" name="university" id="university">
+													<select class="form-control" name="university" id="university">
 													  <option value="<?= $university['university_id']; ?>"><?= $university['SchoolName']; ?></option>
 													</select>
 													<span class="custom_err" id="err_university"></span>
 												</div>
 												<div class="form-group select select_label">
 													<label>Course</label>
-													<select class="form-control selectpicker" name="course" id="course" onchange="getProfessor(this.value, '<?php echo base_url('account/getProfessor') ?>')">
+													<select class="form-control" name="course" id="course" onchange="getProfessor(this.value, '<?php echo base_url('account/getProfessor') ?>')">
 														<option value="">Select Course</option>
 														<?php foreach ($course as $key => $value) { ?>
 															<option value="<?= $value['id'] ?>" <?php if($result['course'] == $value['id']) { echo 'selected'; } ?>><?= $value['name'] ?></option>
@@ -66,7 +66,7 @@
 												</div>											
 												<div class="form-group select select_label">
 													<label>Professor</label>
-													<select class="form-control selectpicker" name="professor" id="professor">
+													<select class="form-control" name="professor" id="professor">
 														<?php foreach ($professor as $key => $value) { ?>
 															<option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
 														<?php } ?>
