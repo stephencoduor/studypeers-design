@@ -18,6 +18,8 @@
 						$txt = "has invited you to an event";
 					}
 				}
+
+				
 				if($chk_view == 1) {
 
 					$reaction_html = getReactionByReference($value['reference_id'], 'event');
@@ -242,7 +244,7 @@
 										$this->db->order_by('share_master.id', 'desc');
 				                        $shared = $this->db->get_where('share_master', array('reference_id' => $event_detail['id'], 'reference' => 'event', 'peer_id' => $user_id))->row_array(); 
 				                    ?>
-										<button type="button" class="event_action attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?= $event_detail['id']; ?>"> <span id="attend_text_<?= $event_detail['id']; ?>"><?php if($shared['status'] == 2){
+										<button type="button" class="event_action attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?= $event_detail['id']; ?>"> <span id="attend_text_<?= $event_detail['id']; ?>"><?php if(!empty($shared) && $shared['status'] == 2){
 		                                       echo 'Unattend';
 		                                    } else {
 		                                        echo 'Attend';

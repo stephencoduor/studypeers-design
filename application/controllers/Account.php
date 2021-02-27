@@ -2281,6 +2281,12 @@ class Account extends CI_Controller
             $this->db->where(array('user_id' => $peer_id, 'peer_id' => $user_id));
             $this->db->delete('peer_master');
 
+            $this->db->where(array('user_id' => $peer_id, 'peer_id' => $user_id));
+            $this->db->delete('friends');
+
+            $this->db->where(array('user_id' => $user_id, 'peer_id' => $peer_id));
+            $this->db->delete('friends');
+
             redirect(site_url('account/dashboard'), 'refresh');
         }
     }
