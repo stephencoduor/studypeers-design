@@ -6329,6 +6329,49 @@ Sidebar
 }
 
 @media (max-width: 767px) {
+    .flex-top-header .navbar-collapse {
+        position: absolute;
+        right: 20px;
+        top: 60px;
+        z-index: 1;
+        background: #fff;
+        max-width: 200px;
+        border-radius: 10px;
+        box-shadow: 1px 1px 3px 1px rgb(211 209 209 / 89%);
+        padding:0;
+        margin-top:0;
+        display: none!important;
+    }
+    .flex-top-header  .navbar-collapse.collapse.show{
+        display: block!important;
+    }
+    .flex-top-header  .social-action {
+        float: none;
+        position: absolute;
+        top: 0;
+        right: 70px;
+    }
+    .flex-top-header .navbar-collapse, .navbar .container-fluid {
+        padding: 0;
+    }
+    .header-area{
+        height: auto;
+        padding:0;
+    }
+    .header-area .logo{
+        height: auto;
+    }
+    .flex-top-header  ul.nav.navbar-nav.pull-right {
+        width: 100%;
+        float: none !important;
+        margin: 0;
+    }
+    .flex-top-header .nav>li {
+        margin: 0 10px;
+    }
+    .flex-top-header .nav>li>a {
+        padding: 10px 0;
+    }
     .navbar-brand .logoDesktop {
         display: none;
     }
@@ -6350,7 +6393,7 @@ Sidebar
     .header-area .navbar{
         width:100%;
     }
-    .header-area {
-        padding: 15px;
+    .flex-top-header .social-action ul li {
+        margin: 14px 15px;
     }
 }
