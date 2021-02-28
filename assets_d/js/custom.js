@@ -614,4 +614,7 @@ $(window).on("load", function () {
     $('.listUserWrap').mCustomScrollbar({ 
             theme:"dark-3"        
     });
+    $('.eventDetail').mCustomScrollbar({ 
+        theme:"dark-3"        
+    });
 });
