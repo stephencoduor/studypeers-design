@@ -6327,6 +6327,11 @@ Sidebar
 .social-action ul li:hover a, .social-action ul li:focus a {
     color: #EA2E7E;
 }
+.row.justify-content-center{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
 @media (max-width: 767px) {
     .flex-top-header .navbar-collapse {
