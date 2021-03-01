@@ -17,6 +17,7 @@ var registration = /** @class */ (function() {
           window.location = data.url;
         },
         error: function(data) {
+          
           if (data.status == 422) {
             $.toast({
               heading: "Error",

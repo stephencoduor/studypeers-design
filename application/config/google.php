@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -16,8 +16,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |  api_key           string   Developer key.
 |  scopes            string   Specify scopes
 */
-$config['google']['client_id']        = '183108033073-b44b0k3qchofqgfb3r7e7qbdcnjj9k55.apps.googleusercontent.com';
-$config['google']['client_secret']    = '6gio3UhMqGSBBnAt_T1GLeat';
+$config['google']['client_id']        = '808891959485-jgluqc01l6b7q8ghseqe71j4qtv84fa0.apps.googleusercontent.com';
+$config['google']['client_secret']    = 'vOudl_UEPMA7JAKXxz6yh6ya';
 $config['google']['redirect_uri']     = 'socialLogin/googleCallback';
 $config['google']['application_name'] = 'Study Peers';
 $config['google']['api_key']          = 'AIzaSyDq2nes2KPwH_6QNMbWEa1ELgoFtKF2Kh4';

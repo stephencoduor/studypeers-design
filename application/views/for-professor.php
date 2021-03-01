@@ -7,9 +7,10 @@
 					</div>
 					<h6>Register as Professor</h6>
 					<form>
-						<input type="text" id="ask_question" name="" class="banner-search" placeholder="Email">
-						<button type="button" class="banner-search-btn" onclick="redirectRegisterAsk()">Register</button>
+						<input type="text"  name="" class="banner-search" id="professor-email" placeholder="Email">
+						<button type="button" class="banner-search-btn" onclick="validateRegisterProfessor()">Register</button>
 					</form>
+					<span id="err_email" style="color: red; font-style: italic;"></span>
 				</div>
 			</div>
 		</div>
