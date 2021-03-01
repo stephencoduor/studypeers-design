@@ -1,42 +1,6 @@
 <div class="social-tools bottom-space">
 	<div class="container">
-        <div class="row centered">
-            <div class="col-sm-4">
-                <div class="vertical-menu">
-                    <ul class="faq_menu">
-                        <li class="nav-item"><a class="nav-link collapsed text-truncate" href="#submenu1" data-toggle="collapse" data-target="#submenu1"> <span class="d-none d-sm-inline" style="color:blue;font-weight:500;">Privacy Policy</span></a>
-                    <div class="collapse" id="submenu1" aria-expanded="false">
-                        <ul class="flex-column  nav faq_menu">
-                            <li class="nav-item">
-                                <a class="nav-link collapsed py-1 link" href="#submenu1sub1" data-toggle="collapse" data-target="#submenu1sub1"><span>•&nbsp;Lorem Ipsum</span></a>
-                                <div class="collapse" id="submenu1sub1" aria-expanded="false">
-                                    <ul class="flex-column nav pl-4">
-                                        <li class="nav-item">
-                                            <a class="nav-link link" href="#what">
-                                                •&nbsp;What is Lorem Ipsum? </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#come">
-                                                 •&nbsp;Where does it come from? </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#use">
-                                               •&nbsp; Why do we use it? </a>
-                                        </li>
-                                        <li class="nav-item">
-                                            <a class="nav-link" href="#where">
-                                               •&nbsp; Where can I get some?</a>
-                                        </li>
-                                    </ul>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </li>
-               </ul>
-			</div>
-		</div>
-		<div class="col-sm-8 divS cms-content">	  
+		<div class="cms-content">	  
             <h4><center>Privacy Policy</center></h4>
             <h2 id="what" class="small-title">PRIVACY NOTICE </h2>
             <p class="para"><strong>Last Updated Date: ___________</strong></p>
@@ -149,9 +113,9 @@
                 <li>7. Contact us</li>
             </ol>
             <p class="para">Please also feel free to contact us if you have any questions about Studypeer Privacy Notice or the information practices of this Site. You may contact us as follows:
-___________________________
-or
-via postal mail at: ________________________________
+            ___________________________
+            or
+            via postal mail at: ________________________________
 </p>
         </div>
     </div>
