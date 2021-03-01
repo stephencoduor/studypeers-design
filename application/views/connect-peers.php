@@ -15,14 +15,14 @@
 		<div class="social-tools">
 			<div class="container">
 				<h4>Stay Connected</h4>
-				<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure fugit quaerat tempore</p>	
+				<p>Network with other students in the same field of study</p>	
 				<div class="stay-connected">
 					<div class="add-section">
 						<figure class="add-icon">
 							<img src="<?php echo base_url(); ?>assets_home/images/Add.svg" alt="Image"/>
 						</figure>
 						<h3>Add</h3>
-						<p>Lorem ipsum dolor sit amet consectetur</p>
+						<p>Link up with your classmates</p>
 					</div>
 					<div class="top-border">
 						<figure>
@@ -35,7 +35,7 @@
 								<img src="<?php echo base_url(); ?>assets_home/images/Follow.svg" alt="Image"/>
 							</figure>
 							<h3>Follow</h3>
-							<p>Lorem ipsum dolor sit amet consectetur</p>
+							<p>Get the latest news from your classes and peers</p>
 						</div>
 						<div class="bottom-border"></div>
 						<div class="chat-section">
@@ -43,7 +43,7 @@
 								<img src="<?php echo base_url(); ?>assets_home/images/Chat.svg" alt="Image"/>
 							</figure>
 							<h3>Chat</h3>
-							<p>Lorem ipsum dolor sit amet consectetur</p>
+							<p>Interact with your professors and peers</p>
 						</div>
 					</div>
 					<div class="share-section">
@@ -51,7 +51,7 @@
 							<img src="<?php echo base_url(); ?>assets_home/images/Share.svg" alt="Image"/>
 						</figure>
 						<h3>Share</h3>
-						<p>Lorem ipsum dolor sit amet consectetur</p>
+						<p>Exchange information with other peers</p>
 					</div>
 				</div>
 			</div>
@@ -63,82 +63,37 @@
 					<div class="slide-list events">
 						<div class="slide-inner">
 						<figure>
-							<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
+							<img src="<?php echo base_url(); ?>assets_d/images/student-fourth.jpg" alt="Image">
 						</figure>
-						<h6>Student Name</h6>
-						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
+						<h6>Ricky Russell</h6>
+						<p>A great study tool for all of us. I love this, it makes it super easy to study for tests and learning by creating custom flashcards and offering many ways to memorize them including standard flashcards, tests, and games.</p>
 						</div>
 					</div>
 					<div class="slide-list events">
 						<div class="slide-inner">
 						<figure>
-							<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
+							<img src="<?php echo base_url(); ?>assets_d/images/student-first.jpg" alt="Image">
 						</figure>
-						<h6>Student Name</h6>
-						<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
+						<h6>Richard Woods</h6>
+						<p>Great paltform for sharing content of my study subjects. Easy to navigate, amazing tools for learning and a lot of people  use it so it's very easy to find what you want on various topics. Will really recommend everyone for this.</p>
 					</div>
 					</div>
 					<div class="slide-list events">
 						<div class="slide-inner">
 							<figure>
-								<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
+								<img src="<?php echo base_url(); ?>assets_d/images/student-second.jpg" alt="Image">
 							</figure>
-							<h6>Student Name</h6>
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
+							<h6>Maureen Herrera</h6>
+							<p>I study Mathematics and this platform really helped me in preparing for my exams, I have found great summaries for my lecturers, could discuss tough assignments with my mates through collaboration and made notes with their flashcard feature. Really loving it </p>
 						</div>
 					</div>
 					<div class="slide-list events">
 						<div class="slide-inner">
 							<figure>
-								<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
+								<img src="<?php echo base_url(); ?>assets_d/images/student-third.jpg" alt="Image">
 							</figure>
-							<h6>Student Name</h6>
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
-						</div>
-					</div>
-					<div class="slide-list events">
-						<div class="slide-inner">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
-							</figure>
-							<h6>Student Name</h6>
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
-						</div>
-					</div>
-					<div class="slide-list events">
-						<div class="slide-inner">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
-							</figure>
-							<h6>Student Name</h6>
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
-						</div>
-					</div>
-					<div class="slide-list events">
-						<div class="slide-inner">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
-							</figure>
-							<h6>Student Name</h6>
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
-						</div>
-					</div>
-					<div class="slide-list events">
-						<div class="slide-inner">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
-							</figure>
-							<h6>Student Name</h6>
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
-						</div>
-					</div>
-					<div class="slide-list events">
-						<div class="slide-inner">
-							<figure>
-								<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Image">
-							</figure>
-							<h6>Student Name</h6>
-							<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aut fugiat sequi corporis optio rem magnam aspernatur eius maiores, vel quae, aperiam dolores culpa dolorum commodi excepturi at est porro necessitatibus!</p>
+							<h6>Eleanor Robertson</h6>
+							<p>Great platform to share my notes and to find the ones which I had missed from come classes.</p>
 						</div>
 					</div>
 				</div>	

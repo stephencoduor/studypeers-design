@@ -2,10 +2,12 @@
     	<div class="container margin_60" style="padding-bottom: 20px">
     		<div class="row justify-content-center">
     			<?php if ($message) { ?>
-    				<div class="col-xl-8 col-lg-8 col-md-12" style="text-align: center;background-color:green;color:#ffffff;padding: 10px;margin-bottom: 20px">
+    				<div class="col-xl-6 col-lg-6 col-md-8" style="text-align: center;background-color:green;color:#ffffff;padding: 10px;margin-bottom: 20px">
     					<span><?= $message ?></span>
     				</div>
     			<?php } ?>
+			</div>
+			<div class="row justify-content-center">
     			<div class="col-xl-6 col-lg-6 col-md-8">
     				<div class="box_account">
     					<h3 class="client"><?php echo get_phrase('Email Verification'); ?></h3>
