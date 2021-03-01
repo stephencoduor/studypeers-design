@@ -4,6 +4,15 @@ date_default_timezone_set('Asia/Kolkata');
 ini_set('memory_limit', '256M');
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
+
+require APPPATH . 'vendor/autoload.php';
+
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable(getcwd());
+
+$dotenv->load();
+
+
+
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
