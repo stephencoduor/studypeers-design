@@ -1,6 +1,8 @@
 <?php
 $full_name      = $user['first_name'] . ' ' . $user['last_name'];
 $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID INNER JOIN major_master As c ON b.major = c.id INNER JOIN university As d ON b.intitutionID = d.university_id WHERE a.id = " . $user_id)->row_array();
+
+$login_user_id = $this->session->get_userdata()['user_data']['user_id'];
 ?>
 <input type="hidden" id="base" value="<?php echo base_url(); ?>">
 
@@ -90,8 +92,8 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                 </div>
                             <?php } ?>
                         </div>
-                        
-                        <div class="shareMenu shareOption">
+                        <?php if($login_user_id != $user_id) { ?>
+                            <div class="shareMenu shareOption">
                             <ul>
                                 <?php if ($is_request_sent == 1) {
                                 ?>
@@ -140,6 +142,8 @@ $user_detail = $this->db->query("SELECT * from user As a INNER JOIN user_info As
                                 </li>
                             </ul>
                         </div>
+                        <?php } ?>
+                        
                     </div>
                 </div>
                 <div class="tabularLiist">

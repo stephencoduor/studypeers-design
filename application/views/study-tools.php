@@ -86,8 +86,7 @@
 							<img src="<?php echo base_url(); ?>assets_d/images/student-fourth.jpg" alt="Image">
 						</figure>
 						<h6>Ricky Russell</h6>
-						<p>A great study tool for all of us.
-I love this, it makes it super easy to study for tests and learning by creating custom flashcards and offering many ways to memorize them including standard flashcards, tests, and games.</p>
+						<p>A great study tool for all of us. I love this, it makes it super easy to study for tests and learning by creating custom flashcards and offering many ways to memorize them including standard flashcards, tests, and games.</p>
 						</div>
 					</div>
 					<div class="slide-list events">

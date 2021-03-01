@@ -145,6 +145,8 @@ class LoginController extends CI_Controller
             $dataPage['otp'] = $otpHidden;
             $dataPage['page_name'] = 'valid_email_otp';
             $dataPage['userData'] = base64_encode(serialize($createNewUser));
+            $dataPage['active'] = 'submit';
+            
             $this->load->view('index', $dataPage);
         } catch (Exception $e) {
             error_log($e->getMessage());
