@@ -40,11 +40,10 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$config['base_url'] = 'http://localhost/studypeers/';
 } else {
 
-//	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-//	$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
-//	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-        $config['base_url'] = "https://studypeers.com/";
-
+	//	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+	//	$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
+	//	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+	$config['base_url'] = "https://studypeers.com/";
 }
 
 /*
@@ -546,22 +545,21 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
-$config['facebook_app_id']              = env('FB_ID');
-$config['facebook_app_secret']          = env('FB_APP_SECRET');
-$config['facebook_login_type']          = env('FB_LOGIN_TYPE');
-$config['facebook_login_redirect_url']  = env('FB_REDIRECT_URL');
-$config['facebook_logout_redirect_url'] = env('FB_LOGOUT_URL');
+$config['facebook_app_id']              = getenv('FB_ID');
+$config['facebook_app_secret']          = getenv('FB_APP_SECRET');
+$config['facebook_login_type']          = getenv('FB_LOGIN_TYPE');
+$config['facebook_login_redirect_url']  = getenv('FB_REDIRECT_URL');
+$config['facebook_logout_redirect_url'] = getenv('FB_LOGOUT_URL');
 $config['facebook_permissions']         = array('public_profile', 'email');
-$config['facebook_graph_version']       = env('FB_GRAPH_VERSION');
+$config['facebook_graph_version']       = getenv('FB_GRAPH_VERSION');
 $config['facebook_auth_on_load']        = TRUE;
 
-$config['linkedin_app_id']				= env('LINKEDIN_ID');
-$config['linkedin_app_secret']			= env('LINKEDIN_SECRET');
-$config['linkedin_redirect_uri'] 		= env('LINKED_REDIRECT');
-$config['linkedin_scope'] 				= env('LINKE_SCOPE');
+$config['linkedin_app_id']				= getenv('LINKEDIN_ID');
+$config['linkedin_app_secret']			= getenv('LINKEDIN_SECRET');
+$config['linkedin_redirect_uri'] 		= getenv('LINKED_REDIRECT');
+$config['linkedin_scope'] 				= getenv('LINKE_SCOPE');
 
 
-$config['ms_client_id']					= env('MS_CLIENT_ID');
-$config['ms_client_secret']				= env('MS_CLIENT_SECRET');
-$config['ms_redirect_url'] 				= env('MS_REDIRECT');
-
+$config['ms_client_id']					= getenv('MS_CLIENT_ID');
+$config['ms_client_secret']				= getenv('MS_CLIENT_SECRET');
+$config['ms_redirect_url'] 				= getenv('MS_REDIRECT');
