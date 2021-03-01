@@ -8,7 +8,7 @@
 										<div class="row">
 											<div class="col-md-12">
 												<div class="form-group select">
-													<select class="form-control selectpicker" onchange="showFormDetails(this.value)" name="schedule" id="schedule">
+													<select class="form-control" onchange="showFormDetails(this.value)" name="schedule" id="schedule">
 														<option value="">Choose</option>
 														<option value="course">Course schedule</option>
 														<option value="assignment">Assignment</option>
@@ -41,7 +41,7 @@
 
 												</div>
 												<div class="col-md-12">
-													<div class="form-group select select_label courseMenuSelect">
+													<div class="form-group select select_label">
 														<label>Course</label>
 														<select class="form-control" name="course" id="course" onchange="getProfessor(this.value)">
 															<option value="">Select Course</option>
@@ -50,7 +50,6 @@
 															<?php } ?>
 														</select>
 														<span class="custom_err" id="err_course"></span>
-														<a data-toggle="modal" data-target="#courseModal" style="cursor: pointer;">Add Course</a>
 													</div>
 												</div>
 												<div class="col-md-12">
@@ -64,7 +63,7 @@
 												</div>
 												<div class="col-md-12">
 													<div class="row">
-														<div class="col-md-6">
+														<div class="col-md-4 col-sm-6 col-xs-12">
 															<div class="form-group calendar">
 																<label>Start</label>
 																<div class="filtercalendar">
@@ -97,7 +96,7 @@
 															</div>
 															<span class="custom_err" id="err_start-date"></span>
 														</div>
-														<div class="col-md-6">
+														<div class="col-md-4 col-sm-6 col-xs-12">
 															<div class="form-group calendar">
 																<label>End</label>
 																<div class="filtercalendar">

@@ -1,72 +1,65 @@
-<?php if ($this->session->flashdata('error')) : ?>
-    <div class="alert alert-danger" role="alert">
-        An error occured with message <?php echo $this->session->flashdata('error'); ?>.
-    </div>
-<?php endif; ?>
-
 <section class="home-body">
-
     <div class="login-container">
-        <form action="<?php echo base_url('submit') ?>" method="post" class="row" onsubmit="return validate()">
-
-            <div class="flex-row">
-                <div class="flex-item">
-                    <div class="content-right">
-                        <h2>Register</h2>
-                        <div class="form-group user-name-wrap">
-                            <input type="text" name="username" required onblur="validateUnique(this.value, 'username')" class="form-control form-control--lg" placeholder="User Name">
-                            <span class="ap-field-errors" id="error_username" style="display: none;"></span>
-                            <a href="javascript:void(0)"><img src="assets/images/info.png" alt="Icon"></a>
+        <div class="flex-row">
+            <div class="flex-item">
+                <div class="content-right">
+                    <?php if($message !=''){?>
+                        <div class="col-xl-8 col-lg-8 col-md-12" style="text-align: center;background-color:red;color:#ffffff;padding: 10px;">
+                            <span><?=$message?></span>
                         </div>
-                        <div class="form-group">
-                            <input type="email" name="email" required onblur="validateUnique(this.value, 'email')" class="form-control form-control--lg" placeholder="Email Address">
-                            <span class="ap-field-errors" id="error_email" style="display: none;"></span>
-                        </div>
-                        <div class="form-group">
-                            <input type="password" name="password" id="password" required class="form-control form-control--lg" placeholder="Password">
-                        </div>
-                        <div class="form-group">
-                            <input type="password" id="conf_password" name="conf_password" required class="form-control form-control--lg" placeholder="Confirm Password">
-                        </div>
-                        <div class="form-group">
-                            <span class="ap-field-errors" id="error_reg"></span>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="filterBtn" id="user_register">Continue</button>
-                        </div>
-                        <div class="form-group">
-                            <div class="connect-with">
-                                <strong>or connect with</strong>
-                                <div class="link-with">
-                                    <a href="<?php echo base_url('socialLogin/google'); ?>"><img src="assets/images/google.png" alt="Icon"></a>
-                                    <a href="<?php echo base_url('socialLogin/facebook'); ?>"><img src="assets/images/facebook.png" alt="Icon"></a>
-                                    <a href="<?php echo base_url('socialLogin/microsoftLogin'); ?>"><img src="assets/images/twitter.png" alt="Icon"></a>
-                                    <a href="<?php echo base_url('socialLogin/linkedinCallback'); ?>"><img src="assets/images/linkedin.png" alt="Icon"></a>
-                                </div>
-                            </div>
-                        </div>
+                    <?php } ?>
+                    <h2>Register</h2>
+                    <form action="<?php echo site_url('login/email_verification') ?>" method="post" onsubmit="return validate()">
+                    <div class="form-group user-name-wrap">
+                        <input type="text" name="username" class="form-control form-control--lg" placeholder="User Name" required onblur="validateUnique(this.value, 'username')">
+                        <a href="javascript:void(0)"><img src="<?=base_url('front/images/info.png') ?>" alt="Icon"/></a>
                     </div>
-                </div>
-                <div class="flex-item">
-                    <div class="img-wrapper">
-                        <img src="assets/images/bg_image.jpg" alt="Image">
-                        <div class="content-area">
-                            <div class="content-top">
-                                <h1>Create your account</h1>
-                                <p>Join Study Peers and use the most powerful social learning tool yet!</p>
-                            </div>
-                            <div class="content-bottom">
-                                <h3>Already a member?</h3>
-                                <p>Sign in to with your registered email and password to continue</p>
-                                <a href="login" class="pink-btn">
-                                    Sign in Now
-                                </a>
+                    <div class="form-group">
+                        <input type="email" name="email" class="form-control form-control--lg" placeholder="Email Address" onblur="validateUnique(this.value, 'email')" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control form-control--lg password" type="password" name="password" id="password" placeholder="Password" required>
+                    </div>
+                    <div class="form-group">
+                        <input class="form-control form-control--lg retype_password" type="password" id="conf_password" name="conf_password" placeholder="Repeat Password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="filterBtn">Continue</button>
+                    </div>
+                    </form>
+                    <div class="form-group">
+                        <div class="connect-with">
+                            <strong>or connect with</strong>
+                            <div class="link-with">
+                                <a href="<?php echo $this->fb->login_url();?>"><img src="<?=base_url('front/images/facebook.png')?>" alt="Icon"/></a>
+<!--                                <a href="#schoolModal" data-toggle="modal"><img src="--><?//=base_url('uploads/canvas.png')?><!--" alt="Icon"/></a>-->
+                                <a href=""><img src="<?=base_url('front/images/google.png')?>" alt="Icon"/></a>
+                                <a href=""><img src="<?=base_url('front/images/twitter.png')?>" alt="Icon"/></a>
+                                <a href=""><img src="<?=base_url('front/images/linkedin.png')?>" alt="Icon"/></a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+            <div class="flex-item">
+                <div class="img-wrapper">
+                    <img src="<?=base_url('front/images/bg_image.jpg')?>" alt="Image">
+                    <div class="content-area">
+                        <div class="content-top">
+                            <h1>Create your account</h1>
+                            <p>Join Study Peers and use the most powerful social learning tool yet!</p>
+                        </div>
+                        <div class="content-bottom">
+                            <h3>Already a member?</h3>
+                            <p>Sign in to with your registered email and password to continue</p>
+                            <a href="<?=base_url('home/login')?>" class="pink-btn">
+                                Sign in Now
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        </form>
+        </div>
     </div>
 </section>

@@ -1,6 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
+// User Controller
 class User extends CI_Controller {
 	public function __construct()
 	{
@@ -73,7 +74,7 @@ class User extends CI_Controller {
         $get_user = $this->db->get_where('user', array('id' => $user_id))->row_array();
         $this->email_model->send_welcome_email($get_user['email']);
         $this->data['page_name'] = 'verified_email';
-        $this->load->view('index',$this->data); 
+        $this->load->view('index',$this->data);
         
     }
     
@@ -82,9 +83,4 @@ class User extends CI_Controller {
     	$this->data['page_name'] = 'verified_email';
         $this->load->view('index',$this->data); 
     }
-
-
-    
-
-	
 }

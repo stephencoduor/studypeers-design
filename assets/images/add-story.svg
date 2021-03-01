@@ -1,8 +1,0 @@
-<svg id="add-story" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-  <g id="Group_16" data-name="Group 16">
-    <g id="Group_15" data-name="Group 15">
-      <path id="Path_158" data-name="Path 158" d="M2.4,85.333H0v16.8a2.4,2.4,0,0,0,2.4,2.4H19.2v-2.4H2.4Z" transform="translate(0 -80.533)" fill="#fff"/>
-      <path id="Path_159" data-name="Path 159" d="M102.133,0h-14.4a2.4,2.4,0,0,0-2.4,2.4V16.8a2.4,2.4,0,0,0,2.4,2.4h14.4a2.4,2.4,0,0,0,2.4-2.4V2.4A2.4,2.4,0,0,0,102.133,0Zm-1.2,10.8h-4.8v4.8h-2.4V10.8h-4.8V8.4h4.8V3.6h2.4V8.4h4.8Z" transform="translate(-80.533)" fill="#fff"/>
-    </g>
-  </g>
-</svg>

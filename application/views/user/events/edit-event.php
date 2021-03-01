@@ -143,31 +143,18 @@
 										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="form-group">
-											<label>Privacy & Permission  <span style="font-size: 14px;font-weight: 400;color: gray;display: none;" id="privcy_span"></span></label>
-											<select class="form-control selectpicker" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
-												<option value="">Select Privacy</option>
-												<option value="1" <?php if($event['privacy'] == 1) { echo 'selected'; } ?>>Public</option>
-												<option value="2" <?php if($event['privacy'] == 2) { echo 'selected'; } ?>>Private</option>
-												<!-- <option value="3" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 3) ? 'selected' : '';?>>Secret</option> -->
-											</select>
-											<span class="error" id="err_privacy"></span>
-
-										</div>
-									</div>
-									<div class="col-md-12">
 										<div class="form-row">
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group select select_label">
 													<label>Institution</label>
-													<select class="form-control selectpicker" name="university" id="university">
+													<select class="form-control" name="university" id="university">
 													  <option value="<?= $university['university_id']; ?>"><?= $university['SchoolName']; ?></option>
 													</select>
 													<span class="custom_err" id="err_university"></span>
 												</div>
 												<div class="form-group select select_label">
 													<label>Course</label>
-													<select class="form-control selectpicker" name="course" id="course" onchange="getProfessor(this.value)">
+													<select class="form-control" name="course" id="course" onchange="getProfessor(this.value)">
 														<option value="">Select Course</option>
 														<?php foreach ($course as $key => $value) { ?>
 															<option value="<?= $value['id'] ?>" <?php if($event['course'] == $value['id']) { echo 'selected'; } ?>><?= $value['name'] ?></option>
@@ -175,11 +162,10 @@
 													</select>
 
 													<span class="custom_err" id="err_course"></span>
-													<a data-toggle="modal" data-target="#courseModal" class="add-course">Add Course</a>
 												</div>											
 												<div class="form-group select select_label">
 													<label>Professor</label>
-													<select class="form-control selectpicker" name="professor" id="professor">
+													<select class="form-control" name="professor" id="professor">
 														<?php foreach ($professor as $key => $value) { ?>
 															<option value="<?= $value['id'] ?>" <?php if($event['professor'] == $value['id']) { echo 'selected'; } ?>><?= $value['name'] ?></option>
 														<?php } ?>	  

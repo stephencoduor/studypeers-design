@@ -61,8 +61,8 @@ class ApiModel extends CI_Model {
 
     public function sendOtp($user_id, $user_email)
     {   
-        // $otp = mt_rand(100000, 999999);
-        $otp = '123456';
+        $otp = mt_rand(100000, 999999);
+        
         $this->db->where('id' , $user_id);
         $this->db->update('user' , array('otp' => $otp));
         $subject        = "Verify Email Address";
@@ -104,19 +104,6 @@ class ApiModel extends CI_Model {
         $username   = $request['username'];
         $email      = $request['email'];
         $password   = $request['password'];
-
-        $chkUser = $this->db->get_where('user', array('username' => $username))->num_rows();
-
-        if($chkUser != 0){
-            generateServerResponse('0','U');
-        }
-
-
-        $chkEmail = $this->db->get_where('user', array('email' => $email))->num_rows();
-
-        if($chkEmail != 0){
-            generateServerResponse('0','A');
-        }
 
         $insertArr = array( 'username'  => $username,
                             'email'     => $email,
@@ -229,274 +216,6 @@ class ApiModel extends CI_Model {
         return $result;
     }
 
-
-    public function getEvents($request){
-        $offset     = $request['offset'];
-        $count      = $offset*20;
-
-        if(!empty($request['startdate'])) {
-            $timestamp1 = strtotime($request['startdate']);
-            $start_date = date('Y-m-d 00:00:00', $timestamp1); 
-            $qr = " and start_date >= '".$start_date."' ";
-        } else {
-            $qr = " ";
-        }
-
-        $course     = $request['course'];
-        $keyword    = $request['search_keyword'];
-
-        if(!empty($course) && !empty($keyword)){
-            $result['res'] = $this->db->query("select event_master.*,course_master.name as course_name,professor_master.name professor_name,university.SchoolName as institute_name, user_info.nickname as user_name from event_master inner join course_master on course_master.id = event_master.course inner join professor_master on professor_master.id = event_master.professor inner join university on university.university_id = event_master.university inner join user_info on user_info.userID = event_master.created_by where event_master.status = 1 and event_master.course = ".$course." and event_master.event_name like '%{$keyword}%'".$qr."ORDER BY course_master.id DESC LIMIT 20 OFFSET ".$count."")->result_array();
-            $result['count'] = count($result['res']);
-        } else if(!empty($course) && empty($keyword)){
-            $result['res'] = $this->db->query("select event_master.*,course_master.name as course_name,professor_master.name professor_name,university.SchoolName as institute_name, user_info.nickname as user_name from event_master inner join course_master on course_master.id = event_master.course inner join professor_master on professor_master.id = event_master.professor inner join university on university.university_id = event_master.university inner join user_info on user_info.userID = event_master.created_by where event_master.status = 1 and event_master.course = ".$course."".$qr." ORDER BY course_master.id DESC LIMIT 20 OFFSET ".$count."")->result_array();
-            $result['count'] = count($result['res']);
-        } else if(empty($course) && !empty($keyword)){
-            $result['res'] = $this->db->query("select event_master.*,course_master.name as course_name,professor_master.name professor_name,university.SchoolName as institute_name, user_info.nickname as user_name from event_master inner join course_master on course_master.id = event_master.course inner join professor_master on professor_master.id = event_master.professor inner join university on university.university_id = event_master.university inner join user_info on user_info.userID = event_master.created_by where event_master.status = 1".$qr." ORDER BY course_master.id DESC LIMIT 20 OFFSET ".$count."")->result_array();
-            $result['count'] = count($result['res']);
-        } else {
-            $result['res'] = $this->db->query("select event_master.*,course_master.name as course_name,professor_master.name professor_name,university.SchoolName as institute_name, user_info.nickname as user_name from event_master inner join course_master on course_master.id = event_master.course inner join professor_master on professor_master.id = event_master.professor inner join university on university.university_id = event_master.university inner join user_info on user_info.userID = event_master.created_by where event_master.status = 1 ORDER BY course_master.id DESC LIMIT 20 OFFSET ".$count."")->result_array();
-
-            $result['count'] = $this->db->query("SELECT * FROM `event_master` Where status = 1")->num_rows();
-
-        }
-
-        
-        
-        return $result;
-    }
-
-
-    public function getComments($request){
-        $offset     = $request['offset'];
-        $count      = $offset*20;
-
-        $reference          = $request['reference'];
-        $reference_id       = $request['reference_id'];
-
-        $result['res'] = $this->db->query("select * from comment_master where reference = '".$reference."' AND reference_id = ".$reference_id." AND comment_parent_id = 0 LIMIT 20 OFFSET ".$count."")->result_array();
-        $result['count'] = $this->db->query("select * from comment_master where reference = '".$reference."' AND reference_id = ".$reference_id." AND comment_parent_id = 0")->num_rows();
-        return $result;
-
-    }
-
-    public function getCommentReply($request){
-        $offset     = $request['offset'];
-        $count      = $offset*20;
-        $comment_id       = $request['comment_id'];
-
-        $result['res'] = $this->db->query("select * from comment_master where comment_parent_id = ".$comment_id." LIMIT 20 OFFSET ".$count."")->result_array();
-        $result['count'] = $this->db->query("select * from comment_master where  comment_parent_id = ".$comment_id."")->num_rows();
-        return $result;
-    }
-
-
-    public function likeUnlikeComment($request){
-        $comment_id       = $request['comment_id'];
-        $userId           = $request['userId'];
-        $type             = $request['type'];
-        if($type == 'like') {
-            $insertArr =    array( 'comment_id' => $comment_id,
-                                
-                                    'user_id' => $userId,
-                                
-                                    'status' => '1',
-                                    'created_at' => date('Y-m-d H:i:s')
-
-                            );
-
-            $this->db->insert('comment_like_master', $insertArr);
-        } else {
-            $insertArr =    array( 
-                                    'status' => '3',
-                                    'created_at' => date('Y-m-d H:i:s')
-
-                            );
-
-            $this->db->where(array('comment_id' => $comment_id, 'user_id' => $userId));
-            $this->db->update('comment_like_master',$insertArr);
-        }
-        return 1;
-    }
-
-
-    public function likeUnlikeReference($request){
-        $reference_id       = $request['reference_id'];
-        $reference          = $request['reference'];
-        $userId           = $request['userId'];
-        $type             = $request['type'];
-        if($type == 'like') {
-            $insertArr =    array(  'reference_id'  => $reference_id,
-                                    'reference'     => $reference,
-                                    'user_id'       => $userId,
-                                
-                                    'status'        => '1',
-                                    'created_at'    => date('Y-m-d H:i:s')
-
-                            );
-
-            $this->db->insert('like_master', $insertArr);
-        } else {
-            $insertArr =    array( 
-                                    'status' => '3',
-                                    'created_at' => date('Y-m-d H:i:s')
-
-                            );
-
-            $this->db->where(array('reference_id' => $reference_id, 'reference' => $reference, 'user_id' => $userId));
-            $this->db->update('like_master',$insertArr);
-        }
-        return 1;
-    }
-
-
-    public function addEvent($request){
-        $arr['event_name']          = $request['event_name'];
-        $arr['location_txt']        = $request['location'];
-        $arr['latitude']            = $request['latitude'];
-        $arr['longitude']           = $request['longitude'];
-        $arr['start_date']          = $request['start_date'];
-        $arr['start_time']          = $request['start_time'];
-        $arr['end_date']            = $request['end_date'];
-        $arr['end_time']            = $request['end_time'];
-        $arr['description']         = $request['description'];
-        $arr['university']          = $request['university_id'];
-        $arr['course']              = $request['course_id'];
-        $arr['professor']           = $request['professor_id'];
-        $arr['created_by']          = $request['userId'];
-        $arr['status']              = 1;
-        $arr['created_at']          = date('Y-m-d H:i:s');
-
-        if (!empty($request['image'])) {
-            $http = explode(":",$request['image']);
-            // print_r($http[0]);die;
-            if ($http[0] == 'http') {
-                $arr['featured_image'] = $request['image']; 
-            } else {
-                $arr['featured_image']   = $this->saveImageWithPath($request['image'], 'uploads/users/');
-            }
-        }
-
-        $this->db->insert('event_master', $arr);
-        $event_id = $this->db->insert_id();
-        return  $this->db->query("select event_master.*,course_master.name as course_name,professor_master.name professor_name,university.SchoolName as institute_name, user_info.nickname as user_name from event_master inner join course_master on course_master.id = event_master.course inner join professor_master on professor_master.id = event_master.professor inner join university on university.university_id = event_master.university inner join user_info on user_info.userID = event_master.created_by where event_master.id = ".$event_id." ")->row_array();
-    }
-
-
-    public function addEventToCalender($request){
-        
-        $event_id   = $request['event_id'];
-        $event      = $this->db->query("select * from event_master where id = ".$event_id."")->row_array();
-        $startdate  = $event['start_date'].' '.$event['start_time'];
-        $enddate    = $event['end_date'].' '.$event['end_time'];
-        $schedule   = array('schedule'      => 'event',
-                            'schedule_name' => $event['event_name'],
-                            'description'   => $event['description'],
-                            'university'    => $event['university'],
-                            'course'        => $event['course'],
-                            'professor'     => $event['professor'],
-                            'start_date'    => $startdate,
-                            'end_date'      => $enddate,
-                            'location'      => $event['location_txt'],
-                            'latitude'      => $event['latitude'],
-                            'longitude'     => $event['longitude'],
-                            'featured_image'    => $event['featured_image'],
-                            'event_master_id'=> $event['id'],
-                            'status'        => 1,
-                            'created_at'    => date('Y-m-d H:i:s'),
-                            'created_by'    => $event['created_by'],
-                         );
-
-        $this->db->insert('schedule_master', $schedule);
-        $schedule_id = $this->db->insert_id();
-
-        $this->db->where(array('id' => $event_id));
-        $this->db->update('event_master',array('addedToCalender' => 1, 'schedule_master_id' => $schedule_id));
-
-        return 1;
-        
-    }
-
-    public function updateEvent($request){
-        $arr['event_name']          = $request['event_name'];
-        $arr['location_txt']        = $request['location'];
-        $arr['latitude']            = $request['latitude'];
-        $arr['longitude']           = $request['longitude'];
-        $arr['start_date']          = $request['start_date'];
-        $arr['start_time']          = $request['start_time'];
-        $arr['end_date']            = $request['end_date'];
-        $arr['end_time']            = $request['end_time'];
-        $arr['description']         = $request['description'];
-        $arr['university']          = $request['university_id'];
-        $arr['course']              = $request['course_id'];
-        $arr['professor']           = $request['professor_id'];
-       
-
-        if (!empty($request['image'])) {
-            $http = explode(":",$request['image']);
-            // print_r($http[0]);die;
-            if ($http[0] == 'http') {
-                $arr['featured_image'] = $featured_image = $request['image']; 
-            } else {
-                $arr['featured_image'] = $featured_image   = $this->saveImageWithPath($request['image'], 'uploads/users/');
-            }
-        }
-
-        $this->db->where(array('id' => $request['event_id']));
-        $this->db->update('event_master', $arr);
-
-        $event_id = $request['event_id'];
-
-        $get_event = $this->db->query("select * from event_master where id = ".$event_id." and status = 1")->row_array();
-        if($get_event['addedToCalender'] == 1){
-            $startdate  = $get_event['start_date'].' '.$get_event['start_time'];
-            $enddate    = $get_event['end_date'].' '.$get_event['end_time'];
-            $sArr = array(  'schedule_name'  => $request['event_name'],
-                            'location'      => $request['location'],
-                            'description'   => $request['description'],
-                            'university'    => $request['university_id'],
-                            'course'        => $request['course_id'],
-                            'professor'     => $request['professor_id'],
-                            'start_date'    => $startdate,
-                            'end_date'      => $enddate,
-                            'latitude'      => $request['latitude'],
-                            'longitude'     => $request['longitude'],
-                            'featured_image'    => $featured_image,
-                            'schedule'      => 'event'
-
-                        );
-
-            $this->db->where(array('event_master_id' => $event_id));
-            $this->db->update('schedule_master', $sArr);
-        }
-        
-        
-        return  $this->db->query("select event_master.*,course_master.name as course_name,professor_master.name professor_name,university.SchoolName as institute_name, user_info.nickname as user_name from event_master inner join course_master on course_master.id = event_master.course inner join professor_master on professor_master.id = event_master.professor inner join university on university.university_id = event_master.university inner join user_info on user_info.userID = event_master.created_by where event_master.id = ".$event_id." ")->row_array();
-    }
-
-    public function deleteEvent($request){
-        $chkEvent = $this->db->get_where('event_master', array('id' => $request['event_id'], 'created_by' => $request['userId']))->num_rows();
-        if($chkEvent != 0){
-            $this->db->where(array('id' => $request['event_id']));
-            $this->db->update('event_master',array('status' => 3));
-
-            $event_details = $this->db->query("select * from event_master where id = ".$request['event_id']."")->row_array();
-            if($event_details['addedToCalender'] == 1){
-                $this->db->where(array('event_master_id' => $request['event_id']));
-                $this->db->update('schedule_master',array('status' => 3));
-            }
-
-            return 1;
-        } else {
-            return 0;
-        }
-    }
-
-    public function getEventDetail($request){
-        return  $this->db->query("select event_master.*,course_master.name as course_name,professor_master.name professor_name,university.SchoolName as institute_name, user_info.nickname as user_name from event_master inner join course_master on course_master.id = event_master.course inner join professor_master on professor_master.id = event_master.professor inner join university on university.university_id = event_master.university inner join user_info on user_info.userID = event_master.created_by where event_master.id = ".$request['event_id']." ")->row_array();
-    
-    }
-
     public function saveRegistrationStepWise($request){
         $step       = $request['step'];
         $user_id    = $request['user_id'];
@@ -510,12 +229,6 @@ class ApiModel extends CI_Model {
 
             $gender             = $request['gender'];
             $country_code       = $request['country_code'];
-
-            $chkPhone = $this->db->get_where('user', array('phone' => $mobile_no))->num_rows();
-
-            if($chkPhone != 0){
-                generateServerResponse('0','M');
-            }
 
             $update_arr = array('first_name' => $first_name,
                                 'last_name' => $last_name,
@@ -553,8 +266,6 @@ class ApiModel extends CI_Model {
             $intitution_idcard      = $request['intitution_idcard'];
             $manual_verification    = $request['manual_verification'];
 
-
-
             $data['institute_type'] = $institute_type;
         
             if($institute_type == 1){
@@ -564,19 +275,14 @@ class ApiModel extends CI_Model {
             }
 
             if (!empty($intitution_idcard)) {
-                $http = explode(":",$intitution_idcard);
+                $http = explode(":",$str1);
                 // print_r($http[0]);die;
                 if ($http[0] == 'http') {
-                    $data['intitution_idcard'] = $intitution_idcard; 
+                    $full_img1 = $str1; 
                 } else {
-                    $data['intitution_idcard']   = $this->saveImage($intitution_idcard);
+                    $data['intitution_idcard']   = $this->saveImage($image1, $folder_name);
                 }
             } else {
-                $chkEmail = $this->db->get_where('user_info', array('intitution_email' => $intitution_email))->num_rows();
-
-                if($chkEmail != 0){
-                    generateServerResponse('0','I');
-                }
                 $data['intitution_email'] = $intitution_email;
             }
             
@@ -715,7 +421,7 @@ class ApiModel extends CI_Model {
         return 1;
     }
 
-    public function saveImage($base64){
+    public function saveImage($base64, $folder){
            
         $image_parts = explode(";base64,",$base64 );
         $image_type_aux = explode("uploads/user_identification/", $image_parts[0]);
@@ -726,113 +432,6 @@ class ApiModel extends CI_Model {
         $file = $_SERVER['DOCUMENT_ROOT'].'/uploads/user_identification/'.$filename;
         file_put_contents($file, $image_base64);
         return $filename;
-    }
-
-    public function saveImageWithPath($base64, $path){
-           
-        $image_parts = explode(";base64,",$base64 );
-        $image_type_aux = explode($path, $image_parts[0]);
-        $image_type = $image_type_aux[0];
-        // print_r($image_type);die;
-        $image_base64 = base64_decode($image_parts[0]);
-        $filename = 'id_'.uniqid(). '.png';
-        $file = $_SERVER['DOCUMENT_ROOT'].'/'.$path.$filename;
-        file_put_contents($file, $image_base64);
-        return $filename;
-    }
-
-    public function courseDetail($user_id){
-        $this->db->select('course_master.*,professor_master.name as professor_name,professor_master.first_name as professor_first_name, professor_master.last_name as professor_last_name');
-        $this->db->join('professor_master','professor_master.course_id=course_master.id');
-        
-        return $this->db->get_where($this->db->dbprefix('course_master'), array('course_master.user_id'=>$user_id, 'course_master.status' => 1))->result_array(); 
-    }
-
-
-    public function addComment($request){
-        $comment        = $request['comment'];
-        $reference_id   = $request['reference_id'];
-        $reference      = $request['reference'];
-        $userId         = $request['userId'];
-
-        $insertArr = array( 'reference' => $reference,
-                            'reference_id' => $reference_id,
-                            'user_id' => $userId,
-                            'comment' => $comment,
-                            'status' => '1',
-                            'created_at' => date('Y-m-d H:i:s')
-
-                        );
-
-        $this->db->insert('comment_master', $insertArr);
-        return $this->db->insert_id();
-    }
-
-    public function addCommentImage($request){
-        $reference_id   = $request['reference_id'];
-        $reference      = $request['reference'];
-        $userId         = $request['userId'];
-
-        $image = $this->saveImageWithPath($request['image'], 'uploads/comments/');
-
-        $insertArr = array(     'reference'     => $reference,
-                                'reference_id'  => $reference_id,
-                                'user_id'       => $userId,
-                                'comment'       => $image,
-                                'type'          => 1,
-                                'status'        => '1',
-                                'created_at'    => date('Y-m-d H:i:s')
-
-                            );
-
-        $this->db->insert('comment_master', $insertArr);
-        return $this->db->insert_id();
-       
-    }
-
-    public function addReplyToComment($request){
-        $comment_id     = $request['comment_id'];
-        $reply          = $request['reply'];
-        $userId         = $request['userId'];
-
-        $comment_data = $this->db->get_where($this->db->dbprefix('comment_master'), array('id'=>$comment_id))->row_array(); 
-
-        $insertArr = array(     'reference' => $comment_data['reference'],
-                                'reference_id' => $comment_data['reference_id'],
-                                'comment_parent_id' => $comment_id,
-                                'user_id' => $userId,
-                                'comment' => $reply,
-                                'status' => '1',
-                                'created_at' => date('Y-m-d H:i:s')
-
-                        );
-
-        $this->db->insert('comment_master', $insertArr);
-        return $this->db->insert_id();
-    }
-
-    public function addReplyImage($request){
-        $comment_id     = $request['comment_id'];
-        
-        $userId         = $request['userId'];
-
-        $comment_data = $this->db->get_where($this->db->dbprefix('comment_master'), array('id'=>$comment_id))->row_array(); 
-
-        $reply = $this->saveImageWithPath($request['image'], 'uploads/comments/');
-
-        $insertArr = array(     'reference' => $comment_data['reference'],
-                                'reference_id' => $comment_data['reference_id'],
-                                'comment_parent_id' => $comment_id,
-                                'type'      => 1,
-                                'user_id'   => $userId,
-                                'comment'   => $reply,
-                                'status'    => '1',
-                                'created_at' => date('Y-m-d H:i:s')
-
-                        );
-
-        $this->db->insert('comment_master', $insertArr);
-        return $this->db->insert_id();
     }
 }
 

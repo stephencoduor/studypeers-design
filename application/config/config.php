@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-date_default_timezone_set('Asia/Kolkata');
-ini_set('memory_limit', '256M');
+date_default_timezone_set('Africa/Nairobi');
+ini_set('memory_limit', '1024M');
 error_reporting(E_ALL); 
-ini_set('display_errors', 1); 
+ini_set('display_errors', 0);
 /*
 |--------------------------------------------------------------------------
 | Base Site URL
@@ -27,11 +27,12 @@ ini_set('display_errors', 1);
 |
 */
 
-if($_SERVER['SERVER_NAME'] == 'localhost'){
-	$config['base_url'] = 'http://localhost/studypeers/';
+if($_SERVER['SERVER_NAME'] == 'studypeers.ga'){
+	$config['base_url'] = 'http://studypeers.ga';
 } else {
-//	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-	$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
+
+	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+	$config['base_url'] .= "://".$_SERVER['HTTP_HOST'];
 	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
 }
 
@@ -110,7 +111,7 @@ $config['charset'] = 'UTF-8';
 | setting this variable to TRUE (boolean).  See the user guide for details.
 |
 */
-$config['enable_hooks'] = TRUE;
+$config['enable_hooks'] = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -534,20 +535,3 @@ $config['rewrite_short_tags'] = FALSE;
 $config['proxy_ips'] = '';
 
 
-$config['facebook_app_id']              = '2627226627492976';
-$config['facebook_app_secret']          = '4372c08cf77b9adb7e1a87ede8374ab8';
-$config['facebook_login_type']          = 'web';
-$config['facebook_login_redirect_url']  = 'https://studypeers.dev/socialLogin/facebookCallback';
-$config['facebook_logout_redirect_url'] = 'https://studypeers.dev';
-$config['facebook_permissions']         = array('public_profile','email');
-$config['facebook_graph_version']       = 'v2.6';
-$config['facebook_auth_on_load']        = TRUE;
-
-$config['linkedin_app_id']				= '78beuic6jn92q4'; //live
-$config['linkedin_app_secret']			= 'HyXpuvnahIeT4xDo'; //live
-$config['linkedin_redirect_uri'] 		= 'https://studypeers.dev/socialLogin/linkedinCallback';
-$config['linkedin_scope'] 				= 'r_liteprofile r_emailaddress';
-
-$config['ms_client_id']					= '00000000445A8D80'; //live
-$config['ms_client_secret']				= 'efnWXM({otjfDGPM71088]#'; //live
-$config['ms_redirect_url'] 				= 'https://studypeers.dev/socialLogin/microsoftCallback';

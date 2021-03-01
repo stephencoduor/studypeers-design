@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') or exit('No direct script access allowed');
+defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------------
@@ -53,60 +53,68 @@ $route['default_controller'] = 'home';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 
+$route['admin/lms/delete/(:num)']["post"] = "SchoolController/deleteLmsSystem/$1";
+$route['admin/lms/update/(:num)'] = "SchoolController/updateLms/$1";
+$route['admin/viewLms'] = "SchoolController/manageLms";
+$route['admin/addLms'] = "SchoolController/addLms";
+$route['admin/school/filtered'] = "SchoolController/filteredSchools";
+
+$route['admin/school/update/(:num)'] = "SchoolController/update_school/$1";
+$route['admin/school/delete/(:num)']["post"] = "SchoolController/delete_school/$1";
 
 $route['admin/(:any)/(:any)']               = "Admin/$1";
 $route['admin/(:any)/(:any)/(:any)']        = "Admin/$1/$1";
 $route['admin/(:any)/(:any)/(:any)/(:any)'] = "Admin/$1/$1/$1";
 $route['admin'] = "Admin/index";
+$route['admin'] = "Admin/index";
 
 
-/**
- * chat module routes
- * 
- */
+$route['token_success'] = "Canvas/login";
+$route['fb'] = "Canvas/fblogin";
+$route['canvas'] = "Canvas/test";
+$route['accounts'] = "canvas_accounts/list_accounts";
+$route['users'] = "canvas_users/showUserDetails";
+$route['accounts/(:num)/users'] = "canvas_users/listUsersInAccount/$1";
+$route['users/stream'] = "canvas_users/listActivityStream";
+$route['accounts/(:num)/createUser'] = "canvas_users/createUser/$1";
+$route['courses'] = "canvas_courses/listCourses";
+//$route['courses/sync'] = 'Account/syncCourses';
+$route['courses/sync'] = 'CourseDetailSync/syncCourses';
+$route['assignments/sync'] = 'Account/syncAssignments';
+$route['results/sync'] = 'Account/syncResults';
+$route['discussions/sync'] = 'Account/syncDiscussions';
+$route['announcements/sync'] = 'Account/syncAnnouncements';
+$route['quizzes/sync'] = 'Account/syncQuizzes';
 
-$route['account/find-my-peers'] = "ChatController/getPeers";
-$route['account/add-new-peers']  = "ChatController/addNewPeers";
-$route['account/submit-chat-users'] = "ChatController/createUserGroup";
-$route['account/get-user-groups'] = "ChatController/getUserChat";
-$route['account/get-user-group-chat-name'] = "ChatController/getUserGroupNames";
-$route['account/add-new-group-member'] = "ChatController/addNewGroupMember";
-$route['account/upload-document-server'] = "ChatController/uploadDocumentServer";
-$route['submit-single-chat-user'] = "ChatController/createSingleUserGroup";
+//customized for testing urls for ui
 
-/**
- * login routes
- * 
- */
+$route['ui/testing/index'] = 'SchoolController/index';
+$route['ui/testing/quizzes'] = 'SchoolController/quizzes';
+$route['ui/testing/submissions'] = 'SchoolController/submissions';
+$route['ui/testing/files'] = 'SchoolController/files';
+$route['ui/testing/grades'] = 'SchoolController/grades';
+$route['ui/testing/notifications'] = 'SchoolController/notifications';
+$route['ui/testing/discussions'] = 'SchoolController/discussions';
+$route['ui/testing/assignments'] = 'SchoolController/assignments';
 
-$route['login'] = "LoginController/index";
-$route['signup'] = "LoginController/signUp";
-$route['login/verify-otp'] = "LoginController/verifyOTP";
-$route['login/resend-otp-page'] = "LoginController/resendOTPPage";
-$route['submit'] = "LoginController/submitSignUpForm";
-$route['submit-login-form'] = "LoginController/submitLoginForm";
-$route['logout'] = "HomeController/logoutUser";
-
-
-$route['complete-step'] = "BaseController/index";
-
-/**
- * step submit routes.
- */
-
-$route['home/step-register'] = "HomeController/stepRegisterPage";
-$route['submit-step-one'] = "HomeController/submitStepWiseData";
-$route['home/step-two-page'] = "HomeController/stepTwoPage";
-$route['get-my-university-list'] = "HomeController/getMyUniversityList";
-$route['get-university-field-list'] = "HomeController/getFieldList";
-$route['get-university-major-field'] = "HomeController/getMajorList";
+//back to real url mapping
+$route['account/schools'] = 'SchoolController/universities';
+$route['account/token/add']["post"] = 'SchoolController/save_canvas_token';
+$route['account/token/update/(:num)']["post"] = 'SchoolController/update_user_token/$1';
+$route['account/token/delete/(:num)']["post"] = 'SchoolController/deleteLms/$1';
+$route['account/profile/settings'] = 'SchoolController/user_profileSettings';
+$route['account/profile/settings/lms/(:num)'] = 'SchoolController/lmsSettings/$1';
+$route['account/schools/(:num)'] = 'SchoolController/schoolProfile/$1';
 
 
-$route['upload-document-regisration'] = "HomeController/uploadDocument";
-$route['home/step-three-page'] = "HomeController/stepThreePage";
+$route['school/assignment/(:num)'] = 'SchoolController/viewAssignment/$1';
+$route['school/file/(:num)'] = 'SchoolController/viewFile/$1';
+$route['school/notification/(:num)'] = 'SchoolController/notificationDetail/$1';
+$route['school/discussion/(:num)'] = 'SchoolController/discussionDetail/$1';
+$route['school/result/(:num)'] = 'SchoolController/resultDetail/$1';
+$route['school/submission/(:num)'] = 'SchoolController/submissionDetail/$1';
+$route['school/quizz/(:num)'] = 'SchoolController/viewQuiz/$1';
+$route['school/discussion/(:num)'] = 'SchoolController/viewDiscussion/$1';
+$route['account/schools/(:num)/course/(:num)'] = 'SchoolController/courseDetail/$1/$2';
 
-$route['home/step-four-page']  = "HomeController/stepFourPage";
 
-$route['Profile/find-my-peers'] = "Profile/getPeers";
-
-$route['sp/(:any)'] = "Profile/friends/$1";

@@ -21,15 +21,12 @@
 						</div>
 						<div class="main_subheaderCenter">
 							<div class="set-progress">
-								Correct <span class="sp-set-progress__answered-progress" id="correct_count">00</span>
+								Correct <span class="sp-set-progress__answered-progress">01</span>
 							</div>
 							<div class="set-progress">
-								Missed <span class="sp-set-progress__missed-progress" id="missed_count">00</span>
+								Missed <span class="sp-set-progress__missed-progress">00</span>
 							</div>
 						</div>
-						<input type="hidden" id="studyset_id" value="<?php echo $studyset['study_set_id']; ?>">
-						<input type="hidden" id="missed_terms" value="">
-						<input type="hidden" id="total_term" value="<?php echo count($term_data); ?>">
 						<div class="main_subheaderRight">
 							<svg class="timer-tracker__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 501.333 501.333">
 								<path d="M250.667,0C112,0,0,112,0,250.667s112,250.667,250.667,250.667s250.667-112,250.667-250.667S389.333,0,250.667,0z
@@ -43,27 +40,13 @@
 						</div>
 					</div>
 					<div class="mainCardWrapper">
-						<div class="matches row">
-							<?php 	$max = count($term_data); 
-									$random_term = $term_data; 
-									$random_desc = $term_data; 
-									shuffle($random_term); shuffle($random_desc);
-									for ($i=0; $i < $max; $i++) { 
-										
-									?>
-										<div class="match-item ui-widget-content" id="item_<?php echo $i; ?>" data-id="<?php echo $random_desc[$i]['study_set_term_id']; ?>" data-type="description">
-											<p>
-												<?php if(!empty($random_desc[$i]['term_image'])) { ?>
-													<img src="<?php echo base_url(); ?>uploads/studyset/<?php echo $random_desc[$i]['term_image']; ?>" alt="Study Set" style="height: 95px;margin-right: 5px;border-radius: 5px;"><br>
-												<?php } ?> <p class="text-capitalise"><?php echo $random_desc[$i]['term_description']; ?></p>
-											</p>
-										</div>
-										<div class="match-item ui-widget-content" id="item_<?php echo $i; ?>_<?php echo $i; ?>" data-id="<?php echo $random_term[$i]['study_set_term_id']; ?>" data-type="term">
-											<p><?php echo $random_term[$i]['term_name']; ?></p>
-										</div>
-									<?php }
-							?>
-							
+						<div class="matches">
+							<div class="match-item ui-widget-content">
+								<p>You are training a new dynamics 365 Finance developer. You need to explain the relationships between models, packages, and projects to the new hire. Which three design concepts should you explain? Each correct answer presents a complete solution.</p>
+							</div>
+							<div class="match-item ui-widget-content">
+								<p>A model is a group or collection of elements that constitute a distributable software solution. A model is a design time concept. A package is a deployment...</p>
+							</div>
 						</div>
 					</div>
 				</section>
@@ -329,155 +312,113 @@
       </div>
     </div>
 </div>
+<div class="modal fade" id="courseModal" role="dialog">
+	<div class="modal-dialog">
+	  <!-- Modal content-->
+	  <div class="modal-content">
+	      <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+	    <div class="modal-body">
+	      	<div class="courseHeader">
+	      		<h4>Course</h4>
+	      		<div class="add_course">
+					<svg height="512pt" 
+						viewBox="0 0 512 512" width="512pt" xmlns="http://www.w3.org/2000/svg"><path d="m256 0c-141.164062 0-256 114.835938-256 256s114.835938 256 256 256 256-114.835938 256-256-114.835938-256-256-256zm0 0" fill="#2196f3"/><path d="m368 277.332031h-90.667969v90.667969c0 11.777344-9.554687 21.332031-21.332031 21.332031s-21.332031-9.554687-21.332031-21.332031v-90.667969h-90.667969c-11.777344 0-21.332031-9.554687-21.332031-21.332031s9.554687-21.332031 21.332031-21.332031h90.667969v-90.667969c0-11.777344 9.554687-21.332031 21.332031-21.332031s21.332031 9.554687 21.332031 21.332031v90.667969h90.667969c11.777344 0 21.332031 9.554687 21.332031 21.332031s-9.554687 21.332031-21.332031 21.332031zm0 0" fill="#fafafa"/>
+					</svg>
+	      			Add a course
+	      		</div>
+	      	</div>
+	      	<div class="courseBox">
+	      		<div class="removeCourseBox">
+					<svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" 
+								xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+						<g>
+							<g>
+								<path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+									L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+									c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+									l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+									L284.286,256.002z"/>
+							</g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+						<g>
+						</g>
+					</svg>
 
+	      		</div>
+	      		<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<input type="text" name="" class="form-control form-control--lg" placeholder="Course">
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor First Name">
+						</div>
+					</div>
+					<div class="col-md-6 col-sm-6 col-xs-12">
+						<div class="form-group">
+							<input type="text" name="" class="form-control form-control--lg" placeholder="Professor Last Name">
+						</div>
+					</div>
+				</div>
+	      	</div>
+	      	<div class="studybuttonGroup">
+				<button type="button" class="transparentBtn" onclick="">Cancel</button>
+				<button type="submit" class="filterBtn">
+					Add
+				</button>
+			</div>
+	    </div>
+	  </div>
+	</div>
+</div>
 <script>
-	var timer2 = "00:00:00";
-// var incrementUrl = '<?php echo base_url(); ?>studyset/incrementFlashcard';
-var interval = setInterval(function() {
-
-
-  var timer = timer2.split(':'); 
-  //by parsing integer, I avoid all extra string processing
-  var hours = parseInt(timer[0], 10);
-  var minutes = parseInt(timer[1], 10);
-  var seconds = parseInt(timer[2], 10);
-  ++seconds;
-  
-  hours = (hours < 10) ? '0' + hours : hours;
-  minutes = (seconds > 59) ? ++minutes : minutes;
-  minutes = (minutes < 10) ? '0' + minutes : minutes;
-  if(minutes > 59) {
-    minutes = 0;
-    hours = ++hours;
-  } else {
-    minutes = minutes;
-  }
-  // minutes = (minutes > 59) ? 0 : minutes;
-  if (minutes < 0) clearInterval(interval);
-  seconds = (seconds > 59) ? 0 : seconds;
-  seconds = (seconds < 10) ? '0' + seconds : seconds;
-  //minutes = (minutes < 10) ?  minutes : minutes;
-  $('#matchtime').html(hours + ':' + minutes + ':' + seconds);
-  // if ((seconds <= 0) && (minutes <= 0)) {
-  // 	clearInterval(interval);
-  // 	$('#timerOutModal').modal('show');
-  // }
-  timer2 = hours+ ':' + minutes + ':' + seconds;
-  
-}, 1000);
-
-var maxSearchIterations = 10;
-var min_x = 0;
-var max_x = 800;
-var min_y = 0;
-var max_y = 350;
-var filled_areas = [];
-var drag_id;
-
-function calc_overlap(a1) {
-    var overlap = 0;
-    for (i = 0; i < filled_areas.length; i++) {
-
-        var a2 = filled_areas[i];
-
-        // no intersection cases
-        if (a1.x + a1.width < a2.x) {
-            continue;
-        }
-        if (a2.x + a2.width < a1.x) {
-            continue;
-        }
-        if (a1.y + a1.height < a2.y) {
-            continue;
-        }
-        if (a2.y + a2.height < a1.y) {
-            continue;
-        }
-
-        // intersection exists : calculate it !
-        var x1 = Math.max(a1.x, a2.x);
-        var y1 = Math.max(a1.y, a2.y);
-        var x2 = Math.min(a1.x + a1.width, a2.x + a2.width);
-        var y2 = Math.min(a1.y + a1.height, a2.y + a2.height);
-
-        var intersection = ((x1 - x2) * (y1 - y2));
-
-        overlap += intersection;
-
-        // console.log("( "+x1+" - "+x2+" ) * ( "+y1+" - "+y2+" ) = " + intersection);
-    }
-
-    // console.log("overlap = " + overlap + " on " + filled_areas.length + " filled areas ");
-    return overlap;
-}
-
-function randomize() {
-
-    filled_areas.splice(0, filled_areas.length);
-
-    var index = 0;
-    $('.match-item').each(function() {
-        var rand_x = 0;
-        var rand_y = 0;
-        var i = 0;
-        var smallest_overlap = 9007199254740992;
-        var best_choice;
-        var area;
-        for (i = 0; i < maxSearchIterations; i++) {
-            rand_x = Math.round(min_x + ((max_x - min_x) * (Math.random() % 1)));
-            rand_y = Math.round(min_y + ((max_y - min_y) * (Math.random() % 1)));
-            area = {
-                x: rand_x,
-                y: rand_y,
-                width: $(this).width(),
-                height: $(this).height()
-            };
-            var overlap = calc_overlap(area);
-            if (overlap < smallest_overlap) {
-                smallest_overlap = overlap;
-                best_choice = area;
-            }
-            if (overlap === 0) {
-                break;
-            }
-        }
-
-        filled_areas.push(best_choice);
-
-        $(this).css({
-            position: "absolute"
-        });
-        $(this).animate({
-            left: rand_x,
-            top: rand_y
-        });
-
-        // console.log("and the winner is : " + smallest_overlap);
-    });
-    return false;
-}
-
-randomize();
-
-function submitMatchData(){
-	var total_term = parseInt($('#total_term').val()); 
-	var correct_count = parseInt($('#correct_count').html()); 
-    correct_count = ("0" + correct_count).slice(-2);
-    var missed_count  = parseInt($('#missed_count').html());
-    missed_count = ("0" + missed_count).slice(-2);
-    var url = '<?php echo base_url(); ?>studyset/incrementMatchRound';
-    var studyset_id = $('#studyset_id').val();
-    var missed_terms = $('#missed_terms').val();
-    var time_span = $('#matchtime').html();
-    $.ajax({
-	        url: url,
-	        type: 'POST',
-	        data: {'studyset_id': studyset_id, 'total_term':total_term, 'correct_count': correct_count, 'missed_count': missed_count, 'missed_terms': missed_terms, 'time_span': time_span},
-	        success: function(result) {
-	        	clearInterval(interval);
-	          	$('.matches').html(result);
-          	}
-	});
-}
-
+	timer();
+	function timer(){
+	    var timepattern = new Date();
+	    var h = timepattern.getHours();
+	    var m = timepattern.getMinutes();
+	    var s = timepattern.getSeconds();
+	    h = checkTime(h);
+	    m = checkTime(m);
+	    s = checkTime(s);
+	    var time = h + ":" + m + ":" + s; 
+	    document.getElementById('matchtime').innerHTML = time;  
+	    var spectime = setTimeout(timer, 500);
+	}
+	function checkTime(i) {
+	  if (i < 10) {i = "0" + i};
+	  return i;
+	}
 </script>

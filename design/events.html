@@ -8,13 +8,12 @@
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="css/star-rating-svg.css">
+	<!-- <link href='css/fullcalendar.css' rel='stylesheet' /> -->
 	<link href='css/main.css' rel='stylesheet' />
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" type="text/css" href="css/schedule.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
-	<link rel="stylesheet" href="assets/css/chat.css">
-	<link href="assets/css/fm.selectator.jquery.css" rel="stylesheet" />
 </head>
 <body>
 	<header>
@@ -181,89 +180,19 @@
 					            </ul>					            
 					         </li>
 					         <li class="message dropdown">
-					            <a href = "javascript:void(0)" class="dropdown-toggle" data-toggle = "dropdown">
+					            <a href = "javascript:void(0)" class = "dropdown-toggle" data-toggle = "dropdown">
 					               <div class="messageBox">
 					               		<img src="images/message.svg" alt="chat">
 					               </div>
               					   <span class="label label-success">25</span>
-								</a>
-
-								<div class="chat-dropdown dropdown-menu">
-									<div class="chat-dropdown-header">
-										<div class="left-area">
-											Messages <span class="total-message">(03)</span>
-										</div>
-										<div class="right-area">
-											<a href="javascript:void(0)" class="open-chat"><img src="assets/images/maximize.svg" alt="Maximize Icon"/></a>
-											<a href="javascript:void(0)" class="open-start-conversation"><img src="assets/images/new_message.svg" alt="New Message"/></a>
-										</div>
-									</div>
-									<div class="chat-body-wrap">
-										<div class="search-list">
-											<button type="submit" class="searchBtn">
-												<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-													<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
-													s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
-													c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-												</svg>
-											</button>
-											<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Find conversations" class="form-control">
-										</div>
-										<div class="chat-user-list">
-											<ul id="myUL">
-												<li>
-													<a href="javascript:void(0)">
-														<figure>
-															<img src="assets/images/student-img.png" alt="">
-														</figure>
-														<div class="time">40 mins</div>
-														<div class="info-wrap">
-															User Name
-															<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)">
-														<figure>
-															<img src="assets/images/student-img.png" alt="">
-														</figure>
-														<div class="info-wrap">
-															Group Name
-															<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)">
-														<figure>
-															<img src="assets/images/student-img.png" alt="">
-														</figure>
-														<div class="info-wrap">
-															Group Name
-															<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-														</div>
-													</a>
-												</li>
-												<li>
-													<a href="javascript:void(0)">
-														<figure>
-															<img src="assets/images/student-img.png" alt="">
-														</figure>
-														<div class="info-wrap">
-															Group Name
-															<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-														</div>
-													</a>
-												</li>
-											</ul>
-										</div>
-									</div>
-									<div class="see-all">
-										<a href="">See All</a>
-									</div>
-								</div>	
-
+					            </a>
+					            <ul class = "dropdown-menu">
+					               <li><a href = "javascript:void(0);">Message 1</a></li>
+					               <li><a href = "javascript:void(0);">Message 2</a></li>
+					               <li><a href = "javascript:void(0);">Message 3</a></li>					               
+					               <li class = "divider"></li>
+					               <li><a href = "javascript:void(0);">Message 4</a></li>
+					            </ul>					            
 					         </li>
 					         <!-- <li class="search">
 					         	<a href="javascript:void(0)"><i class="fa fa-search" aria-hidden="true"></i></a>
@@ -313,7 +242,7 @@
 					<section class="sidebar-content">
 						<section class="sidebar-menu">
 		                	<ul>
-		                		<li><a href="index-dashboard-new.html">
+		                		<li><a href="index-dashboard.html">
 		                			<div class="activeBg">
 		                				<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488.875 488.875">
 											<path d="M481.65,206.175l-94.6-84.9v-100.2c0-11.4-9.4-20.8-20.8-20.8s-20.8,9.4-20.8,20.8v62.8l-87.3-78.4c-7.3-7.3-19.8-7.3-27,0
@@ -844,235 +773,7 @@
 		</section>
 	</section>
 	<!-- Modal -->
-	<div class="chat-wrapper hide-chat">
-		<div class="chat-left">
-			<div class="chat-body-wrap">
-				<div class="chat-dropdown-header">
-					<div class="left-area">
-						<div class="for-mobile">
-							<figure>
-								<img src="assets/images/student-img.png" alt="Image">
-							</figure>
-							<strong>John Smith</strong>
-						</div>
-						<div class="hide-on-small">
-							Messages <span class="total-message">(03)</span>
-						</div>
-					</div>
-					<div class="right-area">
-						<a href="javascript:void(0)" class="minimize"><img src="assets/images/minimize.svg" class="change-icon" alt="Maximize Icon"/></a>
-						<a href="javascript:void(0)" class="open-big-start"><img src="assets/images/new_message.svg" alt="New Message Icon"/></a>
-					</div>
-				</div>
-				<div class="search-list">
-					<button type="submit" class="searchBtn">
-						<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-							<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
-							s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
-							c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-						</svg>
-					</button>
-					<input type="text" id="myUsers" onkeyup="searchUser()" placeholder="Find conversations" class="form-control">
-				</div>
-				<div class="chat-user-list">
-					<ul id="userList">
-						<li>
-							<a href="">
-								<figure>
-									<img src="assets/images/student-img.png" alt="">
-								</figure>
-								<div class="time">40 mins</div>
-								<div class="info-wrap">
-									User Name
-									<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<figure>
-									<img src="assets/images/student-img.png" alt="">
-								</figure>
-								<div class="info-wrap">
-									Group Name
-									<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<figure>
-									<img src="assets/images/student-img.png" alt="">
-								</figure>
-								<div class="info-wrap">
-									Group Name
-									<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-								</div>
-							</a>
-						</li>
-						<li>
-							<a href="">
-								<figure>
-									<img src="assets/images/student-img.png" alt="">
-								</figure>
-								<div class="info-wrap">
-									Group Name
-									<p>message Lorem ipsum dolor sit amet, consetetur sadipscing...</p>
-								</div>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		<div class="chat-right">
-			<div class="chat-header">
-				<div class="chat-header-left">
-					<div class="basic-user-info">
-						<figure>
-							<img src="assets/images/student-img.png" alt="Image"/>
-						</figure>
-						<strong>John Smith</strong>
-					</div>
-					<h3>Start Conversation</h3>
-				</div>
-				<div class="chat-header-right">
-					<div class="hide-on-big">
-						<a href="javascript:void(0)" class="maximize"><img src="assets/images/maximize.svg" class="change-icon" alt="Maximize Icon"/></a>
-					</div>
-					<a href="javascript:void(0)" class="video-icon"><img src="assets/images/video-camera.svg" alt="Video Icon"/></a>
-					<a href="javascript:void(0)" class="hide-on-small"><img src="assets/images/more.svg" alt="More Icon"/></a>
-					<a href="javascript:void(0)" class="add-user"><img src="assets/images/Add.svg" alt="Icon"/></a>
-					<div class="hide-on-big close-icon-wrap">
-						<a href="javascript:void(0)" class="chat-close"><img src="assets/images/close.svg" alt="New Message Icon"/></a>
-					</div>
-				</div>
-			</div>
-			<div class="start-conversation">
-				<button type="submit" class="searchBtn">
-					<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713">
-						<path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
-						s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
-						c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path>
-					</svg>
-				</button>
-				<select id="multiple" name="select2" multiple>
-					<option value="1" data-left="assets/images/student-img.png">Lorem ipsum 1</option>
-					<option value="2" data-left="assets/images/student-img.png">Lorem ipsum 2</option>
-					<option value="3" data-left="assets/images/student-img.png">Lorem ipsum 3</option>
-					<option value="4" data-left="assets/images/student-img.png">Lorem ipsum 4</option>
-					<option value="5" data-left="assets/images/student-img.png">Lorem ipsum 5</option>
-					<option value="6" data-left="assets/images/student-img.png">Lorem ipsum 6</option>
-					<option value="7" data-left="assets/images/student-img.png">Lorem ipsum 7</option>
-					<option value="8" data-left="assets/images/student-img.png">Lorem ipsum 8</option>
-					<option value="9" data-left="assets/images/student-img.png">Lorem ipsum 9</option>
-					<option value="10" data-left="assets/images/student-img.png">Lorem ipsum 10</option>
-				</select>
-				<a href="javascript:void(0)" class="done-link">Done</a>
-			</div>
-			<div class="chat-content">
-				<div class="chat-body">
-					<div class="chat-date">
-						Sept 28
-					</div>
-					<div class="received-wrap">
-						<div class="message-received">
-							<div class="user-info">
-								<figure>
-									<img src="assets/images/student-img.png" alt="Image"/>
-								</figure>
-								<div class="user-name">
-									<strong>User name</strong>
-									<span class="msg-tile">04:00</span>
-								</div>
-							</div>
-							<div class="chat-msg">
-								<p>Lorem ipsum dolor sit amet consectetur</p>
-							</div>
-						</div>
-					</div>
-					<div class="sent-wrap">
-						<div class="message-sent">
-							<div class="user-info">
-								<div class="user-name">
-									<strong>User name</strong>
-									<span class="msg-tile">04:00</span>
-								</div>
-								<figure>
-									<img src="assets/images/student-img.png" alt="Image"/>
-								</figure>
-							</div>
-							<div class="chat-msg">
-								<p>Lorem ipsum dolor sit amet consectetur</p>
-								<figure>
-									<img src="assets/images/Connect-Peers.jpg" alt="Attached Image"/>
-								</figure>
-							</div>
-						</div>
-					</div>
-					<div class="received-wrap">
-						<div class="message-received">
-							<div class="user-info">
-								<figure>
-									<img src="assets/images/student-img.png" alt="Image"/>
-								</figure>
-								<div class="user-name">
-									<strong>User name</strong>
-									<span class="msg-tile">04:00</span>
-								</div>
-							</div>
-							<div class="chat-msg">
-								<p>Lorem ipsum dolor sit amet consectetur</p>
-								<figure>
-									<img src="assets/images/Connect-Peers.jpg" alt="Attached Image"/>
-								</figure>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="chat-footer">
-				<div class="input-wrap">
-					<div class="img-preview">
-						<ul class="custom-image clearfix">
-							<li>
-								<ul class="custom-upload clearfix">
-									<li>
-										<div class="choose-imagefile-wrap">
-											<div class="result">
-												<div id="gal">
-													<ul class="gallery">
-														<li class="uploadBtn uploadBtnRestImage add">
-															<img class="img" src="" />
-															<input type="file" name="rest_image[]" class="rest_img" accept="image/*">
-															<a href="javascript:void(0);" class="removePic removePicRestImage"><i class="fa fa-times"></i></a>
-														</li>
-													</ul>
-												</div>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</li>
-						</ul>
-					</div>
-					<div class="chat-input-wrap">
-						<input type="text" placeholder="Type your message here" class="form-control">
-						<div class="chat-action">
-							<a href="javascript:void(0)" class="imoji">
-								<img src="assets/images/emoji.svg" alt="Imozi Icon"/>
-							</a>
-							<label class="file-upload"></label>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-
-
-	
+  
 <div class="modal fade" id="peersMessageModal" role="dialog">
 	<div class="modal-dialog">
   <!-- Modal content-->
@@ -1489,7 +1190,6 @@
 	  </div>
 	</div>
 </div>
-
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/Chart.bundle.js"></script>
@@ -1510,11 +1210,11 @@
                 inline: true,
                 // sideBySide: true
             });
-            $('#datetimepickermonth').datetimepicker().on('changeYear', function(e){ console.log(e); })
+            1
 			$('#datetimepicker1').datetimepicker({
                 allowInputToggle: true,
                 format: 'L'
-			})
+			});
 			$('.event').not('.disabled').on('click',() => {
 				$('.eventDetail').addClass('active');
 			})
@@ -1522,20 +1222,7 @@
 				$(this).parents('.eventDetail').removeClass('active');
 			});
         });
-        // let eventname = $('#datetimepickermonth .table-condensed tr th');
-        // let eventname = document.querySelector('#datetimepickermonth .table-condensed tr th');
-        // console.log(eventname);
-        // eventname.addEventListener('click', function(){
-        // 	alert();
-        // })
-        // $('#datetimepickermonth .table-condensed tr th').on('click', function() {
-        // 	alert();
-        // 	let action = $(this).attr('data-action');
-        // 	console.log(action);
-        // })
-	</script>
-	<script src="assets/js/fm.selectator.jquery.js"></script>
-	<script src="js/custom.js"></script>
-	<script src="assets/js/chat.js"></script>
+    </script>
+    <script src="js/custom.js"></script>
 </body>
 </html>

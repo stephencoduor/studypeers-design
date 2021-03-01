@@ -19,11 +19,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |  facebook_auth_on_load         boolean  Set to TRUE to have the library to check for valid access token on every page load.
 */
 
-$config['app_id']              = '2627226627492976';
-$config['app_secret']          = '4372c08cf77b9adb7e1a87ede8374ab8';
+$config['facebook_app_id']              = '754026455378259';
+$config['facebook_app_secret']          = 'd16460a8a335104f754f048d2873c330';
 $config['facebook_login_type']          = 'web';
-$config['facebook_login_redirect_url']  = 'https://studypeers.dev/socialLogin/facebookCallback';
-$config['facebook_logout_redirect_url'] = 'https://studypeers.dev';
-$config['facebook_permissions']         = array('public_profile','email');
+$config['facebook_login_redirect_url']  = 'https://studypeers.ga/fb';
+$config['facebook_logout_redirect_url'] = 'https://studypeers.ga';
+$config['facebook_permissions']         = array('public_profile', 'email');
 $config['facebook_graph_version']       = 'v2.6';
-$config['facebook_auth_on_load']        = TRUE;
+$config['facebook_auth_on_load']        = false;

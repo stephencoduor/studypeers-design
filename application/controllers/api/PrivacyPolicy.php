@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 header("Content-type: application/json");
+
+// API PrivacyPolicy Controller
 class PrivacyPolicy extends CI_Controller {
   public function __construct()
     {

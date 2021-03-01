@@ -373,10 +373,9 @@ function validateJson($requestJson, $checkRequestKeys)
             $validate_keys[] = $key;
         }
 
-        $result1 = array_diff($checkRequestKeys, $validate_keys); 
-        $result2 = array_diff($validate_keys, $checkRequestKeys); 
+        $result = array_diff($checkRequestKeys, $validate_keys);
 
-        if(($result1) || ($result2))
+        if ($result)
         {
             return "0";
         }
@@ -575,10 +574,6 @@ function messages($resMsg = '', $dynamicValue = '')
         '219' => 'Revenue Data',
         '220' => 'Mother Already Admitted',
         '221' => 'Wrong Old Password',
-        '222' => 'Event Deleted Successfully',
-        '223' => 'Event Added To Calendar Successfully',
-        '224' => 'Comment Added Successfully',
-        '225' => 'Comment Reply Added Successfully',
         'E' => 'Data Not Found',
         'W' => 'Something Went Wrong',
         'S' => 'Success',
@@ -588,9 +583,6 @@ function messages($resMsg = '', $dynamicValue = '')
         'R' => 'Refund',
         'U' => 'Username already exists',
         'A' => 'Email already exists',
-        'M' => 'Mobile number already exists',
-        'I' => 'Institute email already exists',
-        'N' => 'User not authorized'
     );
 
     return (isset($codes[$resMsg])) ? $codes[$resMsg] : '';
@@ -678,172 +670,5 @@ function createMd5OfString($arrayData)
     $stringData = json_encode($arrayData, JSON_UNESCAPED_UNICODE);
     $md5Data = md5($stringData);
     return $md5Data;
-}
-
-function time_ago_in_php($timestamp){
-  
-    // date_default_timezone_set("Asia/Kolkata");         
-    $time_ago        = strtotime($timestamp);
-    $current_time    = time();
-    $time_difference = $current_time - $time_ago;
-    $seconds         = $time_difference;
-    
-    $minutes = round($seconds / 60); // value 60 is seconds  
-    $hours   = round($seconds / 3600); //value 3600 is 60 minutes * 60 sec  
-    $days    = round($seconds / 86400); //86400 = 24 * 60 * 60;  
-    $weeks   = round($seconds / 604800); // 7*24*60*60;  
-    $months  = round($seconds / 2629440); //((365+365+365+365+366)/5/12)*24*60*60  
-    $years   = round($seconds / 31553280); //(365+365+365+365+366)/5 * 24 * 60 * 60
-
-    $dateF   = date("M d ",strtotime($timestamp)).'at '.date("h:i A",strtotime($timestamp)); 
-                  
-    if ($seconds <= 60){
-
-      return "Just Now";
-
-    } else if ($minutes <= 60){
-
-      if ($minutes == 1){
-
-        return "one min ago";
-
-      } else {
-
-        return "$minutes mins ago";
-
-      }
-
-    } else if ($hours <= 24){
-
-      if ($hours == 1){
-
-        return "an hour ago";
-
-      } else {
-
-        return "$hours hrs ago";
-
-      }
-
-    } else if ($days <= 7){
-
-      if ($days == 1){
-
-        return "yesterday";
-
-      } else {
-
-        return "$days days ago";
-
-      }
-
-    } else if ($weeks == 1){
-
-      return "a week ago";
-        
-    } else {
-
-      return $dateF;
-      
-    }
-}
-
-
-function userImage($user_id){
-    $tableRecord = & get_instance();
-    $tableRecord
-        ->load
-        ->database();
-        
-    $user_detail = $tableRecord->db->get_where('user', array('id' => $user_id))->row_array();
-    $user_info = $tableRecord->db->get_where('user_info', array('userID' => $user_id))->row_array();
-
-    if(!empty($user_detail['image']) && ($user_detail['image'] != 'user.png')) {
-        return base_url().'uploads/users/'.$user_detail['image'];
-    } else {
-        if(!empty($user_info['gender']) && $user_info['gender'] == 'male'){
-            return base_url().'uploads/user-male.png';
-        } else {
-            return base_url().'uploads/user-female.png';
-        }
-    }
-}
-
-function userProfileLink($user_id){
-    $tableRecord = & get_instance();
-    $tableRecord
-        ->load
-        ->database();
-        
-    $user_detail = $tableRecord->db->get_where('user', array('id' => $user_id))->row_array();
-    
-    return base_url().'sp/'.$user_detail['username'];
-}
-
- function getReactionByReference($reference_id, $reference){
-    $tableRecord = & get_instance();
-    $tableRecord
-        ->load
-        ->database();
-
-        $chk_if_like = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '1'))->row_array();
-        $chk_if_support = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '2'))->row_array();
-        $chk_if_celebrate = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '3'))->row_array();
-        $chk_if_insightful = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '4'))->row_array();
-        $chk_if_curious = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '5'))->row_array();
-        $chk_if_love = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference, 'reaction_id' => '6'))->row_array();
-        $like_count_increment = $tableRecord->db->get_where($tableRecord->db->dbprefix('reaction_master'), array('reference_id' => $reference_id, 'reference' => $reference))->num_rows();
-        if($like_count_increment == 0){
-            $like_count_increment = '';
-        }
-
-            $html = '';
-
-            if(!empty($chk_if_like)){
-                $html.='<img src="'.base_url().'assets_d/images/like-dashboard.svg"
-                                            alt="Like">';
-            }
-
-            if(!empty($chk_if_support)){
-                $html.='<img src="'.base_url().'assets_d/images/support-dashboard.svg"
-                                            alt="Like">';
-            }
-
-            if(!empty($chk_if_celebrate)){
-                $html.='<img src="'.base_url().'assets_d/images/celebrate-dashboard.svg"
-                                            alt="Like">';
-            }
-
-            if(!empty($chk_if_insightful)){
-                $html.='<img src="'.base_url().'assets_d/images/curious-dashboard.svg"
-                                            alt="Like">';
-            }
-
-            if(!empty($chk_if_curious)){
-                $html.='<img src="'.base_url().'assets_d/images/insight-dashboard.svg"
-                                            alt="Like">';
-            }
-
-            if(!empty($chk_if_love)){
-                $html.='<img src="'.base_url().'assets_d/images/love-dashboard.svg"
-                                            alt="Like">';
-            }
-
-            $html.='<span>'.$like_count_increment.'</span>';
-
-            return $html;
-    }
-
-function checkFollowStatus($user_id , $peer_id){
-        $tableRecord = & get_instance();
-        $tableRecord
-            ->load
-            ->database();
-        $check_follow_status = $tableRecord->db->get_where('follow_master', array('user_id' => $user_id, 'peer_id' => $peer_id))->row_array();
-        if(isset($check_follow_status) && !empty($check_follow_status)){
-            return true;
-        }else{
-            return false;
-        }
 }
 

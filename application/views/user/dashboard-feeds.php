@@ -1169,15 +1169,9 @@
 						</div>
 						<h4><?php echo $document_detail['document_name']; ?></h4>
 						<p><?php echo $document_detail['description']; ?> </p>
-						<?php $userfile_name = $document_detail['featured_image'];
-                                $extn = substr($userfile_name, strrpos($userfile_name, '.')+1);  ?>
-                        <div class="documentName">
-                            <?php if($extn == 'pdf') { ?>
-                                <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a target="_blank" href="<?php echo base_url(); ?>uploads/users/<?php echo $document_detail['featured_image']; ?>"><?php echo $document_detail['featured_image']; ?></a>
-                            <?php } else { ?>
-                                <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a href="<?php echo base_url(); ?>account/documentDetail/<?php echo base64_encode($document_detail['id']); ?>" target="_blank" ><?php echo $document_detail['featured_image']; ?>
-                            <?php } ?>
-                        </div>
+						<div class="documentName">
+							<img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a href="<?php echo base_url(); ?>account/documentDetail/<?php echo base64_encode($document_detail['id']); ?>"><?php echo $document_detail['featured_image']; ?></a>
+						</div>
 						<div class="socialStatus">
 							<div class="leftStatus">
 								<a class="document_total_likes_<?php echo $value['reference_id']; ?>" onclick="getAllReactionData('<?php echo $value['reference_id']; ?>', 'document')">
@@ -2204,8 +2198,8 @@
                                         $user_list = $this->db->get_where($this->db->dbprefix('user_poll_data'), array('user_poll_data.post_id'=>$value['reference_id'], 'poll_option_id' => @$options['id']))->result_array(); 
                                     ?>
                                         <div class="selectedPollOptions">
-                                            
-											<div class="progressBar pd-left">
+                                            <label class="dashRadioWrap">
+                                                <div class="progressBar">
                                                     <div class="progress">
                                                         <div class="progressValues">
                                                             <div class="leftValue">
@@ -2262,23 +2256,19 @@
                                                                 <?php } ?>
                                                             </div>
                                                         </div>
-														<div class="progressbar-wrap">
-															<label class="dashRadioWrap">
-																<?php  if($if_poll_active == 1) { ?>
-																	<input type="radio" <?= $chk; ?> name="radio" >
-																	<span class="checkmark" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')"></span>
-																<?php } ?>
-															</label>
-															<div class="progress-bar"
+                                                        <div class="progress-bar"
                                                              role="progressbar"
                                                              aria-valuenow="<?= $per; ?>"
                                                              aria-valuemin="0"
                                                              aria-valuemax="100"
                                                              style="width:<?= $per ?>%"></div>
-														</div>
-                                                        
                                                     </div>
                                                 </div>
+                                                <?php  if($if_poll_active == 1) { ?>
+	                                                <input type="radio" <?= $chk; ?> name="radio" >
+	                                                <span class="checkmark" onclick="savePollOption('<?= $value['reference_id']; ?>', '<?php echo @$options['id']; ?>')"></span>
+	                                            <?php } ?>
+                                            </label>
                                         </div>
                                         <?php
                                     } ?>

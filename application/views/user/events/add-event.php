@@ -39,9 +39,9 @@
 										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="align-items-center mb-2 no-gutters">
-											<div class="row  eventAdd">
-												<div class="col-md-6">
+										<div class="form-row align-items-center mb-2 no-gutters">
+											<div class="col  eventAdd">
+												<div class="col-sm-6">
 													<div class="form-group calendar event">
 														<label>Start</label>
 														<div class="filtercalendar">
@@ -84,7 +84,7 @@
 														</div>
 													</div>
 												</div>
-												<div class="col-lg-6">
+												<div class="col-sm-6">
 													<div class="form-group calendar event">
 														<label>End</label>
 														<div class="filtercalendar">
@@ -143,31 +143,18 @@
 										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="form-group">
-											<label>Privacy & Permission  <span style="font-size: 14px;font-weight: 400;color: gray;display: none;" id="privcy_span"></span></label>
-											<select class="form-control" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
-												<option value="">Select Privacy</option>
-												<option value="1">Public</option>
-												<option value="2">Private</option>
-												<!-- <option value="3" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 3) ? 'selected' : '';?>>Secret</option> -->
-											</select>
-											<span class="error" id="err_privacy"></span>
-
-										</div>
-									</div>
-									<div class="col-md-12">
 										<div class="form-row">
 											<div class="col-sm-6 col-xs-12">
 												<div class="form-group select select_label">
 													<label>Institution</label>
-													<select class="form-control selectpicker" name="university" id="university">
+													<select class="form-control" name="university" id="university">
 													  <option value="<?= $university['university_id']; ?>"><?= $university['SchoolName']; ?></option>
 													</select>
 													<span class="custom_err" id="err_university"></span>
 												</div>
-												<div class="form-group select select_label courseMenuSelect">
+												<div class="form-group select select_label">
 													<label>Course</label>
-													<select class="form-control selectpicker" name="course" id="course" onchange="getProfessor(this.value)">
+													<select class="form-control" name="course" id="course" onchange="getProfessor(this.value)">
 														<option value="">Select Course</option>
 														<?php foreach ($course as $key => $value) { ?>
 															<option value="<?= $value['id'] ?>"><?= $value['name'] ?></option>
@@ -175,11 +162,10 @@
 													</select>
 
 													<span class="custom_err" id="err_course"></span>
-													<a data-toggle="modal" data-target="#courseModal" style="cursor: pointer;">Add Course</a>
 												</div>											
 												<div class="form-group select select_label">
 													<label>Professor</label>
-													<select class="form-control selectpicker" name="professor" id="professor">
+													<select class="form-control" name="professor" id="professor">
 															  
 													</select>
 													<span class="custom_err" id="err_professor"></span>
@@ -234,6 +220,3 @@
 						</form>
 					</div>
 				</section>
-
-
-	

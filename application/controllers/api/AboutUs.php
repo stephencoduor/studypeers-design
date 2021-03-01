@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 header("Content-type: application/json");
+
+//API About us Controller
 class AboutUs extends CI_Controller {
   public function __construct()
     {
@@ -7,6 +9,7 @@ class AboutUs extends CI_Controller {
         $this->load->model('api/ApiModel');
       
     }
+    //About us Controller Index method
     public function index()
     {
         $requestData           = isset($HTTpres_RAW_POST_DATA) ? $HTTpres_RAW_POST_DATA : file_get_contents('php://input');

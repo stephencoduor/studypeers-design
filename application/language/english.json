@@ -21,7 +21,5 @@
     "verification_code": "Verification code",
     "enter_verification_code": "Enter verification code",
     "resend_otp": "Resend otp",
-    "verify_email": "Verify email",
-    "email_id_already_exists.": "Email id already exists.",
-    "email_verified_successfully": "Email verified successfully"
+    "verify_email": "Verify email"
 }

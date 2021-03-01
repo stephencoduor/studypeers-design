@@ -11,7 +11,7 @@ class Studyset_model extends CI_Model {
 
     function getUserData($user_id)
     {
-        $this->db->select('ui.intitutionID,uv.SchoolName');
+        $this->db->select('ui.intitutionID,uv.name');
         $this->db->from('user as u');
         $this->db->join('user_info as ui','u.id = ui.userID','inner');
         $this->db->join('university as uv','uv.university_id = ui.intitutionID','inner');
@@ -21,21 +21,17 @@ class Studyset_model extends CI_Model {
     }
 
     function getStudySets($user_id)
-    {   
-        $List = $this->peerListString($user_id); 
-        // $List = implode(', ', $peer_list); 
-        
+    {
         $page = (isset($_POST['page']) && $_POST['page'] > 0) ? $_POST['page'] : 0;
-        $this->db->select('s.*,u.first_name,u.last_name,u.image as user_image,cm.name as course_name,pm.name as professor_name,uv.SchoolName as institution_name,');
+        $this->db->select('s.*,u.first_name,u.last_name,u.image as user_image,cm.name as course_name,pm.name as professor_name,uv.name as institution_name,');
         $this->db->from('study_sets as s');
         $this->db->join('user as u','u.id = s.user_id','inner');
         $this->db->join('course_master as cm','cm.id = s.course','inner');
         $this->db->join('professor_master as pm','pm.id = s.professor','inner');
         $this->db->join('university as uv','uv.university_id = s.institution','inner');
-        $this->db->or_group_start();
         if(isset($_GET['study_search']) && $_GET['study_search'] != ''){
             $txt = $_GET['study_search'];
-            $this->db->where("(s.name like '%$txt%' OR uv.SchoolName like '%$txt%' OR cm.name like '%$txt%' OR pm.name like '%$txt%')");
+            $this->db->where("(s.name like '%$txt%' OR uv.name like '%$txt%' OR cm.name like '%$txt%' OR pm.name like '%$txt%')");
         }
 
         if(isset($_GET['institution']) && $_GET['institution'] != '') {
@@ -52,75 +48,25 @@ class Studyset_model extends CI_Model {
 
         if(isset($_GET['order_by']) && $_GET['order_by'] != '') {
             $this->db->order_by('s.'.$_GET['order_by'],'desc');
-        } else {
-            $this->db->order_by('s.study_set_id', 'desc');
         }
     
-        $this->db->where('s.user_id',$user_id);
-        if(!empty($List)) { 
-            $this->db->or_group_start(); 
-            $this->db->where_in('s.user_id', $List);
-            $this->db->where('s.privacy',1);
-            $this->db->group_end();   
-        }
-        $this->db->or_group_start();
-        $this->db->where("s.`study_set_id` IN (SELECT `reference_id` FROM `share_master` where `reference` = 'studyset' and status = 1 and peer_id = ".$user_id.")", NULL, FALSE);
-        $this->db->group_end();
-        $this->db->group_end();
+        $this->db->where('s.user_id',$user_id);        
         $this->db->where('s.status',1);
         $this->db->limit(PER_PAGE, $page * PER_PAGE);
         $study_sets = $this->db->get()->result_array(); 
-        
-        // echo $this->db->last_query();die;   
+        //echo $this->db->last_query();die;   
         $final_study_set = array();
         foreach ($study_sets as $key => $value) {
-            $chk = $this->db->get_where($this->db->dbprefix('remove_master'), array('user_id'=>$user_id, 'reference_id' => $value['study_set_id'], 'reference' => 'studyset', 'status' => 1))->row_array();
-            if(empty($chk)) {
-                $value['time_ago'] = $this->to_time_ago(strtotime($value['created_on']));
-                $value['isLikedByUser'] = $this->isLikedByUser($user_id,$value['study_set_id']); 
-                array_push($final_study_set, $value);
-            }
+            $value['time_ago'] = $this->to_time_ago(strtotime($value['created_on']));
+            $value['isLikedByUser'] = $this->isLikedByUser($user_id,$value['study_set_id']); 
+            array_push($final_study_set, $value);
         }
-        
+    
         return $final_study_set;
     }
 
-
-    function peerListString($user_id){
-        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
-        $peer = array();
-        foreach ($peer_list as $key => $value) {
-            if($value['user_id'] == $user_id){
-                // $peer[$key] = $value['peer_id']; 
-                array_push($peer, $value['peer_id']);
-            } else {
-                // $peer[$key] = $value['user_id']; 
-                array_push($peer, $value['user_id']);
-            }
-        }
-        return $peer;
-    }
-
-    function peerList($user_id){
-        $peer_list = $this->db->query("SELECT * FROM `peer_master` WHERE (`user_id` = '".$user_id ."' OR `peer_id` = '".$user_id ."') AND `status` = 2")->result_array();
-        $peer = array();
-        foreach ($peer_list as $key => $value) {
-            if($value['user_id'] == $user_id){
-                $peer[$key] = $value['peer_id']; 
-                // array_push($peer, $value['peer_id']);
-            } else {
-                $peer[$key] = $value['user_id']; 
-                // array_push($peer, $value['user_id']);
-            }
-        }
-        return $peer;
-    }
-
     function getTotalStudySets($user_id)
-    {   
-        $List = $this->peerListString($user_id); 
-        // $List = implode(', ', $peer_list); 
-
+    {
         $this->db->select('s.study_set_id');
         $this->db->from('study_sets as s');
         $this->db->join('user as u','u.id = s.user_id','inner');
@@ -129,7 +75,7 @@ class Studyset_model extends CI_Model {
         $this->db->join('university as uv','uv.university_id = s.institution','inner');
         if(isset($_GET['study_search']) && $_GET['study_search'] != ''){
             $txt = $_GET['study_search'];
-            $this->db->where("(s.name like '%$txt%' OR uv.SchoolName like '%$txt%' OR cm.name like '%$txt%' OR pm.name like '%$txt%')");
+            $this->db->where("(s.name like '%$txt%' OR uv.name like '%$txt%' OR cm.name like '%$txt%' OR pm.name like '%$txt%')");
         }
 
         if(isset($_GET['institution']) && $_GET['institution'] != '') {
@@ -149,15 +95,6 @@ class Studyset_model extends CI_Model {
         }
         
         $this->db->where('s.user_id',$user_id);
-        if(!empty($List)) { 
-            $this->db->or_group_start(); 
-            $this->db->where_in('s.user_id', $List);
-            $this->db->where('s.privacy',1);
-            $this->db->group_end();   
-        }
-        $this->db->or_group_start();
-        $this->db->where("s.`study_set_id` IN (SELECT `reference_id` FROM `share_master` where `reference` = 'studyset' and status = 1 and peer_id = ".$user_id.")", NULL, FALSE);
-        $this->db->group_end();
         $this->db->where('s.status',1);
         $study_sets = $this->db->get(); 
     
@@ -167,7 +104,7 @@ class Studyset_model extends CI_Model {
 
     public function getStudySetDetails($study_set_id,$user_id)
     {
-        $this->db->select('s.*,u.first_name,u.last_name,u.image as user_image,cm.name as course_name,pm.name as professor_name,uv.SchoolName as institution_name,');
+        $this->db->select('s.*,u.first_name,u.last_name,u.image as user_image,cm.name as course_name,pm.name as professor_name,uv.name as institution_name,');
         $this->db->from('study_sets as s');
         $this->db->join('user as u','u.id = s.user_id','inner');
         $this->db->join('course_master as cm','cm.id = s.course','inner');
@@ -262,19 +199,6 @@ class Studyset_model extends CI_Model {
             unset($data['study_set_id']);
             $result = $this->db->insert('study_sets',$data);
             $study_set_id = $this->db->insert_id();
-
-            $user_id = $this->session->get_userdata()['user_data']['user_id']; 
-
-            $insertRef = array( 'reference'     => 'studyset',
-                                'reference_id'  => $study_set_id,
-                                'user_id'       => $user_id,
-                                
-                                'status'        => 1,
-                                
-                                'addDate'       => date('Y-m-d H:i:s'),
-                                'modifyDate'    => date('Y-m-d H:i:s')
-                            );
-            $this->db->insert('reference_master', $insertRef);
         }
 
         return $study_set_id;
@@ -304,31 +228,6 @@ class Studyset_model extends CI_Model {
     {
         $this->db->where('study_set_id', $study_set_id);
         $result = $this->db->update('study_sets',array('status' => 2));
-
-        $this->db->where(array('reference_id' => $study_set_id, 'reference' => 'studyset'));
-        $this->db->update('reference_master',array('status' => 3));
-
-        return $result;
-    }
-
-    function removeStudySet($study_set_id)
-    {   
-        $user_id = $this->session->get_userdata()['user_data']['user_id'];
-
-        $chk = $this->db->get_where($this->db->dbprefix('share_master'), array('reference_id' => $study_set_id, 'reference' => 'studyset', 'peer_id' => $user_id))->row_array();
-        if(!empty($chk)){
-            $this->db->where(array('reference_id' => $study_set_id, 'reference' => 'studyset', 'peer_id' => $user_id));
-            $result = $this->db->update('share_master',array('status' => 3));
-        } else {
-            $insertArr = array( 'reference'     => 'studyset', 
-                                'reference_id'  => $study_set_id,
-                                'user_id'       => $user_id,
-                                'status'        => 1,
-                                'addDate'       => date("Y-m-d H:i:s")
-                            );
-            $result = $this->db->insert('remove_master',$insertArr);
-        }
-
         return $result;
     }
 
@@ -372,20 +271,6 @@ class Studyset_model extends CI_Model {
         }
     }
 
-    function updateShareCount($study_set_id){
-        $this->db->where('study_set_id',$study_set_id);
-        $this->db->set('share_count', 'share_count+1', FALSE);
-        $update_like = $this->db->update('study_sets');
-        return 1;
-    }
-
-    function updateShareCountDec($study_set_id){
-        $this->db->where('study_set_id',$study_set_id);
-        $this->db->set('share_count', 'share_count-1', FALSE);
-        $update_like = $this->db->update('study_sets');
-        return 1;
-    }
-
      function isLikedByUser($user_id,$study_set_id) {
 
         $this->db->select('like_id');
@@ -405,5 +290,8 @@ class Studyset_model extends CI_Model {
         }
         
         return $result;
+
     }
+
+
 }

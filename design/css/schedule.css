@@ -2042,28 +2042,8 @@ div[data-edit] {
     text-align: center;
     position: relative;
 }
-.chatreplyBox .chatReplyInnerWrap {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-}
-.chatreplyBox .chatReplyInnerWrap figure {
-    width: 40px;
-    height:40px;
-    overflow: hidden;
-    border-radius: 50%;
-    margin-right:10px;
-}
-.chatreplyBox .chatReplyInnerWrap figure img {
-    width:100%;
-    height:100%;
-}
 .emojiPickerIconWrap {
-    width:93%;
-}
-.emojiPickerIcon{
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
+    width:100%;
 }
 .emojiPicker .shortcode { 
     display:none;

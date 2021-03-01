@@ -58,7 +58,9 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('email', 'session', 'form_validation','pagination', 'facebook', 'phpmailer_lib', 'database');
+$autoload['libraries'] = array( 'fb_auth'=>'fb','email', 'session', 'google','smtech','form_validation','pagination', 'facebook','phpmailer_lib', 'database');
+
+
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +134,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('user_model','email_model');
+$autoload['model'] = array('user_model'=>'user','email_model');

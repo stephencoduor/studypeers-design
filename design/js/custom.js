@@ -73,65 +73,25 @@ $(document).ready(() => {
 });
 
 
-// $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").niceScroll(
-//   {
-//     cursorwidth:"8",
-//     cursorcolor:"#000",
-//     scrollspeed:"100",
-//     touchbehavior:false,
-//     boxzoom: true,
-//     cursor:false,
-//     smoothscroll:true,
-//     autohidemode:false,
-//     zindex:9999999,
-//     background:"#e3e3e3"
-//   });
-  $(document).ready(function(){
-    $(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").mCustomScrollbar({
-      theme:"dark-thin",
-      autoExpandScrollbar:true,
-      advanced:{autoExpandHorizontalScroll:true}
-    });
+$(".sidebar-content,.listChatBox,.rightsidemsgbar,.listUserWrap,.listChatWrap,.eventWrapper").niceScroll(
+  {
+    cursorwidth:"8",
+    cursorcolor:"#000",
+    scrollspeed:"100",
+    touchbehavior:false,
+    boxzoom: true,
+    cursor:false,
+    smoothscroll:true,
+    autohidemode:false,
+    zindex:9999999,
+    background:"#e3e3e3"
   });
-  $(document).ready(function(){
-    $("body").mCustomScrollbar({
-      theme:"dark-thin",
-      autoExpandScrollbar:true,
-      advanced:{autoExpandHorizontalScroll:true}
-    });
-  });
-// (function($){
-//   $(window).on("load",function(){
-    
-//     $("body").mCustomScrollbar({
-//       theme:"minimal"
-//     });
-    
-//   });
-// })(jQuery);
+
 
 
 //study-set JS
 $(document).ready(function() {
     $('.institutions,.course,.professor').select2();
-    $(".select-box").select2({
-      placeholder: "--Select--",
-    });
-    $(".study-field").select2({
-      placeholder: "--Select your field of study--",
-    });
-    $(".major-field").select2({
-      placeholder: "--Select your major--",
-    });
-    $(".session-field").select2({
-      placeholder: "--Session--",
-    });
-    $(".degree-field").select2({
-        placeholder: "--Select degree--",
-    });
-    $(".field-of-interest").select2({
-      placeholder: "--Field of interest--",
-    });
     $('.filterForm').addClass('collapse');
     $('.filterBtn').on('click',()=>{
       $('.filterForm').toggleClass('collapse');
@@ -198,8 +158,8 @@ $(document).ready(()=>{
       $('.edit_rating').removeClass('hide');
   });
 })
-$('.flipper').on('click', function(){
-  $(this).toggleClass('is-flipped');
+$('.flipper').on('click',()=>{
+  $('.flipper').toggleClass('is-flipped');
 })
 $('.showAnwer').on('click',()=>{
   $('.flipper').toggleClass('is-flipped');
@@ -213,8 +173,7 @@ $( ".match-item" ).draggable();
 
 $(document).ready(function(){
   $('.likecount a').click(function(){
-     $(this).find('i').toggleClass('fa-thumbs-o-up fa-thumbs-up');
-     $(this).toggleClass('active');
+     $(this).find('i').toggleClass('fa-thumbs-o-up fa-thumbs-up')
   })
 })
 //Add Course
@@ -250,22 +209,3 @@ $('.add_course').on('click', function(){
 
 
 
-
-
-
-
-// resize 
-$(window).resize(function() {
-  if($(window).width()<=1400) {
-    $('.mainContent').addClass('active');
-    $('aside').addClass('active');
-  } else {
-    $('.mainContent').removeClass('active');
-    $('aside').removeClass('active');
-  }
-  if($(window).width() <= 991) {
-    $('.rightsidemsgbar').css("transform","translateX(800px)");
-  } else {
-    $('.rightsidemsgbar').css("transform","translateX(0px)");
-  }
-})

@@ -237,10 +237,9 @@
 								</div>
 								<div class="user-name">
 									<figure>
-										<img src="<?php echo userImage($result['created_by']); ?>" alt="user">
+										<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
 									</figure>
-									<?php  $user_name = $this->db->get_where('user', array('id' => $result['created_by']))->row_array(); ?>
-									<a href="<?php echo base_url().'sp/'.$user_name['username'] ?>"><figcaption><?php echo $result['nickname']; ?></figcaption></a>
+									<figcaption><?php echo $result['nickname']; ?></figcaption>
 								</div>
 							</div>	
 						</div>
@@ -363,7 +362,7 @@
 												<div class="userWrap study-sets">
 													<div class="user-name">
 														<figure>
-															<img src="<?php echo userImage($value['answered_by']); ?>" alt="user">
+															<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
 														</figure>
 														<figcaption><?php echo $value['nickname']; ?></figcaption>
 													</div>
@@ -430,7 +429,7 @@
 														<div class="userWrap study-sets">
 															<div class="user-name">
 																<figure>
-																	<img src="<?php echo userImage($value2['created_by']); ?>" alt="user">
+																	<img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
 																</figure>
 																<figcaption><?php echo $value2['nickname']; ?></figcaption>
 															</div>

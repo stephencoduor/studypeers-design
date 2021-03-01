@@ -217,17 +217,14 @@
     <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
     <script src="<?php echo base_url(); ?>assets_d/js/Chart.bundle.js"></script>
-    <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.js"></script>
 	<script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 	<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
-	<!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>-->
-	<!--<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>-->
-	<script src="<?php echo base_url('assets_d/js/bootstrap-select.js'); ?>"></script>
+	<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.plus.js"></script>
+	<script src="https://areaaperta.com/nicescroll/js/jquery.nicescroll.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 	<script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
 	<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojipicker.js"></script>
-	<script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script>
-	
+    <script type="text/javascript" src="<?php echo base_url(); ?>assets_d/js/jquery.emojis.js"></script>
 	<script src="https://momentjs.com/downloads/moment.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/js/bootstrap-datetimepicker.min.js"></script>
 	<!-- <script src='js/fullcalendar.js'></script> -->
@@ -242,7 +239,7 @@
                 
                 // sideBySide: true
             });
-            
+            1
 			$('#datetimepickerstart,#datetimepickerend').datetimepicker({
                 allowInputToggle: true,
                 format: 'L',
@@ -410,14 +407,6 @@
 	      $('#err_description').html("").hide();
 	    }
 
-	    var privacy = $('#privacy').val();
-      	if(privacy == ''){
-	        $('#err_privacy').html("This field is required").show();
-	        return false;
-        } else {
-        	$('#err_privacy').html("").hide();
-        }
-
 	    var university = $('#university').val();
 	    if(university == ''){
 	      $('#err_university').html("This field is required").show();
@@ -443,18 +432,6 @@
 	    }
   	}
 
-  	function showPermissionText(val){
-		if(val == 1) {
-			$('#privcy_span').html('(Keep this studyset public)').show();
-		} else if(val == 2) {
-			$('#privcy_span').html('(Keep this studyset private)').show();
-		} else if(val == 3) {
-			$('#privcy_span').html('(Keep this studyset secret)').show();
-		} else {
-			$('#privcy_span').html('').hide();
-		}
-	}
-
 
   	$(document).on("click", ".delete_event", function () {
 	     var event_id = $(this).data('id');
@@ -465,12 +442,6 @@
 	$(document).on("click", ".addEvents", function () {
 	     var event_id = $(this).data('id');
 	     $(".modal-body #calender_event_id").val(event_id);
-	     
-	});
-
-	$(document).on("click", ".removeEvent", function () {
-	     var event_id = $(this).data('id');
-	     $(".modal-body #remove_event_id").val(event_id);
 	     
 	});
 
@@ -490,22 +461,6 @@
 	$("#featured_image-id").change(function() {
 	  readURL(this);
 	});
-
-	$('#datetimepickermonth').on('dp.change', function(e){ 
-    var formatedValue = e.date.format(e.date._f);
-    var fields = formatedValue.split('T');
-    var url = '<?php echo base_url('account/getEventsDayWise') ?>';
-    $('.events').html('<h6 class="loadingEvents">Loading Events</h6>');
-     $.ajax({
-          url: url,
-          type: 'POST',
-          data: {'date': fields[0]},
-          success: function(result) {
-              $('.events').html(result);
-          }
-      });
-  });
-
 
 </script>
     <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>

@@ -23,6 +23,8 @@
   <script src="<?php echo base_url(); ?>assets_a/vendor/chart.js/dist/Chart.extension.js"></script>
   <!-- Argon JS -->
   <script src="<?php echo base_url(); ?>assets_a/js/argon.js?v=1.2.0"></script>
+  <script src="<?php echo base_url(); ?>assets_a/js/studypeers.js"></script>
+<script src="https://unpkg.com/bootstrap-table@1.18.1/dist/bootstrap-table.min.js"></script>
 </body>
 
 </html>

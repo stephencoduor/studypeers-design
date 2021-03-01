@@ -270,27 +270,27 @@
 }
 .postBackBtn {
     background-color: transparent !important;
-    color: #185aeb !important;
-    box-shadow: inset 0 0 0 1px #185aeb;
+    color: #0073b1 !important;
+    box-shadow: inset 0 0 0 1px #0073b1;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
     transition-duration: 167ms;
     align-items: center;
     border-radius: 2px;
     padding: 5px 16px;    
     margin: 0 10px 0 0 !important;
-    border: 1px solid #185aeb;
+    border: 1px solid #0073b1;
 }
 .postBtn {
-    background-color: #185aeb;
+    background-color: #0073b1;
     color: #fff;
-    box-shadow: inset 0 0 0 1px #185aeb;
+    box-shadow: inset 0 0 0 1px #0073b1;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
     transition-duration: 167ms;
     align-items: center;
     border-radius: 2px;
     padding: 5px 16px;
     margin: 0 0px 0 0 !important;
-    border: 1px solid #185aeb;
+    border: 1px solid #0073b1;
 }
 .postBackBtn:focus, .postBackBtn:hover {
     background-color: rgba(152,216,244,.25) !important;
@@ -421,7 +421,7 @@
 }
 .createBox .user-name {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     justify-content: flex-start;
 }
 .createBox .user-name figure {
@@ -444,7 +444,6 @@
     right: 0;
     top: 30px;
     left: auto;
-    max-width: 300px;
 }
 .feedpostuserdetail .dropdown .dropdown-menu  h4 {
     margin: 0;
@@ -485,20 +484,6 @@
     color: #65676B;
     line-height: 1.45;
     padding: 0px 16px 12px 16px;
-    display: inline-block;
-}
-.feedpostMessage a {
-    margin: 0;
-    font-size: 14px;
-    font-weight: 600;
-    color:#337ab7;
-    line-height: 1.45;
-    display: inline-block;
-    padding:0 0 20px 15px;
-}
-.feedpostMessage a:hover {
-    text-decoration: underline;
-    color:#337ab7;
 }
 .feedpostMessage .imgWrapper {
 	width: 100%;
@@ -506,11 +491,6 @@
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    position: relative;
-}
-.feedpostMessage .imgWrapper video {
-    width: 100%;
-    background: rgba(211, 210, 210, 0.21)
 }
 .feedpostMessage .imgWrapper figure {
 	width:100%;
@@ -528,24 +508,17 @@
 .feedpostMessage .imgWrapper.type2 figure {
 	width: 50%;
     height: 250px;
-    border: 1px solid #fff;
 }
 .feedpostMessage .imgWrapper.type3 figure {
 	width: 50%;
     height: 250px;
-    border: 1px solid #fff;
 }
-.feedpostMessage .imgWrapper.type3 figure:first-child {
+.feedpostMessage .imgWrapper.type3 figure:last-child {
 	width: 100%;
     height: 250px;
 }
 .feedpostMessage .imgWrapper.type4 figure {
-	width: 33.33%;
-    height: 200px;
-    border: 1px solid #fff;
-}
-.feedpostMessage .imgWrapper.type4 figure:first-child {
-    width: 100%;
+	width: 50%;
     height: 200px;
 }
 .postType {
@@ -623,10 +596,10 @@
     color: rgba(0,0,0,.6);
 }
 .share-visibility-options__list .share-visibility-options__list-item button.active h4 {
-    color: #185aeb;
+    color: #0073b1;
 }
 .share-visibility-options__list .share-visibility-options__list-item button.active .share-visibility-options__icon svg {
-    fill: #185aeb;
+    fill: #0073b1;
 }
 .share-visibility-options__radio-button {
     width: 24px;
@@ -682,7 +655,7 @@ input[type=radio]+label:after, input[type=radio]+label:before {
     box-sizing: border-box;
 }
 input[type=radio]:checked+label:before {
-    box-shadow: inset 0 0 0 0.6rem #185aeb, inset 0 0 0 1.1rem #fff;
+    box-shadow: inset 0 0 0 0.6rem #0073b1, inset 0 0 0 1.1rem #fff;
 }
 input[type=radio]:checked+label:after {
     display: block;
@@ -741,7 +714,7 @@ input[type=radio]:checked+label:after {
 }
 
 .allowCommentsWrapper input:checked + .slider {
-  background-color: #185aeb;
+  background-color: #0073b1;
 }
 
 .allowCommentsWrapper input:focus + .slider {
@@ -782,7 +755,7 @@ input[type=radio]:checked+label:after {
     outline: none;
     padding:3px 8px;
     margin-right:4px;
-    color:#185aeb;
+    color:#0073b1;
     font-size: 13px;
     border-radius: 2px;
 }
@@ -857,7 +830,7 @@ input[type=radio]:checked+label:after {
 .shareOptionList:hover,
 .shareOptionList:focus {
     border-radius: 32px;
-    color: #185aeb;
+    color: #0073b1;
 }
 .uploadPostWrapper {
     overflow: auto;
@@ -883,7 +856,7 @@ input[type=radio]:checked+label:after {
     outline: none;
     padding: 3px 8px;
     margin-right: 4px;
-    color: #185aeb;
+    color: #0073b1;
     font-size: 16px;
     border-radius: 2px;
     font-weight: 500;
@@ -899,15 +872,15 @@ input[type=radio]:checked+label:after {
 }
 .uploadDocWrapper .uploadDocBtn {
     background-color: transparent !important;
-    color: #185aeb !important;
-    box-shadow: inset 0 0 0 1px #185aeb;
+    color: #0073b1 !important;
+    box-shadow: inset 0 0 0 1px #0073b1;
     transition-timing-function: cubic-bezier(.4,0,.2,1);
     transition-duration: 167ms;
     align-items: center;
     border-radius: 2px;
     padding: 5px 16px;    
     margin: 0 10px 0 0 !important;
-    border: 1px solid #185aeb;
+    border: 1px solid #0073b1;
     position: relative;
     margin:0 0 24px !important;
 }
@@ -942,7 +915,7 @@ input[type=radio]:checked+label:after {
     border-radius: 2px;
     padding: 5px 16px;    
     margin: 0 10px 0 0 !important;
-    border: 1px solid #185aeb;
+    border: 1px solid #0073b1;
     position: relative;
     margin:0 0 24px !important;
 }
@@ -955,364 +928,6 @@ input[type=radio]:checked+label:after {
     color: rgba(0,0,0,.75) !important;
     box-shadow: inset 0 0 0 2px rgba(0,0,0,.75);
 }
-.socialStatus {
-    border-top:1px solid #ced0d4;
-    padding:10px 15px;
-}
-.socialStatus li a {
-    color: rgba(0,0,0,.6);
-    font-size: 14px;
-    font-weight: 600;
-}
-.socialStatus li a img {
-    vertical-align: bottom;
-}
-.socialStatus li a i {
-    width: 24px;
-    height: 24px;
-    vertical-align: middle;
-    font-size: 23px;
-    color: rgba(0,0,0,.6);
-}
-.socialStatus li a i.fa-thumbs-up {
-    color: #1485bd;
-}
-.socialStatus li a.active {
- color: #1485bd;   
-}
-.socialStatus ul {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-}
-.socialStatus li {
-    margin-right: 20px;
-}
-.socialStatus li svg {
-    vertical-align: middle;
-}
-.chatreplyBox {
-    padding: 10px;
-    border-top: 1px solid #e3e3e3;
-    margin: auto;
-    text-align: center;
-}
-.chatreplyBox input {
-    width: 100% !important;
-    border-radius: 20px;
-    border: 1px solid #f1f0f0;
-    background: #f1f0f0;
-    padding: 10px 10px;
-}
-.chatreplyBox input:focus {
-    outline: none;
-}
-.chatreplyBox  {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    position: relative;
-}
-.chatreplyBox figure {
-    width: 42px;
-    height: 42px;
-    border-radius: 50%;
-    overflow: hidden;
-    margin-right: 5px;
-}
-.chatreplyBox figure img {
-    width: 100%;
-    height: 100%;
-}
-
-.mediaAction {
-    position: absolute;
-    bottom: 20px;
-    right: 55px;
-}
-.mediaAction button {
-    border: 0;
-    padding: 0;
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-    outline: none;
-}
-.mediaAction button input {
-    position: absolute;
-    top:0;
-    left:0;
-    opacity: 0;
-    width:100%;
-    height:100%;
-    cursor: pointer;
-}
-.chatreplyBox .chatReplyInnerWrap {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    width: 100%;
-}
-.emojiPickerIcon {
-    border-top-right-radius: 20px;
-    border-bottom-right-radius: 20px;
-}
-.emojiPickerIconWrap {
-    width: 93%;
-}
-.chatMsg {
-    width: 100%;
-    display: flex;
-    align-items: flex-start;
-    position: relative;
-    justify-content: flex-start;
-    margin: 0 0px 30px 0px;
-    padding:0 10px 20px 10px;
-}
-.chatMsg figcaption{
-    width: max-content;
-    margin:0;
-    padding: 10px;
-    border-radius: 20px;
-    position: relative;
-    background: #f1f0f0;
-    color: rgba(0, 0, 0, 1);
-}
-.chatMsg figcaption .name {
-    display: block;
-    font-weight: 700;
-}
-.reactmessage {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    position: absolute;
-    right: -10px;
-    background: #fff;
-    border-radius: 10px;
-    bottom: -15px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, .15);
-    color: #626262;
-    padding: 2px;
-    cursor: pointer;
-}
-.reactmessage .react img{
-    width:12px;
-    height:12px;
-}
-.reactmessage p {
-    margin: 0;
-    padding:0px 4px;
-    font-weight: 500;
-    font-size: 12px;
-    background: transparent !important;
-}
-.chatMsg.reply figcaption {
-    margin-bottom: 60px;
-}
-.actionmsgMenu {
-    position: absolute;
-    bottom: -17px;
-    right: -15px;
-    cursor: pointer;
-    width: 100%;
-}
-.actionmsgMenu ul li{
-    display: inline-block;
-    font-size:12px;
-    font-weight:500;
-    cursor: pointer;
-    outline: none;
-    margin-right:5px;
-}
-.replyBox {
-    bottom: 10px;
-}
-.chatMsg.reply .replyBox {
-    width: 90%;
-}
-.chatMsg.reply .replyBox .replyuser {
-    width: 100%;
-}
-.chatMsg.reply .replyBox .replyuser input {
-    padding: 10px 10px;
-}
-.comment-popularity {
-    padding: 0 15px 15px 15px;
-    cursor: pointer;
-}
-.comment-popularity .value,
-.comment-popularity .caret {
-    display: inline-block;
-}
-.comment-popularity .dropdown-menu li a {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    padding: 5px 20px;
-    outline: none;
-}
-.comment-popularity .dropdown-menu {
-    max-width: 300px;
-}
-.comment-popularity .dropdown-menu .right {
-    word-break: break-all;
-    white-space: normal;
-    font-size: 12px;
-    font-weight: 500;
-    color: #aeaeae;
-}
-.comment-popularity .dropdown-menu .right span {
-    font-weight:700;
-    margin-right:5px;
-    color: #333;
-    display: block;
-}
-.comment-popularity .dropdown-menu .left {
-    margin-right: 10px;
-}
-.feedpostuserdetail .dropdown .dropdown-menu{
-    max-width: 500px;
-}
-.feedpostuserdetail .dropdown .dropdown-menu li a {
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 3px 10px;
-}
-.feedpostuserdetail .dropdown .dropdown-menu li a .left {
-    margin-right: 15px;
-}
-.feedpostuserdetail .dropdown .dropdown-menu li a .right span {
-    font-weight: 600;
-    font-size: 13px;
-    white-space: nowrap;
-    word-break: break-all;
-}
-.feedpostuserdetail .dropdown .dropdown-menu li a .right p {
-    font-size: 12px;
-    font-weight: 500;
-    color: #aeaeae;
-    white-space: nowrap;
-    word-break: break-all;
-}
-.count {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    width: 233px;
-    height: 200px;
-    background: rgba(0,0,0,0.5);
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: 600;
-    cursor: pointer;
-    outline: none;
-}
-.peerList {
-    width: 100%;
-    max-width: 150px;
-    border-radius: 10px;
-    box-shadow: 0 12px 28px 0 rgba(0,0,0,0.2), 0 2px 4px 0 rgba(0,0,0,0.1), inset 0 0 0 1px rgba(255,255,255,0.5);
-    margin:0 10px 10px 10px;
-    display: inline-block;
-}
-.peerList figure {
-    width: 100%;
-    height: 120px;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-    overflow: hidden;
-}
-.peerList figure img {
-    width:100%;
-    height:100%;
-}
-.peerList h4 {
-    margin: 10px 0 0 0;
-    font-size: 18px;
-    padding: 0 10px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-}
-.peerList p {
-    margin: 0;
-    font-size: 14px;
-    padding: 0 10px 10px 10px;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-} 
-.add_peer {
-    width: 85%;
-    margin: 0 10px 10px 10px;
-    background: #e7f3ff;
-    border: 0px;
-    border-radius: 5px;
-    padding: 5px 0;
-    color: #2f8df4;
-    font-weight: 600;
-}
-.remove_peer {
-    width: 85%;
-    margin: 0 10px 10px 10px;
-    background: #e4e6eb;
-    border: 0px;
-    border-radius: 5px;
-    padding: 5px 0;
-    color: #46322f;
-    font-weight: 600;
-}
-.video-click {
-    position: absolute;
-    cursor: pointer;
-    z-index: 99;
-}
-.user-name p {
-    color: #346eee;
-    margin: 5px 0 0 5px;
-}
-.user-name figcaption span {
-    font-weight:400;
-}
-.hoveredStateStatusList {
-    width:100%;
-    max-width: 350px;
-    box-shadow: 0 6px 12px rgba(0,0,0,.175);
-    border-radius: 25px;
-    border:1px solid #ccc;
-    display: none;
-    position: absolute;
-    top: -60px;
-    min-height: 50px;
-    background: #fff;
-}
-.socialStatus li.likecount a:hover .hoveredStateStatusList {
-    display: block;
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

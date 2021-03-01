@@ -58,8 +58,8 @@
 
     var possiblePositions = [ 'left',
                               'right'
-                              ,'top',
-                              /*'bottom'*/];
+                              /*,'top',
+                              'bottom'*/];
     if($.inArray(this.settings.position,possiblePositions) == -1) {
       this.settings.position = defaults.position; //current default
     }
@@ -204,10 +204,7 @@
       if(this.settings.position == 'right'){
         elOffset.left += this.$el.outerWidth() - this.settings.width;
       }
-      if(this.settings.position == 'top'){
-        elOffset.left += this.$el.outerWidth() - this.settings.width;
-      }
-      elOffset.top += this.$el.outerHeight() - this.settings.width;
+      elOffset.top += this.$el.outerHeight();
 
       // Step 3
       var diffOffset = {

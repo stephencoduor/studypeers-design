@@ -1,5 +1,7 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 header("Content-type: application/json");
+
+// API Login Controller
 class Login extends CI_Controller {
   public function __construct()
     {
@@ -35,6 +37,7 @@ class Login extends CI_Controller {
        // check for header 
         $checkData = $this->db->query("SELECT * FROM `user` WHERE (username = '".$data['email']."' OR email = '".$data['email']."') AND password = sha1('".$data['password']."')");
 
+        /*$loungeData = $this->db->get_where('loungeMaster', array('loungeId'=>$data['loungeId'],'imeiNumber'=>$data['imeiNumber'],'status'=>'1'));*/
        
         if($checkData->num_rows() != 0 )
         {
@@ -44,8 +47,7 @@ class Login extends CI_Controller {
                             if ($resultJson == 1) { 
                                 $userDetail = $this->ApiModel->userLogin($data);
                                     if($userDetail != 0){
-                                        $response['userDetails'] = $userDetail;
-                                        $response['courseDetail'] = $this->ApiModel->courseDetail($userDetail['userId']);
+                                         $response['userDetails'] = $userDetail;
                                         generateServerResponse('1','S', $response);
 
                                     }else{
