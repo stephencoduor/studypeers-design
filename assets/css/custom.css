@@ -389,6 +389,12 @@ body {
 }
 
 @media (max-width: 767px) {
+  .connect-with{
+    flex-direction: column;
+  }
+  .connect-with strong{
+    margin-bottom:15px;
+  }
   .row.vertical-center .col-sm-4 {
     position: absolute;
     top: -50px;
@@ -429,11 +435,14 @@ body {
     display: block;
     overflow: auto;
   }
+  .sticky-footer-wrap{
+    padding-bottom:0;
+  }
   .home-footer ul li {
-    width: 50%;
+    width: 100%;
     float: left;
     padding: 5px 0;
-    text-align: left;
+    text-align: center;
     margin-right: 0;
   }
   .home-footer .col-md-2.text-right {

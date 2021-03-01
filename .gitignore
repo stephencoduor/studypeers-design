@@ -3,6 +3,7 @@
 /.vscode
 .htaccess
 /.htaccess
+.env
 studypeers.com/*
 home/*
 Stephenoduor/*
@@ -13,3 +14,4 @@ josebautista/*
 error_log
 uploads/*
 assets_d/js/socket-config.js
+application/composer.lock
