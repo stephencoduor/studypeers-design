@@ -2316,15 +2316,19 @@ ol.order-list>li{
         height:240px;
     }
     .share-section{
+        width:50%;
         right:0;
     }
     .add-section{
+        width:50%;
         left:0;
     }
     .follow-section{
+        width:50%;
         left:0;
     }
     .chat-section{
+        width:50%;
         right:0;
     }
     .stay-connected:before{
