@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
 /*
 | -------------------------------------------------------------------
@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('email', 'session', 'form_validation','pagination', 'facebook', 'phpmailer_lib', 'database');
+$autoload['libraries'] = array('email', 'session', 'form_validation', 'pagination', 'facebook', 'phpmailer_lib', 'database', 'env');
 
 /*
 | -------------------------------------------------------------------
@@ -89,7 +89,7 @@ $autoload['drivers'] = array('cache');
 |
 |	$autoload['helper'] = array('url', 'file');
 */
-$autoload['helper'] = array('url','form_helper','common','multi_language','pagination','user', 'api');
+$autoload['helper'] = array('url', 'form_helper', 'common', 'multi_language', 'pagination', 'user', 'api', 'general');
 
 /*
 | -------------------------------------------------------------------
@@ -132,4 +132,4 @@ $autoload['language'] = array();
 |
 |	$autoload['model'] = array('first_model' => 'first');
 */
-$autoload['model'] = array('user_model','email_model');
+$autoload['model'] = array('user_model', 'email_model');
