@@ -559,7 +559,6 @@ $config['linkedin_app_secret']			= getenv('LINKEDIN_SECRET');
 $config['linkedin_redirect_uri'] 		= getenv('LINKED_REDIRECT');
 $config['linkedin_scope'] 				= getenv('LINKE_SCOPE');
 
-
 $config['ms_client_id']					= getenv('MS_CLIENT_ID');
 $config['ms_client_secret']				= getenv('MS_CLIENT_SECRET');
 $config['ms_redirect_url'] 				= getenv('MS_REDIRECT');
