@@ -40,11 +40,10 @@ if ($_SERVER['SERVER_NAME'] == 'localhost') {
 	$config['base_url'] = 'http://localhost/studypeers/';
 } else {
 
-//	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
-//	$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
-//	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
-        $config['base_url'] = "https://studypeers.com/";
-
+	//	$config['base_url'] = ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "https" : "http");
+	//	$config['base_url'] = "https://".$_SERVER['HTTP_HOST'];
+	//	$config['base_url'] .= str_replace(basename($_SERVER['SCRIPT_NAME']),"",$_SERVER['SCRIPT_NAME']);
+	$config['base_url'] = "https://studypeers.com/";
 }
 
 /*
@@ -560,8 +559,6 @@ $config['linkedin_app_secret']			= getenv('LINKEDIN_SECRET');
 $config['linkedin_redirect_uri'] 		= getenv('LINKED_REDIRECT');
 $config['linkedin_scope'] 				= getenv('LINKE_SCOPE');
 
-
 $config['ms_client_id']					= getenv('MS_CLIENT_ID');
 $config['ms_client_secret']				= getenv('MS_CLIENT_SECRET');
 $config['ms_redirect_url'] 				= getenv('MS_REDIRECT');
-

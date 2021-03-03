@@ -107,7 +107,7 @@ aside{top: 80px;height: 100%;z-index:99;position:fixed;width:276px;left:0;max-he
     -o-transition: all 0.3s ease;transition: all 0.3s ease;background:#fff;}
 .sidebar-content{max-height: calc(100% - 30px);
     height: calc(100% - 30px);
-    overflow-y: auto;
+    /* overflow-y: auto; */
     position: relative !important;
     width: 100% !important;}
 .sidebar-menu {border-bottom: 1px solid #eae9ee;padding: 25px 0;}
@@ -778,7 +778,7 @@ a.filterBtn,a.sortMenu{
 @media(max-width:991px){
     .logo{position: absolute;left: 50%;top:100%;background: transparent;transform: translate(-50%,0%);
         -webkit-transform: translate(-50%,0%);-moz-transform: translate(-50%,0%);-ms-transform: translate(-50%,0%);
-        -o-transform: translate(-50%,0%);width: 150px;height: 50px;padding: 0;margin-top: 20px;}
+        -o-transform: translate(-50%,0%);width: 150px;height: 50px;padding: 0;margin-top: 10px;}
     .nav.navbar-nav {margin-right: 30px;}
     .navbar-brand{z-index:99;}
     /*.mainContent.msgActive {
@@ -914,7 +914,7 @@ a.filterBtn,a.sortMenu{
     .nav>li>a>img{width: 30px;height: 30px;}
     .messageBox img {width: 15px;height: 15px;}
     .nav li a {padding: 10px 11px !important;}
-    .search {max-width: 200px;margin-top: 10px;}
+    .search {max-width: 175px;margin-top: 10px; margin-left:85px;}
     .rightsidemsgbar{top:70px !important;}
     aside{top:70px;}
     .rightsidemsgbar{max-width:100%;}

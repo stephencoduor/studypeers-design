@@ -471,7 +471,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 		</section>
 	</header>
 	<section class="dashbody">
-		<section class="container-fluid" data-simplebar>
+		<section class="container-fluid">
 			<section class="row">
 				<aside>
 					<section class="sidebar-content">
@@ -583,7 +583,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image"/>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image" />
 												</span>
 											</div>
 										</span>
@@ -598,7 +598,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image"/>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image" />
 												</span>
 											</div>
 										</span>
@@ -614,7 +614,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 										<span class="comming-soon-icon">
 											<div class="ml10">
 												<span class="text-wrapper">
-													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image"/>
+													<img src="<?php echo base_url('assets_d/images/coming-soon-gif.gif'); ?>" alt="Image" />
 												</span>
 											</div>
 										</span>

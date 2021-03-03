@@ -25,6 +25,7 @@
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
+
 <script>
     $(document).ready(function() {
         $("#multiple-select").selectator();
@@ -731,9 +732,9 @@
 
         $(document).on('click', '#save_post_from_ajax', function() {
             var html_content = $('#messagepostarea').val();
-            if(html_content != ''){
-                if($('.pollsWrapper').is(":visible")){
-                    if($("input[name=option]").val() != '' && $('#start-date').val() != '' && $('input[name=poll-end-time]').val() != ''){
+            if (html_content != '') {
+                if ($('.pollsWrapper').is(":visible")) {
+                    if ($("input[name=option]").val() != '' && $('#start-date').val() != '' && $('input[name=poll-end-time]').val() != '') {
                         $('#addPostForm').submit();
                     } else {
                         alert("Please fill poll data");
@@ -742,9 +743,9 @@
                     $('#addPostForm').submit();
                 }
             }
-            
+
         });
-        $('#addPostForm').on("submit", function(e) { 
+        $('#addPostForm').on("submit", function(e) {
             e.preventDefault();
             $('.ajax-loading').show();
             $('#createPost').modal('hide');
@@ -834,7 +835,7 @@
             $('.studybuttonGroup.post').removeClass('active');
         }
     });
-    
+
 
     $('.shareMoreContentWrapper').hide();
     $('.moreSection').on('click', function() {
@@ -859,7 +860,7 @@
     $('.shareDocs').hide();
     $('.pollsWrapper').hide();
     $('.fileSection').on('click', function() {
-        if ($('.pollsWrapper').is(":Visible")) { 
+        if ($('.pollsWrapper').is(":Visible")) {
             $('.pollsWrapper').hide();
             $('.shareDocs').slideToggle();
         } else {
@@ -874,7 +875,7 @@
             $('.pollsWrapper').slideToggle();
         }
     });
-    
+
     $(function() {
         $('#datetimepickerstart').datetimepicker({
             allowInputToggle: true,
