@@ -84,7 +84,7 @@ class Home extends CI_Controller
         if ($this->input->post()) { 
             $captcha=$_POST['g-recaptcha-response'];
             if(empty($captcha)){
-                $message = '<div class="alert alert-danger" role="alert"><strong>Success!</strong> Captcha not filled<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $message = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> Please fill the captcha.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button></div>';
 
@@ -135,7 +135,7 @@ class Home extends CI_Controller
                 $this->session->set_flashdata('flash_message', $message);
                 redirect(site_url('contact-us'), 'refresh');
             } else {
-                $message = '<div class="alert alert-danger" role="alert"><strong>Success!</strong> Invalid Captcha<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                $message = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> Invalid Captcha.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button></div>';
 
