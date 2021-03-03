@@ -480,7 +480,7 @@
 					<div class="col-md-12">
 						<form method="post" action="<?php echo base_url(); ?>account/removeEvent">
 							<div class="form-group button">
-								<input type="hidden" id="remove_event_id" name="remove_event_id">
+								<input type="hidden" id="remove_event_id" name="remove_event_id" value="<?= $event['id']; ?>">
 								<button type="button" data-dismiss="modal" class="transparentBtn highlight">No</button>
 								<button type="submit" class="filterBtn">Yes</button>
 							</div>
