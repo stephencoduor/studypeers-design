@@ -1,3 +1,5 @@
+<script src='https://www.google.com/recaptcha/api.js' async defer></script>
+
 <div class="social-tools">
 			<div class="container">
 			 <div class="row centered">
@@ -52,6 +54,9 @@
 							<span id="err_message" style="font-style: italic;"></span>
 						</div>
 					</div>
+					<div class="form-group">
+                        <div class="g-recaptcha" data-sitekey="6LdOJXAaAAAAAL5J7_760Ah8oN-fAz7thivZfvWR"></div>
+                    </div>
 					<div class="form-group text-center">
 							<input type="submit" class="filterBtn sp" value="Submit">
 					</div>
