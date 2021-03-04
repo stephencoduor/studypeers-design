@@ -89,6 +89,15 @@
 .filterSearch:focus-within {
     box-shadow: 0 0 0 3px #e8effd;
 }
+.captcha-btn-wrap{
+    padding:0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.captcha-btn-wrap .filterBtn.sp{
+    margin-right:0;
+}
 .buttonGroup{
     width:35%;
     display: flex;

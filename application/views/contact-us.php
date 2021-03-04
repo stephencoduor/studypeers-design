@@ -17,7 +17,9 @@
                                       echo $this->session->flashdata('flash_message');
                                     }
                             ?>
+					<div class="col-sm-12">
 					<p style="text-align: left;"><b>Fill out the details and we will get in touched with you</b></p>
+					</div>
 					<form method="post" action="<?php echo base_url(); ?>contact-us" onsubmit="return validateContact()">
 					<div class="form-group">
 						<div class="col-sm-12" style="padding: 0; margin-bottom: 10px;">
@@ -54,11 +56,13 @@
 							<span id="err_message" style="font-style: italic;"></span>
 						</div>
 					</div>
-					<div class="form-group">
-                        <div class="g-recaptcha" data-sitekey="6LdOJXAaAAAAAL5J7_760Ah8oN-fAz7thivZfvWR"></div>
-                    </div>
-					<div class="form-group text-center">
-							<input type="submit" class="filterBtn sp" value="Submit">
+					<div class="captcha-btn-wrap">
+						<div class="form-group">
+							<div class="g-recaptcha" data-sitekey="6LdOJXAaAAAAAL5J7_760Ah8oN-fAz7thivZfvWR"></div>
+						</div>
+						<div class="form-group text-center">
+								<input type="submit" class="filterBtn sp" value="Submit">
+						</div>
 					</div>
 					</form>
 				</div>
