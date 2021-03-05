@@ -1682,7 +1682,6 @@ l,.share:focus
     background: transparent;
     padding: 6px 15px;
     border: 1px solid #185aeb;
-    vertical-align: top;
     display: block;
     padding:0px 0 10px 0 !important;
 }
@@ -2179,9 +2178,16 @@ l,.share:focus
     .feedWrapper.listView .feed-card {
         max-width: 48%;
     }
-    /*.filterSearch {
+    .filterSearch {
         width: 50%;
-    }*/
+    }
+    .studySetWrapper.list .buttonGroup{
+        width:50%;
+        flex-direction: column;
+    }
+    .left-btn-wrap{
+        margin-bottom:10px;
+    }
 }
 @media(max-width:1200px){
     .filterWrapper.active .filterSearch{width:44%;}
@@ -2230,6 +2236,12 @@ l,.share:focus
     }
 }
 @media(max-width:991px){
+    .studySetWrapper.list .buttonGroup {
+        width: auto;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
     .filterWrapper {
         flex-wrap: wrap;
     }
