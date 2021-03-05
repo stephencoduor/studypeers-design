@@ -55,6 +55,7 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
           $("#current_single_chat_name").html(additionaInfo.receiverName);
           $("#current_profile_to_user_image").val(additionaInfo.receiverImage);
           if (parseInt(additionaInfo.group_id) != 0) {
+            console.log(additionaInfo);
             console.log("teting group--->");
             $("#curren_group_name_id").val(additionaInfo.receiverName);
             $("#single_chat_image_preview").attr(
@@ -258,7 +259,7 @@ $("body").on("click", ".open-single-chat-window", function() {
     group_image: groupImage
   };
 
-  additionaInfo = data;
+  var additionaInfo = data;
 
   CHAT_GROUP_ADDITIONS_SINGLE._AJAX_SUBMIT_SINGLE_CHAT(
     data,
