@@ -2508,6 +2508,9 @@ textarea.textarea-gray {
     }
 }
 @media(max-width:991px){
+    .sortwrapper{
+        margin-bottom:15px;
+    }
     .filterWrapper {
         flex-wrap: wrap;
     }
