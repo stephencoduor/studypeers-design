@@ -57,7 +57,10 @@ var CHAT_GROUP_ADDITIONS_SINGLE = {
           if (parseInt(additionaInfo.group_id) != 0) {
             console.log("teting group--->");
             $("#curren_group_name_id").val(additionaInfo.receiverName);
-            $("#single_chat_image_preview").attr(additionaInfo.group_image);
+            $("#single_chat_image_preview").attr(
+              "src",
+              additionaInfo.group_image
+            );
           } else {
             $("#current_active_user_group_image_single").val(
               additionaInfo.image
