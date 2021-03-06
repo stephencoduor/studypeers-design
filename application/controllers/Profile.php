@@ -766,6 +766,17 @@ class Profile extends CI_Controller {
 		echo $insert_reference;
 	}
 
+
+    public function updatePost(){
+        $post_id = $this->input->post('post_id');
+        $html_content = $this->input->post('html_content');
+
+        $this->db->where(array('id' => $post_id));
+        $result = $this->db->update('posts', array('post_content_html' => $html_content));
+        
+        echo $result;
+    }
+
 	public function redirect_page(){
 		if($this->input->get('result') == 1){
 			$message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Posts Added Successfully.<button type="button" class="close" data-dismiss="alert" aria-label="Close">

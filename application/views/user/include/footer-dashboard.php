@@ -729,6 +729,46 @@
         });
 
 
+        $(document).on('click', '#update_post_from_ajax', function() {
+            var html_content = $('#messagepostareaedit').val();
+            if (html_content != '') {
+                
+                $('#editPostForm').submit();
+                
+            }
+
+        });
+
+        $('#editPostForm').on("submit", function(e) {
+            e.preventDefault();
+            $('.ajax-loading').show();
+            $('#editPost').modal('hide');
+
+            var formData = new FormData(this);
+            var url = $(this).attr('action');
+            var html_content = $('#messagepostareaedit').val();
+            var post_id = $('#editPostId').val();
+            formData.append('html_content', html_content);
+            formData.append('post_id', post_id);
+            $.ajax({
+                type: 'POST',
+                url: url,
+                dataType: 'json',
+                data: formData,
+                cache: false,
+                contentType: false,
+                processData: false,
+                success: function(result) {
+                    console.log(result);
+                    if (result == true) {
+                        window.location.href = base_url + 'account/dashboard';
+                    }
+                    $('.ajax-loading').hide();
+                }
+            });
+        });
+
+
 
         $(document).on('click', '#save_post_from_ajax', function() {
             var html_content = $('#messagepostarea').val();

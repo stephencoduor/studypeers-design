@@ -4384,4 +4384,16 @@ class Account extends CI_Controller
             redirect(site_url('account/eventDetails/' . base64_encode($report_event_id)), 'refresh');
         }
     }
+
+
+    public function getPostDataById(){
+        if ($this->input->post()) {
+            $post_id              = $this->input->post('post_id');
+
+            $post_details = $this->db->get_where('posts', array('id' => $post_id))->row_array();
+
+            echo $post_details['post_content_html'];die;
+
+        }
+    }
 }
