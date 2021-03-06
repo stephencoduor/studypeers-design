@@ -1349,6 +1349,9 @@ img{
 ol.order-list{
     margin-bottom:10px;
 }
+ul.unordered-list li strong {
+    font-weight: 500;
+}
 ul.unordered-list{
     margin-bottom:10px;
 }
@@ -1766,6 +1769,9 @@ ol.order-list>li{
     }
 }
 @media (max-width: 767px){
+    .flex-top-header .social-action ul li a.outline-join{
+        padding: 10px 25px;
+    }
     .banner.connect-with-peers{
         min-height:500px;
     }

@@ -389,8 +389,16 @@ html,body{
         position: relative;
     }
 }
-
+.no-padding.padding-right{
+    padding-right:15px;
+}
 @media (max-width: 767px) {
+    .content-right {
+        padding: 100px 25px 25px;
+    }
+    .prev-link{
+        top: 160px;
+    }
     .row.vertical-center .col-sm-4 {
         position: absolute;
         top: -50px;
@@ -412,7 +420,7 @@ html,body{
         height: 50px;
     }
     .login-container{
-        margin: 100px auto 0;
+        margin: 0 auto 0;
     }
     .home-body{
         flex-direction: column;
@@ -452,7 +460,7 @@ html,body{
 
 @media (max-width: 580px) {
     .vertical-center {
-        height: 40px;
+        height: auto;
     }
     .header-menu a {
         font-size: 13px;

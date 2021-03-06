@@ -150,12 +150,12 @@
 						</a>
 					</section>
 				</section>
-				<section class="col-sm-10 no-padding">
+				<section class="col-sm-10 no-padding padding-right">
 					<div class="row vertical-center">
 						<div class="col-sm-8">
 
 						</div>
-						<div class="col-sm-4">
+						<div class="col-sm-4 text-right">
 							<div class="btn-group">
 								<a href="<?php echo base_url('logout'); ?>" class="pink-btn">Logout</a>
 							</div>

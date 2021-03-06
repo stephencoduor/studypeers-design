@@ -353,25 +353,27 @@
         responsive: [{
                 breakpoint: 1200,
                 settings: {
-                    slidesToShow: 4
+                    slidesToShow: 3
                 }
             },
             {
                 breakpoint: 767,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 2,
                 }
             },
             {
                 breakpoint: 567,
                 settings: {
-                    slidesToShow: 2
+                    slidesToShow: 2,
+                    slidesToScroll: 1,
                 }
             },
             {
                 breakpoint: 400,
                 settings: {
-                    slidesToShow: 1
+                    slidesToShow: 1,
+                    slidesToScroll: 1
                 }
             }
         ]

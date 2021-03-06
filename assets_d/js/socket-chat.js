@@ -1,4 +1,4 @@
-var socket = io("http://18.218.122.48:3000", {
+var socket = io("/", {
   "sync disconnect on unload": true
 });
 var userData = $("#hidden_user_info").val();

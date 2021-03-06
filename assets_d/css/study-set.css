@@ -89,6 +89,15 @@
 .filterSearch:focus-within {
     box-shadow: 0 0 0 3px #e8effd;
 }
+.captcha-btn-wrap{
+    padding:0 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.captcha-btn-wrap .filterBtn.sp{
+    margin-right:0;
+}
 .buttonGroup{
     width:35%;
     display: flex;
@@ -640,7 +649,7 @@ textarea{
     font-weight: 500;
 }
 .userWrap {
-    margin: 40px 0 20px 0;
+    margin: 15px 0 20px;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -791,6 +800,9 @@ l,.share:focus
     margin-bottom: 13px;
 }
 .toolBox ul li a small {
+    width: 100%;
+    padding: 0 10px;
+    display: inline-block;
     color: #7f7b94;
     font-size: 12px;
 }
@@ -830,7 +842,7 @@ l,.share:focus
     padding-left: 10px;
 }
 .testWrapper h3 {
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 500;
     color: #2a234f;
 }
@@ -1673,7 +1685,6 @@ l,.share:focus
     background: transparent;
     padding: 6px 15px;
     border: 1px solid #185aeb;
-    vertical-align: top;
     display: block;
     padding:0px 0 10px 0 !important;
 }
@@ -1955,11 +1966,15 @@ l,.share:focus
     justify-content: flex-start;
 }
 .studySetWrapper .left {
-    width:35%;
-    margin-right: 25px;
+    width:200px;
 }
 .studySetWrapper .right {
-    width:65%;
+    width:calc(100% - 200px);
+    padding-left:15px;
+}
+.edit-delete-wrap{
+    display: flex;
+    align-items: center;
 }
 .studySetWrapper .left figure {
     width:100%;
@@ -1981,7 +1996,7 @@ l,.share:focus
     flex-wrap: wrap;
 }
 .badgeList ul li.badge {
-    margin-right: 10px;
+    margin: 0 10px 10px 0;
     border-radius:14px;
     font-size: 12px;
     font-weight:500;
@@ -2170,9 +2185,25 @@ l,.share:focus
     .feedWrapper.listView .feed-card {
         max-width: 48%;
     }
-    /*.filterSearch {
+    .main_subheaderCenter{
+        margin-bottom:10px; 
+    }
+    .mainContent .main_subheader {
+        width: calc(100% - 279px);
+        flex-direction: column;
+        height: auto;
+        padding-bottom:10px;
+    }
+    .filterSearch {
         width: 50%;
-    }*/
+    }
+    .studySetWrapper.list .buttonGroup{
+        width:50%;
+        flex-direction: column;
+    }
+    .left-btn-wrap{
+        margin-bottom:10px;
+    }
 }
 @media(max-width:1200px){
     .filterWrapper.active .filterSearch{width:44%;}
@@ -2221,6 +2252,12 @@ l,.share:focus
     }
 }
 @media(max-width:991px){
+    .studySetWrapper.list .buttonGroup {
+        width: auto;
+        flex-direction: row;
+        align-items: flex-start;
+        flex-wrap: wrap;
+    }
     .filterWrapper {
         flex-wrap: wrap;
     }
@@ -2813,7 +2850,7 @@ l,.share:focus
     background: #fff;
     border-radius: 8px;
     overflow: hidden;
-    margin: 20px 0 0 0;
+    margin: 10px 0 0 0;
 }
 .rating-wrap-div{
     display: flex;
@@ -3346,6 +3383,14 @@ l,.share:focus
     }
     .userWrap{
         flex-direction: column;
+        margin: 4px 0 10px 0;
+    }
+    .userWrap .user-name {
+        width: 100%;
+        margin-right: 0;
+    }
+    .edit-delete-wrap{
+        width:100%;
     }
     .mainCardWrapper.newflash .flashcards.flash-has-img.active.show {
         height: 455px!important;
