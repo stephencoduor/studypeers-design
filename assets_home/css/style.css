@@ -1349,6 +1349,9 @@ img{
 ol.order-list{
     margin-bottom:10px;
 }
+ul.unordered-list li strong {
+    font-weight: 500;
+}
 ul.unordered-list{
     margin-bottom:10px;
 }
@@ -1766,6 +1769,24 @@ ol.order-list>li{
     }
 }
 @media (max-width: 767px){
+    .flex-top-header .social-action ul li a.outline-join{
+        padding: 10px 25px;
+    }
+    .banner.connect-with-peers{
+        min-height:500px;
+    }
+    .banner-text{
+        padding:0 15px;
+    }
+    .tough-wrap{
+        margin-bottom:15px;
+    }
+    .banner-text h4{
+        margin-bottom:15px;
+    }
+    .banner.banner.connect-with-peers .container {
+        min-height: 500px;
+    }
     .flex-top-header .social-action ul li.button {
         margin: 0 10px 0px 10px;
     }

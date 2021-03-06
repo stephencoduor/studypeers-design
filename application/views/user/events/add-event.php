@@ -41,7 +41,7 @@
 									<div class="col-md-12">
 										<div class="align-items-center mb-2 no-gutters">
 											<div class="row  eventAdd">
-												<div class="col-md-6">
+												<div class="col-lg-6">
 													<div class="form-group calendar event">
 														<label>Start</label>
 														<div class="filtercalendar">

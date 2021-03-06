@@ -82,41 +82,66 @@ class Home extends CI_Controller
     public function contactUs()
     {   
         if ($this->input->post()) { 
-            $firstname  = $this->input->post('firstname');
-            $lastname   = $this->input->post('lastname');
-            $email      = $this->input->post('email');
-            $phoneNo    = $this->input->post('phoneNo');
-            $message    = $this->input->post('message');
+            $captcha=$_POST['g-recaptcha-response'];
+            if(empty($captcha)){
+                $message = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> Please fill the captcha.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button></div>';
 
-            $subject = 'New User has contacted via Contact Us';
-            $email_message  =   "Hello Admin,";
-            $email_message .= '<p>New user has contacted via contact us form.Below are the details : <br>
-                        Name : '.$firstname.' '.$lastname.'<br>
-                        Email : '.$email.'<br>
-                        Phone Number : '.$phoneNo.'<br>
-                        Message : '.$message.'<br>
-                        </p>';
+                $this->session->set_flashdata('flash_message', $message);
+                redirect(site_url('contact-us'), 'refresh');
+            }
+    
+            $secretKey = "6LdOJXAaAAAAAMERO90vAx3lWoapZ0taToJQTorn";
+            
+            $url = 'https://www.google.com/recaptcha/api/siteverify?secret=' . urlencode($secretKey) .  '&response=' . urlencode($captcha);
+            $response = file_get_contents($url);
+            $responseKeys = json_decode($response,true);
+            
+            if($responseKeys["success"]) {
+                $firstname  = $this->input->post('firstname');
+                $lastname   = $this->input->post('lastname');
+                $email      = $this->input->post('email');
+                $phoneNo    = $this->input->post('phoneNo');
+                $message    = $this->input->post('message');
 
-            $this->email_model->send_contact_email('studypeers.dev@gmail.com', $subject, $email_message);
+                $subject = 'New User has contacted via Contact Us';
+                $email_message  =   "Hello Admin,";
+                $email_message .= '<p>New user has contacted via contact us form.Below are the details : <br>
+                            Name : '.$firstname.' '.$lastname.'<br>
+                            Email : '.$email.'<br>
+                            Phone Number : '.$phoneNo.'<br>
+                            Message : '.$message.'<br>
+                            </p>';
 
-            $insertArr = array(
-                'firstname'         => $firstname,
-                'lastname'          => $lastname,
-                'email'             => $email,
-                'phoneNo'           => $phoneNo,
-                'message'           => $message,
-                
-                'status'            => 1,
-                
-                'created_at'        => date('Y-m-d H:i:s')
-            );
-            $this->db->insert('contact_us', $insertArr);
+                $this->email_model->send_contact_email('studypeers.dev@gmail.com', $subject, $email_message);
 
-            $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Your details submitted Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button></div>';
-            $this->session->set_flashdata('flash_message', $message);
-            redirect(site_url('contact-us'), 'refresh');
+                $insertArr = array(
+                    'firstname'         => $firstname,
+                    'lastname'          => $lastname,
+                    'email'             => $email,
+                    'phoneNo'           => $phoneNo,
+                    'message'           => $message,
+                    
+                    'status'            => 1,
+                    
+                    'created_at'        => date('Y-m-d H:i:s')
+                );
+                $this->db->insert('contact_us', $insertArr);
+
+                $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Your details submitted Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button></div>';
+                $this->session->set_flashdata('flash_message', $message);
+                redirect(site_url('contact-us'), 'refresh');
+            } else {
+                $message = '<div class="alert alert-danger" role="alert"><strong>Error!</strong> Invalid Captcha.<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button></div>';
+
+                $this->session->set_flashdata('flash_message', $message);
+                redirect(site_url('contact-us'), 'refresh');
+            }
         }
         $data['active'] = 'contactUs';
         $this->load->view('layouts/home-header', $data);

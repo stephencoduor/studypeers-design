@@ -6065,7 +6065,7 @@ Sidebar
     .navbar-toggle {
         position: absolute;
         right: 0;
-        top: 17px;
+        top: 5px;
         margin: 0;
     }
     .navbar-toggle .icon-bar {
