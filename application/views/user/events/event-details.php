@@ -1,6 +1,7 @@
 <?php $user_id = $this->session->get_userdata()['user_data']['user_id']; ?>
 <section class="mainContent">
 	<div class="scheduleWrapper">
+		<div class="flex-wrp">
 		<a class="backBtn col-sm-12" href="<?php echo base_url(); ?>account/events">
 			<svg class="sp-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
 				 xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
@@ -10,6 +11,7 @@
 								</svg>
 			Back to events
 		</a>
+		
 		<div class="col-md-12">
 			<ul class="eventscheduledWrap">
 				<li>
@@ -47,12 +49,12 @@
 						  $user_name = $this->db->get_where('user', array('id' => $event['created_by']))->row_array(); 
 
 					?>
-					
+					<div class="list-inner">
 						<figure>
 							<img src="<?php echo userImage($event['created_by']); ?>" alt="user">
 						</figure>
 						<figcaption><a href="<?php echo base_url().'sp/'.$user_name['username'] ?>"><?= $user['nickname']; ?></a></figcaption>
-					
+					</div>
 				</li>
 			</ul>
 			
@@ -462,6 +464,7 @@
 
 			</div>
 		</div>
+												</div>
 	</div>
 </section>
 
