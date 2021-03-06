@@ -214,21 +214,23 @@ class SocialLogin extends CI_Controller
 					$insert['long_live_token'] = $data['long_live_token'];
 				}
 				$insert['registration_type'] = $data['registration_type'];
-				$file_name = 'user_image_' . time() . '.jpg';
-				$local_file = 'uploads/users/' . $file_name;
-				$remote_file = $data['image'];
+				if(!empty($data['image'])){
+					$file_name = 'user_image_' . time() . '.jpg';
+					$local_file = 'uploads/users/' . $file_name;
+					$remote_file = $data['image'];
 
-				$ch = curl_init();
-				$fp = fopen($local_file, 'w+');
-				$ch = curl_init($remote_file);
-				curl_setopt($ch, CURLOPT_TIMEOUT, 50);
-				curl_setopt($ch, CURLOPT_FILE, $fp);
-				curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-				curl_setopt($ch, CURLOPT_ENCODING, "");
-				curl_exec($ch);
-				curl_close($ch);
-				fclose($fp);
-				$insert['image'] = $file_name;
+					$ch = curl_init();
+					$fp = fopen($local_file, 'w+');
+					$ch = curl_init($remote_file);
+					curl_setopt($ch, CURLOPT_TIMEOUT, 50);
+					curl_setopt($ch, CURLOPT_FILE, $fp);
+					curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+					curl_setopt($ch, CURLOPT_ENCODING, "");
+					curl_exec($ch);
+					curl_close($ch);
+					fclose($fp);
+					$insert['image'] = $file_name;
+				}
 				$user = $this->user_model->insert_data('user', $insert);
 				$insert['user_id'] = $user;
 				$insert['username'] = 'user' . $user; //generate user_id
