@@ -21,7 +21,8 @@
     max-width: 95%;
 }
 .mainContent.profile.active{
-    max-width: 95%;
+    max-width: 90%;
+    margin:0 auto!important
 }
 .profileHeaderWrapper {
     width: 100%;
@@ -2595,7 +2596,7 @@ shareOptionList celebrate*/
     border-radius: 8px;
     position: absolute;
     top: -95px;
-    right: 70px;
+    right: 0;
     background: #fff;
     box-shadow: 1px 3px 4px -2px #e3e3e3;
     /*display: none;*/
@@ -2835,11 +2836,33 @@ shareOptionList celebrate*/
 .sortWrapper {
     padding-left: 15px;
 }
+@media(max-width: 1280px) { 
+    .shareMenu.shareOption{
+        right: 0;
+        top: -135px;
+    }
+}
+@media(max-width: 1024px) { 
+    .info-profile{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .profileInformation .name{
+        font-size:15px;
+    }
+    .profileInformation .username{
+        flex-direction: column;
+    }
+    .profileInformation .username span{
+        margin-left:0;
+    }
+}
+
 @media(max-width: 767px) {
     .shareMenu.shareOption {
         top: -200px;
         right: 0;
-        width: 100%;
+        width: auto;
     }
     .TabsAndSortWrapper {
         align-items: flex-start;
@@ -3313,6 +3336,7 @@ shareOptionList celebrate*/
     justify-content: flex-start;
     color:#185aeb;
     padding: 0 5px;
+    white-space: nowrap;
 }
 .dashboard-qa .action ul li a svg {
     width:16px;
@@ -3951,7 +3975,7 @@ input:-webkit-autofill:active {
     }
     .tabPaneWrapper .right{
         min-width: auto;
-        width:100%!important;
+        width:calc(100% - 60px)!important;
         padding-left:0;
     }
     
