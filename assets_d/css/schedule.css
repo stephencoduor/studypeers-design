@@ -996,9 +996,12 @@ div[data-edit] {
     width: 25px;
     height:25px;
 }
+.filtercalendar .input-group.date input{
+    padding-left:40px;
+}
 .eventWrapper {
     overflow: auto !important;
-    height: 100vh !important;
+    min-height: 100vh !important;
     width: 100% !important;
     margin-right: 0 !important;
     position: static !important;
@@ -2567,7 +2570,7 @@ div[data-edit] {
         justify-content: flex-start;
     }
     .filterSearch, .filtercalendar, .filterSelect{
-        width:32% !important;
+        width:100% !important;
         margin-right: 10px;
         margin-bottom: 20px;
     }
@@ -2662,6 +2665,13 @@ div[data-edit] {
     }
 }
 @media(max-width:767px){
+    .scheduleWrapper .header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .eventDetail .userWrap{
+        flex-direction: row;
+    }
     .events{
         padding-left:0;
     }
@@ -3204,6 +3214,7 @@ div[data-edit] {
         flex: 0 100%;
     }
     .filtercalendar .input-group.date input{
+        width:100%!important;
         padding: 13px 10px 13px 40px;
     }
     .form-group.calendar.event{

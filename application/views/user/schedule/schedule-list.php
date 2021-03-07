@@ -148,7 +148,7 @@
 							</span>
 							<input type='text' class="form-control" name="start-date" id="start-date" value="<?php if ($startdate_search != '') {
 																													echo date('m/d/Y h:i A', strtotime($startdate_search));
-																												} ?>" style="width: 90%;" />
+																												} ?>"/>
 
 						</div>
 					</div>

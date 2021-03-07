@@ -746,6 +746,20 @@ a.filterBtn,a.sortMenu{
 }
 
 @media(max-width: 1300px){
+    .event-description {
+        flex-direction: column;
+    }
+    .event-description .left {
+        font-size: 15px;
+        margin-bottom: 10px;
+    }
+    .event-description .right figcaption {
+        font-size: 15px;
+        margin-right: 10px;
+    }
+    .event-description .right a{
+        font-size:15px; 
+    }
     .navbar-brand {
         right:0;
     }
@@ -950,7 +964,7 @@ a.filterBtn,a.sortMenu{
     .mainContent.active {
         width:100%;
         margin: 0px !important;
-        padding: 0 15px;
+        padding: 0 30px;
     }
     .modal-body .studybuttonGroup button {
         min-width: 100px;
