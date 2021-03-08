@@ -69,6 +69,19 @@ class Account extends CI_Controller
         return $peer;
     }
 
+    public function searchResult(){
+        $data['index_menu']  = 'search';
+        $data['title']  = 'Search Result | Studypeers';
+
+        $this->load->view('user/include/header', $data);
+        $this->load->view('user/search-result');
+        
+        $this->load->view('user/include/right-sidebar');
+        
+        $this->load->view('user/include/firebase-include');
+        $this->load->view('user/include/footer-dashboard');
+    }
+
 
     public function dashboard()
     {
@@ -4390,9 +4403,20 @@ class Account extends CI_Controller
         if ($this->input->post()) {
             $post_id              = $this->input->post('post_id');
 
-            $post_details = $this->db->get_where('posts', array('id' => $post_id))->row_array();
+            $post_query = $this->db->query('SELECT * from posts where id = '.$post_id)->row_array();
+            $post_images_query = $this->db->query('SELECT * from post_images where post_id = '.$post_id)->result_array();
+            $post_videos_query = $this->db->query('SELECT * from post_videos where post_id = '.$post_id)->result_array();
+            $post_options_query = $this->db->query('SELECT * from post_poll_options where post_id = '.$post_id)->result_array();
+            $post_documents_query = $this->db->query('SELECT * from post_documents where post_id = '.$post_id)->result_array();
 
-            echo $post_details['post_content_html'];die;
+            $posts['post_details'] = $post_query;
+            $posts['post_images'] = $post_images_query;
+            $posts['post_videos'] = $post_videos_query;
+            $posts['post_poll_options'] = $post_options_query;
+            $posts['post_documents'] = $post_documents_query;
+
+            $html = $this->load->view('user/profile/edit-post-modal', $posts, true);
+            echo $html;
 
         }
     }

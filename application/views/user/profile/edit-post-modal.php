@@ -3,16 +3,12 @@ $userdata = $this->session->userdata('user_data');
 $user_detail    = $this->db->query("SELECT * from user As a INNER JOIN user_info As b ON a.id = b.userID WHERE a.id = ".$userdata['user_id'])->row_array();
 $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 ?>
-<div class="modal fade" id="createPost" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
-            <form method="post" id="addPostForm" action="<?php echo base_url(); ?>Profile/savePost" enctype="multipart/form-data">
-                <input type="hidden" name="shareWithPeersId" id="shareWithPeersId">
-                <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+
+<form method="post" id="editPostForm" action="<?php echo base_url(); ?>Profile/updatePost" enctype="multipart/form-data">
+                
                 <div class="modal-body">
                     <div class="createHeader">
-                        <h4>New Post</h4>
+                        <h4>Edit Post</h4>
                         <div class="closePost" data-dismiss="modal">
                             <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
                         </div>
@@ -54,22 +50,29 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                             </div>
                         </div>
                         <div class="postMessage">
-                            <textarea id="messagepostarea" name="messagepostarea" placeholder="What's on your mind?"></textarea>
+                            <input type="hidden" name="editPostId" id="editPostId" value="<?= $post_details['id']; ?>">
+                            <textarea id="messagepostareaedit" name="messagepostareaedit" placeholder="What's on your mind?"><?= $post_details['post_content_html']; ?></textarea>
                         </div>
-                        <div class="pollsWrapper">
+                        <?php if (count($post_poll_options) > 0) { 
+                                $poll_display = '';
+                            } else {
+                                $poll_display = 'display:none;';
+                            }
+
+                        ?>
+                        <div class="pollsWrapper" style="<?= $poll_display; ?>">
                             <div class="pollsform">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="option[1]" placeholder="Option 1">
-                                    
-                                </div>
-                                <div class="form-group">
-                                    <input type="text" class="form-control" name="option[2]" placeholder="Option 2">
-                                    
-                                </div>
-                                <div class="form-group" id="option_div_3">
-                                    <input type="text" class="form-control" name="option[3]" placeholder="Option 3">
+                                <?php $count = 1; foreach ($post_poll_options as $key => $value) { ?>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="edit_option[<?= $count; ?>]" placeholder="Option <?= $count; ?>" value="<?= $value['options']; ?>">
+                                        <input type="hidden" class="form-control" name="edit_option_id[<?= $count; ?>]" value="<?= $value['id']; ?>">
+                                    </div>
+                                <?php } ?>
+                                
+                                <!-- <div class="form-group" id="option_div_3">
+                                    <input type="text" class="form-control" name="edit_option[3]" placeholder="Option 3">
                                     <a href="javascript:void(0)" onclick="removeOptionDiv('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
-                                </div>
+                                </div> -->
                             </div>
                             <div class="addmore">
                                 + Add Option
@@ -80,10 +83,10 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                     <div class="filtercalendar">
                                         <div class="input-group date" id="datetimepickerstart">
                                             <span class="input-group-addon" for="start-date"></span>
-                                            <input type="text" class="form-control" name="poll-end-date" placeholder="dd/mm/yy" id="start-date">
+                                            <input type="text" class="form-control" name="poll-end-date-edit" placeholder="dd/mm/yy" id="start-date-edit" value="<?= $post_details['poll_end_date']; ?>">
                                         </div>
                                         <div class="input-group--overlap" id="selectTime1">
-                                            <input type="text" class="form-control form-control--lg" placeholder="hh:mm" name="poll-end-time">
+                                            <input type="text" class="form-control form-control--lg" placeholder="hh:mm" name="poll-end-time-edit" value="<?= $post_details['poll_end_time']; ?>">
                                         </div>
                                     </div>
                                 </div>
@@ -102,7 +105,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                         <a href="javascript:void(0)">
                                             <button type="button" class="choose_btn shareBtn">
                                                 <img src="<?php echo base_url(); ?>assets_d/images/choose-file.svg" alt="Choose File"> Choose File
-                                                <input type="file" name="file[]" id="document" multiple="multiple"/>
+                                                <input type="file" name="file_edit[]" id="document" multiple="multiple"/>
                                             </button>
                                         </a>
                                     </li>
@@ -143,7 +146,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                             <div class="imageSection" id="upload_image_section">
                                 <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="image/video">
                                 <span>Image/Video</span>
-                                <input type="file" class="image_upload_button" id="imgInp1" name="file[]" multiple="multiple">
+                                <input type="file" class="image_upload_button" id="imgInp1" name="file_edit[]" multiple="multiple">
                             </div>
                             <div class="pollSection">
                                 <img src="<?php echo base_url(); ?>assets_d/images/poll.svg" alt="image/video">
@@ -159,8 +162,8 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                             </div> -->
                         </div>
                         <div class="studybuttonGroup post ">
-                            <button type="button" class="event_action" id="save_post_from_ajax" >
-                                Post
+                            <button type="button" class="event_action" id="update_post_from_ajax" >
+                                Update Post
                             </button>
                         </div>
                     </div>
@@ -183,20 +186,3 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     </div>
                 </div>
             </form>
-
-        </div>
-    </div>
-</div>
-
-
-
-
-<div class="modal fade" id="editPost" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content" id="editPostContent">
-            
-
-        </div>
-    </div>
-</div>

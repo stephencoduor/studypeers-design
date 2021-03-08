@@ -10603,8 +10603,8 @@
 				'post_id': post_id
 			},
 			success: function(data) {
-				$("#editPost #editPostId").val(post_id);
-				$("#editPost #messagepostareaedit").val(data);
+				
+				$("#editPost #editPostContent").html(data);
 			}
 		});
 		
