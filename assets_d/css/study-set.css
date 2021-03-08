@@ -2356,6 +2356,10 @@ l,.share:focus
     }
 }
 @media (max-width:767px) {
+    
+    .flashcard-controls .shareOptionBox ul li{
+        margin-bottom:10px;
+    }
     .flashcard-controls{
         padding:0 50px;
     }
@@ -2409,10 +2413,9 @@ l,.share:focus
     .main_subheaderLeft{
         padding: 10px 15px 5px 0;
     }
-    .main_subheaderCenter{
-        flex-direction: column;
-        width:100%;
-        justify-content: space-between;
+    .main_subheaderCenter {
+        width: 100%;
+        justify-content: center;
     }
     .main_subheaderCenter ul:first-child{
         margin-bottom:15px;
@@ -3378,6 +3381,13 @@ l,.share:focus
     background-color: transparent;
 }
 @media (max-width:767px) {
+    .main_subheaderCenter.newflash{
+        width:100%;
+    }
+    .main_subheaderLeft {
+        width: 100%;
+        justify-content: space-between;
+    }
     .studySetWrapper .feedVoteWrap{
         flex-direction: column;
     }

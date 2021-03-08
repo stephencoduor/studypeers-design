@@ -2474,6 +2474,18 @@ div[data-edit] {
     .mainContent.active button.fc-prev-button.fc-button.fc-button-primary {
         left: 47%;
     }
+    .events {
+        width: 100%;
+        padding-left: 0;
+        padding-top:30px;
+    }
+    
+    .feed-card.list{
+        margin-left:0;
+    }
+    .monthEvents{
+        flex-direction: column;
+    }
 }
 @media (max-width: 1200px){
     .scheduleWrapper .header{
@@ -2683,6 +2695,12 @@ div[data-edit] {
     }
 }
 @media(max-width:767px){
+    .feed_card_inner {
+        padding: 0px 20px 15px 15px;
+    }
+    .feed-card.list .right{
+        padding-left:0;
+    }
     .btn-wrp-right{
         flex-direction: column;
         align-items: flex-start;
