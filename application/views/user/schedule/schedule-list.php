@@ -78,7 +78,7 @@
 			?>
 
 
-			<a href="<?php echo base_url(); ?>account/addSchedule">
+			<a href="<?php echo base_url(); ?>account/addSchedule" class="create-new">
 				<svg xmlns="http://www.w3.org/2000/svg" id="prefix__Group_667" width="20" height="20" data-name="Group 667" viewBox="0 0 20 20">
 					<defs>
 						<style>
