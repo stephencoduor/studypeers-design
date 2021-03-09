@@ -2527,9 +2527,6 @@ textarea{
         width:100%;
         justify-content: space-between;
     }
-    .feed_card_footer .action {
-        width: 100%;
-    }
     .studySetWrapper.qa-detail .commentfilterWrapper .filterSelect{
         width:140px;
     }
@@ -2540,9 +2537,8 @@ textarea{
         margin-left:0;
     }
     .feed_card_footer{
-        padding: 12px 25px 12px 15px;
+        padding: 12px 0 12px 0;
         position: relative;
-        flex-direction: column;
     }
     .modalText{
         font-size:16px;
@@ -2607,7 +2603,8 @@ textarea{
         display: none;
     }
     .userWrap{
-        flex-direction: column;
+        width:100%;
+        align-items: center;
     }
     .feed-card .timeperiod ul li{
         width:100%;
@@ -2814,7 +2811,7 @@ textarea{
     }
     .userWrap .user-name {
         width:100%;
-        margin-bottom:10px;
+        margin-bottom:0;
     }
     .feedWrapper.listView .feedVoteWrap {
         max-width: 100%;
