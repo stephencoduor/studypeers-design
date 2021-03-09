@@ -768,6 +768,7 @@ class Profile extends CI_Controller {
 
 
     public function updatePost(){
+
         $post_id = $this->input->post('post_id');
         $html_content = $this->input->post('html_content');
 
@@ -791,7 +792,7 @@ class Profile extends CI_Controller {
             }
         }
         
-        echo $result;
+        echo $result;die;
     }
 
 	public function redirect_page(){

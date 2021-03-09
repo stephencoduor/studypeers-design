@@ -4420,4 +4420,17 @@ class Account extends CI_Controller
 
         }
     }
+
+
+    public function deletePollOption(){
+        $option_id              = $this->input->post('option_id');
+
+        $this->db->where(array('poll_option_id' => $option_id));
+        $this->db->delete('user_poll_data');
+
+        $this->db->where(array('id' => $option_id));
+        $this->db->delete('post_poll_options');
+
+        echo 1;die;
+    }
 }
