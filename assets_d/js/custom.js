@@ -617,4 +617,12 @@ $(window).on("load", function () {
     $('.eventDetail').mCustomScrollbar({ 
         theme:"dark-3"        
     });
+
+    $("#search-info").keyup(function () {
+        $("#search-result").css("display","block");
+        $("#search-result > li").hide().filter(":contains(" + $(this).val() + ")").show();
+    });
+    $("#search-info").focus(function () {
+        $(".search-info-wrp").addClass("active");
+    });
 });
