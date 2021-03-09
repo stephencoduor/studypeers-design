@@ -248,6 +248,19 @@
             }
         });
     }
+
+    $(document).ready(function(){
+        $(document).on("click", '.resend-otp', resendOTP);
+    });
+
+
+    function resendOTP(e){
+        targetUrl = $(this).attr('href');
+        encodedData = $(this).attr('id');
+        $('<form/>').append('<input name="encodedData" value="'+ encodedData +'"/>').attr('action', targetUrl ).attr('method', 'POST').appendTo('body').submit();
+
+        return false; 
+    };
 </script>
 </body>
 
