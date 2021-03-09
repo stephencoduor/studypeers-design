@@ -2370,6 +2370,12 @@ textarea{
     }
 }
 @media(max-width:1200px){
+    .studySetWrapper .header{
+        flex-direction: column;
+    }
+    .studySetWrapper .header .studybuttonGroup{
+        margin:15px 0 0;
+    }
     .filterWrapper.active .filterSearch{width:100%;}
     .filterSearch {
         width: 100%;
@@ -2378,12 +2384,6 @@ textarea{
         margin-bottom: 10px;
         display: inline-block;
         height: auto;
-    }
-    .studySetWrapper.qa-detail .commentfilterWrapper .filterSelect {
-        width: 16%;
-    }
-    .filterWrapper.active form {
-        width: 46%;
     }
 }
 @media(max-width:1120px) {
