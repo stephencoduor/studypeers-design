@@ -36,7 +36,10 @@ $dotenv->load();
 |
 */
 
+
 $config['base_url'] = getenv('APP_URL');
+
+
 
 
 /*
