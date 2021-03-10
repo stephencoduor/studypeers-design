@@ -218,13 +218,17 @@ class LoginController extends CI_Controller
 
     public function resendOTPPage()
     {
-        $userInfo = $this->input->get('params');
+        $userInfoEncoded = $this->input->post('encodedData');
 
-        if (empty($userInfo)) {
+        $userData = unserialize(base64_decode($userInfoEncoded));
+
+        
+
+        if (empty($userInfoEncoded)) {
             redirect('signup');
         }
 
-        $userData = unserialize(base64_decode($userInfo));
+        // $userData = unserialize(base64_decode($userInfo));
 
         $otpHidden = $this->user_model->otp($userData['email']);
 
@@ -237,6 +241,7 @@ class LoginController extends CI_Controller
         $dataPage['message'] = 'Verification code has been re-send on your mail.';
         $dataPage['otp'] = $otpHidden;
         $dataPage['page_name'] = 'valid_email_otp';
+        $dataPage['active'] = 'submit';
         $dataPage['userData'] = base64_encode(serialize($createNewUser));
         $this->load->view('index', $dataPage);
     }

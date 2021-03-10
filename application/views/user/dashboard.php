@@ -10593,6 +10593,25 @@
 	});
 
 
+	$(document).on("click", ".editPostById", function() {
+		var post_id = $(this).data('id');
+		var url = '<?php echo base_url('account/getPostDataById') ?>';
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: {
+				'post_id': post_id
+			},
+			success: function(data) {
+				
+				$("#editPost #editPostContent").html(data);
+			}
+		});
+		
+		
+	});
+
+
 	$(document).on('submit', 'form.bestAnswerDashboard', function(e) {
 
 		var form = $(this);

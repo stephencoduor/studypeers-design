@@ -731,6 +731,9 @@
         });
 
 
+        
+
+
 
         $(document).on('click', '#save_post_from_ajax', function() {
             var html_content = $('#messagepostarea').val();
@@ -953,6 +956,24 @@
             imgsrc.attr('class', 'notification-disabled')
         }
     })
+
+
+    function removeOptionDivDelete(id, option_id) {
+                    url = '<?php echo base_url(); ?>account/deletePollOption';
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        
+                        data: {
+                            "option_id": option_id
+                        },
+                        
+                        success: function(result) {
+                            $('#edit_option_div_' + id).remove();
+                        }
+                    });
+                    
+                }
 </script>
 
 </body>
