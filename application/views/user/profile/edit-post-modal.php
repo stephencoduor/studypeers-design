@@ -62,10 +62,27 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         ?>
                         <div class="pollsWrapper" style="<?= $poll_display; ?>">
                             <div class="pollsform">
-                                <?php $count = 1; foreach ($post_poll_options as $key => $value) { ?>
-                                    <div class="form-group">
+                                <?php if(!empty($post_poll_options)) { $count = 1; foreach ($post_poll_options as $key => $value) { ?>
+                                    <div class="form-group" id="edit_option_div_<?= $count; ?>">
                                         <input type="text" class="form-control" name="edit_option[<?= $count; ?>]" placeholder="Option <?= $count; ?>" value="<?= $value['options']; ?>">
+                                        <?php if($count > 2) { ?>
+                                            <a href="javascript:void(0)" onclick="removeOptionDivDelete('<?= $count; ?>', '<?= $value['id']; ?>')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                                        <?php } ?>
+                                        
                                         <input type="hidden" class="form-control" name="edit_option_id[<?= $count; ?>]" value="<?= $value['id']; ?>">
+                                    </div>
+                                <?php $count++; } } else { ?>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="edit_option[1]" placeholder="Option 1">
+                                        
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" name="edit_option[2]" placeholder="Option 2">
+                                        
+                                    </div>
+                                    <div class="form-group" id="edit_option_div_3">
+                                        <input type="text" class="form-control" name="edit_option[3]" placeholder="Option 3">
+                                        <a href="javascript:void(0)" onclick="removeOptionDiv('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
                                     </div>
                                 <?php } ?>
                                 
@@ -186,3 +203,52 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     </div>
                 </div>
             </form>
+
+
+
+            <script type="text/javascript">
+                
+                $(document).on('click', '#update_post_from_ajax', function() {
+                    var html_content = $('#messagepostareaedit').val(); 
+                    if (html_content != '') {
+                        
+                        $('#editPostForm').submit();
+                        
+                    }
+
+                });
+
+                $('#editPostForm').on("submit", function(e) {
+                    e.preventDefault();
+                    $('.ajax-loading').show();
+                    $('#editPost').modal('hide');
+
+                    var formData = new FormData(this);
+                    var url = $(this).attr('action');
+                    var html_content = $('#messagepostareaedit').val();
+                    var post_id = $('#editPostId').val();
+                    formData.append('html_content', html_content);
+                    formData.append('post_id', post_id);
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        dataType: 'json',
+                        data: formData,
+                        cache: false,
+                        contentType: false,
+                        processData: false,
+                        success: function(result) {
+                            console.log(result);
+                            if (result == true) {
+                                window.location.href = base_url + 'account/dashboard';
+                            }
+                            $('.ajax-loading').hide();
+                        }
+                    });
+                });
+
+
+
+                
+
+            </script>
