@@ -73,7 +73,9 @@ class User extends CI_Controller {
         $get_user = $this->db->get_where('user', array('id' => $user_id))->row_array();
         $this->email_model->send_welcome_email($get_user['email']);
         $this->data['page_name'] = 'verified_email';
+        $this->data['active'] = 'verified_email';
         $this->load->view('index',$this->data); 
+
         
     }
     
