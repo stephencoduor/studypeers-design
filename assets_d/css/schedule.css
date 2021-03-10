@@ -12,6 +12,17 @@
     font-weight: bold;
     color: #2a234f;
     text-transform: capitalize;
+    white-space: nowrap;
+}
+.btn-wrp-right{
+    display: flex;
+    align-items: center;
+}
+.btn-wrp-right a .gdrive{
+    height:42px;
+    text-transform: uppercase;
+    font-size:12px;
+    font-weight:700;
 }
 .choose_btn.gdrive{
     border-radius:4px;
@@ -23,13 +34,16 @@
     text-align: center;
     color: #fff;
     border-radius: 4px;
-    padding: 10px 20px;
+    
     border: 1px solid transparent;
     margin: 0 2px;
     transition: all 300ms ease-in-out;
     display: inline-block;
     vertical-align: middle;
     text-transform: uppercase;
+}
+.scheduleWrapper .header a.create-new{
+    padding: 10px 20px;
 }
 .scheduleWrapper .header a svg {
     fill: #fff;
@@ -996,9 +1010,12 @@ div[data-edit] {
     width: 25px;
     height:25px;
 }
+.filtercalendar .input-group.date input{
+    padding-left:40px;
+}
 .eventWrapper {
     overflow: auto !important;
-    height: 100vh !important;
+    min-height: 100vh !important;
     width: 100% !important;
     margin-right: 0 !important;
     position: static !important;
@@ -2457,8 +2474,24 @@ div[data-edit] {
     .mainContent.active button.fc-prev-button.fc-button.fc-button-primary {
         left: 47%;
     }
+    .events {
+        width: 100%;
+        padding-left: 0;
+        padding-top:30px;
+    }
+    
+    .feed-card.list{
+        margin-left:0;
+    }
+    .monthEvents{
+        flex-direction: column;
+    }
 }
 @media (max-width: 1200px){
+    .scheduleWrapper .header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
     .mainContent.active button.fc-prev-button.fc-button.fc-button-primary {
         left: 42%;
     }
@@ -2567,7 +2600,7 @@ div[data-edit] {
         justify-content: flex-start;
     }
     .filterSearch, .filtercalendar, .filterSelect{
-        width:32% !important;
+        width:100% !important;
         margin-right: 10px;
         margin-bottom: 20px;
     }
@@ -2662,6 +2695,23 @@ div[data-edit] {
     }
 }
 @media(max-width:767px){
+    .feed_card_inner {
+        padding: 0px 20px 15px 15px;
+    }
+    .feed-card.list .right{
+        padding-left:0;
+    }
+    .btn-wrp-right{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .scheduleWrapper .header{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .eventDetail .userWrap{
+        flex-direction: row;
+    }
     .events{
         padding-left:0;
     }
@@ -3204,6 +3254,7 @@ div[data-edit] {
         flex: 0 100%;
     }
     .filtercalendar .input-group.date input{
+        width:100%!important;
         padding: 13px 10px 13px 40px;
     }
     .form-group.calendar.event{

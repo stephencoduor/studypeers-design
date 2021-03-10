@@ -41,7 +41,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="info-section bg-left">
+		<div class="info-section bg-right">
 			<div class="container">
 				<div class="row">
 					<div class="col-md-6">

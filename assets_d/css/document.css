@@ -2448,6 +2448,26 @@ textarea.textarea-gray {
     }
 }
 @media(max-width:1300px) {
+   
+    .feed-card.list{
+        flex-direction: column; 
+    }
+    .studySetWrapper .left{
+        width:100%;
+    }
+    .studySetWrapper .right{
+        width:100%;
+        padding-left:0;
+    }
+    .filterSearch{
+        margin-bottom:10px;
+    }
+    .studySetWrapper.list .buttonGroup{
+        flex-direction: row;
+    }
+    .filterWrapper{
+        flex-direction: column;
+    }
     .filterWrapper.active .filterSearch{width:53%;}
     /*.feedWrapper.listView .feed-card {
         max-width: 48%;
@@ -2482,6 +2502,17 @@ textarea.textarea-gray {
     }
 }
 @media(max-width: 1100px){
+    .feedWrapper.listView .feed_card_footer{
+        flex-direction: column;
+    }
+    .feedWrapper.listView .userWrap{
+        width: 100%;
+        margin-bottom:10px;
+    }
+    .feedWrapper.listView .action{
+        width:100%;
+        top:0;
+    }
     .filterWrapper.active .filterSearch{width:37%;}
     .filterSearch {
         width: 55%;
@@ -2581,7 +2612,8 @@ textarea.textarea-gray {
         font-size: 15px;
     }
 }
-@media(max-width:767px){
+@media (max-width: 767px){
+  
     #confirmationModal .transparentBtn {
         margin-right: 15px!important;
     }

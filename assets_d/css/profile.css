@@ -2843,6 +2843,7 @@ shareOptionList celebrate*/
     }
 }
 @media(max-width: 1024px) { 
+   
     .info-profile{
         flex-direction: column;
         align-items: flex-start;
@@ -3885,16 +3886,39 @@ input:-webkit-autofill:active {
         margin: 10px 0 0 15px;
     }
     .profileInformation .name{
-        font-size:16px;
+        font-size:14px;
+        white-space: nowrap;
+        width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .user-name figcaption {
+        font-size: 14px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    .timeline {
+        margin-right: 0;
+        white-space: nowrap;
+    }
+    .username span{
+        font-size:14px;
+    }
+    .shareProfile img {
+        margin-right: 5px;
     }
     .shareProfile{
-        font-size:14px;
+        font-size:13px;
     }
     .tabPaneWrapper{
         flex-direction: column;
     }
 }
 @media (min-width: 768px) and (max-width: 1024px) { 
+    .profileInformation .name{
+        width: auto;
+    }
     .socialAction li a span {
         top: 0;
         white-space: nowrap;
