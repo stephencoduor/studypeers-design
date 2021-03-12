@@ -197,11 +197,12 @@ class SocialLogin extends CI_Controller
 				$user['username'] = $user_details->username;
 				$user['is_logged_in'] = 2;
 				$user['is_verified']  = $user_details->is_verified;
+				$user['form_step'] = $user_details->form_step;
+
 				$this->session->set_userdata('user_data', $user);
 				$this->session->unset_userdata('social_signup');
 
 				if (!$user_details->form_completed) {
-	                $this->session->set_userdata('user_data', $sessionData);
 	                return redirect('complete-step');
 	            }
 	            if($user['is_verified'] == 1){
@@ -284,7 +285,7 @@ class SocialLogin extends CI_Controller
 		$client->addScope("profile");
 		//Send Client Request
 		$objOAuthService = new Google_Service_Oauth2($client);
-		$authUrl = $client->createAuthUrl();
+		$authUrl = $client->createAuthUrl(); 
 		header('Location: ' . $authUrl);
 	}
 
