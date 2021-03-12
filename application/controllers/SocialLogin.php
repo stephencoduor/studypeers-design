@@ -196,10 +196,21 @@ class SocialLogin extends CI_Controller
 				$user['user_id'] = $user_details->id;
 				$user['username'] = $user_details->username;
 				$user['is_logged_in'] = 2;
+				$user['is_verified']  = $user_details->is_verified;
 				$this->session->set_userdata('user_data', $user);
 				$this->session->unset_userdata('social_signup');
+
+				if (!$user_details->form_completed) {
+	                $this->session->set_userdata('user_data', $sessionData);
+	                return redirect('complete-step');
+	            }
+	            if($user['is_verified'] == 1){
+	                return redirect('account/dashboard');
+	            } else {
+	                return redirect('not-verified-user');
+	            }
 				//redirect to user's dashboard
-				redirect(base_url() . 'account/dashboard');
+				
 			} else {
 				$name = $data['name'];
 				$split_name = $this->split_name($name);
