@@ -132,15 +132,336 @@
                             </div>
                         </div>
                     </div>
+                    <div class="view-all-section"><a href="">View All Peers</a></div>
                 </div>
             </div>
             <div id="posts" class="tab-pane fade">
-                <h3>Menu 1</h3>
-                <p>Some content in menu 1.</p>
+                <div class="content-card seprate-border">
+                    <div class="title-wrap">
+                        <h3>Posts</h3>
+                    </div>
+                    <div class="post-row-wrap">
+                        <div class="user-top">
+                            <div class="user-top-left">
+                                <div class="user-img">
+                                    <figure>
+                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                    </figure>
+                                </div>
+                                <div class="user-name-wrap">
+                                    <h3>Lorem Ipsum</h3>
+                                    <div class="badgeList">
+                                        <ul>
+                                            <li class="badge badge1">
+                                                <a href="">University of Florida</a>
+                                            </li>
+                                            <li class="badge badge3">
+                                                <a href="">
+                                                    Faculty
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-top-right">
+                                <div class="timeline-action">
+                                    <span class="timeline">a week ago</span>
+                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="content-info-area">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+                        </div>
+                        <div class="like-comment-wrap">
+                            <div class="like-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                            <div class="comment-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-row-wrap">
+                        <div class="user-top">
+                            <div class="user-top-left">
+                                <div class="user-img">
+                                    <figure>
+                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                    </figure>
+                                </div>
+                                <div class="user-name-wrap">
+                                    <h3>Lorem Ipsum</h3>
+                                    <div class="badgeList">
+                                        <ul>
+                                            <li class="badge badge1">
+                                                <a href="">University of Florida</a>
+                                            </li>
+                                            <li class="badge badge3">
+                                                <a href="">
+                                                    Faculty
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-top-right">
+                                <div class="timeline-action">
+                                    <span class="timeline">a week ago</span>
+                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="content-info-area">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+                        </div>
+                        <div class="like-comment-wrap">
+                            <div class="like-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                            <div class="comment-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-row-wrap">
+                        <div class="user-top">
+                            <div class="user-top-left">
+                                <div class="user-img">
+                                    <figure>
+                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                    </figure>
+                                </div>
+                                <div class="user-name-wrap">
+                                    <h3>Lorem Ipsum</h3>
+                                    <div class="badgeList">
+                                        <ul>
+                                            <li class="badge badge1">
+                                                <a href="">University of Florida</a>
+                                            </li>
+                                            <li class="badge badge3">
+                                                <a href="">
+                                                    Faculty
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-top-right">
+                                <div class="timeline-action">
+                                    <span class="timeline">a week ago</span>
+                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="content-info-area">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+                        </div>
+                        <div class="like-comment-wrap">
+                            <div class="like-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                            <div class="comment-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-row-wrap">
+                        <div class="user-top">
+                            <div class="user-top-left">
+                                <div class="user-img">
+                                    <figure>
+                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                    </figure>
+                                </div>
+                                <div class="user-name-wrap">
+                                    <h3>Lorem Ipsum</h3>
+                                    <div class="badgeList">
+                                        <ul>
+                                            <li class="badge badge1">
+                                                <a href="">University of Florida</a>
+                                            </li>
+                                            <li class="badge badge3">
+                                                <a href="">
+                                                    Faculty
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-top-right">
+                                <div class="timeline-action">
+                                    <span class="timeline">a week ago</span>
+                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="content-info-area">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+                        </div>
+                        <div class="like-comment-wrap">
+                            <div class="like-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                            <div class="comment-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="post-row-wrap">
+                        <div class="user-top">
+                            <div class="user-top-left">
+                                <div class="user-img">
+                                    <figure>
+                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                    </figure>
+                                </div>
+                                <div class="user-name-wrap">
+                                    <h3>Lorem Ipsum</h3>
+                                    <div class="badgeList">
+                                        <ul>
+                                            <li class="badge badge1">
+                                                <a href="">University of Florida</a>
+                                            </li>
+                                            <li class="badge badge3">
+                                                <a href="">
+                                                    Faculty
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-top-right">
+                                <div class="timeline-action">
+                                    <span class="timeline">a week ago</span>
+                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="content-info-area">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+                        </div>
+                        <div class="like-comment-wrap">
+                            <div class="like-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                            <div class="comment-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-all-section"><a href="">View All Posts</a></div>
+                </div>
             </div>
             <div id="questions" class="tab-pane fade">
-                <h3>Menu 2</h3>
-                <p>Some content in menu 2.</p>
+                <div class="content-card seprate-border">
+                    <div class="title-wrap">
+                        <h3>Questions</h3>
+                    </div>
+                    <div class="post-row-wrap">
+                        <div class="user-top">
+                            <div class="user-top-left">
+                                <div class="user-img">
+                                    <figure>
+                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                    </figure>
+                                </div>
+                                <div class="user-name-wrap">
+                                    <h3>Lorem Ipsum</h3>
+                                    <div class="badgeList">
+                                        <ul>
+                                            <li class="badge badge1">
+                                                <a href="">University of Florida</a>
+                                            </li>
+                                            <li class="badge badge3">
+                                                <a href="">
+                                                    Faculty
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-top-right">
+                                <div class="timeline-action">
+                                    <span class="timeline">a week ago</span>
+                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="content-info-area">
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+                        </div>
+                        <div class="like-comment-wrap">
+                            <div class="like-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                            <div class="comment-wrap">
+                                <ul>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="view-all-section"><a href="">View All Questions</a></div>
+                </div>
             </div>
             <div id="documents" class="tab-pane fade">
                 <h3>Menu 2</h3>
