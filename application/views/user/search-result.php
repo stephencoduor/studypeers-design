@@ -1,4 +1,4 @@
-<section class="mainContent">
+<!-- <section class="mainContent">
     <div class="main-home-wrapper">
         <div class="tabs-wrappper">
             <div class="tabslisting">
@@ -485,4 +485,4 @@
             </div>
         </div>
     </div>
-</section>
+</section> -->
