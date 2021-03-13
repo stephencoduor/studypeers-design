@@ -1,11 +1,15 @@
     <section class="hero-section" style="padding-top: 150px;background-color:#e7e5e5">
     	<div class="container margin_60" style="padding-bottom: 20px">
     		<div class="row justify-content-center">
-    			<?php if ($message) { ?>
+    			<?php if (isset($message)) { ?>
     				<div class="col-xl-6 col-lg-6 col-md-8" style="text-align: center;background-color:green;color:#ffffff;padding: 10px;margin-bottom: 20px">
     					<span><?= $message ?></span>
     				</div>
-    			<?php } ?>
+    			<?php } if(isset($errormessage)) { ?>
+                    <div class="col-xl-6 col-lg-6 col-md-8" style="text-align: center;background-color:red;color:#ffffff;padding: 10px;margin-bottom: 20px">
+                        <span><?= $errormessage ?></span>
+                    </div>
+                <?php } ?>
 			</div>
 			<div class="row justify-content-center">
     			<div class="col-xl-6 col-lg-6 col-md-8">
