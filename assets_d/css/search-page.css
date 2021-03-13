@@ -151,6 +151,9 @@
     display: flex;
     align-items: center;
 }
+.timeline{
+    color: #a9a8a8;
+}
 .timeline-action a{
     width:30px;
     height:30px;
@@ -179,6 +182,7 @@
 .like-wrap a,.comment-wrap a{
     width:20px;
     display: inline-block;
+    color:#a9a8a8;
 }
 img{
     max-width:100%;
@@ -186,7 +190,7 @@ img{
     display: block;
 }
 .like-wrap li a{
-    color:#f3f3f3;
+    color:#a9a8a8;
 }
 .content-info-area{
     margin-bottom:15px;
@@ -203,4 +207,178 @@ img{
     content:"";
     left:0;
     bottom:25px;
+}
+.content-img > figure{
+    width:160px;
+    height:120px;
+    margin-right:15px;
+    float: left;
+}
+.content-img > figure > img{
+    width:100%;
+    height:100%;
+    object-fit: cover;
+    object-position: center center;
+}
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+.documentName{
+    display: flex;
+    align-items: center;
+}
+.documentName img{
+    margin-right:10px;
+}
+.star-rating ul{
+    display: flex;
+    align-items: center;
+}
+.star-rating ul li{
+    margin-right:5px;
+}
+.star-rating ul li a{
+    width:16px;
+    display:inline-block;
+}
+.eventActionWrap {
+    width: 100%;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.eventActionWrap.author  {
+    margin:10px 0;
+}
+.eventActionWrap.author p {
+    color:#ef639e;
+    font-weight: 600;
+}
+
+.eventActionWrap ul {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+}
+.eventActionWrap ul li {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    border:2px solid #fff;
+    box-shadow: 0px 3px 8px 0px rgba(42, 35, 79, 0.08);
+    position: absolute;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.5s ease-in;
+    -webkit-transition: all 0.5s ease-in;
+    -ms-transition: all 0.5s ease-in;
+    -o-transition: all 0.5s ease-in;
+    transform: scale(1.0);
+}
+.eventActionWrap ul li:hover {
+    z-index: 99;
+    transform: scale(1.1);
+}
+.eventActionWrap ul li img {
+    width:100%;
+    height:100%;
+}
+.eventActionWrap ul li:first-child {
+    left:0;
+}
+.eventActionWrap ul li:nth-child(2) {
+    left:20px;
+}
+.eventActionWrap ul li:nth-child(3) {
+    left:45px;
+}
+.eventActionWrap ul li:nth-child(4) {
+    left:70px;
+}
+.eventActionWrap ul li:nth-child(5) {
+    left:95px;
+}
+.eventActionWrap ul li:last-child {
+    left: 95px;
+    background: rgb(0 0 0 / 45%);
+}
+.eventActionWrap ul li.more {
+    border: 0px;
+    color: #fff;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.event_action {
+    padding: 12px 18px;
+    border-radius: 10px;
+    background-color: #546de5;
+    border: 1px solid #546de5;
+    font-weight: 700;
+    font-size: 12px;
+    line-height: 16px;
+    color: #fff;
+    text-align: center;
+    text-transform: uppercase;
+    text-decoration: none;
+    position: relative;
+    transition: all 100ms ease-in-out;
+    white-space: nowrap;
+    width: -webkit-max-content;
+    width: -moz-max-content;
+    width: max-content;
+    margin: 0 8px 0 0;
+}
+.event-description {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+.event-description .left {    
+    font-size: 15px;
+    font-weight: 400;
+    width: auto;
+    display: flex;
+    align-items: center;
+}
+.event-description .left img {
+    margin-right: 10px;
+    width:16px;
+}
+.event-description .right { 
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    width: auto;
+}
+.event-description .right figure {
+    margin-right:10px;
+}
+.event-description .right figcaption {
+    font-size: 14px;
+    font-weight: 400;
+    margin-right:10px;
+}
+.event-description .right a {
+    font-weight:500;
+    cursor: pointer;
+    font-size: 15px;
+    color: #546de5;
+}
+.event-description .right a:hover {
+    text-decoration: underline;
 }

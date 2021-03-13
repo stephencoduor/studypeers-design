@@ -214,6 +214,8 @@
     font-size: 16px;
     color: #333333;
     margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 .profileInformation .location img {
     width:20px;
@@ -226,6 +228,8 @@
     font-size: 15px;
     font-weight: 400;
     cursor: pointer;
+    display: flex;
+    align-items: center;
 }
 .shareProfile img {
     margin-right:10px;
@@ -581,6 +585,10 @@
     background: #fff1e2;
     color:#fe9774;
 }
+.badgeList ul li a{
+    display: flex;
+    align-items: center;
+}
 .badgeList ul li.badge.badge1 a {
     color:#185aeb;
 }
@@ -689,6 +697,8 @@
     vertical-align: middle;
     text-decoration: none;
     cursor:pointer;
+    display: flex;
+    align-items: center;    
 }
 .socialAction li a span {
     color: #bebebe;
