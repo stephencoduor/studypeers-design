@@ -782,11 +782,24 @@ class Profile extends CI_Controller {
         if(count($poll_data) > 0){
             foreach($poll_data as $key => $value) {
                 if(!empty($value)){
-                    $option_id = $_POST['edit_option_id'][$key];
-                    $qtyOut = $value;
-                    
-                    $this->db->where(array('id' => $option_id));
-                    $this->db->update('post_poll_options', array('options' => $value, 'updated_at' => date('Y-m-d H:i:s')));
+                    if(isset($_POST['edit_option_id'][$key])){
+                        $option_id = $_POST['edit_option_id'][$key];
+                        $qtyOut = $value;
+                        
+                        $this->db->where(array('id' => $option_id));
+                        $this->db->update('post_poll_options', array('options' => $value, 'updated_at' => date('Y-m-d H:i:s')));
+                    } else {
+                        $qtyOut = $value;
+                        //insert in polls table
+                        $insert_polls = array(
+                            'post_id' => $post_id,
+                            'options' => $value,
+                            'status' => 1,
+                            'created_at' => date('Y-m-d H:i:s'),
+                            'updated_at' => date('Y-m-d H:i:s')
+                        );
+                        $insert_reference = $this->db->insert('post_poll_options', $insert_polls);
+                    }
                 }
 
             }
