@@ -124,3 +124,5 @@ $route['FAQ'] = "Home/FAQ";
 
 
 $route['search-result'] = "Account/searchResult";
+
+$route['Profile/profile-upload-cropper'] = "Profile/uploadCropperImage";

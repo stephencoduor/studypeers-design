@@ -42,7 +42,6 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/profile.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/loader.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/croppie.css">
-
 	<?php } ?>
 
 	<!-- Emoji Data -->
@@ -67,11 +66,15 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
+	<link rel="stylesheet" href="<?php echo base_url('assets_d/js/cropper/cropper.css'); ?>">
+
 	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/moment.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/socket.io.js'); ?>"></script>
+
+
 
 
 
@@ -457,7 +460,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 								<div class="removeSearch">
 									<img src="<?php echo base_url(); ?>assets_d/images/close.svg" alt="close">
 								</div>
-								
+
 							</div>
 						</div>
 					</nav>

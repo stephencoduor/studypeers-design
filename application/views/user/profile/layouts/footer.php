@@ -385,6 +385,39 @@
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/cropper/cropper.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/cropper/custom.cropper.js'); ?>"></script>
+
+<div class="modal fade" id="modal_cropper" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalLabel">Cropper</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="img-container">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <img id="cropper_image" src="https://avatars0.githubusercontent.com/u/3456749">
+                        </div>
+                        <div class="col-md-4">
+                            <div class="preview"></div>
+                        </div>
+                    </div>
+                    <input type="hidden" id="crop_type">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="crop">Crop</button>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
 <script>
     $(document).ready(function() {
         $("#multiple-select").selectator();
@@ -412,7 +445,7 @@
 
 
 <?php if ($user_profile_page == 1) { ?>
-    <script> 
+    <script>
         $(document).on('click', '.followerListModal', function() {
             var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
@@ -446,7 +479,7 @@
 
 
         });
-        $(document).ready(function() { 
+        $(document).ready(function() {
             var friend_id = '<?php echo $this->uri->segment('2'); ?>';
             $.ajax({
                 url: '<?php echo base_url(); ?>Profile/getFriendFeeds',
@@ -960,7 +993,7 @@
         var video_types = ['mp4', '3gp', 'mpeg4', 'mkv', 'mov'];
 
         function readURL(input) {
-            
+
             for (var i = 0; i < input.files.length; ++i) {
                 if (input.files[i] && input.files[i]) {
                     var file = input.files[i];
@@ -1113,9 +1146,9 @@
 
         $(document).on('click', '#save_post_from_ajax', function() {
             var html_content = $('#messagepostarea').val();
-            if(html_content != ''){
-                if($('.pollsWrapper').is(":visible")){
-                    if($("input[name=option]").val() != '' && $('#start-date').val() != '' && $('input[name=poll-end-time]').val() != ''){
+            if (html_content != '') {
+                if ($('.pollsWrapper').is(":visible")) {
+                    if ($("input[name=option]").val() != '' && $('#start-date').val() != '' && $('input[name=poll-end-time]').val() != '') {
                         $('#addPostForm').submit();
                     } else {
                         alert("Please fill poll data");
@@ -1185,14 +1218,11 @@
         $('#upload_image').on("change", function() {
             var reader = new FileReader();
             reader.onload = function(event) {
-                $image_crop.croppie('bind', {
-                    url: event.target.result
-                }).then(function() {
-                    console.log('jQuery bind complete');
-                });
+                $("#crop_type").val('profile');
+                $("#cropper_image").attr('src', event.target.result);
+                $('#modal_cropper').modal('show');
             }
             reader.readAsDataURL(this.files[0]);
-            $('#uploadimageModal').modal('show');
         });
         $('.crop_image').click(function(event) {
             $image_crop.croppie('result', {
@@ -1234,14 +1264,21 @@
         $('#upload_cover_image').on("change", function() {
             var cover_reader = new FileReader();
             cover_reader.onload = function(event) {
-                $cover_crop.croppie('bind', {
-                    url: event.target.result
-                }).then(function() {
-                    console.log('jQuery bind complete');
-                });
+
+                // $cover_crop.croppie('bind', {
+                //     url: event.target.result
+                // }).then(function() {
+                //     console.log('jQuery bind complete');
+                // });
+                $("#crop_type").val('cover');
+                $("#cropper_image").attr('src', event.target.result);
+                $("#modal_cropper").modal('show');
+
+
             };
             cover_reader.readAsDataURL(this.files[0]);
-            $('#uploadCoverImageModal').modal('show');
+            // $('#uploadCoverImageModal').modal('show');
+
         });
         $('.crop_cover_image').click(function(event) {
             $cover_crop.croppie('result', {
@@ -1387,7 +1424,7 @@
                 $('.pollsWrapper').slideToggle();
             }
         });
-        
+
         $(function() {
             $('#datetimepickerstart').datetimepicker({
                 allowInputToggle: true,
@@ -1400,7 +1437,7 @@
         });
         index = 3;
         $('.addmore').on('click', function() {
-            if(index < 6){
+            if (index < 6) {
                 index++;
                 $('.pollsform').append(
                     `<div class="form-group" id="option_div_${index}">
@@ -1411,7 +1448,7 @@
                 );
             }
         });
-        
+
         $('.closeBtn').on('click', function() {
             $(this).parents('.uploadedDocs').hide();
         });
@@ -1919,9 +1956,10 @@
 
 
     });
-    function removeOptionDiv(id){
+
+    function removeOptionDiv(id) {
         index--;
-        $('#option_div_'+id).remove();
+        $('#option_div_' + id).remove();
     }
 
     function saveReaction(reaction_id, reference_id, reference) {
@@ -2563,7 +2601,7 @@
     }
 
 
-    
+
 
     function followUnfollow(peer_id) {
         $.ajax({
@@ -2599,7 +2637,7 @@
 
     });
 
-    function validateUserName(username){
+    function validateUserName(username) {
         $.ajax({
             url: '<?php echo base_url(); ?>profile/validateUserName',
             type: 'post',
@@ -2607,7 +2645,7 @@
                 "username": username
             },
             success: function(result) {
-                if(result != 0){
+                if (result != 0) {
                     $('#err_username').text("This username is not available");
                 } else {
                     $('#err_username').text("");
@@ -2617,10 +2655,10 @@
     }
 
 
-    function validateGeneralForm(){
+    function validateGeneralForm() {
         validateUserName($('#usernameG').val());
         var chk = $('#err_username').text().length;
-        if(chk != 0){
+        if (chk != 0) {
             return false;
         }
     }
@@ -2633,4 +2671,5 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBNNCJ7_zDBYPIly-R1MJcs9zLUBNEM6eU&libraries=places&callback=initAutocomplete" async defer></script>
 
 </body>
+
 </html>
