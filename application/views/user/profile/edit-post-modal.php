@@ -61,7 +61,8 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 
                         ?>
                         <div class="pollsWrapper" style="<?= $poll_display; ?>">
-                            <div class="pollsform">
+                            <div class="pollsform" id="pollsformEdit">
+                                <input type="hidden" id="optionCount" value="<?= count($post_poll_options); ?>">
                                 <?php if(!empty($post_poll_options)) { $count = 1; foreach ($post_poll_options as $key => $value) { ?>
                                     <div class="form-group" id="edit_option_div_<?= $count; ?>">
                                         <input type="text" class="form-control" name="edit_option[<?= $count; ?>]" placeholder="Option <?= $count; ?>" value="<?= $value['options']; ?>">
@@ -82,7 +83,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                     </div>
                                     <div class="form-group" id="edit_option_div_3">
                                         <input type="text" class="form-control" name="edit_option[3]" placeholder="Option 3">
-                                        <a href="javascript:void(0)" onclick="removeOptionDiv('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                                        <a href="javascript:void(0)" onclick="removeOptionDivEdit('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
                                     </div>
                                 <?php } ?>
                                 
@@ -91,18 +92,18 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                     <a href="javascript:void(0)" onclick="removeOptionDiv('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
                                 </div> -->
                             </div>
-                            <div class="addmore">
+                            <div class="addmore" id="addmoreEditModal">
                                 + Add Option
                             </div>
                             <div class="pollEndTimmings">
                                 <h6>When does poll ends?</h6>
                                 <div class="polltimeform">
                                     <div class="filtercalendar">
-                                        <div class="input-group date" id="datetimepickerstart">
+                                        <div class="input-group date" id="datetimepickerstartedit">
                                             <span class="input-group-addon" for="start-date"></span>
                                             <input type="text" class="form-control" name="poll-end-date-edit" placeholder="dd/mm/yy" id="start-date-edit" value="<?= $post_details['poll_end_date']; ?>">
                                         </div>
-                                        <div class="input-group--overlap" id="selectTime1">
+                                        <div class="input-group--overlap" id="selectTimeEdit">
                                             <input type="text" class="form-control form-control--lg" placeholder="hh:mm" name="poll-end-time-edit" value="<?= $post_details['poll_end_time']; ?>">
                                         </div>
                                     </div>
@@ -208,6 +209,19 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 
             <script type="text/javascript">
                 
+
+
+                $(function() {
+                    $('#datetimepickerstartedit').datetimepicker({
+                        allowInputToggle: true,
+                        format: 'L'
+                    });
+                    $('#selectTimeEdit').datetimepicker({
+                        format: 'LT',
+                        allowInputToggle: true
+                    });
+                });
+
                 $(document).on('click', '#update_post_from_ajax', function() {
                     var html_content = $('#messagepostareaedit').val(); 
                     if (html_content != '') {
@@ -215,7 +229,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         $('#editPostForm').submit();
                         
                     }
-
+                    
                 });
 
                 $('#editPostForm').on("submit", function(e) {
@@ -248,7 +262,24 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                 });
 
 
+                indexEdit = $('#optionCount').val();
+                $('#addmoreEditModal').on('click', function() { 
+                    if (indexEdit < 6) {
+                        indexEdit++;
+                        $('#pollsformEdit').append(
+                            `<div class="form-group" id="edit_option_div_${indexEdit}">
+                                    <input type="text" name="edit_option[${indexEdit}]" class="form-control" placeholder="Option ${indexEdit}">
+                                    <a href="javascript:void(0)" onclick="removeOptionDivEdit('${index}')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                                </div>
+                                `
+                        );
+                    }
+                });
 
+                function removeOptionDivEdit(id) {
+                    indexEdit--;
+                    $('#edit_option_div_' + id).remove();
+                }
                 
 
             </script>
