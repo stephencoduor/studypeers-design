@@ -134,7 +134,28 @@
                     </div>
                     <div class="view-all-section"><a href="">View All Peers</a></div>
                 </div>
+                <div class="pagination-wrap">
+                    <div class="prev-arrow">
+                        <a href=""><img src="<?php echo base_url(); ?>assets_d/images/prev.svg" alt="Prev Icon"/></a>
+                    </div>
+                    <ul class="pagination">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#">9</a></li>
+                        <li><a href="#">10</a></li>
+                    </ul>
+                    <div class="next-arrow">
+                        <a href=""><img src="<?php echo base_url(); ?>assets_d/images/next.svg" alt="Next Icon"/></a>
+                    </div>
+                </div>
             </div>
+            
             <div id="posts" class="tab-pane fade">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
