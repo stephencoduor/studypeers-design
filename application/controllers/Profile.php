@@ -2228,23 +2228,39 @@ class Profile extends CI_Controller
     public function uploadCropperImage()
     {
 
-        $folderPath = getcwd() . '/uploads/users/';
         $type = $this->input->post('type');
-        $user_id = $this->session->get_userdata()['user_data']['user_id'];
-
-        $image_parts = explode(";base64,", $_POST['image']);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
-        $fileName = uniqid() . '.png';
-        $file = $folderPath . $fileName;
-        file_put_contents($file, $image_base64);
 
         if ($type == 'profile') {
+
+
+            $folderPath = getcwd() . '/uploads/users/';
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+            $image_parts = explode(";base64,", $_POST['image']);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $fileName = uniqid() . '.png';
+            $file = $folderPath . $fileName;
+            file_put_contents($file, $image_base64);
+
             $upload_result = $this->upload_model->save_profile_picture($user_id, $fileName);
         }
 
         if ($type == 'cover') {
+
+
+            $folderPath = getcwd() . '/uploads/users/cover/';
+            $user_id = $this->session->get_userdata()['user_data']['user_id'];
+
+            $image_parts = explode(";base64,", $_POST['image']);
+            $image_type_aux = explode("image/", $image_parts[0]);
+            $image_type = $image_type_aux[1];
+            $image_base64 = base64_decode($image_parts[1]);
+            $fileName = uniqid() . '.png';
+            $file = $folderPath . $fileName;
+            file_put_contents($file, $image_base64);
+
             $upload_result = $this->upload_model->save_cover_picture($user_id, $fileName);
         }
 
