@@ -82,6 +82,45 @@ class Account extends CI_Controller
         $this->load->view('user/include/footer-dashboard');
     }
 
+    public function searchViewAll(){
+        $data['index_menu']  = 'search';
+        $data['title']  = 'Search View All | Studypeers';
+
+        $this->load->view('user/include/header', $data);
+        $this->load->view('user/search-view-all');
+        
+        $this->load->view('user/include/right-sidebar');
+        
+        $this->load->view('user/include/firebase-include');
+        $this->load->view('user/include/footer-dashboard');
+    }
+
+    public function searchDetail(){
+        $data['index_menu']  = 'search';
+        $data['title']  = 'Search Detail | Studypeers';
+
+        $this->load->view('user/include/header', $data);
+        $this->load->view('user/search-detail');
+        
+        $this->load->view('user/include/right-sidebar');
+        
+        $this->load->view('user/include/firebase-include');
+        $this->load->view('user/include/footer-dashboard');
+    }
+
+    public function searchNoResult(){
+        $data['index_menu']  = 'search';
+        $data['title']  = 'Search No Result | Studypeers';
+
+        $this->load->view('user/include/header', $data);
+        $this->load->view('user/search-no-result');
+        
+        $this->load->view('user/include/right-sidebar');
+        
+        $this->load->view('user/include/firebase-include');
+        $this->load->view('user/include/footer-dashboard');
+    }
+
 
     public function dashboard()
     {
