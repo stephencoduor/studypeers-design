@@ -47,17 +47,17 @@
 				<div class="out-team slider">
 					<div class="slide-list">
 						<figure>
-							<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Events">
+							<img src="<?php echo base_url(); ?>assets_d/images/Glimer.jpg" alt="Events">
 						</figure>
-						<h6>Member name</h6>
-						<p>Designation</p>
+						<h6>Gilmer Bautista</h6>
+						<p>Co-founder</p>
 					</div>
 					<div class="slide-list">
 						<figure>
-							<img src="<?php echo base_url(); ?>assets_home/images/professor-img.png" alt="Events">
+							<img src="<?php echo base_url(); ?>assets_d/images/Jose.jpg" alt="Events">
 						</figure>
-						<h6>Member name</h6>
-						<p>Designation</p>
+						<h6>Jose Bautista</h6>
+						<p>Founder</p>
 					</div>
 					<div class="slide-list">
 						<figure>
