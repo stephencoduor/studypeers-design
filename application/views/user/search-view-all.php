@@ -13,7 +13,6 @@
                 <div class="title-wrap">
                     <h3>Peers</h3>
                 </div>
-
                 <div class="peers-listing">
                     <div class="peers-row">
                         <div class="peer-left-info">
