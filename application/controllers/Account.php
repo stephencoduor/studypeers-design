@@ -4433,4 +4433,8 @@ class Account extends CI_Controller
 
         echo 1;die;
     }
+
+    public function notVerifiedUser(){
+        $this->load->view('not-verified-user');
+    }
 }
