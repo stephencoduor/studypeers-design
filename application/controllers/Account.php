@@ -69,15 +69,16 @@ class Account extends CI_Controller
         return $peer;
     }
 
-    public function searchResult(){
+    public function searchResult()
+    {
         $data['index_menu']  = 'search';
         $data['title']  = 'Search Result | Studypeers';
 
         $this->load->view('user/include/header', $data);
         $this->load->view('user/search-result');
-        
+
         $this->load->view('user/include/right-sidebar');
-        
+
         $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer-dashboard');
     }
@@ -91,11 +92,7 @@ class Account extends CI_Controller
         $data['user_detail'] = $this->db->get_where('user', array('id' => $user_id))->row_array();
         $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
-
-        
-            $data['peer_suggestion'] = $this->db->query("SELECT `user`.*, `university`.`SchoolName`, `user_info`.`nickname` FROM `user_info` JOIN `university` ON `university`.`university_id`=`user_info`.`intitutionID` JOIN `user` ON `user`.`id`=`user_info`.`userID` WHERE `user_info`.`intitutionID` = '" . $user_info['intitutionID'] . "' AND `user`.`is_verified` = 1 AND `user`.`id` != '" . $user_id . "' AND `user`.`id` NOT IN (SELECT peer_id from friends where user_id = '" . $user_id . "') ORDER BY `user`.`id` DESC ")->result_array();
-        
-
+        $data['peer_suggestion'] = $this->db->query("SELECT `user`.*, `university`.`SchoolName`, `user_info`.`nickname` FROM `user_info` JOIN `university` ON `university`.`university_id`=`user_info`.`intitutionID` JOIN `user` ON `user`.`id`=`user_info`.`userID` WHERE `user_info`.`intitutionID` = '" . $user_info['intitutionID'] . "' AND `user`.`is_verified` = 1 AND `user`.`id` != '" . $user_id . "' AND `user`.`id` NOT IN (SELECT peer_id from friends where user_id = '" . $user_id . "') ORDER BY `user`.`id` DESC ")->result_array();
 
         $data['peer_requests'] = $this->db->get_where('peer_master', array('peer_id' => $user_id, 'status' => 1))->result_array();
 
@@ -118,7 +115,7 @@ class Account extends CI_Controller
         $this->load->view('user/profile/add-post');
         $this->load->view('user/profile/post-privacy');
         $this->load->view('user/include/right-sidebar');
-        
+
         $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer-dashboard');
     }
@@ -276,7 +273,7 @@ class Account extends CI_Controller
                 $html = '<div class="blankFeedArea">
                                     <div class="noFeedWrapper">
                                         <figure>
-                                            <img src="'.base_url().'assets_d/images/blank-feeds.png" alt="No Feed">
+                                            <img src="' . base_url() . 'assets_d/images/blank-feeds.png" alt="No Feed">
                                         </figure>
                                         <h4>Search result not found.</h4>
                                     </div>
@@ -435,17 +432,17 @@ class Account extends CI_Controller
             $keyword    = $this->input->post('keyword');
 
             if (!empty($course) && !empty($keyword)) {
-                
+
                 $event_list = $this->db->query("select * from event_master where (status = 1 and course = " . $course . " and event_name like '%{$keyword}%' and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and event_master.course = " . $course . " and event_master.event_name like '%{$keyword}%' and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
             } else if (!empty($course) && empty($keyword)) {
                 $event_list = $this->db->query("select * from event_master where (status = 1 and course = " . $course . " and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and event_master.course = " . $course . " and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
             } else if (empty($course) && !empty($keyword)) {
-                 $event_list = $this->db->query("select * from event_master where (status = 1 and event_name like '%{$keyword}%' and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and event_master.event_name like '%{$keyword}%' and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
+                $event_list = $this->db->query("select * from event_master where (status = 1 and event_name like '%{$keyword}%' and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and event_master.event_name like '%{$keyword}%' and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
             } else {
                 $event_list = $this->db->query("select * from event_master where (status = 1 and created_by = " . $user_id . " and (start_date <= '" . $date . "' AND end_date >= '" . $date . "')) OR (event_master.id in (SELECT share_master.reference_id from share_master where share_master.peer_id = " . $user_id . " and share_master.reference = 'event' and share_master.status != 4 AND (event_master.status = 1 and (event_master.start_date <= '" . $date . "' AND event_master.end_date >= '" . $date . "'))))  order by start_date desc")->result_array();
             }
 
-            
+
 
             $html = "";
 
@@ -520,7 +517,7 @@ class Account extends CI_Controller
                                                     </div>
                                                     <div class="feed_card_footer">';
                         $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                        $this->db->join('user','user.id=user_info.userID');
+                        $this->db->join('user', 'user.id=user_info.userID');
                         $user = $this->db->get_where('user_info', array('userID' => $value['created_by']))->row_array();
                         $html .= '<div class="userWrap eventBox">
                                                             <div class="user-name">
@@ -752,7 +749,7 @@ class Account extends CI_Controller
                                                 </div>
                                                 <div class="feed_card_footer">';
                         $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                        $this->db->join('user','user.id=user_info.userID');
+                        $this->db->join('user', 'user.id=user_info.userID');
                         $user = $this->db->get_where('user_info', array('userID' => $value['created_by']))->row_array();
                         $html .= '<div class="userWrap eventBox">
                                                         <div class="user-name">
@@ -941,7 +938,7 @@ class Account extends CI_Controller
                 $html = '<div class="blankFeedArea">
                                     <div class="noFeedWrapper">
                                         <figure>
-                                            <img src="'.base_url().'assets_d/images/blank-feeds.png" alt="No Feed">
+                                            <img src="' . base_url() . 'assets_d/images/blank-feeds.png" alt="No Feed">
                                         </figure>
                                         <h4>Search result not found.</h4>
                                     </div>
@@ -1307,7 +1304,7 @@ class Account extends CI_Controller
         } else {
             $this->db->from('document_master');
         }
-        
+
         $this->db->join('professor_master', 'professor_master.id=document_master.professor');
         $this->db->join('course_master', 'course_master.id=document_master.course');
         $this->db->join('university', 'university.university_id=document_master.university');
@@ -1477,7 +1474,7 @@ class Account extends CI_Controller
         $data['comment'] = $this->db->get_where('comment_master', array('reference' => 'document', 'reference_id' => $document_id, 'comment_parent_id' => 0))->result_array();
 
         $this->db->select('document_rating_master.*, user_info.nickname');
-        $this->db->join('user_info','user_info.userID=document_rating_master.user_id');
+        $this->db->join('user_info', 'user_info.userID=document_rating_master.user_id');
         $this->db->order_by('document_rating_master.created_at', 'desc');
         $this->db->limit(5);
         $data['rating_list'] = $this->db->get_where('document_rating_master', array('document_rating_master.document_id' => $document_id, 'document_rating_master.user_id !=' => $user_id))->result_array();
@@ -1492,8 +1489,9 @@ class Account extends CI_Controller
         $this->load->view('user/include/footer');
     }
 
-    function rateDocument(){
-        if($this->input->post()){
+    function rateDocument()
+    {
+        if ($this->input->post()) {
             // print_r($this->input->post());die;
             $user_rating        = $this->input->post('user_rating');
             $rate_description   = $this->input->post('rate_description');
@@ -1504,12 +1502,13 @@ class Account extends CI_Controller
 
             $chk_if_rated = $this->db->get_where('document_rating_master', array('document_id' => $rate_document, 'user_id' => $user_id))->row_array();
 
-            if(!empty($chk_if_rated)) {
+            if (!empty($chk_if_rated)) {
                 $this->db->where(array('id' => $chk_if_rated['id']));
                 $this->db->update('document_rating_master', array('rating' => $user_rating, 'description' => $rate_description, 'created_at' => date('Y-m-d H:i:s')));
             } else {
 
-                $insertArr = array( 'document_id'      => $rate_document,
+                $insertArr = array(
+                    'document_id'      => $rate_document,
                     'user_id'           => $user_id,
                     'rating'            => $user_rating,
                     'description'       => $rate_description,
@@ -1519,7 +1518,7 @@ class Account extends CI_Controller
                 $this->db->insert('document_rating_master', $insertArr);
             }
 
-            redirect(site_url('account/documentDetail/'.base64_encode($rate_document)), 'refresh');
+            redirect(site_url('account/documentDetail/' . base64_encode($rate_document)), 'refresh');
         }
     }
 
@@ -2087,8 +2086,8 @@ class Account extends CI_Controller
 
             $value = $this->db->get_where($this->db->dbprefix('question_answer_master'), array('question_answer_master.question_id' => $question_id, 'question_answer_master.status' => 1, 'question_answer_master.parent_id' => 0))->row_array();
 
-            $value_user = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$value['answered_by']))->row_array(); 
-            
+            $value_user = $this->db->get_where($this->db->dbprefix('user'), array('id' => $value['answered_by']))->row_array();
+
 
             $html = '<div class="replyAnswerBox" id="replyAnswerBox' . $value['id'] . '">     
 
@@ -2430,7 +2429,7 @@ class Account extends CI_Controller
                 $this->db->insert('schedule_master', $schedule);
                 $schedule_id = $this->db->insert_id();
 
-                
+
 
                 $this->db->where(array('reference_id' => $event_id, 'reference' => 'event', 'peer_id' => $user_id, 'status' => 2));
                 $this->db->update('share_master', array('schedule_master_id' => $schedule_id));
@@ -2445,9 +2444,9 @@ class Account extends CI_Controller
             } else if ($this->input->post('timeline')) {
                 redirect(site_url('Profile/timeline'), 'refresh');
             } else if ($this->input->post('profile')) {
-                $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$this->input->post('profile')))->row_array();
+                $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id' => $this->input->post('profile')))->row_array();
 
-                redirect(site_url('sp/'.$redirect_username['username']), 'refresh');
+                redirect(site_url('sp/' . $redirect_username['username']), 'refresh');
             } else {
                 redirect(site_url('account/events'), 'refresh');
             }
@@ -2470,7 +2469,7 @@ class Account extends CI_Controller
                 $edit_url = base_url() . 'account/editSchedule/' . base64_encode($res['id']);
             }
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-            $this->db->join('user','user.id=user_info.userID');
+            $this->db->join('user', 'user.id=user_info.userID');
             $user = $this->db->get_where('user_info', array('userID' => $res['created_by']))->row_array();
             $html = "";
             if ($res['schedule'] == 'event') {
@@ -2776,10 +2775,10 @@ class Account extends CI_Controller
             } else if ($this->input->post('timeline')) {
                 redirect(site_url('Profile/timeline'), 'refresh');
             } else if ($this->input->post('profile')) {
-                $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$this->input->post('profile')))->row_array();
+                $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id' => $this->input->post('profile')))->row_array();
 
-                redirect(site_url('sp/'.$redirect_username['username']), 'refresh');
-            }  else {
+                redirect(site_url('sp/' . $redirect_username['username']), 'refresh');
+            } else {
                 redirect(site_url('account/events'), 'refresh');
             }
         }
@@ -2805,7 +2804,7 @@ class Account extends CI_Controller
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-            $this->db->join('user','user.id=user_info.userID');
+            $this->db->join('user', 'user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $count = $this->db->get_where('comment_master', array('reference_id' => $event_id, 'reference' => 'event', 'comment_parent_id' => 0, 'status' => 1))->num_rows();
@@ -2834,7 +2833,7 @@ class Account extends CI_Controller
                         </figcaption>
                         <div class="dotsBullet dropdown">
                                                     <img
-                                                        src="'.base_url().'assets_d/images/more.svg"
+                                                        src="' . base_url() . 'assets_d/images/more.svg"
                                                         alt="more"
                                                         data-toggle="dropdown">
                                                     <ul class="dropdown-menu"
@@ -2847,7 +2846,7 @@ class Account extends CI_Controller
                                                                 <div
                                                                     class="left">
                                                                     <img
-                                                                        src="'.base_url().'assets_d/images/restricted.svg"
+                                                                        src="' . base_url() . 'assets_d/images/restricted.svg"
                                                                         alt="Save">
                                                                 </div>
                                                                 <div
@@ -2860,11 +2859,11 @@ class Account extends CI_Controller
                                                             <li role="presentation">
                                                                 <a role="menuitem"
                                                                    tabindex="-1"
-                                                                   href="javascript:void(0);" onclick="deleteComment(' . $comment_id . ', '.$event_id.', \''.$text.'\')">
+                                                                   href="javascript:void(0);" onclick="deleteComment(' . $comment_id . ', ' . $event_id . ', \'' . $text . '\')">
                                                                     <div
                                                                         class="left">
                                                                         <img
-                                                                            src="'.base_url().'assets_d/images/trash.svg"
+                                                                            src="' . base_url() . 'assets_d/images/trash.svg"
                                                                             alt="Link">
                                                                     </div>
                                                                     <div
@@ -2890,12 +2889,13 @@ class Account extends CI_Controller
                         </div>                                                  
                     </div>';
             $result['html'] = $html;
-            if($count != 0){
-                $result['count'] = '('.$count.')';
+            if ($count != 0) {
+                $result['count'] = '(' . $count . ')';
             } else {
                 $result['count'] = '';
             }
-            print_r(json_encode($result));die;
+            print_r(json_encode($result));
+            die;
         }
     }
 
@@ -2923,10 +2923,10 @@ class Account extends CI_Controller
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-            $this->db->join('user','user.id=user_info.userID');
+            $this->db->join('user', 'user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
-            $html = '<div class="userReplyBox" id="comment_reply_id_'.$comment_id.'"><figure>
+            $html = '<div class="userReplyBox" id="comment_reply_id_' . $comment_id . '"><figure>
                         <img src="' . userImage($user_id) . '" alt="User">
                     </figure>
                     <figcaption>
@@ -2934,20 +2934,20 @@ class Account extends CI_Controller
                         ' . $comment . '                                            
                         <div class="actionmsgMenu">
                             <ul>
-                                <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
+                                <li class="likeuser" id="likeComment' . $comment_id . '" onclick="likeComment(' . $comment_id . ')">Like</li>
                                 
                             </ul>
                         </div>
-                        <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display:none;">
+                        <div class="reactmessage" id="reactmessage_' . $comment_id . '" style="display:none;">
                             <div class="react">
-                                <img src="'.base_url().'assets_d/images/like.png" alt="Like">
+                                <img src="' . base_url() . 'assets_d/images/like.png" alt="Like">
                             </div>
-                            <p id="like_count_'.$comment_id.'">0</p>
+                            <p id="like_count_' . $comment_id . '">0</p>
                         </div>
                     </figcaption>
                     <div class="dotsBullet dropdown">
                                                     <img
-                                                        src="'.base_url().'assets_d/images/more.svg"
+                                                        src="' . base_url() . 'assets_d/images/more.svg"
                                                         alt="more"
                                                         data-toggle="dropdown">
                                                     <ul class="dropdown-menu"
@@ -2960,7 +2960,7 @@ class Account extends CI_Controller
                                                                 <div
                                                                     class="left">
                                                                     <img
-                                                                        src="'.base_url().'assets_d/images/restricted.svg"
+                                                                        src="' . base_url() . 'assets_d/images/restricted.svg"
                                                                         alt="Save">
                                                                 </div>
                                                                 <div
@@ -2973,11 +2973,11 @@ class Account extends CI_Controller
                                                             <li role="presentation">
                                                                 <a role="menuitem"
                                                                    tabindex="-1"
-                                                                   href="javascript:void(0);" onclick="deleteCommentReply('.$comment_id.', '.$comment_parent_id.')">
+                                                                   href="javascript:void(0);" onclick="deleteCommentReply(' . $comment_id . ', ' . $comment_parent_id . ')">
                                                                     <div
                                                                         class="left">
                                                                         <img
-                                                                            src="'.base_url().'assets_d/images/trash.svg"
+                                                                            src="' . base_url() . 'assets_d/images/trash.svg"
                                                                             alt="Link">
                                                                     </div>
                                                                     <div
@@ -3019,10 +3019,10 @@ class Account extends CI_Controller
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-            $this->db->join('user','user.id=user_info.userID');
+            $this->db->join('user', 'user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
-            $html = '<div class="userReplyBox" id="comment_reply_id_'.$comment_id.'"><figure>
+            $html = '<div class="userReplyBox" id="comment_reply_id_' . $comment_id . '"><figure>
                         <img src="' . userImage($user_id) . '" alt="User">
                     </figure>
                     <div class="right">
@@ -3032,21 +3032,21 @@ class Account extends CI_Controller
                                 ' . $comment . '                                            
                                 <div class="actionmsgMenu">
                                     <ul>
-                                        <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment('.$comment_id.')">Like</li>
+                                        <li class="likeuser" id="likeComment' . $comment_id . '" onclick="likeComment(' . $comment_id . ')">Like</li>
                                         
                                     </ul>
                                 </div>
-                                <div class="reactmessage" id="reactmessage_'.$comment_id.'" style="display:none;">
+                                <div class="reactmessage" id="reactmessage_' . $comment_id . '" style="display:none;">
                                     <div class="react">
-                                        <img src="'.base_url().'assets_d/images/like-dashboard.svg" alt="Like">
+                                        <img src="' . base_url() . 'assets_d/images/like-dashboard.svg" alt="Like">
                                     </div>
-                                    <p id="like_count_'.$comment_id.'">0</p>
+                                    <p id="like_count_' . $comment_id . '">0</p>
                                 </div>
                             </figcaption>
                         </div>
                         <div class="dotsBullet dropdown">
                                                     <img
-                                                        src="'.base_url().'assets_d/images/more.svg"
+                                                        src="' . base_url() . 'assets_d/images/more.svg"
                                                         alt="more"
                                                         data-toggle="dropdown">
                                                     <ul class="dropdown-menu"
@@ -3059,7 +3059,7 @@ class Account extends CI_Controller
                                                                 <div
                                                                     class="left">
                                                                     <img
-                                                                        src="'.base_url().'assets_d/images/restricted.svg"
+                                                                        src="' . base_url() . 'assets_d/images/restricted.svg"
                                                                         alt="Save">
                                                                 </div>
                                                                 <div
@@ -3072,11 +3072,11 @@ class Account extends CI_Controller
                                                             <li role="presentation">
                                                                 <a role="menuitem"
                                                                    tabindex="-1"
-                                                                   href="javascript:void(0);" onclick="deleteCommentReply('.$comment_id.', '.$comment_parent_id.')">
+                                                                   href="javascript:void(0);" onclick="deleteCommentReply(' . $comment_id . ', ' . $comment_parent_id . ')">
                                                                     <div
                                                                         class="left">
                                                                         <img
-                                                                            src="'.base_url().'assets_d/images/trash.svg"
+                                                                            src="' . base_url() . 'assets_d/images/trash.svg"
                                                                             alt="Link">
                                                                     </div>
                                                                     <div
@@ -3105,19 +3105,20 @@ class Account extends CI_Controller
 
             $if_user_liked = $this->db->get_where('comment_like_master', array('comment_id' => $comment_id, 'status' => 1, 'user_id' => $user_id))->row_array();
 
-            if(!empty($if_user_liked)) {
+            if (!empty($if_user_liked)) {
                 $this->db->where(array('comment_id' => $comment_id, 'user_id' => $user_id));
                 $this->db->delete('comment_like_master');
             } else {
 
-                $insertArr = array( 'comment_id' => $comment_id,
-                                    
-                                    'user_id' => $user_id,
-                                    
-                                    'status' => '1',
-                                    'created_at' => date('Y-m-d H:i:s')
+                $insertArr = array(
+                    'comment_id' => $comment_id,
 
-                                );
+                    'user_id' => $user_id,
+
+                    'status' => '1',
+                    'created_at' => date('Y-m-d H:i:s')
+
+                );
 
                 $this->db->insert('comment_like_master', $insertArr);
             }
@@ -3178,7 +3179,7 @@ class Account extends CI_Controller
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-            $this->db->join('user','user.id=user_info.userID');
+            $this->db->join('user', 'user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $html = '<div class="chatMsg" id="comment_id_' . $comment_id . '">
@@ -3190,7 +3191,7 @@ class Account extends CI_Controller
                             <img src="' . base_url() . 'uploads/comments/' . $c_image . '" alt="comment" style="height: 70px;">                                                 
                             <div class="actionmsgMenu">
                                 <ul>
-                                    <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment(' . $comment_id . ')">Like</li>
+                                    <li class="likeuser" id="likeComment' . $comment_id . '" onclick="likeComment(' . $comment_id . ')">Like</li>
                                     <li class="replyuser" onclick="showReplyBox(' . $comment_id . ')">Reply</li>
                                 </ul>
                             </div>
@@ -3241,7 +3242,7 @@ class Account extends CI_Controller
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-            $this->db->join('user','user.id=user_info.userID');
+            $this->db->join('user', 'user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $html = '<div class="chatMsg" id="comment_id_' . $comment_id . '">
@@ -3253,7 +3254,7 @@ class Account extends CI_Controller
                             <img src="' . base_url() . 'uploads/comments/' . $c_image . '" alt="comment" style="height: 70px;">                                                 
                             <div class="actionmsgMenu">
                                 <ul>
-                                    <li class="likeuser" id="likeComment'.$comment_id.'" onclick="likeComment(' . $comment_id . ')">Like</li>
+                                    <li class="likeuser" id="likeComment' . $comment_id . '" onclick="likeComment(' . $comment_id . ')">Like</li>
                                     <li class="replyuser" onclick="showReplyBox(' . $comment_id . ')">Reply</li>
                                 </ul>
                             </div>
@@ -3301,7 +3302,7 @@ class Account extends CI_Controller
             $this->db->insert('comment_master', $insertArr);
             $comment_id = $this->db->insert_id();
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-            $this->db->join('user','user.id=user_info.userID');
+            $this->db->join('user', 'user.id=user_info.userID');
             $user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
             $count = $this->db->get_where('comment_master', array('reference_id' => $doc_id, 'reference' => 'document', 'comment_parent_id' => 0, 'status' => 1))->num_rows();
@@ -3346,7 +3347,7 @@ class Account extends CI_Controller
                             </div>
                             <div class="dotsBullet dropdown">
                                                     <img
-                                                        src="'.base_url().'assets_d/images/more.svg"
+                                                        src="' . base_url() . 'assets_d/images/more.svg"
                                                         alt="more"
                                                         data-toggle="dropdown">
                                                     <ul class="dropdown-menu"
@@ -3359,7 +3360,7 @@ class Account extends CI_Controller
                                                                 <div
                                                                     class="left">
                                                                     <img
-                                                                        src="'.base_url().'assets_d/images/restricted.svg"
+                                                                        src="' . base_url() . 'assets_d/images/restricted.svg"
                                                                         alt="Save">
                                                                 </div>
                                                                 <div
@@ -3372,11 +3373,11 @@ class Account extends CI_Controller
                                                             <li role="presentation">
                                                                 <a role="menuitem"
                                                                    tabindex="-1"
-                                                                   href="javascript:void(0);" onclick="deleteComment(' . $comment_id . ', '.$doc_id.', \''.$text.'\')">
+                                                                   href="javascript:void(0);" onclick="deleteComment(' . $comment_id . ', ' . $doc_id . ', \'' . $text . '\')">
                                                                     <div
                                                                         class="left">
                                                                         <img
-                                                                            src="'.base_url().'assets_d/images/trash.svg"
+                                                                            src="' . base_url() . 'assets_d/images/trash.svg"
                                                                             alt="Link">
                                                                     </div>
                                                                     <div
@@ -3393,12 +3394,13 @@ class Account extends CI_Controller
                             </div>                                             
                     </div>';
             $result['html'] = $html;
-            if($count != 0){
-                $result['count'] = '('.$count.')';
+            if ($count != 0) {
+                $result['count'] = '(' . $count . ')';
             } else {
                 $result['count'] = '';
             }
-            print_r(json_encode($result));die;
+            print_r(json_encode($result));
+            die;
         }
     }
 
@@ -3662,13 +3664,14 @@ class Account extends CI_Controller
         }
     }
 
-    public function addCancelPeer(){
+    public function addCancelPeer()
+    {
         $peer_id = $this->input->post('peer_id');
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
 
         $chk_if_request = $this->db->get_where($this->db->dbprefix('peer_master'), array('peer_id' => $peer_id, 'user_id' => $user_id, 'status' => 1))->row_array();
 
-        if(empty($chk_if_request)){
+        if (empty($chk_if_request)) {
             $insertArr2 = array(
                 'user_id'       => $user_id,
                 'peer_id'       => $peer_id,
@@ -3706,9 +3709,10 @@ class Account extends CI_Controller
             foreach ($get_active_token  as $key => $value) {
                 $this->sendTestNotification($value['token'], 'New Peer Request', 'You have received a new Peer Request', $action_id);
             }
-            echo 'Cancel Request';die;
+            echo 'Cancel Request';
+            die;
         } else {
-            
+
             $this->db->where(array('action_id' => $chk_if_request['id']));
             $this->db->delete('notification_master');
 
@@ -3717,7 +3721,8 @@ class Account extends CI_Controller
                 $this->db->where(array('id' => $chk_if_request['id']));
                 $this->db->delete('peer_master');
             }
-            echo 'Add Peer';die;
+            echo 'Add Peer';
+            die;
         }
     }
 
@@ -3905,18 +3910,18 @@ class Account extends CI_Controller
         $document_id = $this->input->post('id');
         $peer_id = $this->input->post('peer_id');
 
-        $peer_list = $this->db->query("SELECT * FROM `friends` WHERE (`user_id` = '".$user_id ."')")->result_array();
+        $peer_list = $this->db->query("SELECT * FROM `friends` WHERE (`user_id` = '" . $user_id . "')")->result_array();
 
         $html = '';
 
         foreach ($peer_list as $key => $value) {
             if ($value['user_id'] == $user_id) {
                 $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                $this->db->join('user','user.id=user_info.userID');
+                $this->db->join('user', 'user.id=user_info.userID');
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
             } else {
                 $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                $this->db->join('user','user.id=user_info.userID');
+                $this->db->join('user', 'user.id=user_info.userID');
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
             }
             $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id' => $peer['userID'], 'reference' => 'document', 'reference_id' => $document_id, 'status' => 1))->row_array();
@@ -4044,11 +4049,11 @@ class Account extends CI_Controller
         foreach ($peer_list as $key => $value) {
             if ($value['user_id'] == $user_id) {
                 $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                $this->db->join('user','user.id=user_info.userID');
+                $this->db->join('user', 'user.id=user_info.userID');
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
             } else {
                 $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-                $this->db->join('user','user.id=user_info.userID');
+                $this->db->join('user', 'user.id=user_info.userID');
                 $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['user_id']))->row_array();
             }
             $chk_if_shared = $this->db->get_where($this->db->dbprefix('share_master'), array('peer_id' => $peer['userID'], 'reference' => 'event', 'reference_id' => $id, 'status!=' => 4))->row_array();
@@ -4104,7 +4109,7 @@ class Account extends CI_Controller
 
         foreach ($peer_attending as $key => $value) {
             $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
-            $this->db->join('user','user.id=user_info.userID');
+            $this->db->join('user', 'user.id=user_info.userID');
             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
 
 
@@ -4376,7 +4381,7 @@ class Account extends CI_Controller
             $report_description     = $this->input->post('report_description');
             $user_id = $this->session->get_userdata()['user_data']['user_id'];
 
-            
+
             $insertArr = array(
                 'event_id'             => $report_event_id,
                 'report_reason'         => $report_reason,
@@ -4399,15 +4404,16 @@ class Account extends CI_Controller
     }
 
 
-    public function getPostDataById(){
+    public function getPostDataById()
+    {
         if ($this->input->post()) {
             $post_id              = $this->input->post('post_id');
 
-            $post_query = $this->db->query('SELECT * from posts where id = '.$post_id)->row_array();
-            $post_images_query = $this->db->query('SELECT * from post_images where post_id = '.$post_id)->result_array();
-            $post_videos_query = $this->db->query('SELECT * from post_videos where post_id = '.$post_id)->result_array();
-            $post_options_query = $this->db->query('SELECT * from post_poll_options where post_id = '.$post_id)->result_array();
-            $post_documents_query = $this->db->query('SELECT * from post_documents where post_id = '.$post_id)->result_array();
+            $post_query = $this->db->query('SELECT * from posts where id = ' . $post_id)->row_array();
+            $post_images_query = $this->db->query('SELECT * from post_images where post_id = ' . $post_id)->result_array();
+            $post_videos_query = $this->db->query('SELECT * from post_videos where post_id = ' . $post_id)->result_array();
+            $post_options_query = $this->db->query('SELECT * from post_poll_options where post_id = ' . $post_id)->result_array();
+            $post_documents_query = $this->db->query('SELECT * from post_documents where post_id = ' . $post_id)->result_array();
 
             $posts['post_details'] = $post_query;
             $posts['post_images'] = $post_images_query;
@@ -4417,12 +4423,12 @@ class Account extends CI_Controller
 
             $html = $this->load->view('user/profile/edit-post-modal', $posts, true);
             echo $html;
-
         }
     }
 
 
-    public function deletePollOption(){
+    public function deletePollOption()
+    {
         $option_id              = $this->input->post('option_id');
 
         $this->db->where(array('poll_option_id' => $option_id));
@@ -4431,6 +4437,7 @@ class Account extends CI_Controller
         $this->db->where(array('id' => $option_id));
         $this->db->delete('post_poll_options');
 
-        echo 1;die;
+        echo 1;
+        die;
     }
 }

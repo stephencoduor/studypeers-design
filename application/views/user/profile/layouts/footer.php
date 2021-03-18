@@ -1221,6 +1221,7 @@
                 $("#crop_type").val('profile');
                 $("#cropper_image").attr('src', event.target.result);
                 $('#modal_cropper').modal('show');
+                $("#upload_image").val("");
             }
             reader.readAsDataURL(this.files[0]);
         });
@@ -1273,6 +1274,7 @@
                 $("#crop_type").val('cover');
                 $("#cropper_image").attr('src', event.target.result);
                 $("#modal_cropper").modal('show');
+                $("#upload_cover_image").val("");
 
 
             };
