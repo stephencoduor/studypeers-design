@@ -4476,4 +4476,18 @@ class Account extends CI_Controller
     public function notVerifiedUser(){
         $this->load->view('not-verified-user');
     }
+
+    public function deletePostImage(){
+        $image_id              = $this->input->post('image_id');
+
+        $post_image = $this->db->query('SELECT * from post_images where id = '.$image_id)->row_array();
+
+         unlink(FCPATH .$post_image['image_path']);
+
+        $this->db->where(array('id' => $image_id));
+        $this->db->delete('post_images');
+
+
+        echo 1;die;
+    }
 }

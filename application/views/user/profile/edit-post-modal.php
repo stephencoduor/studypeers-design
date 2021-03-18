@@ -151,7 +151,22 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 </ul>
                             </div>
                         </div>
-                        <div class="row" id="image_row">
+                        <div class="row" id="image_row_edit">
+                            <?php if(count($post_images) > 0){ 
+                                    foreach ($post_images as $key => $value) {
+                                        
+                            ?>
+                                <div class="col-md-4" id="delete_img_<?= $value['id']; ?>">
+                                    <div class="uloadedImage">
+                                        <figure>
+                                            <img src="<?php echo base_url().$value['image_path'] ?>" alt="image" id="image">
+                                        </figure>
+                                        <div class="close">
+                                            <img src="<?php echo base_url(); ?>assets_d/images/close-pink.svg" class="remove_image" onclick="deletePostImg('<?= $value['id']; ?>')" alt="close">
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } } ?>
                             <!----Show image preview here--->
                         </div>
                         <div class="hashTagWrap">
@@ -185,7 +200,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                             </button>
                         </div>
                     </div>
-                    <div class="shareMoreContentWrapper">
+                    <!-- <div class="shareMoreContentWrapper">
                         <button type="button" class="shareOptionList celebrate">
                             <img src="<?php echo base_url(); ?>/assets_d/images/celebrate_occassion.svg"> Celebrate an occasion
                         </button>
@@ -201,7 +216,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         <button type="button" class="shareOptionList offer-help">
                             <img src="<?php echo base_url(); ?>/assets_d/images/offer-help.svg">  Offer Help
                         </button>
-                    </div>
+                    </div> -->
                 </div>
             </form>
 
@@ -279,6 +294,30 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                 function removeOptionDivEdit(id) {
                     indexEdit--;
                     $('#edit_option_div_' + id).remove();
+                }
+
+                $(document).on('click', '.remove_image', function() {
+                    var img_id = $(this).attr('id').split('_');
+                    $('#delete_' + img_id[2]).remove();
+                    $('#imgInp' + img_id[2]).val('');
+                    counter--;
+                });
+
+                function deletePostImg(id){
+                    url = '<?php echo base_url(); ?>account/deletePostImage';
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        
+                        data: {
+                            "image_id": id
+                        },
+                        
+                        success: function(result) {
+                            
+                            $('#delete_img_' + id).remove();
+                        }
+                    });
                 }
                 
 
