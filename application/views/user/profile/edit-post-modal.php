@@ -162,11 +162,12 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                             <img src="<?php echo base_url().$value['image_path'] ?>" alt="image" id="image">
                                         </figure>
                                         <div class="close">
-                                            <img src="<?php echo base_url(); ?>assets_d/images/close-pink.svg" class="remove_image" onclick="deletePostImg('<?= $value['id']; ?>')" alt="close">
+                                            <img src="<?php echo base_url(); ?>assets_d/images/close-pink.svg" class="remove_image_edit" onclick="deletePostImg('<?= $value['id']; ?>')" alt="close">
                                         </div>
                                     </div>
                                 </div>
                             <?php } } ?>
+
                             <!----Show image preview here--->
                         </div>
                         <div class="hashTagWrap">
@@ -176,10 +177,10 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     </div>
                     <div class="shareBoxWrapper">
                         <div class="shareBox">
-                            <div class="imageSection" id="upload_image_section">
+                            <div class="imageSection" id="upload_image_section_edit">
                                 <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="image/video">
                                 <span>Image/Video</span>
-                                <input type="file" class="image_upload_button" id="imgInp1" name="file_edit[]" multiple="multiple">
+                                <input type="file" class="image_upload_button_edit" id="imgInp1" name="file_edit[]" multiple="multiple">
                             </div>
                             <div class="pollSection">
                                 <img src="<?php echo base_url(); ?>assets_d/images/poll.svg" alt="image/video">
@@ -223,7 +224,10 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 
 
             <script type="text/javascript">
-                
+                $(document).on('change', '.image_upload_button_edit', function() {
+
+                    readURLEdit(this);
+                });
 
 
                 $(function() {
@@ -296,12 +300,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     $('#edit_option_div_' + id).remove();
                 }
 
-                $(document).on('click', '.remove_image', function() {
-                    var img_id = $(this).attr('id').split('_');
-                    $('#delete_' + img_id[2]).remove();
-                    $('#imgInp' + img_id[2]).val('');
-                    counter--;
-                });
+                
 
                 function deletePostImg(id){
                     url = '<?php echo base_url(); ?>account/deletePostImage';
@@ -319,6 +318,90 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         }
                     });
                 }
+
+                
+                var counter = 1, video_counter = 1;
+                var image_types = ['jpg', 'png', 'jpeg'];
+                var video_types = ['mp4', '3gp', 'mpeg4', 'mkv', 'mov'];
+                    function readURLEdit(input) {
+                        
+                        for (var i = 0; i < input.files.length; ++i) {
+                            if (input.files[i] && input.files[i]) {
+                                var file = input.files[i];
+                                var extension = file.name.split('.').pop().toLowerCase(); //file extension from input file
+                                var isImage = image_types.indexOf(extension) > -1;
+                                var isVideo = video_types.indexOf(extension) > -1;
+                                var reader = new FileReader();
+                                if (isImage) {
+                                    reader.onload = function(e) {
+                                        var html_image = '<div class="col-md-4" id="delete_img_' + counter + '"><div class="uloadedImage"><figure><img src="' + e.target.result + '" alt="image" id="image' + counter + '"></figure>' +
+                                            '<div class="close"><img src="' + base_url + 'assets_d/images/close-pink.svg" class="remove_image_edit" id="remove_image_' + counter + '" alt="close"></div></div></div>';
+                                        $('#imgInp1' + counter).hide();
+                                        $('#upload_image_section_edit').append('<input type="file" class="image_upload_button_edit" id="imgInp1' + counter + '" name="file_edit[]" multiple="multiple">');
+                                        $('#image_row_edit').append(html_image);
+                                        counter++;
+                                    };
+                                    reader.readAsDataURL(file); // convert to base64 string
+                                } else {
+                                    reader.onload = function() {
+                                        var blob = new Blob([reader.result], {
+                                            type: file.type
+                                        });
+                                        var url = URL.createObjectURL(blob);
+                                        var video = document.createElement('video');
+                                        var timeupdate = function() {
+                                            if (snapImage()) {
+                                                video.removeEventListener('timeupdate', timeupdate);
+                                                video.pause();
+                                            }
+                                        };
+                                        video.addEventListener('loadeddata', function() {
+                                            if (snapImage()) {
+                                                video.removeEventListener('timeupdate', timeupdate);
+                                            }
+                                        });
+                                        var snapImage = function() {
+                                            var canvas = document.createElement('canvas');
+                                            canvas.width = video.videoWidth;
+                                            canvas.height = video.videoHeight;
+                                            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                                            var image = canvas.toDataURL();
+                                            var success = image.length > 100000;
+                                            if (success) {
+                                                var html_image = '<div class="col-md-4" id="delete_video_' + video_counter + '"><div class="uloadedImage"><figure><img src="' + image + '" alt="image" id="image' + video_counter + '"></figure>' +
+                                                    '<div class="close"><img src="' + base_url + 'assets_d/images/close-pink.svg" class="remove_video" id="remove_video_' + video_counter + '" alt="close"></div></div></div>';
+                                                $('#image_row_edit').append(html_image);
+                                                // URL.revokeObjectURL(url);
+                                                $('#imgInp1' + video_counter).hide();
+                                                $('#upload_image_section_edit').append('<input type="file" class="image_upload_button_edit" id="imgInp1' + video_counter + '" name="file_edit[]" multiple="multiple">');
+                                                video_counter++;
+                                            }
+                                            return success;
+                                        };
+                                        video.addEventListener('timeupdate', timeupdate);
+                                        video.preload = 'metadata';
+                                        video.src = url;
+                                        // Load video in Safari / IE11
+                                        video.muted = true;
+                                        video.playsInline = true;
+                                        video.play();
+                                    };
+                                    reader.readAsArrayBuffer(file);
+                                }
+
+                            }
+                        }
+                    }
+
+
+                    $(document).on('click', '.remove_image_edit', function() {
+                        var img_id = $(this).attr('id').split('_');
+                        $('#delete_img_' + img_id[2]).remove();
+                        $('#imgInp1' + img_id[2]).val('');
+                        counter--;
+                    });
+
+                
                 
 
             </script>
