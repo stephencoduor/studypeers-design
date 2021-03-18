@@ -594,7 +594,10 @@
     position: relative;
     white-space: nowrap;
 }
-
+.badgeList ul li a{
+    display: flex;
+    align-items: center;
+}
 .socialAction li a img {
     width: 25px;
     height: 25px;

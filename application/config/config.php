@@ -68,7 +68,7 @@ $config['index_page'] = '';
 |
 | WARNING: If you set this to 'PATH_INFO', URIs will always be URL-decoded!
 */
-$config['uri_protocol']	= 'REQUEST_URI';
+$config['uri_protocol']    = 'REQUEST_URI';
 
 /*
 |--------------------------------------------------------------------------
@@ -92,7 +92,7 @@ $config['url_suffix'] = '';
 | than english.
 |
 */
-$config['language']	= 'english';
+$config['language']    = 'english';
 
 /*
 |--------------------------------------------------------------------------
@@ -417,11 +417,11 @@ $config['sess_regenerate_destroy'] = FALSE;
 |       'cookie_httponly') will also affect sessions.
 |
 */
-$config['cookie_prefix']	= '';
-$config['cookie_domain']	= '';
-$config['cookie_path']		= '/';
-$config['cookie_secure']	= FALSE;
-$config['cookie_httponly'] 	= FALSE;
+$config['cookie_prefix']    = '';
+$config['cookie_domain']    = '';
+$config['cookie_path']        = '/';
+$config['cookie_secure']    = FALSE;
+$config['cookie_httponly']     = FALSE;
 
 /*
 |--------------------------------------------------------------------------
@@ -549,11 +549,11 @@ $config['facebook_permissions']         = array('public_profile', 'email');
 $config['facebook_graph_version']       = getenv('FB_GRAPH_VERSION');
 $config['facebook_auth_on_load']        = TRUE;
 
-$config['linkedin_app_id']				= getenv('LINKEDIN_ID');
-$config['linkedin_app_secret']			= getenv('LINKEDIN_SECRET');
-$config['linkedin_redirect_uri'] 		= getenv('LINKED_REDIRECT');
-$config['linkedin_scope'] 				= getenv('LINKE_SCOPE');
+$config['linkedin_app_id']                = getenv('LINKEDIN_ID');
+$config['linkedin_app_secret']            = getenv('LINKEDIN_SECRET');
+$config['linkedin_redirect_uri']         = getenv('LINKED_REDIRECT');
+$config['linkedin_scope']                 = getenv('LINKE_SCOPE');
 
-$config['ms_client_id']					= getenv('MS_CLIENT_ID');
-$config['ms_client_secret']				= getenv('MS_CLIENT_SECRET');
-$config['ms_redirect_url'] 				= getenv('MS_REDIRECT');
+$config['ms_client_id']                    = getenv('MS_CLIENT_ID');
+$config['ms_client_secret']                = getenv('MS_CLIENT_SECRET');
+$config['ms_redirect_url']                 = getenv('MS_REDIRECT');

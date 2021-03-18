@@ -17,7 +17,7 @@
 		<div class="social-tools">
 			<div class="container">
 				<h4>Stay Connected</h4>
-				<p>Looking for an easier way to manage and interact with your students? Study Peers connects your students with you on a platform that makes it easier for them  <a href="">(Find out more here)</a></p>	
+				<p>Looking for an easier way to manage and interact with your students? Study Peers is one convenient place to manage your class.  Privacy and document sharing is controlled completely by the professor.  Easily connect with your students and communicate effectively as a class.</a></p>	
 				<div class="stay-connected">
 					<div class="add-section">
 						<figure class="add-icon">

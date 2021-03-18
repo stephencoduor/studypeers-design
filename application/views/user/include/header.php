@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/nice-select.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/search-page.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.css">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
@@ -41,7 +42,6 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/profile.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/loader.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/croppie.css">
-
 	<?php } ?>
 
 	<!-- Emoji Data -->
@@ -66,11 +66,15 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
+	<link rel="stylesheet" href="<?php echo base_url('assets_d/js/cropper/cropper.css'); ?>">
+
 	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/moment.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/socket.io.js'); ?>"></script>
+
+
 
 
 
@@ -456,24 +460,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 								<div class="removeSearch">
 									<img src="<?php echo base_url(); ?>assets_d/images/close.svg" alt="close">
 								</div>
-								<div class="search-info-wrp">
-									<ul id="search-result" style="display:none">
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>First Data <span>in peers</span></strong></a></li>
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>Second Data <span>in peers</span></strong></a></li>
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>Third Data <span>in peers</span></strong></a></li>
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>Fourth Data <span>in peers</span></strong></a></li>
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>Fifth Data <span>in peers</span></strong></a></li>
-									</ul>
-									<div class="no-search">
-										<figure>
-											<img src="<?php echo base_url(); ?>assets_d/images/search-img.svg" alt="Image"/>
-										</figure>
-										<h3>Search for something</h3>
-									</div>
-									<div class="view-all">
-										<a href="">View All</a>
-									</div>
-								</div>
+
 							</div>
 						</div>
 					</nav>

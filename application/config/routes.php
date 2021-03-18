@@ -124,4 +124,8 @@ $route['FAQ'] = "Home/FAQ";
 
 
 $route['search-result'] = "Account/searchResult";
+
 $route['not-verified-user'] = "Account/notVerifiedUser";
+
+
+$route['Profile/profile-upload-cropper'] = "Profile/uploadCropperImage";
