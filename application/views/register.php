@@ -40,7 +40,7 @@
                                 <div class="link-with">
                                     <a href="<?php echo base_url('socialLogin/google'); ?>"><img src="assets/images/google.png" alt="Icon"></a>
                                     <a href="<?php echo base_url('socialLogin/facebook'); ?>"><img src="assets/images/facebook.png" alt="Icon"></a>
-                                    <a href="<?php echo base_url('socialLogin/microsoftLogin'); ?>"><img src="assets/images/twitter.png" alt="Icon"></a>
+                                    <a href="<?php echo base_url('socialLogin/microsoftLogin'); ?>"><img src="assets/images/microsoft-icon.png" alt="Icon"></a>
                                     <a href="<?php echo base_url('socialLogin/linkedinCallback'); ?>"><img src="assets/images/linkedin.png" alt="Icon"></a>
                                 </div>
                             </div>

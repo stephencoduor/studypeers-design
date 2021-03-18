@@ -69,6 +69,7 @@ class LoginController extends CI_Controller
             $sessionData['first_name']   = $validateUserLogin['first_name'];
             $sessionData['profileImage'] = empty($validateUserLogin['image']) ? base_url() . 'uploads/user-male.png' : base_url() . '/uploads/users/' . $validateUserLogin['image'];
             $sessionData['user_login']   = 1;
+            $sessionData['is_verified']  = $validateUserLogin['is_verified'];
             $sessionData['form_step'] = $validateUserLogin['form_step'];
 
             # check if form is complete or not.
@@ -80,7 +81,11 @@ class LoginController extends CI_Controller
 
             $sessionData['is_logged_in'] = 2;
             $this->session->set_userdata('user_data', $sessionData);
-            return redirect('account/dashboard');
+            if($sessionData['is_verified'] == 1){
+                return redirect('account/dashboard');
+            } else {
+                return redirect('not-verified-user');
+            }
         } catch (Exception $e) {
             error_log($e->getMessage());
             $this->session->set_flashdata('error', $e->getMessage());
@@ -185,7 +190,7 @@ class LoginController extends CI_Controller
 
 
             if ($otp != $userData['verification_code']) {
-                throw new Exception("OTP verification code failed", 422);
+                throw new Exception("OTP verification code failed. New verification code has been re-send on your mail.", 422);
             }
 
             # create new user
@@ -205,8 +210,9 @@ class LoginController extends CI_Controller
             $this->session->set_userdata('user_data', $userSession);
             redirect('home/step-register');
         } catch (Exception $e) {
-
+            
             error_log($e->getMessage());
+            $this->session->set_flashdata('errormessage', $e->getMessage());
             redirect('login/resend-otp-page?params=' . $post['userData']);
         }
     }
@@ -218,11 +224,10 @@ class LoginController extends CI_Controller
 
     public function resendOTPPage()
     {
-        $userInfoEncoded = $this->input->post('encodedData');
+        $userInfoEncoded = $this->input->get('params');
 
         $userData = unserialize(base64_decode($userInfoEncoded));
 
-        
 
         if (empty($userInfoEncoded)) {
             redirect('signup');
@@ -236,9 +241,13 @@ class LoginController extends CI_Controller
         $createNewUser['verification_code'] = $otpHidden;
 
         # send otp at email address.
+        if($this->session->flashdata('errormessage')){
+            $dataPage['errormessage'] = $this->session->flashdata('errormessage');
+        } else {
+            $dataPage['message'] = 'Verification code has been re-send on your mail.';
+        }
 
-
-        $dataPage['message'] = 'Verification code has been re-send on your mail.';
+        
         $dataPage['otp'] = $otpHidden;
         $dataPage['page_name'] = 'valid_email_otp';
         $dataPage['active'] = 'submit';

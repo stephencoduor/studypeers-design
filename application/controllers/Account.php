@@ -83,6 +83,45 @@ class Account extends CI_Controller
         $this->load->view('user/include/footer-dashboard');
     }
 
+    public function searchViewAll(){
+        $data['index_menu']  = 'search';
+        $data['title']  = 'Search View All | Studypeers';
+
+        $this->load->view('user/include/header', $data);
+        $this->load->view('user/search-view-all');
+        
+        $this->load->view('user/include/right-sidebar');
+        
+        $this->load->view('user/include/firebase-include');
+        $this->load->view('user/include/footer-dashboard');
+    }
+
+    public function searchDetail(){
+        $data['index_menu']  = 'search';
+        $data['title']  = 'Search Detail | Studypeers';
+
+        $this->load->view('user/include/header', $data);
+        $this->load->view('user/search-detail');
+        
+        $this->load->view('user/include/right-sidebar');
+        
+        $this->load->view('user/include/firebase-include');
+        $this->load->view('user/include/footer-dashboard');
+    }
+
+    public function searchNoResult(){
+        $data['index_menu']  = 'search';
+        $data['title']  = 'Search No Result | Studypeers';
+
+        $this->load->view('user/include/header', $data);
+        $this->load->view('user/search-no-result');
+        
+        $this->load->view('user/include/right-sidebar');
+        
+        $this->load->view('user/include/firebase-include');
+        $this->load->view('user/include/footer-dashboard');
+    }
+
 
     public function dashboard()
     {
@@ -4439,5 +4478,23 @@ class Account extends CI_Controller
 
         echo 1;
         die;
+    }
+
+    public function notVerifiedUser(){
+        $this->load->view('not-verified-user');
+    }
+
+    public function deletePostImage(){
+        $image_id              = $this->input->post('image_id');
+
+        $post_image = $this->db->query('SELECT * from post_images where id = '.$image_id)->row_array();
+
+         unlink(FCPATH .$post_image['image_path']);
+
+        $this->db->where(array('id' => $image_id));
+        $this->db->delete('post_images');
+
+
+        echo 1;die;
     }
 }
