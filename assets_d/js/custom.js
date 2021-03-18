@@ -618,11 +618,80 @@ $(window).on("load", function () {
         theme:"dark-3"        
     });
 
-    $("#search-info").keyup(function () {
-        $("#search-result").css("display","block");
-        $("#search-result > li").hide().filter(":contains(" + $(this).val() + ")").show();
-    });
     $("#search-info").focus(function () {
         $(".search-info-wrp").addClass("active");
+		$('.no-search').show();
     });
+});
+
+$(document).on('keydown keypress keyup','#search-info',function(){
+	$("#search-result").css("display","block");
+	var search_val = $(this).val();
+	$('.no-search').hide();
+	
+	if(search_val.length > 0 && (search_val != '' || typeof search_val !== "undefined"))
+	{
+		$("#searchPeeersLoader").show();
+		$(".searchresulttext").html('Search for something');
+		
+		$.ajax({
+			type: 'POST',		
+			url: $("#searchAction").val(),
+			data: {search_val : search_val},
+			dataType:'json',
+			success: function (response)
+			{
+				$("#searchPeeersLoader").hide();
+				if(response.status == true){
+					if(response.search_html == ''){
+						$(".searchresulttext").html('No result found!');
+						$(".no-search").show();
+						$(".searchResultClass").hide();
+						$(".searchResultClassView").hide();
+					} else {
+						$(".searchresulttext").html('Search for something');
+						$(".no-search").hide();
+						$(".searchResultClass").show();
+						$(".searchResultClassView").show();
+						$(".searchResultClass").html(response.search_html);	
+					}
+				} else {
+					$(".searchresulttext").html('No result found!');
+					$(".no-search").show();
+					alert(response.message);
+				}
+			}
+		});
+	}
+	else
+	{
+		$(".searchresulttext").html('Search for something');
+		$('.no-search').show();
+		$(".searchResultClass").hide();
+		$(".searchResultClassView").hide();
+		$(".searchResultClass").html('');
+	}
+});
+
+$(document).on('focusout','#search-info',function(){
+	if($("#search-info").val() == ''){
+		$('.no-search').show();
+		$(".search-info-wrp").removeClass("active");
+		$(".searchResultClass").hide();
+		$(".searchResultClassView").hide();
+		$(".searchResultClass").html('');
+	}
+});
+
+$(document).on('click','.storeHistory',function(){
+	var search_text = $("#search-info").val();
+	
+	$.ajax({
+		type: 'POST',		
+		url: $("#searchStore").val(),
+		data: {search_text : search_text},
+		dataType:'json',
+		success: function (response){
+		}
+	});
 });
