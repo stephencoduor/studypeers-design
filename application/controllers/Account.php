@@ -75,9 +75,166 @@ class Account extends CI_Controller
 
 		$SearchText = ($this->session->userdata('SearchText')) ? $this->session->userdata('SearchText') : '';
 		$data['SearchText']  = $SearchText;
+		//$this->session->unset_userdata('SearchText');
 		
-		$this->session->unset_userdata('SearchText');
-
+		$CurrentUserID = $this->session->get_userdata()['user_data']['user_id'];
+			
+		$GetUserInfo   = $this->db->query("SELECT intitutionID FROM user_info WHERE userID='".$CurrentUserID."'")->row();
+		$intitutionID  = (!empty($GetUserInfo)) ? $GetUserInfo->intitutionID : '';
+		
+		$AllPeers = array();
+		if($SearchText != '')
+		{
+			$LimitResult     = 5;
+			$FoundResult     = 0;
+			$FoundResult2    = 0;
+			$RemainingResult = 0;
+			
+			$SearchUserid = array();
+			
+			// search for my friends / peers
+			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ORDER BY user.id DESC LIMIT 5";
+			
+			$SearchPeersResult = $this->db->query($SearchPeers)->result_array();
+			$FoundResult = count($SearchPeersResult);
+			
+			if(!empty($SearchPeersResult))
+			{
+				foreach($SearchPeersResult as $SearchPeersResultData)
+				{
+					$SearchUserid[]  = $SearchPeersResultData['id'];
+					
+					$UserProfile = base_url().'assets_d/images/user.jpg';
+					if($SearchPeersResultData['image'] != '' && file_exists('uploads/users/'.$SearchPeersResultData['image'])){
+						$UserProfile = base_url('uploads/users/'.$SearchPeersResultData['image']);
+					}
+						
+					$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName,user_info.user_location FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchPeersResultData['id']."'";
+					$UniversityResult = $this->db->query($getUniversityName)->result_array();
+					
+					$UniversityName = 'N/A';
+					$LocationName = 'N/A';
+					if(!empty($UniversityResult)){
+						$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+						$LocationName = ($UniversityResult[0]['user_location']) ? $UniversityResult[0]['user_location'] : 'N/A';
+					}
+	
+					$tempPeers['id']             = $SearchPeersResultData['id']; 	
+					$tempPeers['username']       = $SearchPeersResultData['username']; 
+					$tempPeers['UserProfile']    = $UserProfile; 
+					$tempPeers['full_name']      = $SearchPeersResultData['first_name'].' '.$SearchPeersResultData['last_name']; 
+					$tempPeers['UniversityName'] = $UniversityName; 
+					$tempPeers['LocationName']   = $LocationName; 
+					array_push($AllPeers,$tempPeers);
+				}
+			}
+			
+			$RemainingResult = $LimitResult - $FoundResult;
+			
+			$SearchUseridString = '';
+			if(count($SearchUserid) > 0){
+				$SearchUseridString = implode(",",$SearchUserid);
+			}
+			
+			// get mutal friends from search result
+			if(!empty($SearchPeersResult))
+			{
+				foreach($SearchPeersResult as $SearchPeersResultData)
+				{
+					$MutalQuery = "SELECT u.id,u.username,u.first_name,u.last_name,u.image FROM friends f1 INNER JOIN friends f2 ON (f2.peer_id = f1.peer_id) INNER JOIN user u ON (u.id = f2.peer_id) WHERE f1.user_id = '".$CurrentUserID."' AND f2.user_id = '".$SearchPeersResultData['id']."'";
+					
+					if($SearchUseridString != ''){
+						$MutalQuery .= " AND u.id NOT IN (".$SearchUseridString.")";
+					}
+					
+					$SearchMutalFriends = $this->db->query($MutalQuery)->result_array();
+					
+					if(!empty($SearchMutalFriends)){
+						foreach($SearchMutalFriends as $SearchMutalFriend){
+							$RemainingResult--;
+							if($RemainingResult == 0){
+								break;
+							}
+							
+							$UserProfile = base_url().'assets_d/images/user.jpg';
+							if($SearchMutalFriend['image'] != '' && file_exists('uploads/users/'.$SearchMutalFriend['image'])){
+								$UserProfile = base_url('uploads/users/'.$SearchMutalFriend['image']);
+							}
+							
+							$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName,user_info.user_location FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchMutalFriend['id']."'";
+							$UniversityResult = $this->db->query($getUniversityName)->result_array();
+							
+							$UniversityName = 'N/A';
+							$LocationName = 'N/A';
+							if(!empty($UniversityResult)){
+								$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+								$LocationName = ($UniversityResult[0]['user_location']) ? $UniversityResult[0]['user_location'] : 'N/A';
+							}
+							
+							$SearchUserid[]  = $SearchMutalFriend['id'];
+							
+							$tempPeers['id']             = $SearchMutalFriend['id']; 	
+							$tempPeers['username']       = $SearchMutalFriend['username']; 
+							$tempPeers['UserProfile']    = $UserProfile; 
+							$tempPeers['full_name']      = $SearchMutalFriend['first_name'].' '.$SearchMutalFriend['last_name']; 
+							$tempPeers['UniversityName'] = $UniversityName;
+							$tempPeers['LocationName']   = $LocationName;
+							array_push($AllPeers,$tempPeers);
+						}
+					}
+				}
+			}
+			
+			// search peers based on university
+			if($intitutionID != '' && $RemainingResult != 0)
+			{
+				$SearchByUniversity = "SELECT user_info.userID,user.id,user.username,user.first_name,user.last_name,user.image,user_info.user_location FROM user_info LEFT JOIN user ON (user.id = user_info.userID) WHERE user_info.userID != '".$CurrentUserID."' AND user_info.intitutionID='".$intitutionID."'";	
+				
+				if($SearchUseridString != ''){
+					$SearchByUniversity .= " AND user.id NOT IN (".$SearchUseridString.")";
+				}
+				
+				$SearchByUniversity .= " AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%')";
+				
+				$SearchByUniversity .= " ORDER BY user.id DESC LIMIT ".$RemainingResult;
+				
+				$SearchUniversityResult = $this->db->query($SearchByUniversity)->result_array();
+				$FoundResult2 = count($SearchUniversityResult);
+				
+				if(!empty($SearchUniversityResult))
+				{
+					foreach($SearchUniversityResult as $SearchUniversityResultData)
+					{
+						$SearchUserid[]  = $SearchUniversityResultData['id'];
+						$ExistingUsers[] = $SearchUniversityResultData['id'];
+						
+						$UserProfile = base_url().'assets_d/images/user.jpg';
+						if($SearchUniversityResultData['image'] != '' && file_exists('uploads/users/'.$SearchUniversityResultData['image'])){
+							$UserProfile = base_url('uploads/users/'.$SearchUniversityResultData['image']);
+						}
+							
+						$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchUniversityResultData['id']."'";
+						$UniversityResult = $this->db->query($getUniversityName)->result_array();
+						
+						$UniversityName = 'N/A';
+						if(!empty($UniversityResult)){
+							$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+						}	
+							
+						$tempPeers['id']             = $SearchUniversityResultData['id']; 	
+						$tempPeers['username']       = $SearchUniversityResultData['username']; 
+						$tempPeers['UserProfile']    = $UserProfile; 
+						$tempPeers['full_name']      = $SearchUniversityResultData['first_name'].' '.$SearchUniversityResultData['last_name']; 
+						$tempPeers['UniversityName'] = $UniversityName; 	
+						$tempPeers['LocationName']   = ($SearchUniversityResultData['user_location']) ? $SearchUniversityResultData['user_location'] : 'N/A';		
+						array_push($AllPeers,$tempPeers);	
+					}
+				}
+			}
+		}
+		 
+		$data['AllPeers'] = $AllPeers;
+		
         $this->load->view('user/include/header', $data);
         $this->load->view('user/search-result');
         
@@ -4482,7 +4639,8 @@ class Account extends CI_Controller
         $this->load->view('not-verified-user');
     }
 
-    public function deletePostImage(){
+    public function deletePostImage()
+	{
         $image_id              = $this->input->post('image_id');
 
         $post_image = $this->db->query('SELECT * from post_images where id = '.$image_id)->row_array();
@@ -4496,7 +4654,8 @@ class Account extends CI_Controller
         echo 1;die;
     }
 	
-	public function searchAllDetails(){
+	public function searchAllDetails()
+	{
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('search_val','Search Word','required');
@@ -4523,10 +4682,12 @@ class Account extends CI_Controller
 			$LimitResult     = 10;
 			$FoundResult     = 0;
 			$FoundResult2    = 0;
+			$FoundResult3    = 0;
 			$RemainingResult = 0;
 			$SearchHTML      = '';
 			
 			$SearchUserid = array();
+			$ExistingUsers = array();
 			
 			// search for my friends / peers
 			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ORDER BY user.id DESC LIMIT 10";
@@ -4538,7 +4699,8 @@ class Account extends CI_Controller
 			{
 				foreach($SearchPeersResult as $SearchPeersResultData)
 				{
-					$SearchUserid[] = $SearchPeersResultData['id'];
+					$SearchUserid[]  = $SearchPeersResultData['id'];
+					$ExistingUsers[] = $SearchPeersResultData['id'];
 					
 					$UserProfile = base_url().'assets_d/images/user.jpg';
 					if($SearchPeersResultData['image'] != '' && file_exists('uploads/users/'.$SearchPeersResultData['image'])){
@@ -4547,7 +4709,7 @@ class Account extends CI_Controller
 					
 					$SearchHTML .= '
 						<li>
-							<a href="'.base_url('sp/'.$SearchPeersResultData['username']).'" target="_blank" class="storeHistory">
+							<a href="'.base_url('sp/'.$SearchPeersResultData['username']).'" data-user_id="'.$SearchPeersResultData['id'].'" class="storeHistory">
 								<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
 								<strong>'.$SearchPeersResultData['first_name'].' '.$SearchPeersResultData['last_name'].' <span>in peers</span> </strong>
 							</a>
@@ -4587,9 +4749,12 @@ class Account extends CI_Controller
 								$UserProfile = base_url('uploads/users/'.$SearchMutalFriend['image']);
 							}
 							
+							$SearchUserid[]  = $SearchMutalFriend['id'];
+							$ExistingUsers[] = $SearchMutalFriend['id'];
+							
 							$SearchHTML .= '
 								<li>
-									<a href="'.base_url('sp/'.$SearchMutalFriend['username']).'" target="_blank" class="storeHistory">
+									<a href="'.base_url('sp/'.$SearchMutalFriend['username']).'" data-user_id="'.$SearchMutalFriend['id'].'" class="storeHistory">
 										<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
 										<strong>'.$SearchMutalFriend['first_name'].' '.$SearchMutalFriend['last_name'].' <span>in peers</span> </strong>
 									</a>
@@ -4619,7 +4784,8 @@ class Account extends CI_Controller
 				{
 					foreach($SearchUniversityResult as $SearchUniversityResultData)
 					{
-						$SearchUserid[] = $SearchUniversityResultData['id'];
+						$SearchUserid[]  = $SearchUniversityResultData['id'];
+						$ExistingUsers[] = $SearchUniversityResultData['id'];
 						
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 						if($SearchUniversityResultData['image'] != '' && file_exists('uploads/users/'.$SearchUniversityResultData['image'])){
@@ -4628,12 +4794,73 @@ class Account extends CI_Controller
 						
 						$SearchHTML .= '
 							<li>
-								<a href="'.base_url('sp/'.$SearchUniversityResultData['username']).'" target="_blank" class="storeHistory">
+								<a href="'.base_url('sp/'.$SearchUniversityResultData['username']).'" data-user_id="'.$SearchUniversityResultData['id'].'" class="storeHistory">
 									<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
 									<strong>'.$SearchUniversityResultData['first_name'].' '.$SearchUniversityResultData['last_name'].' <span>in peers</span> </strong>
 								</a>
 							</li>';
 					}
+				}
+			}
+			
+			$SearchUseridStringStoreResult = '';
+			if(count($SearchUserid) > 0){
+				$SearchUseridStringStoreResult = implode(",",$SearchUserid);
+			}
+			
+			if($RemainingResult != 0){
+				$RemainingResult = $RemainingResult - $FoundResult2;	
+			}
+			
+			// get result from the store result
+			$SearchStoreQuery = "SELECT search_text,search_peer_id FROM recent_search_history WHERE 1=1 AND user_id='".$CurrentUserID."'";	
+			
+			if($SearchUseridStringStoreResult != ""){
+				$SearchStoreQuery .= " AND (search_text != '' OR (search_peer_id != 0 AND search_peer_id NOT IN (".$SearchUseridStringStoreResult.")))";
+			} else {
+				$SearchStoreQuery .= " AND (search_text != '' OR search_peer_id != 0)";
+			}
+			
+			$SearchStoreQuery .= " GROUP BY search_text ORDER BY created_at DESC LIMIT ".$RemainingResult;
+			
+			$SearchStoreResult = $this->db->query($SearchStoreQuery)->result_array();
+			$FoundResult3 = count($SearchStoreResult);
+			
+			if(!empty($SearchStoreResult))
+			{
+				foreach($SearchStoreResult as $SearchStoreResultData)
+				{
+					if($SearchStoreResultData['search_peer_id'] != '' && $SearchStoreResultData['search_peer_id'] != 0){
+						$UserDetails = $this->db->query("SELECT id,username,first_name,last_name,image FROM user WHERE id='".$SearchStoreResultData['search_peer_id']."'")->result_array();
+						
+						if(!empty($UserDetails)){
+							if(!in_array($UserDetails[0]['id'],$ExistingUsers)){
+								$ExistingUsers[] = $UserDetails[0]['id'];
+								$UserProfile = base_url().'assets_d/images/user.jpg';
+								if($UserDetails[0]['image'] != '' && file_exists('uploads/users/'.$UserDetails[0]['image'])){
+									$UserProfile = base_url('uploads/users/'.$UserDetails[0]['image']);
+								}
+								
+								$SearchHTML .= '
+									<li>
+										<a href="'.base_url('sp/'.$UserDetails[0]['username']).'" data-user_id="'.$UserDetails[0]['id'].'" class="storeHistory">
+											<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
+											<strong>'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> </strong>
+										</a>
+									</li>';		
+							}
+						}
+						
+					} else {
+						$SearchHTML .= '
+						<li>
+							<a href="'.base_url('account/searchResult/').'">
+								<figure> <img src="'.base_url('assets_d/images/search.png').'" alt="Image"/> </figure>
+								<strong>'.$SearchStoreResultData['search_text'].' <span>from previous search</span> </strong>
+							</a>
+						</li>';
+					}
+					
 				}
 			}
 			
@@ -4645,7 +4872,8 @@ class Account extends CI_Controller
 		}
 	}
 	
-	function searchStore(){
+	function searchStore()
+	{
 		$this->load->library('form_validation');
 		
 		$this->form_validation->set_rules('search_text','Search Text','required');
@@ -4655,13 +4883,15 @@ class Account extends CI_Controller
 			print_r(json_encode($result));
 			die;
 		} else {
-			$search_text = $this->input->post('search_text');
-			$CurrentUserID = $this->session->get_userdata()['user_data']['user_id'];
+			$search_text    = $this->input->post('search_text');
+			$SearchedUserID = ($this->input->post('search_user_id')) ? $this->input->post('search_user_id') : 0;
+			$CurrentUserID  = $this->session->get_userdata()['user_data']['user_id'];
 			
 			if($search_text != ''){
-				$insertData['user_id']     = $CurrentUserID;
-				$insertData['search_text'] = $search_text;
-				$insertData['created_at']  = date("Y-m-d H:i:s");
+				$insertData['user_id']        = $CurrentUserID;
+				$insertData['search_peer_id'] = $SearchedUserID;
+				$insertData['search_text']    = $search_text;
+				$insertData['created_at']     = date("Y-m-d H:i:s");
 				$this->db->insert('recent_search_history',$insertData);
 			}
 			
@@ -4670,4 +4900,5 @@ class Account extends CI_Controller
 			die;
 		}
 	}
+	
 }
