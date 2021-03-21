@@ -309,8 +309,9 @@
     color: #65676b;
     font-size: 15px;
     font-weight: 600;
-    margin: 0;
+    margin: 0 0 10px;
 }
+
 .post-notification {
     width: 25px;
     height: 30px;
@@ -2994,6 +2995,9 @@ figcaption a {
     .mainContent.active .main-home-wrapper{
         max-width:530px;
     }
+    
+}
+@media (max-width: 767px) {
     
 }
 @media (max-width: 767px) {
