@@ -6,8 +6,7 @@ window.addEventListener('DOMContentLoaded', function () {
 
     $('#modal_cropper').on('shown.bs.modal', function () {
         cropper = new Cropper(image, {
-            aspectRatio: NaN,
-            viewMode: 3,
+            aspectRatio: 16 / 9,
             preview: '.preview'
         });
     }).on('hidden.bs.modal', function () {
@@ -18,8 +17,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     $("#crop").click(function () {
         canvas = cropper.getCroppedCanvas({
-            width: 160,
-            height: 160,
+            width: 1000,
+            height: 290,
         });
 
         canvas.toBlob(function (blob) {
@@ -36,9 +35,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     url: "profile-upload-cropper",
                     data: { image: base64data, type: type },
                     success: function (data) {
-
                         $('#modal_cropper').modal('hide');
-                        alert("success upload image");
                         location.reload();
                     }
                 });
