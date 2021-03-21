@@ -783,14 +783,6 @@ class Profile extends CI_Controller
         $post_id = $this->input->post('post_id');
         $html_content = $this->input->post('html_content');
 
-        $config['upload_path'] = './uploads/posts/';
-        $config['allowed_types'] = 'jpg|jpeg|png|gif|mp4|3gp|avi|mov|pdf|xlsx|xls|doc|docx|txt|ppt|pptx';
-        $config['max_size'] = '1000000';
-        $config['max_width']  = '1024000';
-        $config['max_height']  = '768000';
-        $config['encrypt_name'] = TRUE;
-        $config['remove_spaces'] = TRUE;  //it will remove all spaces
-
         $poll_end_date = date('Y-m-d', strtotime($this->input->post('poll-end-date-edit')));
         $poll_end_time = date('H:i:s', strtotime($this->input->post('poll-end-time-edit')));
 
@@ -801,66 +793,11 @@ class Profile extends CI_Controller
         if (count($poll_data) > 0) {
             foreach ($poll_data as $key => $value) {
                 if (!empty($value)) {
-                    if (isset($_POST['edit_option_id'][$key])) {
-                        $option_id = $_POST['edit_option_id'][$key];
-                        $qtyOut = $value;
+                    $option_id = $_POST['edit_option_id'][$key];
+                    $qtyOut = $value;
 
-                        $this->db->where(array('id' => $option_id));
-                        $this->db->update('post_poll_options', array('options' => $value, 'updated_at' => date('Y-m-d H:i:s')));
-                    } else {
-                        $qtyOut = $value;
-                        //insert in polls table
-                        $insert_polls = array(
-                            'post_id' => $post_id,
-                            'options' => $value,
-                            'status' => 1,
-                            'created_at' => date('Y-m-d H:i:s'),
-                            'updated_at' => date('Y-m-d H:i:s')
-                        );
-                        $insert_reference = $this->db->insert('post_poll_options', $insert_polls);
-                    }
-                }
-            }
-        }
-
-        $this->upload->initialize($config);
-        $F = array();
-        $count_uploaded_files = count($_FILES['file_edit']['name']);
-        $files = $_FILES;
-        $image_extensions_arr = array('jpg', 'image/jpg', 'image/jpeg', 'image/png', 'jpeg', 'png');
-        $video_extensions_arr = array("mp4", "avi", "3gp", "mov", "mpeg", "video/mp4", "video/mov", "video/avi", "video/3gp", "video/mpeg");
-        $document_extension_arr = array('pdf', 'xls', 'xlsx', 'doc', 'docx', 'ppt', 'pptx', 'txt');
-        $maxsize = 5242880; // 5MB 
-        $res = [];
-        for ($i = 0; $i < $count_uploaded_files; $i++) {
-            if (!empty($files['file_edit']['name'][$i])) {
-                $file_type = $files['file_edit']['type'][$i];
-                if ($files['file_edit']['size'][$i] > $maxsize) {
-                    echo 'file size is too large';
-                    die;
-                }
-                // Check extension
-                $_FILES['userfile'] = [
-                    'name'     => $files['file_edit']['name'][$i],
-                    'type'     => $files['file_edit']['type'][$i],
-                    'tmp_name' => $files['file_edit']['tmp_name'][$i],
-                    'error'    => $files['file_edit']['error'][$i],
-                    'size'     => $files['file_edit']['size'][$i]
-                ];
-                $original_name = $files['file_edit']['name'][$i];
-                if ($this->upload->do_upload('userfile')) {
-                    $data = $this->upload->data();
-                    $F[] = $data["file_name"];
-                    if (in_array($file_type, $image_extensions_arr)) {
-                        $this->upload_model->save_image($post_id, '/uploads/posts/' . $data["file_name"], $file_type);
-                    } else if (in_array($file_type, $video_extensions_arr)) {
-                        $this->upload_model->save_video($post_id, '/uploads/posts/' . $data["file_name"], $file_type);
-                    } else {
-                        $this->upload_model->save_document($post_id, '/uploads/posts/' . $data["file_name"], $file_type, $original_name);
-                    }
-                } else {
-                    $error = array('error' => $this->upload->display_errors());
-                    $res[] = $error;
+                    $this->db->where(array('id' => $option_id));
+                    $this->db->update('post_poll_options', array('options' => $value, 'updated_at' => date('Y-m-d H:i:s')));
                 }
             }
         }
