@@ -212,7 +212,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -264,7 +264,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -316,7 +316,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -368,7 +368,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -420,7 +420,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -478,11 +478,11 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/ans.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -537,9 +537,11 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -594,9 +596,11 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -679,7 +683,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -754,7 +758,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -829,7 +833,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -904,7 +908,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -988,7 +992,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1060,7 +1064,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1132,7 +1136,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1204,7 +1208,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1304,7 +1308,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1396,7 +1400,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1485,7 +1489,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1550,7 +1554,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1602,7 +1606,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1654,7 +1658,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1706,7 +1710,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1758,7 +1762,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1858,7 +1862,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -1950,7 +1954,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -2039,7 +2043,7 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>

@@ -453,26 +453,34 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 								<div class="searchIcon">
 									<img src="<?php echo base_url(); ?>assets_d/images/search.png" alt="search">
 								</div>
-								<input type="text" id="search-info">
+								<input type="text" id="search-info" autocomplete="off" value="<?php echo (isset($SearchText)) ? $SearchText : ''; ?>">
+								
+								<input type="hidden" id="searchAction" value="<?php echo base_url('account/searchAllDetails'); ?>">
+								<input type="hidden" id="searchStore" value="<?php echo base_url('account/searchStore'); ?>">
 								<div class="removeSearch">
 									<img src="<?php echo base_url(); ?>assets_d/images/close.svg" alt="close">
 								</div>
 								<div class="search-info-wrp">
-									<ul id="search-result" style="display:none">
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>First Data <span>in peers</span></strong></a></li>
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>Second Data <span>in peers</span></strong></a></li>
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>Third Data <span>in peers</span></strong></a></li>
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>Fourth Data <span>in peers</span></strong></a></li>
-										<li><a href=""><figure><img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/></figure><strong>Fifth Data <span>in peers</span></strong></a></li>
+									<ul id="search-result" class="searchResultClass" style="display:none">
+										
 									</ul>
 									<div class="no-search">
 										<figure>
 											<img src="<?php echo base_url(); ?>assets_d/images/search-img.svg" alt="Image"/>
 										</figure>
-										<h3>Search for something</h3>
+										<h3 class="searchresulttext">Search for something</h3>
 									</div>
-									<div class="view-all">
-										<a href="">View All</a>
+									<div class="view-all searchResultClassView" style="display:none">
+										<a href="<?php echo base_url('account/searchResult'); ?>">View All</a>
+									</div>
+									<div class="loader-wrap" id="searchPeeersLoader" style="display:none;">
+										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">
+											<g>
+												<path d="M50 15A35 35 0 1 0 74.74873734152916 25.251262658470843" fill="none" stroke="#ea2e7e" stroke-width="12"></path>
+												<path d="M49 3L49 27L61 15L49 3" fill="#ea2e7e"></path>
+												<animateTransform attributeName="transform" type="rotate" repeatCount="indefinite" dur="1s" values="0 50 50;360 50 50" keyTimes="0;1"></animateTransform>
+											</g>
+										</svg>
 									</div>
 								</div>
 							</div>
