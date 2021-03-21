@@ -35,9 +35,7 @@ window.addEventListener('DOMContentLoaded', function () {
                     url: "profile-upload-cropper",
                     data: { image: base64data, type: type },
                     success: function (data) {
-
                         $('#modal_cropper').modal('hide');
-                        alert("success upload image");
                         location.reload();
                     }
                 });
