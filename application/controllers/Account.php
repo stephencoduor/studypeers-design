@@ -4490,4 +4490,19 @@ class Account extends CI_Controller
 
         echo 1;die;
     }
+
+
+    public function deleteDocumentPost(){
+        $doc_id              = $this->input->post('doc_id');
+
+        $post_doc = $this->db->query('SELECT * from post_documents where id = '.$doc_id)->row_array();
+
+        unlink(FCPATH .$post_doc['document_path']);
+
+        $this->db->where(array('id' => $doc_id));
+        $this->db->delete('post_documents');
+
+
+        echo 1;die;
+    }
 }

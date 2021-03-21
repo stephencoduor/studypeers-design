@@ -113,8 +113,17 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         <div class="shareDocs">
                             <h4>Share a Document</h4>
                             <div class="uploadedDocs">
-                                <div id="all_documents">
-
+                                <div id="all_documents_edit">
+                                    <?php if(count($post_documents) > 0){ $count = 1;
+                                        foreach($post_documents as $document){
+                                        ?>
+                                        <p class="feedPostMessages" id="document_div_<?= $document['id']; ?>">
+                                            <a href="<?php echo base_url().$document['document_path']; ?>">Document <?= $count; ?></a>
+                                            <div class="closeBtn" id="remove_document_<?= $document['id']; ?>" onclick="deleteDocument('<?= $document['id']; ?>')"><img src="<?php echo base_url(); ?>/assets_d/images/close-pink.svg" alt="close"/></div>
+                                        </p>
+                                    <?php
+                                       $count++; }
+                                    } ?>
                                 </div>
                             </div>
                             <div class="shareOptionBox">
@@ -123,7 +132,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                         <a href="javascript:void(0)">
                                             <button type="button" class="choose_btn shareBtn">
                                                 <img src="<?php echo base_url(); ?>assets_d/images/choose-file.svg" alt="Choose File"> Choose File
-                                                <input type="file" name="file_edit[]" id="document" multiple="multiple"/>
+                                                <input type="file" name="file_edit[]" id="document_edit" multiple="multiple"/>
                                             </button>
                                         </a>
                                     </li>
@@ -229,6 +238,52 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     readURLEdit(this);
                 });
 
+                $(document).on('change', '#document_edit', function() {
+                    getoutputEdit(this);
+                });
+                var document_counter = '<?= count($post_documents); ?>';
+
+                function getFileEdit(filePath) {
+                    return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
+                }
+
+                function getoutputEdit
+                (inputfile) {
+                    var file_ext = ["doc", "docx", "xls", "xlsx", "ppt", "pptx", "txt", "pdf"];
+                    var extension = inputfile.value.split('.')[1];
+                    var filename = getFileEdit(inputfile.value);
+                    // Check if a value exists in the file_ext array
+                    if (file_ext.indexOf(extension) == -1) {
+                        alert("Invalid file type ! Please choose another file");
+                    }
+                    var img_icon = '';
+                    if (extension == 'docx' || extension == 'doc') {
+                        img_icon = '<img src="' + base_url + '/assets_d/images/document.svg' + '" />';
+                    } else if (extension == 'pdf') {
+                        img_icon = '<img src="' + base_url + '/assets_d/images/pdf.svg' + '" />';
+                    } else if (extension == 'ppt' || extension == 'pptx') {
+                        img_icon = '<img src="' + base_url + '/assets_d/images/pptx.svg' + '" />';
+                    } else if (extension == 'xls' || extension == 'xlsx') {
+                        img_icon = '<img src="' + base_url + '/assets_d/images/xlsx.svg' + '" />';
+                    } else if (extension == 'txt') {
+                        img_icon = '<img src="' + base_url + '/assets_d/images/txt.svg' + '" />';
+                    } else {
+                        alert('Invalid file format ! Please choose any other file . Supported file formats are doc/docx/pdf/ppt/xls/txt');
+                        return false;
+                    }
+                    $('#all_documents_edit').append('<div class="filename" id="document_file_edit_' + document_counter + '">' + img_icon + '</div><div class="closeBtnDocEdit" id="remove_document_edit_' + document_counter + '"><img src="' + base_url + '/assets_d/images/close-pink.svg' + '" alt="close"/> ' + filename + '.' + extension + '</div>');
+                    document_counter++;
+                }
+
+                $(document).on("click", ".closeBtnDocEdit", function() {
+                    close_id = $(this).attr('id');
+                    close_id = close_id.split('_');
+                    $('#document_file_edit_' + close_id[2]).remove();
+                    $('#remove_document_edit_' + close_id[2]).remove();
+                    document_counter--;
+                });
+
+
 
                 $(function() {
                     $('#datetimepickerstartedit').datetimepicker({
@@ -315,6 +370,24 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         success: function(result) {
                             
                             $('#delete_img_' + id).remove();
+                        }
+                    });
+                }
+
+
+                function deleteDocument(id){
+                    url = '<?php echo base_url(); ?>account/deleteDocumentPost';
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        
+                        data: {
+                            "doc_id": id
+                        },
+                        
+                        success: function(result) {
+                            
+                            $('#document_div_' + id).remove();
                         }
                     });
                 }
