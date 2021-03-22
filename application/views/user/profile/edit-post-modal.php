@@ -278,8 +278,8 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                 $(document).on("click", ".closeBtnDocEdit", function() {
                     close_id = $(this).attr('id');
                     close_id = close_id.split('_');
-                    $('#document_file_edit_' + close_id[2]).remove();
-                    $('#remove_document_edit_' + close_id[2]).remove();
+                    $('#document_file_edit_' + close_id[3]).remove();
+                    $('#remove_document_edit_' + close_id[3]).remove();
                     document_counter--;
                 });
 
