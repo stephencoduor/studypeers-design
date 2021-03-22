@@ -10,6 +10,7 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/nice-select.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/search-page.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/owl.carousel.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/scrolling-tabs.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.css">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" rel="stylesheet">

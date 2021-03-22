@@ -266,6 +266,13 @@
     border-radius: 100px;
     margin: 0 8px 8px 0;
 }
+.innerFeedTabs .nav.scroll-tabs li{
+    margin-bottom:0!important;
+}
+.innerFeedTabs .nav.scroll-tabs{
+    flex-wrap: initial;
+    margin:10px 0 15px;
+}
 .innerFeedTabs .nav li a {
     padding: 12px 15px !important;
     white-space: nowrap;
@@ -704,11 +711,7 @@
     text-decoration: none;
     cursor:pointer;
     display: flex;
-<<<<<<< HEAD
-    align-items:center;
-=======
     align-items: center;    
->>>>>>> 07a59f4837df4a4f426e7b98a0cbec8c5ad6312f
 }
 .socialAction li a span {
     color: #bebebe;

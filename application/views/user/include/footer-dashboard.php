@@ -26,6 +26,7 @@
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/owl.carousel.min.js'); ?>"></script>
+
 <script>
     $(document).ready(function() {
         $("#multiple-select").selectator();

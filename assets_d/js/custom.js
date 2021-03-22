@@ -643,5 +643,16 @@ $(window).on("load", function () {
             }
         }
     })
-   
+
+    $(activate);
+
+    function activate() {
+      $('.scroll-tabs')
+        .scrollingTabs({
+          enableSwiping: true
+        })
+        .on('ready.scrtabs', function() {
+          $('.tab-content').show();
+        });
+    }
 });
