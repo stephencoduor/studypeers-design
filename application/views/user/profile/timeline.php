@@ -170,7 +170,7 @@ die;*/
                 } ?>">
                 <div class="innerFeedTabs">
                     <div class="tabularLiist">
-                        <ul class="nav nav-tabs">
+                        <ul class="nav nav-tabs scroll-tabs">
                             <li class="active loadAll"><a data-toggle="tab" href="#all">All</a></li>
                             <li><a class="loadPosts" data-toggle="tab" href="#posts">Posts</a></li>
                             <li><a class="loadQuestions" data-toggle="tab" href="#questions">Questions</a></li>

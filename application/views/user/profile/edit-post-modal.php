@@ -61,7 +61,8 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
 
                         ?>
                         <div class="pollsWrapper" style="<?= $poll_display; ?>">
-                            <div class="pollsform">
+                            <div class="pollsform" id="pollsformEdit">
+                                <input type="hidden" id="optionCount" value="<?= count($post_poll_options); ?>">
                                 <?php if(!empty($post_poll_options)) { $count = 1; foreach ($post_poll_options as $key => $value) { ?>
                                     <div class="form-group" id="edit_option_div_<?= $count; ?>">
                                         <input type="text" class="form-control" name="edit_option[<?= $count; ?>]" placeholder="Option <?= $count; ?>" value="<?= $value['options']; ?>">
@@ -82,7 +83,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                     </div>
                                     <div class="form-group" id="edit_option_div_3">
                                         <input type="text" class="form-control" name="edit_option[3]" placeholder="Option 3">
-                                        <a href="javascript:void(0)" onclick="removeOptionDiv('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                                        <a href="javascript:void(0)" onclick="removeOptionDivEdit('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
                                     </div>
                                 <?php } ?>
                                 
@@ -91,18 +92,18 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                     <a href="javascript:void(0)" onclick="removeOptionDiv('3')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
                                 </div> -->
                             </div>
-                            <div class="addmore">
+                            <div class="addmore" id="addmoreEditModal">
                                 + Add Option
                             </div>
                             <div class="pollEndTimmings">
                                 <h6>When does poll ends?</h6>
                                 <div class="polltimeform">
                                     <div class="filtercalendar">
-                                        <div class="input-group date" id="datetimepickerstart">
+                                        <div class="input-group date" id="datetimepickerstartedit">
                                             <span class="input-group-addon" for="start-date"></span>
                                             <input type="text" class="form-control" name="poll-end-date-edit" placeholder="dd/mm/yy" id="start-date-edit" value="<?= $post_details['poll_end_date']; ?>">
                                         </div>
-                                        <div class="input-group--overlap" id="selectTime1">
+                                        <div class="input-group--overlap" id="selectTimeEdit">
                                             <input type="text" class="form-control form-control--lg" placeholder="hh:mm" name="poll-end-time-edit" value="<?= $post_details['poll_end_time']; ?>">
                                         </div>
                                     </div>
@@ -150,7 +151,23 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 </ul>
                             </div>
                         </div>
-                        <div class="row" id="image_row">
+                        <div class="row" id="image_row_edit">
+                            <?php if(count($post_images) > 0){ 
+                                    foreach ($post_images as $key => $value) {
+                                        
+                            ?>
+                                <div class="col-md-4" id="delete_img_<?= $value['id']; ?>">
+                                    <div class="uloadedImage">
+                                        <figure>
+                                            <img src="<?php echo base_url().$value['image_path'] ?>" alt="image" id="image">
+                                        </figure>
+                                        <div class="close">
+                                            <img src="<?php echo base_url(); ?>assets_d/images/close-pink.svg" class="remove_image_edit" onclick="deletePostImg('<?= $value['id']; ?>')" alt="close">
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } } ?>
+
                             <!----Show image preview here--->
                         </div>
                         <div class="hashTagWrap">
@@ -160,10 +177,10 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     </div>
                     <div class="shareBoxWrapper">
                         <div class="shareBox">
-                            <div class="imageSection" id="upload_image_section">
+                            <div class="imageSection" id="upload_image_section_edit">
                                 <img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="image/video">
                                 <span>Image/Video</span>
-                                <input type="file" class="image_upload_button" id="imgInp1" name="file_edit[]" multiple="multiple">
+                                <input type="file" class="image_upload_button_edit" id="imgInp1" name="file_edit[]" multiple="multiple">
                             </div>
                             <div class="pollSection">
                                 <img src="<?php echo base_url(); ?>assets_d/images/poll.svg" alt="image/video">
@@ -184,7 +201,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                             </button>
                         </div>
                     </div>
-                    <div class="shareMoreContentWrapper">
+                    <!-- <div class="shareMoreContentWrapper">
                         <button type="button" class="shareOptionList celebrate">
                             <img src="<?php echo base_url(); ?>/assets_d/images/celebrate_occassion.svg"> Celebrate an occasion
                         </button>
@@ -200,14 +217,30 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         <button type="button" class="shareOptionList offer-help">
                             <img src="<?php echo base_url(); ?>/assets_d/images/offer-help.svg">  Offer Help
                         </button>
-                    </div>
+                    </div> -->
                 </div>
             </form>
 
 
 
             <script type="text/javascript">
-                
+                $(document).on('change', '.image_upload_button_edit', function() {
+
+                    readURLEdit(this);
+                });
+
+
+                $(function() {
+                    $('#datetimepickerstartedit').datetimepicker({
+                        allowInputToggle: true,
+                        format: 'L'
+                    });
+                    $('#selectTimeEdit').datetimepicker({
+                        format: 'LT',
+                        allowInputToggle: true
+                    });
+                });
+
                 $(document).on('click', '#update_post_from_ajax', function() {
                     var html_content = $('#messagepostareaedit').val(); 
                     if (html_content != '') {
@@ -215,7 +248,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         $('#editPostForm').submit();
                         
                     }
-
+                    
                 });
 
                 $('#editPostForm').on("submit", function(e) {
@@ -248,7 +281,127 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                 });
 
 
+                indexEdit = $('#optionCount').val();
+                $('#addmoreEditModal').on('click', function() { 
+                    if (indexEdit < 6) {
+                        indexEdit++;
+                        $('#pollsformEdit').append(
+                            `<div class="form-group" id="edit_option_div_${indexEdit}">
+                                    <input type="text" name="edit_option[${indexEdit}]" class="form-control" placeholder="Option ${indexEdit}">
+                                    <a href="javascript:void(0)" onclick="removeOptionDivEdit('${index}')" class="cross-icon"><img src="<?php echo base_url(); ?>assets_d/images/clear-search-icon.svg" alt="Cross Icon"></a>
+                                </div>
+                                `
+                        );
+                    }
+                });
 
+                function removeOptionDivEdit(id) {
+                    indexEdit--;
+                    $('#edit_option_div_' + id).remove();
+                }
+
+                
+
+                function deletePostImg(id){
+                    url = '<?php echo base_url(); ?>account/deletePostImage';
+                    $.ajax({
+                        type: 'POST',
+                        url: url,
+                        
+                        data: {
+                            "image_id": id
+                        },
+                        
+                        success: function(result) {
+                            
+                            $('#delete_img_' + id).remove();
+                        }
+                    });
+                }
+
+                
+                var counter = 1, video_counter = 1;
+                var image_types = ['jpg', 'png', 'jpeg'];
+                var video_types = ['mp4', '3gp', 'mpeg4', 'mkv', 'mov'];
+                    function readURLEdit(input) {
+                        
+                        for (var i = 0; i < input.files.length; ++i) {
+                            if (input.files[i] && input.files[i]) {
+                                var file = input.files[i];
+                                var extension = file.name.split('.').pop().toLowerCase(); //file extension from input file
+                                var isImage = image_types.indexOf(extension) > -1;
+                                var isVideo = video_types.indexOf(extension) > -1;
+                                var reader = new FileReader();
+                                if (isImage) {
+                                    reader.onload = function(e) {
+                                        var html_image = '<div class="col-md-4" id="delete_img_' + counter + '"><div class="uloadedImage"><figure><img src="' + e.target.result + '" alt="image" id="image' + counter + '"></figure>' +
+                                            '<div class="close"><img src="' + base_url + 'assets_d/images/close-pink.svg" class="remove_image_edit" id="remove_image_' + counter + '" alt="close"></div></div></div>';
+                                        $('#imgInp1' + counter).hide();
+                                        $('#upload_image_section_edit').append('<input type="file" class="image_upload_button_edit" id="imgInp1' + counter + '" name="file_edit[]" multiple="multiple">');
+                                        $('#image_row_edit').append(html_image);
+                                        counter++;
+                                    };
+                                    reader.readAsDataURL(file); // convert to base64 string
+                                } else {
+                                    reader.onload = function() {
+                                        var blob = new Blob([reader.result], {
+                                            type: file.type
+                                        });
+                                        var url = URL.createObjectURL(blob);
+                                        var video = document.createElement('video');
+                                        var timeupdate = function() {
+                                            if (snapImage()) {
+                                                video.removeEventListener('timeupdate', timeupdate);
+                                                video.pause();
+                                            }
+                                        };
+                                        video.addEventListener('loadeddata', function() {
+                                            if (snapImage()) {
+                                                video.removeEventListener('timeupdate', timeupdate);
+                                            }
+                                        });
+                                        var snapImage = function() {
+                                            var canvas = document.createElement('canvas');
+                                            canvas.width = video.videoWidth;
+                                            canvas.height = video.videoHeight;
+                                            canvas.getContext('2d').drawImage(video, 0, 0, canvas.width, canvas.height);
+                                            var image = canvas.toDataURL();
+                                            var success = image.length > 100000;
+                                            if (success) {
+                                                var html_image = '<div class="col-md-4" id="delete_video_' + video_counter + '"><div class="uloadedImage"><figure><img src="' + image + '" alt="image" id="image' + video_counter + '"></figure>' +
+                                                    '<div class="close"><img src="' + base_url + 'assets_d/images/close-pink.svg" class="remove_video" id="remove_video_' + video_counter + '" alt="close"></div></div></div>';
+                                                $('#image_row_edit').append(html_image);
+                                                // URL.revokeObjectURL(url);
+                                                $('#imgInp1' + video_counter).hide();
+                                                $('#upload_image_section_edit').append('<input type="file" class="image_upload_button_edit" id="imgInp1' + video_counter + '" name="file_edit[]" multiple="multiple">');
+                                                video_counter++;
+                                            }
+                                            return success;
+                                        };
+                                        video.addEventListener('timeupdate', timeupdate);
+                                        video.preload = 'metadata';
+                                        video.src = url;
+                                        // Load video in Safari / IE11
+                                        video.muted = true;
+                                        video.playsInline = true;
+                                        video.play();
+                                    };
+                                    reader.readAsArrayBuffer(file);
+                                }
+
+                            }
+                        }
+                    }
+
+
+                    $(document).on('click', '.remove_image_edit', function() {
+                        var img_id = $(this).attr('id').split('_');
+                        $('#delete_img_' + img_id[2]).remove();
+                        $('#imgInp1' + img_id[2]).val('');
+                        counter--;
+                    });
+
+                
                 
 
             </script>

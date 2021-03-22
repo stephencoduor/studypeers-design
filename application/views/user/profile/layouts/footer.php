@@ -378,6 +378,8 @@
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.star-rating-svg.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.js"></script>
 <script src="<?php echo base_url('assets_d/js/jquery.ui.touch-punch.min'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/owl.carousel.min.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/scrolling-tabs.js'); ?>"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/custom.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/croppie.js"></script>
 <script src="<?php echo base_url('assets_d/js/emojionearea-master/dist/emojionearea.js'); ?>"></script>
@@ -1221,6 +1223,7 @@
                 $("#crop_type").val('profile');
                 $("#cropper_image").attr('src', event.target.result);
                 $('#modal_cropper').modal('show');
+                $("#upload_image").val("");
             }
             reader.readAsDataURL(this.files[0]);
         });
@@ -1273,6 +1276,7 @@
                 $("#crop_type").val('cover');
                 $("#cropper_image").attr('src', event.target.result);
                 $("#modal_cropper").modal('show');
+                $("#upload_cover_image").val("");
 
 
             };

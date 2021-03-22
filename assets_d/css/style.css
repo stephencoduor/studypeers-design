@@ -254,7 +254,7 @@ aside.active{transform: translateX(-310px);-webkit-transform: translateX(-310px)
 }
 .search-info-wrp{
     width: 100%;
-    padding: 25px 25px 30px;
+    padding: 25px 0 30px;
     position: absolute;
     top: 100%;
     left: 0;
@@ -274,11 +274,31 @@ aside.active{transform: translateX(-310px);-webkit-transform: translateX(-310px)
     flex-direction: column;
 }
 .search-info-wrp ul li{
-    margin-bottom:10px;
+    padding:0 25px;
+    position: relative;
+    transition:0.3s ease-in;
+}
+.search-info-wrp ul li:before{
+    width:5px;
+    height:100%;
+    background:#303f9f;
+    position: absolute;
+    content:"";
+    left:0;
+    top:0;
+    opacity:0;
+    transition:0.3s ease-in;
+}
+.search-info-wrp ul li:hover{
+    box-shadow: 0 2px 4px #c3c3c3;
+}
+.search-info-wrp ul li:hover:before{
+    opacity:1;
 }
 .search-info-wrp ul li a{
     display: flex;
     align-items: center;
+    padding:8px 0 7px;
 }
 .search-info-wrp ul li a strong{
     font-size:14px;
@@ -1679,6 +1699,13 @@ display: inline-block;
 line-height: 1em;
 transform-origin: 0 0;
 }
+.owl-item{
+    border-radius: 10px;
+    border: 1px solid #e4e6eb;
+}
+.peer-info-wrap{
+    padding:0 10px;
+}
 @media (max-width: 991px) {
     body .login-container .flex-row {
         flex-direction: column-reverse!important;
@@ -1717,6 +1744,35 @@ transform-origin: 0 0;
 .sortMenu.viewList.hide-in-mobile{
     display: block;
 }
+.owl-nav{
+    position: absolute;
+    right:0;
+    top:-40px;
+}
+.owl-carousel{
+    padding-top:15px;
+}
+
+.owl-nav button:focus{
+    outline: none;
+}
+.owl-nav button+button{
+    margin-left:10px;
+}
+.owl-nav button{
+    width:30px;
+    height:30px;
+    position: relative;
+}
+.owl-nav button span{
+    font-size:36px;
+}
+.owl-next{
+    background:url("/assets_d/images/next.svg");
+}
+.owl-prev{
+    background:url("/assets_d/images/next.svg");
+}
 @media (max-width: 767px) {
     .modal .listUserWrap .list{
         flex-direction: column;
@@ -1748,4 +1804,11 @@ transform-origin: 0 0;
     .left-btn-wrap, .right-btn-wrap{
         align-items: flex-start;
     }
+}
+@media (max-width: 600px) { 
+    .suggestionWrapper .owl-item figure{
+        width:200px;
+        height:200px;
+        margin:0 auto;
+    }        
 }

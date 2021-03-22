@@ -107,6 +107,7 @@
 .profileLogo figure img {
     width:100%;
     height:100%;
+    object-fit: cover;
 }
 .profileLogo .changeProfile {
     width:60px;
@@ -215,6 +216,8 @@
     font-size: 16px;
     color: #333333;
     margin-top: 10px;
+    display: flex;
+    align-items: center;
 }
 .profileInformation .location img {
     width:20px;
@@ -262,6 +265,13 @@
     background: #e9e9e9;
     border-radius: 100px;
     margin: 0 8px 8px 0;
+}
+.innerFeedTabs .nav.scroll-tabs li{
+    margin-bottom:0!important;
+}
+.innerFeedTabs .nav.scroll-tabs{
+    flex-wrap: initial;
+    margin:10px 0 15px;
 }
 .innerFeedTabs .nav li a {
     padding: 12px 15px !important;
@@ -584,6 +594,10 @@
     background: #fff1e2;
     color:#fe9774;
 }
+.badgeList ul li a{
+    display: flex;
+    align-items: center;
+}
 .badgeList ul li.badge.badge1 a {
     color:#185aeb;
 }
@@ -697,7 +711,7 @@
     text-decoration: none;
     cursor:pointer;
     display: flex;
-    align-items:center;
+    align-items: center;    
 }
 .socialAction li a span {
     color: #bebebe;

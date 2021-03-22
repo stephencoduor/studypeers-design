@@ -149,7 +149,47 @@
 							<div class="createBox">
 								<div class="suggestionWrapper">
 									<h5>Peer Suggestions</h5>
-									<div class="slider peerSuggestionList">
+									<div class="owl-carousel">
+										<?php foreach ($peer_suggestion as $key => $value) {
+											$user_id = $this->session->get_userdata()['user_data']['user_id'];
+											$chk_if_sent = $this->db->get_where('peer_master', array('peer_id' => $value['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
+											$chk_if_follow = $this->db->get_where($this->db->dbprefix('follow_master'), array('user_id'=>$user_id, 'peer_id' =>  $value['id']))->row_array(); 
+											$profile_user = $this->db->get_where('user', array('id' => $value['id']))->row_array();
+											$mutual_count = $this->db->query("SELECT u.* FROM friends f1 INNER JOIN friends f2 ON (f2.peer_id = f1.peer_id) INNER JOIN user u ON (u.id = f2.peer_id) WHERE f1.user_id = '".$user_id."' AND f2.user_id = '".$value['id']."'")->num_rows();
+										?>
+										<div class="item" id="peerList<?= $value['id']; ?>">
+											<figure>
+													<a href="<?php echo base_url() . 'sp/' . $profile_user['username'] ?>">
+														<img src="<?php echo userImage($value['id']); ?>" alt="Peers">
+													</a>
+													<div class="removePeer">
+														<img src="<?php echo base_url(); ?>assets_d/images/close-peer.svg" alt="Close Peer Suggestions">
+													</div>
+												</figure>
+												<div class="peer-info-wrap">
+													<a href="<?php echo base_url() . 'sp/' . $profile_user['username']  ?>">
+														<h4><?php echo $value['nickname']; ?></h4>
+													</a>
+
+													<p><?= $mutual_count; ?> mutual peers</p>
+												</div>
+												<?php if(!empty($chk_if_follow)) { ?>
+	                                                
+	                                                <button type="button" class="follow_peer follow_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" id="0">Unfollow</button>
+	                                            <?php } else { ?>
+	                                                
+	                                                <button type="button" class="follow_peer follow_<?php echo $value['id']; ?>" data-id="<?php echo $value['id']; ?>" id="1">Follow</button>
+	                                            <?php } ?>
+												
+												<?php if (!empty($chk_if_sent)) { ?>
+													<button type="button" class="add_peer" onclick="cancelRequest('<?= $value['id']; ?>')" id="add_peer_<?= $value['id']; ?>">Cancel Request</button>
+												<?php } else { ?>
+													<button type="button" class="add_peer" onclick="sendRequest('<?= $value['id']; ?>')" id="add_peer_<?= $value['id']; ?>">Add Peer</button>
+												<?php } ?>
+										</div>
+										<?php } ?>
+									</div>
+									<!-- <div class="slider peerSuggestionList">
 										<?php foreach ($peer_suggestion as $key => $value) {
 											$user_id = $this->session->get_userdata()['user_data']['user_id'];
 											$chk_if_sent = $this->db->get_where('peer_master', array('peer_id' => $value['id'], 'user_id' => $user_id, 'status' => 1))->row_array();
@@ -194,7 +234,7 @@
 										<?php } ?>
 
 
-									</div>
+									</div> -->
 								</div>
 							</div>
 						</div>

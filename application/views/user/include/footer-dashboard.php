@@ -25,6 +25,7 @@
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/owl.carousel.min.js'); ?>"></script>
 
 <script>
     $(document).ready(function() {
@@ -958,22 +959,28 @@
     })
 
 
+    
+
+    
+
     function removeOptionDivDelete(id, option_id) {
-                    url = '<?php echo base_url(); ?>account/deletePollOption';
-                    $.ajax({
-                        type: 'POST',
-                        url: url,
-                        
-                        data: {
-                            "option_id": option_id
-                        },
-                        
-                        success: function(result) {
-                            $('#edit_option_div_' + id).remove();
-                        }
-                    });
-                    
-                }
+        url = '<?php echo base_url(); ?>account/deletePollOption';
+        $.ajax({
+            type: 'POST',
+            url: url,
+            
+            data: {
+                "option_id": option_id
+            },
+            
+            success: function(result) {
+                indexEdit--;
+                $('#edit_option_div_' + id).remove();
+            }
+        });
+        
+    }
+
 </script>
 
 </body>

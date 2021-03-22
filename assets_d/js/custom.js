@@ -618,5 +618,41 @@ $(window).on("load", function () {
         theme:"dark-3"        
     });
 
-   
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:true
+            },
+            600:{
+                items:2,
+                nav:true
+            },
+            1024:{
+                items:3,
+                nav:true,
+                loop:false
+            },
+            1280:{
+                items:4,
+                nav:true,
+                loop:false
+            }
+        }
+    })
+
+    $(activate);
+
+    function activate() {
+      $('.scroll-tabs')
+        .scrollingTabs({
+          enableSwiping: true
+        })
+        .on('ready.scrtabs', function() {
+          $('.tab-content').show();
+        });
+    }
 });
