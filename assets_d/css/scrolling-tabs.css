@@ -37,11 +37,10 @@
     cursor: pointer;
     display: none;
     float: left;
-    font-size: 12px;
+    font-size: 20px;
     height: 60px;
-    margin-bottom: -1px;
-    padding-left: 2px;
-    padding-top: 20px;
+    padding-left: 0;
+    padding-top: 15px;
     width: 20px; }
     .scrtabs-tab-scroll-arrow:hover {
       background-color: #eeeeee; }
