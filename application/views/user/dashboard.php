@@ -10611,6 +10611,24 @@
 		
 	});
 
+	$(document).on("click", ".privacyPostEdit", function() {
+		var post_id = $(this).data('id');
+		var url = '<?php echo base_url('account/getPostPrivacyDataById') ?>';
+		$.ajax({
+			type: "POST",
+			url: url,
+			data: {
+				'post_id': post_id
+			},
+			success: function(data) {
+				
+				$("#privacyPostEdit #privacyPostEditContent").html(data);
+			}
+		});
+		
+		
+	});
+
 
 	$(document).on('submit', 'form.bestAnswerDashboard', function(e) {
 
@@ -10808,4 +10826,26 @@
                 }
             });
         });
+
+	function updatePrivacyOfPost(){ 
+        var privacy = $("input:radio.privacy_val_edit:checked").val();
+        if ($('#allow_comment_edit').is(':checked')) {
+            var allow_comment = 1;
+        } else {
+            var allow_comment = 0;
+        }
+        var url = '<?php echo base_url('account/updatePrivacyOfPost') ?>';
+        var post_id = $("#editPostPrivacyId").val();
+        $.ajax({
+            type: "POST",
+            url: url,
+            data: {
+                'post_id': post_id, 'privacy': privacy, 'allow_comment': allow_comment
+            },
+            success: function(data) {
+                
+                $("#privacyPostEdit").modal('hide');
+            }
+        });
+    }
 </script>

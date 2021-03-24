@@ -200,3 +200,14 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
         </div>
     </div>
 </div>
+
+
+<div class="modal fade" id="privacyPostEdit" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content" id="privacyPostEditContent">
+            <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+            
+        </div>
+    </div>
+</div>

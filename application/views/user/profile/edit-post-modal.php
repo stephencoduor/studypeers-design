@@ -41,7 +41,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 </div>
                             </div>
                             <div class="settingWrapper">
-                                <div class="postSetting" data-dismiss="modal" data-toggle="modal" href="#privacyPost">
+                                <div class="postSetting privacyPostEdit" data-id="<?= $post_details['id']; ?>" data-dismiss="modal" data-toggle="modal" href="#privacyPostEdit">
                                     <img src="<?php echo base_url(); ?>assets_d/images/post-setting.svg" alt="Post Setting">
                                 </div>
                                 <div class="notification">
@@ -474,7 +474,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                         counter--;
                     });
 
-                
+                    
                 
 
             </script>

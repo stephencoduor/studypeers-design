@@ -4465,6 +4465,21 @@ class Account extends CI_Controller
         }
     }
 
+    public function getPostPrivacyDataById(){
+        if ($this->input->post()) {
+            $post_id              = $this->input->post('post_id');
+
+            $post_query = $this->db->query('SELECT * from posts where id = '.$post_id)->row_array();
+            
+            $posts['post_details'] = $post_query;
+            
+
+            $html = $this->load->view('user/profile/edit-post-privacy', $posts, true);
+            echo $html;
+
+        }
+    }
+
 
     public function deletePollOption(){
         $option_id              = $this->input->post('option_id');
@@ -4687,5 +4702,16 @@ class Account extends CI_Controller
 			die;
 		}
 	}
+
+    public function updatePrivacyOfPost(){
+        $post_id              = $this->input->post('post_id');
+        $privacy              = $this->input->post('privacy');
+        $allow_comment        = $this->input->post('allow_comment');
+
+        $this->db->where(array('id' => $post_id));
+        $result = $this->db->update('posts', array('privacy_id' => $privacy, 'is_comment_on' => $allow_comment));
+
+        echo 1;die;
+    }
 
 }
