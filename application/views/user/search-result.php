@@ -44,9 +44,20 @@
                             </div>
                             <div class="peer-right-info">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/chat-red.svg" alt="Image"/></a></li>
-                                    <li><a href="">Following</a></li>
-                                    <li><a href="">Peer</a></li>
+                                    <li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/chat-red.svg" alt="Image" data-name="<?php echo $AllPeer['full_name']; ?>" data-groupId="0" data-id="<?php echo $AllPeer['id']; ?>" class="open-single-chat-window" /></a></li>
+									
+									<?php
+										if($AllPeer['isFollowing'] == 1){
+									?>
+									<li><a href="javascript:;" class="follow_now follow_<?php echo $AllPeer['id']; ?>" data-id="<?php echo $AllPeer['id']; ?>" id="0">UnFollow</a></li>
+									<?php		
+										} else {
+									?>
+									<li><a href="javascript:;" class="follow_now follow_<?php echo $AllPeer['id']; ?>" data-id="<?php echo $AllPeer['id']; ?>" id="1">Follow</a></li>
+									<?php		
+										}
+									?>
+                                    <!--li><a href="javascript:;" onclick="alert('Work in progress');">Peer</a></li-->
                                 </ul>
                             </div>
                         </div>
@@ -164,8 +175,8 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href=""><?php echo $AllPost['total_comments']; ?></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li-->
                                 </ul>
                             </div>
                         </div>
@@ -226,9 +237,25 @@
                         <div class="like-comment-wrap">
                             <div class="like-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <li>
+										<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20">
+											<g id="prefix__up-arrow" transform="translate(-31.008 -10.925)">
+												<path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+											</g>
+										</svg>
+									</li>
+										<a href="javascript:;"><?php echo $AllQuestion['vote_count']; ?></a>
+                                    <li>
+									</li>
+                                    <li>
+										<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20">
+											<g id="prefix__Layer_1" transform="rotate(180 24.686 15.463)">
+												<g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+													<path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" />
+												</g>
+											</g>
+										</svg>
+									</li>
                                 </ul>
                             </div>
                             <div class="comment-wrap">
@@ -237,8 +264,8 @@
                                     <li><a href=""><?php echo $AllQuestion['view_count']; ?></a></li>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
                                     <li><a href=""><?php echo $AllQuestion['answer_count']; ?></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li-->
                                 </ul>
                             </div>
                         </div>
@@ -343,36 +370,70 @@
                         <div class="like-comment-wrap">
                             <div class="like-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+									<?php
+										if(!empty($AllDocument['reactions_ids'])){
+											foreach($AllDocument['reactions_ids'] as $reactions_id){
+												if($reactions_id == 1) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like"></a></li>
+										<?php			
+												} else if($reactions_id == 2) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+										<?php			
+												} else if($reactions_id == 3) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 4) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 5) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 6) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												}
+											}
+										}
+									?>
+                                    <?php
+									if(!empty($AllDocument['reactions_ids'])){
+									?>
+									<li><a href="javascript:;"><?php echo $AllDocument['total_reactions']; ?></a></li>
+									<?php
+									} else {
+									?>
+									<li><a href="javascript:;">&nbsp;&nbsp;</a></li>	
+									<li><a href="javascript:;">&nbsp;&nbsp;</a></li>
+									<?php	
+									}
+									?>
                                 </ul>
                             </div>
                             <div class="star-rating">
                                 <ul>
+									<?php
+										for($i = 1;$i <= $AllDocument['avgRatings'];$i++){
+									?>
                                     <li>
                                         <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
                                     </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
+                                    <?php
+										}
+									?>
                                 </ul>
                             </div>
                             <div class="comment-wrap">
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <li><a href=""><?php echo $AllDocument['total_comments']; ?></a></li>
+                                    <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li-->
                                 </ul>
                             </div>
                         </div>
@@ -385,25 +446,30 @@
 				<br>
 				<?php
 				}
+				
+				if(!empty($AllStudySets)){
 				?>
 				<div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Study Sets</h3>
                     </div>
+					<?php
+						foreach($AllStudySets as $AllStudySet){
+					?>
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img">
                                     <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                        <img src="<?php echo $AllStudySet['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
+                                    <h3><?php echo $AllStudySet['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
-                                                <a href="">University of Florida</a>
+                                                <a href=""><?php echo $AllStudySet['UniversityName']; ?></a>
                                             </li>
                                             <li class="badge badge3">
                                                 <a href="">
@@ -416,275 +482,103 @@
                             </div>
                             <div class="user-top-right">
                                 <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
+                                    <span class="timeline"><?php echo $AllStudySet['post_at']; ?></span>
                                     <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
                                 </div>
                             </div>
                         </div>  
                         <div class="content-info-area">
                             <div class="content-img clearfix">
+								<?php
+									if($AllStudySet['studyset_cover'] != ''){
+								?>
                                 <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/Study-Tools-bg.jpg" alt="Image"/>
+                                    <img src="<?php echo $AllStudySet['studyset_cover']; ?>" alt="Image"/>
                                 </figure>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+								<?php
+									}
+								?>
+                                <p><?php echo $AllStudySet['studyset_name']; ?></p>
                             </div>
                         </div>
                         <div class="like-comment-wrap">
                             <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
+                                <?php
+									if(!empty($AllStudySet['reactions_ids'])){
+										foreach($AllStudySet['reactions_ids'] as $reactions_id){
+											if($reactions_id == 1) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like"></a></li>
+									<?php			
+											} else if($reactions_id == 2) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+									<?php			
+											} else if($reactions_id == 3) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>
+									<?php			
+											} else if($reactions_id == 4) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>
+									<?php			
+											} else if($reactions_id == 5) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>
+									<?php			
+											} else if($reactions_id == 6) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Icon"></a></li>
+									<?php			
+											}
+										}
+									}
+								?>
+							<?php
+								if(!empty($AllStudySet['reactions_ids'])){
+							?>
+								<li><a href="javascript:;"><?php echo $AllStudySet['total_reactions']; ?></a></li>
+							<?php
+								} else {
+							?>
+								<li><a href="javascript:;">&nbsp;&nbsp;</a></li>	
+								<li><a href="javascript:;">&nbsp;&nbsp;</a></li>
+							<?php	
+								}
+							?>
                             </div>
                             <div class="star-rating">
                                 <ul>
+									<?php
+										for($i = 1;$i <= $AllStudySet['avgRatings'];$i++){
+									?>
                                     <li>
                                         <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
                                     </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
+                                    <?php
+										}
+									?>
                                 </ul>
                             </div>
                             <div class="comment-wrap">
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <li><a href=""><?php echo $AllStudySet['total_comments']; ?></a></li>
+                                    <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li-->
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                            
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="star-rating">
-                                <ul>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                            
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="star-rating">
-                                <ul>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                            
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="star-rating">
-                                <ul>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <?php
+						}
+					?>
                     <div class="view-all-section"><a href="">View All Study Sets</a></div>
                 </div>
 				<br>
+				<?php
+				}
+				?>
 				<div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Events</h3>
@@ -1537,15 +1431,26 @@
                                     <ul>
                                         <li><?php echo $AllPeer['UniversityName']; ?></li>
                                         <li><?php echo $AllPeer['LocationName']; ?></li>
-                                        <li><a href="">25</a> followers</li>
+                                        <li><a href=""><?php echo $AllPeer['totalFollower']; ?></a> followers</li>
                                     </ul>
                                 </div>
                             </div>
                             <div class="peer-right-info">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/chat-red.svg" alt="Image"/></a></li>
-                                    <li><a href="">Following</a></li>
-                                    <li><a href="">Peer</a></li>
+                                    <li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/chat-red.svg" alt="Image" data-name="<?php echo $AllPeer['full_name']; ?>" data-groupId="0" data-id="<?php echo $AllPeer['id']; ?>" class="open-single-chat-window" /></a></li>
+									
+									<?php
+										if($AllPeer['isFollowing'] == 1){
+									?>
+									<li><a href="javascript:;" class="follow_now follow_<?php echo $AllPeer['id']; ?>" data-id="<?php echo $AllPeer['id']; ?>" id="0">UnFollow</a></li>
+									<?php		
+										} else {
+									?>
+									<li><a href="javascript:;" class="follow_now follow_<?php echo $AllPeer['id']; ?>" data-id="<?php echo $AllPeer['id']; ?>" id="1">Follow</a></li>
+									<?php		
+										}
+									?>
+                                    <!--li><a href="javascript:;" onclick="alert('Work in progress');">Peer</a></li-->
                                 </ul>
                             </div>
                         </div>
@@ -1702,13 +1607,13 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href=""><?php echo $AllPost['total_comments']; ?></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li-->
                                 </ul>
                             </div>
                         </div>
-                    </div>	
-                    <?php	
+                    </div>
+					<?php
 							}
 						} else {
 					?>
@@ -1782,9 +1687,25 @@
                         <div class="like-comment-wrap">
                             <div class="like-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <li>
+										<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20">
+											<g id="prefix__up-arrow" transform="translate(-31.008 -10.925)">
+												<path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+											</g>
+										</svg>
+									</li>
+										<a href="javascript:;"><?php echo $AllQuestion['vote_count']; ?></a>
+                                    <li>
+									</li>
+                                    <li>
+										<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20">
+											<g id="prefix__Layer_1" transform="rotate(180 24.686 15.463)">
+												<g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+													<path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" />
+												</g>
+											</g>
+										</svg>
+									</li>
                                 </ul>
                             </div>
                             <div class="comment-wrap">
@@ -1793,8 +1714,8 @@
                                     <li><a href=""><?php echo $AllQuestion['view_count']; ?></a></li>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
                                     <li><a href=""><?php echo $AllQuestion['answer_count']; ?></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li-->
                                 </ul>
                             </div>
                         </div>
@@ -1835,123 +1756,157 @@
 						if(!empty($AllDocuments)){
 							foreach($AllDocuments as $AllDocument){
 					?>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo $AllDocument['profile_picture']; ?>" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3><?php echo $AllDocument['fullname']; ?></h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href=""><?php echo $AllDocument['UniversityName']; ?></a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline"><?php echo $AllDocument['post_at']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-							<b><?php echo $AllDocument['document_name']; ?></b>
-                            <p><?php echo $AllDocument['description']; ?></p>
-                            <div class="documentName">
-								<?php
-									if($AllDocument['document_file'] != ''){
-										$ExplodedFileName = explode(".",$AllDocument['document_file']);
-										
-										if(strtolower($ExplodedFileName[1]) == 'pdf'){
-									?>
-										<img src="<?php echo base_url(); ?>/assets_d/images/application_pdf.svg" alt="pdf"> 
-									<?php		
-										} else if(strtolower($ExplodedFileName[1]) == 'docx') {
-									?>
-										<img src="<?php echo base_url(); ?>/assets_d/images/application_vnd.openxmlformats-officedocument.wordprocessingml.document.svg" style="width: 30px;" alt="doc"> 
-									<?php		
-										} else if(strtolower($ExplodedFileName[1]) == 'doc') {
-									?>
-										<img src="<?php echo base_url(); ?>/assets_d/images/application_vnd.openxmlformats-officedocument.wordprocessingml.document.svg" style="width: 30px;" alt="doc"> 
-									<?php		
-										} else if(strtolower($ExplodedFileName[1]) == 'png') {
-									?>
-									<img src="<?php echo base_url(); ?>/assets_d/images/file.svg" alt="pdf"> 
-									<?php		
-										} else if(strtolower($ExplodedFileName[1]) == 'xls') {
-									?>
-									<img src="<?php echo base_url(); ?>/assets_d/images/xlsx@2x.png" style="width: 30px;" alt="text"> 
-									<?php		
-										} else if(strtolower($ExplodedFileName[1]) == 'csv') {
-									?>
-									<img src="<?php echo base_url(); ?>/assets_d/images/file.svg" alt="csv"> 
-									<?php		
-										} else if(strtolower($ExplodedFileName[1]) == 'txt') {
-									?>
-									<img src="<?php echo base_url(); ?>/assets_d/images/txt@2x.png" style="width: 30px;" alt="text"> 
-									<?php		
-										} else if(strtolower($ExplodedFileName[1]) == 'pptx') {
-									?>
-									<img src="<?php echo base_url(); ?>/assets_d/images/pptx@2x.png" style="width: 30px;" alt="pptx"> 
-									<?php		
+						<div class="post-row-wrap">
+							<div class="user-top">
+								<div class="user-top-left">
+									<div class="user-img">
+										<figure>
+											<img src="<?php echo $AllDocument['profile_picture']; ?>" alt="Image"/>
+										</figure>
+									</div>
+									<div class="user-name-wrap">
+										<h3><?php echo $AllDocument['fullname']; ?></h3>
+										<div class="badgeList">
+											<ul>
+												<li class="badge badge1">
+													<a href=""><?php echo $AllDocument['UniversityName']; ?></a>
+												</li>
+												<li class="badge badge3">
+													<a href="">
+														Faculty
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="user-top-right">
+									<div class="timeline-action">
+										<span class="timeline"><?php echo $AllDocument['post_at']; ?></span>
+										<a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+									</div>
+								</div>
+							</div>  
+							<div class="content-info-area">
+								<b><?php echo $AllDocument['document_name']; ?></b>
+								<p><?php echo $AllDocument['description']; ?></p>
+								<div class="documentName">
+									<?php
+										if($AllDocument['document_file'] != ''){
+											$ExplodedFileName = explode(".",$AllDocument['document_file']);
+											
+											if(strtolower($ExplodedFileName[1]) == 'pdf'){
+										?>
+											<img src="<?php echo base_url(); ?>/assets_d/images/application_pdf.svg" alt="pdf"> 
+										<?php		
+											} else if(strtolower($ExplodedFileName[1]) == 'docx') {
+										?>
+											<img src="<?php echo base_url(); ?>/assets_d/images/application_vnd.openxmlformats-officedocument.wordprocessingml.document.svg" style="width: 30px;" alt="doc"> 
+										<?php		
+											} else if(strtolower($ExplodedFileName[1]) == 'doc') {
+										?>
+											<img src="<?php echo base_url(); ?>/assets_d/images/application_vnd.openxmlformats-officedocument.wordprocessingml.document.svg" style="width: 30px;" alt="doc"> 
+										<?php		
+											} else if(strtolower($ExplodedFileName[1]) == 'png') {
+										?>
+										<img src="<?php echo base_url(); ?>/assets_d/images/file.svg" alt="pdf"> 
+										<?php		
+											} else if(strtolower($ExplodedFileName[1]) == 'xls') {
+										?>
+										<img src="<?php echo base_url(); ?>/assets_d/images/xlsx@2x.png" style="width: 30px;" alt="text"> 
+										<?php		
+											} else if(strtolower($ExplodedFileName[1]) == 'csv') {
+										?>
+										<img src="<?php echo base_url(); ?>/assets_d/images/file.svg" alt="csv"> 
+										<?php		
+											} else if(strtolower($ExplodedFileName[1]) == 'txt') {
+										?>
+										<img src="<?php echo base_url(); ?>/assets_d/images/txt@2x.png" style="width: 30px;" alt="text"> 
+										<?php		
+											} else if(strtolower($ExplodedFileName[1]) == 'pptx') {
+										?>
+										<img src="<?php echo base_url(); ?>/assets_d/images/pptx@2x.png" style="width: 30px;" alt="pptx"> 
+										<?php		
+											}
+										?>
+									<a href="<?php echo $AllDocument['document_link']; ?>" download><?php echo $AllDocument['document_file']; ?></a>
+									<?php
 										}
 									?>
-                                <a href="<?php echo $AllDocument['document_link']; ?>" download><?php echo $AllDocument['document_file']; ?></a>
-								<?php
-									}
-								?>
-                            </div>
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="star-rating">
-                                <ul>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <?php
+								</div>
+							</div>
+							<div class="like-comment-wrap">
+								<div class="like-wrap">
+									<ul>
+										<?php
+											if(!empty($AllDocument['reactions_ids'])){
+												foreach($AllDocument['reactions_ids'] as $reactions_id){
+													if($reactions_id == 1) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like"></a></li>
+											<?php			
+													} else if($reactions_id == 2) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+											<?php			
+													} else if($reactions_id == 3) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>
+											<?php			
+													} else if($reactions_id == 4) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>
+											<?php			
+													} else if($reactions_id == 5) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>
+											<?php			
+													} else if($reactions_id == 6) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Icon"></a></li>
+											<?php			
+													}
+												}
+											}
+										?>
+										<?php
+										if(!empty($AllDocument['reactions_ids'])){
+										?>
+										<li><a href="javascript:;"><?php echo $AllDocument['total_reactions']; ?></a></li>
+										<?php
+										} else {
+										?>
+										<li><a href="javascript:;">&nbsp;&nbsp;</a></li>	
+										<li><a href="javascript:;">&nbsp;&nbsp;</a></li>
+										<?php	
+										}
+										?>
+									</ul>
+								</div>
+								<div class="star-rating">
+									<ul>
+										<?php
+											for($i = 1;$i <= $AllDocument['avgRatings'];$i++){
+										?>
+										<li>
+											<a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
+										</li>
+										<?php
+											}
+										?>
+									</ul>
+								</div>
+								<div class="comment-wrap">
+									<ul>
+										<li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+										<li><a href=""><?php echo $AllDocument['total_comments']; ?></a></li>
+										<!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+										<li><a href="">24</a></li-->
+									</ul>
+								</div>
+							</div>
+						</div>
+						<?php
 							}
 						} else {
 					?>
@@ -1983,20 +1938,24 @@
                     <div class="title-wrap">
                         <h3>Study Sets</h3>
                     </div>
-                    <div class="post-row-wrap">
+					<?php
+						if(!empty($AllStudySets)){
+							foreach($AllStudySets as $AllStudySet){
+					?>
+					<div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img">
                                     <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                        <img src="<?php echo $AllStudySet['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
+                                    <h3><?php echo $AllStudySet['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
-                                                <a href="">University of Florida</a>
+                                                <a href=""><?php echo $AllStudySet['UniversityName']; ?></a>
                                             </li>
                                             <li class="badge badge3">
                                                 <a href="">
@@ -2009,273 +1968,104 @@
                             </div>
                             <div class="user-top-right">
                                 <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
+                                    <span class="timeline"><?php echo $AllStudySet['post_at']; ?></span>
                                     <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
                                 </div>
                             </div>
                         </div>  
                         <div class="content-info-area">
                             <div class="content-img clearfix">
+								<?php
+									if($AllStudySet['studyset_cover'] != ''){
+								?>
                                 <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/Study-Tools-bg.jpg" alt="Image"/>
+                                    <img src="<?php echo $AllStudySet['studyset_cover']; ?>" alt="Image"/>
                                 </figure>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+								<?php
+									}
+								?>
+                                <p><?php echo $AllStudySet['studyset_name']; ?></p>
                             </div>
                         </div>
                         <div class="like-comment-wrap">
                             <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
+                                <?php
+									if(!empty($AllStudySet['reactions_ids'])){
+										foreach($AllStudySet['reactions_ids'] as $reactions_id){
+											if($reactions_id == 1) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like"></a></li>
+									<?php			
+											} else if($reactions_id == 2) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+									<?php			
+											} else if($reactions_id == 3) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>
+									<?php			
+											} else if($reactions_id == 4) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>
+									<?php			
+											} else if($reactions_id == 5) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>
+									<?php			
+											} else if($reactions_id == 6) {
+									?>
+									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Icon"></a></li>
+									<?php			
+											}
+										}
+									}
+								?>
+							<?php
+								if(!empty($AllStudySet['reactions_ids'])){
+							?>
+								<li><a href="javascript:;"><?php echo $AllStudySet['total_reactions']; ?></a></li>
+							<?php
+								} else {
+							?>
+								<li><a href="javascript:;">&nbsp;&nbsp;</a></li>	
+								<li><a href="javascript:;">&nbsp;&nbsp;</a></li>
+							<?php	
+								}
+							?>
                             </div>
                             <div class="star-rating">
                                 <ul>
+									<?php
+										for($i = 1;$i <= $AllStudySet['avgRatings'];$i++){
+									?>
                                     <li>
                                         <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
                                     </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
+                                    <?php
+										}
+									?>
                                 </ul>
                             </div>
                             <div class="comment-wrap">
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <li><a href=""><?php echo $AllStudySet['total_comments']; ?></a></li>
+                                    <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li-->
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                            
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="star-rating">
-                                <ul>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                            
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="star-rating">
-                                <ul>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                            
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="star-rating">
-                                <ul>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                    <li>
-                                        <a><img src="<?php echo base_url(); ?>assets_d/images/Star.png" alt="Image"/></a>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+					<?php
+						}
+					}
+					
+					if(!empty($AllStudySets)){
+					?>
                     <div class="view-all-section"><a href="">View All Study Sets</a></div>
+					<?php
+					}
+					?>
                 </div>
             </div>
             <div id="events" class="tab-pane fade">
