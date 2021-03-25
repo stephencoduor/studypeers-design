@@ -503,49 +503,50 @@
                         </div>
                         <div class="like-comment-wrap">
                             <div class="like-wrap">
-                                <?php
-									if(!empty($AllStudySet['reactions_ids'])){
-										foreach($AllStudySet['reactions_ids'] as $reactions_id){
-											if($reactions_id == 1) {
-									?>
-									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like"></a></li>
-									<?php			
-											} else if($reactions_id == 2) {
-									?>
-									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-									<?php			
-											} else if($reactions_id == 3) {
-									?>
-									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>
-									<?php			
-											} else if($reactions_id == 4) {
-									?>
-									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>
-									<?php			
-											} else if($reactions_id == 5) {
-									?>
-									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>
-									<?php			
-											} else if($reactions_id == 6) {
-									?>
-									<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Icon"></a></li>
-									<?php			
+								<ul>
+									<?php
+										if(!empty($AllStudySet['reactions_ids'])){
+											foreach($AllStudySet['reactions_ids'] as $reactions_id){
+												if($reactions_id == 1) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like"></a></li>
+										<?php			
+												} else if($reactions_id == 2) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+										<?php			
+												} else if($reactions_id == 3) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 4) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 5) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 6) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												}
 											}
 										}
-									}
-								?>
-							<?php
-								if(!empty($AllStudySet['reactions_ids'])){
-							?>
-								<li><a href="javascript:;"><?php echo $AllStudySet['total_reactions']; ?></a></li>
-							<?php
-								} else {
-							?>
-								<li><a href="javascript:;">&nbsp;&nbsp;</a></li>	
-								<li><a href="javascript:;">&nbsp;&nbsp;</a></li>
-							<?php	
-								}
-							?>
+									
+										if(!empty($AllStudySet['reactions_ids'])){
+									?>
+										<li><a href="javascript:;"><?php echo $AllStudySet['total_reactions']; ?></a></li>
+									<?php
+										} else {
+									?>
+										<li><a href="javascript:;">&nbsp;&nbsp;</a></li>	
+										<li><a href="javascript:;">&nbsp;&nbsp;</a></li>
+									<?php	
+										}
+									?>
+								</ul>
                             </div>
                             <div class="star-rating">
                                 <ul>
@@ -578,25 +579,30 @@
 				<br>
 				<?php
 				}
+				
+				if(!empty($AllEvents)){
 				?>
 				<div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Events</h3>
                     </div>
+					<?php
+						foreach($AllEvents as $AllEvent){
+					?>
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img">
                                     <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
+                                        <img src="<?php echo $AllEvent['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
+                                    <h3><?php echo $AllEvent['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
-                                                <a href="">University of Florida</a>
+                                                <a href="javascript:;"><?php echo $AllEvent['UniversityName']; ?></a>
                                             </li>
                                             <li class="badge badge3">
                                                 <a href="">
@@ -609,256 +615,153 @@
                             </div>
                             <div class="user-top-right">
                                 <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
+                                    <span class="timeline"><?php echo $AllEvent['post_at']; ?></span>
                                     <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
                                 </div>
                             </div>
                         </div>  
                         <div class="content-info-area">
                             <div class="content-img clearfix">
+								<?php
+									if($AllEvent['featured_image'] != ''){
+								?>
                                 <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/Study-Tools-bg.jpg" alt="Image"/>
+                                    <img src="<?php echo $AllEvent['featured_image']; ?>" alt="Image"/>
                                 </figure>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+								<?php
+									}
+								?>
+                                <p><?php echo $AllEvent['event_description']; ?></p>
                                 <div class="event-description">
                                     <div class="left">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> Location name
+                                        <img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> <?php echo $AllEvent['event_location']; ?>
                                     </div>
                                     <div class="right">
                                         <figure>
                                             <img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
                                         </figure>
-                                        <figcaption>July 17, 03:00 PM</figcaption>
-                                        <a>Add to Calendar</a>
+                                        <figcaption><?php echo $AllEvent['event_time']; ?></figcaption>
+										<?php
+											$isEventScheduled = $this->db->get_where('schedule_master', array('event_master_id' => $AllEvent['event_primary_id'], 'status' => 1,'created_by' => $CurrentUserID))->row_array();
+											
+											if(!empty($isEventScheduled)){
+										?>
+										<a href="#" class="removeEvent" data-id="<?php echo $AllEvent['event_primary_id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">Remove From Calendar</a>
+										<?php		
+											} else {
+										?>
+										<a href="#" class="addEvents" data-id="<?php echo $AllEvent['event_primary_id']; ?>" data-toggle="modal" data-target="#addEventModal">Add to Calendar</a>
+										<?php		
+											}
+										?>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="eventActionWrap">
                             <ul>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
+                                <?php
+									$peerAttending = $this->db->get_where('share_master', array('reference_id' => $AllEvent['event_primary_id'], 'reference' => 'event', 'status' => 2))->result_array();
+									
+									$totalAttendingPeer = 0;
+									if(!empty($peerAttending)){
+										$totalAttendingPeer = count($peerAttending);
+										$i = 0;
+										foreach($peerAttending as $peerAttendingData){
+											$i++;
+											if($i <= 5){
+								?>
+								<li>
+									<img src="<?php echo userImage($peerAttendingData['peer_id']); ?>" alt="user">
+								</li>
+								<?php
+											}
+										}
+									}
+									
+									if($totalAttendingPeer > 5){
+								?>
                                 <li class="more">
-                                    +5
+                                    +<?php echo $totalAttendingPeer-5; ?>
                                 </li>
+								<?php
+									}
+								?>
                             </ul>
-                            <button type="button" class="event_action"> Attend Event</button>
+							<?php
+								$this->db->order_by('share_master.id', 'desc');
+								$attendEvent = $this->db->get_where('share_master', array('reference_id' => $AllEvent['event_primary_id'], 'reference' => 'event', 'peer_id' => $CurrentUserID))->row_array(); 
+							?>
+							<button type="button" class="event_action attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?php echo $AllEvent['event_primary_id']; ?>"> 
+								<span id="attend_text_<?php echo $AllEvent['event_primary_id']; ?>"><?php echo (!empty($attendEvent) && $attendEvent['status'] == 2) ? 'Unattend' : 'Attend';?></span> Event
+							</button>
                         </div>
                         <div class="like-comment-wrap">
                             <div class="like-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <?php
+										if(!empty($AllEvent['reactions_ids'])){
+											foreach($AllEvent['reactions_ids'] as $reactions_id){
+												if($reactions_id == 1) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like"></a></li>
+										<?php			
+												} else if($reactions_id == 2) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+										<?php			
+												} else if($reactions_id == 3) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 4) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 5) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												} else if($reactions_id == 6) {
+										?>
+										<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Icon"></a></li>
+										<?php			
+												}
+											}
+										}
+									
+										if(!empty($AllEvent['reactions_ids'])){
+									?>
+										<li><a href="javascript:;"><?php echo $AllEvent['total_reactions']; ?></a></li>
+									<?php
+										} else {
+									?>
+										<li><a href="javascript:;">&nbsp;&nbsp;</a></li>	
+										<li><a href="javascript:;">&nbsp;&nbsp;</a></li>
+									<?php	
+										}
+									?>
                                 </ul>
                             </div>
                             <div class="comment-wrap">
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
+                                    <li><a href=""><?php echo $AllEvent['total_comments']; ?></a></li>
+                                    <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">24</a></li-->
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <div class="content-img clearfix">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/Study-Tools-bg.jpg" alt="Image"/>
-                                </figure>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                                <div class="event-description">
-                                    <div class="left">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> Location name
-                                    </div>
-                                    <div class="right">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
-                                        </figure>
-                                        <figcaption>July 17, 03:00 PM</figcaption>
-                                        <a>Add to Calendar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="eventActionWrap">
-                            <ul>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li class="more">
-                                    +5
-                                </li>
-                            </ul>
-                            <button type="button" class="event_action"> Attend Event</button>
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <div class="content-img clearfix">
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                                <div class="event-description">
-                                    <div class="left">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> Location name
-                                    </div>
-                                    <div class="right">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
-                                        </figure>
-                                        <figcaption>July 17, 03:00 PM</figcaption>
-                                        <a>Add to Calendar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="eventActionWrap">
-                            <ul>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li class="more">
-                                    +5
-                                </li>
-                            </ul>
-                            <button type="button" class="event_action"> Attend Event</button>
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                    <?php 
+						}
+					?>
                     <div class="view-all-section"><a href="">View All Events</a></div>
                 </div>
 				<br>
+				<?php
+				}
+				?>
 				<div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Articles</h3>
@@ -2073,280 +1976,184 @@
                     <div class="title-wrap">
                         <h3>Events</h3>
                     </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <div class="content-img clearfix">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/Study-Tools-bg.jpg" alt="Image"/>
-                                </figure>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                                <div class="event-description">
-                                    <div class="left">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> Location name
-                                    </div>
-                                    <div class="right">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
-                                        </figure>
-                                        <figcaption>July 17, 03:00 PM</figcaption>
-                                        <a>Add to Calendar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="eventActionWrap">
-                            <ul>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li class="more">
-                                    +5
-                                </li>
-                            </ul>
-                            <button type="button" class="event_action"> Attend Event</button>
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <div class="content-img clearfix">
-                                <figure>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/Study-Tools-bg.jpg" alt="Image"/>
-                                </figure>
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                                <div class="event-description">
-                                    <div class="left">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> Location name
-                                    </div>
-                                    <div class="right">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
-                                        </figure>
-                                        <figcaption>July 17, 03:00 PM</figcaption>
-                                        <a>Add to Calendar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="eventActionWrap">
-                            <ul>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li class="more">
-                                    +5
-                                </li>
-                            </ul>
-                            <button type="button" class="event_action"> Attend Event</button>
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="post-row-wrap">
-                        <div class="user-top">
-                            <div class="user-top-left">
-                                <div class="user-img">
-                                    <figure>
-                                        <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="Image"/>
-                                    </figure>
-                                </div>
-                                <div class="user-name-wrap">
-                                    <h3>Lorem Ipsum</h3>
-                                    <div class="badgeList">
-                                        <ul>
-                                            <li class="badge badge1">
-                                                <a href="">University of Florida</a>
-                                            </li>
-                                            <li class="badge badge3">
-                                                <a href="">
-                                                    Faculty
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="user-top-right">
-                                <div class="timeline-action">
-                                    <span class="timeline">a week ago</span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
-                                </div>
-                            </div>
-                        </div>  
-                        <div class="content-info-area">
-                            <div class="content-img clearfix">
-                                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
-                                <div class="event-description">
-                                    <div class="left">
-                                        <img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> Location name
-                                    </div>
-                                    <div class="right">
-                                        <figure>
-                                            <img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
-                                        </figure>
-                                        <figcaption>July 17, 03:00 PM</figcaption>
-                                        <a>Add to Calendar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="eventActionWrap">
-                            <ul>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li>
-                                    <img src="<?php echo base_url(); ?>assets_d/images/user.jpg" alt="user">
-                                </li>
-                                <li class="more">
-                                    +5
-                                </li>
-                            </ul>
-                            <button type="button" class="event_action"> Attend Event</button>
-                        </div>
-                        <div class="like-comment-wrap">
-                            <div class="like-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                            <div class="comment-wrap">
-                                <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">20</a></li>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">24</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+					<?php
+						if(!empty($AllEvents)){
+							foreach($AllEvents as $AllEvent){
+					?>
+						<div class="post-row-wrap">
+							<div class="user-top">
+								<div class="user-top-left">
+									<div class="user-img">
+										<figure>
+											<img src="<?php echo $AllEvent['profile_picture']; ?>" alt="Image"/>
+										</figure>
+									</div>
+									<div class="user-name-wrap">
+										<h3><?php echo $AllEvent['fullname']; ?></h3>
+										<div class="badgeList">
+											<ul>
+												<li class="badge badge1">
+													<a href="javascript:;"><?php echo $AllEvent['UniversityName']; ?></a>
+												</li>
+												<li class="badge badge3">
+													<a href="">
+														Faculty
+													</a>
+												</li>
+											</ul>
+										</div>
+									</div>
+								</div>
+								<div class="user-top-right">
+									<div class="timeline-action">
+										<span class="timeline"><?php echo $AllEvent['post_at']; ?></span>
+										<a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+									</div>
+								</div>
+							</div>  
+							<div class="content-info-area">
+								<div class="content-img clearfix">
+									<?php
+										if($AllEvent['featured_image'] != ''){
+									?>
+									<figure>
+										<img src="<?php echo $AllEvent['featured_image']; ?>" alt="Image"/>
+									</figure>
+									<?php
+										}
+									?>
+									<p><?php echo $AllEvent['event_description']; ?></p>
+									<div class="event-description">
+										<div class="left">
+											<img src="<?php echo base_url(); ?>assets_d/images/location.svg" alt="Location"> <?php echo $AllEvent['event_location']; ?>
+										</div>
+										<div class="right">
+											<figure>
+												<img src="<?php echo base_url(); ?>assets_d/images/calendar1.svg" alt="Event Time">
+											</figure>
+											<figcaption><?php echo $AllEvent['event_time']; ?></figcaption>
+											<?php
+												$isEventScheduled = $this->db->get_where('schedule_master', array('event_master_id' => $AllEvent['event_primary_id'], 'status' => 1,'created_by' => $CurrentUserID))->row_array();
+												
+												if(!empty($isEventScheduled)){
+											?>
+											<a href="#" class="removeEvent" data-id="<?php echo $AllEvent['event_primary_id']; ?>" data-toggle="modal" data-target="#removeFromScheduleModal">Remove From Calendar</a>
+											<?php		
+												} else {
+											?>
+											<a href="#" class="addEvents" data-id="<?php echo $AllEvent['event_primary_id']; ?>" data-toggle="modal" data-target="#addEventModal">Add to Calendar</a>
+											<?php		
+												}
+											?>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="eventActionWrap">
+								<ul>
+									<?php
+										$peerAttending = $this->db->get_where('share_master', array('reference_id' => $AllEvent['event_primary_id'], 'reference' => 'event', 'status' => 2))->result_array();
+										
+										$totalAttendingPeer = 0;
+										if(!empty($peerAttending)){
+											$totalAttendingPeer = count($peerAttending);
+											$i = 0;
+											foreach($peerAttending as $peerAttendingData){
+												$i++;
+												if($i <= 5){
+									?>
+									<li>
+										<img src="<?php echo userImage($peerAttendingData['peer_id']); ?>" alt="user">
+									</li>
+									<?php
+												}
+											}
+										}
+										
+										if($totalAttendingPeer > 5){
+									?>
+									<li class="more">
+										+<?php echo $totalAttendingPeer-5; ?>
+									</li>
+									<?php
+										}
+									?>
+								</ul>
+								<?php
+									$this->db->order_by('share_master.id', 'desc');
+									$attendEvent = $this->db->get_where('share_master', array('reference_id' => $AllEvent['event_primary_id'], 'reference' => 'event', 'peer_id' => $CurrentUserID))->row_array(); 
+								?>
+								<button type="button" class="event_action attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?php echo $AllEvent['event_primary_id']; ?>"> 
+									<span id="attend_text_<?php echo $AllEvent['event_primary_id']; ?>"><?php echo (!empty($attendEvent) && $attendEvent['status'] == 2) ? 'Unattend' : 'Attend';?></span> Event
+								</button>
+							</div>
+							<div class="like-comment-wrap">
+								<div class="like-wrap">
+									<ul>
+										<?php
+											if(!empty($AllEvent['reactions_ids'])){
+												foreach($AllEvent['reactions_ids'] as $reactions_id){
+													if($reactions_id == 1) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg" alt="Like"></a></li>
+											<?php			
+													} else if($reactions_id == 2) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+											<?php			
+													} else if($reactions_id == 3) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>
+											<?php			
+													} else if($reactions_id == 4) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>
+											<?php			
+													} else if($reactions_id == 5) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>
+											<?php			
+													} else if($reactions_id == 6) {
+											?>
+											<li><a href="javascript:;"><img src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg" alt="Icon"></a></li>
+											<?php			
+													}
+												}
+											}
+										
+											if(!empty($AllEvent['reactions_ids'])){
+										?>
+											<li><a href="javascript:;"><?php echo $AllEvent['total_reactions']; ?></a></li>
+										<?php
+											} else {
+										?>
+											<li><a href="javascript:;">&nbsp;&nbsp;</a></li>	
+											<li><a href="javascript:;">&nbsp;&nbsp;</a></li>
+										<?php	
+											}
+										?>
+									</ul>
+								</div>
+								<div class="comment-wrap">
+									<ul>
+										<li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+										<li><a href=""><?php echo $AllEvent['total_comments']; ?></a></li>
+										<!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+										<li><a href="">24</a></li-->
+									</ul>
+								</div>
+							</div>
+						</div>
+                    <?php 
+							}
+						}
+						
+						if(!empty($AllEvents)){
+					?>
                     <div class="view-all-section"><a href="">View All Events</a></div>
+					<?php
+						}
+					?>
                 </div>
             </div>
             <div id="articles" class="tab-pane fade">
@@ -2906,3 +2713,112 @@
         </div>
     </div>
 </section>
+
+<div class="modal fade" id="addEventModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-body peers">
+				<h4>Confirmation</h4>
+				<div class="row">
+					<h6 class="modalText">Are you sure to add this Event to Calendar</h6>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group button">
+							<form method="post" action="<?php echo base_url(); ?>account/addEventToCalender">
+								<input type="hidden" id="calender_event_id" name="calender_event_id" value="">
+								<input type="hidden" id="" name="searchResult" value="1">
+								<button type="button" data-dismiss="modal" class="transparentBtn highlight">No</button>
+								<button type="submit" class="filterBtn">Yes</button>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="modal fade" id="removeFromScheduleModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-body peers">
+				<h4>Confirmation</h4>
+				<div class="row">
+					<h6 class="modalText">Are you sure you want to remove this event <br> from your schedule?</h6>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<form method="post" action="<?php echo base_url(); ?>account/removeEvent">
+							<div class="form-group button">
+								<input type="hidden" id="remove_event_id" name="remove_event_id">
+								<input type="hidden" id="" name="searchResult" value="1">
+								<button type="button" data-dismiss="modal" class="transparentBtn highlight">No</button>
+								<button type="submit" class="filterBtn">Yes</button>
+							</div>
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="confirmationModalAttend" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-body peers">
+				<h4>Confirmation</h4>
+				<div class="row">
+					<h6 class="modalText" id="confirmationModalAttendHead">Are you sure to attend this Event !</h6>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group button">
+							<input type="hidden" name="attend_event_id" id="attend_event_id">
+							<button data-dismiss="modal" class="transparentBtn highlight">No</button>
+							<button type="button" class="filterBtn" onclick="attendEvent()">Yes</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="peersModalAttending" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-body peers">
+				<h4>Peers List Attending Event</h4>
+				<div class="searchPeer">
+					<div class="filterSearch">
+						<input type="text" placeholder="Search Peers" name="">
+						<button type="submit" class="searchBtn">
+							<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 489.713 489.713"><path d="M483.4,454.444l-121.3-121.4c28.7-35.2,46-80,46-128.9c0-112.5-91.5-204.1-204.1-204.1S0,91.644,0,204.144
+                        s91.5,204,204.1,204c48.8,0,93.7-17.3,128.9-46l121.3,121.3c8.3,8.3,20.9,8.3,29.2,0S491.8,462.744,483.4,454.444z M40.7,204.144
+                        c0-90.1,73.2-163.3,163.3-163.3s163.4,73.3,163.4,163.4s-73.3,163.4-163.4,163.4S40.7,294.244,40.7,204.144z"></path></svg>
+						</button>
+					</div>
+				</div>
+				<div class="peersList">
+					<div class="listHeader">
+						<h6>Peers</h6>
+					</div>
+					<div class="listUserWrap" id="peersModalAttendingList">
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

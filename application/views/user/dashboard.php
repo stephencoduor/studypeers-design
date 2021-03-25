@@ -10204,11 +10204,8 @@
 				<div class="peersList">
 					<div class="listHeader">
 						<h6>Peers</h6>
-
 					</div>
 					<div class="listUserWrap" id="peersModalAttendingList">
-
-
 					</div>
 				</div>
 			</div>

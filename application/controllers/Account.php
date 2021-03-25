@@ -87,6 +87,7 @@ class Account extends CI_Controller
 		$AllQuestions = array();
 		$AllDocuments = array();
 		$AllStudySets = array();
+		$AllEvents = array();
 		
 		if($SearchText != '')
 		{
@@ -590,13 +591,93 @@ class Account extends CI_Controller
 					array_push($AllStudySets,$tempStudySet);
 				}
 			}
+			
+			//get search result from events
+			$SearchEvents = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			
+			$SearchEventsResult = $this->db->query($SearchEvents)->result_array();
+			
+			$FoundEventsResult = count($SearchEventsResult);
+			
+			if(!empty($SearchEventsResult))
+			{
+				foreach($SearchEventsResult as $SearchEventsResultData){
+					$addDate = ($SearchEventsResultData['addDate']) ? date("Y-m-d H:i:s",strtotime($SearchEventsResultData['addDate'])) : '';
+					$timeAgo = $this->timestring($addDate);
+					
+					$event_primary_id = $SearchEventsResultData['id'];
+					
+					$tempEvents['event_name'] = ($SearchEventsResultData['event_name']) ? $SearchEventsResultData['event_name'] : '';
+					$tempEvents['event_description'] = ($SearchEventsResultData['description']) ? $SearchEventsResultData['description'] : '';
+					$tempEvents['event_location'] = ($SearchEventsResultData['location_txt']) ? $SearchEventsResultData['location_txt'] : '';
+					
+					$start_date = ($SearchEventsResultData['start_date']) ? date("M d,",strtotime($SearchEventsResultData['start_date'])) : '';
+					$start_time = ($SearchEventsResultData['start_time']) ? date("h:i A",strtotime($SearchEventsResultData['start_time'])) : '';
+					$tempEvents['event_time'] = $start_date.' '.$start_time;
+					
+					// get featured image
+					$FeaturedImage = '';
+					if($SearchEventsResultData['featured_image'] != '' && file_exists('uploads/users/'.$SearchEventsResultData['featured_image'])){
+						$FeaturedImage = base_url('uploads/users/'.$SearchEventsResultData['featured_image']);
+					}
+					$tempEvents['featured_image'] = $FeaturedImage;
+					
+					// get user profile picture
+					$UserProfile = base_url().'assets_d/images/user.jpg';
+					if($SearchEventsResultData['pp'] != '' && file_exists('uploads/users/'.$SearchEventsResultData['pp'])){
+						$UserProfile = base_url('uploads/users/'.$SearchEventsResultData['pp']);
+					}
+					
+					// get university name
+					$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchEventsResultData['user_id']."'";
+					$UniversityResult = $this->db->query($getUniversityName)->result_array();
+					
+					$UniversityName = 'N/A';
+					if(!empty($UniversityResult)){
+						$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+					}
+					
+					// get total number of reactions and unique reaction id
+					$getReactionMaster = "SELECT reaction_id FROM reaction_master WHERE reference_id='".$event_primary_id."' AND reference='event'";
+					$ReactionResult    = $this->db->query($getReactionMaster)->result_array();
+					
+					$getUniqueReactionsID = "SELECT reaction_id FROM reaction_master WHERE reference_id='".$event_primary_id."' AND reference='event' GROUP BY reaction_id";
+					$UniqueReactionResult = $this->db->query($getUniqueReactionsID)->result_array();
+					
+					$ReactionIds = array();
+					if(!empty($UniqueReactionResult)){
+						foreach($UniqueReactionResult as $UniqueReactionResultData){
+							$ReactionIds[] = $UniqueReactionResultData['reaction_id'];
+						}
+					}
+					
+					// get total active comments counter in posts
+					$getEventsCommentCounter = "SELECT id FROM comment_master WHERE reference_id='".$event_primary_id."' AND reference='event' AND status='1'";
+					$EveCommentCounter    = $this->db->query($getEventsCommentCounter)->result_array();
+					
+					$tempEvents['event_primary_id']= $event_primary_id;
+					$tempEvents['post_at']         = $timeAgo;
+					$tempEvents['user_id']         = ($SearchEventsResultData['user_id']) ? $SearchEventsResultData['user_id'] : 0;
+					$tempEvents['username']        = ($SearchEventsResultData['username']) ? $SearchEventsResultData['username'] : '';
+					$tempEvents['fullname']        = $SearchEventsResultData['first_name'].' '.$SearchEventsResultData['last_name'];
+					$tempEvents['profile_picture'] = $UserProfile;
+					$tempEvents['UniversityName']  = $UniversityName;
+					$tempEvents['total_reactions'] = count($ReactionResult);
+					$tempEvents['reactions_ids']   = $ReactionIds;
+					$tempEvents['total_comments']  = count($EveCommentCounter);
+					
+					array_push($AllEvents,$tempEvents);
+				}
+			}
 		}
 		 
-		$data['AllPeers']     = $AllPeers;
-		$data['AllPosts']     = $AllPosts;
-		$data['AllQuestions'] = $AllQuestions;
-		$data['AllDocuments'] = $AllDocuments;
-		$data['AllStudySets'] = $AllStudySets;
+		$data['CurrentUserID'] = $CurrentUserID; 
+		$data['AllPeers']      = $AllPeers;
+		$data['AllPosts']      = $AllPosts;
+		$data['AllQuestions']  = $AllQuestions;
+		$data['AllDocuments']  = $AllDocuments;
+		$data['AllStudySets']  = $AllStudySets;
+		$data['AllEvents']     = $AllEvents;
 		
         $this->load->view('user/include/header', $data);
         $this->load->view('user/search-result');
@@ -3037,6 +3118,8 @@ class Account extends CI_Controller
                 redirect(site_url('account/dashboard'), 'refresh');
             } else if ($this->input->post('timeline')) {
                 redirect(site_url('Profile/timeline'), 'refresh');
+            } else if ($this->input->post('searchResult')) {
+                redirect(site_url('account/searchResult'), 'refresh');
             } else if ($this->input->post('profile')) {
                 $redirect_username = $this->db->get_where($this->db->dbprefix('user'), array('id'=>$this->input->post('profile')))->row_array();
 
@@ -3366,6 +3449,8 @@ class Account extends CI_Controller
             $this->session->set_flashdata('flash_message', $message);
             if ($this->input->post('dashboard')) {
                 redirect(site_url('account/dashboard'), 'refresh');
+            } else if ($this->input->post('searchResult')) {
+                redirect(site_url('account/searchResult'), 'refresh');
             } else if ($this->input->post('timeline')) {
                 redirect(site_url('Profile/timeline'), 'refresh');
             } else if ($this->input->post('profile')) {
