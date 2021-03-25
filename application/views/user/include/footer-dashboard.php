@@ -425,7 +425,33 @@
             }
         })
     }
-
+	
+	var url;
+	$('.follow_now').on("click", function() {
+		var peer_id = $(this).attr('data-id');
+		var status = $(this).attr('id');
+		url = '<?php echo base_url(); ?>Profile/follow';
+		if (status == 0) {
+			url = '<?php echo base_url(); ?>Profile/unfollow';
+		}
+		$.ajax({
+			url: url,
+			type: 'post',
+			data: {
+				"peer_id": peer_id
+			},
+			success: function(result) {
+				if (status == 1) {
+					$('.follow_' + peer_id).html('Unfollow');
+					$('.follow_' + peer_id).attr('id', 0);
+				} else {
+					$('.follow_' + peer_id).html('Follow');
+					$('.follow_' + peer_id).attr('id', 1);
+				}
+			}
+		});
+	});
+	
     $("#multiple-select-post").selectator({
         showAllOptionsOnFocus: true,
         searchFields: "value text subtitle right",

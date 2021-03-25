@@ -1819,7 +1819,7 @@
         }
 
         var url;
-        $('.follow_now').on("click", function() {
+        $('.follow_now').unbind().on("click", function() {
             var peer_id = $(this).attr('data-id');
             var status = $(this).attr('id');
             url = '<?php echo base_url(); ?>Profile/follow';
