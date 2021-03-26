@@ -901,9 +901,20 @@ a.filterBtn,a.sortMenu{
     .sidebar-content{height: calc(100vh - 100px);}
 }
 @media(max-width:991px){
-    .logo{position: absolute;left: 50%;top:100%;background: transparent;transform: translate(-50%,0%);
-        -webkit-transform: translate(-50%,0%);-moz-transform: translate(-50%,0%);-ms-transform: translate(-50%,0%);
-        -o-transform: translate(-50%,0%);width: 150px;height: 50px;padding: 0;margin-top: 10px;}
+    header .navbar-default {
+        margin: 10px auto 10px auto;
+    }
+    .navbar .header-user-img{
+        padding-top:0!important;
+    }
+    .search{
+        float: right;
+        margin-right:15px;
+    }
+    #sidenav{
+        left:125px;
+    }
+    .logo{position: absolute;left: 15px;top:100%;background: transparent;width: 150px;height: 50px;padding: 0;margin-top: 10px;}
     .nav.navbar-nav {margin-right: 30px;}
     .navbar-brand{z-index:99;}
     /*.mainContent.msgActive {
@@ -948,9 +959,7 @@ a.filterBtn,a.sortMenu{
         padding: 0px 40px;
         margin: 0 10px !important;
     }
-}
-@media(max-width:900px){
-    .search{max-width: 250px;}
+    .search{max-width: 200px;}
 }
 @media (min-width: 768px) and (max-width: 1024px) {
     aside{
@@ -984,9 +993,6 @@ a.filterBtn,a.sortMenu{
         -o-transform: translateX(0);
     }
     .desktopToggleButton {display: none;}
-    .logo{
-        left:90px;
-    }
     .tabularLiist .nav.nav-tabs{
         margin-top:15px!important;
     }
@@ -1049,7 +1055,10 @@ a.filterBtn,a.sortMenu{
     /*#sidenav.open{z-index: 99;left: auto;right: 20px;}*/
     .logoDesktop{display: none;}
     .logoMobile{display: block;}
-    .logo{width: 90px;margin-top: 14px;}
+    .logo{width: 90px;margin-top: 10px;left:15px;}
+    #sidenav {
+        left: 65px;
+    }
     .navbar-nav .open .dropdown-menu {
         position: absolute;
         background: #fff;
@@ -1081,7 +1090,7 @@ a.filterBtn,a.sortMenu{
         min-width: 100px;
     }
 }
-@media(max-width:576px){
+@media(max-width:600px){
     .search {
         max-width: 150px;
         display: none;
@@ -1328,6 +1337,8 @@ a.filterBtn,a.sortMenu{
 .header-user-img figure img {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  object-position: center center;
 }
 
 .left figure {
