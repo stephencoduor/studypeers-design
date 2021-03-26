@@ -498,7 +498,7 @@ if($(window).width() >= 767) {
     $('.mainContent').removeClass('active');
 }
 $("#course_form").submit(function(e) {
-    var pathname = window.location.pathname;
+    var pathname = window.location.pathname.split("/").pop();
     e.preventDefault(); // avoid to execute the actual submit of the form.
     var chk = validateCourse(); 
     if(chk !== false) {
@@ -510,7 +510,7 @@ $("#course_form").submit(function(e) {
            url: url,
            data: form.serialize() + '&page=' + pathname, // serializes the form's elements.
            success: function(data) {    
-                if(pathname == '/account/dashboard') {
+                if(pathname == 'dashboard') {
                         $('#courseModal').modal('hide');
                         $('#course_count_dashboard').html(data);
                         $("#course_form")[0].reset();
