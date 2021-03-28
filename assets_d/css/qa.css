@@ -480,6 +480,9 @@ select.form-control:focus {
     overflow: hidden;
     margin-right:8px;
 }
+.user-name a{
+    width:calc(100% - 28px);
+}
 .feed-card.list .action ul{
     display: flex;
     align-items: center;
@@ -692,6 +695,7 @@ textarea{
 }
 .studybuttonGroup button{
     margin:0 0 0 10px ;
+    white-space: nowrap;
 }
 .studyDetailHeaderWrapper {
     display: flex;
@@ -712,7 +716,7 @@ textarea{
 }
 .userWrap .user-name{
     justify-content: flex-start;
-    margin-right: 20px;
+    margin-right: 15px;
 }
 .share,.transAction,.like{
     padding: 8px 15px 8px 15px;
@@ -1966,6 +1970,7 @@ textarea{
     margin-right:10px;
     cursor: pointer;
     text-decoration: none;
+    white-space: nowrap;
 }
 .edit svg {
     fill:#5a5aec;;
@@ -1977,6 +1982,7 @@ textarea{
     margin-right:10px;
     cursor: pointer;
     text-decoration: none;
+    white-space: nowrap;
 }
 .delete svg {
     fill:#ed2e7e;
@@ -2364,6 +2370,12 @@ textarea{
     }
 }
 @media(max-width:1200px){
+    .studySetWrapper .header{
+        flex-direction: column;
+    }
+    .studySetWrapper .header .studybuttonGroup{
+        margin:15px 0 0;
+    }
     .filterWrapper.active .filterSearch{width:100%;}
     .filterSearch {
         width: 100%;
@@ -2372,12 +2384,6 @@ textarea{
         margin-bottom: 10px;
         display: inline-block;
         height: auto;
-    }
-    .studySetWrapper.qa-detail .commentfilterWrapper .filterSelect {
-        width: 16%;
-    }
-    .filterWrapper.active form {
-        width: 46%;
     }
 }
 @media(max-width:1120px) {
@@ -2430,7 +2436,7 @@ textarea{
         font-size: 18px;
     }
     .studySetWrapper {
-        margin-top: 20px;
+        margin-top: 0;
     }
     .flashCard_txt {
         margin-bottom: 30px;
@@ -2478,14 +2484,60 @@ textarea{
     }
 }
 @media (max-width: 1024px) and (min-width: 768px) {
+    .feed-card.list .action ul{
+        width:100%;
+        justify-content: space-between;
+    }
+    .feed_card_footer .action {
+        width: 100%;
+    }
+    .studySetWrapper.qa-detail .commentfilterWrapper .filterSelect{
+        width:140px;
+    }
+    .feed_card_footer {
+        padding: 10px 15px 10px 15px;
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: column;
+    }
+    .userWrap .user-name{
+        margin-bottom:10px;
+    }
     .action-btn{
         display: flex;
         align-items: center;
     }
+    .userWrap{
+        align-items: flex-start;
+        justify-content: flex-start;
+        flex-direction: column;
+    }
+    .studySetWrapper .header {
+        align-items: flex-start;
+        justify-content: space-between;
+        flex-direction: column;
+        padding-top:10px;
+    }
+    .studybuttonGroup{
+        margin:15px 0 0 0;
+    }
 }
 @media (max-width: 767px) {
+    .feed-card.list .action ul{
+        width:100%;
+        justify-content: space-between;
+    }
+    .studySetWrapper.qa-detail .commentfilterWrapper .filterSelect{
+        width:140px;
+    }
+    .feed-card.list{
+        width:100%;
+    }
+    .answerQuote{
+        margin-left:0;
+    }
     .feed_card_footer{
-        padding: 12px 25px 12px 15px;
+        padding: 12px 0 12px 0;
         position: relative;
     }
     .modalText{
@@ -2551,7 +2603,8 @@ textarea{
         display: none;
     }
     .userWrap{
-        flex-direction: column;
+        width:100%;
+        align-items: center;
     }
     .feed-card .timeperiod ul li{
         width:100%;
@@ -2758,7 +2811,7 @@ textarea{
     }
     .userWrap .user-name {
         width:100%;
-        margin-bottom:10px;
+        margin-bottom:0;
     }
     .feedWrapper.listView .feedVoteWrap {
         max-width: 100%;

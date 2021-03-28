@@ -1,4 +1,8 @@
+
+<!-- <section class="mainContent">
+=======
 <section class="mainContent">
+>>>>>>> 07a59f4837df4a4f426e7b98a0cbec8c5ad6312f
     <div class="main-home-wrapper">
         <div class="tabs-wrappper">
             <div class="tabslisting">
@@ -134,6 +138,9 @@
                     </div>
                     <div class="view-all-section"><a href="">View All Peers</a></div>
                 </div>
+<<<<<<< HEAD
+            </div>
+=======
                 <div class="pagination-wrap">
                     <div class="prev-arrow">
                         <a href=""><img src="<?php echo base_url(); ?>assets_d/images/prev.svg" alt="Prev Icon"/></a>
@@ -156,6 +163,7 @@
                 </div>
             </div>
             
+>>>>>>> 07a59f4837df4a4f426e7b98a0cbec8c5ad6312f
             <div id="posts" class="tab-pane fade">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
@@ -193,12 +201,16 @@
                             </div>
                         </div>  
                         <div class="content-info-area">
+<<<<<<< HEAD
+                            <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
+=======
                             <div class="content-img clearfix">
                                 <figure>
                                     <img src="<?php echo base_url(); ?>assets_d/images/Study-Tools-bg.jpg" alt="Image"/>
                                 </figure>
                                 <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ratione deleniti pariatur quasi iure voluptates! Est eaque dolorem eius nesciunt, laudantium inventore incidunt tempore impedit error voluptates, recusandae corrupti, esse consequatur!</p>
                             </div>
+>>>>>>> 07a59f4837df4a4f426e7b98a0cbec8c5ad6312f
                         </div>
                         <div class="like-comment-wrap">
                             <div class="like-wrap">
@@ -480,7 +492,13 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
+<<<<<<< HEAD
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
+=======
+<<<<<<< HEAD
+=======
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/ans.svg" alt="Icon"/></a></li>
+>>>>>>> regisupdate
                                     <li><a href="">20</a></li>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
@@ -598,9 +616,14 @@
                                 <ul>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
+<<<<<<< HEAD
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
                                     <li><a href="">20</a></li>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+=======
+>>>>>>> 07a59f4837df4a4f426e7b98a0cbec8c5ad6312f
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+>>>>>>> regisupdate
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
@@ -610,6 +633,30 @@
                 </div>
             </div>
             <div id="documents" class="tab-pane fade">
+<<<<<<< HEAD
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="studySets" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="events" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="articles" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="studySessions" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+        </div>
+    </div>
+</section> -->
+
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Documents</h3>
@@ -2055,3 +2102,4 @@
         </div>
     </div>
 </section>
+

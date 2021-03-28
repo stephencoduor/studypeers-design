@@ -498,7 +498,7 @@ if($(window).width() >= 767) {
     $('.mainContent').removeClass('active');
 }
 $("#course_form").submit(function(e) {
-    var pathname = window.location.pathname;
+    var pathname = window.location.pathname.split("/").pop();
     e.preventDefault(); // avoid to execute the actual submit of the form.
     var chk = validateCourse(); 
     if(chk !== false) {
@@ -510,7 +510,7 @@ $("#course_form").submit(function(e) {
            url: url,
            data: form.serialize() + '&page=' + pathname, // serializes the form's elements.
            success: function(data) {    
-                if(pathname == '/account/dashboard') {
+                if(pathname == 'dashboard') {
                         $('#courseModal').modal('hide');
                         $('#course_count_dashboard').html(data);
                         $("#course_form")[0].reset();
@@ -618,6 +618,7 @@ $(window).on("load", function () {
         theme:"dark-3"        
     });
 
+
     $("#search-info").focus(function () {
         $(".search-info-wrp").addClass("active");
 		$('.no-search').show();
@@ -694,4 +695,43 @@ $(document).on('click','.storeHistory',function(){
 		success: function (response){
 		}
 	});
+
+    $('.owl-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+                nav:true
+            },
+            600:{
+                items:2,
+                nav:true
+            },
+            1024:{
+                items:3,
+                nav:true,
+                loop:false
+            },
+            1280:{
+                items:4,
+                nav:true,
+                loop:false
+            }
+        }
+    })
+
+    $(activate);
+
+    function activate() {
+      $('.scroll-tabs')
+        .scrollingTabs({
+          enableSwiping: true
+        })
+        .on('ready.scrtabs', function() {
+          $('.tab-content').show();
+        });
+    }
+
 });

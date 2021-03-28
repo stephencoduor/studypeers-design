@@ -15,7 +15,8 @@
 		<div class="social-tools">
 			<div class="container">
 				<h4>Stay Connected</h4>
-				<p>Network with other students in the same field of study</p>	
+				<p>Study Peers gives you one place to find what you need to study, connect and collaborate.  Find study tools made by other students and upload your own. Network with other students in the same field of study
+</p>	
 				<div class="stay-connected">
 					<div class="add-section">
 						<figure class="add-icon">
