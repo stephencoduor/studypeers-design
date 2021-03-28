@@ -428,7 +428,80 @@
             }
         })
     }
-
+	
+	var url;
+	$('.follow_now').on("click", function() {
+		var peer_id = $(this).attr('data-id');
+		var status = $(this).attr('id');
+		url = '<?php echo base_url(); ?>Profile/follow';
+		if (status == 0) {
+			url = '<?php echo base_url(); ?>Profile/unfollow';
+		}
+		$.ajax({
+			url: url,
+			type: 'post',
+			data: {
+				"peer_id": peer_id
+			},
+			success: function(result) {
+				if (status == 1) {
+					$('.follow_' + peer_id).html('Unfollow');
+					$('.follow_' + peer_id).attr('id', 0);
+				} else {
+					$('.follow_' + peer_id).html('Follow');
+					$('.follow_' + peer_id).attr('id', 1);
+				}
+			}
+		});
+	});
+	
+	function attendEvent() {
+		var id = $("#attend_event_id").val();
+		var txt = $('#attend_text_' + id).html();
+		var newtxt = txt.trim();
+		if (id != '') {
+			$.ajax({
+				url: '<?php echo base_url(); ?>account/attendSharedEvent',
+				type: 'post',
+				data: {
+					"id": id,
+					"type": newtxt
+				},
+				success: function(result) {
+					$("#confirmationModalAttend").modal('hide');
+					$("#attend_text_" + id).html(result);
+					$("#attend_event_id").val('');
+				}
+			})
+		}
+	}
+	
+	$(document).on('click', '.attendEvent', function() {
+		var event_id = $(this).data('id');
+		var txt = $('#attend_text_' + event_id).html();
+		$("#attend_event_id").val(event_id);
+		var newtxt = txt.trim();
+		if (newtxt == 'Attend') {
+			$('#confirmationModalAttendHead').html('Do you want to attend this Event !');
+		} else {
+			$('#confirmationModalAttendHead').html("Are you sure you don't want to attend this Event !");
+		}
+	});
+	
+	$(document).on('click', '.peersModalAttending', function() {
+		var event_id = $(this).data('id');
+		$.ajax({
+			url: '<?php echo base_url(); ?>account/getPeersEVentAttending',
+			type: 'post',
+			data: {
+				"id": event_id
+			},
+			success: function(result) {
+				$('#peersModalAttendingList').html(result);
+			}
+		});
+	});
+	
     $("#multiple-select-post").selectator({
         showAllOptionsOnFocus: true,
         searchFields: "value text subtitle right",

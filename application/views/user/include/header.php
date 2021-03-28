@@ -478,7 +478,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 										<h3 class="searchresulttext">Search for something</h3>
 									</div>
 									<div class="view-all searchResultClassView" style="display:none">
-										<a href="<?php echo base_url('account/searchResult'); ?>">View All</a>
+										<a href="<?php echo base_url('account/searchResult'); ?>" class="storeHistory">View All</a>
 									</div>
 									<div class="loader-wrap" id="searchPeeersLoader" style="display:none;">
 										<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="margin:auto;background:#fff;display:block;" width="200px" height="200px" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid">

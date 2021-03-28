@@ -617,12 +617,6 @@ $(window).on("load", function () {
     $('.eventDetail').mCustomScrollbar({ 
         theme:"dark-3"        
     });
-
-
-    $("#search-info").focus(function () {
-        $(".search-info-wrp").addClass("active");
-		$('.no-search').show();
-    });
 });
 
 $(document).on('keydown keypress keyup','#search-info',function(){
@@ -674,6 +668,11 @@ $(document).on('keydown keypress keyup','#search-info',function(){
 	}
 });
 
+$(document).on('focus click','#search-info',function(){
+	$(".search-info-wrp").addClass("active");
+	$('.no-search').show();
+});
+
 $(document).on('focusout','#search-info',function(){
 	if($("#search-info").val() == ''){
 		$('.no-search').show();
@@ -685,12 +684,12 @@ $(document).on('focusout','#search-info',function(){
 });
 
 $(document).on('click','.storeHistory',function(){
-	var search_text = $("#search-info").val();
-	
+	var search_text    = $("#search-info").val();
+	var search_user_id = $(this).attr('data-user_id'); 
 	$.ajax({
 		type: 'POST',		
 		url: $("#searchStore").val(),
-		data: {search_text : search_text},
+		data: {search_text : search_text,search_user_id : search_user_id},
 		dataType:'json',
 		success: function (response){
 		}
