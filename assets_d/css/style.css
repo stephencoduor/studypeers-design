@@ -791,14 +791,14 @@ textarea {
     padding:29px 12px 0px 12px;
     position: relative;
 }
-.removeCourseBox {
+.removeCourseBox, .removeCourseBoxIcon {
     position: absolute;
     top: 4px;
     right: 5px;
     cursor: pointer;
     outline: none;
 }
-.removeCourseBox svg {
+.removeCourseBox, .removeCourseBoxIcon svg {
     fill: #2196f3;
     width: 10px;
     height: 10px;

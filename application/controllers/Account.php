@@ -3509,6 +3509,7 @@ class Account extends CI_Controller
             $professor_first_name   = $this->input->post('professor_first_name');
             $professor_last_name    = $this->input->post('professor_last_name');
             $user_id = $this->session->get_userdata()['user_data']['user_id'];
+            $page    = $this->input->post('page');
             foreach ($course_name as $key => $value) {
                 $insertArr = array(
                     'user_id'   => $user_id,
@@ -3536,12 +3537,22 @@ class Account extends CI_Controller
 
                 $this->db->insert('professor_master', $insertArr2);
             }
+
+            if($page == 'dashboard'){
+                $get_course = $this->db->get_where($this->db->dbprefix('course_master'), array('course_master.user_id' => $user_id, 'course_master.status' => 1))->num_rows();
+                echo $get_course;die;
+            } else {
+                $get_course = $this->db->get_where($this->db->dbprefix('course_master'), array('course_master.user_id' => $user_id, 'course_master.status' => 1))->result_array();
+                $html = '<option value="">Select Course</option>';
+                foreach ($get_course as $key => $value) {
+                    $html.= '<option value="'.$value['id'].'">'.$value['name'].'</option>';
+                }
+                echo $html;die;
+            }
+
+
         }
-        $message = '<div class="alert alert-success" role="alert"><strong>Success!</strong> Course Added Successfully!<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button></div>';
-        $this->session->set_flashdata('flash_message', $message);
-        redirect(site_url('account/dashboard'), 'refresh');
+        
     }
 
     public function showAllCourses()
@@ -3556,8 +3567,51 @@ class Account extends CI_Controller
         if (!empty($get_course)) {
             foreach ($get_course as $key => $value) {
                 $html .= '<div class="courseBox">
-                        
-                        <div class="row">
+                        <div class="removeCourseBoxIcon deleteCourseById" data-toggle="modal" data-target="#confirmationModalRemoveCourse" data-id="'.$value['id'].'">
+                            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+                                <g>
+                                    <g>
+                                        <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+                                            L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+                                            c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+                                            l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+                                            L284.286,256.002z" />
+                                    </g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                            </svg>
+
+                        </div>
+                        <div class="row" style="margin-top: 10px;">
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <div class="form-group">
                                     <input type="text" readonly class="form-control form-control--lg" placeholder="Course ID" value="' . $value['course_id'] . '">
@@ -3588,6 +3642,19 @@ class Account extends CI_Controller
         }
         $num = count($get_course);
         echo json_encode(array("html" => $html, "num" => $num));
+    }
+
+    public function deleteCourseById(){
+        if ($this->input->post()) {
+            $course_id    = $this->input->post('course_id');
+
+            $this->db->where(array('course_id' => $course_id));
+            $this->db->delete('professor_master');
+
+            $this->db->where(array('id' => $course_id));
+            $this->db->delete('course_master');
+            echo 1;die;
+        }
     }
 
     public function uploadUserUploads($f_n, $name)
