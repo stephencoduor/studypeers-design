@@ -31,7 +31,7 @@
 										</div>
 									</div>
 									<div class="col-md-12">
-										<div class="form-group">
+										<div class="form-group select select_label">
 											<label>Privacy & Permission  <span style="font-size: 14px;font-weight: 400;color: gray;display: none;" id="privcy_span"></span></label>
 											<select class="form-control" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
 												<option value="">Select Privacy</option>

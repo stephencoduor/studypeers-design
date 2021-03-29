@@ -976,6 +976,7 @@ footer .right-footer p {
     font-weight: 300;
     margin-top:38px;
     text-align: right;
+    white-space: nowrap;
 }
 
 
