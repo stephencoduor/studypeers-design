@@ -1174,10 +1174,14 @@
 						<?php $userfile_name = $document_detail['featured_image'];
                                 $extn = substr($userfile_name, strrpos($userfile_name, '.')+1);  ?>
                         <div class="documentName">
+						
                             <?php if($extn == 'pdf') { ?>
-                                <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a target="_blank" href="<?php echo base_url(); ?>uploads/users/<?php echo $document_detail['featured_image']; ?>"><?php echo $document_detail['featured_image']; ?></a>
+                                <!-- <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> 
+								<a target="_blank" href="<?php echo base_url(); ?>uploads/users/<?php echo $document_detail['featured_image']; ?>"><?php echo $document_detail['featured_image']; ?></a> -->
+								<img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> 
+								<a data-toggle="modal" data-target="#documentPreview"><?php echo $document_detail['featured_image']; ?></a>
                             <?php } else { ?>
-                                <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a href="<?php echo base_url(); ?>account/documentDetail/<?php echo base64_encode($document_detail['id']); ?>" target="_blank" ><?php echo $document_detail['featured_image']; ?>
+                                <img src="<?php echo base_url(); ?>assets_d/images/pdf.svg" alt="pdf"> <a data-toggle="modal" data-target="#documentPreview"><?php echo $document_detail['featured_image']; ?>
                             <?php } ?>
                         </div>
 						<div class="socialStatus">
@@ -2624,3 +2628,19 @@
 		<button type="button"> You've reached the end!</button>
 	</div>
 <?php } ?>
+
+<div id="documentPreview" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">Document Preview</h4>
+      </div>
+      <div class="modal-body">
+	  	Show Document Here
+      </div>
+    </div>
+  </div>
+</div>
