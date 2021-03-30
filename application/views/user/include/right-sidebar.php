@@ -312,7 +312,7 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                             </svg>
 
                         </div>
-                        <div class="row">
+                        <div class="row" >
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <input type="text" name="course_id[]" class="form-control form-control--lg" placeholder="Course ID">
@@ -758,8 +758,35 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         </div>
     </div>
 
+    
+
 
 </div>
+
+
+<div class="modal fade" id="confirmationModalRemoveCourse" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <div class="modal-body peers">
+                       <h4>Confirmation</h4>
+                       <div class="row">
+                         <h6 class="modalText">Are you sure to delete this Course !</h6>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group button">
+                                    <input type="hidden" name="remove_course_id" id="remove_course_id">
+                                    <button data-dismiss="modal" class="transparentBtn highlight">No</button>
+                                    <button type="button" class="filterBtn" onclick="deleteCourseById()">Yes</button>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 <script type="text/javascript">
     $(document).on('click', '.removePeerSugg', function() {
@@ -767,6 +794,28 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         $("#remove_peer_id").val(peer_id);
 
     });
+
+    $(document).on('click','.deleteCourseById',function(){
+        $('#courseModalAll').modal('hide');
+        var course_id = $(this).data('id'); 
+        $("#remove_course_id").val(course_id);
+
+    });
+
+    function deleteCourseById(){
+        var course_id = $("#remove_course_id").val(); 
+        url = '<?php echo base_url(); ?>account/deleteCourseById';
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                "course_id": course_id
+            },
+            success: function(result) {
+                location.reload();
+            }
+        });
+    }
 
     $('.unblock_peer').on("click", function() {
         var blocked_friend_id = $(this).attr('id');

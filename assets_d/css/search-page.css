@@ -208,7 +208,8 @@ img{
     content:"";
     left:0;
     bottom:25px;
-}
+
+} 
 .content-img > figure{
     width:160px;
     height:120px;
@@ -455,6 +456,7 @@ img{
     bottom: 30px;
     right: 40px;
 }
+
 @media (max-width: 1024px) {
     .content-img > figure {
         width: 140px;
@@ -503,3 +505,4 @@ img{
         padding: 10px 15px;
     }
 }
+

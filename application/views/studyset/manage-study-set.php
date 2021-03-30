@@ -54,7 +54,7 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Institution</label>
-							<select class="form-control selectpicker" id="institution" name="institution" >
+							<select class="form-control" id="institution" name="institution" >
 								<option value="">Select Institution</option>
 								<option value="<?php echo $userdata['intitutionID'];?>" <?php echo (isset($studyset_data) && isset($studyset_data['institution']) && $studyset_data['institution'] == $userdata['intitutionID']) ? 'selected' : '';?>><?php echo $userdata['SchoolName'];?></option>
 							</select>
@@ -64,7 +64,7 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Course</label>
-							<select class="form-control selectpicker" id="course" name="course" onchange="getProfessor();">
+							<select class="form-control" id="course" name="course" onchange="getProfessor();">
 								<option value="">Select Course</option>
 								<?php
 								foreach ($courses as $key => $course) {
@@ -91,7 +91,7 @@ $submit_name = (isset($study_set_id) && $study_set_id > 0) ? 'Update' : 'Create'
 					<div class="col-md-12">
 						<div class="form-group">
 							<label>Privacy & Permission  <span style="font-size: 14px;font-weight: 400;color: gray;display: none;" id="privcy_span"></span></label>
-							<select class="form-control selectpicker" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
+							<select class="form-control" id="privacy" name="privacy" onchange="showPermissionText(this.value)">
 								<option value="">Select Privacy</option>
 								<option value="1" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 1) ? 'selected' : '';?>>Public</option>
 								<option value="2" <?php echo (isset($studyset_data) && isset($studyset_data['privacy']) && $studyset_data['privacy'] == 2) ? 'selected' : '';?>>Private</option>

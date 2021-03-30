@@ -1,4 +1,8 @@
+
+<!-- <section class="mainContent">
+=======
 <section class="mainContent">
+>>>>>>> 07a59f4837df4a4f426e7b98a0cbec8c5ad6312f
     <div class="main-home-wrapper">
         <div class="tabs-wrappper">
             <div class="tabslisting">
@@ -67,6 +71,35 @@
                     </div>
                     <div class="view-all-section"><a href="">View All Peers</a></div>
                 </div>
+
+            </div>
+
+                <div class="pagination-wrap">
+                    <div class="prev-arrow">
+                        <a href=""><img src="<?php echo base_url(); ?>assets_d/images/prev.svg" alt="Prev Icon"/></a>
+                    </div>
+                    <ul class="pagination">
+                        <li><a href="#">1</a></li>
+                        <li><a href="#">2</a></li>
+                        <li><a href="#">3</a></li>
+                        <li><a href="#">4</a></li>
+                        <li><a href="#">5</a></li>
+                        <li><a href="#">6</a></li>
+                        <li><a href="#">7</a></li>
+                        <li><a href="#">8</a></li>
+                        <li><a href="#">9</a></li>
+                        <li><a href="#">10</a></li>
+                    </ul>
+                    <div class="next-arrow">
+                        <a href=""><img src="<?php echo base_url(); ?>assets_d/images/next.svg" alt="Next Icon"/></a>
+                    </div>
+                </div>
+            </div>
+            
+
+            <div id="posts" class="tab-pane fade">
+                <div class="content-card seprate-border">
+
 				<br>
 				<?php
 				}
@@ -74,6 +107,7 @@
 				if(!empty($AllPosts)){
 				?>
 				<div class="content-card seprate-border">
+
                     <div class="title-wrap">
                         <h3>Posts</h3>
                     </div>
@@ -815,7 +849,19 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
+<<<<<<< HEAD
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+<<<<<<< HEAD
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
+=======
+<<<<<<< HEAD
+=======
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/ans.svg" alt="Icon"/></a></li>
+>>>>>>> regisupdate
+=======
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+>>>>>>> 0f0748147bf300283a531f34417288bf13ec9bb7
                                     <li><a href="">20</a></li>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li>
@@ -919,14 +965,58 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
+
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
+                                    <li><a href="">20</a></li>
+
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
+
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+
                                     <li><a href="">20</a></li>
                                     <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
+
+                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>
+
                                     <li><a href="">24</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+
+                    <div class="view-all-section"><a href="">View All Questions</a></div>
+                </div>
+            </div>
+            <div id="documents" class="tab-pane fade">
+
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="studySets" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="events" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="articles" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+            <div id="studySessions" class="tab-pane fade">
+                <h3>Menu 2</h3>
+                <p>Some content in menu 2.</p>
+            </div>
+        </div>
+    </div>
+</section> -->
+
+                <div class="content-card seprate-border">
+                    <div class="title-wrap">
+                        <h3>Documents</h3>
+                    </div>
+
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
@@ -2714,6 +2804,7 @@
     </div>
 </section>
 
+
 <div class="modal fade" id="addEventModal" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -2822,3 +2913,4 @@
 		</div>
 	</div>
 </div>
+

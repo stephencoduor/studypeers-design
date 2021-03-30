@@ -21,7 +21,8 @@
     max-width: 95%;
 }
 .mainContent.profile.active{
-    max-width: 95%;
+    max-width: 90%;
+    margin:0 auto!important
 }
 .profileHeaderWrapper {
     width: 100%;
@@ -106,6 +107,7 @@
 .profileLogo figure img {
     width:100%;
     height:100%;
+    object-fit: cover;
 }
 .profileLogo .changeProfile {
     width:60px;
@@ -263,6 +265,13 @@
     background: #e9e9e9;
     border-radius: 100px;
     margin: 0 8px 8px 0;
+}
+.innerFeedTabs .nav.scroll-tabs li{
+    margin-bottom:0!important;
+}
+.innerFeedTabs .nav.scroll-tabs{
+    flex-wrap: initial;
+    margin:10px 0 15px;
 }
 .innerFeedTabs .nav li a {
     padding: 12px 15px !important;
@@ -592,6 +601,10 @@
 .badgeList ul li.badge.badge1 a {
     color:#185aeb;
 }
+.badgeList ul li a{
+    display: flex;
+    align-items: center;
+}
 .badgeList ul li.badge.badge2 a {
     color:#ea2e7e;
 }
@@ -707,7 +720,6 @@
     font-weight: 400;
     vertical-align: middle;
     position: relative;
-    top: 3px;
 }
 
 .socialAction li a img {
@@ -2605,7 +2617,7 @@ shareOptionList celebrate*/
     border-radius: 8px;
     position: absolute;
     top: -95px;
-    right: 70px;
+    right: 0;
     background: #fff;
     box-shadow: 1px 3px 4px -2px #e3e3e3;
     /*display: none;*/
@@ -2845,11 +2857,34 @@ shareOptionList celebrate*/
 .sortWrapper {
     padding-left: 15px;
 }
+@media(max-width: 1280px) { 
+    .shareMenu.shareOption{
+        right: 0;
+        top: -135px;
+    }
+}
+@media(max-width: 1024px) { 
+   
+    .info-profile{
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .profileInformation .name{
+        font-size:15px;
+    }
+    .profileInformation .username{
+        flex-direction: column;
+    }
+    .profileInformation .username span{
+        margin-left:0;
+    }
+}
+
 @media(max-width: 767px) {
     .shareMenu.shareOption {
         top: -200px;
         right: 0;
-        width: 100%;
+        width: auto;
     }
     .TabsAndSortWrapper {
         align-items: flex-start;
@@ -3323,6 +3358,7 @@ shareOptionList celebrate*/
     justify-content: flex-start;
     color:#185aeb;
     padding: 0 5px;
+    white-space: nowrap;
 }
 .dashboard-qa .action ul li a svg {
     width:16px;
@@ -3871,16 +3907,39 @@ input:-webkit-autofill:active {
         margin: 10px 0 0 15px;
     }
     .profileInformation .name{
-        font-size:16px;
+        font-size:14px;
+        white-space: nowrap;
+        width: 140px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .user-name figcaption {
+        font-size: 14px;
+        margin-bottom: 10px;
+        display: flex;
+        flex-direction: column;
+    }
+    .timeline {
+        margin-right: 0;
+        white-space: nowrap;
+    }
+    .username span{
+        font-size:14px;
+    }
+    .shareProfile img {
+        margin-right: 5px;
     }
     .shareProfile{
-        font-size:14px;
+        font-size:13px;
     }
     .tabPaneWrapper{
         flex-direction: column;
     }
 }
 @media (min-width: 768px) and (max-width: 1024px) { 
+    .profileInformation .name{
+        width: auto;
+    }
     .socialAction li a span {
         top: 0;
         white-space: nowrap;
@@ -3961,7 +4020,7 @@ input:-webkit-autofill:active {
     }
     .tabPaneWrapper .right{
         min-width: auto;
-        width:100%!important;
+        width:calc(100% - 60px)!important;
         padding-left:0;
     }
     
