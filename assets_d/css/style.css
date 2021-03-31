@@ -827,7 +827,27 @@ a.filterBtn,a.sortMenu{
     width:calc(100% - 45px);
     display:inline-block;
 }
-
+.flex-header-wrp{
+    display: flex;
+    align-items: center;
+}
+.download-close-wrap{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    right: 30px;
+    top: 7px;
+}
+.download-close-wrap a.filterBtn{
+    padding: 10px 15px;
+    height:40px;
+    line-height: initial;
+    font-size:11px;
+}
+.modal .download-close-wrap .close{
+    top: 5px;
+    right: -20px;
+}
 @media(min-width:1600px){
     .mainContent{margin-left:25%;}
     .pieDataList{margin-left: 60px;}
