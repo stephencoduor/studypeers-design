@@ -712,8 +712,6 @@ class Account extends CI_Controller
 		
         $this->load->view('user/include/header', $data);
         $this->load->view('user/search-result');
-
-<<<<<<< HEAD
         $this->load->view('user/include/right-sidebar');
 
         $this->load->view('user/include/firebase-include');
@@ -749,8 +747,6 @@ class Account extends CI_Controller
         $this->load->view('user/include/header', $data);
         $this->load->view('user/search-view-all');
         
-=======
->>>>>>> origin/master
         $this->load->view('user/include/right-sidebar');
 
         $this->load->view('user/include/firebase-include');
@@ -1107,19 +1103,6 @@ class Account extends CI_Controller
 		echo json_encode($data);		
 	}
 	
-    public function searchViewAll(){
-        $data['index_menu']  = 'search';
-        $data['title']  = 'Search View All | Studypeers';
-
-        $this->load->view('user/include/header', $data);
-        $this->load->view('user/search-view-all');
-        
-        $this->load->view('user/include/right-sidebar');
-        
-        $this->load->view('user/include/firebase-include');
-        $this->load->view('user/include/footer-dashboard');
-    }
-
     public function searchDetail(){
         $data['index_menu']  = 'search';
         $data['title']  = 'Search Detail | Studypeers';
