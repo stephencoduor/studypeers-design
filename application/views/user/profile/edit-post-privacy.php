@@ -96,7 +96,7 @@
                             </a>
                         </li>
                         <li class="<?php if($post_details['privacy_id'] == 5) { echo 'active'; } ?>">
-                            <a id="shareWithPeer" data-toggle="modal" data-target="#postGroupModal" >
+                            <a id="shareWithPeerEdit" data-toggle="modal" data-target="#postGroupModalEdit" data-id="<?= $post_details['id']; ?>">
                                 <label class="dashRadioWrap">
                                     <div class="privacyTxtWrap">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="17.49" viewBox="0 0 20 17.49">

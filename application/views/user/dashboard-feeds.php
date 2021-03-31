@@ -2003,6 +2003,18 @@
 	                                </div>
 	                            </a>
 	                        </li>
+
+	                        <li role="presentation" class="editPostById" data-toggle="modal" data-target="#editPost" data-id="<?= $value['reference_id']; ?>">
+	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">
+	                                <div class="left">
+	                                    <img src="<?php echo base_url(); ?>assets_d/images/save.svg" alt="Save">
+	                                </div>
+	                                <div class="right">
+	                                    <span>Edit</span>
+	                                    <p>Edit this post</p>
+	                                </div>
+	                            </a>
+	                        </li>
 	                        
 	                        <!-- <li role="presentation">
 	                            <a role="menuitem" tabindex="-1" href="javascript:void(0);">

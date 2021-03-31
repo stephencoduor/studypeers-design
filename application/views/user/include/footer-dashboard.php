@@ -25,12 +25,12 @@
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
-<script src="<?php echo base_url('assets_d/js/owl.carousel.min.js'); ?>"></script>
 
 <script>
     $(document).ready(function() {
         $("#multiple-select").selectator();
         $("#multiple-select-post").selectator();
+        $("#multiple-select-post-update").selectator();
     });
 </script>
 <script type="text/javascript">
@@ -354,27 +354,25 @@
         responsive: [{
                 breakpoint: 1200,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 4
                 }
             },
             {
                 breakpoint: 767,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3
                 }
             },
             {
                 breakpoint: 567,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
+                    slidesToShow: 2
                 }
             },
             {
                 breakpoint: 400,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToShow: 1
                 }
             }
         ]
@@ -748,6 +746,23 @@
 
         });
 
+        $(document).on('click', '#shareWithPeerEdit', function() {
+            var post_id = $(this).data('id');
+            $('#privacyPostEdit').modal('hide');
+            var url = '<?php echo base_url('account/getShareWithPeerById') ?>';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'post_id': post_id
+                },
+                success: function(data) {
+                    
+                    $("#postGroupModalEdit #multiple-select-post-update").html(data);
+                }
+            });
+        });
+
         $(document).on('change', '.image_upload_button', function() {
 
             readURL(this);
@@ -806,6 +821,7 @@
 
 
         
+
 
 
 
@@ -1020,7 +1036,7 @@
     $('.uloadedImage .close').click(function() {
         $(this).parent().hide();
     });
-    $('.notification').on('click', function() {
+    $('#notification').on('click', function() {
         let imgsrc = $(this).children('img');
         if (imgsrc.hasClass('notification-disabled')) {
             imgsrc.attr('src', base_url + 'assets_d/images/alert.svg');
@@ -1055,7 +1071,39 @@
     }
 
 </script>
-
+<script type='text/javascript'>
+$(document).ready(function() {
+	
+	var searchType = "<?php echo ($searchType) ? $searchType : 'peers'; ?>";
+	
+	createPagination(0,searchType);
+	$('#pagination').on('click','a',function(e){
+		e.preventDefault(); 
+		var pageNum = $(this).attr('data-ci-pagination-page');
+		createPagination(pageNum,searchType);
+	});
+	
+	function createPagination(pageNum,searchType){
+		$.ajax({
+			url: '<?php echo base_url(); ?>account/loadData/'+pageNum+'/'+searchType,
+			type: 'get',
+			dataType: 'json',
+			success: function(responseData){
+				
+				$(".searchThing").html(responseData.searchThing);
+				$(".searchHtml").html(responseData.searchHtml);
+				
+				if(responseData.pagination != ''){
+					$('#pagination').css('display','flex');
+					$('#pagination').html(responseData.pagination);
+				} else {
+					$('#pagination').css('display','none');
+				}
+			}
+		});
+	}
+});
+</script>
 </body>
 
 </html>

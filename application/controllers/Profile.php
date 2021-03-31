@@ -783,11 +783,13 @@ class Profile extends CI_Controller
         $post_id = $this->input->post('post_id');
         $html_content = $this->input->post('html_content');
 
+        $announcement = $this->input->post('announcement');
+
         $poll_end_date = date('Y-m-d', strtotime($this->input->post('poll-end-date-edit')));
         $poll_end_time = date('H:i:s', strtotime($this->input->post('poll-end-time-edit')));
 
         $this->db->where(array('id' => $post_id));
-        $result = $this->db->update('posts', array('post_content_html' => $html_content, 'poll_end_date' => $poll_end_date, 'poll_end_time'         => $poll_end_time));
+        $result = $this->db->update('posts', array('post_content_html' => $html_content, 'poll_end_date' => $poll_end_date, 'poll_end_time'         => $poll_end_time, 'is_announcement' => $announcement));
 
         $poll_data = $_POST['edit_option'];
         if (count($poll_data) > 0) {

@@ -44,8 +44,13 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 <div class="postSetting privacyPostEdit" data-id="<?= $post_details['id']; ?>" data-dismiss="modal" data-toggle="modal" href="#privacyPostEdit">
                                     <img src="<?php echo base_url(); ?>assets_d/images/post-setting.svg" alt="Post Setting">
                                 </div>
-                                <div class="notification">
-                                    <img src="<?php echo base_url(); ?>assets_d/images/alert-grey.svg" alt="notification" class="notification-disabled" id="bell-announcement">
+                                <div class="notification" id="notification-edit">
+                                    <?php if($post_details['is_announcement'] == 0) { ?>
+                                        <img src="<?php echo base_url(); ?>assets_d/images/alert-grey.svg" alt="notification" class="notification-disabled" id="bell-announcement-edit">
+                                    <?php } else { ?>
+                                        <img src="<?php echo base_url(); ?>assets_d/images/alert.svg" alt="notification" class="notification-active" id="bell-announcement-edit">
+                                    <?php } ?>
+                                    
                                 </div>
                             </div>
                         </div>
@@ -306,6 +311,17 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     
                 });
 
+                $('#notification-edit').on('click', function() {
+                    let imgsrc = $(this).children('img');
+                    if (imgsrc.hasClass('notification-disabled')) {
+                        imgsrc.attr('src', base_url + 'assets_d/images/alert.svg');
+                        imgsrc.attr('class', 'notification-active')
+                    } else {
+                        imgsrc.attr('src', base_url + 'assets_d/images/alert-grey.svg');
+                        imgsrc.attr('class', 'notification-disabled')
+                    }
+                })
+
                 $('#editPostForm').on("submit", function(e) {
                     e.preventDefault();
                     $('.ajax-loading').show();
@@ -315,8 +331,16 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                     var url = $(this).attr('action');
                     var html_content = $('#messagepostareaedit').val();
                     var post_id = $('#editPostId').val();
+
+                    if ($("#bell-announcement-edit").hasClass("notification-disabled")) {
+                        var announcement = 0;
+                    } else {
+                        var announcement = 1;
+                    }
+
                     formData.append('html_content', html_content);
                     formData.append('post_id', post_id);
+                    formData.append('announcement', announcement);
                     $.ajax({
                         type: 'POST',
                         url: url,
