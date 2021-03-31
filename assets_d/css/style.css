@@ -836,16 +836,21 @@ a.filterBtn,a.sortMenu{
     align-items: center;
     position: absolute;
     right: 30px;
-    top: 7px;
+    top: 10px;
 }
 .download-close-wrap a.filterBtn{
-    padding: 10px 15px;
-    height:40px;
+    padding: 5px 10px;
+    height:34px;
     line-height: initial;
-    font-size:11px;
+    font-size:10px;
+    display: flex;
+    align-items: center;
+}
+.download-close-wrap a.filterBtn svg{
+    margin-right:5px;
 }
 .modal .download-close-wrap .close{
-    top: 5px;
+    top: 2px;
     right: -20px;
 }
 @media(min-width:1600px){
