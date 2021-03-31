@@ -25,7 +25,6 @@
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
-<script src="<?php echo base_url('assets_d/js/owl.carousel.min.js'); ?>"></script>
 
 <script>
     $(document).ready(function() {
@@ -355,27 +354,25 @@
         responsive: [{
                 breakpoint: 1200,
                 settings: {
-                    slidesToShow: 3
+                    slidesToShow: 4
                 }
             },
             {
                 breakpoint: 767,
                 settings: {
-                    slidesToShow: 2,
+                    slidesToShow: 3
                 }
             },
             {
                 breakpoint: 567,
                 settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
+                    slidesToShow: 2
                 }
             },
             {
                 breakpoint: 400,
                 settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToShow: 1
                 }
             }
         ]
@@ -1074,7 +1071,39 @@
     }
 
 </script>
-
+<script type='text/javascript'>
+$(document).ready(function() {
+	
+	var searchType = "<?php echo ($searchType) ? $searchType : 'peers'; ?>";
+	
+	createPagination(0,searchType);
+	$('#pagination').on('click','a',function(e){
+		e.preventDefault(); 
+		var pageNum = $(this).attr('data-ci-pagination-page');
+		createPagination(pageNum,searchType);
+	});
+	
+	function createPagination(pageNum,searchType){
+		$.ajax({
+			url: '<?php echo base_url(); ?>account/loadData/'+pageNum+'/'+searchType,
+			type: 'get',
+			dataType: 'json',
+			success: function(responseData){
+				
+				$(".searchThing").html(responseData.searchThing);
+				$(".searchHtml").html(responseData.searchHtml);
+				
+				if(responseData.pagination != ''){
+					$('#pagination').css('display','flex');
+					$('#pagination').html(responseData.pagination);
+				} else {
+					$('#pagination').css('display','none');
+				}
+			}
+		});
+	}
+});
+</script>
 </body>
 
 </html>
