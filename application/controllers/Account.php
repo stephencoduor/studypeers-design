@@ -16,6 +16,8 @@ class Account extends CI_Controller
         // Set the timezone
         date_default_timezone_set(get_settings('timezone'));
         $this->load->library('upload');
+		$this->load->helper('url');
+        $this->load->library('mypagination');
         $this->load->model('studyset_model');
     }
 
@@ -681,12 +683,397 @@ class Account extends CI_Controller
 		
         $this->load->view('user/include/header', $data);
         $this->load->view('user/search-result');
+
+        $this->load->view('user/include/right-sidebar');
+
+        $this->load->view('user/include/firebase-include');
+        $this->load->view('user/include/footer-dashboard');
+    }
+	
+	public function searchViewAll($searchType = null){
+        $data['index_menu']  = 'search';
+        $data['title']  = 'Search View All | Studypeers';
+
+		$SearchText = ($this->session->userdata('SearchText')) ? $this->session->userdata('SearchText') : '';
+		$data['SearchText']  = $SearchText;
+		
+		if(empty($SearchText)){
+			redirect(base_url('account/searchResult'));
+		}
+		
+		$postTypes = array('peers','posts','questions','documents','studysets','events','qa','textbooks','articles','studynotes');
+		
+		if($searchType == ''){
+			redirect(base_url('account/searchResult'));
+		} else if($searchType != '' && !in_array(strtolower($searchType),$postTypes)){
+			redirect(base_url('account/searchResult'));
+		}
+		 
+		$data['searchType'] = strtolower($searchType);
+		
+		$CurrentUserID = ($this->session->userdata['user_data']['user_id']) ? $this->session->userdata['user_data']['user_id'] : 0;
+			
+		$GetUserInfo   = $this->db->query("SELECT intitutionID FROM user_info WHERE userID='".$CurrentUserID."'")->row();
+		$intitutionID  = (!empty($GetUserInfo)) ? $GetUserInfo->intitutionID : '';
+
+        $this->load->view('user/include/header', $data);
+        $this->load->view('user/search-view-all');
         
         $this->load->view('user/include/right-sidebar');
         
         $this->load->view('user/include/firebase-include');
         $this->load->view('user/include/footer-dashboard');
     }
+	
+	public function loadData($record=0,$searchType = null) {
+		$recordPerPage = 5;
+		// if($record != 0){
+			// $record = ($record-1) * $recordPerPage;
+		// }      	
+      	
+		$SearchText = ($this->session->userdata('SearchText')) ? $this->session->userdata('SearchText') : '';
+		
+		$CurrentUserID = ($this->session->userdata['user_data']['user_id']) ? $this->session->userdata['user_data']['user_id'] : 0;
+		
+		$GetUserInfo   = $this->db->query("SELECT intitutionID FROM user_info WHERE userID='".$CurrentUserID."'")->row();
+		$intitutionID  = (!empty($GetUserInfo)) ? $GetUserInfo->intitutionID : '';
+		
+		$recordCount = 0;
+		$searchData  = array();
+		$searchHtml = '';
+		$searchThing = '';
+		
+		if($searchType == 'peers') {
+			$searchThing = 'Peers';
+			
+			$AllPeers = array();
+			$SearchUserid = array();
+			
+			$LimitResult     = 5;
+			$FoundResult     = 0;
+			$FoundResult2    = 0;
+			
+			// search for my friends / peers
+			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ORDER BY user.id DESC";
+			
+			$SearchPeersResult = $this->db->query($SearchPeers)->result_array();
+			$FoundResult = count($SearchPeersResult);
+			
+			if(!empty($SearchPeersResult))
+			{
+				foreach($SearchPeersResult as $SearchPeersResultData)
+				{
+					$SearchUserid[]  = $SearchPeersResultData['id'];
+					
+					$UserProfile = base_url().'assets_d/images/user.jpg';
+					if($SearchPeersResultData['image'] != '' && file_exists('uploads/users/'.$SearchPeersResultData['image'])){
+						$UserProfile = base_url('uploads/users/'.$SearchPeersResultData['image']);
+					}
+						
+					$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName,user_info.user_location FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchPeersResultData['id']."'";
+					$UniversityResult = $this->db->query($getUniversityName)->result_array();
+					
+					$UniversityName = 'N/A';
+					$LocationName = 'N/A';
+					if(!empty($UniversityResult)){
+						$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+						$LocationName = ($UniversityResult[0]['user_location']) ? $UniversityResult[0]['user_location'] : 'N/A';
+					}
+	
+					$getFollowerCounter = "SELECT id FROM follow_master WHERE peer_id='".$SearchPeersResultData['id']."'";
+					$FollowerResult = $this->db->query($getFollowerCounter)->result_array();
+					$TotalFollower = 0;
+					if(!empty($FollowerResult)){
+						$TotalFollower = count($FollowerResult);
+					}
+					
+					$checkFollowingStatus = "SELECT * FROM follow_master WHERE user_id='".$CurrentUserID."' AND peer_id='".$SearchPeersResultData['id']."'";
+					$FollowStatusResult = $this->db->query($checkFollowingStatus)->result_array();
+					
+					if(!empty($FollowStatusResult)){
+						$isFollowing = 1;
+					} else {
+						$isFollowing = 0;
+					}
+					
+					$tempPeers['id']             = $SearchPeersResultData['id']; 	
+					$tempPeers['username']       = $SearchPeersResultData['username']; 
+					$tempPeers['UserProfile']    = $UserProfile; 
+					$tempPeers['full_name']      = $SearchPeersResultData['first_name'].' '.$SearchPeersResultData['last_name']; 
+					$tempPeers['UniversityName'] = $UniversityName; 
+					$tempPeers['LocationName']   = $LocationName; 
+					$tempPeers['totalFollower']  = $TotalFollower;
+					$tempPeers['isFollowing']    = $isFollowing;		
+					array_push($AllPeers,$tempPeers);
+				}
+			}
+			
+			$SearchUseridString = '';
+			if(count($SearchUserid) > 0){
+				$SearchUseridString = implode(",",$SearchUserid);
+			}
+			
+			// get mutal friends from search result
+			if(!empty($SearchPeersResult))
+			{
+				foreach($SearchPeersResult as $SearchPeersResultData)
+				{
+					$MutalQuery = "SELECT u.id,u.username,u.first_name,u.last_name,u.image FROM friends f1 INNER JOIN friends f2 ON (f2.peer_id = f1.peer_id) INNER JOIN user u ON (u.id = f2.peer_id) WHERE f1.user_id = '".$CurrentUserID."' AND f2.user_id = '".$SearchPeersResultData['id']."'";
+					
+					if($SearchUseridString != ''){
+						$MutalQuery .= " AND u.id NOT IN (".$SearchUseridString.")";
+					}
+					
+					$SearchMutalFriends = $this->db->query($MutalQuery)->result_array();
+					
+					if(!empty($SearchMutalFriends)){
+						foreach($SearchMutalFriends as $SearchMutalFriend){
+							
+							$UserProfile = base_url().'assets_d/images/user.jpg';
+							if($SearchMutalFriend['image'] != '' && file_exists('uploads/users/'.$SearchMutalFriend['image'])){
+								$UserProfile = base_url('uploads/users/'.$SearchMutalFriend['image']);
+							}
+							
+							$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName,user_info.user_location FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchMutalFriend['id']."'";
+							$UniversityResult = $this->db->query($getUniversityName)->result_array();
+							
+							$UniversityName = 'N/A';
+							$LocationName = 'N/A';
+							if(!empty($UniversityResult)){
+								$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+								$LocationName = ($UniversityResult[0]['user_location']) ? $UniversityResult[0]['user_location'] : 'N/A';
+							}
+							
+							$getFollowerCounter = "SELECT id FROM follow_master WHERE peer_id='".$SearchMutalFriend['id']."'";
+							$FollowerResult = $this->db->query($getFollowerCounter)->result_array();
+							$TotalFollower = 0;
+							if(!empty($FollowerResult)){
+								$TotalFollower = count($FollowerResult);
+							}
+							
+							$checkFollowingStatus = "SELECT * FROM follow_master WHERE user_id='".$CurrentUserID."' AND peer_id='".$SearchMutalFriend['id']."'";
+							$FollowStatusResult = $this->db->query($checkFollowingStatus)->result_array();
+							
+							if(!empty($FollowStatusResult)){
+								$isFollowing = 1;
+							} else {
+								$isFollowing = 0;
+							}
+							
+							$SearchUserid[]  = $SearchMutalFriend['id'];
+							
+							$tempPeers['id']             = $SearchMutalFriend['id']; 	
+							$tempPeers['username']       = $SearchMutalFriend['username']; 
+							$tempPeers['UserProfile']    = $UserProfile; 
+							$tempPeers['full_name']      = $SearchMutalFriend['first_name'].' '.$SearchMutalFriend['last_name']; 
+							$tempPeers['UniversityName'] = $UniversityName;
+							$tempPeers['LocationName']   = $LocationName;
+							$tempPeers['totalFollower']  = $TotalFollower; 
+							$tempPeers['isFollowing']    = $isFollowing;		
+							array_push($AllPeers,$tempPeers);
+						}
+					}
+				}
+			}
+			
+			// search peers based on university
+			if($intitutionID != '')
+			{
+				$SearchByUniversity = "SELECT user_info.userID,user.id,user.username,user.first_name,user.last_name,user.image,user_info.user_location FROM user_info LEFT JOIN user ON (user.id = user_info.userID) WHERE user_info.userID != '".$CurrentUserID."' AND user_info.intitutionID='".$intitutionID."'";	
+				
+				if($SearchUseridString != ''){
+					$SearchByUniversity .= " AND user.id NOT IN (".$SearchUseridString.")";
+				}
+				
+				$SearchByUniversity .= " AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%')";
+				
+				$SearchByUniversity .= " ORDER BY user.id DESC";
+				
+				$SearchUniversityResult = $this->db->query($SearchByUniversity)->result_array();
+				$FoundResult2 = count($SearchUniversityResult);
+				
+				if(!empty($SearchUniversityResult))
+				{
+					foreach($SearchUniversityResult as $SearchUniversityResultData)
+					{
+						$SearchUserid[]  = $SearchUniversityResultData['id'];
+						$ExistingUsers[] = $SearchUniversityResultData['id'];
+						
+						$UserProfile = base_url().'assets_d/images/user.jpg';
+						if($SearchUniversityResultData['image'] != '' && file_exists('uploads/users/'.$SearchUniversityResultData['image'])){
+							$UserProfile = base_url('uploads/users/'.$SearchUniversityResultData['image']);
+						}
+							
+						$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchUniversityResultData['id']."'";
+						$UniversityResult = $this->db->query($getUniversityName)->result_array();
+						
+						$UniversityName = 'N/A';
+						if(!empty($UniversityResult)){
+							$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+						}	
+							
+						$getFollowerCounter = "SELECT id FROM follow_master WHERE peer_id='".$SearchUniversityResultData['id']."'";
+						$FollowerResult = $this->db->query($getFollowerCounter)->result_array();
+						$TotalFollower = 0;
+						if(!empty($FollowerResult)){
+							$TotalFollower = count($FollowerResult);
+						}	
+							
+						$checkFollowingStatus = "SELECT * FROM follow_master WHERE user_id='".$CurrentUserID."' AND peer_id='".$SearchUniversityResultData['id']."'";
+						$FollowStatusResult = $this->db->query($checkFollowingStatus)->result_array();
+						
+						if(!empty($FollowStatusResult)){
+							$isFollowing = 1;
+						} else {
+							$isFollowing = 0;
+						}	
+							
+						$tempPeers['id']             = $SearchUniversityResultData['id']; 	
+						$tempPeers['username']       = $SearchUniversityResultData['username']; 
+						$tempPeers['UserProfile']    = $UserProfile; 
+						$tempPeers['full_name']      = $SearchUniversityResultData['first_name'].' '.$SearchUniversityResultData['last_name']; 
+						$tempPeers['UniversityName'] = $UniversityName; 	
+						$tempPeers['LocationName']   = ($SearchUniversityResultData['user_location']) ? $SearchUniversityResultData['user_location'] : 'N/A';		
+						$tempPeers['totalFollower']  = $TotalFollower; 
+						$tempPeers['isFollowing']    = $isFollowing;	
+						array_push($AllPeers,$tempPeers);	
+					}
+				}
+			}
+			
+			$recordCount = count($AllPeers);
+			
+			$per_page = $recordPerPage;
+			$offset   = $record;
+			
+			$pages = ceil($recordCount / $per_page);
+			
+			$paginated_orders = array();
+			if (count($AllPeers)) {
+				$paginated_orders = array_slice($AllPeers, $offset, $per_page, true);
+			}
+			
+			$searchData = array();
+			foreach($paginated_orders as $paginated_orders){
+				array_push($searchData,$paginated_orders);
+			}
+			
+				
+			 
+			if(!empty($searchData)){
+				$searchHtml .= '<div class="peers-listing">';	
+				foreach($searchData as $searchedData){
+					$searchHtml .= '
+					<div class="peers-row">
+						<div class="peer-left-info">
+							<div class="peers-img-wrap">
+								<img src="'.$searchedData['UserProfile'].'" alt="Image"/>
+							</div>
+							<div class="basic-info">
+								<h3>'.$searchedData['full_name'].'</h3>
+								<ul>
+									<li>'.$searchedData['UniversityName'].'</li>
+									<li>'.$searchedData['LocationName'].'</li>
+									<li><a href="">'.$searchedData['totalFollower'].'</a> followers</li>
+								</ul>
+							</div>
+						</div>
+						<div class="peer-right-info">
+							<ul>
+								<li><a href="javascript:;"><img src="'.base_url().'assets_d/images/chat-red.svg" alt="Image" data-name="'.$searchedData['full_name'].'" data-groupId="0" data-id="'.$searchedData['id'].'" class="open-single-chat-window" /></a></li>';
+								
+								if($searchedData['isFollowing'] == 1){
+									$searchHtml .= '<li><a href="javascript:;" class="follow_now follow_'.$searchedData['id'].'" data-id="'.$searchedData['id'].'" id="0">UnFollow</a></li>';	
+								} else {
+									$searchHtml .= '<li><a href="javascript:;" class="follow_now follow_'.$searchedData['id'].'" data-id="'.$searchedData['id'].'" id="1">Follow</a></li>';
+								}
+							$searchHtml .= '
+							</ul>
+						</div>
+					</div>';
+				}
+				$searchHtml .= '</div>';
+			}
+			
+		} else if($searchType == 'posts') {
+			
+		} else if($searchType == 'questions') {
+			
+		} else if($searchType == 'documents') {
+			
+		} else if($searchType == 'studysets') {
+			
+		} else if($searchType == 'events') {
+			
+		} else if($searchType == 'qa') {
+			
+		} else if($searchType == 'textbooks') {
+			
+		} else if($searchType == 'articles') {
+			
+		} else if($searchType == 'studynotes') {
+			
+		}
+		
+		$config['base_url']         = base_url('account/loadData');
+		$config['total_rows']       = $recordCount;
+		$config['per_page']         = $recordPerPage;
+      	$config['use_page_numbers'] = TRUE;
+		$this->mypagination->initialize($config);
+		
+		$totalPage = ceil($recordCount/$recordPerPage);
+		
+		$current_page = ($record == 0) ? 1 : ($record);
+		
+		$prev_page = $current_page - 1;
+		$next_page = $current_page + 1;
+		
+		$links = '';
+		
+		if($prev_page <= $totalPage){
+		$links .= '<div class="prev-arrow">
+						<a href="'.base_url('account/loadData/').$prev_page.'" data-ci-pagination-page="'.$prev_page.'"><img src="'.base_url('assets_d/images/prev.svg').'" alt="Prev Icon"/></a>
+					</div>
+					';
+		} else {
+			$links .= '<div class="prev-arrow">
+						<a href="javascript:;" style="pointer-events:none;"><img src="'.base_url('assets_d/images/prev.svg').'" alt="Prev Icon"/></a>
+					</div>
+					';
+		}
+					
+		$links .= '<ul class="pagination">';		
+		for ($i=1; $i <= $totalPage ; $i++) { 
+			if($current_page == $i){
+				$links .= '<li class="active"><a href="'.base_url('account/loadData/'.$i).'" data-ci-pagination-page="'.$i.'">'.$i.'</a></li>';
+			} else {
+				$links .= '<li><a href="'.base_url('account/loadData/'.$i).'" data-ci-pagination-page="'.$i.'">'.$i.'</a></li>';	
+			}
+		}
+		$links .= '</ul>';
+		
+		if($next_page <= $totalPage){
+			$links .= '
+			   <div class="next-arrow">
+					<a href="'.base_url('account/loadData/').$next_page.'" data-ci-pagination-page="'.$next_page.'"><img src="'.base_url('assets_d/images/next.svg').'" alt="Next Icon"/></a>
+			   </div>';	
+		} else {
+			$links .= '
+			   <div class="next-arrow">
+					<a href="javascript:;" style="pointer-events:none;"><img src="'.base_url('assets_d/images/next.svg').'" alt="Next Icon"/></a>
+			   </div>';	
+		}
+		
+		
+		if($totalPage <= 1){
+			$links = '';
+		}
+		
+		$data['pagination']  = $links;
+		$data['searchHtml']  = $searchHtml;
+		$data['searchThing'] = $searchThing;
+		echo json_encode($data);		
+	}
 	
 	public function timestring($datetime, $full = false) {
 		$now = new DateTime;

@@ -10,8 +10,8 @@
                     <li><a data-toggle="tab" href="#documents" aria-expanded="true">Documents</a></li>
                     <li><a data-toggle="tab" href="#studySets" aria-expanded="true">Study Sets</a></li>
                     <li><a data-toggle="tab" href="#events" aria-expanded="true">Events</a></li>
-                    <li><a data-toggle="tab" href="#articles" aria-expanded="true">Articles</a></li>
-                    <li><a data-toggle="tab" href="#studySessions" aria-expanded="true">Study Sessions</a></li>
+                    <li style="display:none;"><a data-toggle="tab" href="#articles" aria-expanded="true">Articles</a></li>
+                    <li style="display:none;"><a data-toggle="tab" href="#studySessions" aria-expanded="true">Study Sessions</a></li>
                 </ul>
             </div>
         </div>
@@ -65,7 +65,7 @@
 							}
 						?>
                     </div>
-                    <div class="view-all-section"><a href="">View All Peers</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/peers'); ?>">View All Peers</a></div>
                 </div>
 				<br>
 				<?php
@@ -184,7 +184,7 @@
 					<?php
 						}
 					?>
-                    <div class="view-all-section"><a href="">View All Posts</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/posts'); ?>">View All Posts</a></div>
                 </div>
 				<br>
 				<?php
@@ -273,7 +273,7 @@
                     <?php
 						}
 					?>
-                    <div class="view-all-section"><a href="">View All Questions</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/questions'); ?>">View All Questions</a></div>
                 </div>
 				<br>
 				<?php
@@ -441,7 +441,7 @@
                     <?php
 						}
 					?>
-                    <div class="view-all-section"><a href="">View All Documents</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/documents'); ?>">View All Documents</a></div>
                 </div>
 				<br>
 				<?php
@@ -574,7 +574,7 @@
                     <?php
 						}
 					?>
-                    <div class="view-all-section"><a href="">View All Study Sets</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/studysets'); ?>">View All Study Sets</a></div>
                 </div>
 				<br>
 				<?php
@@ -756,13 +756,13 @@
                     <?php 
 						}
 					?>
-                    <div class="view-all-section"><a href="">View All Events</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/events'); ?>">View All Events</a></div>
                 </div>
 				<br>
 				<?php
 				}
 				?>
-				<div class="content-card seprate-border">
+				<div class="content-card seprate-border" style="display:none;">
                     <div class="title-wrap">
                         <h3>Articles</h3>
                     </div>
@@ -1034,7 +1034,7 @@
                     <div class="view-all-section"><a href="">View All Articles</a></div>
                 </div>
 				<br>
-				<div class="content-card seprate-border">
+				<div class="content-card seprate-border" style="display:none;">
                     <div class="title-wrap">
                         <h3>Study Sessions</h3>
                     </div>
@@ -1961,6 +1961,21 @@
                     </div>
 					<?php
 						}
+					} else {
+					?>
+					<div class="mainContent">
+						<div class="main-home-wrapper">
+							<div class="createBox">
+								<div class="noFeedWrapper">
+									<figure>
+										<img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+									</figure>
+									<h4>Search result not found.</h4>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php	
 					}
 					
 					if(!empty($AllStudySets)){
@@ -2146,6 +2161,21 @@
 						</div>
                     <?php 
 							}
+						} else {
+						?>
+						<div class="mainContent">
+							<div class="main-home-wrapper">
+								<div class="createBox">
+									<div class="noFeedWrapper">
+										<figure>
+											<img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+										</figure>
+										<h4>Search result not found.</h4>
+									</div>
+								</div>
+							</div>
+						</div>
+						<?php	
 						}
 						
 						if(!empty($AllEvents)){
@@ -2156,7 +2186,8 @@
 					?>
                 </div>
             </div>
-            <div id="articles" class="tab-pane fade">
+			
+            <div id="articles" class="tab-pane fade" style="display:none;">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Articles</h3>
@@ -2429,7 +2460,7 @@
                     <div class="view-all-section"><a href="">View All Articles</a></div>
                 </div>
             </div>
-            <div id="studySessions" class="tab-pane fade">
+            <div id="studySessions" class="tab-pane fade" style="display:none;">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Study Sessions</h3>
