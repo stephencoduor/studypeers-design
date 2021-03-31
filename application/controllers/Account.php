@@ -5494,4 +5494,16 @@ class Account extends CI_Controller
         echo 1;die;
     }
 
+
+    public function getShareWithPeerById(){
+    	if ($this->input->post()) {
+            $post_id              = $this->input->post('post_id');
+
+            $post_query = $this->db->query('SELECT * from posts where id = '.$post_id)->row_array();
+            
+            
+
+        }
+    }
+
 }

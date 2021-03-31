@@ -763,6 +763,30 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
 </div>
 
+<div class="modal fade" id="postGroupModalEdit" role="dialog">
+
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="createHeader">
+                    <h4><img src="<?php echo base_url(); ?>assets_d/images/return.svg" class="privacyPostEdit" data-id="" data-dismiss="modal" data-toggle="modal" href="#privacyPostEdit"> Share with peers</h4>
+                    <div class="closePost" data-dismiss="modal">
+                        <img src="<?php echo base_url(); ?>assets_d/images/close-grey.svg" alt="close">
+                    </div>
+                </div>
+                <select id="multiple-select-post-update" multiple class="form-control"></select>
+                <div class="settingWrapper">
+                    <button type="button" id="" class="event_action" onclick="updatedSelectedPeer()"> Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+
+</div>
+
 
 <div class="modal fade" id="confirmationModalRemoveCourse" role="dialog">
         <div class="modal-dialog">

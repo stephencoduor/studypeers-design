@@ -31,6 +31,7 @@
     $(document).ready(function() {
         $("#multiple-select").selectator();
         $("#multiple-select-post").selectator();
+        $("#multiple-select-post-update").selectator();
     });
 </script>
 <script type="text/javascript">
@@ -748,6 +749,23 @@
 
         });
 
+        $(document).on('click', '#shareWithPeerEdit', function() {
+            var post_id = $(this).data('id');
+            $('#privacyPostEdit').modal('hide');
+            var url = '<?php echo base_url('account/getShareWithPeerById') ?>';
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: {
+                    'post_id': post_id
+                },
+                success: function(data) {
+                    
+                    $("#postGroupModalEdit #multiple-select-post-update").html(data);
+                }
+            });
+        });
+
         $(document).on('change', '.image_upload_button', function() {
 
             readURL(this);
@@ -806,6 +824,7 @@
 
 
         
+
 
 
 
@@ -1020,7 +1039,7 @@
     $('.uloadedImage .close').click(function() {
         $(this).parent().hide();
     });
-    $('.notification').on('click', function() {
+    $('#notification').on('click', function() {
         let imgsrc = $(this).children('img');
         if (imgsrc.hasClass('notification-disabled')) {
             imgsrc.attr('src', base_url + 'assets_d/images/alert.svg');

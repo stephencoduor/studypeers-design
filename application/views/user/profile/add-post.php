@@ -48,7 +48,7 @@ $full_name      = $user_detail['first_name'].' '.$user_detail['last_name'];
                                 <div class="postSetting" data-dismiss="modal" data-toggle="modal" href="#privacyPost">
                                     <img src="<?php echo base_url(); ?>assets_d/images/post-setting.svg" alt="Post Setting">
                                 </div>
-                                <div class="notification">
+                                <div class="notification" id="notification">
                                     <img src="<?php echo base_url(); ?>assets_d/images/alert-grey.svg" alt="notification" class="notification-disabled" id="bell-announcement">
                                 </div>
                             </div>
