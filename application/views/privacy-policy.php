@@ -3,7 +3,6 @@
 		<div class="cms-content">	  
             <h4><center>Privacy Policy</center></h4>
             <h2 id="what" class="small-title">PRIVACY NOTICE </h2>
-            <p class="para"><strong>Last Updated Date: ___________</strong></p>
             <p class="para">
                 Welcome to the web site (Studypeerss.com, the “Site”) and Services (as defined below) of Studypeerss. (“Studypeerss”, “we”, “us” and/or “our”). Studypeerss is dedicated to helping people around the world practice and master whatever they are learning. This platform have been created to provide information about our company and its web platform and mobile application services for education institutions (such education institutions, our “Client(s”) (such services, together with the Site, the “Service(s)”) to our users (“you”, “your”, “users”, “Client”). When you share information with us we can help you achieve that goal by helping you find the right content and making your studying quicker and more effective.  
             </p>					   

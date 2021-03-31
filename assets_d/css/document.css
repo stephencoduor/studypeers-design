@@ -119,7 +119,7 @@
     width: -webkit-max-content;
     width: -moz-max-content;
     width: max-content;
-    margin:0 8px 0 0 ;
+    margin:0 0 0 8px;
 }
 .sortMenu:hover,
 .sortMenu:focus-within {
@@ -347,7 +347,7 @@ select.form-control:focus {
 }
 .studySetWrapper .feedVoteWrap {
     display: flex;
-    align-items: center;
+    align-items: initial;
     justify-content: flex-start;
 }
 .studySetWrapper .feed-card.list h5 {
@@ -512,13 +512,13 @@ select.form-control:focus {
     flex-wrap: wrap;
 }
 .feedWrapper.listView .feedVoteWrap {
-    max-width: 47%;
+    max-width: 50%;
 }
 .feedWrapper.listView .feedVoteWrap:nth-child(odd)  {
-    margin: 0 3% 0 0;   
+    padding: 0 10px 0 0;   
 }
 .feedWrapper.listView .feedVoteWrap:nth-child(even)  {
-    margin: 0 0 0 3%;   
+    padding: 0 0 0 10px;   
 }
 .feedWrapper.listView .feed-card {
     flex: auto;
@@ -532,6 +532,7 @@ select.form-control:focus {
 }
 .studySetWrapper.list .feedWrapper.listView .feed-card.list  .left {
     width:100%;
+    height: auto;
     margin: 0;
     border-bottom: 1px solid #eae9ee;
     border-right: 0;
@@ -1862,12 +1863,13 @@ textarea{
     justify-content: flex-start;
 }
 .studySetWrapper .left {
-    width:35%;
+    width:200px;
+    height:100%;
+    background-color:#f0f2f5;
     border-right: 1px solid #eae9ee;
 }
 .studySetWrapper .right {
-    /*width:65%;*/
-    width: 100%;
+    width: calc(100% - 200px);
 }
 .studySetWrapper .left figure {
     width:100%;
@@ -2446,6 +2448,26 @@ textarea.textarea-gray {
     }
 }
 @media(max-width:1300px) {
+   
+    .feed-card.list{
+        flex-direction: column; 
+    }
+    .studySetWrapper .left{
+        width:100%;
+    }
+    .studySetWrapper .right{
+        width:100%;
+        padding-left:0;
+    }
+    .filterSearch{
+        margin-bottom:10px;
+    }
+    .studySetWrapper.list .buttonGroup{
+        flex-direction: row;
+    }
+    .filterWrapper{
+        flex-direction: column;
+    }
     .filterWrapper.active .filterSearch{width:53%;}
     /*.feedWrapper.listView .feed-card {
         max-width: 48%;
@@ -2480,6 +2502,17 @@ textarea.textarea-gray {
     }
 }
 @media(max-width: 1100px){
+    .feedWrapper.listView .feed_card_footer{
+        flex-direction: column;
+    }
+    .feedWrapper.listView .userWrap{
+        width: 100%;
+        margin-bottom:10px;
+    }
+    .feedWrapper.listView .action{
+        width:100%;
+        top:0;
+    }
     .filterWrapper.active .filterSearch{width:37%;}
     .filterSearch {
         width: 55%;
@@ -2579,7 +2612,8 @@ textarea.textarea-gray {
         font-size: 15px;
     }
 }
-@media(max-width:767px){
+@media (max-width: 767px){
+  
     #confirmationModal .transparentBtn {
         margin-right: 15px!important;
     }

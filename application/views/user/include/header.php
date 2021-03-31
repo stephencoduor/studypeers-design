@@ -8,6 +8,9 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/search-page.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/nice-select.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/search-page.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/owl.carousel.css">
+	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/scrolling-tabs.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/jquery.mCustomScrollbar.css">
 	<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.43/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
@@ -42,7 +45,6 @@
 		<link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/profile.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/loader.css">
 		<link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets_d/css/croppie.css">
-
 	<?php } ?>
 
 	<!-- Emoji Data -->
@@ -67,11 +69,15 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
+	<link rel="stylesheet" href="<?php echo base_url('assets_d/js/cropper/cropper.css'); ?>">
+
 	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/moment.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/socket.io.js'); ?>"></script>
+
+
 
 
 
@@ -460,6 +466,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 								<div class="removeSearch">
 									<img src="<?php echo base_url(); ?>assets_d/images/close.svg" alt="close">
 								</div>
+
 								<div class="search-info-wrp">
 									<ul id="search-result" class="searchResultClass" style="display:none">
 										
@@ -483,6 +490,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 										</svg>
 									</div>
 								</div>
+
 							</div>
 						</div>
 					</nav>
