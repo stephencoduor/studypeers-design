@@ -10518,6 +10518,16 @@
     </div>
 </div>
 
+<div id="documentPreview" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content" id="doc-preview-id">
+      
+    </div>
+  </div>
+</div>
+
 
 <script type="text/javascript">
 	$(document).ready(function() {
@@ -10533,6 +10543,24 @@
 				$('.commentBoxWrap').hide();
 			}
 		});
+	});
+
+	$(document).on('click', '.preview-doc', function() {
+		var doc_id = $(this).data('id');
+
+		$.ajax({
+			url: '<?php echo base_url(); ?>account/getDocPreview',
+			type: 'post',
+			data: {
+				"id": doc_id
+			},
+			success: function(result) {
+
+				$('#doc-preview-id').html(result);
+			}
+		})
+
+
 	});
 
 	$(document).on('click', '.attendEvent', function() {
