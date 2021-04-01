@@ -246,11 +246,11 @@
 
 	function showPermissionText(val){
 		if(val == 1) {
-			$('#privcy_span').html('(Keep this studyset public)').show();
+			$('#privcy_span').html('(Keep this document public)').show();
 		} else if(val == 2) {
-			$('#privcy_span').html('(Keep this studyset private)').show();
+			$('#privcy_span').html('(Keep this document private)').show();
 		} else if(val == 3) {
-			$('#privcy_span').html('(Keep this studyset secret)').show();
+			$('#privcy_span').html('(Keep this document secret)').show();
 		} else {
 			$('#privcy_span').html('').hide();
 		}
