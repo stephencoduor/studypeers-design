@@ -5878,4 +5878,17 @@ class Account extends CI_Controller
         }
     }
 
+
+    public function getDocPreview(){
+    	if ($this->input->post()) {
+            $id              = $this->input->post('id');
+            $doc_detail = $this->db->query('SELECT * from document_master where id = '.$id)->row_array();
+            $result['doc_detail'] = $doc_detail;
+
+            $html = $this->load->view('user/profile/preview-document', $result, true);
+            echo $html;
+
+        }
+    }
+
 }
