@@ -6,7 +6,7 @@
 		<div class="what-is-studypeers">
 			<div class="container">
 				<h4>What is Studypeers?</h4>
-				<p class="mb-25 text-left">Our Team behind the making of StudyPeers saw an opportunity for one centralized application to coordinate communication and study tools all in one Application.  We understand how complicated college is and want to bring simplicity to the abundance of apps available to the average college student. All of our colleagues had the struggle of transitioning from highschool to college and from college to universities of the simple fact there were so many steps to apply or transfer or adapt or even to make friends. Our objective was that StudyPeers faces all of your troubles that you may face at your College or University and help you to your best ability. StudyPeers want to bring virtual interaction to physical interaction and help create study groups and see teamwork as well to build friendships and success. We believe education should be equal for everyone no matter the situation. </p>
+				<p class="mb-25 text-left">Our Team behind the making of Studypeers saw an opportunity for one centralized application to coordinate communication and study tools all in one Application.  We understand how complicated college is and want to bring simplicity to the abundance of apps available to the average college student. All of our colleagues had the struggle of transitioning from highschool to college and from college to universities of the simple fact there were so many steps to apply or transfer or adapt or even to make friends. Our objective was that Studypeers faces all of your troubles that you may face at your College or University and help you to your best ability. Studypeers want to bring virtual interaction to physical interaction and help create study groups and see teamwork as well to build friendships and success. We believe education should be equal for everyone no matter the situation. </p>
 			</div>
 			<div class="container">
 				<figure class="about-image">
@@ -22,7 +22,7 @@
 					</div>
 					<div class="col-md-6">
 						<h3>Mission </h3>
-						<p>StudyPeers vision is to revolutionize the way students collaborate, connect, study, and learn in today’s 21st-century education. Our goal is to offer as many tools to a student and help them graduate and master their full potential. StudyPeers focuses on connecting students to their institutions and gives them accessibility to our resources such as connecting with students that study in the same major or educational path. Furthermore, students also have the option to create study groups or even create events to better understand their surroundings and subjects to a higher degree. </p>
+						<p>Studypeers vision is to revolutionize the way students collaborate, connect, study, and learn in today’s 21st-century education. Our goal is to offer as many tools to a student and help them graduate and master their full potential. Studypeers focuses on connecting students to their institutions and gives them accessibility to our resources such as connecting with students that study in the same major or educational path. Furthermore, students also have the option to create study groups or even create events to better understand their surroundings and subjects to a higher degree. </p>
 					</div>
 				</div>
 			</div>
