@@ -805,6 +805,7 @@ l,.share:focus
     display: inline-block;
     color: #7f7b94;
     font-size: 12px;
+    word-break: break-word;
 }
 .toolBox ul li a:hover {
     transform: scale(1.1);
