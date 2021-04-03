@@ -17,8 +17,8 @@ window.addEventListener('DOMContentLoaded', function () {
 
     $("#crop").click(function () {
         canvas = cropper.getCroppedCanvas({
-            width: 1000,
-            height: 290,
+            width: 1100,
+            height: 320,
         });
 
         canvas.toBlob(function (blob) {
