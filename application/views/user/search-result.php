@@ -30,11 +30,11 @@
 						?>
                         <div class="peers-row">
                             <div class="peer-left-info">
-                                <div class="peers-img-wrap">
+                                <div class="peers-img-wrap" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllPeer['username']); ?>'">
                                     <img src="<?php echo $AllPeer['UserProfile']; ?>" alt="Image"/>
                                 </div>
                                 <div class="basic-info">
-                                    <h3><?php echo $AllPeer['full_name']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllPeer['username']); ?>'"><?php echo $AllPeer['full_name']; ?></h3>
                                     <ul>
                                         <li><?php echo $AllPeer['UniversityName']; ?></li>
                                         <li><?php echo $AllPeer['LocationName']; ?></li>
@@ -83,13 +83,13 @@
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllPost['username']); ?>'">
                                     <figure>
                                         <img src="<?php echo $AllPost['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3><?php echo $AllPost['fullname']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllPost['username']); ?>'"><?php echo $AllPost['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -202,13 +202,13 @@
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllQuestion['username']); ?>'">
                                     <figure>
                                         <img src="<?php echo $AllQuestion['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3><?php echo $AllQuestion['username']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllQuestion['username']); ?>'"><?php echo $AllQuestion['username']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -291,13 +291,13 @@
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllDocument['username']); ?>'">
                                     <figure>
                                         <img src="<?php echo $AllDocument['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3><?php echo $AllDocument['fullname']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllDocument['username']); ?>'"><?php echo $AllDocument['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -459,13 +459,13 @@
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllStudySet['username']); ?>'">
                                     <figure>
                                         <img src="<?php echo $AllStudySet['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3><?php echo $AllStudySet['fullname']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllStudySet['username']); ?>'"><?php echo $AllStudySet['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -592,13 +592,13 @@
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllEvent['username']); ?>'">
                                     <figure>
                                         <img src="<?php echo $AllEvent['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3><?php echo $AllEvent['fullname']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllEvent['username']); ?>'"><?php echo $AllEvent['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -693,7 +693,7 @@
 								$attendEvent = $this->db->get_where('share_master', array('reference_id' => $AllEvent['event_primary_id'], 'reference' => 'event', 'peer_id' => $CurrentUserID))->row_array(); 
 							?>
 							<button type="button" class="event_action attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?php echo $AllEvent['event_primary_id']; ?>"> 
-								<span id="attend_text_<?php echo $AllEvent['event_primary_id']; ?>"><?php echo (!empty($attendEvent) && $attendEvent['status'] == 2) ? 'Unattend' : 'Attend';?></span> Event
+								<span class="attend_text_<?php echo $AllEvent['event_primary_id']; ?>" id="attend_text_<?php echo $AllEvent['event_primary_id']; ?>"><?php echo (!empty($attendEvent) && $attendEvent['status'] == 2) ? 'Unattend' : 'Attend';?></span> Event
 							</button>
                         </div>
                         <div class="like-comment-wrap">
@@ -1326,11 +1326,11 @@
 						?>
                         <div class="peers-row">
                             <div class="peer-left-info">
-                                <div class="peers-img-wrap">
+                                <div class="peers-img-wrap" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllPeer['username']); ?>'">
                                     <img src="<?php echo $AllPeer['UserProfile']; ?>" alt="Image"/>
                                 </div>
                                 <div class="basic-info">
-                                    <h3><?php echo $AllPeer['full_name']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllPeer['username']); ?>'"><?php echo $AllPeer['full_name']; ?></h3>
                                     <ul>
                                         <li><?php echo $AllPeer['UniversityName']; ?></li>
                                         <li><?php echo $AllPeer['LocationName']; ?></li>
@@ -1418,13 +1418,13 @@
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllPost['username']); ?>'">
                                     <figure>
                                         <img src="<?php echo $AllPost['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3><?php echo $AllPost['fullname']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllPost['username']); ?>'"><?php echo $AllPost['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -1555,13 +1555,13 @@
                     <div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllQuestion['username']); ?>'">
                                     <figure>
                                         <img src="<?php echo $AllQuestion['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3><?php echo $AllQuestion['username']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllQuestion['username']); ?>'"><?php echo $AllQuestion['username']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -1662,13 +1662,13 @@
 						<div class="post-row-wrap">
 							<div class="user-top">
 								<div class="user-top-left">
-									<div class="user-img">
+									<div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllDocument['username']); ?>'">
 										<figure>
 											<img src="<?php echo $AllDocument['profile_picture']; ?>" alt="Image"/>
 										</figure>
 									</div>
 									<div class="user-name-wrap">
-										<h3><?php echo $AllDocument['fullname']; ?></h3>
+										<h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllDocument['username']); ?>'"><?php echo $AllDocument['fullname']; ?></h3>
 										<div class="badgeList">
 											<ul>
 												<li class="badge badge1">
@@ -1848,13 +1848,13 @@
 					<div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllStudySet['username']); ?>'">
                                     <figure>
                                         <img src="<?php echo $AllStudySet['profile_picture']; ?>" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3><?php echo $AllStudySet['fullname']; ?></h3>
+                                    <h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllStudySet['username']); ?>'"><?php echo $AllStudySet['fullname']; ?></h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -1998,13 +1998,13 @@
 						<div class="post-row-wrap">
 							<div class="user-top">
 								<div class="user-top-left">
-									<div class="user-img">
+									<div class="user-img" style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllEvent['username']); ?>'">
 										<figure>
 											<img src="<?php echo $AllEvent['profile_picture']; ?>" alt="Image"/>
 										</figure>
 									</div>
 									<div class="user-name-wrap">
-										<h3><?php echo $AllEvent['fullname']; ?></h3>
+										<h3 style="cursor:pointer;" onclick="window.location.href='<?php echo base_url('sp/'.$AllEvent['username']); ?>'"><?php echo $AllEvent['fullname']; ?></h3>
 										<div class="badgeList">
 											<ul>
 												<li class="badge badge1">
@@ -2099,7 +2099,7 @@
 									$attendEvent = $this->db->get_where('share_master', array('reference_id' => $AllEvent['event_primary_id'], 'reference' => 'event', 'peer_id' => $CurrentUserID))->row_array(); 
 								?>
 								<button type="button" class="event_action attendEvent" data-toggle="modal" data-target="#confirmationModalAttend" data-id="<?php echo $AllEvent['event_primary_id']; ?>"> 
-									<span id="attend_text_<?php echo $AllEvent['event_primary_id']; ?>"><?php echo (!empty($attendEvent) && $attendEvent['status'] == 2) ? 'Unattend' : 'Attend';?></span> Event
+									<span class="attend_text_<?php echo $AllEvent['event_primary_id']; ?>" id="attend_text_<?php echo $AllEvent['event_primary_id']; ?>"><?php echo (!empty($attendEvent) && $attendEvent['status'] == 2) ? 'Unattend' : 'Attend';?></span> Event
 								</button>
 							</div>
 							<div class="like-comment-wrap">

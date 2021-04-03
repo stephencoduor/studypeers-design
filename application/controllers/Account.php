@@ -986,19 +986,17 @@ class Account extends CI_Controller
 				array_push($searchData,$paginated_orders);
 			}
 			
-				
-			 
 			if(!empty($searchData)){
 				$searchHtml .= '<div class="peers-listing">';	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
 					<div class="peers-row">
 						<div class="peer-left-info">
-							<div class="peers-img-wrap">
+							<div class="peers-img-wrap" style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">
 								<img src="'.$searchedData['UserProfile'].'" alt="Image"/>
 							</div>
 							<div class="basic-info">
-								<h3>'.$searchedData['full_name'].'</h3>
+								<h3 style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">'.$searchedData['full_name'].'</h3>
 								<ul>
 									<li>'.$searchedData['UniversityName'].'</li>
 									<li>'.$searchedData['LocationName'].'</li>
@@ -1024,8 +1022,354 @@ class Account extends CI_Controller
 			}
 			
 		} else if($searchType == 'posts') {
+			$searchThing = 'Posts';
+			
+			$AllPosts = array();
+			
+			//get result from posts
+			//get particular user assigned posts ids
+			$getAssignedPostsIDS = "SELECT post_id FROM post_share_with_peers WHERE peer_id='".$CurrentUserID."'";
+			$AssignedPostIds = $this->db->query($getAssignedPostsIDS)->result_array();
+			$FoundAssignedPost = count($AssignedPostIds);
+			
+			$AssignedPostIdString = '';
+			$AssignedPostIdArray  = array();
+			if(!empty($AssignedPostIds)) {
+				foreach($AssignedPostIds as $AssignedPostIdsData){
+					$AssignedPostIdArray[] = $AssignedPostIdsData['post_id'];
+				}
+			}
+			$AssignedPostIdString = implode(",",$AssignedPostIdArray);
+			
+			$SearchPosts = "SELECT reference_master.reference,reference_master.addDate,posts.id,posts.post_content_html,post_documents.original_name,post_poll_options.options,post_images.image_path,post_videos.video_path,user.id as user_id,user.username,user.first_name,user.last_name,user.image FROM reference_master LEFT JOIN posts ON (posts.id = reference_master.reference_id) LEFT JOIN post_images ON (posts.id = post_images.post_id AND post_images.post_id = reference_master.reference_id) LEFT JOIN post_videos ON (posts.id = post_videos.post_id AND post_videos.post_id = reference_master.reference_id) LEFT JOIN post_documents ON (posts.id = post_documents.post_id AND post_documents.post_id = reference_master.reference_id) LEFT JOIN post_poll_options ON (posts.id = post_poll_options.post_id AND post_poll_options.post_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='Post' AND (posts.post_content_html LIKE '%$SearchText%' OR post_documents.original_name LIKE '%$SearchText%' OR post_poll_options.options LIKE '%$SearchText%')";
+			
+			if($AssignedPostIdString != ''){
+				$SearchPosts .= " AND (reference_master.reference_id IN (".$AssignedPostIdString.") OR posts.privacy_id IN (1,2) OR reference_master.user_id = '".$CurrentUserID."')"; 
+			} else {
+				$SearchPosts .= " AND (posts.privacy_id IN (1,2) OR reference_master.user_id = '".$CurrentUserID."')"; 
+			}
+			
+			$SearchPosts .= " ORDER BY reference_master.addDate DESC";
+			
+			$SearchPostResult = $this->db->query($SearchPosts)->result_array();
+			$FoundPostResult = count($SearchPostResult);
+			
+			if(!empty($SearchPostResult)) {
+				foreach($SearchPostResult as $SearchPostResultDat){
+					$addDate = ($SearchPostResultDat['addDate']) ? date("Y-m-d H:i:s",strtotime($SearchPostResultDat['addDate'])) : '';
+					$timeAgo = $this->timestring($addDate);
+					$post_id = ($SearchPostResultDat['id']) ? $SearchPostResultDat['id'] : 0;
+					
+					$UserProfile = base_url().'assets_d/images/user.jpg';
+					if($SearchPostResultDat['image'] != '' && file_exists('uploads/users/'.$SearchPostResultDat['image'])){
+						$UserProfile = base_url('uploads/users/'.$SearchPostResultDat['image']);
+					}
+					
+					$PostImage = '';
+					if($SearchPostResultDat['image_path'] != ''){
+						$PostImage = base_url($SearchPostResultDat['image_path']);
+					}
+					
+					$PostVideo = '';
+					if($SearchPostResultDat['video_path'] != '' && file_exists($SearchPostResultDat['video_path'])){
+						$PostVideo = base_url($SearchPostResultDat['video_path']);
+					}
+					
+					// get university name
+					$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchPostResultDat['user_id']."'";
+					$UniversityResult = $this->db->query($getUniversityName)->result_array();
+					
+					$UniversityName = 'N/A';
+					if(!empty($UniversityResult)){
+						$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+					}
+					
+					// get total number of reactions and unique reaction id
+					$getReactionMaster = "SELECT reaction_id FROM reaction_master WHERE reference_id='".$post_id."' AND reference='Post'";
+					$ReactionResult    = $this->db->query($getReactionMaster)->result_array();
+					
+					$getUniqueReactionsID = "SELECT reaction_id FROM reaction_master WHERE reference_id='".$post_id."' AND reference='Post' GROUP BY reaction_id";
+					$UniqueReactionResult = $this->db->query($getUniqueReactionsID)->result_array();
+					
+					$ReactionIds = array();
+					if(!empty($UniqueReactionResult)){
+						foreach($UniqueReactionResult as $UniqueReactionResultData){
+							$ReactionIds[] = $UniqueReactionResultData['reaction_id'];
+						}
+					}
+					
+					// get total active comments counter in posts
+					$getPostCommentCounter = "SELECT id FROM comment_master WHERE reference_id='".$post_id."' AND reference='Post' AND status='1'";
+					$postCommentCounter    = $this->db->query($getPostCommentCounter)->result_array();
+					
+					$tempPostResult['post_id']                = $post_id;
+					$tempPostResult['post_content_html']      = ($SearchPostResultDat['post_content_html']) ? $SearchPostResultDat['post_content_html'] : '';
+					$tempPostResult['post_image']             = ($PostImage) ? $PostImage : '';
+					$tempPostResult['post_video']             = ($PostVideo) ? $PostVideo : '';
+					$tempPostResult['document_original_name'] = ($SearchPostResultDat['original_name']) ? $SearchPostResultDat['original_name'] : '';
+					$tempPostResult['poll_options']           = ($SearchPostResultDat['options']) ? $SearchPostResultDat['options'] : '';
+					$tempPostResult['user_id']                = ($SearchPostResultDat['user_id']) ? $SearchPostResultDat['user_id'] : 0;
+					$tempPostResult['username']               = ($SearchPostResultDat['username']) ? $SearchPostResultDat['username'] : '';
+					$tempPostResult['fullname']               = $SearchPostResultDat['first_name'].' '.$SearchPostResultDat['last_name'];
+					$tempPostResult['profile_picture']        = $UserProfile;
+					$tempPostResult['posted_date']            = $timeAgo;
+					$tempPostResult['UniversityName']         = $UniversityName;
+					$tempPostResult['total_reactions']        = count($ReactionResult);
+					$tempPostResult['reactions_ids']          = $ReactionIds;
+					$tempPostResult['total_comments']         = count($postCommentCounter);
+					array_push($AllPosts,$tempPostResult);
+				}
+			}
+			
+			$recordCount = count($AllPosts);
+			
+			$per_page = $recordPerPage;
+			$offset   = $record;
+			
+			$pages = ceil($recordCount / $per_page);
+			
+			$paginated_orders = array();
+			if (count($AllPosts)) {
+				$paginated_orders = array_slice($AllPosts, $offset, $per_page, true);
+			}
+			
+			$searchData = array();
+			foreach($paginated_orders as $paginated_orders){
+				array_push($searchData,$paginated_orders);
+			}
+			
+			if(!empty($searchData)){	
+				foreach($searchData as $searchedData){
+					$searchHtml .= '
+					<div class="post-row-wrap">
+                        <div class="user-top">
+                            <div class="user-top-left">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">
+                                    <figure>
+                                        <img src="'.$searchedData['profile_picture'].'" alt="Image"/>
+                                    </figure>
+                                </div>
+                                <div class="user-name-wrap">
+                                    <h3 style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">'.$searchedData['fullname'].'</h3>
+                                    <div class="badgeList">
+                                        <ul>
+                                            <li class="badge badge1">
+                                                <a href="">'.$searchedData['UniversityName'].'</a>
+                                            </li>
+                                            <li class="badge badge3">
+                                                <a href="">
+                                                    Faculty
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-top-right">
+                                <div class="timeline-action">
+                                    <span class="timeline">'.$searchedData['posted_date'].'</span>
+                                    <a href=""><img src="'.base_url().'assets_d/images/more.svg" alt="Image"/></a>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="content-info-area">
+                            <div class="content-img clearfix">';
+								if($searchedData['post_image'] != ''){
+									$searchHtml .= '
+									<figure>
+										<img src="'.$searchedData['post_image'].'" alt="Image"/>
+									</figure>';
+								} else if($searchedData['post_video'] != ''){
+									$searchHtml .= '
+									<figure>
+										<video width="320" height="240" controls>
+											<source src="'.$searchedData['post_video'].'" type="video/mp4">
+										</video>
+									</figure>';
+								}
+                                $searchHtml .= '
+								<p>'.$searchedData['post_content_html'].'</p>
+                            </div>
+                        </div>
+                        <div class="like-comment-wrap">
+                            <div class="like-wrap">
+                                <ul>';
+									if(!empty($searchedData['reactions_ids'])){
+										foreach($searchedData['reactions_ids'] as $reactions_id){
+											if($reactions_id == 1) {
+												$searchHtml .= '<li><a href="javascript:;"><img src="'.base_url().'assets_d/images/like-dashboard.svg" alt="Like"></a></li>';
+											} else if($reactions_id == 2) {
+												$searchHtml .= '<li><a href="javascript:;"><img src="'.base_url().'assets_d/images/support-dashboard.svg" alt="Icon"/></a></li>';
+											} else if($reactions_id == 3) {
+												$searchHtml .= '<li><a href="javascript:;"><img src="'.base_url().'assets_d/images/celebrate-dashboard.svg" alt="Icon"></a></li>';
+											} else if($reactions_id == 4) {
+												$searchHtml .= '<li><a href="javascript:;"><img src="'.base_url().'assets_d/images/curious-dashboard.svg" alt="Icon"></a></li>';
+											} else if($reactions_id == 5) {
+												$searchHtml .= '<li><a href="javascript:;"><img src="'.base_url().'assets_d/images/insight-dashboard.svg" alt="Icon"></a></li>';
+											} else if($reactions_id == 6) {
+												$searchHtml .= '<li><a href="javascript:;"><img src="'.base_url().'assets_d/images/love-dashboard.svg" alt="Icon"></a></li>';
+											}
+										}
+									}
+                                    $searchHtml .= '<li><a href="">'.$searchedData['total_reactions'].'</a></li>
+                                </ul>
+                            </div>
+                            <div class="comment-wrap">
+                                <ul>
+                                    <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="">'.$searchedData['total_comments'].'</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>';
+				}
+			}
 			
 		} else if($searchType == 'questions') {
+			$searchThing = 'Questions';
+			
+			$AllQuestions = array();
+			
+			// get result from questions
+			$SearchQuestions = "SELECT reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC";
+			
+			$SearchQuestionsResult = $this->db->query($SearchQuestions)->result_array();
+			$FoundQuestionResult = count($SearchQuestionsResult);
+			
+			if(!empty($SearchQuestionsResult)){
+				if(!empty($SearchQuestionsResult)){
+					foreach($SearchQuestionsResult as $SearchQuestionsResultData){
+						$addDate = ($SearchQuestionsResultData['addDate']) ? date("Y-m-d H:i:s",strtotime($SearchQuestionsResultData['addDate'])) : '';
+						$timeAgo = $this->timestring($addDate);
+						
+						$question_id = ($SearchQuestionsResultData['id']) ? $SearchQuestionsResultData['id'] : 0;
+						
+						$UserProfile = base_url().'assets_d/images/user.jpg';
+						if($SearchQuestionsResultData['image'] != '' && file_exists('uploads/users/'.$SearchQuestionsResultData['image'])){
+							$UserProfile = base_url('uploads/users/'.$SearchQuestionsResultData['image']);
+						}
+						
+						// get university name
+						$getUniversityName = "SELECT user_info.intitutionID,university.SchoolName FROM user_info LEFT JOIN university ON (university.university_id = user_info.intitutionID) WHERE 1=1 AND user_info.userID = '".$SearchQuestionsResultData['user_id']."'";
+						$UniversityResult = $this->db->query($getUniversityName)->result_array();
+						
+						$UniversityName = 'N/A';
+						if(!empty($UniversityResult)){
+							$UniversityName = ($UniversityResult[0]['SchoolName']) ? $UniversityResult[0]['SchoolName'] : 'N/A';
+						}
+						
+						// get total answer on question counter 
+						$getTotalAnswersCounter = "SELECT id FROM question_answer_master WHERE question_id='".$question_id."' AND status='1'";
+						$AnswerCounterResult = $this->db->query($getTotalAnswersCounter)->result_array();
+						
+						$tempQuestion['question_title']       = $SearchQuestionsResultData['question_title'];
+						$tempQuestion['question_description'] = $SearchQuestionsResultData['textarea'];
+						$tempQuestion['post_at']              = $timeAgo;
+						$tempQuestion['user_id']              = ($SearchQuestionsResultData['user_id']) ? $SearchQuestionsResultData['user_id'] : 0;
+						$tempQuestion['username']             = ($SearchQuestionsResultData['username']) ? $SearchQuestionsResultData['username'] : '';
+						$tempQuestion['fullname']             = $SearchQuestionsResultData['first_name'].' '.$SearchQuestionsResultData['last_name'];
+						$tempQuestion['profile_picture']      = $UserProfile;
+						$tempQuestion['UniversityName']       = $UniversityName;
+						$tempQuestion['view_count']           = $SearchQuestionsResultData['view_count'];
+						$tempQuestion['answer_count']         = count($AnswerCounterResult);
+						$tempQuestion['vote_count']           = $SearchQuestionsResultData['vote_count'];
+						array_push($AllQuestions,$tempQuestion);
+					}
+				}
+			}
+			
+			$recordCount = count($AllQuestions);
+			
+			$per_page = $recordPerPage;
+			$offset   = $record;
+			
+			$pages = ceil($recordCount / $per_page);
+			
+			$paginated_orders = array();
+			if (count($AllQuestions)) {
+				$paginated_orders = array_slice($AllQuestions, $offset, $per_page, true);
+			}
+			
+			$searchData = array();
+			foreach($paginated_orders as $paginated_orders){
+				array_push($searchData,$paginated_orders);
+			}
+			
+			if(!empty($searchData)){	
+				foreach($searchData as $searchedData){
+					$searchHtml .= '
+					<div class="post-row-wrap">
+                        <div class="user-top">
+                            <div class="user-top-left">
+                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">
+                                    <figure>
+                                        <img src="'.$searchedData['profile_picture'].'" alt="Image"/>
+                                    </figure>
+                                </div>
+                                <div class="user-name-wrap">
+                                    <h3 style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">'.$searchedData['username'].'</h3>
+                                    <div class="badgeList">
+                                        <ul>
+                                            <li class="badge badge1">
+                                                <a href="">'.$searchedData['UniversityName'].'</a>
+                                            </li>
+                                            <li class="badge badge3">
+                                                <a href="">
+                                                    Faculty
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="user-top-right">
+                                <div class="timeline-action">
+                                    <span class="timeline">'.$searchedData['post_at'].'</span>
+                                    <a href=""><img src="'.base_url().'assets_d/images/more.svg" alt="Image"/></a>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="content-info-area">
+							 <b>'.$searchedData['question_title'].'</b>
+                            <p>'.$searchedData['question_description'].'</p>
+                        </div>
+                        <div class="like-comment-wrap">
+                            <div class="like-wrap">
+                                <ul>
+                                    <li>
+										<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20">
+											<g id="prefix__up-arrow" transform="translate(-31.008 -10.925)">
+												<path id="prefix__Path_1209" d="M37.272 29.256h5.6v-9.1a.83.83 0 0 1 .828-.833h2.828l-6.358-6.387-6.35 6.383h2.62a.83.83 0 0 1 .828.833v9.1zm6.428 1.669h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.827.833z" data-name="Path 1209" />
+											</g>
+										</svg>
+									</li>
+										<a href="javascript:;">'.$searchedData['vote_count'].'</a>
+                                    <li>
+									</li>
+                                    <li>
+										<svg xmlns="http://www.w3.org/2000/svg"  class="activeState" width="18.363" height="20" viewBox="0 0 18.363 20">
+											<g id="prefix__Layer_1" transform="rotate(180 24.686 15.463)">
+												<g id="prefix__Group_1371" data-name="Group 1371" transform="translate(31.008 10.925)">
+													<path id="prefix__Path_1213" d="M43.7 30.925h-7.26a.83.83 0 0 1-.828-.833v-9.1H31.82a.844.844 0 0 1-.588-1.424l8.358-8.4a.845.845 0 0 1 1.171 0l8.354 8.4a.823.823 0 0 1-.588 1.424h-4v9.1a.825.825 0 0 1-.828.833z" data-name="Path 1213" transform="translate(-31.008 -10.925)" />
+												</g>
+											</g>
+										</svg>
+									</li>
+                                </ul>
+                            </div>
+                            <div class="comment-wrap">
+                                <ul>
+                                    <li><a href=""><img src="'.base_url().'assets_d/images/views.svg" alt="Icon"/></a></li>
+                                    <li><a href="">'.$searchedData['view_count'].'</a></li>
+                                    <li><a href=""><img src="'.base_url().'assets_d/images/answer.svg" alt="Icon"/></a></li>
+                                    <li><a href="">'.$searchedData['answer_count'].'</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+					';
+				}
+			}
 			
 		} else if($searchType == 'documents') {
 			
@@ -5644,7 +5988,7 @@ class Account extends CI_Controller
 			$ExistingUsers = array();
 			
 			// search for my friends / peers
-			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ORDER BY user.id DESC LIMIT 10";
+			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ORDER BY user.id DESC LIMIT 10";
 			
 			$SearchPeersResult = $this->db->query($SearchPeers)->result_array();
 			$FoundResult = count($SearchPeersResult);
@@ -5656,7 +6000,14 @@ class Account extends CI_Controller
 					$SearchUserid[]  = $SearchPeersResultData['id'];
 					$ExistingUsers[] = $SearchPeersResultData['id'];
 					
-					$UserProfile = base_url().'assets_d/images/user.jpg';
+					if($SearchPeersResultData['gender'] == 'female'){
+						$UserProfile = base_url('uploads/user-female.png');
+					} else if($SearchPeersResultData['gender'] == 'male') {
+						$UserProfile = base_url('uploads/user-male.png');
+					} else {
+						$UserProfile = base_url().'assets_d/images/user.jpg';
+					}
+					
 					if($SearchPeersResultData['image'] != '' && file_exists('uploads/users/'.$SearchPeersResultData['image'])){
 						$UserProfile = base_url('uploads/users/'.$SearchPeersResultData['image']);
 					}
@@ -5683,7 +6034,7 @@ class Account extends CI_Controller
 			{
 				foreach($SearchPeersResult as $SearchPeersResultData)
 				{
-					$MutalQuery = "SELECT u.id,u.username,u.first_name,u.last_name,u.image FROM friends f1 INNER JOIN friends f2 ON (f2.peer_id = f1.peer_id) INNER JOIN user u ON (u.id = f2.peer_id) WHERE f1.user_id = '".$CurrentUserID."' AND f2.user_id = '".$SearchPeersResultData['id']."'";
+					$MutalQuery = "SELECT u.id,u.username,u.first_name,u.last_name,u.image,user_info.gender FROM friends f1 INNER JOIN friends f2 ON (f2.peer_id = f1.peer_id) INNER JOIN user u ON (u.id = f2.peer_id) LEFT JOIN user_info ON (user_info.userID = u.id) WHERE f1.user_id = '".$CurrentUserID."' AND f2.user_id = '".$SearchPeersResultData['id']."'";
 					
 					if($SearchUseridString != ''){
 						$MutalQuery .= " AND u.id NOT IN (".$SearchUseridString.")";
@@ -5698,7 +6049,14 @@ class Account extends CI_Controller
 								break;
 							}
 							
-							$UserProfile = base_url().'assets_d/images/user.jpg';
+							if($SearchMutalFriend['gender'] == 'female'){
+								$UserProfile = base_url('uploads/user-female.png');
+							} else if($SearchMutalFriend['gender'] == 'male') {
+								$UserProfile = base_url('uploads/user-male.png');
+							} else {
+								$UserProfile = base_url().'assets_d/images/user.jpg';
+							}
+							
 							if($SearchMutalFriend['image'] != '' && file_exists('uploads/users/'.$SearchMutalFriend['image'])){
 								$UserProfile = base_url('uploads/users/'.$SearchMutalFriend['image']);
 							}
@@ -5721,7 +6079,7 @@ class Account extends CI_Controller
 			// search peers based on university
 			if($intitutionID != '' && $RemainingResult != 0)
 			{
-				$SearchByUniversity = "SELECT user_info.userID,user.id,user.username,user.first_name,user.last_name,user.image FROM user_info LEFT JOIN user ON (user.id = user_info.userID) WHERE user_info.userID != '".$CurrentUserID."' AND user_info.intitutionID='".$intitutionID."'";	
+				$SearchByUniversity = "SELECT user_info.userID,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user_info LEFT JOIN user ON (user.id = user_info.userID) WHERE user_info.userID != '".$CurrentUserID."' AND user_info.intitutionID='".$intitutionID."'";	
 				
 				if($SearchUseridString != ''){
 					$SearchByUniversity .= " AND user.id NOT IN (".$SearchUseridString.")";
@@ -5741,7 +6099,14 @@ class Account extends CI_Controller
 						$SearchUserid[]  = $SearchUniversityResultData['id'];
 						$ExistingUsers[] = $SearchUniversityResultData['id'];
 						
-						$UserProfile = base_url().'assets_d/images/user.jpg';
+						if($SearchUniversityResultData['gender'] == 'female'){
+							$UserProfile = base_url('uploads/user-female.png');
+						} else if($SearchUniversityResultData['gender'] == 'male') {
+							$UserProfile = base_url('uploads/user-male.png');
+						} else {
+							$UserProfile = base_url().'assets_d/images/user.jpg';
+						}
+						
 						if($SearchUniversityResultData['image'] != '' && file_exists('uploads/users/'.$SearchUniversityResultData['image'])){
 							$UserProfile = base_url('uploads/users/'.$SearchUniversityResultData['image']);
 						}
@@ -5767,7 +6132,7 @@ class Account extends CI_Controller
 			}
 			
 			// get result from the store result
-			$SearchStoreQuery = "SELECT search_text,search_peer_id FROM recent_search_history WHERE 1=1 AND user_id='".$CurrentUserID."'";	
+			$SearchStoreQuery = "SELECT id,search_text,search_peer_id FROM recent_search_history WHERE 1=1 AND user_id='".$CurrentUserID."'";	
 			
 			if($SearchUseridStringStoreResult != ""){
 				$SearchStoreQuery .= " AND (search_text != '' OR (search_peer_id != 0 AND search_peer_id NOT IN (".$SearchUseridStringStoreResult.")))";
@@ -5785,12 +6150,20 @@ class Account extends CI_Controller
 				foreach($SearchStoreResult as $SearchStoreResultData)
 				{
 					if($SearchStoreResultData['search_peer_id'] != '' && $SearchStoreResultData['search_peer_id'] != 0){
-						$UserDetails = $this->db->query("SELECT id,username,first_name,last_name,image FROM user WHERE id='".$SearchStoreResultData['search_peer_id']."'")->result_array();
+						$UserDetails = $this->db->query("SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'")->result_array();
 						
 						if(!empty($UserDetails)){
 							if(!in_array($UserDetails[0]['id'],$ExistingUsers)){
 								$ExistingUsers[] = $UserDetails[0]['id'];
-								$UserProfile = base_url().'assets_d/images/user.jpg';
+								
+								if($SearchUniversityResultData['gender'] == 'female'){
+									$UserProfile = base_url('uploads/user-female.png');
+								} else if($SearchUniversityResultData['gender'] == 'male') {
+									$UserProfile = base_url('uploads/user-male.png');
+								} else {
+									$UserProfile = base_url().'assets_d/images/user.jpg';
+								}
+								
 								if($UserDetails[0]['image'] != '' && file_exists('uploads/users/'.$UserDetails[0]['image'])){
 									$UserProfile = base_url('uploads/users/'.$UserDetails[0]['image']);
 								}
@@ -5812,6 +6185,9 @@ class Account extends CI_Controller
 								<figure> <img src="'.base_url('assets_d/images/search.png').'" alt="Image"/> </figure>
 								<strong>'.$SearchStoreResultData['search_text'].' <span>from previous search</span> </strong>
 							</a>
+							<div class="removeBadge">
+								<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
+							</div>
 						</li>';
 					}
 					
@@ -5890,5 +6266,98 @@ class Account extends CI_Controller
 
         }
     }
+	
+	public function searchHistory(){
+		$CurrentUserID = $this->session->get_userdata()['user_data']['user_id'];
+		
+		// get result from the store result
+		$SearchStoreQuery = "SELECT id,search_text,search_peer_id FROM recent_search_history WHERE 1=1 AND user_id='".$CurrentUserID."'";	
+		$SearchStoreQuery .= " AND (search_text != '' OR search_peer_id != 0)";
+		$SearchStoreQuery .= " GROUP BY search_text ORDER BY created_at DESC LIMIT 10";
+		
+		$SearchStoreResult = $this->db->query($SearchStoreQuery)->result_array();
+		$FoundResult3 = count($SearchStoreResult);
+		
+		$SearchHTML = '';
+		$ExistingUsers = array();
+		
+		if(!empty($SearchStoreResult))
+		{
+			foreach($SearchStoreResult as $SearchStoreResultData)
+			{
+				if($SearchStoreResultData['search_peer_id'] != '' && $SearchStoreResultData['search_peer_id'] != 0){
+					$UserDetails = $this->db->query("SELECT id,username,first_name,last_name,image FROM user WHERE id='".$SearchStoreResultData['search_peer_id']."'")->result_array();
+					
+					if(!empty($UserDetails)){
+						if(!in_array($UserDetails[0]['id'],$ExistingUsers)){
+							$ExistingUsers[] = $UserDetails[0]['id'];
+							$UserProfile = base_url().'assets_d/images/user.jpg';
+							if($UserDetails[0]['image'] != '' && file_exists('uploads/users/'.$UserDetails[0]['image'])){
+								$UserProfile = base_url('uploads/users/'.$UserDetails[0]['image']);
+							}
+							
+							$SearchHTML .= '
+								<li>
+									<a href="'.base_url('sp/'.$UserDetails[0]['username']).'" data-user_id="'.$UserDetails[0]['id'].'" class="storeHistory">
+										<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
+										<strong>'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> </strong>
+									</a>
+								</li>';		
+						}
+					}
+					
+				} else {
+					$SearchHTML .= '
+					<li class="searchHistory_'.$SearchStoreResultData['id'].'">
+						<a href="'.base_url('account/searchResult/').'">
+							<figure> <img src="'.base_url('assets_d/images/search.png').'" alt="Image"/> </figure>
+							<strong>'.$SearchStoreResultData['search_text'].' <span>from previous search</span> </strong>
+						</a>
+						<div class="removeBadge">
+							<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
+						</div>
+					</li>';
+				}
+				
+			}
+		}
+		
+		$result['status']      = true;
+		$result['search_html'] = $SearchHTML;
 
+		print_r(json_encode($result));
+		die;
+	}
+	
+	public function removeStoredSearch(){
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('historyId','ID','required');
+		
+		if($this->form_validation->run() == FALSE){
+			$result['status'] = false;
+			print_r(json_encode($result));
+			die;
+		} else {
+			$historyId     = $this->input->post('historyId');
+			$CurrentUserID = $this->session->get_userdata()['user_data']['user_id'];
+			
+			$checkIfExist = "SELECT id,search_text FROM recent_search_history WHERE id='".$historyId."' AND user_id='".$CurrentUserID."'";
+			$checkResultExist = $this->db->query($checkIfExist)->result_array();
+			
+			if(!empty($checkResultExist)){
+				$searchText = $checkResultExist[0]['search_text'];
+				
+				$deleteHistory = "DELETE FROM recent_search_history WHERE search_text='".$searchText."' AND user_id='".$CurrentUserID."'";
+				$deleteResult  = $this->db->query($deleteHistory);
+				
+				$result['status'] = true;
+			} else {
+				$result['status'] = false;	
+			}
+			
+			print_r(json_encode($result));
+			die;
+		}
+	}
 }

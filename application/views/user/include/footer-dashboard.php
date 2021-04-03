@@ -466,8 +466,10 @@
 					"type": newtxt
 				},
 				success: function(result) {
+					var resulttext = result.trim();
 					$("#confirmationModalAttend").modal('hide');
-					$("#attend_text_" + id).html(result);
+					$("#attend_text_"+id).html(resulttext);
+					$(".attend_text_"+id).html(resulttext);
 					$("#attend_event_id").val('');
 				}
 			})
@@ -1074,7 +1076,7 @@
 <script type='text/javascript'>
 $(document).ready(function() {
 	
-	var searchType = "<?php echo ($searchType) ? $searchType : 'peers'; ?>";
+	var searchType = "<?php echo (isset($searchType)) ? $searchType : 'peers'; ?>";
 	
 	createPagination(0,searchType);
 	$('#pagination').on('click','a',function(e){
