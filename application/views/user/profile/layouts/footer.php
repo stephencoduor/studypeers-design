@@ -1220,12 +1220,19 @@
         $('#upload_image').on("change", function() {
             var reader = new FileReader();
             reader.onload = function(event) {
-                $("#crop_type").val('profile');
-                $("#cropper_image").attr('src', event.target.result);
-                $('#modal_cropper').modal('show');
-                $("#upload_image").val("");
+                $image_crop.croppie('bind', {
+                    url: event.target.result
+                }).then(function() {
+
+                    console.log('jQuery bind complete');
+                });
+                // $("#crop_type").val('profile');
+                // $("#cropper_image").attr('src', event.target.result);
+                // $('#modal_cropper').modal('show');
+                // $("#upload_image").val("");
             }
             reader.readAsDataURL(this.files[0]);
+            $('#uploadimageModal').modal('show');
         });
         $('.crop_image').click(function(event) {
             $image_crop.croppie('result', {

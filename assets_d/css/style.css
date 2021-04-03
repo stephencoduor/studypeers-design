@@ -1823,3 +1823,8 @@ transform-origin: 0 0;
         margin:0 auto;
     }        
 }
+
+button.btn.btn-success.crop_image {
+    position: relative;
+    margin-top: 300px;
+}
