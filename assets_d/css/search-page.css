@@ -93,6 +93,24 @@
     padding-left:20px;
     color:#1ae1bd;
 }
+.peer-right-info ul li:last-child a{
+    display:inline-block;
+    width:60px;
+}
+.noFeedWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: wrap column;
+}
+.noFeedWrapper figure {
+    width: 160px;
+    height: 160px;
+    margin-bottom: 20px;
+}
+.noFeedWrapper h4 {
+    white-space: nowrap;
+}
 .peer-right-info ul li a img{
     width:30px;
 }
