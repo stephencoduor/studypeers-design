@@ -4556,7 +4556,11 @@ class Account extends CI_Controller
                 $get_course = $this->db->get_where($this->db->dbprefix('course_master'), array('course_master.user_id' => $user_id, 'course_master.status' => 1))->result_array();
                 $html = '<option value="">Select Course</option>';
                 foreach ($get_course as $key => $value) {
-                    $html.= '<option value="'.$value['id'].'">'.$value['name'].'</option>';
+                	$sel = '';
+                	if($id == $value['id']){
+                		$sel = 'selected';
+                	}
+                    $html.= '<option value="'.$value['id'].'" '.$sel.'>'.$value['name'].'</option>';
                 }
                 echo $html;die;
             }
@@ -5876,6 +5880,47 @@ class Account extends CI_Controller
             
 
         }
+    }
+
+
+    public function autoSuggestCourse(){
+    	if ($this->input->post()) {
+    		$keyword              = $this->input->post('keyword');
+    		$user_id = $this->session->get_userdata()['user_data']['user_id'];
+        
+        	$user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
+
+        	$this->db->select('course_master.*');
+            $this->db->join('user_info', 'user_info.userID=course_master.user_id');
+            $this->db->like('course_master.name', $keyword);
+            $result = $this->db->get_where($this->db->dbprefix('course_master'), array('user_info.intitutionID' => $user_info['intitutionID'], 'course_master.status' => 1, 'course_master.user_id !=' => $user_id))->result_array();
+
+            $html = '';
+            if (!empty($result)) {
+                foreach ($result as $key => $value) {
+                    $html .= '<div id="suggestion_' . $value['id'] . '" onclick="selectCourse(' . $value['id'] . ')">' . $value['name'] . '</div>';
+                }
+            }
+            echo $html;
+            die;
+    	}
+    }
+
+    public function selectSuggestCourse(){
+    	if ($this->input->post()) {
+    		$course = $this->input->post('course');
+    		$result = $this->db->get_where($this->db->dbprefix('course_master'), array('id' => $course))->row_array();
+
+    		$professor = $this->db->get_where($this->db->dbprefix('professor_master'), array('course_id' => $course))->row_array();
+
+    		$res['course_id']      = $result['course_id'];
+			$res['first_name'] = $professor['first_name'];
+			$res['last_name'] = $professor['last_name'];
+
+			print_r(json_encode($res));
+
+
+    	}
     }
 
 
