@@ -88,7 +88,7 @@
             <ol class="order-list">
                 <li>3. Security</li>
             </ol>
-            <p class="para">Studypeers takes reasonable steps to protect the Personal Data provided via the Site and Services from loss, misuse, and unauthorized access, disclosure, alteration, or destruction. The security of your Personal Data and our Clients’ information is important to us. When you enter sensitive information (such as login credentials) we encrypt the transmission of that information using secure socket layer technology (SSL). However, no Internet, email or other electronic transmission is ever fully secure or error free, so you should take special care in deciding what information you send to us in this way. If you have any questions about security on our Site, you can contact us at __________.</p>
+            <p class="para">Studypeers takes reasonable steps to protect the Personal Data provided via the Site and Services from loss, misuse, and unauthorized access, disclosure, alteration, or destruction. The security of your Personal Data and our Clients’ information is important to us. When you enter sensitive information (such as login credentials) we encrypt the transmission of that information using secure socket layer technology (SSL). However, no Internet, email or other electronic transmission is ever fully secure or error free, so you should take special care in deciding what information you send to us in this way. If you have any questions about security on our Site, you can contact us at support@studypeers.com</p>
             <ol class="order-list">
                 <li>4. Changes to This Notice</li>
             </ol>
