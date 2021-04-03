@@ -517,6 +517,7 @@ $("#course_form").submit(function(e) {
                 } else {
                     $('#courseModal').modal('hide');
                     $('#course').html(data);
+                    getProfessor();
                     $("#course_form")[0].reset();
                 }
             }

@@ -7,6 +7,32 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
 
 ?>
 
+<style type="text/css">
+    .autocomplete-items {
+        position: absolute;
+        border: 1px solid #d4d4d4;
+        border-top: none;
+        border-bottom: none;
+        z-index: 99;
+        top: 75%;
+        left: auto;
+        max-height: 250px;
+        overflow-y: auto;
+        
+        width: calc(100% - 30px);
+        margin: 0;
+        text-align:left;
+    }
+    .autocomplete-items div {
+        font-size: 14px;
+        font-weight: 500;
+        padding: 10px;
+        cursor: pointer;
+        background-color: #fff;
+        border-bottom: 1px solid #d4d4d4;
+    }
+</style>
+
 <section class="rightsidemsgbar">
     <section class="view message">
         Close <i class="fa fa-arrow-right" aria-hidden="true"></i>
@@ -315,24 +341,25 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         <div class="row" >
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="course_id[]" class="form-control form-control--lg" placeholder="Course ID">
+                                    <input type="text" name="course_id[]" id="course_id_0" class="form-control form-control--lg" placeholder="Course ID">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="course_name[]" class="form-control form-control--lg course_name" placeholder="Course Name">
+                                    <input type="text" name="course_name[]" id="course_name_0" class="form-control form-control--lg course_name" placeholder="Course Name" onkeyup="autoSuggestCourse(this.value)">
+                                    <div id="myInputautocomplete-list" class="autocomplete-items"></div>
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="professor_first_name[]" class="form-control form-control--lg professor_first_name" placeholder="Professor First Name">
+                                    <input type="text" name="professor_first_name[]" id="professor_first_name_0" class="form-control form-control--lg professor_first_name" placeholder="Professor First Name">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="professor_last_name[]" class="form-control form-control--lg professor_last_name" placeholder="Professor Last Name">
+                                    <input type="text" name="professor_last_name[]" id="professor_last_name_0" class="form-control form-control--lg professor_last_name" placeholder="Professor Last Name">
                                 </div>
                             </div>
                         </div>
@@ -855,4 +882,43 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             }
         });
     });
+
+    function autoSuggestCourse(keyword){
+        if(keyword.length > 2){
+            url = '<?php echo base_url(); ?>account/autoSuggestCourse';
+            $.ajax({
+                url: url,
+                type: 'post',
+                data: {
+                    "keyword": keyword
+                },
+                success: function(result) {
+                    $('#myInputautocomplete-list').html(result);
+                }
+            });
+        } else {
+            $('#myInputautocomplete-list').html('');
+        }
+    }
+
+    function selectCourse(course){
+            
+        var text = $('#suggestion_'+course).text();
+        url = '<?php echo base_url(); ?>account/selectSuggestCourse';
+        $.ajax({
+            url: url,
+            type: 'post',
+            data: {
+                "course": course
+            },
+            dataType: 'json',
+            success: function(result) {
+                $('#course_id_0').val(result.course_id);
+                $('#professor_first_name_0').val(result.first_name);
+                $('#professor_last_name_0').val(result.last_name);
+            }
+        });
+        $('#myInputautocomplete-list').html('');
+              
+    }
 </script>
