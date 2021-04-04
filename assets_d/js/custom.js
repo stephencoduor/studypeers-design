@@ -404,6 +404,12 @@ $('.add_course').on('click', function(){
         num = $('#courseModal .courseBox').length;
     cloneBox.find('input:text').val('');
     cloneBox.find('.removeCourseBox').show();
+    cloneBox.find('.course_name').attr("id", "course_name_"+num);
+    cloneBox.find('.course_name').attr('data-id', num);
+    cloneBox.find('.course_id').attr("id", "course_id_"+num);
+    cloneBox.find('.professor_first_name').attr("id", "professor_first_name_"+num);
+    cloneBox.find('.professor_last_name').attr("id", "professor_last_name_"+num);
+    cloneBox.find('.autocomplete-items').attr("id", "myInputautocomplete-list-"+num);
     this.disabled = num+1 >=6;
     if(num>=2) {
         $('#courseModal .modal-body').addClass('scroll');

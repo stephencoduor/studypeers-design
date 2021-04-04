@@ -341,13 +341,13 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
                         <div class="row" >
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="course_id[]" id="course_id_0" class="form-control form-control--lg" placeholder="Course ID">
+                                    <input type="text" name="course_id[]" id="course_id_0" class="form-control form-control--lg course_id" placeholder="Course ID">
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <input type="text" name="course_name[]" id="course_name_0" class="form-control form-control--lg course_name" placeholder="Course Name" onkeyup="autoSuggestCourse(this.value)">
-                                    <div id="myInputautocomplete-list" class="autocomplete-items"></div>
+                                    <input type="text" name="course_name[]" id="course_name_0" class="form-control form-control--lg course_name autoSuggestCourse" placeholder="Course Name" data-id="0" >
+                                    <div id="myInputautocomplete-list-0" class="autocomplete-items"></div>
                                 </div>
                             </div>
                         </div>
@@ -883,25 +883,28 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
         });
     });
 
-    function autoSuggestCourse(keyword){
+    
+    $(document).on('keyup','.autoSuggestCourse', function(){
+        var keyword = $(this).val();
+        var id = $(this).attr("data-id"); 
         if(keyword.length > 2){
             url = '<?php echo base_url(); ?>account/autoSuggestCourse';
             $.ajax({
                 url: url,
                 type: 'post',
                 data: {
-                    "keyword": keyword
+                    "keyword": keyword, "id":id
                 },
                 success: function(result) {
-                    $('#myInputautocomplete-list').html(result);
+                    $('#myInputautocomplete-list-'+id).html(result);
                 }
             });
         } else {
-            $('#myInputautocomplete-list').html('');
+            $('#myInputautocomplete-list-'+id).html('');
         }
-    }
+    });
 
-    function selectCourse(course){
+    function selectCourse(course, id){
             
         var text = $('#suggestion_'+course).text();
         url = '<?php echo base_url(); ?>account/selectSuggestCourse';
@@ -913,12 +916,12 @@ $blocked_users = $this->db->query('SELECT * from blocked_peers As a INNER JOIN u
             },
             dataType: 'json',
             success: function(result) {
-                $('#course_id_0').val(result.course_id);
-                $('#professor_first_name_0').val(result.first_name);
-                $('#professor_last_name_0').val(result.last_name);
+                $('#course_id_'+id).val(result.course_id);
+                $('#professor_first_name_'+id).val(result.first_name);
+                $('#professor_last_name_'+id).val(result.last_name);
             }
         });
-        $('#myInputautocomplete-list').html('');
+        $('#myInputautocomplete-list-'+id).html('');
               
     }
 </script>

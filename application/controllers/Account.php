@@ -5886,6 +5886,7 @@ class Account extends CI_Controller
     public function autoSuggestCourse(){
     	if ($this->input->post()) {
     		$keyword              = $this->input->post('keyword');
+    		$id              = $this->input->post('id');
     		$user_id = $this->session->get_userdata()['user_data']['user_id'];
         
         	$user_info = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
@@ -5898,7 +5899,7 @@ class Account extends CI_Controller
             $html = '';
             if (!empty($result)) {
                 foreach ($result as $key => $value) {
-                    $html .= '<div id="suggestion_' . $value['id'] . '" onclick="selectCourse(' . $value['id'] . ')">' . $value['name'] . '</div>';
+                    $html .= '<div id="suggestion_' . $value['id'] . '" onclick="selectCourse(' . $value['id'] . ', '.$id.')">' . $value['name'] . '</div>';
                 }
             }
             echo $html;
