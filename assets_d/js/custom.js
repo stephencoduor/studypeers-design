@@ -708,46 +708,48 @@ $(document).on('focus click','#search-info',function(e){
 	$('.no-search').show();
 	$("#searchPeeersLoader").show();
 	
-	var me = $(this);
-	e.preventDefault();
-	
-	if (me.data('requestRunning')) {
-        return;
-    }
-	
-	me.data('requestRunning', true);
-	
-	$.ajax({
-		type: 'POST',		
-		url: $("#searchHistoryAction").val(),
-		dataType:'json',
-		success: function (response)
-		{
-			$("#searchPeeersLoader").hide();
-			if(response.status == true){
-				$(".removeSearchIcon").show();
-				if(response.search_html == ''){
+	if($(this).val() == ''){
+		var me = $(this);
+		e.preventDefault();
+		
+		if (me.data('requestRunning')) {
+			return;
+		}
+		
+		me.data('requestRunning', true);
+		
+		$.ajax({
+			type: 'POST',		
+			url: $("#searchHistoryAction").val(),
+			dataType:'json',
+			success: function (response)
+			{
+				$("#searchPeeersLoader").hide();
+				if(response.status == true){
+					$(".removeSearchIcon").show();
+					if(response.search_html == ''){
+						$(".searchresulttext").html('No result found!');
+						$(".no-search").show();
+						$(".searchResultClass").hide();
+						$(".searchResultClassView").hide();
+					} else {
+						$(".searchresulttext").html('Search for something');
+						$(".no-search").hide();
+						$(".searchResultClass").show();
+						$(".searchResultClassView").show();
+						$(".searchResultClass").html(response.search_html);	
+					}
+				} else {
 					$(".searchresulttext").html('No result found!');
 					$(".no-search").show();
-					$(".searchResultClass").hide();
-					$(".searchResultClassView").hide();
-				} else {
-					$(".searchresulttext").html('Search for something');
-					$(".no-search").hide();
-					$(".searchResultClass").show();
-					$(".searchResultClassView").show();
-					$(".searchResultClass").html(response.search_html);	
+					alert(response.message);
 				}
-			} else {
-				$(".searchresulttext").html('No result found!');
-				$(".no-search").show();
-				alert(response.message);
+			},
+			complete: function() {
+				me.data('requestRunning', false);
 			}
-		},
-		complete: function() {
-            me.data('requestRunning', false);
-        }
-	});
+		});	
+	}
 });
 
 $(document).on('focusout','#search-info',function(){

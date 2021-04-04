@@ -1101,6 +1101,20 @@ $(document).ready(function() {
 				} else {
 					$('#pagination').css('display','none');
 				}
+			},
+			complete: function() {
+				$('.childDivTrigger').click(function (e) {          
+					e.stopImmediatePropagation();
+					
+					var redirect_url = $(this).attr('data-userProfileUrl');
+					window.location.href=redirect_url;
+				}); 
+
+				$('.mainDivTrigger').click(function () {
+				}).children().click(function (e) {
+					var redirect_url = $(this).attr('data-userPostUrl');
+					window.location.href=redirect_url;
+				});
 			}
 		});
 	}
