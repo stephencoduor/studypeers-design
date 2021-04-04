@@ -645,6 +645,7 @@ $(document).on('keydown keypress keyup','#search-info',function(){
 			{
 				$("#searchPeeersLoader").hide();
 				if(response.status == true){
+					$(".removeSearchIcon").show();
 					if(response.search_html == ''){
 						$(".searchresulttext").html('No result found!');
 						$(".no-search").show();
@@ -675,19 +676,106 @@ $(document).on('keydown keypress keyup','#search-info',function(){
 	}
 });
 
-$(document).on('focus click','#search-info',function(){
+$(document).on('keydown keypress keyup','#search-info',function(e){
+	var search_val = $(this).val();
+	if(search_val.length > 0 && (search_val != '' || typeof search_val !== "undefined")){
+		if (e.key === 'Enter' || e.keyCode === 13) {
+			
+			var search_text    = $("#search-info").val();
+			var search_user_id = ($(this).attr('data-user_id')) ? $(this).attr('data-user_id') : 0; 
+			
+			var me = $(this);
+			e.preventDefault();
+			
+			if (me.data('requestRunning')) {
+				return;
+			}
+			
+			me.data('requestRunning', true);
+			$(".removeSearchIcon").show();
+			$.ajax({
+				type: 'POST',		
+				url: $("#searchStore").val(),
+				data: {search_text : search_text,search_user_id : search_user_id},
+				dataType:'json',
+				success: function (response){
+					window.location.href = $("#searchResultAction").val();
+				},
+				complete: function() {
+					me.data('requestRunning', false);
+				}
+			});
+		}
+	}
+});
+
+$(document).on('focus click','#search-info',function(e){
 	$(".search-info-wrp").addClass("active");
 	$('.no-search').show();
+	$("#searchPeeersLoader").show();
+	
+	if($(this).val() == ''){
+		var me = $(this);
+		e.preventDefault();
+		
+		if (me.data('requestRunning')) {
+			return;
+		}
+		
+		me.data('requestRunning', true);
+		
+		$.ajax({
+			type: 'POST',		
+			url: $("#searchHistoryAction").val(),
+			dataType:'json',
+			success: function (response)
+			{
+				$("#searchPeeersLoader").hide();
+				if(response.status == true){
+					$(".removeSearchIcon").show();
+					if(response.search_html == ''){
+						$(".searchresulttext").html('No result found!');
+						$(".no-search").show();
+						$(".searchResultClass").hide();
+						$(".searchResultClassView").hide();
+					} else {
+						$(".searchresulttext").html('Search for something');
+						$(".no-search").hide();
+						$(".searchResultClass").show();
+						$(".searchResultClassView").show();
+						$(".searchResultClass").html(response.search_html);	
+					}
+				} else {
+					$(".searchresulttext").html('No result found!');
+					$(".no-search").show();
+					alert(response.message);
+				}
+			},
+			complete: function() {
+				me.data('requestRunning', false);
+			}
+		});	
+	}
 });
 
 $(document).on('focusout','#search-info',function(){
-	if($("#search-info").val() == ''){
+	if($("#search-info").val() == '' && $(".searchResultClass li").length == 0){
 		$('.no-search').show();
 		$(".search-info-wrp").removeClass("active");
 		$(".searchResultClass").hide();
 		$(".searchResultClassView").hide();
 		$(".searchResultClass").html('');
+		$(".removeSearchIcon").hide();
 	}
+});
+
+$(document).on('click','.removeSearchIcon',function(){
+	$('.no-search').show();
+	$(".search-info-wrp").removeClass("active");
+	$(".searchResultClass").hide();
+	$(".searchResultClassView").hide();
+	$(".searchResultClass").html('');
+	$(this).hide();
 });
 
 $(document).on('click','.storeHistory',function(){
@@ -699,6 +787,7 @@ $(document).on('click','.storeHistory',function(){
 		data: {search_text : search_text,search_user_id : search_user_id},
 		dataType:'json',
 		success: function (response){
+			$(".removeSearchIcon").show();
 		}
 	});
 
@@ -740,4 +829,21 @@ $(document).on('click','.storeHistory',function(){
         });
     }
 
+});
+
+$(document).on('click','.removeBadgeIcon',function(){
+	var historyId = $(this).attr('data-historyId');
+	
+	$.ajax({
+		type: 'POST',		
+		url: $("#removeStoredSearch").val(),
+		data: {historyId : historyId},
+		dataType:'json',
+		success: function (response){
+			$(".searchHistory_"+historyId).fadeOut(500);
+			setTimeout(function(){
+               $(".searchHistory_"+historyId).remove();     
+			},500);
+		}
+	});
 });

@@ -76,6 +76,32 @@
 	<script src="<?php echo base_url('assets_d/js/moment.js'); ?>"></script>
 
 	<script src="<?php echo base_url('assets_d/js/socket.io.js'); ?>"></script>
+	<style>
+		.removeBadge {
+			position: relative;
+		}
+		
+		.removeBadge .removeBadgeIcon{
+			position: absolute;
+			top: -37px;
+			right: -2px;
+			padding: 0px 5px;
+			border-radius: 50%;
+			background: #a19999;
+			color: white;
+			cursor:pointer;
+		}
+		.removeBadge .removeSearchIcon {
+			position: absolute;
+			top: 14px;
+			right: 14px;
+			padding: 0px 5px;
+			border-radius: 50%;
+			background: #a19999;
+			color: white;
+			cursor:pointer;
+		}
+	</style>
 
 
 
@@ -83,8 +109,7 @@
 
 
 
-
-
+	
 </head>
 
 <?php
@@ -460,9 +485,16 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 									<img src="<?php echo base_url(); ?>assets_d/images/search.png" alt="search">
 								</div>
 								<input type="text" id="search-info" autocomplete="off" value="<?php echo (isset($SearchText)) ? $SearchText : ''; ?>">
+								<div class="removeBadge">
+									<span class="removeSearchIcon" style="display:none;"><i class="fa fa-times"></i></span>
+								</div>
 								
 								<input type="hidden" id="searchAction" value="<?php echo base_url('account/searchAllDetails'); ?>">
+								<input type="hidden" id="searchHistoryAction" value="<?php echo base_url('account/searchHistory'); ?>">
+								<input type="hidden" id="searchResultAction" value="<?php echo base_url('account/searchResult'); ?>">
 								<input type="hidden" id="searchStore" value="<?php echo base_url('account/searchStore'); ?>">
+								<input type="hidden" id="removeStoredSearch" value="<?php echo base_url('account/removeStoredSearch'); ?>">
+								
 								<div class="removeSearch">
 									<img src="<?php echo base_url(); ?>assets_d/images/close.svg" alt="close">
 								</div>

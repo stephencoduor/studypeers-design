@@ -466,8 +466,10 @@
 					"type": newtxt
 				},
 				success: function(result) {
+					var resulttext = result.trim();
 					$("#confirmationModalAttend").modal('hide');
-					$("#attend_text_" + id).html(result);
+					$("#attend_text_"+id).html(resulttext);
+					$(".attend_text_"+id).html(resulttext);
 					$("#attend_event_id").val('');
 				}
 			})
@@ -1074,7 +1076,7 @@
 <script type='text/javascript'>
 $(document).ready(function() {
 	
-	var searchType = "<?php echo ($searchType) ? $searchType : 'peers'; ?>";
+	var searchType = "<?php echo (isset($searchType)) ? $searchType : 'peers'; ?>";
 	
 	createPagination(0,searchType);
 	$('#pagination').on('click','a',function(e){
@@ -1099,6 +1101,20 @@ $(document).ready(function() {
 				} else {
 					$('#pagination').css('display','none');
 				}
+			},
+			complete: function() {
+				$('.childDivTrigger').click(function (e) {          
+					e.stopImmediatePropagation();
+					
+					var redirect_url = $(this).attr('data-userProfileUrl');
+					window.location.href=redirect_url;
+				}); 
+
+				$('.mainDivTrigger').click(function () {
+				}).children().click(function (e) {
+					var redirect_url = $(this).attr('data-userPostUrl');
+					window.location.href=redirect_url;
+				});
 			}
 		});
 	}

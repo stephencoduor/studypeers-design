@@ -2357,51 +2357,50 @@
                                             
                                     </a>
                                     <div class="hoverMenu">
-                                        <ul>
-                                                
-                                                <li data-toggle="tooltip" title="Like" onclick="saveReaction('1', '<?php echo $value['reference_id']; ?>', 'Post')" class="likeOption like_option_type"
-                                                    id="1"
-                                                    data-id="<?php echo $key; ?>">
-                                                    <img
-                                                        src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
-                                                        alt="like">
-                                                </li>
-                                                <li data-toggle="tooltip" onclick="saveReaction('2', '<?php echo $value['reference_id']; ?>', 'Post')" title="Support" class="supportMenu like_option_type"
-                                                    id="2"
-                                                    data-id="<?php echo $key; ?>">
-                                                    <img
-                                                        src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
-                                                        alt="like">
-                                                </li>
-                                                <li data-toggle="tooltip" onclick="saveReaction('3', '<?php echo $value['reference_id']; ?>', 'Post')" title="Celebrate" class="celebrateMenu like_option_type"
-                                                    id="3"
-                                                    data-id="<?php echo $key; ?>">
-                                                    <img
-                                                        src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg"
-                                                        alt="like">
-                                                </li>
-                                                <li data-toggle="tooltip" onclick="saveReaction('4', '<?php echo $value['reference_id']; ?>', 'Post')" title="Insightful" class="curiousMenu like_option_type"
-                                                    id="4"
-                                                    data-id="<?php echo $key; ?>">
-                                                    <img
-                                                        src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg"
-                                                        alt="like">
-                                                </li>
-                                                <li data-toggle="tooltip" onclick="saveReaction('5', '<?php echo $value['reference_id']; ?>', 'Post')" title="Curious" class="insightMenu like_option_type"
-                                                    id="5"
-                                                    data-id="<?php echo $key; ?>">
-                                                    <img
-                                                        src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg"
-                                                        alt="like">
-                                                </li>
-                                                <li data-toggle="tooltip" onclick="saveReaction('6', '<?php echo $value['reference_id']; ?>', 'Post')" title="Love" class="loveMenu like_option_type"
-                                                    id="6"
-                                                    data-id="<?php echo $key; ?>">
-                                                    <img
-                                                        src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg"
-                                                        alt="like">
-                                                </li>
-                                            </ul>
+                                        <ul>    
+											<li data-toggle="tooltip" title="Like" onclick="saveReaction('1', '<?php echo $value['reference_id']; ?>', 'Post')" class="likeOption like_option_type"
+												id="1"
+												data-id="<?php echo $key; ?>">
+												<img
+													src="<?php echo base_url(); ?>assets_d/images/like-dashboard.svg"
+													alt="like">
+											</li>
+											<li data-toggle="tooltip" onclick="saveReaction('2', '<?php echo $value['reference_id']; ?>', 'Post')" title="Support" class="supportMenu like_option_type"
+												id="2"
+												data-id="<?php echo $key; ?>">
+												<img
+													src="<?php echo base_url(); ?>assets_d/images/support-dashboard.svg"
+													alt="like">
+											</li>
+											<li data-toggle="tooltip" onclick="saveReaction('3', '<?php echo $value['reference_id']; ?>', 'Post')" title="Celebrate" class="celebrateMenu like_option_type"
+												id="3"
+												data-id="<?php echo $key; ?>">
+												<img
+													src="<?php echo base_url(); ?>assets_d/images/celebrate-dashboard.svg"
+													alt="like">
+											</li>
+											<li data-toggle="tooltip" onclick="saveReaction('4', '<?php echo $value['reference_id']; ?>', 'Post')" title="Insightful" class="curiousMenu like_option_type"
+												id="4"
+												data-id="<?php echo $key; ?>">
+												<img
+													src="<?php echo base_url(); ?>assets_d/images/curious-dashboard.svg"
+													alt="like">
+											</li>
+											<li data-toggle="tooltip" onclick="saveReaction('5', '<?php echo $value['reference_id']; ?>', 'Post')" title="Curious" class="insightMenu like_option_type"
+												id="5"
+												data-id="<?php echo $key; ?>">
+												<img
+													src="<?php echo base_url(); ?>assets_d/images/insight-dashboard.svg"
+													alt="like">
+											</li>
+											<li data-toggle="tooltip" onclick="saveReaction('6', '<?php echo $value['reference_id']; ?>', 'Post')" title="Love" class="loveMenu like_option_type"
+												id="6"
+												data-id="<?php echo $key; ?>">
+												<img
+													src="<?php echo base_url(); ?>assets_d/images/love-dashboard.svg"
+													alt="like">
+											</li>
+										</ul>
                                     </div>
                                 </li>
                                 <li  <?php if (@$posts['post_details']->is_comment_on != 1) { ?>  class="tooltip" style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $value['reference_id']; ?>')" <?php } ?>>
