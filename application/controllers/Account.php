@@ -1259,7 +1259,7 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap mainDivTrigger" data-userPostUrl="'.base_url().'">
+					<div class="post-row-wrap mainDivTrigger" data-userPostUrl="'.base_url('account/searchDetail/posts/'.base64_encode($searchedData['post_id'])).'">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
@@ -7062,13 +7062,11 @@ class Account extends CI_Controller
 			
 			// get result from the store result
 			$SearchStoreQuery = "SELECT id,search_text,search_peer_id FROM recent_search_history WHERE 1=1 AND user_id='".$CurrentUserID."'";	
-			
 			if($SearchUseridStringStoreResult != ""){
 				$SearchStoreQuery .= " AND (search_text != '' OR (search_peer_id != 0 AND search_peer_id NOT IN (".$SearchUseridStringStoreResult.")))";
 			} else {
 				$SearchStoreQuery .= " AND (search_text != '' OR search_peer_id != 0)";
 			}
-			
 			$SearchStoreQuery .= " GROUP BY search_text ORDER BY created_at DESC LIMIT ".$RemainingResult;
 			
 			$SearchStoreResult = $this->db->query($SearchStoreQuery)->result_array();
@@ -7098,18 +7096,21 @@ class Account extends CI_Controller
 								}
 								
 								$SearchHTML .= '
-									<li>
+									<li class="searchHistory_'.$SearchStoreResultData['id'].'">
 										<a href="'.base_url('sp/'.$UserDetails[0]['username']).'" data-user_id="'.$UserDetails[0]['id'].'" class="storeHistory">
 											<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
 											<strong>'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> </strong>
 										</a>
+										<div class="removeBadge">
+											<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
+										</div>
 									</li>';		
 							}
 						}
 						
 					} else {
 						$SearchHTML .= '
-						<li>
+						<li class="searchHistory_'.$SearchStoreResultData['id'].'">
 							<a href="'.base_url('account/searchResult/').'">
 								<figure> <img src="'.base_url('assets_d/images/search.png').'" alt="Image"/> </figure>
 								<strong>'.$SearchStoreResultData['search_text'].' <span>from previous search</span> </strong>
@@ -7268,11 +7269,14 @@ class Account extends CI_Controller
 							}
 							
 							$SearchHTML .= '
-								<li>
+								<li class="searchHistory_'.$SearchStoreResultData['id'].'">
 									<a href="'.base_url('sp/'.$UserDetails[0]['username']).'" data-user_id="'.$UserDetails[0]['id'].'" class="storeHistory">
 										<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
 										<strong>'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> </strong>
 									</a>
+									<div class="removeBadge">
+										<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
+									</div>
 								</li>';		
 						}
 					}

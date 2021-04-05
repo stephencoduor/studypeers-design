@@ -1111,9 +1111,9 @@ $(document).ready(function() {
 				}); 
 
 				$('.mainDivTrigger').click(function () {
-				}).children().click(function (e) {
 					var redirect_url = $(this).attr('data-userPostUrl');
 					window.location.href=redirect_url;
+				}).children().click(function (e) {
 				});
 			}
 		});

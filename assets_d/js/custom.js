@@ -626,7 +626,7 @@ $(window).on("load", function () {
     });
 });
 
-$(document).on('keydown keypress keyup','#search-info',function(){
+$(document).on('keydown keypress keyup click','#search-info',function(){
 	$("#search-result").css("display","block");
 	var search_val = $(this).val();
 	$('.no-search').hide();
@@ -652,17 +652,22 @@ $(document).on('keydown keypress keyup','#search-info',function(){
 						$(".searchResultClass").hide();
 						$(".searchResultClassView").hide();
 					} else {
-						$(".searchresulttext").html('Search for something');
-						$(".no-search").hide();
 						$(".searchResultClass").show();
 						$(".searchResultClassView").show();
 						$(".searchResultClass").html(response.search_html);	
+						$(".searchresulttext").html('Search for something');
+						$(".no-search").hide();
 					}
 				} else {
 					$(".searchresulttext").html('No result found!');
 					$(".no-search").show();
 					alert(response.message);
 				}
+			},
+			timeout: 10000,
+			error: function(e){
+				$("#searchPeeersLoader").hide();
+				return false;
 			}
 		});
 	}
@@ -703,6 +708,11 @@ $(document).on('keydown keypress keyup','#search-info',function(e){
 				},
 				complete: function() {
 					me.data('requestRunning', false);
+				},
+				timeout: 10000,
+				error: function(e){
+					$("#searchPeeersLoader").hide();
+					return false;
 				}
 			});
 		}
@@ -711,10 +721,10 @@ $(document).on('keydown keypress keyup','#search-info',function(e){
 
 $(document).on('focus click','#search-info',function(e){
 	$(".search-info-wrp").addClass("active");
-	$('.no-search').show();
-	$("#searchPeeersLoader").show();
 	
 	if($(this).val() == ''){
+		$("#searchPeeersLoader").show();
+		
 		var me = $(this);
 		e.preventDefault();
 		
@@ -753,13 +763,18 @@ $(document).on('focus click','#search-info',function(e){
 			},
 			complete: function() {
 				me.data('requestRunning', false);
+			},
+			timeout: 10000,
+			error: function(e){
+				$("#searchPeeersLoader").hide();
+				return false;
 			}
 		});	
 	}
 });
 
 $(document).on('focusout','#search-info',function(){
-	if($("#search-info").val() == '' && $(".searchResultClass li").length == 0){
+	if($("#search-info").val() == ''){
 		$('.no-search').show();
 		$(".search-info-wrp").removeClass("active");
 		$(".searchResultClass").hide();
@@ -788,6 +803,11 @@ $(document).on('click','.storeHistory',function(){
 		dataType:'json',
 		success: function (response){
 			$(".removeSearchIcon").show();
+		},
+		timeout: 10000,
+		error: function(e){
+			$("#searchPeeersLoader").hide();
+			return false;
 		}
 	});
 
@@ -841,9 +861,24 @@ $(document).on('click','.removeBadgeIcon',function(){
 		dataType:'json',
 		success: function (response){
 			$(".searchHistory_"+historyId).fadeOut(500);
+			
 			setTimeout(function(){
-               $(".searchHistory_"+historyId).remove();     
+               $(".searchHistory_"+historyId).remove(); 
+
+				if($(".searchResultClass li").length == 0){
+					$('.no-search').show();
+					$(".search-info-wrp").removeClass("active");
+					$(".searchResultClass").hide();
+					$(".searchResultClassView").hide();
+					$(".searchResultClass").html('');
+					$(".removeSearchIcon").hide();
+				}
 			},500);
+		},
+		timeout: 10000,
+		error: function(e){
+			$("#searchPeeersLoader").hide();
+			return false;
 		}
 	});
 });
