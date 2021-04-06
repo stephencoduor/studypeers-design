@@ -70,11 +70,14 @@ class Studyset extends CI_Controller {
         echo $html;
     }
 
-    public function details($study_set_id)
+    public function details($study_set_id,$reType = null)
     {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $data['studyset'] = $this->studyset_model->getStudySetDetails($study_set_id,$user_id);
         $data['term_data'] = $this->studyset_model->getStudySetTermData($study_set_id);
+
+		$redirectionType = ($reType) ? $reType : ''; 
+		$data['redirectionType'] = $redirectionType;
 
         $this->db->order_by('learn_round_master.id', 'desc');
         $this->db->limit(5);

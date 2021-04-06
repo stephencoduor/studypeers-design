@@ -773,8 +773,11 @@ $(document).on('focus click','#search-info',function(e){
 	}
 });
 
-$(document).on('focusout','#search-info',function(){
-	if($("#search-info").val() == ''){
+$(document).on("click touchstart", function(e) {	
+	var t = $(e.target).closest('.search');
+	var exceptDiv = $('.search');
+	
+	if(exceptDiv.is(t) == false) {
 		$('.no-search').show();
 		$(".search-info-wrp").removeClass("active");
 		$(".searchResultClass").hide();

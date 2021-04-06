@@ -148,6 +148,8 @@ class Account extends CI_Controller
 							$UserProfile = base_url('uploads/user-female.png');
 						} else if($SearchPeersResultData['gender'] == 'male') {
 							$UserProfile = base_url('uploads/user-male.png');
+						} else if($SearchPeersResultData['gender'] == 'other') {
+								$UserProfile = base_url('uploads/user-anonymous.png');
 						} else {
 							$UserProfile = base_url().'assets_d/images/user.jpg';
 						}
@@ -230,6 +232,8 @@ class Account extends CI_Controller
 									$UserProfile = base_url('uploads/user-female.png');
 								} else if($SearchMutalFriend['gender'] == 'male') {
 									$UserProfile = base_url('uploads/user-male.png');
+								} else if($SearchMutalFriend['gender'] == 'other') {
+									$UserProfile = base_url('uploads/user-anonymous.png');
 								} else {
 									$UserProfile = base_url().'assets_d/images/user.jpg';
 								}
@@ -310,6 +314,8 @@ class Account extends CI_Controller
 								$UserProfile = base_url('uploads/user-female.png');
 							} else if($SearchUniversityResultData['gender'] == 'male') {
 								$UserProfile = base_url('uploads/user-male.png');
+							} else if($SearchUniversityResultData['gender'] == 'other') {
+								$UserProfile = base_url('uploads/user-anonymous.png');
 							} else {
 								$UserProfile = base_url().'assets_d/images/user.jpg';
 							}
@@ -394,6 +400,8 @@ class Account extends CI_Controller
 						$UserProfile = base_url('uploads/user-female.png');
 					} else if($SearchPostResultDat['gender'] == 'male') {
 						$UserProfile = base_url('uploads/user-male.png');
+					} else if($SearchPostResultDat['gender'] == 'other') {
+						$UserProfile = base_url('uploads/user-anonymous.png');
 					} else {
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 					}
@@ -476,6 +484,8 @@ class Account extends CI_Controller
 							$UserProfile = base_url('uploads/user-female.png');
 						} else if($SearchQuestionsResultData['gender'] == 'male') {
 							$UserProfile = base_url('uploads/user-male.png');
+						} else if($SearchQuestionsResultData['gender'] == 'other') {
+							$UserProfile = base_url('uploads/user-anonymous.png');
 						} else {
 							$UserProfile = base_url().'assets_d/images/user.jpg';
 						}
@@ -533,6 +543,8 @@ class Account extends CI_Controller
 						$UserProfile = base_url('uploads/user-female.png');
 					} else if($SearchDocumentResultData['gender'] == 'male') {
 						$UserProfile = base_url('uploads/user-male.png');
+					} else if($SearchDocumentResultData['gender'] == 'other') {
+						$UserProfile = base_url('uploads/user-anonymous.png');
 					} else {
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 					}
@@ -624,6 +636,8 @@ class Account extends CI_Controller
 						$UserProfile = base_url('uploads/user-female.png');
 					} else if($SearchStudySetData['gender'] == 'male') {
 						$UserProfile = base_url('uploads/user-male.png');
+					} else if($SearchStudySetData['gender'] == 'other') {
+						$UserProfile = base_url('uploads/user-anonymous.png');
 					} else {
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 					}
@@ -719,6 +733,8 @@ class Account extends CI_Controller
 						$UserProfile = base_url('uploads/user-female.png');
 					} else if($SearchEventsResultData['gender'] == 'male') {
 						$UserProfile = base_url('uploads/user-male.png');
+					} else if($SearchEventsResultData['gender'] == 'other') {
+						$UserProfile = base_url('uploads/user-anonymous.png');
 					} else {
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 					}
@@ -869,6 +885,8 @@ class Account extends CI_Controller
 							$UserProfile = base_url('uploads/user-female.png');
 						} else if($SearchPeersResultData['gender'] == 'male') {
 							$UserProfile = base_url('uploads/user-male.png');
+						} else if($SearchPeersResultData['gender'] == 'other') {
+							$UserProfile = base_url('uploads/user-anonymous.png');
 						} else {
 							$UserProfile = base_url().'assets_d/images/user.jpg';
 						}
@@ -945,6 +963,8 @@ class Account extends CI_Controller
 									$UserProfile = base_url('uploads/user-female.png');
 								} else if($SearchMutalFriend['gender'] == 'male') {
 									$UserProfile = base_url('uploads/user-male.png');
+								} else if($SearchMutalFriend['gender'] == 'other') {
+									$UserProfile = base_url('uploads/user-anonymous.png');
 								} else {
 									$UserProfile = base_url().'assets_d/images/user.jpg';
 								}
@@ -1027,6 +1047,8 @@ class Account extends CI_Controller
 								$UserProfile = base_url('uploads/user-female.png');
 							} else if($SearchUniversityResultData['gender'] == 'male') {
 								$UserProfile = base_url('uploads/user-male.png');
+							} else if($SearchUniversityResultData['gender'] == 'other') {
+								$UserProfile = base_url('uploads/user-anonymous.png');
 							} else {
 								$UserProfile = base_url().'assets_d/images/user.jpg';
 							}
@@ -1172,6 +1194,8 @@ class Account extends CI_Controller
 						$UserProfile = base_url('uploads/user-female.png');
 					} else if($SearchPostResultDat['gender'] == 'male') {
 						$UserProfile = base_url('uploads/user-male.png');
+					} else if($SearchPostResultDat['gender'] == 'other') {
+						$UserProfile = base_url('uploads/user-anonymous.png');
 					} else {
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 					}
@@ -1259,7 +1283,7 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap mainDivTrigger" data-userPostUrl="'.base_url('account/searchDetail/posts/'.base64_encode($searchedData['post_id'])).'">
+					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('account/searchDetail/posts/'.base64_encode($searchedData['post_id'])).'">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
@@ -1349,7 +1373,7 @@ class Account extends CI_Controller
 			$AllQuestions = array();
 			
 			// get result from questions
-			$SearchQuestions = "SELECT reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC";
+			$SearchQuestions = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC";
 			
 			$SearchQuestionsResult = $this->db->query($SearchQuestions)->result_array();
 			$FoundQuestionResult = count($SearchQuestionsResult);
@@ -1366,6 +1390,8 @@ class Account extends CI_Controller
 							$UserProfile = base_url('uploads/user-female.png');
 						} else if($SearchQuestionsResultData['gender'] == 'male') {
 							$UserProfile = base_url('uploads/user-male.png');
+						} else if($SearchQuestionsResultData['gender'] == 'other') {
+							$UserProfile = base_url('uploads/user-anonymous.png');
 						} else {
 							$UserProfile = base_url().'assets_d/images/user.jpg';
 						}
@@ -1387,6 +1413,7 @@ class Account extends CI_Controller
 						$getTotalAnswersCounter = "SELECT id FROM question_answer_master WHERE question_id='".$question_id."' AND status='1'";
 						$AnswerCounterResult = $this->db->query($getTotalAnswersCounter)->result_array();
 						
+						$tempQuestion['reference_id']         = $SearchQuestionsResultData['reference_id'];
 						$tempQuestion['question_title']       = $SearchQuestionsResultData['question_title'];
 						$tempQuestion['question_description'] = $SearchQuestionsResultData['textarea'];
 						$tempQuestion['post_at']              = $timeAgo;
@@ -1426,16 +1453,16 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap">
+					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">
+                                <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
                                     <figure>
                                         <img src="'.$searchedData['profile_picture'].'" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3 style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">'.$searchedData['username'].'</h3>
+                                    <h3 style="cursor:pointer;" class="childDivTrigger" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">'.$searchedData['username'].'</h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -1505,7 +1532,7 @@ class Account extends CI_Controller
 			$AllDocuments = array();
 			
 			// get result from documents
-			$SearchDocuments = "SELECT reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
+			$SearchDocuments = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
 			$SearchDocumentResult = $this->db->query($SearchDocuments)->result_array();
 			
 			$FoundDocumentResult = count($SearchDocumentResult);
@@ -1524,6 +1551,8 @@ class Account extends CI_Controller
 						$UserProfile = base_url('uploads/user-female.png');
 					} else if($SearchDocumentResultData['gender'] == 'male') {
 						$UserProfile = base_url('uploads/user-male.png');
+					} else if($SearchDocumentResultData['gender'] == 'other') {
+						$UserProfile = base_url('uploads/user-anonymous.png');
 					} else {
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 					}
@@ -1572,6 +1601,7 @@ class Account extends CI_Controller
 						$avgRatings = round($averageRatings[0]['average'], 1);
 					}
 					
+					$tempDocuments['reference_id']    = ($SearchDocumentResultData['reference_id']) ? $SearchDocumentResultData['reference_id'] : 0;
 					$tempDocuments['document_name']   = $SearchDocumentResultData['document_name'];
 					$tempDocuments['description']     = $SearchDocumentResultData['description'];
 					$tempDocuments['post_at']         = $timeAgo;
@@ -1613,16 +1643,16 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap">
+					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('account/documentDetail/'.base64_encode($searchedData['reference_id']).'/search').'">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">
+                                <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
                                     <figure>
                                         <img src="'.$searchedData['profile_picture'].'" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3 style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">'.$searchedData['fullname'].'</h3>
+                                    <h3 style="cursor:pointer;" class="childDivTrigger" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">'.$searchedData['fullname'].'</h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -1733,7 +1763,7 @@ class Account extends CI_Controller
 			$AllStudySets = array();
 			
 			//get search result from study set
-			$SearchStudySet = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC";
+			$SearchStudySet = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC";
 			$SearchStudySetResult = $this->db->query($SearchStudySet)->result_array();
 			
 			$FoundStudySetResult = count($SearchStudySetResult);
@@ -1758,6 +1788,8 @@ class Account extends CI_Controller
 						$UserProfile = base_url('uploads/user-female.png');
 					} else if($SearchStudySetData['gender'] == 'male') {
 						$UserProfile = base_url('uploads/user-male.png');
+					} else if($SearchStudySetData['gender'] == 'other') {
+						$UserProfile = base_url('uploads/user-anonymous.png');
 					} else {
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 					}
@@ -1801,6 +1833,7 @@ class Account extends CI_Controller
 						$avgRatings = round($averageRatings[0]['average'], 1);
 					}
 					
+					$tempStudySet['reference_id']    = ($SearchStudySetData['reference_id']) ? $SearchStudySetData['reference_id'] : 0;
 					$tempStudySet['studyset_name']   = $SearchStudySetData['name'];
 					$tempStudySet['studyset_cover']  = $CoverimageLink;
 					$tempStudySet['studyset_id']     = $SearchStudySetData['study_set_id'];
@@ -1841,16 +1874,16 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap">
+					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('studyset/details/'.$searchedData['reference_id'].'/search').'">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">
+                                <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
                                     <figure>
                                         <img src="'.$searchedData['profile_picture'].'" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3 style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">'.$searchedData['fullname'].'</h3>
+                                    <h3 style="cursor:pointer;" class="childDivTrigger" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">'.$searchedData['fullname'].'</h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -1943,7 +1976,7 @@ class Account extends CI_Controller
 			$AllEvents = array();
 			
 			//get search result from events
-			$SearchEvents = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
+			$SearchEvents = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
 			
 			$SearchEventsResult = $this->db->query($SearchEvents)->result_array();
 			
@@ -1977,6 +2010,8 @@ class Account extends CI_Controller
 						$UserProfile = base_url('uploads/user-female.png');
 					} else if($SearchEventsResultData['gender'] == 'male') {
 						$UserProfile = base_url('uploads/user-male.png');
+					} else if($SearchEventsResultData['gender'] == 'other') {
+						$UserProfile = base_url('uploads/user-anonymous.png');
 					} else {
 						$UserProfile = base_url().'assets_d/images/user.jpg';
 					}
@@ -2012,6 +2047,7 @@ class Account extends CI_Controller
 					$getEventsCommentCounter = "SELECT id FROM comment_master WHERE reference_id='".$event_primary_id."' AND reference='event' AND status='1'";
 					$EveCommentCounter    = $this->db->query($getEventsCommentCounter)->result_array();
 					
+					$tempEvents['reference_id']    = ($SearchEventsResultData['reference_id']) ? $SearchEventsResultData['reference_id'] : 0;
 					$tempEvents['event_primary_id']= $event_primary_id;
 					$tempEvents['post_at']         = $timeAgo;
 					$tempEvents['user_id']         = ($SearchEventsResultData['user_id']) ? $SearchEventsResultData['user_id'] : 0;
@@ -2050,16 +2086,16 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap">
+					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('account/eventDetails/'.base64_encode($searchedData['reference_id']).'/search').'">
                         <div class="user-top">
                             <div class="user-top-left">
-                                <div class="user-img" style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">
+                                <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
                                     <figure>
                                         <img src="'.$searchedData['profile_picture'].'" alt="Image"/>
                                     </figure>
                                 </div>
                                 <div class="user-name-wrap">
-                                    <h3 style="cursor:pointer;" onclick="window.location.href=\''.base_url('sp/'.$searchedData['username']).'\'">'.$searchedData['fullname'].'</h3>
+                                    <h3 style="cursor:pointer;" class="childDivTrigger" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">'.$searchedData['fullname'].'</h3>
                                     <div class="badgeList">
                                         <ul>
                                             <li class="badge badge1">
@@ -2283,7 +2319,17 @@ class Account extends CI_Controller
 				$addDate = ($SearchPostResultDat['addDate']) ? date("Y-m-d H:i:s",strtotime($SearchPostResultDat['addDate'])) : '';
 				$timeAgo = $this->timestring($addDate);
 				
-				$UserProfile = base_url().'assets_d/images/user.jpg';
+				// get user profile picture
+				if($SearchPostResultDat['gender'] == 'female'){
+					$UserProfile = base_url('uploads/user-female.png');
+				} else if($SearchPostResultDat['gender'] == 'male') {
+					$UserProfile = base_url('uploads/user-male.png');
+				} else if($SearchPostResultDat['gender'] == 'other') {
+					$UserProfile = base_url('uploads/user-anonymous.png');
+				} else {
+					$UserProfile = base_url().'assets_d/images/user.jpg';
+				}
+				
 				if($SearchPostResultDat['image'] != '' && file_exists('uploads/users/'.$SearchPostResultDat['image'])){
 					$UserProfile = base_url('uploads/users/'.$SearchPostResultDat['image']);
 				}
@@ -3379,7 +3425,10 @@ class Account extends CI_Controller
         $data['user_info'] = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
         $event_id = base64_decode($this->uri->segment('3'));
-
+		$redirectType = ($this->uri->segment('4')) ? $this->uri->segment('4') : '';
+		
+		$data['redirectType'] = $redirectType; 
+		
         $data['event'] = $this->db->query("select * from event_master where id = " . $event_id . "")->row_array();
         $data['university'] = $this->db->get_where('university', array('university_id' => $data['event']['university']))->row_array();
 
@@ -3767,6 +3816,8 @@ class Account extends CI_Controller
         $data['user_info'] = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
         $document_id = base64_decode($this->uri->segment('3'));
+		$redirectType = ($this->uri->segment('4')) ? $this->uri->segment('4') : '';
+		$data['redirectType'] = $redirectType;
 
         $data['index_menu']  = 'documents';
         $data['title']  = 'Document Details | Studypeers';
@@ -4080,6 +4131,8 @@ class Account extends CI_Controller
         $data['user_info'] = $this->db->get_where('user_info', array('userID' => $user_id))->row_array();
 
         $question_id = base64_decode($this->uri->segment('3'));
+		$redirectType = ($this->uri->segment('4')) ? $this->uri->segment('4') : '';
+		$data['redirectType']  = $redirectType;
 
         $data['index_menu']  = 'questions';
         $data['title']  = 'Question Details | Studypeers';
@@ -6928,6 +6981,8 @@ class Account extends CI_Controller
 							$UserProfile = base_url('uploads/user-female.png');
 						} else if($SearchPeersResultData['gender'] == 'male') {
 							$UserProfile = base_url('uploads/user-male.png');
+						} else if($SearchPeersResultData['gender'] == 'other') {
+							$UserProfile = base_url('uploads/user-anonymous.png');
 						} else {
 							$UserProfile = base_url().'assets_d/images/user.jpg';
 						}
@@ -6979,6 +7034,8 @@ class Account extends CI_Controller
 									$UserProfile = base_url('uploads/user-female.png');
 								} else if($SearchMutalFriend['gender'] == 'male') {
 									$UserProfile = base_url('uploads/user-male.png');
+								} else if($SearchMutalFriend['gender'] == 'other') {
+									$UserProfile = base_url('uploads/user-anonymous.png');
 								} else {
 									$UserProfile = base_url().'assets_d/images/user.jpg';
 								}
@@ -7031,6 +7088,8 @@ class Account extends CI_Controller
 								$UserProfile = base_url('uploads/user-female.png');
 							} else if($SearchUniversityResultData['gender'] == 'male') {
 								$UserProfile = base_url('uploads/user-male.png');
+							} else if($SearchUniversityResultData['gender'] == 'other') {
+								$UserProfile = base_url('uploads/user-anonymous.png');
 							} else {
 								$UserProfile = base_url().'assets_d/images/user.jpg';
 							}
@@ -7087,6 +7146,8 @@ class Account extends CI_Controller
 									$UserProfile = base_url('uploads/user-female.png');
 								} else if($SearchUniversityResultData['gender'] == 'male') {
 									$UserProfile = base_url('uploads/user-male.png');
+								} else if($SearchUniversityResultData['gender'] == 'other') {
+									$UserProfile = base_url('uploads/user-anonymous.png');
 								} else {
 									$UserProfile = base_url().'assets_d/images/user.jpg';
 								}
@@ -7258,12 +7319,22 @@ class Account extends CI_Controller
 			foreach($SearchStoreResult as $SearchStoreResultData)
 			{
 				if($SearchStoreResultData['search_peer_id'] != '' && $SearchStoreResultData['search_peer_id'] != 0){
-					$UserDetails = $this->db->query("SELECT id,username,first_name,last_name,image FROM user WHERE id='".$SearchStoreResultData['search_peer_id']."'")->result_array();
+					$UserDetails = $this->db->query("SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'")->result_array();
 					
 					if(!empty($UserDetails)){
 						if(!in_array($UserDetails[0]['id'],$ExistingUsers)){
 							$ExistingUsers[] = $UserDetails[0]['id'];
-							$UserProfile = base_url().'assets_d/images/user.jpg';
+							
+							if($UserDetails[0]['gender'] == 'female'){
+								$UserProfile = base_url('uploads/user-female.png');
+							} else if($UserDetails[0]['gender'] == 'male') {
+								$UserProfile = base_url('uploads/user-male.png');
+							} else if($UserDetails[0]['gender'] == 'other') {
+								$UserProfile = base_url('uploads/user-anonymous.png');
+							} else {
+								$UserProfile = base_url().'assets_d/images/user.jpg';
+							}
+							
 							if($UserDetails[0]['image'] != '' && file_exists('uploads/users/'.$UserDetails[0]['image'])){
 								$UserProfile = base_url('uploads/users/'.$UserDetails[0]['image']);
 							}
