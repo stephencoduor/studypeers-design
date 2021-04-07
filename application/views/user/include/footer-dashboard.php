@@ -1032,7 +1032,7 @@
         }
     });
     $('.innerReplyBox').slideUp();
-    $('.leftStatus a.reply').on('click', function() {
+    $('.leftStatus a.reply').on('click', function() { 
         $(this).siblings('.innerReplyBox').slideDown();
     });
     $('.uloadedImage .close').click(function() {
