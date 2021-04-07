@@ -377,7 +377,7 @@ class Account extends CI_Controller
 			}
 			$AssignedPostIdString = implode(",",$AssignedPostIdArray);
 			
-			$SearchPosts = "SELECT reference_master.reference,reference_master.addDate,posts.id,posts.post_content_html,post_documents.original_name,post_poll_options.options,post_images.image_path,post_videos.video_path,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN posts ON (posts.id = reference_master.reference_id) LEFT JOIN post_images ON (posts.id = post_images.post_id AND post_images.post_id = reference_master.reference_id) LEFT JOIN post_videos ON (posts.id = post_videos.post_id AND post_videos.post_id = reference_master.reference_id) LEFT JOIN post_documents ON (posts.id = post_documents.post_id AND post_documents.post_id = reference_master.reference_id) LEFT JOIN post_poll_options ON (posts.id = post_poll_options.post_id AND post_poll_options.post_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='Post' AND (posts.post_content_html LIKE '%$SearchText%' OR post_documents.original_name LIKE '%$SearchText%' OR post_poll_options.options LIKE '%$SearchText%')";
+			$SearchPosts = "SELECT reference_master.reference,reference_master.addDate,posts.id,posts.post_content_html,post_documents.original_name,post_poll_options.options,post_images.image_path,post_videos.video_path,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN posts ON (posts.id = reference_master.reference_id) LEFT JOIN post_images ON (posts.id = post_images.post_id AND post_images.post_id = reference_master.reference_id) LEFT JOIN post_videos ON (posts.id = post_videos.post_id AND post_videos.post_id = reference_master.reference_id) LEFT JOIN post_documents ON (posts.id = post_documents.post_id AND post_documents.post_id = reference_master.reference_id) LEFT JOIN post_poll_options ON (posts.id = post_poll_options.post_id AND post_poll_options.post_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND posts.status='1' AND reference_master.reference='Post' AND (posts.post_content_html LIKE '%$SearchText%' OR post_documents.original_name LIKE '%$SearchText%' OR post_poll_options.options LIKE '%$SearchText%')";
 			
 			if($AssignedPostIdString != ''){
 				$SearchPosts .= " AND (reference_master.reference_id IN (".$AssignedPostIdString.") OR posts.privacy_id IN (1,2) OR reference_master.user_id = '".$CurrentUserID."')"; 
@@ -467,7 +467,7 @@ class Account extends CI_Controller
 			}
 			
 			// get result from questions
-			$SearchQuestions = "SELECT reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			$SearchQuestions = "SELECT reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND question_master.status='1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
 			
 			$SearchQuestionsResult = $this->db->query($SearchQuestions)->result_array();
 			$FoundQuestionResult = count($SearchQuestionsResult);
@@ -507,6 +507,7 @@ class Account extends CI_Controller
 						$getTotalAnswersCounter = "SELECT id FROM question_answer_master WHERE question_id='".$question_id."' AND status='1'";
 						$AnswerCounterResult = $this->db->query($getTotalAnswersCounter)->result_array();
 						
+						$tempQuestion['question_id']          = $question_id;
 						$tempQuestion['question_title']       = $SearchQuestionsResultData['question_title'];
 						$tempQuestion['question_description'] = $SearchQuestionsResultData['textarea'];
 						$tempQuestion['post_at']              = $timeAgo;
@@ -524,7 +525,7 @@ class Account extends CI_Controller
 			}
 			
 			// get result from documents
-			$SearchDocuments = "SELECT reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			$SearchDocuments = "SELECT reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND document_master.status='1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
 			$SearchDocumentResult = $this->db->query($SearchDocuments)->result_array();
 			
 			$FoundDocumentResult = count($SearchDocumentResult);
@@ -593,6 +594,7 @@ class Account extends CI_Controller
 						$avgRatings = round($averageRatings[0]['average'], 1);
 					}
 					
+					$tempDocuments['document_id']     = $document_id;
 					$tempDocuments['document_name']   = $SearchDocumentResultData['document_name'];
 					$tempDocuments['description']     = $SearchDocumentResultData['description'];
 					$tempDocuments['post_at']         = $timeAgo;
@@ -612,7 +614,7 @@ class Account extends CI_Controller
 			}
 			
 			//get search result from study set
-			$SearchStudySet = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			$SearchStudySet = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND study_sets.status='1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
 			$SearchStudySetResult = $this->db->query($SearchStudySet)->result_array();
 			
 			$FoundStudySetResult = count($SearchStudySetResult);
@@ -699,7 +701,7 @@ class Account extends CI_Controller
 			}
 			
 			//get search result from events
-			$SearchEvents = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			$SearchEvents = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND event_master.status='1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
 			
 			$SearchEventsResult = $this->db->query($SearchEvents)->result_array();
 			
@@ -1171,7 +1173,7 @@ class Account extends CI_Controller
 			}
 			$AssignedPostIdString = implode(",",$AssignedPostIdArray);
 			
-			$SearchPosts = "SELECT reference_master.reference,reference_master.addDate,posts.id,posts.post_content_html,post_documents.original_name,post_poll_options.options,post_images.image_path,post_videos.video_path,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN posts ON (posts.id = reference_master.reference_id) LEFT JOIN post_images ON (posts.id = post_images.post_id AND post_images.post_id = reference_master.reference_id) LEFT JOIN post_videos ON (posts.id = post_videos.post_id AND post_videos.post_id = reference_master.reference_id) LEFT JOIN post_documents ON (posts.id = post_documents.post_id AND post_documents.post_id = reference_master.reference_id) LEFT JOIN post_poll_options ON (posts.id = post_poll_options.post_id AND post_poll_options.post_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='Post' AND (posts.post_content_html LIKE '%$SearchText%' OR post_documents.original_name LIKE '%$SearchText%' OR post_poll_options.options LIKE '%$SearchText%')";
+			$SearchPosts = "SELECT reference_master.reference,reference_master.addDate,posts.id,posts.post_content_html,post_documents.original_name,post_poll_options.options,post_images.image_path,post_videos.video_path,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN posts ON (posts.id = reference_master.reference_id) LEFT JOIN post_images ON (posts.id = post_images.post_id AND post_images.post_id = reference_master.reference_id) LEFT JOIN post_videos ON (posts.id = post_videos.post_id AND post_videos.post_id = reference_master.reference_id) LEFT JOIN post_documents ON (posts.id = post_documents.post_id AND post_documents.post_id = reference_master.reference_id) LEFT JOIN post_poll_options ON (posts.id = post_poll_options.post_id AND post_poll_options.post_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND posts.status='1' AND reference_master.reference='Post' AND (posts.post_content_html LIKE '%$SearchText%' OR post_documents.original_name LIKE '%$SearchText%' OR post_poll_options.options LIKE '%$SearchText%')";
 			
 			if($AssignedPostIdString != ''){
 				$SearchPosts .= " AND (reference_master.reference_id IN (".$AssignedPostIdString.") OR posts.privacy_id IN (1,2) OR reference_master.user_id = '".$CurrentUserID."')"; 
@@ -1373,7 +1375,7 @@ class Account extends CI_Controller
 			$AllQuestions = array();
 			
 			// get result from questions
-			$SearchQuestions = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC";
+			$SearchQuestions = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND question_master.status='1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC";
 			
 			$SearchQuestionsResult = $this->db->query($SearchQuestions)->result_array();
 			$FoundQuestionResult = count($SearchQuestionsResult);
@@ -1532,7 +1534,7 @@ class Account extends CI_Controller
 			$AllDocuments = array();
 			
 			// get result from documents
-			$SearchDocuments = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
+			$SearchDocuments = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND document_master.status='1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
 			$SearchDocumentResult = $this->db->query($SearchDocuments)->result_array();
 			
 			$FoundDocumentResult = count($SearchDocumentResult);
@@ -1763,7 +1765,7 @@ class Account extends CI_Controller
 			$AllStudySets = array();
 			
 			//get search result from study set
-			$SearchStudySet = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC";
+			$SearchStudySet = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND study_sets.status='1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC";
 			$SearchStudySetResult = $this->db->query($SearchStudySet)->result_array();
 			
 			$FoundStudySetResult = count($SearchStudySetResult);
@@ -1976,7 +1978,7 @@ class Account extends CI_Controller
 			$AllEvents = array();
 			
 			//get search result from events
-			$SearchEvents = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
+			$SearchEvents = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND event_master.status='1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
 			
 			$SearchEventsResult = $this->db->query($SearchEvents)->result_array();
 			
@@ -2306,7 +2308,7 @@ class Account extends CI_Controller
 			$ID = base64_decode($detailId);
 			
 			// get single post query
-			$SearchPosts = "SELECT reference_master.reference,reference_master.reference_id,reference_master.addDate,posts.id,posts.post_content_html,posts.is_comment_on,posts.created_by,post_documents.original_name,post_poll_options.options,post_images.image_path,post_videos.video_path,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN posts ON (posts.id = reference_master.reference_id) LEFT JOIN post_images ON (posts.id = post_images.post_id AND post_images.post_id = reference_master.reference_id) LEFT JOIN post_videos ON (posts.id = post_videos.post_id AND post_videos.post_id = reference_master.reference_id) LEFT JOIN post_documents ON (posts.id = post_documents.post_id AND post_documents.post_id = reference_master.reference_id) LEFT JOIN post_poll_options ON (posts.id = post_poll_options.post_id AND post_poll_options.post_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND reference_master.reference='Post' AND posts.id='".$ID."'";
+			$SearchPosts = "SELECT reference_master.reference,reference_master.reference_id,reference_master.addDate,posts.id,posts.post_content_html,posts.is_comment_on,posts.created_by,post_documents.original_name,post_poll_options.options,post_images.image_path,post_videos.video_path,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN posts ON (posts.id = reference_master.reference_id) LEFT JOIN post_images ON (posts.id = post_images.post_id AND post_images.post_id = reference_master.reference_id) LEFT JOIN post_videos ON (posts.id = post_videos.post_id AND post_videos.post_id = reference_master.reference_id) LEFT JOIN post_documents ON (posts.id = post_documents.post_id AND post_documents.post_id = reference_master.reference_id) LEFT JOIN post_poll_options ON (posts.id = post_poll_options.post_id AND post_poll_options.post_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND posts.status='1' AND reference_master.reference='Post' AND posts.id='".$ID."'";
 			
 			$SearchPosts .= " GROUP BY posts.id ORDER BY reference_master.addDate DESC";
 			
@@ -7404,6 +7406,160 @@ class Account extends CI_Controller
 			
 			print_r(json_encode($result));
 			die;
+		}
+	}
+	
+	public function reportThings(){
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('primary_id','ID','required');
+		$this->form_validation->set_rules('report_post_type','Report Type','required');
+		$this->form_validation->set_rules('report_reason','Report Reason','required');
+		$this->form_validation->set_rules('report_description','Report Description','required');
+		$this->form_validation->set_rules('current_page','Redirection','required');
+		if($this->form_validation->run() == FALSE){
+			$errors = $this->form_validation->error_array();
+			$this->session->set_flashdata('exception',$errors);
+			
+			if($this->input->post('current_page') != ''){
+				if($this->input->post('current_page') == 'searchResult'){
+					redirect('account/searchResult');
+				}
+			} else {
+				redirect('account/searchResult');		
+			}
+		} else {
+			$CurrentUserID = $this->session->get_userdata()['user_data']['user_id'];
+			
+			$primary_id         = ($this->input->post('primary_id')) ? $this->input->post('primary_id') : 0;
+			$report_post_type   = $this->input->post('report_post_type');
+			$report_reason      = $this->input->post('report_reason');
+			$report_description = $this->input->post('report_description');
+			$current_page       = $this->input->post('current_page');
+			
+			if($report_post_type == 'POSTS'){
+				$insertPost['post_id']            = $primary_id;
+				$insertPost['user_id']            = $CurrentUserID;
+				$insertPost['report_reason']      = $report_reason;
+				$insertPost['created_at']         = date("Y-m-d H:i:s");
+				$insertPost['report_description'] = $report_description;
+				$insertPost['status']             = 1;
+				if($this->db->insert('report_post',$insertPost)){
+					$this->session->set_flashdata('message',"You have succesfully reported this post.");
+					
+					$checkPostExist = "SELECT id from posts WHERE id='".$primary_id."'";
+					$checkResultPost = $this->db->query($checkPostExist)->result_array();
+					if(!empty($checkResultPost)){
+						
+						$updatePost['status']     = 3;
+						$updatePost['updated_at'] = date("Y-m-d H:i:s");
+						
+						$this->db->where('id',$primary_id);
+						$this->db->set($updatePost);
+						$this->db->update('posts');
+					}
+				} else {
+					$this->session->set_flashdata('exception','Something went wrong!');
+				}
+			} else if($report_post_type == 'QUESTIONS') {
+				$insertPost['question_id']        = $primary_id;
+				$insertPost['user_id']            = $CurrentUserID;
+				$insertPost['report_reason']      = $report_reason;
+				$insertPost['created_at']         = date("Y-m-d H:i:s");
+				$insertPost['report_description'] = $report_description;
+				$insertPost['status']             = 1;
+				if($this->db->insert('report_questions',$insertPost)){
+					$this->session->set_flashdata('message',"You have succesfully reported this question.");
+					
+					$checkPostExist = "SELECT id from question_master WHERE id='".$primary_id."'";
+					$checkResultPost = $this->db->query($checkPostExist)->result_array();
+					if(!empty($checkResultPost)){
+						
+						$updatePost['status']     = 3;
+						$this->db->where('id',$primary_id);
+						$this->db->set($updatePost);
+						$this->db->update('question_master');
+					}
+				} else {
+					$this->session->set_flashdata('exception','Something went wrong!');
+				}
+			} else if($report_post_type == 'DOCUMENTS'){
+				$insertPost['document_id']        = $primary_id;
+				$insertPost['user_id']            = $CurrentUserID;
+				$insertPost['report_reason']      = $report_reason;
+				$insertPost['created_at']         = date("Y-m-d H:i:s");
+				$insertPost['report_description'] = $report_description;
+				$insertPost['status']             = 1;
+				if($this->db->insert('report_documents',$insertPost)){
+					$this->session->set_flashdata('message',"You have succesfully reported this document.");
+					
+					$checkPostExist = "SELECT id from document_master WHERE id='".$primary_id."'";
+					$checkResultPost = $this->db->query($checkPostExist)->result_array();
+					if(!empty($checkResultPost)){
+						
+						$updatePost['status']     = 3;
+						$this->db->where('id',$primary_id);
+						$this->db->set($updatePost);
+						$this->db->update('document_master');
+					}
+				} else {
+					$this->session->set_flashdata('exception','Something went wrong!');
+				}
+			} else if($report_post_type == 'STUDYSET'){
+				$insertPost['study_set_id']       = $primary_id;
+				$insertPost['user_id']            = $CurrentUserID;
+				$insertPost['report_reason']      = $report_reason;
+				$insertPost['created_at']         = date("Y-m-d H:i:s");
+				$insertPost['report_description'] = $report_description;
+				$insertPost['status']             = 1;
+				if($this->db->insert('reported',$insertPost)){
+					$this->session->set_flashdata('message',"You have succesfully reported this study set.");
+					
+					$checkPostExist = "SELECT study_set_id from study_sets WHERE study_set_id ='".$primary_id."'";
+					$checkResultPost = $this->db->query($checkPostExist)->result_array();
+					if(!empty($checkResultPost)){
+						
+						$updatePost['status']     = 3;
+						$updatePost['updated_on'] = date("Y-m-d H:i:s");
+						
+						$this->db->where('study_set_id',$primary_id);
+						$this->db->set($updatePost);
+						$this->db->update('study_sets');
+					}
+				} else {
+					$this->session->set_flashdata('exception','Something went wrong!');
+				}
+			} else if($report_post_type == 'EVENTS'){
+				$insertPost['event_id']           = $primary_id;
+				$insertPost['user_id']            = $CurrentUserID;
+				$insertPost['report_reason']      = $report_reason;
+				$insertPost['created_at']         = date("Y-m-d H:i:s");
+				$insertPost['report_description'] = $report_description;
+				$insertPost['status']             = 1;
+				if($this->db->insert('report_event',$insertPost)){
+					$this->session->set_flashdata('message',"You have succesfully reported this event.");
+					
+					$checkPostExist = "SELECT id from event_master WHERE id ='".$primary_id."'";
+					$checkResultPost = $this->db->query($checkPostExist)->result_array();
+					if(!empty($checkResultPost)){
+						
+						$updatePost['status']     = 3;
+						$this->db->where('id',$primary_id);
+						$this->db->set($updatePost);
+						$this->db->update('event_master');
+					}
+				} else {
+					$this->session->set_flashdata('exception','Something went wrong!');
+				}
+			}
+			
+			if($this->input->post('current_page') != ''){
+				if($this->input->post('current_page') == 'searchResult'){
+					redirect('account/searchResult');
+				}
+			} else {
+				redirect('account/searchResult');		
+			}
 		}
 	}
 }

@@ -1031,7 +1031,7 @@
             togglename.text('Love');
         }
     });
-    $('.innerReplyBox').slideUp();
+	/*$('.innerReplyBox').slideUp();*/
     $('.leftStatus a.reply').on('click', function() {
         $(this).siblings('.innerReplyBox').slideDown();
     });
