@@ -1109,11 +1109,12 @@ $(document).ready(function() {
 					var redirect_url = $(this).attr('data-userProfileUrl');
 					window.location.href=redirect_url;
 				}); 
-
+				
 				$('.mainDivTrigger').click(function () {
 					var redirect_url = $(this).attr('data-userPostUrl');
 					window.location.href=redirect_url;
 				}).children().click(function (e) {
+					
 				});
 			}
 		});

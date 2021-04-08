@@ -130,8 +130,38 @@ class Account extends CI_Controller
 			$SearchUserid = array();
 			$ExistingUsers = array();
 			
+			// get reported users
+			$reportedUsers = array();
+			$reportedUsersString = '';
+			
+			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+			$ReportedUserResult = $this->db->query($getReportedUsers)->result_array();
+			if(!empty($ReportedUserResult)){
+				foreach($ReportedUserResult as $ReportedUserResultData){
+					$reportedUsers[] = $ReportedUserResultData['report_user_id'];
+				}
+			}
+			
+			$getBlockedUsers = "SELECT peer_id FROM blocked_peers WHERE user_id='".$CurrentUserID."'";
+			$BlockedUserResult = $this->db->query($getBlockedUsers)->result_array();
+			if(!empty($BlockedUserResult)){
+				foreach($BlockedUserResult as $BlockedUserResultData){
+					$reportedUsers[] = $BlockedUserResultData['peer_id'];
+				}
+			}
+			
+			if(!empty($reportedUsers)){
+				$reportedUsersString = implode(",",$reportedUsers);
+			}
+			
 			// search for my friends / peers
-			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ORDER BY user.id DESC LIMIT 5";
+			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ";
+			
+			if($reportedUsersString != ''){
+				$SearchPeers .= " AND user.id NOT IN (".$reportedUsersString.")";
+			}
+			
+			$SearchPeers .= " ORDER BY user.id DESC LIMIT 5";
 			
 			$SearchPeersResult = $this->db->query($SearchPeers)->result_array();
 			$FoundResult = count($SearchPeersResult);
@@ -215,6 +245,10 @@ class Account extends CI_Controller
 						$MutalQuery .= " AND u.id NOT IN (".$SearchUseridString.")";
 					}
 					
+					if($reportedUsersString != ''){
+						$MutalQuery .= " AND u.id NOT IN (".$reportedUsersString.")";
+					}
+					
 					$SearchMutalFriends = $this->db->query($MutalQuery)->result_array();
 					
 					if(!empty($SearchMutalFriends)){
@@ -294,9 +328,15 @@ class Account extends CI_Controller
 					$SearchByUniversity .= " AND user.id NOT IN (".$SearchUseridString.")";
 				}
 				
+				if($reportedUsersString != ''){
+					$SearchByUniversity .= " AND user.id NOT IN (".$reportedUsersString.")";
+				}
+				
 				$SearchByUniversity .= " AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%')";
 				
 				$SearchByUniversity .= " ORDER BY user.id DESC LIMIT ".$RemainingResult;
+				
+				
 				
 				$SearchUniversityResult = $this->db->query($SearchByUniversity)->result_array();
 				$FoundResult2 = count($SearchUniversityResult);
@@ -363,6 +403,22 @@ class Account extends CI_Controller
 			}
 			
 			//get result from posts
+			// get reported posts
+			$reportedPosts = array();
+			$reportedPostsString = '';
+			
+			$getReportedPosts = "SELECT post_id FROM report_post WHERE user_id='".$CurrentUserID."'";
+			$ReportedPostsResult = $this->db->query($getReportedPosts)->result_array();
+			if(!empty($ReportedPostsResult)){
+				foreach($ReportedPostsResult as $ReportedPostsResultData){
+					$reportedPosts[] = $ReportedPostsResultData['post_id'];
+				}
+			}
+			
+			if(!empty($reportedPosts)){
+				$reportedPostsString = implode(",",$reportedPosts);
+			}
+			
 			//get particular user assigned posts ids
 			$getAssignedPostsIDS = "SELECT post_id FROM post_share_with_peers WHERE peer_id='".$CurrentUserID."'";
 			$AssignedPostIds = $this->db->query($getAssignedPostsIDS)->result_array();
@@ -383,6 +439,10 @@ class Account extends CI_Controller
 				$SearchPosts .= " AND (reference_master.reference_id IN (".$AssignedPostIdString.") OR posts.privacy_id IN (1,2) OR reference_master.user_id = '".$CurrentUserID."')"; 
 			} else {
 				$SearchPosts .= " AND (posts.privacy_id IN (1,2) OR reference_master.user_id = '".$CurrentUserID."')"; 
+			}
+			
+			if($reportedPostsString != ''){
+				$SearchPosts .= " AND posts.id NOT IN (".$reportedPostsString.")"; 
 			}
 			
 			$SearchPosts .= " GROUP BY posts.id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
@@ -467,7 +527,29 @@ class Account extends CI_Controller
 			}
 			
 			// get result from questions
-			$SearchQuestions = "SELECT reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND question_master.status='1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			// get reported questions
+			$reportedQuestions = array();
+			$reportedQuestionString = '';
+			
+			$getReportedQuestion = "SELECT question_id FROM report_questions WHERE user_id='".$CurrentUserID."'";
+			$ReportedQuestionResult = $this->db->query($getReportedQuestion)->result_array();
+			if(!empty($ReportedQuestionResult)){
+				foreach($ReportedQuestionResult as $ReportedQuestionResultData){
+					$reportedQuestions[] = $ReportedQuestionResultData['question_id'];
+				}
+			}
+			
+			if(!empty($reportedQuestions)){
+				$reportedQuestionString = implode(",",$reportedQuestions);
+			}
+			
+			$SearchQuestions = "SELECT reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND question_master.status='1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%')";
+			
+			if($reportedQuestionString != ''){
+				$SearchQuestions .= " AND question_master.id NOT IN (".$reportedQuestionString.")";
+			}
+			
+			$SearchQuestions .= " GROUP BY question_master.id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult; 
 			
 			$SearchQuestionsResult = $this->db->query($SearchQuestions)->result_array();
 			$FoundQuestionResult = count($SearchQuestionsResult);
@@ -525,7 +607,30 @@ class Account extends CI_Controller
 			}
 			
 			// get result from documents
-			$SearchDocuments = "SELECT reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND document_master.status='1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			// get reported questions
+			$reportedDocuments = array();
+			$reportedDocumentString = '';
+			
+			$getReportedDocument = "SELECT document_id FROM report_documents WHERE user_id='".$CurrentUserID."'";
+			$ReportedDocumentResult = $this->db->query($getReportedDocument)->result_array();
+			if(!empty($ReportedDocumentResult)){
+				foreach($ReportedDocumentResult as $ReportedDocumentResultData){
+					$reportedDocuments[] = $ReportedDocumentResultData['document_id'];
+				}
+			}
+			
+			if(!empty($reportedDocuments)){
+				$reportedDocumentString = implode(",",$reportedDocuments);
+			}
+			
+			$SearchDocuments = "SELECT reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND document_master.status='1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ";
+			
+			if($reportedDocumentString != ''){
+				$SearchDocuments .= " AND document_master.id NOT IN(".$reportedDocumentString.")";
+			}
+			
+			$SearchDocuments .= " ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			
 			$SearchDocumentResult = $this->db->query($SearchDocuments)->result_array();
 			
 			$FoundDocumentResult = count($SearchDocumentResult);
@@ -614,7 +719,30 @@ class Account extends CI_Controller
 			}
 			
 			//get search result from study set
-			$SearchStudySet = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND study_sets.status='1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			// get reported questions
+			$reportedStudyset = array();
+			$reportedStudysetString = '';
+			
+			$getReportedStudyset = "SELECT study_set_id FROM reported WHERE user_id='".$CurrentUserID."'";
+			$ReportedStudysetResult = $this->db->query($getReportedStudyset)->result_array();
+			if(!empty($ReportedStudysetResult)){
+				foreach($ReportedStudysetResult as $ReportedStudysetResultData){
+					$reportedStudyset[] = $ReportedStudysetResultData['study_set_id'];
+				}
+			}
+			
+			if(!empty($reportedStudyset)){
+				$reportedStudysetString = implode(",",$reportedStudyset);
+			}
+			
+			$SearchStudySet = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND study_sets.status='1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') ";
+			
+			if($reportedStudysetString != ''){
+				$SearchStudySet .= " AND study_sets.study_set_id NOT IN (".$reportedStudysetString.")";
+			}
+			
+			$SearchStudySet .= " GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			
 			$SearchStudySetResult = $this->db->query($SearchStudySet)->result_array();
 			
 			$FoundStudySetResult = count($SearchStudySetResult);
@@ -701,7 +829,29 @@ class Account extends CI_Controller
 			}
 			
 			//get search result from events
-			$SearchEvents = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND event_master.status='1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
+			// get reported questions
+			$reportedEvents = array();
+			$reportedEventsString = '';
+			
+			$getReportedEvents = "SELECT event_id FROM report_event WHERE user_id='".$CurrentUserID."'";
+			$ReportedEventsResult = $this->db->query($getReportedEvents)->result_array();
+			if(!empty($ReportedEventsResult)){
+				foreach($ReportedEventsResult as $ReportedEventsResultData){
+					$reportedEvents[] = $ReportedEventsResultData['event_id'];
+				}
+			}
+			
+			if(!empty($reportedEvents)){
+				$reportedEventsString = implode(",",$reportedEvents);
+			}
+			
+			$SearchEvents = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND event_master.status='1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ";
+			
+			if($reportedEventsString != ''){
+				$SearchEvents .= " AND event_master.id NOT IN (".$reportedEventsString.")";
+			}
+			
+			$SearchEvents .= " ORDER BY reference_master.addDate DESC LIMIT ".$LimitResult;
 			
 			$SearchEventsResult = $this->db->query($SearchEvents)->result_array();
 			
@@ -868,8 +1018,38 @@ class Account extends CI_Controller
 			$FoundResult     = 0;
 			$FoundResult2    = 0;
 			
+			// get reported questions
+			$reportedUsers = array();
+			$reportedUsersString = '';
+			
+			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+			$ReportedUsersResult = $this->db->query($getReportedUsers)->result_array();
+			if(!empty($ReportedUsersResult)){
+				foreach($ReportedUsersResult as $ReportedUsersResultData){
+					$reportedUsers[] = $ReportedUsersResultData['report_user_id'];
+				}
+			}
+			
+			$getBlockedUsers = "SELECT peer_id FROM blocked_peers WHERE user_id='".$CurrentUserID."'";
+			$BlockedUserResult = $this->db->query($getBlockedUsers)->result_array();
+			if(!empty($BlockedUserResult)){
+				foreach($BlockedUserResult as $BlockedUserResultData){
+					$reportedUsers[] = $BlockedUserResultData['peer_id'];
+				}
+			}
+			
+			if(!empty($reportedUsers)){
+				$reportedUsersString = implode(",",$reportedUsers);
+			}
+			
 			// search for my friends / peers
-			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ORDER BY user.id DESC";
+			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%')";
+			
+			if($reportedUsersString != ''){
+				$SearchPeers .= " AND user.id NOT IN (".$reportedUsersString.")";
+			}
+			
+			$SearchPeers .= " ORDER BY user.id DESC";
 			
 			$SearchPeersResult = $this->db->query($SearchPeers)->result_array();
 			$FoundResult = count($SearchPeersResult);
@@ -953,6 +1133,10 @@ class Account extends CI_Controller
 						$MutalQuery .= " AND u.id NOT IN (".$SearchUseridString.")";
 					}
 					
+					if($reportedUsersString != ''){
+						$MutalQuery .= " AND u.id NOT IN (".$reportedUsersString.")";
+					}
+					
 					$SearchMutalFriends = $this->db->query($MutalQuery)->result_array();
 					
 					if(!empty($SearchMutalFriends)){
@@ -1026,6 +1210,10 @@ class Account extends CI_Controller
 				
 				if($SearchUseridString != ''){
 					$SearchByUniversity .= " AND user.id NOT IN (".$SearchUseridString.")";
+				}
+				
+				if($reportedUsersString != ''){
+					$SearchByUniversity .= " AND user.id NOT IN (".$reportedUsersString.")";
 				}
 				
 				$SearchByUniversity .= " AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%')";
@@ -1159,6 +1347,22 @@ class Account extends CI_Controller
 			$AllPosts = array();
 			
 			//get result from posts
+			// get reported posts
+			$reportedPosts = array();
+			$reportedPostsString = '';
+			
+			$getReportedPosts = "SELECT post_id FROM report_post WHERE user_id='".$CurrentUserID."'";
+			$ReportedPostsResult = $this->db->query($getReportedPosts)->result_array();
+			if(!empty($ReportedPostsResult)){
+				foreach($ReportedPostsResult as $ReportedPostsResultData){
+					$reportedPosts[] = $ReportedPostsResultData['post_id'];
+				}
+			}
+			
+			if(!empty($reportedPosts)){
+				$reportedPostsString = implode(",",$reportedPosts);
+			}
+			
 			//get particular user assigned posts ids
 			$getAssignedPostsIDS = "SELECT post_id FROM post_share_with_peers WHERE peer_id='".$CurrentUserID."'";
 			$AssignedPostIds = $this->db->query($getAssignedPostsIDS)->result_array();
@@ -1179,6 +1383,10 @@ class Account extends CI_Controller
 				$SearchPosts .= " AND (reference_master.reference_id IN (".$AssignedPostIdString.") OR posts.privacy_id IN (1,2) OR reference_master.user_id = '".$CurrentUserID."')"; 
 			} else {
 				$SearchPosts .= " AND (posts.privacy_id IN (1,2) OR reference_master.user_id = '".$CurrentUserID."')"; 
+			}
+			
+			if($reportedPostsString != ''){
+				$SearchPosts .= " AND posts.id NOT IN (".$reportedPostsString.")"; 
 			}
 			
 			$SearchPosts .= " GROUP BY posts.id ORDER BY reference_master.addDate DESC";
@@ -1312,7 +1520,17 @@ class Account extends CI_Controller
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline">'.$searchedData['posted_date'].'</span>
-                                    <a href=""><img src="'.base_url().'assets_d/images/more.svg" alt="Image"/></a>
+                                    &nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="'.base_url().'assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="POSTS" data-currentPage="searchViewAll" data-primaryId="'.$searchedData['post_id'].'">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -1375,7 +1593,29 @@ class Account extends CI_Controller
 			$AllQuestions = array();
 			
 			// get result from questions
-			$SearchQuestions = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND question_master.status='1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') GROUP BY question_master.id ORDER BY reference_master.addDate DESC";
+			// get reported questions
+			$reportedQuestions = array();
+			$reportedQuestionString = '';
+			
+			$getReportedQuestion = "SELECT question_id FROM report_questions WHERE user_id='".$CurrentUserID."'";
+			$ReportedQuestionResult = $this->db->query($getReportedQuestion)->result_array();
+			if(!empty($ReportedQuestionResult)){
+				foreach($ReportedQuestionResult as $ReportedQuestionResultData){
+					$reportedQuestions[] = $ReportedQuestionResultData['question_id'];
+				}
+			}
+			
+			if(!empty($reportedQuestions)){
+				$reportedQuestionString = implode(",",$reportedQuestions);
+			}
+			
+			$SearchQuestions = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND question_master.status='1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%') ";
+			
+			if($reportedQuestionString != ''){
+				$SearchQuestions .= " AND question_master.id NOT IN (".$reportedQuestionString.")";
+			}
+			
+			$SearchQuestions .= " GROUP BY question_master.id ORDER BY reference_master.addDate DESC"; 
 			
 			$SearchQuestionsResult = $this->db->query($SearchQuestions)->result_array();
 			$FoundQuestionResult = count($SearchQuestionsResult);
@@ -1415,6 +1655,7 @@ class Account extends CI_Controller
 						$getTotalAnswersCounter = "SELECT id FROM question_answer_master WHERE question_id='".$question_id."' AND status='1'";
 						$AnswerCounterResult = $this->db->query($getTotalAnswersCounter)->result_array();
 						
+						$tempQuestion['question_id']          = $question_id;
 						$tempQuestion['reference_id']         = $SearchQuestionsResultData['reference_id'];
 						$tempQuestion['question_title']       = $SearchQuestionsResultData['question_title'];
 						$tempQuestion['question_description'] = $SearchQuestionsResultData['textarea'];
@@ -1482,7 +1723,17 @@ class Account extends CI_Controller
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline">'.$searchedData['post_at'].'</span>
-                                    <a href=""><img src="'.base_url().'assets_d/images/more.svg" alt="Image"/></a>
+                                    &nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="'.base_url().'assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="QUESTIONS" data-currentPage="searchViewAll" data-primaryId="'.$searchedData['question_id'].'">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -1534,7 +1785,30 @@ class Account extends CI_Controller
 			$AllDocuments = array();
 			
 			// get result from documents
-			$SearchDocuments = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND document_master.status='1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
+			// get reported questions
+			$reportedDocuments = array();
+			$reportedDocumentString = '';
+			
+			$getReportedDocument = "SELECT document_id FROM report_documents WHERE user_id='".$CurrentUserID."'";
+			$ReportedDocumentResult = $this->db->query($getReportedDocument)->result_array();
+			if(!empty($ReportedDocumentResult)){
+				foreach($ReportedDocumentResult as $ReportedDocumentResultData){
+					$reportedDocuments[] = $ReportedDocumentResultData['document_id'];
+				}
+			}
+			
+			if(!empty($reportedDocuments)){
+				$reportedDocumentString = implode(",",$reportedDocuments);
+			}
+			
+			$SearchDocuments = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND document_master.status='1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ";
+			
+			if($reportedDocumentString != ''){
+				$SearchDocuments .= " AND document_master.id NOT IN(".$reportedDocumentString.")";
+			}
+			
+			$SearchDocuments .= " ORDER BY reference_master.addDate DESC";
+			
 			$SearchDocumentResult = $this->db->query($SearchDocuments)->result_array();
 			
 			$FoundDocumentResult = count($SearchDocumentResult);
@@ -1603,6 +1877,7 @@ class Account extends CI_Controller
 						$avgRatings = round($averageRatings[0]['average'], 1);
 					}
 					
+					$tempDocuments['document_id']    =  $document_id;
 					$tempDocuments['reference_id']    = ($SearchDocumentResultData['reference_id']) ? $SearchDocumentResultData['reference_id'] : 0;
 					$tempDocuments['document_name']   = $SearchDocumentResultData['document_name'];
 					$tempDocuments['description']     = $SearchDocumentResultData['description'];
@@ -1672,7 +1947,17 @@ class Account extends CI_Controller
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline">'.$searchedData['post_at'].'</span>
-                                    <a href=""><img src="'.base_url().'assets_d/images/more.svg" alt="Image"/></a>
+                                    &nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="'.base_url().'assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="DOCUMENTS" data-currentPage="searchViewAll" data-primaryId="'.$searchedData['document_id'].'">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -1765,7 +2050,30 @@ class Account extends CI_Controller
 			$AllStudySets = array();
 			
 			//get search result from study set
-			$SearchStudySet = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND study_sets.status='1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC";
+			// get reported questions
+			$reportedStudyset = array();
+			$reportedStudysetString = '';
+			
+			$getReportedStudyset = "SELECT study_set_id FROM reported WHERE user_id='".$CurrentUserID."'";
+			$ReportedStudysetResult = $this->db->query($getReportedStudyset)->result_array();
+			if(!empty($ReportedStudysetResult)){
+				foreach($ReportedStudysetResult as $ReportedStudysetResultData){
+					$reportedStudyset[] = $ReportedStudysetResultData['study_set_id'];
+				}
+			}
+			
+			if(!empty($reportedStudyset)){
+				$reportedStudysetString = implode(",",$reportedStudyset);
+			}
+			
+			$SearchStudySet = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND study_sets.status='1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') ";
+			
+			if($reportedStudysetString != ''){
+				$SearchStudySet .= " AND study_sets.study_set_id NOT IN (".$reportedStudysetString.")";
+			}
+			
+			$SearchStudySet .= " GROUP BY study_sets.study_set_id ORDER BY reference_master.addDate DESC";
+			
 			$SearchStudySetResult = $this->db->query($SearchStudySet)->result_array();
 			
 			$FoundStudySetResult = count($SearchStudySetResult);
@@ -1835,6 +2143,7 @@ class Account extends CI_Controller
 						$avgRatings = round($averageRatings[0]['average'], 1);
 					}
 					
+					$tempStudySet['study_set_id']    = $study_set_id;
 					$tempStudySet['reference_id']    = ($SearchStudySetData['reference_id']) ? $SearchStudySetData['reference_id'] : 0;
 					$tempStudySet['studyset_name']   = $SearchStudySetData['name'];
 					$tempStudySet['studyset_cover']  = $CoverimageLink;
@@ -1903,7 +2212,17 @@ class Account extends CI_Controller
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline">'.$searchedData['post_at'].'</span>
-                                    <a href=""><img src="'.base_url().'assets_d/images/more.svg" alt="Image"/></a>
+                                    &nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="'.base_url().'assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="STUDYSET" data-currentPage="searchViewAll" data-primaryId="'.$searchedData['study_set_id'].'">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -1978,7 +2297,29 @@ class Account extends CI_Controller
 			$AllEvents = array();
 			
 			//get search result from events
-			$SearchEvents = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND event_master.status='1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ORDER BY reference_master.addDate DESC";
+			// get reported questions
+			$reportedEvents = array();
+			$reportedEventsString = '';
+			
+			$getReportedEvents = "SELECT event_id FROM report_event WHERE user_id='".$CurrentUserID."'";
+			$ReportedEventsResult = $this->db->query($getReportedEvents)->result_array();
+			if(!empty($ReportedEventsResult)){
+				foreach($ReportedEventsResult as $ReportedEventsResultData){
+					$reportedEvents[] = $ReportedEventsResultData['event_id'];
+				}
+			}
+			
+			if(!empty($reportedEvents)){
+				$reportedEventsString = implode(",",$reportedEvents);
+			}
+			
+			$SearchEvents = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND event_master.status='1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ";
+			
+			if($reportedEventsString != ''){
+				$SearchEvents .= " AND event_master.id NOT IN (".$reportedEventsString.")";
+			}
+			
+			$SearchEvents .= " ORDER BY reference_master.addDate DESC";
 			
 			$SearchEventsResult = $this->db->query($SearchEvents)->result_array();
 			
@@ -2115,7 +2456,17 @@ class Account extends CI_Controller
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline">'.$searchedData['post_at'].'</span>
-                                    <a href=""><img src="'.base_url().'assets_d/images/more.svg" alt="Image"/></a>
+                                    &nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="'.base_url().'assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="EVENTS" data-currentPage="searchViewAll" data-primaryId="'.$searchedData['event_primary_id'].'">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -2479,11 +2830,116 @@ class Account extends CI_Controller
     public function getDashboardFeeds()
     {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
+		$CurrentUserID = $user_id;
+		
         $offset     = $this->input->post('count');
         $count      = $offset * 10;
         $peerList = $this->peerListStringDashboard($user_id);
 
-
+		// get reported questions
+		$reportedUsers = array();
+		$reportedUsersString = '';
+		
+		$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+		$ReportedUsersResult = $this->db->query($getReportedUsers)->result_array();
+		if(!empty($ReportedUsersResult)){
+			foreach($ReportedUsersResult as $ReportedUsersResultData){
+				$reportedUsers[] = $ReportedUsersResultData['report_user_id'];
+			}
+		}
+		
+		$getBlockedUsers = "SELECT peer_id FROM blocked_peers WHERE user_id='".$CurrentUserID."'";
+		$BlockedUserResult = $this->db->query($getBlockedUsers)->result_array();
+		if(!empty($BlockedUserResult)){
+			foreach($BlockedUserResult as $BlockedUserResultData){
+				$reportedUsers[] = $BlockedUserResultData['peer_id'];
+			}
+		}
+		
+		if(!empty($reportedUsers)){
+			$reportedUsersString = implode(",",$reportedUsers);
+		}
+		
+		// get reported posts
+		$reportedPosts = array();
+		$reportedPostsString = '';
+		
+		$getReportedPosts = "SELECT post_id FROM report_post WHERE user_id='".$CurrentUserID."'";
+		$ReportedPostsResult = $this->db->query($getReportedPosts)->result_array();
+		if(!empty($ReportedPostsResult)){
+			foreach($ReportedPostsResult as $ReportedPostsResultData){
+				$reportedPosts[] = $ReportedPostsResultData['post_id'];
+			}
+		}
+		
+		if(!empty($reportedPosts)){
+			$reportedPostsString = implode(",",$reportedPosts);
+		}
+		
+		// get reported questions
+		$reportedQuestions = array();
+		$reportedQuestionString = '';
+		
+		$getReportedQuestion = "SELECT question_id FROM report_questions WHERE user_id='".$CurrentUserID."'";
+		$ReportedQuestionResult = $this->db->query($getReportedQuestion)->result_array();
+		if(!empty($ReportedQuestionResult)){
+			foreach($ReportedQuestionResult as $ReportedQuestionResultData){
+				$reportedQuestions[] = $ReportedQuestionResultData['question_id'];
+			}
+		}
+		
+		if(!empty($reportedQuestions)){
+			$reportedQuestionString = implode(",",$reportedQuestions);
+		}
+		
+		// get reported questions
+		$reportedDocuments = array();
+		$reportedDocumentString = '';
+		
+		$getReportedDocument = "SELECT document_id FROM report_documents WHERE user_id='".$CurrentUserID."'";
+		$ReportedDocumentResult = $this->db->query($getReportedDocument)->result_array();
+		if(!empty($ReportedDocumentResult)){
+			foreach($ReportedDocumentResult as $ReportedDocumentResultData){
+				$reportedDocuments[] = $ReportedDocumentResultData['document_id'];
+			}
+		}
+		
+		if(!empty($reportedDocuments)){
+			$reportedDocumentString = implode(",",$reportedDocuments);
+		}
+		
+		// get reported studyset
+		$reportedStudyset = array();
+		$reportedStudysetString = '';
+		
+		$getReportedStudyset = "SELECT study_set_id FROM reported WHERE user_id='".$CurrentUserID."'";
+		$ReportedStudysetResult = $this->db->query($getReportedStudyset)->result_array();
+		if(!empty($ReportedStudysetResult)){
+			foreach($ReportedStudysetResult as $ReportedStudysetResultData){
+				$reportedStudyset[] = $ReportedStudysetResultData['study_set_id'];
+			}
+		}
+		
+		if(!empty($reportedStudyset)){
+			$reportedStudysetString = implode(",",$reportedStudyset);
+		}
+		
+		// get reported events
+		$reportedEvents = array();
+		$reportedEventsString = '';
+		
+		$getReportedEvents = "SELECT event_id FROM report_event WHERE user_id='".$CurrentUserID."'";
+		$ReportedEventsResult = $this->db->query($getReportedEvents)->result_array();
+		if(!empty($ReportedEventsResult)){
+			foreach($ReportedEventsResult as $ReportedEventsResultData){
+				$reportedEvents[] = $ReportedEventsResultData['event_id'];
+			}
+		}
+		
+		if(!empty($reportedEvents)){
+			$reportedEventsString = implode(",",$reportedEvents);
+		}
+		
         $this->db->select('reference_master.*,');
         $this->db->from('reference_master');
         $this->db->where("reference_master.status", 1);
@@ -2494,6 +2950,7 @@ class Account extends CI_Controller
             $this->db->where('reference_master.status', 1);
             $this->db->group_end();
         }
+		
         $total_feeds = $this->db->get()->num_rows();
 
         $this->db->select('reference_master.*,');
@@ -2506,9 +2963,11 @@ class Account extends CI_Controller
             $this->db->where('reference_master.status', 1);
             $this->db->group_end();
         }
+		
         $this->db->limit(10, $count);
         $this->db->order_by('reference_master.id', 'desc');
         $data['feeds'] = $this->db->get()->result_array();
+		
         // echo $this->db->last_query();die;
         if ($count + 10 < $total_feeds) {
             $data['loadMore'] = 1;
@@ -6951,6 +7410,30 @@ class Account extends CI_Controller
 			
 			$CurrentUserID = $this->session->get_userdata()['user_data']['user_id'];
 			
+			// get reported questions
+			$reportedUsers = array();
+			$reportedUsersString = '';
+			
+			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+			$ReportedUsersResult = $this->db->query($getReportedUsers)->result_array();
+			if(!empty($ReportedUsersResult)){
+				foreach($ReportedUsersResult as $ReportedUsersResultData){
+					$reportedUsers[] = $ReportedUsersResultData['report_user_id'];
+				}
+			}
+			
+			$getBlockedUsers = "SELECT peer_id FROM blocked_peers WHERE user_id='".$CurrentUserID."'";
+			$BlockedUserResult = $this->db->query($getBlockedUsers)->result_array();
+			if(!empty($BlockedUserResult)){
+				foreach($BlockedUserResult as $BlockedUserResultData){
+					$reportedUsers[] = $BlockedUserResultData['peer_id'];
+				}
+			}
+			
+			if(!empty($reportedUsers)){
+				$reportedUsersString = implode(",",$reportedUsers);
+			}
+			
 			$GetUserInfo   = $this->db->query("SELECT intitutionID FROM user_info WHERE userID='".$CurrentUserID."'")->row();
 			$intitutionID  = (!empty($GetUserInfo)) ? $GetUserInfo->intitutionID : '';
 			
@@ -6965,7 +7448,13 @@ class Account extends CI_Controller
 			$ExistingUsers = array();
 			
 			// search for my friends / peers
-			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ORDER BY user.id DESC LIMIT 10";
+			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ";
+			
+			if($reportedUsersString != ''){
+				$SearchPeers .= " AND user.id NOT IN (".$reportedUsersString.")";
+			}
+			
+			$SearchPeers .= " ORDER BY user.id DESC LIMIT 10";
 			
 			$SearchPeersResult = $this->db->query($SearchPeers)->result_array();
 			$FoundResult = count($SearchPeersResult);
@@ -7022,6 +7511,10 @@ class Account extends CI_Controller
 						$MutalQuery .= " AND u.id NOT IN (".$SearchUseridString.")";
 					}
 					
+					if($reportedUsersString != ''){
+						$MutalQuery .= " AND u.id NOT IN (".$reportedUsersString.")";
+					}
+					
 					$SearchMutalFriends = $this->db->query($MutalQuery)->result_array();
 					
 					if(!empty($SearchMutalFriends)){
@@ -7069,6 +7562,10 @@ class Account extends CI_Controller
 				
 				if($SearchUseridString != ''){
 					$SearchByUniversity .= " AND user.id NOT IN (".$SearchUseridString.")";
+				}
+				
+				if($reportedUsersString != ''){
+					$SearchByUniversity .= " AND user.id NOT IN (".$reportedUsersString.")";
 				}
 				
 				$SearchByUniversity .= " AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%')";
@@ -7138,7 +7635,13 @@ class Account extends CI_Controller
 				foreach($SearchStoreResult as $SearchStoreResultData)
 				{
 					if($SearchStoreResultData['search_peer_id'] != '' && $SearchStoreResultData['search_peer_id'] != 0){
-						$UserDetails = $this->db->query("SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'")->result_array();
+						$SearchQ = "SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'";
+						
+						if($reportedUsersString != ''){
+							$SearchQ .= " AND user.id NOT IN (".$reportedUsersString.")";
+						}
+						
+						$UserDetails = $this->db->query($SearchQ)->result_array();
 						
 						if(!empty($UserDetails)){
 							if(!in_array($UserDetails[0]['id'],$ExistingUsers)){
@@ -7305,6 +7808,30 @@ class Account extends CI_Controller
 	public function searchHistory(){
 		$CurrentUserID = $this->session->get_userdata()['user_data']['user_id'];
 		
+		// get reported questions
+		$reportedUsers = array();
+		$reportedUsersString = '';
+		
+		$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+		$ReportedUsersResult = $this->db->query($getReportedUsers)->result_array();
+		if(!empty($ReportedUsersResult)){
+			foreach($ReportedUsersResult as $ReportedUsersResultData){
+				$reportedUsers[] = $ReportedUsersResultData['report_user_id'];
+			}
+		}
+		
+		$getBlockedUsers = "SELECT peer_id FROM blocked_peers WHERE user_id='".$CurrentUserID."'";
+		$BlockedUserResult = $this->db->query($getBlockedUsers)->result_array();
+		if(!empty($BlockedUserResult)){
+			foreach($BlockedUserResult as $BlockedUserResultData){
+				$reportedUsers[] = $BlockedUserResultData['peer_id'];
+			}
+		}
+		
+		if(!empty($reportedUsers)){
+			$reportedUsersString = implode(",",$reportedUsers);
+		}
+		
 		// get result from the store result
 		$SearchStoreQuery = "SELECT id,search_text,search_peer_id FROM recent_search_history WHERE 1=1 AND user_id='".$CurrentUserID."'";	
 		$SearchStoreQuery .= " AND (search_text != '' OR search_peer_id != 0)";
@@ -7321,7 +7848,14 @@ class Account extends CI_Controller
 			foreach($SearchStoreResult as $SearchStoreResultData)
 			{
 				if($SearchStoreResultData['search_peer_id'] != '' && $SearchStoreResultData['search_peer_id'] != 0){
-					$UserDetails = $this->db->query("SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'")->result_array();
+					
+					$SearchUQuery = "SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'";
+					
+					if($reportedUsersString != ''){
+						$SearchUQuery .= " AND user.id NOT IN (".$reportedUsersString.")";
+					}
+					
+					$UserDetails = $this->db->query()->result_array();
 					
 					if(!empty($UserDetails)){
 						if(!in_array($UserDetails[0]['id'],$ExistingUsers)){
@@ -7446,18 +7980,6 @@ class Account extends CI_Controller
 				$insertPost['status']             = 1;
 				if($this->db->insert('report_post',$insertPost)){
 					$this->session->set_flashdata('message',"You have succesfully reported this post.");
-					
-					$checkPostExist = "SELECT id from posts WHERE id='".$primary_id."'";
-					$checkResultPost = $this->db->query($checkPostExist)->result_array();
-					if(!empty($checkResultPost)){
-						
-						$updatePost['status']     = 3;
-						$updatePost['updated_at'] = date("Y-m-d H:i:s");
-						
-						$this->db->where('id',$primary_id);
-						$this->db->set($updatePost);
-						$this->db->update('posts');
-					}
 				} else {
 					$this->session->set_flashdata('exception','Something went wrong!');
 				}
@@ -7470,16 +7992,6 @@ class Account extends CI_Controller
 				$insertPost['status']             = 1;
 				if($this->db->insert('report_questions',$insertPost)){
 					$this->session->set_flashdata('message',"You have succesfully reported this question.");
-					
-					$checkPostExist = "SELECT id from question_master WHERE id='".$primary_id."'";
-					$checkResultPost = $this->db->query($checkPostExist)->result_array();
-					if(!empty($checkResultPost)){
-						
-						$updatePost['status']     = 3;
-						$this->db->where('id',$primary_id);
-						$this->db->set($updatePost);
-						$this->db->update('question_master');
-					}
 				} else {
 					$this->session->set_flashdata('exception','Something went wrong!');
 				}
@@ -7492,16 +8004,6 @@ class Account extends CI_Controller
 				$insertPost['status']             = 1;
 				if($this->db->insert('report_documents',$insertPost)){
 					$this->session->set_flashdata('message',"You have succesfully reported this document.");
-					
-					$checkPostExist = "SELECT id from document_master WHERE id='".$primary_id."'";
-					$checkResultPost = $this->db->query($checkPostExist)->result_array();
-					if(!empty($checkResultPost)){
-						
-						$updatePost['status']     = 3;
-						$this->db->where('id',$primary_id);
-						$this->db->set($updatePost);
-						$this->db->update('document_master');
-					}
 				} else {
 					$this->session->set_flashdata('exception','Something went wrong!');
 				}
@@ -7514,18 +8016,6 @@ class Account extends CI_Controller
 				$insertPost['status']             = 1;
 				if($this->db->insert('reported',$insertPost)){
 					$this->session->set_flashdata('message',"You have succesfully reported this study set.");
-					
-					$checkPostExist = "SELECT study_set_id from study_sets WHERE study_set_id ='".$primary_id."'";
-					$checkResultPost = $this->db->query($checkPostExist)->result_array();
-					if(!empty($checkResultPost)){
-						
-						$updatePost['status']     = 3;
-						$updatePost['updated_on'] = date("Y-m-d H:i:s");
-						
-						$this->db->where('study_set_id',$primary_id);
-						$this->db->set($updatePost);
-						$this->db->update('study_sets');
-					}
 				} else {
 					$this->session->set_flashdata('exception','Something went wrong!');
 				}
@@ -7538,16 +8028,6 @@ class Account extends CI_Controller
 				$insertPost['status']             = 1;
 				if($this->db->insert('report_event',$insertPost)){
 					$this->session->set_flashdata('message',"You have succesfully reported this event.");
-					
-					$checkPostExist = "SELECT id from event_master WHERE id ='".$primary_id."'";
-					$checkResultPost = $this->db->query($checkPostExist)->result_array();
-					if(!empty($checkResultPost)){
-						
-						$updatePost['status']     = 3;
-						$this->db->where('id',$primary_id);
-						$this->db->set($updatePost);
-						$this->db->update('event_master');
-					}
 				} else {
 					$this->session->set_flashdata('exception','Something went wrong!');
 				}
@@ -7556,6 +8036,20 @@ class Account extends CI_Controller
 			if($this->input->post('current_page') != ''){
 				if($this->input->post('current_page') == 'searchResult'){
 					redirect('account/searchResult');
+				} else if($this->input->post('current_page') == 'searchViewAll'){
+					if($report_post_type == 'POSTS'){
+						redirect('account/searchViewAll/posts');
+					} else if($report_post_type == 'QUESTIONS') {
+						redirect('account/searchViewAll/questions');
+					} else if($report_post_type == 'DOCUMENTS') {
+						 redirect('account/searchViewAll/documents');
+					} else if($report_post_type == 'STUDYSET') {
+						redirect('account/searchViewAll/studysets');
+					} else if($report_post_type == 'EVENTS') {
+						redirect('account/searchViewAll/events');
+					} else {
+						redirect('account/searchResult');	
+					}
 				}
 			} else {
 				redirect('account/searchResult');		
