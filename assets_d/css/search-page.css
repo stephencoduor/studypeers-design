@@ -97,6 +97,17 @@
     display:inline-block;
     width:60px;
 }
+.removeSearchIcon{
+    height:26px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: transparent!important;
+}
+.removeSearchIcon svg{
+    width:26px;
+    height:26px;
+}
 .noFeedWrapper {
     display: flex;
     align-items: center;
