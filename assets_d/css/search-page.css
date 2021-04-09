@@ -105,8 +105,22 @@
     background-color: transparent!important;
 }
 .removeSearchIcon svg{
-    width:26px;
-    height:26px;
+    width: 16px;
+    height: 16px;
+    fill: #2196f3;
+}
+.removeBadge .removeBadgeIcon{
+    background: #f2f2f2!important;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.removeBadgeIcon svg {
+    width: 12px;
+    height: 12px;
+    fill: #2196f3;
 }
 .noFeedWrapper {
     display: flex;
