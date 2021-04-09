@@ -1144,13 +1144,23 @@
 						<div class="user-details">
 							<div class="user-name">
 								<figure>
+								<?php if($document_detail['status'] != 2) { ?>
 									<img src="<?php echo userImage($document_detail['created_by']); ?>" alt="user">
+								<?php } else { ?>
+									<img src="<?php echo base_url(); ?>uploads/user-anonymous.png" alt="user">
+								<?php } ?>
 								</figure>
 								<?php $user = $this->db->get_where('user', array('id' => $document_detail['created_by']))->row_array();
 					$user_info = $this->db->get_where('user_info', array('userID' => $document_detail['created_by']))->row_array();
 					$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><a href="<?php echo base_url().'sp/'.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new document</span></figcaption>
+									<figcaption>
+										<?php if($document_detail['status'] != 2) { ?>
+										<a href="<?php echo base_url().'sp/'.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a>
+										<?php } else { ?>
+											Anonymous User
+										<?php } ?>
+										 <span>added a new document</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">

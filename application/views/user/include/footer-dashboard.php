@@ -1032,6 +1032,7 @@
             togglename.text('Love');
         }
     });
+
 	/*$('.innerReplyBox').slideUp();*/
     $('.leftStatus a.reply').on('click', function() {
         $(this).siblings('.innerReplyBox').slideDown();
@@ -1110,11 +1111,12 @@ $(document).ready(function() {
 					var redirect_url = $(this).attr('data-userProfileUrl');
 					window.location.href=redirect_url;
 				}); 
-
+				
 				$('.mainDivTrigger').click(function () {
 					var redirect_url = $(this).attr('data-userPostUrl');
 					window.location.href=redirect_url;
 				}).children().click(function (e) {
+					
 				});
 			}
 		});
