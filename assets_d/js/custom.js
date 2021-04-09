@@ -885,3 +885,14 @@ $(document).on('click','.removeBadgeIcon',function(){
 		}
 	});
 });
+
+$(document).on('click','.reportThings',function(){
+	var reportType  = $(this).attr('data-reportType');
+	var primaryId   = $(this).attr('data-primaryId');
+	var currentPage = $(this).attr('data-currentPage');
+	
+	$("#reportModal").modal('show');
+	$("#primary_id").val(primaryId);
+	$("#report_post_type").val(reportType);
+	$("#current_page").val(currentPage);
+});

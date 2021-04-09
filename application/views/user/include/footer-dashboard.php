@@ -1031,9 +1031,10 @@
             togglename.text('Love');
         }
     });
-    // $('.innerReplyBox').slideUp( );
-    $('.leftStatus a.reply').on('click', function() { 
-        $(this).children('.innerReplyBox').slideDown();
+
+	/*$('.innerReplyBox').slideUp();*/
+    $('.leftStatus a.reply').on('click', function() {
+        $(this).siblings('.innerReplyBox').slideDown();
     });
     $('.uloadedImage .close').click(function() {
         $(this).parent().hide();
@@ -1109,11 +1110,12 @@ $(document).ready(function() {
 					var redirect_url = $(this).attr('data-userProfileUrl');
 					window.location.href=redirect_url;
 				}); 
-
+				
 				$('.mainDivTrigger').click(function () {
 					var redirect_url = $(this).attr('data-userPostUrl');
 					window.location.href=redirect_url;
 				}).children().click(function (e) {
+					
 				});
 			}
 		});

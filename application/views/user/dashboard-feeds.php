@@ -1379,10 +1379,8 @@
                                                                 <img src="<?php echo userImage($value2['user_id']); ?>"
                                                                     alt="User">
                                                             </figure>
-                                                            <div
-                                                                class="right">
-                                                                <div
-                                                                    class="userWrapText">
+                                                            <div class="right">
+                                                                <div class="userWrapText">
                                                                     <h4><?php echo $user_info['nickname']; ?></h4>
                                                                     <p><?php echo $value2['comment']; ?></p>
                                                                     

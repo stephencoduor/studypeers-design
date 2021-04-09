@@ -1,5 +1,25 @@
 <section class="mainContent">
     <div class="main-home-wrapper">
+		<?php 
+			if ($this->session->flashdata('message')) { 
+		?>
+			<div class="alert alert-success alert-dismissible" role="alert">
+				<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+				<?php echo $this->session->flashdata('message') ?>
+			</div>
+		<?php 
+			}
+			
+			if ($this->session->flashdata('exception')) { 
+		?>
+		<div class="alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+			<?php echo $this->session->flashdata('exception') ?>
+		</div>
+		<?php 
+			} 
+		?>
+		
         <div class="tabs-wrappper">
             <div class="tabslisting">
                 <ul class="nav nav-tabs">
@@ -107,7 +127,18 @@
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline"><?php echo $AllPost['posted_date']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                    <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="POSTS" data-currentPage="searchResult" data-primaryId="<?php echo $AllPost['post_id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -226,7 +257,18 @@
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline"><?php echo $AllQuestion['post_at']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                    <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="QUESTIONS" data-currentPage="searchResult" data-primaryId="<?php echo $AllQuestion['question_id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -315,7 +357,18 @@
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline"><?php echo $AllDocument['post_at']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                    <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="DOCUMENTS" data-currentPage="searchResult" data-primaryId="<?php echo $AllDocument['document_id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -483,7 +536,18 @@
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline"><?php echo $AllStudySet['post_at']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                    <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="STUDYSET" data-currentPage="searchResult" data-primaryId="<?php echo $AllStudySet['studyset_id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -616,7 +680,18 @@
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline"><?php echo $AllEvent['post_at']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                    <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="EVENTS" data-currentPage="searchResult" data-primaryId="<?php echo $AllEvent['event_primary_id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -1458,7 +1533,18 @@
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline"><?php echo $AllPost['posted_date']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                    <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="POSTS" data-currentPage="searchResult" data-primaryId="<?php echo $AllPost['post_id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -1593,7 +1679,18 @@
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline"><?php echo $AllQuestion['post_at']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                    <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="QUESTIONS" data-currentPage="searchResult" data-primaryId="<?php echo $AllQuestion['question_id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -1698,7 +1795,18 @@
 								<div class="user-top-right">
 									<div class="timeline-action">
 										<span class="timeline"><?php echo $AllDocument['post_at']; ?></span>
-										<a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+										<!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+										&nbsp;&nbsp;&nbsp;
+										<div class="dropdown">
+											<i class="dropdown-toggle" data-toggle="dropdown">
+												<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+											</i>
+											<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+												<li class="removePeerSugg">
+													<a href="javascript:;" class="reportThings" data-reportType="DOCUMENTS" data-currentPage="searchResult" data-primaryId="<?php echo $AllDocument['document_id']; ?>">Report</a>
+												</li>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>  
@@ -1882,7 +1990,18 @@
                             <div class="user-top-right">
                                 <div class="timeline-action">
                                     <span class="timeline"><?php echo $AllStudySet['post_at']; ?></span>
-                                    <a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+                                    <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThings" data-reportType="STUDYSET" data-currentPage="searchResult" data-primaryId="<?php echo $AllStudySet['studyset_id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
                                 </div>
                             </div>
                         </div>  
@@ -2030,7 +2149,18 @@
 								<div class="user-top-right">
 									<div class="timeline-action">
 										<span class="timeline"><?php echo $AllEvent['post_at']; ?></span>
-										<a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a>
+										<!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+										&nbsp;&nbsp;&nbsp;
+										<div class="dropdown">
+											<i class="dropdown-toggle" data-toggle="dropdown">
+												<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+											</i>
+											<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+												<li class="removePeerSugg">
+													<a href="javascript:;" class="reportThings" data-reportType="EVENTS" data-currentPage="searchResult" data-primaryId="<?php echo $AllEvent['event_primary_id']; ?>">Report</a>
+												</li>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>  
@@ -2855,6 +2985,60 @@
 					<div class="listUserWrap" id="peersModalAttendingList">
 					</div>
 				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="modal fade" id="reportModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-body peers">
+				<h4>Reason</h4>
+				<form method="POST" action="<?php echo base_url('account/reportThings'); ?>">
+					
+					<input type="hidden" name="primary_id" id="primary_id">
+					<input type="hidden" name="report_post_type" id="report_post_type">
+					<input type="hidden" name="current_page" id="current_page">
+				
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Reason for Report</label>
+								<div class="reason">
+									<select class="form-control" name="report_reason" id="report_reason" required>
+										<option value="">Select Reason</option>
+										<option value="Inappropriate Content">Inappropriate Content</option>
+										<option value="Spam">Spam</option>
+										<option value="Promotional">Promotional</option>
+										<option value="Uncivil">Uncivil</option>
+										<option value="Other">Other</option>
+									</select>
+									<span class="error" id="report_reason_err"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Reason</label>
+								<div class="reason droparea">
+									<textarea id="report_description" name="report_description" required ></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="submit" class="filterBtn">Submit</button>
+							</div>
+						</div>
+					</div>
+				</form>
 			</div>
 		</div>
 	</div>
