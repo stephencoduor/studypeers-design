@@ -234,7 +234,7 @@
 										
 										<?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
 										
-										<a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span> </a>
+										<a class="" onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span> </a>
 										
 										<div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
 											<div id="commentreply_box_<?php echo $value['id']; ?>">
@@ -344,15 +344,17 @@
                                     </div>
                                 </div>
 							</div>
-                                <?php } ?>
+						<?php } ?>
 					</div>
 					<div class="chatMsgBox">
 						<div class="commentWrapBox">
 							<figure> <img src="<?php echo userImage($user_id);  ?>" alt="User"> </figure>
-							<input type="text" name="" placeholder="Comment" id="comment_input_Post_<?php echo $value['reference_id']; ?>" data-id="Post" class="commentReference" onkeypress="postCommentByReference(event, 'Post', '<?php echo $value['reference_id']; ?>', this.value)">
+							<input type="text" name="" placeholder="Comment" id="comment_input_Post_<?php echo $reference_id; ?>" data-id="Post" class="commentReference" onkeypress="postCommentByReference(event, 'Post', '<?php echo $reference_id; ?>', this.value)">
 							<div class="mediaAction"> 
-								<button type="button"><img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
-								<input type="file" id="comment_image_Post_<?php echo $value['reference_id']; ?>" onchange="postImageComment('Post', '<?php echo $value['reference_id']; ?>')"> </button>
+								<button type="button">
+									<img src="<?php echo base_url(); ?>assets_d/images/image.svg" alt="Add Files">
+									<input type="file" id="comment_image_Post_<?php echo $reference_id; ?>" onchange="postImageComment('Post', '<?php echo $reference_id; ?>')"> 
+								</button>
 							</div>
 						</div>  
 					</div>

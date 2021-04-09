@@ -1031,9 +1031,9 @@
             togglename.text('Love');
         }
     });
-    $('.innerReplyBox').slideUp();
+    // $('.innerReplyBox').slideUp( );
     $('.leftStatus a.reply').on('click', function() { 
-        $(this).siblings('.innerReplyBox').slideDown();
+        $(this).children('.innerReplyBox').slideDown();
     });
     $('.uloadedImage .close').click(function() {
         $(this).parent().hide();
@@ -1111,9 +1111,9 @@ $(document).ready(function() {
 				}); 
 
 				$('.mainDivTrigger').click(function () {
-				}).children().click(function (e) {
 					var redirect_url = $(this).attr('data-userPostUrl');
 					window.location.href=redirect_url;
+				}).children().click(function (e) {
 				});
 			}
 		});

@@ -102,14 +102,6 @@
 			cursor:pointer;
 		}
 	</style>
-
-
-
-
-
-
-
-	
 </head>
 
 <?php

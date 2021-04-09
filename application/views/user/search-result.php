@@ -1313,6 +1313,24 @@
                     </div>
                     <div class="view-all-section"><a href="">View All Study Sessions</a></div>
                 </div>
+				
+				<?php
+					if(empty($AllPeers) && empty($AllPosts) && empty($AllQuestions) && empty($AllDocuments) && empty($AllStudySets) && empty($AllEvents)) {
+				?>
+				<div class="mainContent">
+					<div class="main-home-wrapper">
+						<div class="noFeedWrapper">
+							<figure>
+								<img src="<?php echo base_url(); ?>assets_d/images/blank-feeds.png" alt="No Feed">
+							</figure>
+							<h4>Search result not found.</h4>
+						</div>
+					</div>
+				</div>
+				<?php		
+					}
+				?>
+				
 			</div>
             <div id="peers" class="tab-pane fade">
                 <div class="content-card">
@@ -1378,7 +1396,7 @@
 					<?php
 						if(!empty($AllPeers)){
 					?>
-                    <div class="view-all-section"><a href="">View All Peers</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/peers'); ?>">View All Peers</a></div>
 					<?php
 						}
 					?>
@@ -1533,7 +1551,7 @@
 						
 						if(!empty($AllPosts)){
 					?>
-                    <div class="view-all-section"><a href="">View All Posts</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/posts'); ?>">View All Posts</a></div>
 					<?php
 						}
 					?>
@@ -1638,7 +1656,7 @@
 					
 					if(!empty($AllQuestions)){
 					?>
-                    <div class="view-all-section"><a href="">View All Questions</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/questions'); ?>">View All Questions</a></div>
 					<?php
 					}
 					?>
@@ -1822,7 +1840,7 @@
 						
 						if(!empty($AllDocuments)){
 					?>
-                    <div class="view-all-section"><a href="">View All Documents</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/documents'); ?>">View All Documents</a></div>
 					<?php
 						}
 					?>
@@ -1970,7 +1988,7 @@
 					
 					if(!empty($AllStudySets)){
 					?>
-                    <div class="view-all-section"><a href="">View All Study Sets</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/studysets'); ?>">View All Study Sets</a></div>
 					<?php
 					}
 					?>
@@ -2168,7 +2186,7 @@
 						
 						if(!empty($AllEvents)){
 					?>
-                    <div class="view-all-section"><a href="">View All Events</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/events'); ?>">View All Events</a></div>
 					<?php
 						}
 					?>
