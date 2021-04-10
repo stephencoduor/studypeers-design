@@ -3012,7 +3012,7 @@ class Account extends CI_Controller
         if (!empty($peerList)) {
             $this->db->or_group_start();
             $this->db->where_in('reference_master.user_id', $peerList);
-            $this->db->where('reference_master.status', 1);
+            $this->db->where('reference_master.status !=', 3);
             $this->db->group_end();
         }
 		
@@ -3025,7 +3025,7 @@ class Account extends CI_Controller
         if (!empty($peerList)) {
             $this->db->or_group_start();
             $this->db->where_in('reference_master.user_id', $peerList);
-            $this->db->where('reference_master.status', 1);
+            $this->db->where('reference_master.status !=', 3);
             $this->db->group_end();
         }
 		
@@ -6513,6 +6513,13 @@ class Account extends CI_Controller
         if ($this->input->post()) {
             $course_id    = $this->input->post('course_id');
 
+            $this->db->query("UPDATE reference_master
+								SET status = 2
+								WHERE reference = 'document' and reference_id in (select id from document_master where course = ".$course_id.")");
+
+            $this->db->where(array('course' => $course_id));
+            $this->db->update('document_master', array('status' => 2));
+
             $this->db->where(array('course_id' => $course_id));
             $this->db->delete('professor_master');
 
@@ -7823,7 +7830,47 @@ class Account extends CI_Controller
 											</strong>
 										</a>
 										<div class="removeBadge">
-											<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
+											<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+                                            <g>
+                                                <g>
+                                                    <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+                                                        L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+                                                        c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+                                                        l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+                                                        L284.286,256.002z"></path>
+                                                </g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                            <g>
+                                            </g>
+                                        </svg></span>
 										</div>
 									</li>';		
 							}
@@ -7837,7 +7884,47 @@ class Account extends CI_Controller
 								<strong>'.$SearchStoreResultData['search_text'].' <span>from previous search</span> </strong>
 							</a>
 							<div class="removeBadge">
-								<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
+								<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+                                <g>
+                                    <g>
+                                        <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+                                            L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+                                            c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+                                            l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+                                            L284.286,256.002z"></path>
+                                    </g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                            </svg></span>
 							</div>
 						</li>';
 					}
@@ -8057,7 +8144,47 @@ class Account extends CI_Controller
 										</strong>
 									</a>
 									<div class="removeBadge">
-										<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
+										<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+                                        <g>
+                                            <g>
+                                                <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+                                                    L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+                                                    c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+                                                    l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+                                                    L284.286,256.002z"></path>
+                                            </g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                        <g>
+                                        </g>
+                                    </svg></span>
 									</div>
 								</li>';		
 						}
@@ -8071,7 +8198,47 @@ class Account extends CI_Controller
 							<strong>'.$SearchStoreResultData['search_text'].' <span>from previous search</span> </strong>
 						</a>
 						<div class="removeBadge">
-							<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
+							<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512.001 512.001" style="enable-background:new 0 0 512.001 512.001;" xml:space="preserve">
+                            <g>
+                                <g>
+                                    <path d="M284.286,256.002L506.143,34.144c7.811-7.811,7.811-20.475,0-28.285c-7.811-7.81-20.475-7.811-28.285,0L256,227.717
+                                        L34.143,5.859c-7.811-7.811-20.475-7.811-28.285,0c-7.81,7.811-7.811,20.475,0,28.285l221.857,221.857L5.858,477.859
+                                        c-7.811,7.811-7.811,20.475,0,28.285c3.905,3.905,9.024,5.857,14.143,5.857c5.119,0,10.237-1.952,14.143-5.857L256,284.287
+                                        l221.857,221.857c3.905,3.905,9.024,5.857,14.143,5.857s10.237-1.952,14.143-5.857c7.811-7.811,7.811-20.475,0-28.285
+                                        L284.286,256.002z"></path>
+                                </g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                            <g>
+                            </g>
+                        </svg></span>
 						</div>
 					</li>';
 				}

@@ -1869,7 +1869,7 @@ background-color: #ccc;
 }
 .tabcontent-area h3{
     color:#0155f5;
-    margin:0;
+    margin:0 0 15px;
 }
 .data-privacy-row{
     display: flex;
@@ -1892,6 +1892,78 @@ background-color: #ccc;
 .data-privacy-right p{
     font-size:13px;
 }
+.data-privacy-row.no-brd{
+    border:none;
+}
+.data-privacy-left h4{
+    margin:10px 0 5px;
+}
+.custom-accordion {
+    color: #000;
+    cursor: pointer;
+    padding:5px 15px;
+    width: 100%;
+    text-align: left;
+    border: none;
+    outline: none;
+    transition: 0.3s ease-in;
+    cursor: pointer;
+    position: relative;
+}
+.custom-accordion:after {
+    border-bottom: 1px solid #90a1b5;
+    border-right: 1px solid #90a1b5;
+    content: '';
+    display: block;
+    height: 10px;
+    margin-top: -8px;
+    pointer-events: none;
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    -webkit-transform-origin: 66% 66%;
+    -ms-transform-origin: 66% 66%;
+    transform-origin: 66% 66%;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    -webkit-transition: all 0.15s ease-in-out;
+    transition: all 0.15s ease-in-out;
+    width: 10px;
+}
+.custom-accordion h3{
+    font-size:18px;
+    font-weight:600;
+    color:#000;
+    margin-bottom:0;
+}
+.custom-accordion p{
+    font-size:14px;
+    color: #9592a7;
+    margin-bottom:0;
+}
+.custom-accordion.active,
+.custom-accordion:hover {
+    background-color: #f2f2f2;
+}
+.custom-panel {
+    padding: 0 15px 5px;
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: 0.6s ease-in-out;
+    opacity: 0;
+}
+.custom-panel p{
+    margin-bottom:0;
+}
+.custom-panel.show {
+    opacity: 1;
+    height:auto;
+    max-height: 500px;
+}
+
+  
 @media (max-width: 767px) {
     .modal .listUserWrap .list{
         flex-direction: column;
