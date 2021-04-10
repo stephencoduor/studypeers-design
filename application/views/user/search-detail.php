@@ -1,7 +1,14 @@
 <link rel="stylesheet" href="<?php echo base_url(); ?>assets_d/css/profile.css">
 <section class="mainContent">
     <div class="main-home-wrapper">
-		<a class="backBtn" href="javascript:;" onclick="window.history.back();">
+		<?php
+			if(!empty($tabType)){
+				$redirectLink = "window.location.href='".base_url('account/searchResult/'.$tabType)."'";
+			} else {
+				$redirectLink = "window.history.back();";
+			}
+		?>
+		<a class="backBtn" href="javascript:;" onclick="<?php echo $redirectLink; ?>">
 			<svg class="sp-icon" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 490 490" style="enable-background:new 0 0 490 490;" xml:space="preserve">
 				<path d="M245.9,436.3c14.8-16.4,13.9-41.5-2-56.8l-101.5-94.4l308.4-0.7c22.2-0.6,39.7-19,39.2-41.1c-0.5-21.4-17.7-38.6-39.1-39.1l-308.6,0.7l101.5-94.4c16.2-15.1,17.1-40.6,2-56.8c-15.1-16.2-40.6-17.1-56.8-2l-176.2,164C4.7,223.3,0.1,233.9,0,245c0,11.1,4.6,21.7,12.8,29.3L189,438.2c16.2,15.2,41.6,14.4,56.8-1.7c0.1-0.1,0.2-0.2,0.2-0.2H245.9z"></path>
 			</svg>
@@ -173,7 +180,7 @@
                             </div>
                         </li>
 						
-                        <li <?php if (@$is_comment_on != 1) { ?>  class="tooltip" style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $reference_id; ?>')" <?php } ?>>
+                        <li class="autoClick" <?php if (@$is_comment_on != 1) { ?>  class="tooltip" style="opacity: 0.7;cursor: not-allowed;" <?php } else { ?> onclick="showCommentBoxWrap('Post', '<?php echo $reference_id; ?>')" <?php } ?>>
                             <?php 
 								if (@$is_comment_on != 1) { 
 							?>
@@ -431,3 +438,15 @@
 		</div>
 	</div>
 </div>
+
+<?php
+	if(!empty($openComment)){
+?>
+<script>
+	$("document").ready(function() {
+		$(".autoClick").trigger('click');
+	});
+</script>
+<?php		
+	}
+?>

@@ -100,10 +100,11 @@ class Account extends CI_Controller
 		return $string ? implode(', ', $string) . ' ago' : 'just now';
 	}
 	
-    public function searchResult(){
-        $data['index_menu']  = 'search';
-        $data['title']  = 'Search Result | Studypeers';
-
+    public function searchResult($tabType = null){
+        $data['index_menu'] = 'search';
+        $data['title']      = 'Search Result | Studypeers';
+		$data['tabType']    = $tabType;
+		
 		$SearchText = ($this->session->userdata('SearchText')) ? $this->session->userdata('SearchText') : '';
 		$data['SearchText']  = $SearchText;
 		//$this->session->unset_userdata('SearchText');
@@ -134,7 +135,7 @@ class Account extends CI_Controller
 			$reportedUsers = array();
 			$reportedUsersString = '';
 			
-			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."' AND status='1'";
 			$ReportedUserResult = $this->db->query($getReportedUsers)->result_array();
 			if(!empty($ReportedUserResult)){
 				foreach($ReportedUserResult as $ReportedUserResultData){
@@ -543,7 +544,7 @@ class Account extends CI_Controller
 				$reportedQuestionString = implode(",",$reportedQuestions);
 			}
 			
-			$SearchQuestions = "SELECT reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND question_master.status='1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%')";
+			$SearchQuestions = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,question_master.id,question_master.question_title,question_master.vote_count,question_master.textarea,question_master.view_count,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN question_master ON (question_master.id = reference_master.reference_id) LEFT JOIN question_answer_master ON (question_answer_master.question_id = question_master.id AND question_answer_master.question_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND question_master.status='1' AND reference_master.reference='question' AND (question_master.question_title LIKE '%$SearchText%' OR question_master.textarea LIKE '%$SearchText%' OR question_answer_master.answer LIKE '%$SearchText%')";
 			
 			if($reportedQuestionString != ''){
 				$SearchQuestions .= " AND question_master.id NOT IN (".$reportedQuestionString.")";
@@ -589,6 +590,7 @@ class Account extends CI_Controller
 						$getTotalAnswersCounter = "SELECT id FROM question_answer_master WHERE question_id='".$question_id."' AND status='1'";
 						$AnswerCounterResult = $this->db->query($getTotalAnswersCounter)->result_array();
 						
+						$tempQuestion['reference_id']         = $SearchQuestionsResultData['reference_id'];
 						$tempQuestion['question_id']          = $question_id;
 						$tempQuestion['question_title']       = $SearchQuestionsResultData['question_title'];
 						$tempQuestion['question_description'] = $SearchQuestionsResultData['textarea'];
@@ -623,7 +625,7 @@ class Account extends CI_Controller
 				$reportedDocumentString = implode(",",$reportedDocuments);
 			}
 			
-			$SearchDocuments = "SELECT reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND document_master.status='1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ";
+			$SearchDocuments = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,document_master.id,document_master.document_name,document_master.description,document_master.description,document_master.featured_image,user.id as user_id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM reference_master LEFT JOIN document_master ON (document_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND document_master.status='1' AND reference_master.reference='document' AND document_master.privacy = '1' AND (document_master.document_name LIKE '%$SearchText%' OR document_master.description LIKE '%$SearchText%') ";
 			
 			if($reportedDocumentString != ''){
 				$SearchDocuments .= " AND document_master.id NOT IN(".$reportedDocumentString.")";
@@ -699,6 +701,7 @@ class Account extends CI_Controller
 						$avgRatings = round($averageRatings[0]['average'], 1);
 					}
 					
+					$tempDocuments['reference_id']    = $SearchDocumentResultData['reference_id'];
 					$tempDocuments['document_id']     = $document_id;
 					$tempDocuments['document_name']   = $SearchDocumentResultData['document_name'];
 					$tempDocuments['description']     = $SearchDocumentResultData['description'];
@@ -735,7 +738,7 @@ class Account extends CI_Controller
 				$reportedStudysetString = implode(",",$reportedStudyset);
 			}
 			
-			$SearchStudySet = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND study_sets.status='1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') ";
+			$SearchStudySet = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,study_sets.study_set_id,study_sets.name,study_sets.image,user_info.gender FROM reference_master LEFT JOIN study_sets ON (study_sets.study_set_id = reference_master.reference_id) LEFT JOIN study_set_terms ON (study_set_terms.study_set_id = study_sets.study_set_id AND study_set_terms.study_set_id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND study_sets.status='1' AND reference_master.reference='studyset' AND study_sets.privacy = '1' AND (study_sets.name LIKE '%$SearchText%' OR study_set_terms.term_description LIKE '%$SearchText%') ";
 			
 			if($reportedStudysetString != ''){
 				$SearchStudySet .= " AND study_sets.study_set_id NOT IN (".$reportedStudysetString.")";
@@ -811,6 +814,7 @@ class Account extends CI_Controller
 						$avgRatings = round($averageRatings[0]['average'], 1);
 					}
 					
+					$tempStudySet['reference_id']    = $SearchStudySetData['reference_id'];
 					$tempStudySet['studyset_name']   = $SearchStudySetData['name'];
 					$tempStudySet['studyset_cover']  = $CoverimageLink;
 					$tempStudySet['studyset_id']     = $SearchStudySetData['study_set_id'];
@@ -845,7 +849,7 @@ class Account extends CI_Controller
 				$reportedEventsString = implode(",",$reportedEvents);
 			}
 			
-			$SearchEvents = "SELECT reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND event_master.status='1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ";
+			$SearchEvents = "SELECT reference_master.reference_id,reference_master.reference,reference_master.addDate,user.id as user_id,user.username,user.first_name,user.last_name,user.image as pp,event_master.id,event_master.event_name,event_master.description,event_master.location_txt,event_master.start_date,event_master.start_time,event_master.featured_image,user_info.gender FROM reference_master LEFT JOIN event_master ON (event_master.id = reference_master.reference_id) LEFT JOIN user ON (user.id = reference_master.user_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE 1=1 AND reference_master.status = '1' AND event_master.status='1' AND reference_master.reference='event' AND event_master.privacy = '1' AND (event_master.event_name LIKE '%$SearchText%' OR event_master.location_txt LIKE '%$SearchText%' OR event_master.description LIKE '%$SearchText%') ";
 			
 			if($reportedEventsString != ''){
 				$SearchEvents .= " AND event_master.id NOT IN (".$reportedEventsString.")";
@@ -922,6 +926,7 @@ class Account extends CI_Controller
 					$getEventsCommentCounter = "SELECT id FROM comment_master WHERE reference_id='".$event_primary_id."' AND reference='event' AND status='1'";
 					$EveCommentCounter    = $this->db->query($getEventsCommentCounter)->result_array();
 					
+					$tempEvents['reference_id']    = $SearchEventsResultData['reference_id'];
 					$tempEvents['event_primary_id']= $event_primary_id;
 					$tempEvents['post_at']         = $timeAgo;
 					$tempEvents['user_id']         = ($SearchEventsResultData['user_id']) ? $SearchEventsResultData['user_id'] : 0;
@@ -954,9 +959,11 @@ class Account extends CI_Controller
         $this->load->view('user/include/footer-dashboard');
     }
 	
-	public function searchViewAll($searchType = null){
+	public function searchViewAll($searchType = null,$tabType = null){
         $data['index_menu']  = 'search';
         $data['title']  = 'Search View All | Studypeers';
+		
+		$data['tabType'] = $tabType;
 
 		$SearchText = ($this->session->userdata('SearchText')) ? $this->session->userdata('SearchText') : '';
 		$data['SearchText']  = $SearchText;
@@ -1022,7 +1029,7 @@ class Account extends CI_Controller
 			$reportedUsers = array();
 			$reportedUsersString = '';
 			
-			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."' AND status='1'";
 			$ReportedUsersResult = $this->db->query($getReportedUsers)->result_array();
 			if(!empty($ReportedUsersResult)){
 				foreach($ReportedUsersResult as $ReportedUsersResultData){
@@ -1493,7 +1500,7 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('account/searchDetail/posts/'.base64_encode($searchedData['post_id'])).'">
+					<div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
@@ -1580,6 +1587,17 @@ class Account extends CI_Controller
                                 <ul>
                                     <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">'.$searchedData['total_comments'].'</a></li>
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="'.base_url('account/searchDetail/posts/'.base64_encode($searchedData['post_id'])).'">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -1696,7 +1714,7 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'">
+					<div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
@@ -1771,6 +1789,17 @@ class Account extends CI_Controller
                                     <li><a href="">'.$searchedData['view_count'].'</a></li>
                                     <li><a href=""><img src="'.base_url().'assets_d/images/answer.svg" alt="Icon"/></a></li>
                                     <li><a href="">'.$searchedData['answer_count'].'</a></li>
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -1920,7 +1949,7 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('account/documentDetail/'.base64_encode($searchedData['reference_id']).'/search').'">
+					<div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
@@ -2037,6 +2066,17 @@ class Account extends CI_Controller
                                 <ul>
                                     <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">'.$searchedData['total_comments'].'</a></li>
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['reference_id']).'/search').'">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -2185,7 +2225,7 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('studyset/details/'.$searchedData['reference_id'].'/search').'">
+					<div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
@@ -2284,6 +2324,17 @@ class Account extends CI_Controller
                                 <ul>
                                     <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">'.$searchedData['total_comments'].'</a></li>
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="'.base_url('studyset/details/'.$searchedData['reference_id'].'/search').'">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -2429,7 +2480,7 @@ class Account extends CI_Controller
 			if(!empty($searchData)){	
 				foreach($searchData as $searchedData){
 					$searchHtml .= '
-					<div class="post-row-wrap mainDivTrigger" style="cursor:pointer;" data-userPostUrl="'.base_url('account/eventDetails/'.base64_encode($searchedData['reference_id']).'/search').'">
+					<div class="post-row-wrap">
                         <div class="user-top">
                             <div class="user-top-left">
                                 <div class="user-img childDivTrigger" style="cursor:pointer;" data-userProfileUrl="'.base_url('sp/'.$searchedData['username']).'">
@@ -2573,6 +2624,17 @@ class Account extends CI_Controller
                                 <ul>
                                     <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">'.$searchedData['total_comments'].'</a></li>
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['reference_id']).'/search').'">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -2650,11 +2712,14 @@ class Account extends CI_Controller
 		echo json_encode($data);		
 	}
 	
-    public function searchDetail($detailType = null,$detailId = null){
+    public function searchDetail($detailType = null,$detailId = null,$tabType = null,$openComment = null){
         $data['index_menu']  = 'search';
         $data['title']  = 'Search Detail | Studypeers';
 		
 		$data['detailType'] = $detailType;
+		$data['tabType']    = $tabType;
+		$data['openComment']= $openComment;
+		
 		if($detailType == 'posts') {
 			$ID = base64_decode($detailId);
 			
@@ -2840,7 +2905,7 @@ class Account extends CI_Controller
 		$reportedUsers = array();
 		$reportedUsersString = '';
 		
-		$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+		$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."' AND status='1'";
 		$ReportedUsersResult = $this->db->query($getReportedUsers)->result_array();
 		if(!empty($ReportedUsersResult)){
 			foreach($ReportedUsersResult as $ReportedUsersResultData){
@@ -3890,6 +3955,9 @@ class Account extends CI_Controller
 		
 		$data['redirectType'] = $redirectType; 
 		
+		$tabType = ($this->uri->segment('5')) ? $this->uri->segment('5') : '';
+		$data['tabType'] = $tabType; 
+		
         $data['event'] = $this->db->query("select * from event_master where id = " . $event_id . "")->row_array();
         $data['university'] = $this->db->get_where('university', array('university_id' => $data['event']['university']))->row_array();
 
@@ -4278,7 +4346,10 @@ class Account extends CI_Controller
 
         $document_id = base64_decode($this->uri->segment('3'));
 		$redirectType = ($this->uri->segment('4')) ? $this->uri->segment('4') : '';
+		$tabType = ($this->uri->segment('5')) ? $this->uri->segment('5') : '';
+		
 		$data['redirectType'] = $redirectType;
+		$data['tabType']      = $tabType;
 
         $data['index_menu']  = 'documents';
         $data['title']  = 'Document Details | Studypeers';
@@ -4593,7 +4664,10 @@ class Account extends CI_Controller
 
         $question_id = base64_decode($this->uri->segment('3'));
 		$redirectType = ($this->uri->segment('4')) ? $this->uri->segment('4') : '';
-		$data['redirectType']  = $redirectType;
+		$tabType = ($this->uri->segment('5')) ? $this->uri->segment('5') : '';
+		
+		$data['redirectType'] = $redirectType;
+		$data['tabType']      = $tabType;
 
         $data['index_menu']  = 'questions';
         $data['title']  = 'Question Details | Studypeers';
@@ -7414,7 +7488,7 @@ class Account extends CI_Controller
 			$reportedUsers = array();
 			$reportedUsersString = '';
 			
-			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+			$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."' AND status='1'";
 			$ReportedUsersResult = $this->db->query($getReportedUsers)->result_array();
 			if(!empty($ReportedUsersResult)){
 				foreach($ReportedUsersResult as $ReportedUsersResultData){
@@ -7448,7 +7522,7 @@ class Account extends CI_Controller
 			$ExistingUsers = array();
 			
 			// search for my friends / peers
-			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ";
+			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender,user_info.intitutionID,user_info.course FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ";
 			
 			if($reportedUsersString != ''){
 				$SearchPeers .= " AND user.id NOT IN (".$reportedUsersString.")";
@@ -7482,11 +7556,31 @@ class Account extends CI_Controller
 							$UserProfile = base_url('uploads/users/'.$SearchPeersResultData['image']);
 						}
 						
+						// get university name
+						$UniversityName = '';
+						$getUniversityName = "SELECT SchoolName FROM university WHERE university_id='".$SearchPeersResultData['intitutionID']."'";
+						$UniversityNameResult = $this->db->query($getUniversityName)->result_array();
+						if(!empty($UniversityNameResult)){
+							$UniversityName = $UniversityNameResult[0]['SchoolName'];
+						}
+						
+						// get master name
+						$MasterName = '';
+						$getMasterName = "SELECT name as field_of_study FROM field_of_study_master WHERE id='".$SearchPeersResultData['course']."'";
+						$MasterNameResult = $this->db->query($getMasterName)->result_array();
+						if(!empty($MasterNameResult)){
+							$MasterName = $MasterNameResult[0]['field_of_study'];
+						}
+						
 						$SearchHTML .= '
 							<li>
 								<a href="'.base_url('sp/'.$SearchPeersResultData['username']).'" data-user_id="'.$SearchPeersResultData['id'].'" class="storeHistory">
 									<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
-									<strong>'.$SearchPeersResultData['first_name'].' '.$SearchPeersResultData['last_name'].' <span>in peers</span> </strong>
+									<strong>
+										'.$SearchPeersResultData['first_name'].' '.$SearchPeersResultData['last_name'].' <span>in peers</span>
+										<br>
+										'.$UniversityName.' || '.$MasterName.'		
+									</strong>
 								</a>
 							</li>';
 					}
@@ -7505,7 +7599,7 @@ class Account extends CI_Controller
 			{
 				foreach($SearchPeersResult as $SearchPeersResultData)
 				{
-					$MutalQuery = "SELECT u.id,u.username,u.first_name,u.last_name,u.image,user_info.gender FROM friends f1 INNER JOIN friends f2 ON (f2.peer_id = f1.peer_id) INNER JOIN user u ON (u.id = f2.peer_id) LEFT JOIN user_info ON (user_info.userID = u.id) WHERE f1.user_id = '".$CurrentUserID."' AND f2.user_id = '".$SearchPeersResultData['id']."'";
+					$MutalQuery = "SELECT u.id,u.username,u.first_name,u.last_name,u.image,user_info.gender,user_info.intitutionID,user_info.course FROM friends f1 INNER JOIN friends f2 ON (f2.peer_id = f1.peer_id) INNER JOIN user u ON (u.id = f2.peer_id) LEFT JOIN user_info ON (user_info.userID = u.id) WHERE f1.user_id = '".$CurrentUserID."' AND f2.user_id = '".$SearchPeersResultData['id']."'";
 					
 					if($SearchUseridString != ''){
 						$MutalQuery .= " AND u.id NOT IN (".$SearchUseridString.")";
@@ -7542,11 +7636,32 @@ class Account extends CI_Controller
 								$SearchUserid[]  = $SearchMutalFriend['id'];
 								$ExistingUsers[] = $SearchMutalFriend['id'];
 								
+								// get university name
+								$UniversityName = '';
+								$getUniversityName = "SELECT SchoolName FROM university WHERE university_id='".$SearchMutalFriend['intitutionID']."'";
+								$UniversityNameResult = $this->db->query($getUniversityName)->result_array();
+								if(!empty($UniversityNameResult)){
+									$UniversityName = $UniversityNameResult[0]['SchoolName'];
+								}
+								
+								// get master name
+								$MasterName = '';
+								$getMasterName = "SELECT name as field_of_study FROM field_of_study_master WHERE id='".$SearchMutalFriend['course']."'";
+								$MasterNameResult = $this->db->query($getMasterName)->result_array();
+								if(!empty($MasterNameResult)){
+									$MasterName = $MasterNameResult[0]['field_of_study'];
+								}
+								
 								$SearchHTML .= '
 									<li>
 										<a href="'.base_url('sp/'.$SearchMutalFriend['username']).'" data-user_id="'.$SearchMutalFriend['id'].'" class="storeHistory">
 											<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
-											<strong>'.$SearchMutalFriend['first_name'].' '.$SearchMutalFriend['last_name'].' <span>in peers</span> </strong>
+											<strong>
+												'.$SearchMutalFriend['first_name'].' '.$SearchMutalFriend['last_name'].' <span>in peers</span> 
+												<br>
+												'.$UniversityName.' || '.$MasterName.'	
+											</strong>
+											
 										</a>
 									</li>';
 							}
@@ -7558,7 +7673,7 @@ class Account extends CI_Controller
 			// search peers based on university
 			if($intitutionID != '' && $RemainingResult != 0)
 			{
-				$SearchByUniversity = "SELECT user_info.userID,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user_info LEFT JOIN user ON (user.id = user_info.userID) WHERE user_info.userID != '".$CurrentUserID."' AND user_info.intitutionID='".$intitutionID."'";	
+				$SearchByUniversity = "SELECT user_info.userID,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender,user_info.intitutionID,user_info.course FROM user_info LEFT JOIN user ON (user.id = user_info.userID) WHERE user_info.userID != '".$CurrentUserID."' AND user_info.intitutionID='".$intitutionID."'";	
 				
 				if($SearchUseridString != ''){
 					$SearchByUniversity .= " AND user.id NOT IN (".$SearchUseridString.")";
@@ -7597,11 +7712,31 @@ class Account extends CI_Controller
 								$UserProfile = base_url('uploads/users/'.$SearchUniversityResultData['image']);
 							}
 							
+							// get university name
+							$UniversityName = '';
+							$getUniversityName = "SELECT SchoolName FROM university WHERE university_id='".$SearchUniversityResultData['intitutionID']."'";
+							$UniversityNameResult = $this->db->query($getUniversityName)->result_array();
+							if(!empty($UniversityNameResult)){
+								$UniversityName = $UniversityNameResult[0]['SchoolName'];
+							}
+							
+							// get master name
+							$MasterName = '';
+							$getMasterName = "SELECT name as field_of_study FROM field_of_study_master WHERE id='".$SearchUniversityResultData['course']."'";
+							$MasterNameResult = $this->db->query($getMasterName)->result_array();
+							if(!empty($MasterNameResult)){
+								$MasterName = $MasterNameResult[0]['field_of_study'];
+							}
+							
 							$SearchHTML .= '
 								<li>
 									<a href="'.base_url('sp/'.$SearchUniversityResultData['username']).'" data-user_id="'.$SearchUniversityResultData['id'].'" class="storeHistory">
 										<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
-										<strong>'.$SearchUniversityResultData['first_name'].' '.$SearchUniversityResultData['last_name'].' <span>in peers</span> </strong>
+										<strong>
+										'.$SearchUniversityResultData['first_name'].' '.$SearchUniversityResultData['last_name'].' <span>in peers</span>
+										<br>
+										'.$UniversityName.' || '.$MasterName.'		
+										</strong>
 									</a>
 								</li>';
 						}
@@ -7635,7 +7770,7 @@ class Account extends CI_Controller
 				foreach($SearchStoreResult as $SearchStoreResultData)
 				{
 					if($SearchStoreResultData['search_peer_id'] != '' && $SearchStoreResultData['search_peer_id'] != 0){
-						$SearchQ = "SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'";
+						$SearchQ = "SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender,user_info.intitutionID,user_info.course FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'";
 						
 						if($reportedUsersString != ''){
 							$SearchQ .= " AND user.id NOT IN (".$reportedUsersString.")";
@@ -7647,11 +7782,11 @@ class Account extends CI_Controller
 							if(!in_array($UserDetails[0]['id'],$ExistingUsers)){
 								$ExistingUsers[] = $UserDetails[0]['id'];
 								
-								if($SearchUniversityResultData['gender'] == 'female'){
+								if($UserDetails[0]['gender'] == 'female'){
 									$UserProfile = base_url('uploads/user-female.png');
-								} else if($SearchUniversityResultData['gender'] == 'male') {
+								} else if($UserDetails[0]['gender'] == 'male') {
 									$UserProfile = base_url('uploads/user-male.png');
-								} else if($SearchUniversityResultData['gender'] == 'other') {
+								} else if($UserDetails[0]['gender'] == 'other') {
 									$UserProfile = base_url('uploads/user-anonymous.png');
 								} else {
 									$UserProfile = base_url().'assets_d/images/user.jpg';
@@ -7661,11 +7796,31 @@ class Account extends CI_Controller
 									$UserProfile = base_url('uploads/users/'.$UserDetails[0]['image']);
 								}
 								
+								// get university name
+								$UniversityName = '';
+								$getUniversityName = "SELECT SchoolName FROM university WHERE university_id='".$UserDetails[0]['intitutionID']."'";
+								$UniversityNameResult = $this->db->query($getUniversityName)->result_array();
+								if(!empty($UniversityNameResult)){
+									$UniversityName = $UniversityNameResult[0]['SchoolName'];
+								}
+								
+								// get master name
+								$MasterName = '';
+								$getMasterName = "SELECT name as field_of_study FROM field_of_study_master WHERE id='".$UserDetails[0]['course']."'";
+								$MasterNameResult = $this->db->query($getMasterName)->result_array();
+								if(!empty($MasterNameResult)){
+									$MasterName = $MasterNameResult[0]['field_of_study'];
+								}
+								
 								$SearchHTML .= '
 									<li class="searchHistory_'.$SearchStoreResultData['id'].'">
 										<a href="'.base_url('sp/'.$UserDetails[0]['username']).'" data-user_id="'.$UserDetails[0]['id'].'" class="storeHistory">
 											<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
-											<strong>'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> </strong>
+											<strong>
+												'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> 
+												<br>
+												'.$UniversityName.' || '.$MasterName.'	
+											</strong>
 										</a>
 										<div class="removeBadge">
 											<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
@@ -7812,7 +7967,7 @@ class Account extends CI_Controller
 		$reportedUsers = array();
 		$reportedUsersString = '';
 		
-		$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."'";
+		$getReportedUsers = "SELECT report_user_id FROM user_report_master WHERE user_id='".$CurrentUserID."' AND status='1'";
 		$ReportedUsersResult = $this->db->query($getReportedUsers)->result_array();
 		if(!empty($ReportedUsersResult)){
 			foreach($ReportedUsersResult as $ReportedUsersResultData){
@@ -7849,13 +8004,13 @@ class Account extends CI_Controller
 			{
 				if($SearchStoreResultData['search_peer_id'] != '' && $SearchStoreResultData['search_peer_id'] != 0){
 					
-					$SearchUQuery = "SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'";
+					$SearchUQuery = "SELECT user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender,user_info.intitutionID,user_info.course FROM user LEFT JOIN user_info ON (user_info.userID = user.id) WHERE user.id='".$SearchStoreResultData['search_peer_id']."'";
 					
 					if($reportedUsersString != ''){
 						$SearchUQuery .= " AND user.id NOT IN (".$reportedUsersString.")";
 					}
 					
-					$UserDetails = $this->db->query()->result_array();
+					$UserDetails = $this->db->query($SearchUQuery)->result_array();
 					
 					if(!empty($UserDetails)){
 						if(!in_array($UserDetails[0]['id'],$ExistingUsers)){
@@ -7875,11 +8030,31 @@ class Account extends CI_Controller
 								$UserProfile = base_url('uploads/users/'.$UserDetails[0]['image']);
 							}
 							
+							// get university name
+							$UniversityName = '';
+							$getUniversityName = "SELECT SchoolName FROM university WHERE university_id='".$UserDetails[0]['intitutionID']."'";
+							$UniversityNameResult = $this->db->query($getUniversityName)->result_array();
+							if(!empty($UniversityNameResult)){
+								$UniversityName = $UniversityNameResult[0]['SchoolName'];
+							}
+							
+							// get master name
+							$MasterName = '';
+							$getMasterName = "SELECT name as field_of_study FROM field_of_study_master WHERE id='".$UserDetails[0]['course']."'";
+							$MasterNameResult = $this->db->query($getMasterName)->result_array();
+							if(!empty($MasterNameResult)){
+								$MasterName = $MasterNameResult[0]['field_of_study'];
+							}
+							
 							$SearchHTML .= '
 								<li class="searchHistory_'.$SearchStoreResultData['id'].'">
 									<a href="'.base_url('sp/'.$UserDetails[0]['username']).'" data-user_id="'.$UserDetails[0]['id'].'" class="storeHistory">
 										<figure> <img src="'.$UserProfile.'" alt="Image"/> </figure>
-										<strong>'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> </strong>
+										<strong>
+											'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> 
+											<br>
+											'.$UniversityName.' || '.$MasterName.'	
+										</strong>
 									</a>
 									<div class="removeBadge">
 										<span class="removeBadgeIcon" data-historyId="'.$SearchStoreResultData['id'].'"><i class="fa fa-times"></i></span>
@@ -7902,9 +8077,12 @@ class Account extends CI_Controller
 				}
 				
 			}
+			
+			$result['status']      = true;
+		} else {
+			$result['status']      = false;
 		}
 		
-		$result['status']      = true;
 		$result['search_html'] = $SearchHTML;
 
 		print_r(json_encode($result));
