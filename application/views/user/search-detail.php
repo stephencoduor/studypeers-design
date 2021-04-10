@@ -252,7 +252,7 @@
 										
 										<?php if(!empty($comment_replies)) { $reply_css= ""; } else { $reply_css= "display:none;"; } ?>
 										
-										<a onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span> </a>
+										<a class="" onclick="showReplyBox('<?php echo $value['id']; ?>')">Reply <span style="<?= $reply_css; ?>" id="comment_reply_count_<?php echo $value['id']; ?>">(<?php echo count($comment_replies); ?>)</span> </a>
 										
 										<div id="show_reply_box_<?php echo $value['id']; ?>" style="display: none;">
 											<div id="commentreply_box_<?php echo $value['id']; ?>">

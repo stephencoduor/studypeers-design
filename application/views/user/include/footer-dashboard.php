@@ -24,6 +24,7 @@
 <script src="<?php echo base_url('assets_d/js/infinite-scroll.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/bootstrap-select.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
 
 <script>
@@ -1031,6 +1032,7 @@
             togglename.text('Love');
         }
     });
+
 	/*$('.innerReplyBox').slideUp();*/
     $('.leftStatus a.reply').on('click', function() {
         $(this).siblings('.innerReplyBox').slideDown();
