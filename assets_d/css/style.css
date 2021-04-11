@@ -1823,8 +1823,11 @@ transform-origin: 0 0;
     color: #000;
     position: relative;
 }
+.data-privacy-right a{
+    cursor: pointer;
+}
 .tabs-list-wrap button:before{
-    width:10px;
+    width:5px;
     height:100%;
     background-color:#0056f5;
     position: absolute;
@@ -1962,8 +1965,19 @@ background-color: #ccc;
     height:auto;
     max-height: 500px;
 }
-
-  
+.side-ic{
+    width:20px;
+    height:20px;
+    margin-right:10px;
+    display: inline-block;
+    vertical-align: middle;
+    background:no-repeat;
+    background-size:100%;
+    background-position: center center;
+}
+.side-ic{
+    background-image:url("../../assets_d/images/icons/account.svg");
+}
 @media (max-width: 767px) {
     .modal .listUserWrap .list{
         flex-direction: column;

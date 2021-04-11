@@ -3,15 +3,15 @@
       <div class="tab-content-wrap">
         <div class="tabs-list-wrap">
           <h3>Settings</h3>
-          <button class="tablinks" onclick="openTab(event, 'site-preference')" id="defaultOpen">Site Preference</button>
-          <button class="tablinks" onclick="openTab(event, 'subscription-payment')">Subscription & Payment</button>
-          <button class="tablinks" onclick="openTab(event, 'partner-services')">Partner & Services</button>
-          <button class="tablinks" onclick="openTab(event, 'account-management')">Account Management</button>
-          <button class="tablinks" onclick="openTab(event, 'sign-security')">Sign in & Security</button>
-          <button class="tablinks" onclick="openTab(event, 'visibility')">Visibility</button>
-          <button class="tablinks" onclick="openTab(event, 'notification')">Notification</button>
-          <button class="tablinks" onclick="openTab(event, 'communication')">Communication</button>
-          <button class="tablinks" onclick="openTab(event, 'data-privacy')">Data Privacy</button>
+          <button class="tablinks" onclick="openTab(event, 'site-preference')" id="defaultOpen"><span class="side-ic site-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Site Preference</button>
+          <button class="tablinks" onclick="openTab(event, 'subscription-payment')"><span class="side-ic subscription-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Subscription & Payment</button>
+          <button class="tablinks" onclick="openTab(event, 'partner-services')"><span class="side-ic partner-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Partner & Services</button>
+          <button class="tablinks" onclick="openTab(event, 'account-management')"><span class="side-ic account-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Account Management</button>
+          <button class="tablinks" onclick="openTab(event, 'sign-security')"><span class="side-ic sign-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Sign in & Security</button>
+          <button class="tablinks" onclick="openTab(event, 'visibility')"><span class="side-ic visibility-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Visibility</button>
+          <button class="tablinks" onclick="openTab(event, 'notification')"><span class="side-ic notification-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Notification</button>
+          <button class="tablinks" onclick="openTab(event, 'communication')"><span class="side-ic communication-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Communication</button>
+          <button class="tablinks" onclick="openTab(event, 'data-privacy')"><span class="side-ic data-privacy"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span>Data Privacy</button>
         </div>
         <div class="tabcontent-area-wrp">
           <div id="site-preference" class="tabcontent-area">
@@ -33,11 +33,21 @@
               <p>Unlock the power of Studypeers</p>
             </div>
             <div class="custom-panel">
-              <p>Lorem ipsum...</p>
+              <h4>Name, are you interested in Premium for personal use?</h4>
+              <p>We'll recommend the right plan for you</p>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">I'd use Premium for my personal goals</label>
+              </div>
+              <div class="checkbox">
+                <label><input type="checkbox" value="">I'd use Premium as part of my job</label>
+              </div>
             </div>
             <div class="custom-accordion">
               <h3>Purchase History</h3>
               <p>See your previous purchases and transactions</p>
+            </div>
+            <div class="custom-panel">
+              <p>Lorem ipsum...</p>
             </div>
           </div>
           <div id="partner-services" class="tabcontent-area">
@@ -55,22 +65,15 @@
           <div id="account-management" class="tabcontent-area">
             <h3>Account Management</h3>
             <div class="custom-accordion">
-              <h3>On Studypeers</h3>
-              <p>Received via Studypeers web and app</p>
+              <h3>Deactivate Account</h3>
+              <p>Temporarily deactivate your account</p>
             </div>
             <div class="custom-panel">
               <p>Lorem ipsum...</p>
             </div>
             <div class="custom-accordion">
-              <h3>Email</h3>
-              <p>Received via your primary email</p>
-            </div>
-            <div class="custom-panel">
-              <p>Lorem ipsum...</p>
-            </div>
-            <div class="custom-accordion">
-              <h3>Push</h3>
-              <p>Pops up on your device</p>
+              <h3>Close Account</h3>
+              <p>Learn your options and close your account if you wish</p>
             </div>
             <div class="custom-panel">
               <p>Lorem ipsum...</p>
@@ -79,22 +82,43 @@
           <div id="sign-security" class="tabcontent-area">
             <h3>Sign in & Security</h3>
             <div class="custom-accordion">
-              <h3>On Studypeers</h3>
-              <p>Received via Studypeers web and app</p>
+              <h3>Email addresses</h3>
+              <p>Add/remove email address on your account</p>
             </div>
             <div class="custom-panel">
               <p>Lorem ipsum...</p>
             </div>
             <div class="custom-accordion">
-              <h3>Email</h3>
-              <p>Received via your primary email</p>
+              <h3>Phone numbers</h3>
+              <p>Add a phone number in case you have trouble signing in</p>
             </div>
             <div class="custom-panel">
               <p>Lorem ipsum...</p>
             </div>
             <div class="custom-accordion">
-              <h3>Push</h3>
-              <p>Pops up on your device</p>
+              <h3>Change password</h3>
+              <p>Choose a unique password to protect your account</p>
+            </div>
+            <div class="custom-panel">
+              <p>Lorem ipsum...</p>
+            </div>
+            <div class="custom-accordion">
+              <h3>Where you're signed in</h3>
+              <p>See your active sessions and sign out if you'd like</p>
+            </div>
+            <div class="custom-panel">
+              <p>Lorem ipsum...</p>
+            </div>
+            <div class="custom-accordion">
+              <h3>Devices that remember your password</h3>
+              <p>Review and control the devices that remember your password</p>
+            </div>
+            <div class="custom-panel">
+              <p>Lorem ipsum...</p>
+            </div>
+            <div class="custom-accordion">
+              <h3>Two-step verification</h3>
+              <p>Active this feature of enhanced account security</p>
             </div>
             <div class="custom-panel">
               <p>Lorem ipsum...</p>
@@ -103,25 +127,53 @@
           <div id="visibility" class="tabcontent-area">
             <h3>Visibility of your activity</h3>
             <div class="custom-accordion">
-              <h3>On Studypeers</h3>
-              <p>Received via Studypeers web and app</p>
+              <h3>Story viewing options</h3>
+              <p>Choose whether you're visible or viewing in private mode</p>
             </div>
             <div class="custom-panel">
               <p>Lorem ipsum...</p>
             </div>
             <div class="custom-accordion">
-              <h3>Email</h3>
-              <p>Received via your primary email</p>
+              <h3>Edit your public profile</h3>
+              <p>Choose how your profile appers to non-logged in members via search</p>
             </div>
             <div class="custom-panel">
               <p>Lorem ipsum...</p>
             </div>
             <div class="custom-accordion">
-              <h3>Push</h3>
-              <p>Pops up on your device</p>
+              <h3>Who can see your connections</h3>
+              <p>Choose who can see your list of connections</p>
             </div>
             <div class="custom-panel">
               <p>Lorem ipsum...</p>
+            </div>
+            <div class="custom-accordion">
+              <h3>Who can see your last name</h3>
+              <p>Choose how you want your name to appear</p>
+            </div>
+            <div class="custom-panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <div class="custom-accordion">
+              <h3>Profile visibility off Studypeers</h3>
+              <p>Choose who can discover your profile it they haven't connected with you, but have your email address</p>
+            </div>
+            <div class="custom-panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <div class="custom-accordion">
+              <h3>Profile discovery using email address</h3>
+              <p>Choose who can discover your profile it they haven't connected with you, but have your email address</p>
+            </div>
+            <div class="custom-panel">
+                <p>Lorem ipsum...</p>
+            </div>
+            <div class="custom-accordion">
+              <h3>Profile discovery using email address</h3>
+              <p>Choose who can discover your profile it they haven't connected with you, but have your email address</p>
+            </div>
+            <div class="custom-panel">
+                <p>Lorem ipsum...</p>
             </div>
           </div>
           <div id="notification" class="tabcontent-area">
