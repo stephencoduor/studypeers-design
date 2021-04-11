@@ -123,11 +123,11 @@ $login_user_id = $this->session->get_userdata()['user_data']['user_id'];
                                     <ul>
                                         <li>
                                             <?php if (!empty($chk_if_reported)) { ?>
-                                                <a role="menuitem" href="javascript:void(0);" data-toggle="modal" data-target="#cancelReportModalUser">
+                                                <a role="menuitem" href="javascript:;" data-toggle="modal" data-target="#cancelReportModalUser">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/report1.svg"> Report
                                                 </a>
                                             <?php } else { ?>
-                                                <a role="menuitem" href="javascript:void(0);" data-toggle="modal" data-target="#reportModalUser">
+                                                <a role="menuitem" href="javascript:;" data-toggle="modal" data-target="#reportModalUser">
                                                     <img src="<?php echo base_url(); ?>assets_d/images/report1.svg"> Report
                                                 </a>
                                             <?php } ?>
@@ -1991,7 +1991,7 @@ $login_user_id = $this->session->get_userdata()['user_data']['user_id'];
         <div class="modal-content">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
             <div class="modal-body peers">
-                <form method="post" action="<?php echo base_url(); ?>Profile/reportUser" onsubmit="return validateReport()">
+                <form method="post" action="<?php echo base_url(); ?>Profile/reportUser">
                     <h4>Reason</h4>
                     <div class="row">
 
@@ -2000,7 +2000,7 @@ $login_user_id = $this->session->get_userdata()['user_data']['user_id'];
                                 <label>Reason for Report</label>
                                 <div class="reason">
                                     <input type="hidden" name="report_user_id" value="<?= $user_id; ?>">
-                                    <select class="form-control selectpicker" id="report_reason" name="report_reason">
+                                    <select class="form-control selectpicker" id="report_reason" name="report_reason" required >
                                         <option value="">Select Reason</option>
                                         <option value="Inappropriate Content">Inappropriate Content</option>
                                         <option value="Spam">Spam</option>
@@ -2174,11 +2174,18 @@ function time_elapsed_string($datetime, $full = false)
 
 <script type="text/javascript">
     function validateReport() {
+		alert();
+		
         var report_reason = $('#report_reason').val();
         if (report_reason == '') {
+			
+			alert(1);
+			
             $('#err_report_reason').html("This field is required").show();
             return false;
         } else {
+			alert(2);
+			
             $('#err_report_reason').html("").hide();
         }
     }

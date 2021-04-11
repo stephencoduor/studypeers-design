@@ -744,7 +744,7 @@ $(document).on('focus click','#search-info',function(e){
 				if(response.status == true){
 					$(".removeSearchIcon").show();
 					if(response.search_html == ''){
-						$(".searchresulttext").html('No result found!');
+						$(".searchresulttext").html('Search for something');
 						$(".no-search").show();
 						$(".searchResultClass").hide();
 						$(".searchResultClassView").hide();
