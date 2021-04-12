@@ -161,6 +161,23 @@
 										</div>												
 									</div>
 									<div class="timeline"><?php echo time_ago_in_php($event_detail['created_at']); ?></div>
+									<?php
+										if($user_id != $event_detail['created_by']) {
+									?>
+									&nbsp;&nbsp;&nbsp;
+									<div class="dropdown">
+										<i class="dropdown-toggle" data-toggle="dropdown">
+											<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+										</i>
+										<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+											<li class="removePeerSugg">
+												<a href="javascript:;" class="reportThingsDashboard" data-reportType="EVENTS" data-currentPage="dashboard" data-primaryId="<?php echo $event_detail['id']; ?>">Report</a>
+											</li>
+										</ul>
+									</div>
+									<?php
+										}
+									?>
 								</div>
 								<h4><?php echo $event_detail['event_name'] ?></h4>
 								<div class="event-description">
@@ -699,6 +716,17 @@
 								</div>												
 							</div>
 							<div class="timeline"><?php echo time_ago_in_php($studyset_detail['created_on']); ?></div>
+							&nbsp;&nbsp;&nbsp;
+							<div class="dropdown">
+								<i class="dropdown-toggle" data-toggle="dropdown">
+									<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+								</i>
+								<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+									<li class="removePeerSugg">
+										<a href="javascript:;" class="reportThingsDashboard" data-reportType="STUDYSET" data-currentPage="dashboard" data-primaryId="<?php echo $studyset_detail['study_set_id']; ?>">Report</a>
+									</li>
+								</ul>
+							</div>
 						</div>
 						<h4><a href="<?php echo base_url(); ?>studyset/details/<?php echo $studyset_detail['study_set_id']; ?>"><?php echo $studyset_detail['name']; ?></a></h4>
 						
@@ -1178,6 +1206,23 @@
 								</div>												
 							</div>
 							<div class="timeline"><?php echo time_ago_in_php($document_detail['created_at']); ?></div>
+							<?php
+								if($user_id != $document_detail['created_by']) {
+							?>
+							&nbsp;&nbsp;&nbsp;
+							<div class="dropdown">
+								<i class="dropdown-toggle" data-toggle="dropdown">
+									<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+								</i>
+								<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+									<li class="removePeerSugg">
+										<a href="javascript:;" class="reportThingsDashboard" data-reportType="DOCUMENTS" data-currentPage="dashboard" data-primaryId="<?php echo $document_detail['id']; ?>">Report</a>
+									</li>
+								</ul>
+							</div>
+							<?php
+								}
+							?>
 						</div>
 						<h4><?php echo $document_detail['document_name']; ?></h4>
 						<p><?php echo $document_detail['description']; ?> </p>
@@ -1698,6 +1743,23 @@
 														</div>												
 													</div>
 													<div class="timeline"><?php echo time_ago_in_php($question_detail['created_at']); ?></div>
+													<?php
+														if($user_id != $question_detail['created_by']) {
+													?>
+													&nbsp;&nbsp;&nbsp;
+													<div class="dropdown">
+														<i class="dropdown-toggle" data-toggle="dropdown">
+															<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/>
+														</i>
+														<ul class="dropdown-menu" style="right: 0;left: auto;top: 0px;">
+															<li class="removePeerSugg">
+																<a href="javascript:;" class="reportThingsDashboard" data-reportType="QUESTIONS" data-currentPage="dashboard" data-primaryId="<?php echo $question_detail['id']; ?>">Report</a>
+															</li>
+														</ul>
+													</div>
+													<?php
+														}
+													?>
 						</div>
 
 						<h4><?php echo $question_detail['question_title']; ?></h4>
@@ -2114,7 +2176,27 @@
 	                    </ul>
 	                
                 	</div>
-                <?php } ?>
+                <?php 
+					} else {
+				?>
+					<div class="dropdown dropdownToggleMenu">
+                    	<img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="toggle" data-toggle="dropdown" >
+	                    <ul class="dropdown-menu" role="menu" aria-labelledby="menu1">
+							<li>
+								<a href="javascript:;" class="reportThingsDashboard" data-reportType="POSTS" data-currentPage="dashboard" data-primaryId="<?php echo $post_query->id; ?>" >
+									<div class="left">
+										<img src="<?php echo base_url(); ?>assets_d/images/report.jpg" alt="Report">
+									</div>
+									<div class="right">
+										<span>Report</span>
+									</div>
+								</a>
+							</li>
+						</ul>
+					</div>
+				<?php	
+					} 
+				?>
                 <div class="createBox">
                     <div class="feeduserwrap">
                         <div class="user-details">

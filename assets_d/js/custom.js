@@ -896,3 +896,14 @@ $(document).on('click','.reportThings',function(){
 	$("#report_post_type").val(reportType);
 	$("#current_page").val(currentPage);
 });
+
+$(document).on('click','.reportThingsDashboard',function(){
+	var reportType  = $(this).attr('data-reportType');
+	var primaryId   = $(this).attr('data-primaryId');
+	var currentPage = $(this).attr('data-currentPage');
+	
+	$("#reportModalDashboard").modal('show');
+	$("#primary_id").val(primaryId);
+	$("#report_post_type").val(reportType);
+	$("#current_page").val(currentPage);
+});

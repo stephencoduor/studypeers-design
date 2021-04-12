@@ -2901,7 +2901,7 @@ class Account extends CI_Controller
         $count      = $offset * 10;
         $peerList = $this->peerListStringDashboard($user_id);
 
-		// get reported questions
+		// get reported users
 		$reportedUsers = array();
 		$reportedUsersString = '';
 		
@@ -3008,26 +3008,66 @@ class Account extends CI_Controller
         $this->db->select('reference_master.*,');
         $this->db->from('reference_master');
         $this->db->where("reference_master.status", 1);
-        $this->db->where("reference_master.user_id", $user_id);
+        //$this->db->where("reference_master.user_id", $user_id);
         if (!empty($peerList)) {
-            $this->db->or_group_start();
-            $this->db->where_in('reference_master.user_id', $peerList);
-            $this->db->where('reference_master.status !=', 3);
-            $this->db->group_end();
-        }
+            // $this->db->or_group_start();
+            // $this->db->where_in('reference_master.user_id', $peerList);
+            // $this->db->where('reference_master.status !=', 3);
+            // $this->db->group_end();
+			
+			$this->db->where("(reference_master.user_id = '".$user_id."' OR (reference_master.user_id IN (".implode(",",$peerList).") AND reference_master.status != '3'))");
+        } else {
+			$this->db->where("reference_master.user_id = '".$user_id."'");
+		}
+		
+		if($reportedPostsString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="Post" AND reference_id IN ('.$reportedPostsString.'))');
+		}
+		if($reportedDocumentString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="document" AND reference_id IN ('.$reportedDocumentString.'))');
+		}
+		if($reportedQuestionString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="question" AND reference_id IN ('.$reportedQuestionString.'))');
+		}
+		if($reportedStudysetString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="studyset" AND reference_id IN ('.$reportedStudysetString.'))');
+		}
+		if($reportedEventsString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="event" AND reference_id IN ('.$reportedEventsString.'))');
+		}
 		
         $total_feeds = $this->db->get()->num_rows();
-
+		
         $this->db->select('reference_master.*,');
         $this->db->from('reference_master');
         $this->db->where("reference_master.status", 1);
-        $this->db->where("reference_master.user_id", $user_id);
+        //$this->db->where("reference_master.user_id", $user_id);
         if (!empty($peerList)) {
-            $this->db->or_group_start();
-            $this->db->where_in('reference_master.user_id', $peerList);
-            $this->db->where('reference_master.status !=', 3);
-            $this->db->group_end();
-        }
+            // $this->db->or_group_start();
+            // $this->db->where_in('reference_master.user_id', $peerList);
+            // $this->db->where('reference_master.status !=', 3);
+            // $this->db->group_end();
+			
+			$this->db->where("(reference_master.user_id = '".$user_id."' OR (reference_master.user_id IN (".implode(",",$peerList).") AND reference_master.status != '3'))");
+        } else {
+			$this->db->where("reference_master.user_id = '".$user_id."'");
+		}
+		
+		if($reportedPostsString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="Post" AND reference_id IN ('.$reportedPostsString.'))');
+		}
+		if($reportedDocumentString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="document" AND reference_id IN ('.$reportedDocumentString.'))');
+		}
+		if($reportedQuestionString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="question" AND reference_id IN ('.$reportedQuestionString.'))');
+		}
+		if($reportedStudysetString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="studyset" AND reference_id IN ('.$reportedStudysetString.'))');
+		}
+		if($reportedEventsString != ''){
+			$this->db->where('id NOT IN (SELECT id FROM reference_master WHERE reference="event" AND reference_id IN ('.$reportedEventsString.'))');
+		}
 		
         $this->db->limit(10, $count);
         $this->db->order_by('reference_master.id', 'desc');
@@ -8395,7 +8435,9 @@ class Account extends CI_Controller
 					} else {
 						redirect('account/searchResult');	
 					}
-				}
+				} else if($this->input->post('current_page') == 'dashboard'){
+					redirect('account/dashboard');
+				} 
 			} else {
 				redirect('account/searchResult');		
 			}

@@ -10518,6 +10518,60 @@
     </div>
 </div>
 
+<div class="modal fade" id="reportModalDashboard" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<button type="button" class="close" data-dismiss="modal">&times;</button>
+			<div class="modal-body peers">
+				<h4>Reason</h4>
+				<form method="POST" action="<?php echo base_url('account/reportThings'); ?>">
+					
+					<input type="hidden" name="primary_id" id="primary_id">
+					<input type="hidden" name="report_post_type" id="report_post_type">
+					<input type="hidden" name="current_page" id="current_page">
+				
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Reason for Report</label>
+								<div class="reason">
+									<select class="form-control" name="report_reason" id="report_reason" required>
+										<option value="">Select Reason</option>
+										<option value="Inappropriate Content">Inappropriate Content</option>
+										<option value="Spam">Spam</option>
+										<option value="Promotional">Promotional</option>
+										<option value="Uncivil">Uncivil</option>
+										<option value="Other">Other</option>
+									</select>
+									<span class="error" id="report_reason_err"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<label>Reason</label>
+								<div class="reason droparea">
+									<textarea id="report_description" name="report_description" required ></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<div class="form-group">
+								<button type="submit" class="filterBtn">Submit</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
 <div id="documentPreview" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
