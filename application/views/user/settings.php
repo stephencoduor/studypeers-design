@@ -3,15 +3,15 @@
       <div class="tab-content-wrap">
         <div class="tabs-list-wrap">
           <h3>Settings</h3>
-          <button class="tablinks" onclick="openTab(event, 'site-preference')" id="defaultOpen"><span class="side-ic site-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Site Preference</button>
-          <button class="tablinks" onclick="openTab(event, 'subscription-payment')"><span class="side-ic subscription-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Subscription & Payment</button>
-          <button class="tablinks" onclick="openTab(event, 'partner-services')"><span class="side-ic partner-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Partner & Services</button>
-          <button class="tablinks" onclick="openTab(event, 'account-management')"><span class="side-ic account-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Account Management</button>
-          <button class="tablinks" onclick="openTab(event, 'sign-security')"><span class="side-ic sign-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Sign in & Security</button>
-          <button class="tablinks" onclick="openTab(event, 'visibility')"><span class="side-ic visibility-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Visibility</button>
-          <button class="tablinks" onclick="openTab(event, 'notification')"><span class="side-ic notification-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Notification</button>
-          <button class="tablinks" onclick="openTab(event, 'communication')"><span class="side-ic communication-icon"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span> Communication</button>
-          <button class="tablinks" onclick="openTab(event, 'data-privacy')"><span class="side-ic data-privacy"><img src="<?php echo base_url(); ?>assets_d/images/icons/message.svg" alt="Icon"/></span>Data Privacy</button>
+          <button class="tablinks" onclick="openTab(event, 'site-preference')" id="defaultOpen"><span class="side-ic site-icon"></span>Site Preference</button>
+          <button class="tablinks" onclick="openTab(event, 'subscription-payment')"><span class="side-ic subscription-icon"></span> Subscription & Payment</button>
+          <button class="tablinks" onclick="openTab(event, 'partner-services')"><span class="side-ic partner-icon"></span> Partner & Services</button>
+          <button class="tablinks" onclick="openTab(event, 'account-management')"><span class="side-ic account-icon"></span> Account Management</button>
+          <button class="tablinks" onclick="openTab(event, 'sign-security')"><span class="side-ic sign-icon"></span> Sign in & Security</button>
+          <button class="tablinks" onclick="openTab(event, 'visibility')"><span class="side-ic visibility-icon"></span> Visibility</button>
+          <button class="tablinks" onclick="openTab(event, 'notification')"><span class="side-ic notification-icon"></span> Notification</button>
+          <button class="tablinks" onclick="openTab(event, 'communication')"><span class="side-ic communication-icon"></span> Communication</button>
+          <button class="tablinks" onclick="openTab(event, 'data-privacy')"><span class="side-ic data-privacy"></span>Data Privacy</button>
         </div>
         <div class="tabcontent-area-wrp">
           <div id="site-preference" class="tabcontent-area">

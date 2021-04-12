@@ -1966,17 +1966,42 @@ background-color: #ccc;
     max-height: 500px;
 }
 .side-ic{
-    width:20px;
-    height:20px;
-    margin-right:10px;
+    width:28px;
+    height:28px;
+    margin-right:5px;
     display: inline-block;
     vertical-align: middle;
     background:no-repeat;
     background-size:100%;
     background-position: center center;
 }
-.side-ic{
-    background-image:url("../../assets_d/images/icons/account.svg");
+.site-icon{
+    background-image:url("../../assets_d/images/icons/01.png");
+}
+.subscription-icon{
+    background-image:url("../../assets_d/images/icons/02.png");
+}
+
+.partner-icon{
+    background-image:url("../../assets_d/images/icons/03.png");
+}
+.account-icon{
+    background-image:url("../../assets_d/images/icons/04.png");
+}
+.sign-icon{
+    background-image:url("../../assets_d/images/icons/05.png");
+}
+.visibility-icon{
+    background-image:url("../../assets_d/images/icons/06.png");
+}
+.notification-icon{
+    background-image:url("../../assets_d/images/icons/07.png");
+}
+.communication-icon{
+    background-image:url("../../assets_d/images/icons/08.png");
+}
+.data-privacy{
+    background-image:url("../../assets_d/images/icons/09.png");
 }
 @media (max-width: 767px) {
     .modal .listUserWrap .list{
