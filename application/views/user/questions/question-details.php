@@ -173,6 +173,22 @@
 									</svg>
 									Edit
 								</button>
+								&nbsp;
+								<?php
+									$CurrentUserID = ($this->session->get_userdata()['user_data']['user_id']) ? $this->session->get_userdata()['user_data']['user_id'] : 0;
+									
+									if($CurrentUserID != $result['created_by']){
+								?>
+								&nbsp;
+								<a type="button" href="javascript:;" class="filterBtn reportThings" data-reportType="QUESTIONS" data-currentPage="questionDetails" data-primaryId="<?php echo $result['id']; ?>">
+									<svg class="sp-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 501.333 501.333">
+										<path d="M442.133,57.6c-26.667-14.933-54.4-21.333-86.4-21.333c-37.333,0-74.667,9.6-109.867,19.2c-34.133,9.6-67.2,18.133-99.2,18.133c-20.267,0-38.4-4.267-55.467-10.667v-41.6C91.2,9.6,81.6,0,69.867,0S48.533,9.6,48.533,21.333V480c0,11.733,9.6,21.333,21.333,21.333s21.333-9.6,21.333-20.267v-147.2c18.133,5.333,36.267,8.533,55.467,8.533c38.4,0,74.667-9.6,109.867-18.133c34.133-9.6,67.2-18.133,99.2-18.133c24.533,0,45.867,5.333,66.133,16c6.4,3.2,14.933,3.2,21.333,0c5.333-4.267,9.6-10.667,9.6-18.133V75.733C452.8,68.267,448.533,60.8,442.133,57.6z M411.2,272c-17.067-6.4-36.267-8.533-55.467-8.533c-37.333,0-74.667,9.6-109.867,19.2c-34.133,9.6-67.2,18.133-99.2,18.133c-20.267,0-38.4-3.2-55.467-10.667v-182.4c17.067,6.4,36.267,8.533,55.467,8.533c37.333,0,74.667-9.6,109.867-19.2c34.133-9.6,67.2-18.133,99.2-18.133c20.267,0,38.4,3.2,55.467,10.667V272z"></path>
+									</svg>
+									Report
+								</a>
+								<?php
+									}
+								?>
 							</div>
 						</div>
 						<?php $user_id = $this->session->get_userdata()['user_data']['user_id'];
@@ -478,9 +494,9 @@
 					</div>
 				</section>
 
-				<div class="modal fade" id="reportModal" role="dialog">
+				<!--div class="modal fade" id="reportModal" role="dialog">
 				    <div class="modal-dialog">
-				        <!-- Modal content-->
+				       
 				        <div class="modal-content">
 				          <button type="button" class="close" data-dismiss="modal">&times;</button>
 					        <div class="modal-body peers">
@@ -527,6 +543,60 @@
 					        </div>
 				        </div>
 				    </div>
+				</div-->
+
+				<div class="modal fade" id="reportModal" role="dialog">
+					<div class="modal-dialog">
+						<!-- Modal content-->
+						<div class="modal-content">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<div class="modal-body peers">
+								<h4>Reason</h4>
+								<form method="POST" action="<?php echo base_url('account/reportThings'); ?>">
+									
+									<input type="hidden" name="primary_id" id="primary_id">
+									<input type="hidden" name="report_post_type" id="report_post_type">
+									<input type="hidden" name="current_page" id="current_page">
+								
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Reason for Report</label>
+												<div class="reason">
+													<select class="form-control" name="report_reason" id="report_reason" required>
+														<option value="">Select Reason</option>
+														<option value="Inappropriate Content">Inappropriate Content</option>
+														<option value="Spam">Spam</option>
+														<option value="Promotional">Promotional</option>
+														<option value="Uncivil">Uncivil</option>
+														<option value="Other">Other</option>
+													</select>
+													<span class="error" id="report_reason_err"></span>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<label>Reason</label>
+												<div class="reason droparea">
+													<textarea id="report_description" name="report_description" required ></textarea>
+												</div>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group">
+												<button type="submit" class="filterBtn">Submit</button>
+											</div>
+										</div>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
 				</div>
 
 

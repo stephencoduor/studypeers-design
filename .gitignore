@@ -15,3 +15,5 @@ error_log
 uploads/*
 assets_d/js/socket-config.js
 application/composer.lock
+studypeers_developent.pem
+studypeers-pm.pem

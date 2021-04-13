@@ -1079,10 +1079,11 @@
 $(document).ready(function() {
 	<?php
 		if($this->router->fetch_class() == 'account' && $this->router->fetch_method() == 'searchViewAll'){
+			$lastVisitedPageIndex = (!empty($lastVisitedPage) && $lastVisitedPage != '') ? $lastVisitedPage : 0;
 	?>
 	var searchType = "<?php echo (isset($searchType)) ? $searchType : 'peers'; ?>";
 	
-	createPagination(0,searchType);
+	createPagination(<?php echo $lastVisitedPageIndex; ?>,searchType);
 	$('#pagination').on('click','a',function(e){
 		e.preventDefault(); 
 		var pageNum = $(this).attr('data-ci-pagination-page');

@@ -2,7 +2,9 @@
 <section class="mainContent">
     <div class="main-home-wrapper">
 		<?php
-			if(!empty($tabType)){
+			if(!empty($tabType) && $tabType == 'searchAllPost'){
+				$redirectLink = "window.location.href='".base_url('account/searchViewAll/posts')."'";
+			} else if(!empty($tabType)){
 				$redirectLink = "window.location.href='".base_url('account/searchResult/'.$tabType)."'";
 			} else {
 				$redirectLink = "window.history.back();";
@@ -47,6 +49,11 @@
                             <div class="timeline-action">
                                 <span class="timeline"><?php echo $posted_date; ?></span>
                                 <!--a href=""><img src="<?php echo base_url(); ?>assets_d/images/more.svg" alt="Image"/></a-->
+								<?php
+									$CurrentUserID = ($this->session->get_userdata()['user_data']['user_id']) ? $this->session->get_userdata()['user_data']['user_id'] : 0;
+									
+									if($CurrentUserID != $created_by){
+								?>
 								&nbsp;&nbsp;&nbsp;
 								<div class="dropdown">
 									<i class="dropdown-toggle" data-toggle="dropdown">
@@ -58,6 +65,9 @@
 										</li>
 									</ul>
 								</div>
+								<?php
+									}
+								?>
                             </div>
                         </div>
                     </div>  
