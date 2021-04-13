@@ -6443,8 +6443,15 @@ class Account extends CI_Controller
 								SET status = 2
 								WHERE reference = 'document' and reference_id in (select id from document_master where course = ".$course_id.")");
 
+            $this->db->query("UPDATE reference_master
+								SET status = 2
+								WHERE reference = 'studyset' and reference_id in (select study_set_id from study_sets where course = ".$course_id.")");
+
             $this->db->where(array('course' => $course_id));
             $this->db->update('document_master', array('status' => 2));
+
+            $this->db->where(array('course' => $course_id));
+            $this->db->update('study_sets', array('status' => 2));
 
             $this->db->where(array('course_id' => $course_id));
             $this->db->delete('professor_master');
