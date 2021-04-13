@@ -3007,7 +3007,7 @@ class Account extends CI_Controller
 		
         $this->db->select('reference_master.*,');
         $this->db->from('reference_master');
-        $this->db->where("reference_master.status", 1);
+        // $this->db->where("reference_master.status", 1);
         //$this->db->where("reference_master.user_id", $user_id);
         if (!empty($peerList)) {
             // $this->db->or_group_start();
@@ -3015,7 +3015,7 @@ class Account extends CI_Controller
             // $this->db->where('reference_master.status !=', 3);
             // $this->db->group_end();
 			
-			$this->db->where("(reference_master.user_id = '".$user_id."' OR (reference_master.user_id IN (".implode(",",$peerList).") AND reference_master.status != '3'))");
+			$this->db->where("(reference_master.user_id = '".$user_id."' OR (reference_master.user_id IN (".implode(",",$peerList).") AND reference_master.status != 3))");
         } else {
 			$this->db->where("reference_master.user_id = '".$user_id."'");
 		}
@@ -3040,7 +3040,7 @@ class Account extends CI_Controller
 		
         $this->db->select('reference_master.*,');
         $this->db->from('reference_master');
-        $this->db->where("reference_master.status", 1);
+        // $this->db->where("reference_master.status", 1);
         //$this->db->where("reference_master.user_id", $user_id);
         if (!empty($peerList)) {
             // $this->db->or_group_start();
