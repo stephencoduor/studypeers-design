@@ -23,20 +23,20 @@
         <div class="tabs-wrappper">
             <div class="tabslisting">
                 <ul class="nav nav-tabs">
-					<li class="active" style="display:none;"><a data-toggle="tab" href="#all" aria-expanded="true">All</a></li>
-                    <li><a data-toggle="tab" href="#peers" aria-expanded="true">Peers</a></li>
-                    <li><a data-toggle="tab" href="#posts" aria-expanded="true">Posts</a></li>
-                    <li><a data-toggle="tab" href="#questions" aria-expanded="true">Questions</a></li>
-                    <li><a data-toggle="tab" href="#documents" aria-expanded="true">Documents</a></li>
-                    <li><a data-toggle="tab" href="#studySets" aria-expanded="true">Study Sets</a></li>
-                    <li><a data-toggle="tab" href="#events" aria-expanded="true">Events</a></li>
+					<li <?php if($tabType == '' || $tabType == 'all'){ ?>class="active" <?php } ?>><a data-toggle="tab" href="#all" aria-expanded="true">All</a></li>
+                    <li <?php if($tabType != '' && $tabType == 'peers'){ ?>class="active" <?php } ?>><a data-toggle="tab" href="#peers" aria-expanded="true">Peers</a></li>
+                    <li <?php if($tabType != '' && $tabType == 'posts'){ ?>class="active" <?php } ?>><a data-toggle="tab" href="#posts" aria-expanded="true">Posts</a></li>
+                    <li <?php if($tabType != '' && $tabType == 'questions'){ ?>class="active" <?php } ?>><a data-toggle="tab" href="#questions" aria-expanded="true">Questions</a></li>
+                    <li <?php if($tabType != '' && $tabType == 'documents'){ ?>class="active" <?php } ?>><a data-toggle="tab" href="#documents" aria-expanded="true">Documents</a></li>
+                    <li <?php if($tabType != '' && $tabType == 'studySets'){ ?>class="active" <?php } ?>><a data-toggle="tab" href="#studySets" aria-expanded="true">Study Sets</a></li>
+                    <li <?php if($tabType != '' && $tabType == 'events'){ ?>class="active" <?php } ?>><a data-toggle="tab" href="#events" aria-expanded="true">Events</a></li>
                     <li style="display:none;"><a data-toggle="tab" href="#articles" aria-expanded="true">Articles</a></li>
                     <li style="display:none;"><a data-toggle="tab" href="#studySessions" aria-expanded="true">Study Sessions</a></li>
                 </ul>
             </div>
         </div>
         <div class="tab-content">
-			<div id="all" class="tab-pane fade in active">
+			<div id="all" class="tab-pane fade <?php if($tabType == '' || $tabType == 'all'){ ?>in active<?php } ?>">
 				<?php
 				if(!empty($AllPeers)){
 				?>
@@ -85,7 +85,7 @@
 							}
 						?>
                     </div>
-                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/peers'); ?>">View All Peers</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/peers/all'); ?>">View All Peers</a></div>
                 </div>
 				<br>
 				<?php
@@ -204,10 +204,22 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><?php echo $AllPost['total_comments']; ?></a></li>
+                                    <li><a href="<?php echo base_url('account/searchDetail/posts/'.base64_encode($AllPost['post_id']).'/all/comment'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('account/searchDetail/posts/'.base64_encode($AllPost['post_id']).'/all/comment'); ?>"><?php echo $AllPost['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
+									
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="<?php echo base_url('account/searchDetail/posts/'.base64_encode($AllPost['post_id']).'/all'); ?>">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -215,7 +227,7 @@
 					<?php
 						}
 					?>
-                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/posts'); ?>">View All Posts</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/posts/all'); ?>">View All Posts</a></div>
                 </div>
 				<br>
 				<?php
@@ -308,6 +320,18 @@
                                     <li><a href=""><?php echo $AllQuestion['answer_count']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
+									
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/all'); ?>">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -315,7 +339,7 @@
                     <?php
 						}
 					?>
-                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/questions'); ?>">View All Questions</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/questions/all'); ?>">View All Questions</a></div>
                 </div>
 				<br>
 				<?php
@@ -487,6 +511,18 @@
                                     <li><a href=""><?php echo $AllDocument['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
+									
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['reference_id']).'/search/all'); ?>">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -494,7 +530,7 @@
                     <?php
 						}
 					?>
-                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/documents'); ?>">View All Documents</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/documents/all'); ?>">View All Documents</a></div>
                 </div>
 				<br>
 				<?php
@@ -631,6 +667,18 @@
                                     <li><a href=""><?php echo $AllStudySet['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
+									
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="<?php echo base_url('studyset/details/'.$AllStudySet['reference_id'].'/search/all'); ?>">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -638,7 +686,7 @@
                     <?php
 						}
 					?>
-                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/studysets'); ?>">View All Study Sets</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/studysets/all'); ?>">View All Study Sets</a></div>
                 </div>
 				<br>
 				<?php
@@ -824,6 +872,18 @@
                                     <li><a href=""><?php echo $AllEvent['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
+									
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['reference_id']).'/search/all'); ?>">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -831,7 +891,7 @@
                     <?php 
 						}
 					?>
-                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/events'); ?>">View All Events</a></div>
+                    <div class="view-all-section"><a href="<?php echo base_url('account/searchViewAll/events/all'); ?>">View All Events</a></div>
                 </div>
 				<br>
 				<?php
@@ -1407,7 +1467,7 @@
 				?>
 				
 			</div>
-            <div id="peers" class="tab-pane fade">
+            <div id="peers" class="tab-pane fade <?php if($tabType != '' && $tabType == 'peers'){ ?>in active<?php } ?>">
                 <div class="content-card">
                     <div class="title-wrap">
                         <h3>Peers</h3>
@@ -1497,7 +1557,7 @@
                     </div>
                 </div-->
             </div>
-            <div id="posts" class="tab-pane fade">
+            <div id="posts" class="tab-pane fade <?php if($tabType != '' && $tabType == 'posts'){ ?>in active<?php } ?>">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Posts</h3>
@@ -1610,10 +1670,22 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href=""><?php echo $AllPost['total_comments']; ?></a></li>
+                                    <li><a href="<?php echo base_url('account/searchDetail/posts/'.base64_encode($AllPost['post_id']).'/posts/comment'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('account/searchDetail/posts/'.base64_encode($AllPost['post_id']).'/posts/comment'); ?>"><?php echo $AllPost['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
+									
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="<?php echo base_url('account/searchDetail/posts/'.base64_encode($AllPost['post_id']).'/posts'); ?>">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -1643,7 +1715,7 @@
 					?>
                 </div>
             </div>
-            <div id="questions" class="tab-pane fade">
+            <div id="questions" class="tab-pane fade <?php if($tabType != '' && $tabType == 'questions'){ ?>in active<?php } ?>">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Questions</h3>
@@ -1730,6 +1802,18 @@
                                     <li><a href=""><?php echo $AllQuestion['answer_count']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
+									
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/questions'); ?>">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -1759,7 +1843,7 @@
 					?>
                 </div>
             </div>
-            <div id="documents" class="tab-pane fade">
+            <div id="documents" class="tab-pane fade <?php if($tabType != '' && $tabType == 'documents'){ ?>in active<?php } ?>">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Documents</h3>
@@ -1925,6 +2009,18 @@
 										<li><a href=""><?php echo $AllDocument['total_comments']; ?></a></li>
 										<!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
 										<li><a href="">24</a></li-->
+										
+										<li>&nbsp;</li>
+										<li>
+											<div class="action">
+												<div class="action_button">
+													<a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['reference_id']).'/search/documents'); ?>">
+														<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+														</svg>
+													</a>
+												</div>
+											</div>
+										</li>
 									</ul>
 								</div>
 							</div>
@@ -1954,7 +2050,7 @@
 					?>
                 </div>
             </div>
-            <div id="studySets" class="tab-pane fade">
+            <div id="studySets" class="tab-pane fade <?php if($tabType != '' && $tabType == 'studySets'){ ?>in active<?php } ?>">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Study Sets</h3>
@@ -2084,6 +2180,18 @@
                                     <li><a href=""><?php echo $AllStudySet['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
+									
+									<li>&nbsp;</li>
+									<li>
+										<div class="action">
+											<div class="action_button">
+												<a href="<?php echo base_url('studyset/details/'.$AllStudySet['reference_id'].'/search/studySets'); ?>">
+													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+													</svg>
+												</a>
+											</div>
+										</div>
+									</li>
                                 </ul>
                             </div>
                         </div>
@@ -2113,7 +2221,7 @@
 					?>
                 </div>
             </div>
-            <div id="events" class="tab-pane fade">
+            <div id="events" class="tab-pane fade <?php if($tabType != '' && $tabType == 'events'){ ?>in active<?php } ?>">
                 <div class="content-card seprate-border">
                     <div class="title-wrap">
                         <h3>Events</h3>
@@ -2293,6 +2401,18 @@
 										<li><a href=""><?php echo $AllEvent['total_comments']; ?></a></li>
 										<!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
 										<li><a href="">24</a></li-->
+										
+										<li>&nbsp;</li>
+										<li>
+											<div class="action">
+												<div class="action_button">
+													<a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['reference_id']).'/search/events'); ?>">
+														<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
+														</svg>
+													</a>
+												</div>
+											</div>
+										</li>
 									</ul>
 								</div>
 							</div>

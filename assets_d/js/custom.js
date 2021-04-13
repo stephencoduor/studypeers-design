@@ -744,7 +744,7 @@ $(document).on('focus click','#search-info',function(e){
 				if(response.status == true){
 					$(".removeSearchIcon").show();
 					if(response.search_html == ''){
-						$(".searchresulttext").html('No result found!');
+						$(".searchresulttext").html('Search for something');
 						$(".no-search").show();
 						$(".searchResultClass").hide();
 						$(".searchResultClassView").hide();
@@ -892,6 +892,17 @@ $(document).on('click','.reportThings',function(){
 	var currentPage = $(this).attr('data-currentPage');
 	
 	$("#reportModal").modal('show');
+	$("#primary_id").val(primaryId);
+	$("#report_post_type").val(reportType);
+	$("#current_page").val(currentPage);
+});
+
+$(document).on('click','.reportThingsDashboard',function(){
+	var reportType  = $(this).attr('data-reportType');
+	var primaryId   = $(this).attr('data-primaryId');
+	var currentPage = $(this).attr('data-currentPage');
+	
+	$("#reportModalDashboard").modal('show');
 	$("#primary_id").val(primaryId);
 	$("#report_post_type").val(reportType);
 	$("#current_page").val(currentPage);

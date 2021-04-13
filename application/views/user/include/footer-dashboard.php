@@ -24,6 +24,7 @@
 <script src="<?php echo base_url('assets_d/js/infinite-scroll.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
+<script src="<?php echo base_url('assets_d/js/bootstrap-select.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
 
 <script>
@@ -1076,7 +1077,9 @@
 </script>
 <script type='text/javascript'>
 $(document).ready(function() {
-	
+	<?php
+		if($this->router->fetch_class() == 'account' && $this->router->fetch_method() == 'searchViewAll'){
+	?>
 	var searchType = "<?php echo (isset($searchType)) ? $searchType : 'peers'; ?>";
 	
 	createPagination(0,searchType);
@@ -1087,6 +1090,7 @@ $(document).ready(function() {
 	});
 	
 	function createPagination(pageNum,searchType){
+		$(".ajax-loading").show();
 		$.ajax({
 			url: '<?php echo base_url(); ?>account/loadData/'+pageNum+'/'+searchType,
 			type: 'get',
@@ -1104,22 +1108,20 @@ $(document).ready(function() {
 				}
 			},
 			complete: function() {
+				$(".ajax-loading").hide();
 				$('.childDivTrigger').click(function (e) {          
 					e.stopImmediatePropagation();
 					
 					var redirect_url = $(this).attr('data-userProfileUrl');
 					window.location.href=redirect_url;
 				}); 
-				
-				$('.mainDivTrigger').click(function () {
-					var redirect_url = $(this).attr('data-userPostUrl');
-					window.location.href=redirect_url;
-				}).children().click(function (e) {
-					
-				});
 			}
 		});
 	}
+	
+	<?php
+		}
+	?>
 });
 </script>
 </body>
