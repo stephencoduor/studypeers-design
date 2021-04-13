@@ -267,6 +267,23 @@
                 <p>Everyone</p>
               </div>
             </div>
+            <div class="panel-info">
+              <div class="panel-info-inner">
+                <p>Your data belongs to you, & you can download an archive any time or view the rich media you have uploaded.</p>
+                <div class="radio">
+                  <label><input type="radio" name="optradio">Download larger data achive, including connections, contacts, account history, & information we infer about you based on your profile and activity. <a href="">Learn more</a></label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="optradio">What something in particular? Select the data file you're most interested in.</label>
+                </div>
+                <div class="checkborx-wrap-area">
+                  <label class="checkbox-inline"><input type="checkbox" value="">Articles</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Connections</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Imported Contacts</label>
+                  <label class="checkbox-inline"><input type="checkbox" value="">Messages</label>
+                </div>
+              </div>
+            </div>
             <div class="data-privacy-row">
               <div class="data-privacy-left">
                 <h4>Search History</h4>
@@ -275,6 +292,12 @@
               <div class="data-privacy-right">
                 <a>Change</a>
                 <p>on</p>
+              </div>
+            </div>
+            <div class="panel-info">
+              <div class="panel-info-inner">
+                <p>You search history is only visible to you, and it helps us to show you better results.</p>
+                <button type="button" class="clear-search">Clear search history</button>
               </div>
             </div>
             <div class="data-privacy-row">
@@ -287,6 +310,12 @@
                 <p>0 account</p>
               </div>
             </div>
+            <div class="panel-info">
+              <div class="panel-info-inner">
+                <p>The job applicant accounts below were stored after being created or added by you while applying to jobs on Linkedin. Removing an account will only remove your credentials from Linkedin's records. It will no erase the actual account from the applicant tracking system that owns it.</p>
+                <p>You have no job applicant accounts.</p>
+              </div>
+            </div>
             <div class="data-privacy-row">
               <div class="data-privacy-left">
                 <h4>Permitted services</h4>
@@ -295,6 +324,25 @@
               <div class="data-privacy-right">
                 <a>Change</a>
                 <p>1 app connected</p>
+              </div>
+            </div>
+            <div class="panel-info">
+              <div class="panel-info-inner">
+                <p>These are the services to which you have granted access to your Linkedin profile and network data. If you remove that access here, they will no longer be able to access your Linkedin data.</p>
+                <p>You can manage Microsoft accounts you have connected to from our new Microsoft setting.</p>
+                <p><strong>Services you've added</strong></p>
+                <div class="logo-wrap">
+                  <div class="logo-area-content">
+                    <div class="logo-area">
+                      <span>Logo</span>
+                    </div>
+                    <div class="logo-content">
+                      <p>Brand Logo</p>
+                      <p>Connected August 28, 2020, 8:51 AM(GMT)
+                    </div>
+                  </div>
+                  <a>Remove</a>
+                </div>
               </div>
             </div>
           </div>
@@ -375,4 +423,17 @@ function getSiblings(elem, matchesSelector) {
   return siblings;
 };
 
+var acc = document.getElementsByClassName("data-privacy-row");
+var i;
+for (i = 0; i < acc.length; i++) {
+  acc[i].addEventListener("click", function() {
+    this.classList.toggle("active");
+    var panel = this.nextElementSibling;
+    if (panel.style.maxHeight) {
+      panel.style.maxHeight = null;
+    } else {
+      panel.style.maxHeight = panel.scrollHeight + "px";
+    } 
+  });
+}
 </script>

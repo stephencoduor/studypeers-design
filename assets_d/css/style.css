@@ -2003,6 +2003,62 @@ background-color: #ccc;
 .data-privacy{
     background-image:url("../../assets_d/images/icons/09.png");
 }
+.tab-content-wrap *{
+    word-break: break-word;
+}
+.panel-info {
+    background-color: white;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out
+}
+.panel-info-inner{
+    padding: 10px 0;
+}
+.panel-info-inner .logo-wrap{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.logo-area-content{
+    display: flex;
+    align-items: center;
+}
+.panel-info-inner .logo-wrap a{
+    font-size: 14px;
+    font-weight: 600;
+    color: #0155f5;
+}
+.clear-search{
+    height:48px;
+    padding:10px 15px;
+    font-size:14px;
+    color:#fff;
+    background: #bf2390;
+    border-radius:100px;
+    border:none;
+    outline: none;
+}
+*:focus{
+    outline: none;
+}
+.logo-area{
+    width: 80px;
+    height: 40px;
+    margin-right:10px;
+    display: flex;
+    align-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    line-height:34px;
+    color: #0155f5;
+    justify-content: center;
+    border: solid 1px #c3c3c3;
+    border-radius: 4px;
+}
+.logo-content p{
+    margin-bottom:0;
+}
 @media (max-width: 767px) {
     .modal .listUserWrap .list{
         flex-direction: column;
