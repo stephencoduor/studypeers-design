@@ -70,7 +70,7 @@ class Studyset extends CI_Controller {
         echo $html;
     }
 
-    public function details($study_set_id,$reType = null,$tabType = null)
+    public function details($study_set_id,$reType = null,$tabType = null,$isComment = null)
     {
         $user_id = $this->session->get_userdata()['user_data']['user_id'];
         $data['studyset'] = $this->studyset_model->getStudySetDetails($study_set_id,$user_id);
@@ -81,6 +81,9 @@ class Studyset extends CI_Controller {
 		
 		$tabreType = ($tabType) ? $tabType : ''; 
 		$data['tabreType'] = $tabreType;
+		
+		$openComment = ($isComment) ? $isComment : ''; 
+		$data['openComment'] = $openComment;
 
         $this->db->order_by('learn_round_master.id', 'desc');
         $this->db->limit(5);

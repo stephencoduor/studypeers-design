@@ -661,7 +661,6 @@ $(document).on('keydown keypress keyup click','#search-info',function(){
 				} else {
 					$(".searchresulttext").html('No result found!');
 					$(".no-search").show();
-					alert(response.message);
 				}
 			},
 			timeout: 10000,
@@ -758,7 +757,6 @@ $(document).on('focus click','#search-info',function(e){
 				} else {
 					$(".searchresulttext").html('No result found!');
 					$(".no-search").show();
-					alert(response.message);
 				}
 			},
 			complete: function() {

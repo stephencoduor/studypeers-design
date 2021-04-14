@@ -692,13 +692,24 @@
 						<div class="user-details">
 							<div class="user-name">
 								<figure>
-									<img src="<?php echo userImage($studyset_detail['user_id']); ?>" alt="user">
+									<?php if($studyset_detail['status'] != 2) { ?>
+										<img src="<?php echo userImage($studyset_detail['user_id']); ?>" alt="user">
+									<?php } else { ?>
+										<img src="<?php echo base_url(); ?>uploads/user-anonymous.png" alt="user">
+									<?php } ?>
+									
 								</figure>
 								<?php $user = $this->db->get_where('user', array('id' => $studyset_detail['user_id']))->row_array();
 									$user_info = $this->db->get_where('user_info', array('userID' => $studyset_detail['user_id']))->row_array();
 									$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array(); ?>
 								<div class="right">
-									<figcaption><a href="<?php echo base_url().'sp/'.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> <span>added a new studyset</span></figcaption>
+									<figcaption>
+										<?php if($studyset_detail['status'] != 2) { ?>
+										<a href="<?php echo base_url().'sp/'.$user['username'] ?>"><?php echo $user['first_name'].' '.$user['last_name']; ?></a> 
+										<?php } else { ?>
+											Anonymous User
+										<?php } ?>
+										<span>added a new studyset</span></figcaption>
 									<div class="badgeList">
 										<ul>
 											<li class="badge badge1">

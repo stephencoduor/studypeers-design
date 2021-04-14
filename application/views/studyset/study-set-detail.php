@@ -269,7 +269,7 @@
 			<li class="active"><a data-toggle="tab" href="#terms">Terms</a></li>
 			<li><a data-toggle="tab" href="#testResult">Test Results</a></li>
 			<li><a data-toggle="tab" href="#rating">Rating</a></li>
-			<li id="commentTab"><a data-toggle="tab" href="#comment">Comment</a></li>
+			<li id="commentTab"><a data-toggle="tab" href="#comment" class="commentOpen">Comment</a></li>
 		</ul>
 		<div class="tab-content">
 			<div id="terms" class="tab-pane fade in active">
@@ -1613,6 +1613,15 @@
 		$('#commentTab').addClass('active');
 
 	}
-
+	
+	<?php
+		if(!empty($openComment)){
+	?>
+		$(document).ready(function(e) {
+			$(".commentOpen").trigger('click');
+		});
+	<?php		
+		}
+	?>
 
 </script>

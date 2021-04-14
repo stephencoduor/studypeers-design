@@ -108,6 +108,7 @@ class Account extends CI_Controller
 		$SearchText = ($this->session->userdata('SearchText')) ? $this->session->userdata('SearchText') : '';
 		$data['SearchText']  = $SearchText;
 		//$this->session->unset_userdata('SearchText');
+		$this->session->unset_userdata('lastVisitedPage');
 		
 		$CurrentUserID = ($this->session->userdata['user_data']['user_id']) ? $this->session->userdata['user_data']['user_id'] : 0;
 			
@@ -979,7 +980,10 @@ class Account extends CI_Controller
 		} else if($searchType != '' && !in_array(strtolower($searchType),$postTypes)){
 			redirect(base_url('account/searchResult'));
 		}
-		 
+			
+		$lastVisitedPage = ($this->session->userdata('lastVisitedPage')) ? $this->session->userdata('lastVisitedPage') : 0;
+		
+		$data['lastVisitedPage'] = $lastVisitedPage;
 		$data['searchType'] = strtolower($searchType);
 		
 		$CurrentUserID = ($this->session->userdata['user_data']['user_id']) ? $this->session->userdata['user_data']['user_id'] : 0;
@@ -1002,6 +1006,12 @@ class Account extends CI_Controller
 			// $record = ($record-1) * $recordPerPage;
 		// }      	
       	
+		$this->session->unset_userdata('lastVisitedPage');
+		$searchSession = array(
+			'lastVisitedPage' => trim($record)
+		);
+		$this->session->set_userdata($searchSession);
+		
 		$SearchText = ($this->session->userdata('SearchText')) ? $this->session->userdata('SearchText') : '';
 		
 		$CurrentUserID = ($this->session->userdata['user_data']['user_id']) ? $this->session->userdata['user_data']['user_id'] : 0;
@@ -1585,8 +1595,8 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">'.$searchedData['total_comments'].'</a></li>
+                                    <li><a href="'.base_url('account/searchDetail/posts/'.base64_encode($searchedData['post_id'])).'/searchAllPost/comment"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/searchDetail/posts/'.base64_encode($searchedData['post_id'])).'/searchAllPost/comment">'.$searchedData['total_comments'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
@@ -1785,10 +1795,10 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="'.base_url().'assets_d/images/views.svg" alt="Icon"/></a></li>
-                                    <li><a href="">'.$searchedData['view_count'].'</a></li>
-                                    <li><a href=""><img src="'.base_url().'assets_d/images/answer.svg" alt="Icon"/></a></li>
-                                    <li><a href="">'.$searchedData['answer_count'].'</a></li>
+                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'"><img src="'.base_url().'assets_d/images/views.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'">'.$searchedData['view_count'].'</a></li>
+                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'"><img src="'.base_url().'assets_d/images/answer.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'">'.$searchedData['answer_count'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
@@ -2064,8 +2074,8 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">'.$searchedData['total_comments'].'</a></li>
+                                    <li><a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['reference_id']).'/search').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['reference_id']).'/search').'">'.$searchedData['total_comments'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
@@ -2322,8 +2332,8 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">'.$searchedData['total_comments'].'</a></li>
+                                    <li><a href="'.base_url('studyset/details/'.$searchedData['reference_id'].'/search/studySets/comment').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('studyset/details/'.$searchedData['reference_id'].'/search/studySets/comment').'">'.$searchedData['total_comments'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
@@ -2622,8 +2632,8 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href=""><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="">'.$searchedData['total_comments'].'</a></li>
+                                    <li><a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['reference_id']).'/search').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['reference_id']).'/search').'">'.$searchedData['total_comments'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
@@ -3007,7 +3017,7 @@ class Account extends CI_Controller
 		
         $this->db->select('reference_master.*,');
         $this->db->from('reference_master');
-        $this->db->where("reference_master.status", 1);
+        // $this->db->where("reference_master.status", 1);
         //$this->db->where("reference_master.user_id", $user_id);
         if (!empty($peerList)) {
             // $this->db->or_group_start();
@@ -3015,7 +3025,7 @@ class Account extends CI_Controller
             // $this->db->where('reference_master.status !=', 3);
             // $this->db->group_end();
 			
-			$this->db->where("(reference_master.user_id = '".$user_id."' OR (reference_master.user_id IN (".implode(",",$peerList).") AND reference_master.status != '3'))");
+			$this->db->where("(reference_master.user_id = '".$user_id."' OR (reference_master.user_id IN (".implode(",",$peerList).") AND reference_master.status != 3))");
         } else {
 			$this->db->where("reference_master.user_id = '".$user_id."'");
 		}
@@ -3040,7 +3050,7 @@ class Account extends CI_Controller
 		
         $this->db->select('reference_master.*,');
         $this->db->from('reference_master');
-        $this->db->where("reference_master.status", 1);
+        // $this->db->where("reference_master.status", 1);
         //$this->db->where("reference_master.user_id", $user_id);
         if (!empty($peerList)) {
             // $this->db->or_group_start();
@@ -4222,8 +4232,6 @@ class Account extends CI_Controller
         $data['user_detail'] = $this->db->get_where('user', array('id' => $user_id))->row_array();
         $data['index_menu']  = 'documents';
         $data['title']  = 'Documents | Studypeers';
-
-
 
         $this->db->select('document_master.*,professor_master.name as professor,course_master.name as course, university.SchoolName, user_info.nickname');
         if ($this->input->get()) {
@@ -6557,8 +6565,15 @@ class Account extends CI_Controller
 								SET status = 2
 								WHERE reference = 'document' and reference_id in (select id from document_master where course = ".$course_id.")");
 
+            $this->db->query("UPDATE reference_master
+								SET status = 2
+								WHERE reference = 'studyset' and reference_id in (select study_set_id from study_sets where course = ".$course_id.")");
+
             $this->db->where(array('course' => $course_id));
             $this->db->update('document_master', array('status' => 2));
+
+            $this->db->where(array('course' => $course_id));
+            $this->db->update('study_sets', array('status' => 2));
 
             $this->db->where(array('course_id' => $course_id));
             $this->db->delete('professor_master');
@@ -7569,7 +7584,7 @@ class Account extends CI_Controller
 			$ExistingUsers = array();
 			
 			// search for my friends / peers
-			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender,user_info.intitutionID,user_info.course FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%') ";
+			$SearchPeers = "SELECT peer_master.peer_id,user.id,user.username,user.first_name,user.last_name,user.image,user_info.gender,user_info.intitutionID,user_info.course FROM peer_master LEFT JOIN user ON (user.id = peer_master.peer_id) LEFT JOIN user_info ON (user_info.userID = user.id) WHERE peer_master.user_id='".$CurrentUserID."' AND peer_master.status='2' AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%') ";
 			
 			if($reportedUsersString != ''){
 				$SearchPeers .= " AND user.id NOT IN (".$reportedUsersString.")";
@@ -7730,7 +7745,7 @@ class Account extends CI_Controller
 					$SearchByUniversity .= " AND user.id NOT IN (".$reportedUsersString.")";
 				}
 				
-				$SearchByUniversity .= " AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%' OR user.username LIKE '%$SearchText%' OR user.about LIKE '%$SearchText%' OR user.email LIKE '%$SearchText%')";
+				$SearchByUniversity .= " AND (user.first_name LIKE '%$SearchText%' OR user.last_name LIKE '%$SearchText%')";
 				
 				$SearchByUniversity .= " ORDER BY user.id DESC LIMIT ".$RemainingResult;
 				
@@ -8437,6 +8452,10 @@ class Account extends CI_Controller
 					}
 				} else if($this->input->post('current_page') == 'dashboard'){
 					redirect('account/dashboard');
+				} else if($this->input->post('current_page') == 'documentDetail'){
+					redirect('account/documents');
+				} else if($this->input->post('current_page') == 'questionDetails'){
+					redirect('account/questions');
 				} 
 			} else {
 				redirect('account/searchResult');		
