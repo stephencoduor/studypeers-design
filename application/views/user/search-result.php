@@ -314,10 +314,10 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/all'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
-                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/all'); ?>"><?php echo $AllQuestion['view_count']; ?></a></li>
-                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/all'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
-                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/all'); ?>"><?php echo $AllQuestion['answer_count']; ?></a></li>
+                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/all'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/all'); ?>"><?php echo $AllQuestion['view_count']; ?></a></li>
+                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/all'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/all'); ?>"><?php echo $AllQuestion['answer_count']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
 									
@@ -325,7 +325,7 @@
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/all'); ?>">
+												<a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/all'); ?>">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -507,8 +507,8 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['reference_id']).'/search/all'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['reference_id']).'/search/all'); ?>"><?php echo $AllDocument['total_comments']; ?></a></li>
+                                    <li><a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['document_id']).'/search/all'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['document_id']).'/search/all'); ?>"><?php echo $AllDocument['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
 									
@@ -516,7 +516,7 @@
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['reference_id']).'/search/all'); ?>">
+												<a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['document_id']).'/search/all'); ?>">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -663,8 +663,8 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="<?php echo base_url('studyset/details/'.$AllStudySet['reference_id'].'/search/all/comment'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="<?php echo base_url('studyset/details/'.$AllStudySet['reference_id'].'/search/all/comment'); ?>"><?php echo $AllStudySet['total_comments']; ?></a></li>
+                                    <li><a href="<?php echo base_url('studyset/details/'.$AllStudySet['studyset_id'].'/search/all/comment'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('studyset/details/'.$AllStudySet['studyset_id'].'/search/all/comment'); ?>"><?php echo $AllStudySet['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
 									
@@ -672,7 +672,7 @@
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="<?php echo base_url('studyset/details/'.$AllStudySet['reference_id'].'/search/all'); ?>">
+												<a href="<?php echo base_url('studyset/details/'.$AllStudySet['studyset_id'].'/search/all'); ?>">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -868,8 +868,8 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['reference_id']).'/search/all'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['reference_id']).'/search/all'); ?>"><?php echo $AllEvent['total_comments']; ?></a></li>
+                                    <li><a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['event_primary_id']).'/search/all'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['event_primary_id']).'/search/all'); ?>"><?php echo $AllEvent['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
 									
@@ -877,7 +877,7 @@
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['reference_id']).'/search/all'); ?>">
+												<a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['event_primary_id']).'/search/all'); ?>">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -1796,10 +1796,10 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/questions'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
-                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/questions'); ?>"><?php echo $AllQuestion['view_count']; ?></a></li>
-                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/questions'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
-                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/questions'); ?>"><?php echo $AllQuestion['answer_count']; ?></a></li>
+                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/questions'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/views.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/questions'); ?>"><?php echo $AllQuestion['view_count']; ?></a></li>
+                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/questions'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/answer.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/questions'); ?>"><?php echo $AllQuestion['answer_count']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
 									
@@ -1807,7 +1807,7 @@
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['reference_id']).'/search/questions'); ?>">
+												<a href="<?php echo base_url('account/questionDetail/'.base64_encode($AllQuestion['question_id']).'/search/questions'); ?>">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -2005,8 +2005,8 @@
 								</div>
 								<div class="comment-wrap">
 									<ul>
-										<li><a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['reference_id']).'/search/documents'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-										<li><a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['reference_id']).'/search/documents'); ?>"><?php echo $AllDocument['total_comments']; ?></a></li>
+										<li><a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['document_id']).'/search/documents'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+										<li><a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['document_id']).'/search/documents'); ?>"><?php echo $AllDocument['total_comments']; ?></a></li>
 										<!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
 										<li><a href="">24</a></li-->
 										
@@ -2014,7 +2014,7 @@
 										<li>
 											<div class="action">
 												<div class="action_button">
-													<a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['reference_id']).'/search/documents'); ?>">
+													<a href="<?php echo base_url('account/documentDetail/'.base64_encode($AllDocument['document_id']).'/search/documents'); ?>">
 														<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 														</svg>
 													</a>
@@ -2176,8 +2176,8 @@
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="<?php echo base_url('studyset/details/'.$AllStudySet['reference_id'].'/search/studySets/comment'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="<?php echo base_url('studyset/details/'.$AllStudySet['reference_id'].'/search/studySets/comment'); ?>"><?php echo $AllStudySet['total_comments']; ?></a></li>
+                                    <li><a href="<?php echo base_url('studyset/details/'.$AllStudySet['studyset_id'].'/search/studySets/comment'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="<?php echo base_url('studyset/details/'.$AllStudySet['studyset_id'].'/search/studySets/comment'); ?>"><?php echo $AllStudySet['total_comments']; ?></a></li>
                                     <!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
                                     <li><a href="">24</a></li-->
 									
@@ -2185,7 +2185,7 @@
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="<?php echo base_url('studyset/details/'.$AllStudySet['reference_id'].'/search/studySets'); ?>">
+												<a href="<?php echo base_url('studyset/details/'.$AllStudySet['studyset_id'].'/search/studySets'); ?>">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -2397,8 +2397,8 @@
 								</div>
 								<div class="comment-wrap">
 									<ul>
-										<li><a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['reference_id']).'/search/events'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-										<li><a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['reference_id']).'/search/events'); ?>"><?php echo $AllEvent['total_comments']; ?></a></li>
+										<li><a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['event_primary_id']).'/search/events'); ?>"><img src="<?php echo base_url(); ?>assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+										<li><a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['event_primary_id']).'/search/events'); ?>"><?php echo $AllEvent['total_comments']; ?></a></li>
 										<!--li><a href=""><img src="<?php echo base_url(); ?>assets_d/images/share-grey.svg" alt="Icon"/></a></li>
 										<li><a href="">24</a></li-->
 										
@@ -2406,7 +2406,7 @@
 										<li>
 											<div class="action">
 												<div class="action_button">
-													<a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['reference_id']).'/search/events'); ?>">
+													<a href="<?php echo base_url('account/eventDetails/'.base64_encode($AllEvent['event_primary_id']).'/search/events'); ?>">
 														<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 														</svg>
 													</a>

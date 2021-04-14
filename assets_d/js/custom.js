@@ -905,3 +905,114 @@ $(document).on('click','.reportThingsDashboard',function(){
 	$("#report_post_type").val(reportType);
 	$("#current_page").val(currentPage);
 });
+
+$('#changePasswordForm').validate({
+	rules: {
+		current_password:{
+			required: true,
+		},	
+		new_password: {
+			required: true,
+			minlength: 8
+		},
+		confirm_password:{
+			required: true,
+			equalTo: "#new_password"
+		}
+	},
+	submitHandler: function(form) {
+		$(".ajax-loading").css("display","block");
+		$("#changePasswordBtn").attr("disabled",true);
+		$("#changePasswordBtn").text("Please wait...");
+		
+		$.ajax({
+			url: $("#changePasswordForm").attr('action'), 
+			type: "POST",             
+			data: $('#changePasswordForm').serialize(),
+			cache: false,             
+			processData: false,  
+			dataType:'json',			
+			success: function(response) 
+			{
+				$(".ajax-loading").css("display","none");
+				if(response.status == true){
+					$("#changePasswordForm")[0].reset();	
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					
+					toastr.success(response.message);
+				} else {
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					 
+					toastr.error(response.message);
+					
+					$("#changePasswordBtn").attr("disabled",false);
+					$("#changePasswordBtn").text("Save");
+				}
+			},
+			complete: function() {
+				$("#changePasswordBtn").attr("disabled",false);
+				$("#changePasswordBtn").text("Save");
+			},
+			timeout: 10000,
+			error: function(e){
+				toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "newestOnTop": true,
+				  "progressBar": true,
+				  "positionClass": "toast-top-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "300",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
+				 
+				toastr.error('Request timeout, Please try again later!');
+				
+				$(".ajax-loading").css("display","none");
+				$("#changePasswordBtn").attr("disabled",false);
+				$("#changePasswordBtn").text("Save");
+				return false;
+			}
+		});
+		return false;
+	}
+});
