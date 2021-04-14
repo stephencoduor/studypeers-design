@@ -178,26 +178,56 @@
           </div>
           <div id="notification" class="tabcontent-area">
             <h3>Notification</h3>
-            <div class="custom-accordion">
-              <h3>On Studypeers</h3>
-              <p>Received via Studypeers web and app</p>
+            <div class="data-privacy-row">
+              <div class="data-privacy-left">
+                <h4>Conversations</h4>
+                <p>Messages, posts, comments</p>
+              </div>
+              <div class="data-privacy-right">
+                <div class="flex-data-wrap">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span>On</span>
+                </div>
+              </div>
             </div>
-            <div class="custom-panel">
-              <p>Lorem ipsum...</p>
+            <div class="data-privacy-row">
+              <div class="data-privacy-left">
+                <h4>Email</h4>
+                <p>Received via your primary email</p>
+              </div>
+              <div class="data-privacy-right">
+                <div class="flex-data-wrap">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span>On</span>
+                </div>
+              </div>
             </div>
-            <div class="custom-accordion">
-              <h3>Email</h3>
-              <p>Received via your primary email</p>
-            </div>
-            <div class="custom-panel">
-              <p>Lorem ipsum...</p>
-            </div>
-            <div class="custom-accordion">
-              <h3>Push</h3>
-              <p>Pops up on your device</p>
-            </div>
-            <div class="custom-panel">
-              <p>Lorem ipsum...</p>
+            <div class="data-privacy-row">
+              <div class="data-privacy-left">
+                <h4>Push</h4>
+                <p>Pops up on your device</p>
+              </div>
+              <div class="data-privacy-right">
+                <div class="flex-data-wrap">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span>On</span>
+                </div>
+              </div>
             </div>
           </div>
           <div id="communication" class="tabcontent-area">
@@ -218,6 +248,19 @@
                 <p>Everyone</p>
               </div>
             </div>
+            <div class="panel-info">
+              <div class="panel-info-inner">
+                <div class="radio">
+                  <label><input type="radio" name="optradio">Everyone on Studypeers (recommended)</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="optradio">Only people who know your email address or appear in your "imported Contacts" list</label>
+                </div>
+                <div class="radio">
+                  <label><input type="radio" name="optradio">Only people who appear in your "Imported Contacts" list</label>
+                </div>
+              </div>
+            </div>
             <div class="data-privacy-row">
               <div class="data-privacy-left">
                 <h4>Invitations from your network</h4>
@@ -226,6 +269,37 @@
               <div class="data-privacy-right">
                 <a>Change</a>
                 <p>On</p>
+              </div>
+            </div>
+            <div class="panel-info">
+              <div class="panel-info-inner">
+                <div class="toggle-flex-wrap">
+                  <p>Allow your network to send you event invitations?</p>
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="toggle-flex-wrap">
+                  <p>Allow your network to send you page invitations to follow companies and organizations?</p>
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="toggle-flex-wrap">
+                  <p>Allow your network to send you invitations to subscribe to newsletters?</p>
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
               </div>
             </div>
             <div class="data-privacy-row">
@@ -238,6 +312,37 @@
                 <p>InMail</p>
               </div>
             </div>
+            <div class="panel-info">
+              <div class="panel-info-inner">
+                <div class="toggle-flex-wrap">
+                  <p>Enable message request notifications</p>
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="toggle-flex-wrap">
+                  <p>Allow others to send you InMail?</p>
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+                <div class="toggle-flex-wrap">
+                  <p>Allow Studypeers partners to show you Sponsored Messages?</p>
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
             <div class="data-privacy-row">
               <div class="data-privacy-left">
                 <h4>Reply Suggestions</h4>
@@ -246,6 +351,18 @@
               <div class="data-privacy-right">
                 <a>Change</a>
                 <p>On</p>
+              </div>
+            </div>
+            <div class="panel-info">
+              <div class="panel-info-inner">
+                <p>Can we show you reply suggestions, some of which are personalized using automated systems to recognize patterns in messages?</p>
+                <div class="toggle-wrap">
+                  <label class="switch">
+                    <input type="checkbox">
+                    <span class="slider round"></span>
+                  </label>
+                </div>
+                <p>Reply suggestions appear at the bottom of the message. Once you've clicked or tapped on a suggestion, it'll be sent out automatically. <a href="">Learn more</a></p>
               </div>
             </div>
           </div>
