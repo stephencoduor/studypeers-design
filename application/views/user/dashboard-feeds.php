@@ -129,12 +129,35 @@
 							<div class="feeduserwrap">
 								<div class="user-details">
 									<div class="user-name">
+										<?php
+											$user = $this->db->get_where('user', array('id' => $event_detail['created_by']))->row_array();
+											$user_info = $this->db->get_where('user_info', array('userID' => $event_detail['created_by']))->row_array();
+											
+											if($user_info['gender'] == 'female'){
+												$UserProfile = base_url('uploads/user-female.png');
+											} else if($user_info['gender'] == 'male') {
+												$UserProfile = base_url('uploads/user-male.png');
+											} else if($user_info['gender'] == 'other') {
+												$UserProfile = base_url('uploads/user-anonymous.png');
+											} else {
+												$UserProfile = base_url().'assets_d/images/user.jpg';
+											}
+										?>
 										<figure>
+											<?php 
+												if($user['is_deactivate'] == 1){
+											?>
+											<img src="<?php echo $UserProfile; ?>" alt="user">
+											<?php
+												} else {
+											?>
 											<img src="<?php echo userImage($event_detail['created_by']); ?>" alt="user">
+											<?php		
+												}
+											?>
 										</figure>
 										<div class="right">
-											<?php $user = $this->db->get_where('user', array('id' => $event_detail['created_by']))->row_array();
-											$user_info = $this->db->get_where('user_info', array('userID' => $event_detail['created_by']))->row_array();
+											<?php 
 											$university = $this->db->get_where('university', array('university_id' => $user_info['intitutionID']))->row_array();
 											 if($event_detail['created_by'] == $user_id) { ?>
 												<figcaption>You 
@@ -223,29 +246,149 @@
 									<?php  if(!empty($peer_attending)) {  ?>
 										<div class="userIcoList peersModalAttending" data-id="<?= $event_detail['id'] ?>" data-toggle="modal" data-target="#peersModalAttending" style="margin-right: 15%;">
 											<ul>
-												<?php if(!empty($peer_attending[0])) { ?>
+												<?php 
+													if(!empty($peer_attending[0])) { 
+														$PEER_PROFILE = $this->db->get_where('user', array('id' => $peer_attending[0]['peer_id']))->row_array();
+														$PEER_INFO = $this->db->get_where('user_info', array('userID' => $peer_attending[0]['peer_id']))->row_array();
+														
+														if($PEER_INFO['gender'] == 'female'){
+															$UserProfile = base_url('uploads/user-female.png');
+														} else if($PEER_INFO['gender'] == 'male') {
+															$UserProfile = base_url('uploads/user-male.png');
+														} else if($PEER_INFO['gender'] == 'other') {
+															$UserProfile = base_url('uploads/user-anonymous.png');
+														} else {
+															$UserProfile = base_url().'assets_d/images/user.jpg';
+														}
+												?>
 													<li>
+														<?php
+															if($PEER_PROFILE['is_deactivate'] == 1){
+														?>
+														<img src="<?php echo $UserProfile; ?>" alt="user">
+														<?php			
+															} else {
+														?>
 														<img src="<?php echo userImage($peer_attending[0]['peer_id']); ?>" alt="user">
+														<?php		
+															}
+														?>
 													</li>
 												<?php } ?>
-												<?php if(!empty($peer_attending[1])) { ?>
+												<?php 
+													if(!empty($peer_attending[1])) { 
+														$PEER_PROFILE = $this->db->get_where('user', array('id' => $peer_attending[1]['peer_id']))->row_array();
+														$PEER_INFO = $this->db->get_where('user_info', array('userID' => $peer_attending[1]['peer_id']))->row_array();
+														
+														if($PEER_INFO['gender'] == 'female'){
+															$UserProfile = base_url('uploads/user-female.png');
+														} else if($PEER_INFO['gender'] == 'male') {
+															$UserProfile = base_url('uploads/user-male.png');
+														} else if($PEER_INFO['gender'] == 'other') {
+															$UserProfile = base_url('uploads/user-anonymous.png');
+														} else {
+															$UserProfile = base_url().'assets_d/images/user.jpg';
+														}
+												?>
 													<li>
+														<?php
+															if($PEER_PROFILE['is_deactivate'] == 1){
+														?>
+														<img src="<?php echo $UserProfile; ?>" alt="user">
+														<?php
+															} else {
+														?>
 														<img src="<?php echo userImage($peer_attending[1]['peer_id']); ?>" alt="user">
+														<?php	
+															}
+														?>
 													</li>
 												<?php } ?>
-												<?php if(!empty($peer_attending[2])) { ?>
+												<?php 
+													if(!empty($peer_attending[2])) { 
+														$PEER_PROFILE = $this->db->get_where('user', array('id' => $peer_attending[2]['peer_id']))->row_array();
+														$PEER_INFO = $this->db->get_where('user_info', array('userID' => $peer_attending[2]['peer_id']))->row_array();
+														
+														if($PEER_INFO['gender'] == 'female'){
+															$UserProfile = base_url('uploads/user-female.png');
+														} else if($PEER_INFO['gender'] == 'male') {
+															$UserProfile = base_url('uploads/user-male.png');
+														} else if($PEER_INFO['gender'] == 'other') {
+															$UserProfile = base_url('uploads/user-anonymous.png');
+														} else {
+															$UserProfile = base_url().'assets_d/images/user.jpg';
+														}
+												?>
 													<li>
+														<?php
+															if($PEER_PROFILE['is_deactivate'] == 1){
+														?>
+														<img src="<?php echo $UserProfile; ?>" alt="user">
+														<?php
+															} else {
+														?>
 														<img src="<?php echo userImage($peer_attending[2]['peer_id']); ?>" alt="user">
+														<?php
+															}
+														?>
 													</li>
 												<?php } ?>
-												<?php if(!empty($peer_attending[3])) { ?>
+												<?php 
+													if(!empty($peer_attending[3])) { 
+														$PEER_PROFILE = $this->db->get_where('user', array('id' => $peer_attending[2]['peer_id']))->row_array();
+														$PEER_INFO = $this->db->get_where('user_info', array('userID' => $peer_attending[2]['peer_id']))->row_array();
+														
+														if($PEER_INFO['gender'] == 'female'){
+															$UserProfile = base_url('uploads/user-female.png');
+														} else if($PEER_INFO['gender'] == 'male') {
+															$UserProfile = base_url('uploads/user-male.png');
+														} else if($PEER_INFO['gender'] == 'other') {
+															$UserProfile = base_url('uploads/user-anonymous.png');
+														} else {
+															$UserProfile = base_url().'assets_d/images/user.jpg';
+														}
+												?>
 													<li>
+														<?php
+															if($PEER_PROFILE['is_deactivate'] == 1){
+														?>
+														<img src="<?php echo $UserProfile; ?>" alt="user">
+														<?php
+															} else {
+														?>
 														<img src="<?php echo userImage($peer_attending[3]['peer_id']); ?>" alt="user">
+														<?php
+															}
+														?>
 													</li>
 												<?php } ?>
-												<?php if(!empty($peer_attending[4])) { ?>
+												<?php 
+													if(!empty($peer_attending[4])) { 
+														$PEER_PROFILE = $this->db->get_where('user', array('id' => $peer_attending[2]['peer_id']))->row_array();
+														$PEER_INFO = $this->db->get_where('user_info', array('userID' => $peer_attending[2]['peer_id']))->row_array();
+														
+														if($PEER_INFO['gender'] == 'female'){
+															$UserProfile = base_url('uploads/user-female.png');
+														} else if($PEER_INFO['gender'] == 'male') {
+															$UserProfile = base_url('uploads/user-male.png');
+														} else if($PEER_INFO['gender'] == 'other') {
+															$UserProfile = base_url('uploads/user-anonymous.png');
+														} else {
+															$UserProfile = base_url().'assets_d/images/user.jpg';
+														}
+												?>
 													<li>
+														<?php
+															if($PEER_PROFILE['is_deactivate'] == 1){
+														?>
+														<img src="<?php echo $UserProfile; ?>" alt="user">
+														<?php
+															} else {
+														?>
 														<img src="<?php echo userImage($peer_attending[4]['peer_id']); ?>" alt="user">
+														<?php
+															}
+														?>
 													</li>
 												<?php } $count = count($peer_attending);  ?>
 												<?php if($count > 5) { ?>

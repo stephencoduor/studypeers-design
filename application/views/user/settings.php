@@ -69,7 +69,52 @@
               <p>Temporarily deactivate your account</p>
             </div>
             <div class="custom-panel">
-              <p>Lorem ipsum...</p>
+				<form role="form" id="deactivateUserAccount" action="<?php echo base_url('settings/deactivateUserAccount'); ?>" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<div class="row">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label for="email_address">Are you sure to deactivate your account?</label>
+								<br>
+								<input type="checkbox" name="is_deactivate" id="is_deactivate1" value="1">
+								<label for="is_deactivate1">Yes</label>
+								<br>
+								<span class="is_deactivate_error"></span>
+							</div>
+							<div class="col-md-9">
+								<label for="email_address">Reason for deactivate account?</label>
+								<br>
+								<input type="radio" name="reason_deactivate" id="reason_deactivate1" value="I need a break">
+								<label for="reason_deactivate1">I need a break</label>
+								<br>
+								<input type="radio" name="reason_deactivate" id="reason_deactivate2" value="I’m getting too many emails">
+								<label for="reason_deactivate2">I’m getting too many emails</label>
+								<br>
+								<input type="radio" name="reason_deactivate" id="reason_deactivate3" value="I have a privacy concern">
+								<label for="reason_deactivate3">I have a privacy concern</label>
+								<br>
+								<input type="radio" name="reason_deactivate" id="reason_deactivate4" value="I have a safety concern">
+								<label for="reason_deactivate4">I have a safety concern</label>
+								<br>
+								<input type="radio" name="reason_deactivate" id="reason_deactivate5" value="Other">
+								<label for="reason_deactivate5">Other</label>	
+								<br>
+								<span class="reason_deactivate_error"></span>
+							</div>
+							<div class="col-md-9">
+								<label for="description_deactivate">Your feedback?</label>
+								<textarea class="form-control" name="description_deactivate" id="description_deactivate"></textarea>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-footer">
+						<button type="submit" id="deactivateUserAccountBtn" class="btn btn-success">Save</button>
+					</div>
+				</form>
             </div>
             <div class="custom-accordion">
               <h3>Close Account</h3>
@@ -86,21 +131,135 @@
               <p>Add/remove email address on your account</p>
             </div>
             <div class="custom-panel">
-              <p>Lorem ipsum...</p>
+				<form role="form" id="changeEmailAddress" action="<?php echo base_url('settings/changeEmailAddress'); ?>" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<div class="row">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label for="email_address">Email</label>
+								<input type="text" class="form-control" name="email_address" id="email_address" autocomplete="off" required value="<?php echo $userDetails['email']; ?>">
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-footer">
+						<button type="submit" id="changeEmailAddressBtn" class="btn btn-success">Save</button>
+					</div>
+				</form>
             </div>
             <div class="custom-accordion">
               <h3>Phone numbers</h3>
               <p>Add a phone number in case you have trouble signing in</p>
             </div>
             <div class="custom-panel">
-              <p>Lorem ipsum...</p>
+				<form role="form" id="changePhoneNumber" action="<?php echo base_url('settings/changePhoneNumber'); ?>" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<div class="row">
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-3">
+								<input type="tel" class="country_select" id="country_code" name="country_code" placeholder="" autocomplete="off" value="<?php echo $userDetails['country_code']; ?>">
+							</div>
+							<div class="col-md-9">
+								<input class="form-control" type="text" maxlength="15" name="phone" onkeypress='validate(event)' required value="<?php echo $userDetails['phone']; ?>">
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-footer">
+						<button type="submit" id="changePhoneNumberBtn" class="btn btn-success">Save</button>
+					</div>
+				</form>
             </div>
-            <div class="custom-accordion">
+			
+			<div class="custom-accordion setPasswordDivTitle" <?php if($isSocialLogin == 0){ ?>style="display:none;"<?php }?>>
+				<h3>Set password</h3>
+				<p>Choose a unique password to protect your account</p>
+            </div>
+            <div class="custom-panel setPasswordDiv" <?php if($isSocialLogin == 0){ ?>style="display:none;"<?php }?>>
+				<form role="form" id="setPasswordForm" action="<?php echo base_url('settings/setPassword'); ?>" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label>Create a new password that is at least 8 characters long</label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label for="set_new_password">Type your new password</label>
+								<input type="password" class="form-control" name="set_new_password" id="set_new_password" autocomplete="off" required>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label for="set_confirm_password">Retype your new password</label>
+								<input type="password" class="form-control" name="set_confirm_password" id="set_confirm_password" autocomplete="off" required>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-footer">
+						<button type="submit" id="setPasswordBtn" class="btn btn-success">Save</button>
+					</div>
+				</form>
+            </div>
+			
+            <div class="custom-accordion changePasswordDivTitle" <?php if($isSocialLogin == 1){ ?>style="display:none;"<?php }?>>
               <h3>Change password</h3>
               <p>Choose a unique password to protect your account</p>
             </div>
-            <div class="custom-panel">
-              <p>Lorem ipsum...</p>
+            <div class="custom-panel changePasswordDiv" <?php if($isSocialLogin == 1){ ?>style="display:none;"<?php }?>>
+				<form role="form" id="changePasswordForm" action="<?php echo base_url('settings/changePassword'); ?>" method="post" enctype="multipart/form-data">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label>Create a new password that is at least 8 characters long</label>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label for="current_password">Type your current password</label>
+								<input type="password" class="form-control" name="current_password" id="current_password" autocomplete="off" required>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label for="new_password">Type your new password</label>
+								<input type="password" class="form-control" name="new_password" id="new_password" autocomplete="off" required>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-9">
+								<label for="confirm_password">Retype your new password</label>
+								<input type="password" class="form-control" name="confirm_password" id="confirm_password" autocomplete="off" required>
+							</div>
+						</div>
+					</div>
+					
+					<div class="form-footer">
+						<button type="submit" id="changePasswordBtn" class="btn btn-success">Save</button>
+					</div>
+				</form>
             </div>
             <div class="custom-accordion">
               <h3>Where you're signed in</h3>

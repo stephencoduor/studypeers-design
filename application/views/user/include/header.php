@@ -71,6 +71,7 @@
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/js/cropper/cropper.css'); ?>">
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/toastr.min.css'); ?>">
+	<link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/registration-assets/css/input.css'); ?>">
 
 	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
 
@@ -101,6 +102,10 @@
 			background: #a19999;
 			color: white;
 			cursor:pointer;
+		}
+		
+		.toastMessage{
+			white-space: break-spaces !important;
 		}
 	</style>
 </head>

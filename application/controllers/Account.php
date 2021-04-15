@@ -7138,14 +7138,27 @@ class Account extends CI_Controller
         $html = '';
 
         foreach ($peer_attending as $key => $value) {
-            $this->db->select('user_info.nickname,user_info.userID,user.id,user.username');
+            $this->db->select('user_info.gender,user_info.nickname,user_info.userID,user.id,user.username,user.is_deactivate');
             $this->db->join('user', 'user.id=user_info.userID');
             $peer = $this->db->get_where($this->db->dbprefix('user_info'), array('userID' => $value['peer_id']))->row_array();
 
+			if($peer['gender'] == 'female'){
+				$UserProfile = base_url('uploads/user-female.png');
+			} else if($peer['gender'] == 'male') {
+				$UserProfile = base_url('uploads/user-male.png');
+			} else if($peer['gender'] == 'other') {
+				$UserProfile = base_url('uploads/user-anonymous.png');
+			} else {
+				$UserProfile = base_url().'assets_d/images/user.jpg';
+			}
+			
+			if($peer['is_deactivate'] == 0){
+				$UserProfile = userImage($peer['userID']);
+			} 
 
             $html .= '<div id="remove_peer_' . $peer['userID'] . '"><section class="list"><section class="left" >
                             <figure>
-                                <img src="' . userImage($peer['userID']) . '" alt="user">
+                                <img src="' . $UserProfile . '" alt="user">
                             </figure>
                             <a href="' . base_url() . 'sp/' . $peer['username'] . '"><figcaption>' . $peer['nickname'] . '</figcaption></a>
                         </section>';
@@ -7638,7 +7651,7 @@ class Account extends CI_Controller
 									<strong>
 										'.$SearchPeersResultData['first_name'].' '.$SearchPeersResultData['last_name'].' <span>in peers</span>
 										<br>
-										'.$UniversityName.' || '.$MasterName.'		
+										'.$UniversityName.' - '.$MasterName.'		
 									</strong>
 								</a>
 							</li>';
@@ -7718,7 +7731,7 @@ class Account extends CI_Controller
 											<strong>
 												'.$SearchMutalFriend['first_name'].' '.$SearchMutalFriend['last_name'].' <span>in peers</span> 
 												<br>
-												'.$UniversityName.' || '.$MasterName.'	
+												'.$UniversityName.' - '.$MasterName.'	
 											</strong>
 											
 										</a>
@@ -7794,7 +7807,7 @@ class Account extends CI_Controller
 										<strong>
 										'.$SearchUniversityResultData['first_name'].' '.$SearchUniversityResultData['last_name'].' <span>in peers</span>
 										<br>
-										'.$UniversityName.' || '.$MasterName.'		
+										'.$UniversityName.' - '.$MasterName.'		
 										</strong>
 									</a>
 								</li>';
@@ -7878,7 +7891,7 @@ class Account extends CI_Controller
 											<strong>
 												'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> 
 												<br>
-												'.$UniversityName.' || '.$MasterName.'	
+												'.$UniversityName.' - '.$MasterName.'	
 											</strong>
 										</a>
 										<div class="removeBadge">
@@ -8192,7 +8205,7 @@ class Account extends CI_Controller
 										<strong>
 											'.$UserDetails[0]['first_name'].' '.$UserDetails[0]['last_name'].' <span>in peers</span> 
 											<br>
-											'.$UniversityName.' || '.$MasterName.'	
+											'.$UniversityName.' - '.$MasterName.'	
 										</strong>
 									</a>
 									<div class="removeBadge">

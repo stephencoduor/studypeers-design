@@ -57,7 +57,6 @@ class LoginController extends CI_Controller
 
             $validateUserLogin = $this->user_model->validateUserLogin($post['email'], sanitizer($post['password']));
 
-
             if (empty($validateUserLogin)) {
                 throw new Exception("Invalid user login attempt", 422);
             }
@@ -78,6 +77,18 @@ class LoginController extends CI_Controller
                 $this->session->set_userdata('user_data', $sessionData);
                 return redirect('complete-step');
             }
+
+			if($validateUserLogin['is_deactivate'] == 1){
+				// reactivate account if deactivated
+				$updateUserStatus['is_deactivate']          = 0;
+				$updateUserStatus['reason_deactivate']      = null;
+				$updateUserStatus['description_deactivate'] = null;
+				$updateUserStatus['deactivated_at']         = null;
+				$updateUserStatus['activated_at']           = date("Y-m-d H:i:s");
+				$this->db->where(array('id' => $validateUserLogin['id']));
+				$this->db->update('user',$updateUserStatus);
+				// reactivate account if deactivated
+			}	
 
             $sessionData['is_logged_in'] = 2;
             $this->session->set_userdata('user_data', $sessionData);

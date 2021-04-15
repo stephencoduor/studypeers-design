@@ -1016,3 +1016,462 @@ $('#changePasswordForm').validate({
 		return false;
 	}
 });
+
+$('#setPasswordForm').validate({
+	rules: {
+		set_new_password: {
+			required: true,
+			minlength: 8
+		},
+		set_confirm_password:{
+			required: true,
+			equalTo: "#set_new_password"
+		}
+	},
+	submitHandler: function(form) {
+		$(".ajax-loading").css("display","block");
+		$("#setPasswordBtn").attr("disabled",true);
+		$("#setPasswordBtn").text("Please wait...");
+		
+		$.ajax({
+			url: $("#setPasswordForm").attr('action'), 
+			type: "POST",             
+			data: $('#setPasswordForm').serialize(),
+			cache: false,             
+			processData: false,  
+			dataType:'json',			
+			success: function(response) 
+			{
+				$(".ajax-loading").css("display","none");
+				if(response.status == true){
+					$("#setPasswordForm")[0].reset();	
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					
+					toastr.success(response.message);
+					
+					$(".setPasswordDivTitle").hide();
+					$(".setPasswordDivTitle").removeClass('active');
+					$(".setPasswordDiv").hide();
+					$(".setPasswordDiv").removeClass('show');
+					
+					$(".changePasswordDivTitle").show();
+					$(".changePasswordDivTitle").addClass('active');
+					$(".changePasswordDiv").show();
+					$(".changePasswordDiv").addClass('show');
+				} else {
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					 
+					toastr.error(response.message);
+					
+					$("#setPasswordBtn").attr("disabled",false);
+					$("#setPasswordBtn").text("Save");
+				}
+			},
+			complete: function() {
+				$("#setPasswordBtn").attr("disabled",false);
+				$("#setPasswordBtn").text("Save");
+			},
+			timeout: 10000,
+			error: function(e){
+				toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "newestOnTop": true,
+				  "progressBar": true,
+				  "positionClass": "toast-top-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "300",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
+				 
+				toastr.error('Request timeout, Please try again later!');
+				
+				$(".ajax-loading").css("display","none");
+				$("#setPasswordBtn").attr("disabled",false);
+				$("#setPasswordBtn").text("Save");
+				return false;
+			}
+		});
+		return false;
+	}
+});
+
+$('#changePhoneNumber').validate({
+	rules: {
+		phone: {
+			required: true
+		}
+	},
+	submitHandler: function(form) {
+		$(".ajax-loading").css("display","block");
+		$("#changePhoneNumberBtn").attr("disabled",true);
+		$("#changePhoneNumberBtn").text("Please wait...");
+		
+		$.ajax({
+			url: $("#changePhoneNumber").attr('action'), 
+			type: "POST",             
+			data: $('#changePhoneNumber').serialize(),
+			cache: false,             
+			processData: false,  
+			dataType:'json',			
+			success: function(response) 
+			{
+				$(".ajax-loading").css("display","none");
+				if(response.status == true){
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					
+					toastr.success(response.message);
+					
+				} else {
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					 
+					toastr.error(response.message);
+					
+					$("#changePhoneNumberBtn").attr("disabled",false);
+					$("#changePhoneNumberBtn").text("Save");
+				}
+			},
+			complete: function() {
+				$("#changePhoneNumberBtn").attr("disabled",false);
+				$("#changePhoneNumberBtn").text("Save");
+			},
+			timeout: 10000,
+			error: function(e){
+				toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "newestOnTop": true,
+				  "progressBar": true,
+				  "positionClass": "toast-top-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "300",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
+				 
+				toastr.error('Request timeout, Please try again later!');
+				
+				$(".ajax-loading").css("display","none");
+				$("#changePhoneNumberBtn").attr("disabled",false);
+				$("#changePhoneNumberBtn").text("Save");
+				return false;
+			}
+		});
+		return false;
+	}
+});
+
+$('#changeEmailAddress').validate({
+	rules: {
+		email_address: {
+			required: true,
+			email : true
+		}
+	},
+	submitHandler: function(form) {
+		$(".ajax-loading").css("display","block");
+		$("#changeEmailAddressBtn").attr("disabled",true);
+		$("#changeEmailAddressBtn").text("Please wait...");
+		
+		$.ajax({
+			url: $("#changeEmailAddress").attr('action'), 
+			type: "POST",             
+			data: $('#changeEmailAddress').serialize(),
+			cache: false,             
+			processData: false,  
+			dataType:'json',			
+			success: function(response) 
+			{
+				$(".ajax-loading").css("display","none");
+				if(response.status == true){
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					toastr["success"](response.message, "Success");
+					
+				} else {
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					
+					toastr["error"](response.message, "Fail")
+					
+					$("#changeEmailAddressBtn").attr("disabled",false);
+					$("#changeEmailAddressBtn").text("Save");
+				}
+			},
+			complete: function() {
+				$("#changeEmailAddressBtn").attr("disabled",false);
+				$("#changeEmailAddressBtn").text("Save");
+			},
+			timeout: 10000,
+			error: function(e){
+				toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "newestOnTop": true,
+				  "progressBar": true,
+				  "positionClass": "toast-top-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "300",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
+				 
+				toastr.error('Request timeout, Please try again later!');
+				
+				$(".ajax-loading").css("display","none");
+				$("#changeEmailAddressBtn").attr("disabled",false);
+				$("#changeEmailAddressBtn").text("Save");
+				return false;
+			}
+		});
+		return false;
+	}
+});
+
+$('#deactivateUserAccount').validate({
+	rules: {
+		is_deactivate: {
+			required: true
+		},
+		reason_deactivate: {
+			required: true
+		}
+	},
+	errorPlacement: function (error, element) {
+		if (element.attr("name") == "is_deactivate") {
+			$(".is_deactivate_error").html(error);
+		} 
+		if (element.attr("name") == "reason_deactivate") {
+			$(".reason_deactivate_error").html(error);
+		} 
+	},
+	submitHandler: function(form) {
+		$(".ajax-loading").css("display","block");
+		$("#deactivateUserAccountBtn").attr("disabled",true);
+		$("#deactivateUserAccountBtn").text("Please wait...");
+		
+		$.ajax({
+			url: $("#deactivateUserAccount").attr('action'), 
+			type: "POST",             
+			data: $('#deactivateUserAccount').serialize(),
+			cache: false,             
+			processData: false,  
+			dataType:'json',			
+			success: function(response) 
+			{
+				$(".ajax-loading").css("display","none");
+				if(response.status == true){
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "2500",
+					  "hideDuration": "2500",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					toastr["success"](response.message, "Success");
+					
+					setTimeout(function(){
+						window.location.href = response.redirect;
+					},2500);
+				} else {
+					toastr.options = {
+					  "closeButton": true,
+					  "debug": false,
+					  "newestOnTop": true,
+					  "progressBar": true,
+					  "positionClass": "toast-top-right",
+					  "preventDuplicates": false,
+					  "onclick": null,
+					  "showDuration": "300",
+					  "hideDuration": "1000",
+					  "timeOut": "5000",
+					  "extendedTimeOut": "1000",
+					  "showEasing": "swing",
+					  "hideEasing": "linear",
+					  "showMethod": "fadeIn",
+					  "hideMethod": "fadeOut"
+					}
+					
+					toastr["error"](response.message, "Fail")
+					
+					$("#deactivateUserAccountBtn").attr("disabled",false);
+					$("#deactivateUserAccountBtn").text("Save");
+				}
+			},
+			complete: function() {
+				$("#deactivateUserAccountBtn").attr("disabled",true);
+				$("#deactivateUserAccountBtn").text("Please wait...");
+			},
+			timeout: 10000,
+			error: function(e){
+				toastr.options = {
+				  "closeButton": true,
+				  "debug": false,
+				  "newestOnTop": true,
+				  "progressBar": true,
+				  "positionClass": "toast-top-right",
+				  "preventDuplicates": false,
+				  "onclick": null,
+				  "showDuration": "300",
+				  "hideDuration": "1000",
+				  "timeOut": "5000",
+				  "extendedTimeOut": "1000",
+				  "showEasing": "swing",
+				  "hideEasing": "linear",
+				  "showMethod": "fadeIn",
+				  "hideMethod": "fadeOut"
+				}
+				 
+				toastr.error('Request timeout, Please try again later!');
+				
+				$(".ajax-loading").css("display","none");
+				$("#deactivateUserAccountBtn").attr("disabled",false);
+				$("#deactivateUserAccountBtn").text("Save");
+				return false;
+			}
+		});
+		return false;
+	}
+});
+
+
+function validate(evt) {
+	var theEvent = evt || window.event;
+
+	// Handle paste
+	if (theEvent.type === "paste") {
+		key = event.clipboardData.getData("text/plain");
+	} else {
+		// Handle key press
+		var key = theEvent.keyCode || theEvent.which;
+		key = String.fromCharCode(key);
+	}
+	var regex = /[0-9]|\./;
+	if (!regex.test(key)) {
+		theEvent.returnValue = false;
+		if (theEvent.preventDefault) theEvent.preventDefault();
+	}
+}
