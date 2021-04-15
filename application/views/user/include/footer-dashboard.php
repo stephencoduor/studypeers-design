@@ -1,6 +1,8 @@
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.min.js"></script>
+<script src="<?php echo base_url(); ?>assets_d/js/jquery.validate.min.js"></script>
+<script src="<?php echo base_url(); ?>assets_d/js/toastr.min.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/bootstrap.min.js"></script>
-<script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>>
+<script src="<?php echo base_url(); ?>assets_d/js/utils.js"></script>
 <script src="<?php echo base_url(); ?>assets_d/js/jquery.mCustomScrollbar.js"></script>
 <script src="<?php echo base_url('assets_d/js/fm.selectator.jquery.js'); ?>"></script>
 <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
@@ -26,6 +28,7 @@
 <script src="<?php echo base_url('assets_d/js/socket-chat.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/bootstrap-select.js'); ?>"></script>
 <script src="<?php echo base_url('assets_d/js/profile-chat.js'); ?>"></script>
+<script src="<?php echo base_url('assets/registration-assets/js/intlTelInput.js'); ?>"></script>
 
 <script>
     $(document).ready(function() {

@@ -70,6 +70,7 @@
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/chat.css'); ?>">
 
 	<link rel="stylesheet" href="<?php echo base_url('assets_d/js/cropper/cropper.css'); ?>">
+	<link rel="stylesheet" href="<?php echo base_url('assets_d/css/toastr.min.css'); ?>">
 
 	<script src="<?php echo base_url('assets_d/js/socket-config.js'); ?>"></script>
 
@@ -466,6 +467,7 @@ $last_notification = $this->db->get_where('notification_master', array('user_id'
 									</a>
 									<ul class="dropdown-area">
 										<li><a href="<?php echo base_url(); ?>Profile/timeline"><i class="fa fa-user"></i>My profile</a></li>
+										<li><a href="<?php echo base_url('settings'); ?>"><i class="fa fa-cog"></i>Settings</a></li>
 										<!-- <li><a href="javascript:void(0);"><i class="fa fa-globe"></i>Connections <span class="totalBadge pull-right">29</span></a></li>
 										<li><a href="javascript:void(0);"><i class="fa fa-male"></i>Peers</a></li> -->
 										<li><a href="<?php echo base_url(); ?>Account/logout"><i class="fa fa-sign-out"></i>Logout</a></li>

@@ -1795,15 +1795,15 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'"><img src="'.base_url().'assets_d/images/views.svg" alt="Icon"/></a></li>
-                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'">'.$searchedData['view_count'].'</a></li>
-                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'"><img src="'.base_url().'assets_d/images/answer.svg" alt="Icon"/></a></li>
-                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'">'.$searchedData['answer_count'].'</a></li>
+                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['question_id']).'/search').'"><img src="'.base_url().'assets_d/images/views.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['question_id']).'/search').'">'.$searchedData['view_count'].'</a></li>
+                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['question_id']).'/search').'"><img src="'.base_url().'assets_d/images/answer.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['question_id']).'/search').'">'.$searchedData['answer_count'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['reference_id']).'/search').'">
+												<a href="'.base_url('account/questionDetail/'.base64_encode($searchedData['question_id']).'/search').'">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -2074,13 +2074,13 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['reference_id']).'/search').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['reference_id']).'/search').'">'.$searchedData['total_comments'].'</a></li>
+                                    <li><a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['document_id']).'/search').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['document_id']).'/search').'">'.$searchedData['total_comments'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['reference_id']).'/search').'">
+												<a href="'.base_url('account/documentDetail/'.base64_encode($searchedData['document_id']).'/search').'">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -2332,13 +2332,13 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="'.base_url('studyset/details/'.$searchedData['reference_id'].'/search/studySets/comment').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="'.base_url('studyset/details/'.$searchedData['reference_id'].'/search/studySets/comment').'">'.$searchedData['total_comments'].'</a></li>
+                                    <li><a href="'.base_url('studyset/details/'.$searchedData['study_set_id'].'/search/studySets/comment').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('studyset/details/'.$searchedData['study_set_id'].'/search/studySets/comment').'">'.$searchedData['total_comments'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="'.base_url('studyset/details/'.$searchedData['reference_id'].'/search').'">
+												<a href="'.base_url('studyset/details/'.$searchedData['study_set_id'].'/search').'">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -2632,13 +2632,13 @@ class Account extends CI_Controller
                             </div>
                             <div class="comment-wrap">
                                 <ul>
-                                    <li><a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['reference_id']).'/search').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
-                                    <li><a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['reference_id']).'/search').'">'.$searchedData['total_comments'].'</a></li>
+                                    <li><a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['event_primary_id']).'/search').'"><img src="'.base_url().'assets_d/images/comment-grey.svg" alt="Icon"/></a></li>
+                                    <li><a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['event_primary_id']).'/search').'">'.$searchedData['total_comments'].'</a></li>
 									<li>&nbsp;</li>
 									<li>
 										<div class="action">
 											<div class="action_button">
-												<a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['reference_id']).'/search').'">
+												<a href="'.base_url('account/eventDetails/'.base64_encode($searchedData['event_primary_id']).'/search').'">
 													<svg class="sp-icon sp-icon--rotate-left" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 490 490"><path d="M481.3,110.1c-11.6-11.6-30.4-11.6-42.1,0L245,304.4L50.8,110.2c-11.6-11.6-30.4-11.6-42.1,0c-11.6,11.6-11.6,30.4,0,42.1l236.4,236.4l236.2-236.4C492.9,140.6,492.9,121.7,481.3,110.1z"></path>
 													</svg>
 												</a>
@@ -4729,9 +4729,6 @@ class Account extends CI_Controller
         $this->db->join('user_info', 'user_info.userID=question_master.created_by');
         $this->db->order_by('question_master.id', 'desc');
         $data['result'] = $this->db->get_where($this->db->dbprefix('question_master'), array('question_master.id' => $question_id, 'question_master.status' => 1))->row_array();
-
-
-
 
         $this->db->select('question_answer_master.*, user_info.nickname');
         $this->db->join('user_info', 'user_info.userID=question_answer_master.answered_by');
