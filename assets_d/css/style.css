@@ -2126,10 +2126,28 @@ background-color: #ccc;
 .toggle-wrap .slider.round:before {
     border-radius: 50%;
 }
+.custom-panel-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0;
+}
+.right-panel{
+    display: flex;
+    align-items: center; 
+}
+.right-panel .switch{
+    margin-bottom:0;
+}
+.left-panel h4{
+    margin:0;
+}
+.right-panel .status{
+    margin-left:10px;
+}
 @media (max-width: 767px) {
     .modal .listUserWrap .list{
-        flex-direction: column;
-        
+        flex-direction: column;  
     }
     .modal .listUserWrap .list .left{
         margin-bottom:10px;

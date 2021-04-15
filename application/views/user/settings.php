@@ -178,54 +178,231 @@
           </div>
           <div id="notification" class="tabcontent-area">
             <h3>Notification</h3>
-            <div class="data-privacy-row">
-              <div class="data-privacy-left">
-                <h4>Conversations</h4>
-                <p>Messages, posts, comments</p>
+            <div class="custom-accordion">
+              <h3>On Studypeers</h3>
+              <p>Received via Studypeers web and app</p>
+            </div>
+            <div class="custom-panel">
+              <div class="custom-panel-inner">
+                  <div class="left-panel">
+                    <h4>Conversations</h4>
+                    <p>Messages, posts, comments</p>
+                  </div>
+                  <div class="right-panel">
+                    <div class="toggle-wrap">
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                    <span class="status">On</span>
+                  </div>
               </div>
-              <div class="data-privacy-right">
-                <div class="flex-data-wrap">
+              <div class="custom-panel-inner">
+                  <div class="left-panel">
+                    <h4>Network</h4>
+                    <p>Groups, events, anniversaries, invites, birthdays</p>
+                  </div>
+                  <div class="right-panel">
+                    <div class="toggle-wrap">
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                    <span class="status">On</span>
+                  </div>
+              </div>
+              <div class="custom-panel-inner">
+                  <div class="left-panel">
+                    <h4>News</h4>
+                    <p>Daily rundown, mentioned in the news</p>
+                  </div>
+                  <div class="right-panel">
+                    <div class="toggle-wrap">
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                    <span class="status">On</span>
+                  </div>
+              </div>
+              <div class="custom-panel-inner">
+                  <div class="left-panel">
+                    <h4>Profile</h4>
+                    <p>Endorsements, profile views</p>
+                  </div>
+                  <div class="right-panel">
+                    <div class="toggle-wrap">
+                      <label class="switch">
+                        <input type="checkbox">
+                        <span class="slider round"></span>
+                      </label>
+                    </div>
+                    <span class="status">On</span>
+                  </div>
+              </div>
+            </div>
+            <div class="custom-accordion">
+              <h3>Email</h3>
+              <p>Received via your primary email</p>
+            </div>
+            <div class="custom-panel">
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>Email Conversations</h4>
+                  <p>Messages, posts, comments</p>
+                </div>
+                <div class="right-panel">
                   <div class="toggle-wrap">
                     <label class="switch">
                       <input type="checkbox">
                       <span class="slider round"></span>
                     </label>
                   </div>
-                  <span>On</span>
+                  <span class="status">On</span>
+                </div>
+              </div>
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>Network</h4>
+                  <p>Received via your primary email</p>
+                </div>
+                <div class="right-panel">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span class="status">On</span>
+                </div>
+              </div>
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>News</h4>
+                  <p>Daily rundown, mentioned in the news</p>
+                </div>
+                <div class="right-panel">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span class="status">On</span>
+                </div>
+              </div>
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>Profile</h4>
+                  <p>Endorsements, profile views</p>
+                </div>
+                <div class="right-panel">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span class="status">On</span>
+                </div>
+              </div>
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>Saftey and Reporting</h4>
+                  <p>Endorsements, profile views</p>
+                </div>
+                <div class="right-panel">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span class="status">On</span>
                 </div>
               </div>
             </div>
-            <div class="data-privacy-row">
-              <div class="data-privacy-left">
-                <h4>Email</h4>
-                <p>Received via your primary email</p>
-              </div>
-              <div class="data-privacy-right">
-                <div class="flex-data-wrap">
+            <div class="custom-accordion">
+              <h3>Push</h3>
+              <p>Pops up on your device</p>
+            </div>
+            <div class="custom-panel">
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>Email Conversations</h4>
+                  <p>Messages, posts, comments</p>
+                </div>
+                <div class="right-panel">
                   <div class="toggle-wrap">
                     <label class="switch">
                       <input type="checkbox">
                       <span class="slider round"></span>
                     </label>
                   </div>
-                  <span>On</span>
+                  <span class="status">On</span>
                 </div>
               </div>
-            </div>
-            <div class="data-privacy-row">
-              <div class="data-privacy-left">
-                <h4>Push</h4>
-                <p>Pops up on your device</p>
-              </div>
-              <div class="data-privacy-right">
-                <div class="flex-data-wrap">
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>Network</h4>
+                  <p>Received via your primary email</p>
+                </div>
+                <div class="right-panel">
                   <div class="toggle-wrap">
                     <label class="switch">
                       <input type="checkbox">
                       <span class="slider round"></span>
                     </label>
                   </div>
-                  <span>On</span>
+                  <span class="status">On</span>
+                </div>
+              </div>
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>News</h4>
+                  <p>Daily rundown, mentioned in the news</p>
+                </div>
+                <div class="right-panel">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span class="status">On</span>
+                </div>
+              </div>
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>Profile</h4>
+                  <p>Endorsements, profile views</p>
+                </div>
+                <div class="right-panel">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span class="status">On</span>
+                </div>
+              </div>
+              <div class="custom-panel-inner">
+                <div class="left-panel">
+                  <h4>Saftey and Reporting</h4>
+                  <p>Endorsements, profile views</p>
+                </div>
+                <div class="right-panel">
+                  <div class="toggle-wrap">
+                    <label class="switch">
+                      <input type="checkbox">
+                      <span class="slider round"></span>
+                    </label>
+                  </div>
+                  <span class="status">On</span>
                 </div>
               </div>
             </div>
